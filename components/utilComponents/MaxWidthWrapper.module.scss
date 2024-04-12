@@ -1,0 +1,24 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+/* MaxWidthWrapper.module.scss */
+.wrapper {
+  transition: max-width 0.3s ease; /* Example transition for visual effect */
+}
+
+.mobile {
+  max-width: 23.4375em;
+}
+
+.tablet {
+  max-width: 68.625em;
+}
+
+.desktop {
+  max-width: 90.625em;
+}
+
+.MessagesSidebarOpen {
+  max-width: 68.625rem; /* Adjust based on your design when sidebar is open */
+}

@@ -1,0 +1,88 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .slidesContainer {
+    position: relative;
+    display: flex;
+
+    width: fit-content;
+    gap: rem(16);
+    border-radius: rem(32);
+
+    .slide {
+      position: absolute;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: rem(311);
+      border-radius: rem(32) ;
+      padding: 0;
+      background-color: $white-four;
+      z-index: 5;
+      box-shadow: $shadow-one;
+
+      .image {
+        border-radius: rem(32) rem(32) 0 0;
+      }
+
+      .description {
+        width: rem(311);
+        height: rem(132);
+        border-radius: 0 0 rem(32) rem(32);
+        .slideTitle {
+          height: rem(32);
+          line-height: normal;
+        }
+      }
+
+   
+    }
+  }
+  .slideDotsContainer {
+    // position: absolute;
+    // bottom: 0;
+    // left: 50%;
+    // transform: translateX(-50%);
+    height: rem(30);
+
+    .slideDots {
+      display: flex;
+      justify-content: space-between;
+      gap: rem(16);
+      margin: 0 auto;
+      width: fit-content;
+
+      .dotsContainer {
+        height: rem(24);
+        cursor: pointer;
+
+        .dot {
+          background-color: $grey-one;
+          width: rem(88);
+          height: rem(5);
+          border-radius: rem(32);
+          border: none;
+          cursor: pointer;
+        }
+
+        .dot:hover {
+          background-color: $grey-three;
+        }
+
+        .active {
+          background-color: $grey-four;
+        }
+
+        .active:hover {
+          background-color: $grey-four;
+        }
+      }
+    }
+  }
+}

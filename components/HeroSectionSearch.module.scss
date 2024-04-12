@@ -1,0 +1,46 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.buttonsAndSearch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin-top: rem(48);
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: rem(64);
+    .link {
+    }
+
+    .postYourAdBtn {
+      margin-bottom: rem(20);
+    }
+
+    .categoriesBtn {
+     
+    }
+  }
+
+  .searchFields {
+    margin-bottom: rem(20);
+    .searchTerm {
+      margin-bottom: rem(20);
+
+      .searchTermInput {
+        
+  
+       
+      }
+    }
+    .searchLocation {
+   
+      .searchLocationInput {
+
+      }
+    }
+  }
+}

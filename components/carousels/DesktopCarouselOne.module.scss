@@ -1,0 +1,110 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .slidesContainer {
+    width: rem(954);
+    height: rem(462);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+    border-radius: rem(32);
+
+    .slides {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: rem(358);
+      border-radius: rem(32) rem(32) 0 0;
+      padding: 0;
+      background-color: $white-four;
+
+      .image {
+        margin-left: 0;
+        height: rem(358);
+        border-radius: rem(32) rem(32) 0 0;
+      }
+
+      .slideDotsContainer {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: rem(30);
+
+        .slideDots {
+          display: flex;
+          justify-content: space-between;
+          gap: rem(16);
+          margin: 0 auto;
+          width: fit-content;
+
+          .dotsContainer {
+            height: rem(24);
+            cursor: pointer;
+
+            .dot {
+              background-color: $grey-one;
+              width: rem(88);
+              height: rem(5);
+              border-radius: rem(32);
+              border: none;
+              cursor: pointer;
+            }
+
+            .dot:hover {
+              background-color: $grey-three;
+            }
+
+            .active {
+              background-color: $grey-four;
+            }
+
+            .active:hover {
+              background-color: $grey-four;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .descriptionContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: rem(20) auto 0;
+    width: rem(848);
+    height: rem(48);
+
+    .description {
+      .slideTitle {
+        height: rem(32);
+        line-height: normal;
+      }
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: rem(16);
+      margin-left: rem(48);
+      
+
+      .button {
+
+      }
+
+      .next {
+      }
+
+      .prev {
+        // cursor: pointer;
+      }
+    }
+  }
+}

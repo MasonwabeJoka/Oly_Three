@@ -1,0 +1,12 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+
+  width: rem(600);
+  height: rem(400);
+  border-radius: rem(32);
+  box-shadow: $shadow-three;
+ 
+}

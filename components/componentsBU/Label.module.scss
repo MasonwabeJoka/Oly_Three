@@ -1,0 +1,9 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.label {
+    width: rem(150);
+    height: rem(30);
+    background-color: rgb(240, 240, 199); 
+}

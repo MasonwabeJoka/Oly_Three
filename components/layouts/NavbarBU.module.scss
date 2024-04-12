@@ -1,0 +1,59 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: rem(8);
+  transform: translateX(-50%);
+  pointer-events: none; /* Make the div click-through */
+  color: #fff;
+  z-index: 12;
+  transition: transform 0.5s ease-in-out;
+
+  .logo {
+    pointer-events: auto; /* Make the element clickable */
+    filter: drop-shadow(0px 23px 50px rgba(0, 0, 0, 0.1))
+      drop-shadow(0px 92px 92px rgba(0, 0, 0, 0.09))
+      drop-shadow(0px 206px 124px rgba(0, 0, 0, 0.05))
+      drop-shadow(0px 367px 147px rgba(0, 0, 0, 0.01))
+      drop-shadow(0px 573px 160px rgba(0, 0, 0, 0));
+  }
+
+  .profileIconContainer {
+    .profile {
+      pointer-events: auto; /* Make the button clickable */
+      filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0));
+
+      background-color: transparent;
+      background-clip: content-box;
+
+      width: rem(32);
+      height: rem(32);
+      border-radius: 50%;
+      background-size: cover;
+    }
+  }
+
+ 
+}
+
+.size {
+  width: rem(343);
+  height: rem(32);
+  @include larger-than(mobile) {
+    width: rem(1289);
+    height: rem(32);
+  }
+}
+
+.withFeedSize {
+  width: rem(940);
+  height: rem(32);
+}
+
+.navbarHidden {
+  transform: translate(-50%, -130%);
+}

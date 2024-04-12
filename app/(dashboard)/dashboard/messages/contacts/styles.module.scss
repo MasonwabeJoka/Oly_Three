@@ -1,0 +1,33 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1098);
+  height: 100vh;
+
+  .searchBar {
+    margin-top: rem(96);
+    margin-bottom: rem(48);
+  }
+
+  .contacts {
+    margin-bottom: rem(48);
+
+    .contact {
+    margin-bottom: rem(20);
+
+    }
+  }
+
+  .backToChatLink {
+    font-weight: bold;
+  }
+
+  .backToChatLink:hover {
+    color: $primary-hover;
+  }
+}

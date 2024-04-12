@@ -1,0 +1,148 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.adCard {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  width: rem(954);
+  height: rem(200);
+  margin-bottom: rem(112);
+
+  .imageContainer {
+    position: relative;
+    width: rem(348);
+    height: rem(288);
+    border-radius: rem(32);
+    box-shadow: $shadow-one;
+
+    .image {
+      border-radius: rem(32);
+    }
+
+    .likeIconContainer {
+      position: absolute;
+      bottom: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .likeIconBG {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(150);
+        height: rem(150);
+        transform: translateY(50%);
+        border: 0px solid black;
+        border-radius: 50%;
+        background-color: hsla(195, 91%, 86%, 1);
+
+        .likeIcon {
+          text-align: center;
+          background-color: #bdecfc;
+        }
+      }
+    }
+    .postMetrics {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      z-index: 1;
+    }
+  }
+
+  .details {
+    width: rem(570);
+    height: rem(250);
+    border-radius: 0 rem(32) rem(32) 0;
+    box-shadow: $shadow-one;
+    background-color: $white-three;
+
+    .pill {
+      display: flex;
+      justify-content: flex-end;
+      margin: rem(12) rem(24) rem(8) 0;
+      cursor: pointer;
+    }
+
+    .detailsWrapper {
+      display: flex;
+      width: 100%;
+      margin: 0 rem(24) rem(28) rem(16);
+
+      width: rem(530);
+      height: rem(193);
+
+      .avatar {
+        margin-right: rem(16);
+      }
+
+      .detailsText {
+        .titleWrapper {
+          margin-top: rem(-6);
+          .title {
+            margin-bottom: rem(0);
+            font-weight: bold;
+          }
+
+          .location {
+            display: flex;
+            align-items: center;
+            .locationIcon {
+              margin-right: rem(8);
+            }
+
+            .locationText {
+              padding-bottom: rem(1);
+            }
+          }
+        }
+
+        .description {
+          width: rem(463);
+          height: rem(104);
+          overflow: hidden;
+          margin-top: rem(8);
+        }
+        .cardBottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: fit-content;
+          margin-top: rem(-24);
+
+          .price {
+            height: fit-content;
+            font-weight: bold;
+
+            padding: 0;
+          }
+        }
+        .icons {
+          display: flex;
+          gap: rem(16);
+          .icon {
+            width: rem(32);
+            height: rem(32);
+            border: none;
+            background: $white-four;
+            filter: drop-shadow(10px 10px 20px rgba(169, 196, 203, 0.5))
+              drop-shadow(5px 5px 10px rgba(169, 196, 203, 0.25));
+          }
+        }
+      }
+    }
+  }
+
+  .cardContainer:hover .image,
+  .cardContainer:hover {
+    background-color: #bdecfc;
+  }
+}

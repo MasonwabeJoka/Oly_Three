@@ -1,0 +1,12 @@
+{
+  "id": "mig_clm6vcu5es60mq882lr0",
+  "parentID": "mig_clm6v7m5es60mq882lpg",
+  "checksum": "1:b907c2f861dcdfacb7211514a8329db33efe532531fbaa7278dcbd60430027c2",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Properties"
+      }
+    }
+  ]
+}

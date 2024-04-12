@@ -1,0 +1,84 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    position: fixed;
+    font-size: $body;
+    font-weight: bold;
+    color: $danger;
+    top: rem(72);
+    z-index: 10;
+    @include larger-than(mobile) {
+      font-size: $h4;
+      top: rem(72);
+
+      margin-bottom: rem(48);
+    }
+  }
+
+  .listingsContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: rem(954);
+    margin-top: rem(48);
+
+    .sortingButtonsContainer {
+      position: fixed;
+      top: rem(124);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: auto;
+      z-index: 8;
+
+      @include larger-than(mobile) {
+        width: 100%;
+        top: rem(152);
+      }
+
+      .sortingButtons {
+        position: absolute;
+        display: flex;
+        border: none;
+        z-index: 7;
+        .sortingButton {
+          background-color: $white-three;
+        }
+
+        .selectAllBtn {
+          margin-right: rem(2);
+          border-radius: rem(32) 0 0 rem(32);
+        }
+        .deleteBtn {
+          margin-right: rem(2);
+        }
+   
+      }
+    }
+
+    .fixedDiv {
+      position: fixed;
+      top: 0;
+      width: 55%;
+      height: rem(178);
+      background-color: $white-four;
+      z-index: 5;
+      pointer-events: none; /* Make the div click-through */
+    }
+
+    .listings {
+      position: absolute;
+      top: rem(254);
+    }
+  }
+
+
+}

@@ -1,0 +1,11 @@
+{
+  "id": "mig_clm696m5es60mq882feg",
+  "checksum": "1:8e9cc3f43dda8dd2dbea0629b20efc44083d794fd3004a6679fdfffc090c1f81",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Categories"
+      }
+    }
+  ]
+}

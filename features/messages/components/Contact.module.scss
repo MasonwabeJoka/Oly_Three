@@ -1,0 +1,37 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+
+.contact {
+    display: flex;
+    align-items: center;
+    width: rem(426);
+    height: rem(88);
+    border-radius: rem(50);
+  
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+    cursor: pointer;
+  
+    .avatarContainer {
+      margin: 0 rem(20) 0 rem(16);
+      border-radius: 50%;
+      border: $white-one solid rem(3);
+      .avatar {
+      }
+    }
+  
+    .textContainer {
+      .name {
+        font-weight: bold;
+        color: #3c4446;
+      }
+     
+    }
+  
+  }
+  
+  .contact:hover {
+    background-color: $white-two;
+  }

@@ -1,0 +1,74 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  position: relative;
+  top: rem(32);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: rem(32);
+  background-color: $white-four;
+  pointer-events: auto;
+
+  @include larger-than(mobile) {
+    top: rem(76);
+  }
+
+  .notifications {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .notification {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+
+      .iconContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(52);
+        height: rem(52);
+        margin-bottom: rem(16);
+        border-radius: 50%;
+        background-color: $white-four;
+        box-shadow:
+          -10px -10px 20px #fff,
+          10px 10px 20px rgba(169, 196, 203, 0.5),
+          5px 5px 10px rgba(169, 196, 203, 0.25),
+          0px 420px 168px 0px rgba(0, 0, 0, 0.01),
+          -5px -5px 10px rgba(255, 255, 255, 0.5);
+
+        .icon {
+        }
+
+        .logoutBtnContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .iconContainer:hover {
+        background-color: $white-three;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .text {
+      }
+    }
+  }
+  .goBackButtonContainer {
+    margin-top: rem(64);
+    .goBackButton {
+      background-color: $white-three;
+    }
+  }
+}

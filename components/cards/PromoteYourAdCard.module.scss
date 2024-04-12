@@ -1,0 +1,79 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: rem(280);
+  height: rem(500);
+  border-radius: rem(32);
+  margin-left: rem(6) !important;
+  margin-bottom: rem(-24) !important;
+  background-color: $white-three;
+  box-shadow: $shadow-one;
+
+  @include larger-than(mobile) {
+    margin-bottom: unset !important;
+    width: rem(900);
+    min-height: rem(255);
+    height: unset;
+    box-shadow: $shadow-one;
+  }
+
+  .title {
+    margin-top: rem(24);
+    margin-bottom: rem(24);
+    text-align: center;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .icon {
+    }
+    .formControls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: rem(400);
+      margin: 0 rem(64) rem(40) rem(64);
+
+      .setPromotionDurationContainer {
+        margin-bottom: rem(20);
+        .setPromotionDuration {
+          background-color: $white-three;
+        }
+      }
+      .moreInfoButton {
+      }
+    }
+
+    .priceContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right: rem(72);
+      width: rem(72);
+      height: rem(72);
+      border-radius: 50%;
+      background-color: $white-one;
+
+      .price {
+        font-weight: 600;
+      }
+    }
+
+    .checkbox {
+      width: rem(24);
+      height: rem(24);
+      border: rem(4) solid $white-one;
+    }
+  }
+}

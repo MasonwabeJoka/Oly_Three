@@ -1,0 +1,46 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  width: 64vw;
+  height: 70vh;
+  background-color: $grey-one;
+  border-radius: rem(32);
+  box-shadow: $shadow-one;
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    padding: rem(0) rem(48) 0 rem(144);
+    border-radius: rem(32) 0 0 rem(32);
+
+    .text {
+      margin-bottom: rem(72);
+    }
+
+    .buttonContainer {
+      padding-right: rem(64);
+
+      .button {
+      }
+    }
+  }
+
+  .illustrationContainer {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    border-radius: 0 rem(32) rem(32) 0;
+
+    .illustration {
+        margin-top: rem(-170);
+      box-shadow: rem(20) rem(20);
+    }
+  }
+}

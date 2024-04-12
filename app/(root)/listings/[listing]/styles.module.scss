@@ -1,0 +1,193 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.maxWidthWrapper {
+  padding: 0 rem(200);
+}
+.listingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // width: rem(1296);
+
+  .listingImages {
+    margin-top: rem(56);
+
+    .breadcrumbsContainer {
+      margin: rem(96) rem(0) rem(8) rem(32);
+    }
+  }
+
+  .listingDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(96);
+
+    .topSection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: rem(32);
+      padding-bottom: rem(32);
+  
+      width: auto;
+      background-color: $white-three;
+
+      .sellerDetails {
+        margin-right: rem(92);
+        // margin-left: rem(32);
+      }
+      .details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: rem(767);
+
+        .title {
+          margin-bottom: rem(56);
+          text-align: center;
+          line-height: normal;
+          font-size: $h2;
+        }
+
+        .detailsContainer {
+          display: flex;
+          flex-direction: column;
+        }
+        .priceSection {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .priceLabel {
+            margin-bottom: rem(-8);
+          }
+          .price {
+            margin-bottom: rem(16);
+          }
+
+          .nonAuctionPrice {
+            margin-bottom: rem(48);
+          }
+
+          .countDown {
+            margin-bottom: rem(16);
+            .countDownPeriod {
+              font-size: rem(16);
+              margin-right: rem(16);
+            }
+          }
+
+          .buyNowLabel {
+          }
+          .buyNow {
+            margin-bottom: rem(56);
+          }
+        }
+        .buttonsContainer {
+          display: flex;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: rem(56);
+
+          .buttons {
+          }
+          .bidContainer {
+            margin-right: rem(20);
+            .bidButton {
+              margin-bottom: rem(16);
+            }
+          }
+          .contactSellerContainer {
+            margin-bottom: rem(20);
+          }
+          .buyContainer {
+            .buyButton {
+              background-color: $white-four;
+            }
+            .buyButton:hover {
+              background-color: $primary;
+            }
+          }
+        }
+
+        .description {
+          margin-bottom: rem(56);
+          width: 75%;
+          p {
+            text-align: center;
+            font-size: $h4;
+          }
+        }
+      }
+    }
+
+    .moreInfoContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: auto;
+      min-height: rem(200);
+
+      .title {
+        color: $danger;
+        font-weight: bold;
+        margin-top: rem(64);
+        margin-bottom: rem(24);
+      }
+      .infoItems {
+        max-width: 72%;
+        margin: 0 auto rem(96);
+        column-count: 2;
+        column-gap: rem(48);
+        padding-top: rem(48);
+
+        .infoItem {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: rem(16);
+
+          .bulletContainer {
+            .bullet {
+              position: relative;
+              width: rem(24);
+              height: rem(12);
+              border: rem(1) solid $grey-four;
+              border-radius: rem(6);
+              margin-right: rem(20);
+              margin-top: rem(8);
+              break-after: always;
+              box-shadow: 2px 2px 3px rgb(177, 189, 189);
+            }
+          }
+          .infoItemContainer {
+            p {
+              font-size: $h4;
+            }
+          }
+        }
+      }
+    }
+
+    .goodToKnowContainer {
+      background-color: $white-four;
+    }
+    .featuresContainer {
+      background-color: $white-three;
+    }
+  }
+
+  .allImagesContainer {
+    margin-top: rem(128);
+
+    .image {
+      margin-bottom: rem(16);
+      border-radius: rem(32);
+      box-shadow:
+        10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+        5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+    }
+  }
+}

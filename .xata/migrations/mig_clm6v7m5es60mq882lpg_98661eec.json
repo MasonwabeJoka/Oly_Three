@@ -1,0 +1,12 @@
+{
+  "id": "mig_clm6v7m5es60mq882lpg",
+  "parentID": "mig_clm6uo65es60mq882ldg",
+  "checksum": "1:98661eecf7e7efc386e30e9daa1230096345bb7928cd7e1d57473d507a307fdf",
+  "operations": [
+    {
+      "addTable": {
+        "table": "GeneralAds"
+      }
+    }
+  ]
+}

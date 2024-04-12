@@ -1,0 +1,130 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.expandedCard {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  width: rem(954);
+  cursor: pointer;
+
+
+  .imageContainer {
+    position: relative;
+    width: rem(348);
+    height: rem(288);
+    border-radius: rem(32);
+
+    .image {
+      border-radius: rem(32);
+    }
+
+    .likeIconContainer {
+      position: absolute;
+      bottom: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .likeIconBG {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(150);
+        height: rem(150);
+        transform: translateY(50%);
+        border: 0px solid black;
+        border-radius: 50%;
+        background-color: hsla(195, 91%, 86%, 1);
+
+        .likeIcon {
+          text-align: center;
+          background-color: #bdecfc;
+        }
+      }
+    }
+    .postMetrics {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      z-index: 1;
+    }
+  }
+
+  .details {
+    width: rem(570);
+    height: rem(250);
+    border-radius: 0 rem(32) rem(32) 0;
+    box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+      5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+
+    .detailsWrapper {
+      display: flex;
+      width: 100%;
+      margin: rem(24) rem(24) rem(28) rem(16);
+
+      width: rem(530);
+      height: rem(193);
+
+      .avatar {
+        margin-right: rem(16);
+      }
+      .detailsText {
+        .titleWrapper {
+          margin-top: rem(-6);
+          .title {
+            margin-bottom: rem(-4);
+           
+          }
+
+          .location {
+            display: flex;
+            align-items: center;
+          
+            .locationText {
+              padding-bottom: rem(1);
+            }
+          }
+        }
+
+        .description {
+          width: rem(463);
+          height: rem(104);
+          overflow: hidden;
+          margin-top: rem(8);
+        }
+        .cardBottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .price {
+           
+          }
+
+          .postMetrics {
+            .postAge {
+              // margin-bottom: rem(-4);
+              margin-right: rem(32);
+            }
+
+            .viewCount {
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cardContainer:hover .image,
+  .cardContainer:hover {
+    background-color: #bdecfc;
+  }
+}

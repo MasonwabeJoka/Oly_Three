@@ -1,0 +1,43 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    position: fixed;
+    font-size: $body;
+    font-weight: bold;
+    color: $danger;
+    margin-top: rem(56);
+    @include larger-than(mobile) {
+      font-size: $h4;
+      margin-top: rem(24);
+      position: static;
+      margin-bottom: rem(48);
+    }
+  }
+
+  .tabsWrapper {
+    margin-top: rem(112);
+
+    @include larger-than(mobile) {
+      margin: unset;
+    }
+    .notificationTabs {
+      margin-bottom: rem(48);
+      @include larger-than(mobile) {
+        margin-bottom: rem(48);
+      }
+    }
+
+    .selectDelete {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mig_clm6sf65es60mq882jv0",
+  "parentID": "mig_clm6s2e5es60mq882ju0",
+  "checksum": "1:41c39d8b2170a92a4be5c2d5247f96306d92b2468964edb7f68fcb5db47b00b0",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "Categories",
+          "type": "text"
+        },
+        "table": "ParentCategories"
+      }
+    }
+  ]
+}

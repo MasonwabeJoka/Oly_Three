@@ -1,0 +1,146 @@
+@import "@/utils/functions.scss";
+@import "@/utils/variables.scss";
+@import "@/utils/breakpoints.scss";
+
+.cardContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: rem(32);
+  cursor: pointer;
+  box-shadow: $shadow-one;
+  background-color: $grey-one;
+  
+  @include larger-than(mobile) {
+    width: rem(229);
+    height: rem(300);
+  }
+
+  .imageContainer {
+    height: rem(128);
+    border-radius: rem(32) rem(32) 0 0;
+    position: absolute;
+
+    @include larger-than(mobile) {
+      height: rem(216);
+    }
+  }
+  .labelContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 rem(32) rem(32);
+    margin-top: auto;
+    background-color: $grey-one;
+
+    .label {
+      color: $black-four;
+      letter-spacing: 1.15px !important;
+      text-align: center;
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: 1.2;
+      padding: 0 rem(20);
+    }
+  }
+  .standardLabelContainerFeed {
+    height: rem(54);
+    padding: rem(8);
+
+    @include larger-than(mobile) {
+      height: rem(84);
+    }
+  }
+  .standardLabelContainer {
+    height: rem(54);
+    font-size: $h4;
+    padding: rem(8);
+
+    @include larger-than(mobile) {
+      height: rem(72);
+    }
+  }
+}
+
+.large {
+  width: rem(306);
+  height: rem(338);
+}
+
+.standard {
+  width: rem(228);
+  height: rem(236);
+}
+
+.small {
+}
+
+.largeFeed {
+  width: rem(229);
+  height: rem(262);
+}
+.standardFeed {
+}
+
+.smallFeed {
+}
+
+.largeDashboard {
+  width: rem(267);
+  height: rem(295);
+
+  @include larger-than(mobile) {
+    width: rem(306);
+    height: rem(338);
+  }
+}
+.standardDashboard {
+
+
+  @include larger-than(mobile) {
+    width: rem(224);
+    height: rem(256.2);
+  }
+}
+.smallDashboard {
+}
+
+.largeImageContainer {
+  border-radius: rem(32) rem(32) 0 0;
+  height: rem(307);
+}
+.largeLabelContainer {
+  height: rem(88);
+  border-radius: 0 0 rem(32) rem(32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .label {
+    font-size: $h3;
+  }
+}
+
+.largeLabelContainerFeed {
+  height: rem(88);
+  border-radius: 0 0 rem(32) rem(32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .label {
+    font-size: $h3;
+  }
+}
+
+.cardContainer:hover {
+  transform: scale(1.04);
+}
+.cardContainer:hover .labelContainer {
+  // background-color: $white-three;
+  // color: $white-two;
+}

@@ -1,0 +1,11 @@
+@import '@/utils/variables.scss';
+@import '@/utils/functions.scss';
+
+.container {
+    display: flex;
+    border: solid black rem(1);
+    .amount {
+        width: rem(100);
+    }
+    
+}

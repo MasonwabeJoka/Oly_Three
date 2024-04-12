@@ -1,0 +1,100 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  // position: relative;
+  margin: 0;
+  padding: 0;
+
+  .label {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .select {
+    border-radius: rem(32);
+    box-shadow: 0px 1px 3px 0px rgba(0, 94, 117, 0.1) inset,
+      0px 5px 5px 0px rgba(0, 94, 117, 0.09) inset,
+      0px 12px 7px 0px rgba(0, 94, 117, 0.05) inset,
+      0px 21px 8px 0px rgba(0, 94, 117, 0.01) inset,
+      1px 33px 9px 0px rgba(0, 94, 117, 0) inset;
+    text-align: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .large {
+    width: 100%;
+    height: rem(50);
+  }
+
+  .placeholder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: rem(40);
+    left: rem(210);
+    width: 50%;
+    height: rem(24);
+    background-color: white;
+    pointer-events: none; // so the element is not clickable and the element below it (z axis) is.
+  }
+
+  .xxLarge {
+    @include larger-than(mobile) {
+      width: rem(1296);
+      height: rem(56);
+    }
+  }
+  
+  .xxLargeFeed {
+    width: rem(954);
+    height: rem(56);
+  }
+  
+  .xLarge {
+    @include larger-than(mobile) {
+      width: rem(1078);
+      height: rem(56);
+    }
+  }
+  
+  .xLargeFeed {
+    width: rem(793);
+    height: rem(56);
+  }
+  
+  .large {
+    width: rem(311);
+    height: rem(56);
+    
+    @include larger-than(mobile) {
+      width: rem(642);
+      height: rem(56);
+    }
+  }
+  
+  .largeFeed {
+    width: rem(471);
+    height: rem(48);
+  }
+  
+  .medium {
+    width: rem(202);
+    height: rem(56);
+    @include larger-than(mobile) {
+      width: rem(424);
+      height: rem(56);
+    }
+  }
+  
+  .mediumFeed {
+    width: rem(310);
+    height: rem(48);
+  }
+
+}

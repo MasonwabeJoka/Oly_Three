@@ -1,0 +1,9 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  width: rem(500);
+  height: rem(50);
+
+}

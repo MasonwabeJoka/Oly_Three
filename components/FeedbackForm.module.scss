@@ -1,0 +1,29 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: rem(800);
+  height: rem(600);
+  border-radius: rem(32);
+  background-color: $white-four;
+
+  .title {
+    margin-bottom: rem(32);
+    font-size: $h4;
+    font-weight: bold;
+    color: $danger;  
+  }
+
+  .control {
+    margin-bottom: rem(20);
+  }
+
+  .emailContainer {
+    margin-bottom: rem(32);
+  }
+}

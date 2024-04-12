@@ -1,0 +1,45 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin-top: rem(56);
+    margin-bottom: rem(24);
+    font-size: $body;
+    color: $danger;
+    font-weight: bold;
+
+    @include larger-than(mobile) {
+      font-size: $h4;
+      position: fixed;
+      margin-top: rem(96);
+      position: static;
+      margin-bottom: rem(48);
+    }
+  }
+
+  .link {
+    margin-bottom: rem(16);
+    @include larger-than(mobile) {
+      margin-bottom: rem(20);
+    }
+  }
+
+  .selectACategoryContainer {
+    // margin-top: rem(200);
+  }
+
+  .button {
+    // background-color: rgb(212, 212, 212);
+  }
+
+  .button:hover {
+    // background-color: $grey-one;
+  }
+}

@@ -1,0 +1,84 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-radius: rem(32);
+  width: 100%;
+  column-gap: rem(8);
+  cursor: pointer;
+
+  .tab {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-width: rem(100);
+    height: rem(56);
+    border-radius: rem(32);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+  }
+
+  .tab:hover {
+    background-color: $white-two;
+  }
+  .tab:active {
+    background-color: $primary;
+  }
+
+  .active {
+    background-color: $primary;
+  }
+  .active:hover {
+    background-color: $primary;
+  }
+
+  .options {
+    position: relative;
+    background-color: $white-four;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: rem(400);
+    cursor: pointer;
+    overflow-y: auto;
+    // padding-top: rem(8);
+    // padding-bottom: rem(8);
+    margin-top: rem(-7);
+    z-index: -1;
+
+    @include larger-than(mobile) {
+      margin-top: rem(24);
+      margin-bottom: rem(16);
+    }
+
+    .option {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 96%;
+      height: rem(40);
+      border-radius: rem(32);
+      margin-bottom: rem(8);
+      background-color: $white-two;
+      box-shadow: $shadow-one;
+    }
+
+    .option:hover {
+      background-color: $white-three;
+    }
+  }
+
+  .options::-webkit-scrollbar-track {
+    border-radius: rem(32);
+    margin-block: rem(30);
+  }
+
+  .hideOptions {
+    display: none;
+  }
+}

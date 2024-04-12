@@ -1,0 +1,39 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-radius: rem(32);
+  width: 100%;
+  row-gap: rem(16);
+  column-gap: rem(8);
+  cursor: pointer;
+
+  .tab {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-width: rem(100);
+    height: rem(56);
+    border-radius: rem(32);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+  }
+
+  .tab:hover {
+    background-color: $white-two;
+  }
+  .tab:active {
+    background-color: $primary;
+  }
+
+  .active {
+    background-color: $primary;
+  }
+  .active:hover {
+    background-color: $primary;
+  }
+}
