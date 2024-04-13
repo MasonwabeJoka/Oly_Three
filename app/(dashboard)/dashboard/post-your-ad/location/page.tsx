@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
-import { locations } from "@/data/locationData";
+import { locations } from "@/data/LocationData";
 import Link from "next/link";
 
 const Location = () => {
