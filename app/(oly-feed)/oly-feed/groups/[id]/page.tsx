@@ -1,6 +1,4 @@
 import styles from "./styles.module.scss";
-
-import styles from "./styles.module.scss";
 import Post from "@/components/forms/Post";
 import { fetchUser } from "@/utils/serverActions/userActions";
 import { currentUser } from "@clerk/nextjs";
