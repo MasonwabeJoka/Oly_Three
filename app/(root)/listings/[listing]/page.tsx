@@ -310,23 +310,23 @@ const Listing = ({ params }: ParamsProp) => {
     );
   };
 
-  const SimilarAdsComponent = () => {
-    return (
-      <div>
-        <h4 className={`${styles.title} ${styles.similarAds}`}>
-          Sponsored Ads
-        </h4>
-        <div className={styles.collage}>
-          <SimilarAds
-            query={{ category: ad?.category, sort: "desc", limit: 4 }}
-            isDashboard={false}
-            isDeletable={false}
-            cardSize="standard"
-          />
-        </div>
-      </div>
-    );
-  };
+  // const SimilarAdsComponent = () => {
+  //   return (
+  //     <div>
+  //       <h4 className={`${styles.title} ${styles.similarAds}`}>
+  //         Sponsored Ads
+  //       </h4>
+  //       <div className={styles.collage}>
+  //         <SimilarAds
+  //           query={{ category: ad?.category, sort: "desc", limit: 4 }}
+  //           isDashboard={false}
+  //           isDeletable={false}
+  //           cardSize="standard"
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div
@@ -385,7 +385,7 @@ const Listing = ({ params }: ParamsProp) => {
                 </div>
                 <GoodToKnow />
                 <Features />
-                <SimilarAdsComponent />
+                {/* <SimilarAdsComponent /> */}
                 <div style={{ height: "6rem" }}></div>
               </section>
             </MaxWidthWrapper>

@@ -32,7 +32,7 @@ type Photo = {
 
 
 export const fetchListings = async  (): Promise<Photo[]>=> {
-    const perPage = 16;
+    const perPage = 82;
     const currentPage = 1;
     const apiURL = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
     const apiKey = process.env.PEXELS_API_KEY;

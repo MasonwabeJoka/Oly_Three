@@ -389,9 +389,9 @@ const Listings = () => {
 
         <div ref={listingsRef} className={styles.listings}>
           {expanded ? (
-            <ListingsExpanded avatars={avatars} isDeletable={false}  />
+            <ListingsExpanded avatars={avatars} isDeletable={false} isDashboard={false} />
           ) : (
-            <ListingsCollage isDeletable={false }isDashboard={false} />
+            <ListingsCollage isDeletable={false} isDashboard={false} />
           )}
         </div>
       </div>

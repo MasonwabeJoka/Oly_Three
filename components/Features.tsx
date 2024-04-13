@@ -13,7 +13,7 @@ const Features = () => {
 
   return (
     <div className={styles.container}>
-      {/* <Title className={styles.title}>OLY Advantage</Title> */}
+      <Title className={styles.title}>OLY Advantage</Title>
       <div className={styles.carousel}>
         {isMobile ? (
           <MobileCarouselOne
@@ -26,15 +26,15 @@ const Features = () => {
           />
         ) : (
 
-          <FeaturesCarousel/>
-          // <DesktopCarouselOne
-          //   src={slides.src}
-          //   mobileSrc={slides.mobileSrc}
-          //   slideName={slides.slideName}
-          //   slideTitle={slides.slideTitle}
-          //   initialValue={initialValue}
-          //   data={slides}
-          // />
+          // <FeaturesCarousel/>
+          <DesktopCarouselOne
+            src={slides.src}
+            mobileSrc={slides.mobileSrc}
+            slideName={slides.slideName}
+            slideTitle={slides.slideTitle}
+            initialValue={initialValue}
+            data={slides}
+          />
         )}
       </div>
     </div>

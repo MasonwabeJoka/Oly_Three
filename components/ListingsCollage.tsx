@@ -9,6 +9,7 @@ import { categoriesArray } from "@/utils/categoriesArray";
 import useSidebarStore from "@/store/useSidebarStore";
 import useIsDashboardStore from "@/store/isDashboardStore";
 import Link from "next/link";
+import {ads} from "@/data/adData"
 
 type ImageMetadata = {
   dimensions: {
@@ -83,7 +84,7 @@ const ListingsCollage = ({
 
   type Props = {
     // ... other props ...
-    description: string | PortableTextBlock[]; // Allow both string and PortableTextBlock[]
+    description: string // Allow both string and PortableTextBlock[]
     // ... other props ...
   };
 
@@ -132,22 +133,21 @@ const ListingsCollage = ({
     return truncatedBlocks;
   }
 
+  const images = imagesData.map(image => image)
+
+
   // Convert array to JSX items
-  const cards = adData.map((ad) => {
+  const cards = ads.map((ad, index) => {
     return (
-      <Link href={`/listings/${ad.slug}`}>
-        <div className={styles.card} key={ad._id}>
+      <Link href={`/listings/${ad.id}`}>
+        <div className={styles.card} key={ad.id}>
           <AdCard
-            id={ad._id}
+            id={ad.id}
             cardType="box"
-            images={ad.images[0].asset.url}
+            images={ad.images[0]}
             title={ad.title}
             price={ad.price}
-            description={
-              Array.isArray(ad.description)
-                ? truncateRichText(ad.description, 400)
-                : ad.description
-            }
+            description={ad.description}
             isDeletable={isDeletable}
             isDashboard={isDashboard}
             isFeed={isSidebarOpen}

@@ -6,7 +6,8 @@ const HeroSection = () => {
   return (
     <div className={styles.mainSection}>
       <h1 className={styles.mainTitle}>
-      Lacinia ornare  veh tellus nisi tempus. Lacinia ornare  veh tellus nisi tempus. 
+      {/* Lacinia ornare  veh tellus nisi tempus. Lacinia ornare  veh tellus nisi tempus.  */}
+      Work In Progress for OLY, South Africa's premier classifieds website. 
       </h1>
       <HeroSectionSearch/>
     </div>

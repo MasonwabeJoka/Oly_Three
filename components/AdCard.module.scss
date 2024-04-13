@@ -20,8 +20,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: rem(32);
-    width: rem(310);
-    min-height: rem(248);
+    width: 100%;
 
     .image {
       border-radius: rem(32);
@@ -37,12 +36,10 @@
       width: rem(72);
       height: rem(72);
       border-radius: 50%;
-      z-index: 5;
 
       .likeIcon {
-        // box-shadow:
-        //   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
-        //   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+        box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+          5px 5px 10px 0px rgba(169, 196, 203, 0.25);
       }
 
       .likeIconHover {
@@ -75,6 +72,8 @@
         padding: rem(8) rem(0) rem(4) rem(16);
         line-height: 1.2;
       }
+
+     
     }
     .price {
       margin: auto;
@@ -126,42 +125,6 @@
     }
   }
 }
--------------------------------------------------------------------------
-  .large {
-  // width: rem(306);
-  // height: rem(338);
-}
-
-.standard {
-  width: rem(310);
-  min-height: rem(248);
-}
-
-.small {
-}
-
-.largeFeed {
-}
-.standardFeed {
-  width: rem(310);
-  min-height: rem(248);
-}
-
-.smallFeed {
-}
-
-.largeDashboard {
-  @include larger-than(mobile) {
-  }
-}
-.standardDashboard {
-  @include larger-than(mobile) {
-    width: rem(310);
-    min-height: rem(248);
-  }
-}
-.smallDashboard {
-}
 
 /*//////////////////////////////////////////////////////////////////////////////*/
 
@@ -175,7 +138,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    width: rem(918);
+    height: rem(250);
     border-radius: rem(32);
     box-shadow: $shadow-three;
 
@@ -191,6 +155,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 100%;
         max-height: rem(288);
         border-radius: rem(32);
         background-color: $grey-one;
@@ -278,7 +243,6 @@
             .description {
               width: rem(463);
               overflow: hidden;
-              margin-top: rem(8);
               padding-bottom: rem(8);
               align-self: center;
             }
@@ -313,41 +277,5 @@
     // .cardContainer:hover {
     //   background-color: #bdecfc;
     // }
-  }
-
-  .large {
-    // width: rem(306);
-    // height: rem(338);
-  }
-
-  .standard {
-    width: rem(918);
-    height: rem(250);
-  }
-
-  .small {
-  }
-
-  .largeFeed {
-  }
-  .standardFeed {
-    width: rem(918);
-    height: rem(250);
-  }
-
-  .smallFeed {
-  }
-
-  .largeDashboard {
-    @include larger-than(mobile) {
-    }
-  }
-  .standardDashboard {
-    @include larger-than(mobile) {
-      width: rem(918);
-      height: rem(250);
-    }
-  }
-  .smallDashboard {
   }
 }

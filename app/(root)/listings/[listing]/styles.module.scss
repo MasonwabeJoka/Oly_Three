@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  // width: rem(1296);
+  width: rem(1296);
 
   .listingImages {
     margin-top: rem(56);
@@ -31,7 +31,10 @@
       align-items: center;
       padding-top: rem(32);
       padding-bottom: rem(32);
-  
+      padding-left: rem(3000);
+      padding-right: rem(3000);
+      margin-left: rem(-3000);
+      margin-right: rem(-3000);
       width: auto;
       background-color: $white-three;
 
@@ -128,6 +131,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-left: rem(1000);
+      padding-right: rem(1000);
+      margin-left: rem(-1000);
+      margin-right: rem(-1000);
       width: auto;
       min-height: rem(200);
 

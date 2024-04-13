@@ -17,9 +17,9 @@ const Messages = () => {
     <MaxWidthWrapper className={styles.maxWidthWrapper}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <MessagesSidebar />
+          {/* <MessagesSidebar /> */}
           {/* <Chats /> */}
-          {/* <div className={styles.sideSection}>
+           <div className={styles.sideSection}>
             <div className={styles.recentChats}>
               <div className={styles.searchBar}>
                 <Input
@@ -41,7 +41,7 @@ const Messages = () => {
                   required={false}
                 />
               </div>
-              {messages[1].slice(0, 6).map((message: any) => {
+              {messages.slice(0, 6).map((message: any) => {
                 return (
                   <div className={styles.chat} key={message.id}>
                     <div className={styles.avatarContainer}>
@@ -97,9 +97,9 @@ const Messages = () => {
             <Link href="/dashboard/messages/contacts">
               <h4 className={styles.contactsLink}>Contacts</h4>
             </Link>
-          </div> */}
+          </div> 
 
-          {/* <div className={styles.mainSection}>
+          <div className={styles.mainSection}>
             {chats ? (
               <EmptyState />
             ) : (
@@ -235,7 +235,7 @@ const Messages = () => {
                 </div>
               </div>
             )}
-          </div> */}
+          </div> 
         </div>
         <div className={styles.bottomSection}>
           <div className={styles.typingArea}>

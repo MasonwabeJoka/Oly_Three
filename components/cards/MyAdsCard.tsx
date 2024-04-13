@@ -75,8 +75,8 @@ const MyAdsCard = ({
               >
                 {`${
                   title.length > 42
-                    ? `${title.slice(0, 52)}...`
-                    : title.slice(0, 72)
+                    ? `${title.slice(0, 32)}...`
+                    : title.slice(0, 52)
                 }`}
               </h3>
 
