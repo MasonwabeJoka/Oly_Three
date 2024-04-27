@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Icon from "./Icon";
 
+
 type ImageAsset = {
   url: string;
   width: number;
