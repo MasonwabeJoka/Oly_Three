@@ -138,6 +138,7 @@
     .keepSidebarInPlace {
       @include larger-than(mobile) {
         width: rem(342);
+        width: rem(342);
       }
     }
     .sidebar {
