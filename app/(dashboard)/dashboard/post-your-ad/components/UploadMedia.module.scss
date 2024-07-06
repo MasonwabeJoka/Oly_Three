@@ -1,0 +1,36 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin-top: rem(52);
+    margin-bottom: rem(32);
+    color: $danger;
+    font-size: $body;
+    font-weight: bold;
+
+    @include larger-than(mobile) {
+      font-size: $h4;
+      margin-top: rem(224);
+      margin-bottom: rem(48);
+    }
+  }
+  .mediaType {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: rem(48);
+  }
+
+  .buttons {
+    margin-top: rem(48);
+  }
+  .buttonContainer {
+    margin-bottom: rem(20);
+  }
+}

@@ -1,0 +1,51 @@
+@import "@/utils/functions.scss";
+@import "@/utils/variables.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  .preferenceCategory {
+    margin-left: rem(80);
+    margin-bottom: rem(16);
+    font-size: $h4;
+    font-weight: 600;
+  }
+  .cardWrapper {
+    display: flex;
+    flex-direction: column;
+    width: rem(920);
+    min-height: rem(180);
+    border-radius: rem(32);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+    padding-bottom: rem(32);
+
+    fieldset {
+      margin-top: rem(32) 
+      ;
+      .preferenceType {
+        font-size: $h4;
+        font-weight: 600;
+        margin-left: rem(80);
+        margin-bottom: rem(24);
+      }
+      .preferencesContainer {
+        display: flex;
+        justify-content: space-between;
+        .preference {
+          margin-left: rem(80);
+        }
+
+        .options {
+          display: flex;
+          flex-direction: column;
+          margin-right: rem(80);
+          .option {
+            margin-bottom: rem(8);
+          }
+        }
+      }
+    }
+  }
+}

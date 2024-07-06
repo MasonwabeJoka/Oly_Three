@@ -1,0 +1,28 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+  .title {
+    margin-bottom: rem(48);
+    color: $danger;
+    font-weight: bold;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(64);
+
+    .buttonContainer {
+      margin-bottom: rem(16);
+    }
+  }
+}

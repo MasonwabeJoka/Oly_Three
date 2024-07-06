@@ -1,0 +1,30 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+
+.breadcrumbs {
+  color: $grey-two;
+  width: fit-content;
+  font-size: rem(14);
+
+  li {
+    display: inline;
+
+    .breadcrumb {
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover {
+      color: $danger-hover;
+    }
+  }
+
+  .lastBreadcrumb {
+   
+  }
+  
+
+  .searchResult {
+    font-weight: 500;
+    color: $black-four;
+  }
+}

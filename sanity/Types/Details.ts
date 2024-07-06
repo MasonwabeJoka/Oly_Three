@@ -1,0 +1,33 @@
+export type Details = {
+    condition: string;
+    accessoriesIncluded?: string[];
+    warrantyInformation?: string;
+    history?: string;
+    customizations?: string;
+    maintenanceHistory?: string;
+    compatibility?: string;
+    originalPackaging?: string;
+    usageHistory?: string;
+    storage?: string;
+    originalPurchaseDate?: string;
+    reasonForSelling?: string;
+    additionalFeatures?: string;
+    serviceRecords?: string;
+    userManualAvailability?: string;
+    manufacturerSupport?: string;
+    compatibilityWithAccessories?: string;
+    packagingCondition?: string;
+    productHistory?: string;
+    transferability?: string;
+    petSmokeExposure?: string;
+    regulatoryCompliance?: string;
+    specialFeatures?: string;
+    documentation?: string;
+    certification?: string;
+    age?: string;
+    ownership?: string;
+    environmentalImpact?: string;
+    knownIssues?: string;
+    upgrades?: string;
+  };
+  

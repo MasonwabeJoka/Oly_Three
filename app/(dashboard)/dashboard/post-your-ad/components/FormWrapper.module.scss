@@ -1,0 +1,26 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: rem(311);
+  
+    @include larger-than(mobile) {
+      width: rem(1098);
+    }
+  
+
+  .title {
+    font-size: $body;
+    margin-top: rem(52);
+    margin-bottom: rem(32);
+    color: $danger;
+    font-weight: bold;
+  }
+}

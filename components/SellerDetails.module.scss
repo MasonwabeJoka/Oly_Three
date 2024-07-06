@@ -1,0 +1,89 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(365);
+  height: rem(688);
+  border-radius: rem(32);
+  background-color: $grey-one;
+  color: $black-four;
+  box-shadow: $shadow-one;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .avatar {
+    margin-top: rem(56);
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(32);
+    font-weight: 600;
+
+    .name {
+    }
+
+    .phoneNumber {
+    }
+
+    .email {
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(56);
+    .button {
+      width: rem(98);
+      height: rem(56);
+      box-shadow: $shadow-one;
+      background-color: $white-four;
+
+      @include larger-than(mobile) {
+        width: rem(206);
+        height: rem(56);
+      }
+    }
+
+    .chatButton {
+      margin-bottom: rem(12);
+    }
+
+    .followButton {
+    }
+  }
+
+  .socialMediaContainer {
+    display: flex;
+    margin-top: rem(56);
+    .app {
+      margin-right: rem(16);
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(56);
+
+    .showAll {
+      font-weight: 600;
+      // margin-bottom: rem(8);
+    }
+
+    .report {
+      color: $danger;
+    }
+  }
+}

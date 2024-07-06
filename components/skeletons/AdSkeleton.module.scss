@@ -1,0 +1,47 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.profileAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(32);
+}
+
+.landscapeAdContainer {
+}
+
+.large {
+  // width: rem(306);
+  // height: rem(338);
+}
+
+.standard {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.small {
+}
+
+.largeFeed {
+}
+.standardFeed {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.smallFeed {
+}
+
+.largeDashboard {
+  @include larger-than(mobile) {
+  }
+}
+.standardDashboard {
+  @include larger-than(mobile) {
+    width: rem(310);
+    min-height: rem(413);
+  }
+}
+.smallDashboard {
+}

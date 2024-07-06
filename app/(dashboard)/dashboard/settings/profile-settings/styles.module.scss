@@ -1,0 +1,83 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    font-size: $h4;
+    font-weight: bold;
+    color: $danger;
+    margin-top: rem(80);
+    margin-bottom: rem(52);
+  }
+
+  .avatarContainer {
+    margin-bottom: rem(24);
+    cursor: url("/icons/pencil.png"), auto;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: rem(48);
+    margin-bottom: rem(48);
+
+    .errorMessage {
+      color: $danger;
+      margin-bottom: rem(8);
+    }
+    .controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .control {
+        margin-bottom: rem(20);
+      }
+
+      .phoneNumber {
+        margin-bottom: rem(48);
+      }
+
+     
+      .changePasswordButton {
+        color: #67787c;
+        margin-bottom: rem(48);
+      }
+      .selectContainer {
+        margin-bottom: rem(20);
+      }
+    }
+
+    .socialMediaLinks {
+      .otherSocialMedia {
+        
+    // 
+      }
+      .selectedSocialMediaContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+      }
+      .otherSocialMediaContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+
+  }
+
+  .buttonsContainer {
+    margin-bottom: rem(240);
+  }
+}

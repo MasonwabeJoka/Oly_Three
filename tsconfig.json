@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "jsx": "preserve",
+    "jsxFactory": "React.createElement",
+    // "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/page.tsx",
+    "app/layout.tsx",
+    "components/cards/LinkCard.tsx",
+    "components/cards/BoxAdCard.jsx",
+    "./payload.config.ts",
+    "app/(root)/Blog.tsx",
+    "components/Avatars.tsx",
+    "data/unsplash.jsx",
+    "store/unsplashStore.tsx"
+, "app/Unsplash.jsx", "lib/unsplash.tsx", "app/Articles.tsx", "components/ui/DropdownResults.tsx", "app/listings/layout.tsx", "functions/page.ts", "functions/src/index.ts", "app/(root)/Blog.tsx", "components/Features.tsx", "components/Checkbox.tsx", "tailwind.config.js", "app/api/temp.js", "app/temp/page.jsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

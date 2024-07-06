@@ -1,0 +1,19 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.leftArrowContainer {
+
+
+    .leftArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $white-four;
+       box-shadow: none;
+       
+        .left {
+            
+        }
+    }
+}

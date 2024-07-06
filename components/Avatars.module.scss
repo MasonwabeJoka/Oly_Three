@@ -1,0 +1,82 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+
+.avatarsContainer {
+  position: relative;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.041);
+  outline: rem(4) solid $white-one;
+
+  .isOnline {
+    position:absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: rem(8);
+    height: rem(8);
+    border-radius: 50%;
+    background-color: $success-hover;
+    outline: rem(2) solid $white-one;
+
+    @include larger-than(mobile) {
+      width: rem(12);
+      height: rem(12);
+    }
+  }
+}
+
+.large {
+  position: relative;
+  width: rem(56);
+  height: rem(56);
+
+  @include larger-than(mobile) {
+    width: rem(72);
+    height: rem(72);
+
+    .isOnline {
+      position:absolute;
+      top: 0;
+      right: rem(4) ;
+      width: rem(14);
+      height: rem(14);
+    }
+  }
+}
+.regular {
+  width: rem(36);
+  height: rem(36);
+
+  @include larger-than(mobile) {
+    width: rem(48);
+    height: rem(48);
+  }
+}
+.small {
+  width: rem(20);
+  height: rem(20);
+
+  @include larger-than(mobile) {
+    width: rem(32);
+    height: rem(32);
+  }
+
+  .isOnline {
+    position:absolute;
+    top: 0;
+    right: rem(-2) ;
+    width: rem(10);
+    height: rem(10);
+  }
+}
+.tiny {
+  width: rem(16);
+  height: rem(16);
+
+  @include larger-than(mobile) {
+    width: rem(20);
+    height: rem(20);
+  }
+}

@@ -1,0 +1,28 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.blogSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  .titleContainer {
+    .title {
+      margin-bottom: rem(56);
+      font-weight: 600;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(136);
+
+    .moreArticlesBtn {
+      margin-bottom: rem(20);
+    }
+  }
+}

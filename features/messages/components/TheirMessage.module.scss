@@ -1,0 +1,35 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.theirMessageContainer {
+  display: flex;
+  margin-bottom: rem(24);
+  align-items: flex-start;
+  // background-color: yellow;
+
+  .avatarContainer {
+    margin-right: rem(36);
+  }
+  .chatBubblesWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .bubbleWidthSetter {
+      display: inline-flex;
+      max-width: rem(456);
+
+      .theirMessage {
+        padding: rem(18) !important;
+        width: fit-content;
+        border-radius: 0 rem(32) rem(32) rem(32);
+        margin-bottom: rem(8);
+        background-color: $white-two;
+        box-shadow:
+          10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+          5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+      }
+    }
+  }
+}

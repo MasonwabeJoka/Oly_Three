@@ -1,0 +1,54 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  // height: 100vh;
+
+  .title {
+    margin-top: rem(56);
+    margin-bottom: rem(32);
+    font-size: $body;
+    color: $danger;
+    font-weight: bold;
+    @include larger-than(mobile) {
+      margin-top: rem(64);
+      font-size: $h4;
+      margin-bottom: rem(24);
+    }
+  }
+
+  .cards {
+    width: rem(800);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include larger-than(mobile) {
+      margin-top: rem(0);
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: row;
+    }
+    .card {
+      margin-bottom: rem(24);
+
+      @include larger-than(mobile) {
+        margin-right: rem(24);
+      }
+    }
+  }
+  .deleteButton {
+    margin-top: rem(8);
+    color: $danger;
+  }
+
+  .deleteButton:hover {
+    color: $danger-hover;
+  }
+}

@@ -1,0 +1,73 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: rem(4);
+  pointer-events: none; /* Make the div click-through */
+  z-index: 12;
+  transition: transform 0.5s ease-in-out;
+
+  @include larger-than(mobile) {
+    top: rem(8);
+ 
+  }
+
+  .logo {
+    pointer-events: auto; /* Make the element clickable */
+
+    filter: drop-shadow(0px 23px 50px rgba(0, 0, 0, 0.1))
+      drop-shadow(0px 92px 92px rgba(0, 0, 0, 0.09))
+      drop-shadow(0px 206px 124px rgba(0, 0, 0, 0.05))
+      drop-shadow(0px 367px 147px rgba(0, 0, 0, 0.01))
+      drop-shadow(0px 573px 160px rgba(0, 0, 0, 0));
+
+      @include larger-than(mobile) {
+       
+      }
+    
+  }
+
+  .profileIconContainer {
+  
+  @include larger-than(mobile) {
+    margin-top: rem(6);
+  }
+
+    .profile {
+      pointer-events: auto; /* Make the button clickable */
+      filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0));
+
+      background-color: transparent;
+      background-clip: content-box;
+
+      width: rem(32);
+      height: rem(32);
+      border-radius: 50%;
+      background-size: cover;
+    }
+  }
+
+ 
+}
+
+.size {
+  width: rem(352);
+  height: rem(32);
+  @include larger-than(mobile) {
+    width: 96vw;
+    height: rem(32);
+  }
+}
+
+.withFeedSize {
+  width: rem(940);
+  height: rem(32);
+}
+
+.navbarHidden {
+  transform: translate(-50%, -130%);
+}

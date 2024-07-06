@@ -1,0 +1,59 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .pageTitle {
+    margin-top: rem(52);
+    margin-bottom: rem(32);
+    color: $danger;
+    font-size: $body;
+    font-weight: bold;
+
+    @include larger-than(mobile) {
+      font-size: $h4;
+      margin-top: rem(96);
+      margin-bottom: rem(72);
+    }
+  }
+
+  .titleContainer {
+    margin-bottom: rem(20);
+
+    .title {
+      @include larger-than(mobile) {
+        width: rem(640);
+        margin-bottom: rem(20);
+      }
+    }
+  }
+  .descriptionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: rem(48);
+    .description {
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // padding: rem(32) rem(64);
+      height: rem(240);
+      // background-color: yellow;
+      @include larger-than(mobile) {
+        width: rem(640);
+       border-radius: rem(32);
+  
+       
+      }
+    }
+  }
+
+  .proceedButtonContainer {
+    margin-bottom: rem(20);
+  }
+}

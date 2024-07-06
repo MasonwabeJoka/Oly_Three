@@ -1,0 +1,82 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+ 
+  @include larger-than(mobile) {
+    width: rem(1440);
+  }
+
+  .main {
+    width: rem(1098);
+    margin-top: rem(164);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .newsLetter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      margin-bottom: rem(64);
+      .input {
+        margin-bottom: rem(20);
+      }
+      
+    }
+    .socials {
+      display: flex;
+      gap: rem(32);
+      margin-bottom: rem(20);
+    }
+    .copyright {
+
+    }
+  }
+
+  
+}
+
+.listingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  @include larger-than(mobile) {
+    width: 100vw;
+    
+  }
+
+  .listingMain {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(164);
+    .newsLetter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      margin-bottom: rem(64);
+      .input {
+        margin-bottom: rem(20);
+      }
+      
+    }
+    .socials {
+      display: flex;
+      gap: rem(32);
+      margin-bottom: rem(20);
+    }
+    .copyright {
+
+    } 
+
+}
+}
+

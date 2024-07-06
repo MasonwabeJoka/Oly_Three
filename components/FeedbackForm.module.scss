@@ -1,0 +1,71 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: rem(740);
+  height: rem(600);
+  border-radius: rem(32);
+  background-color: $white-four;
+  // background-color: antiquewhite;
+
+  .title {
+    margin-bottom: rem(32);
+    font-size: $h4;
+    font-weight: bold;
+    color: $danger;
+  }
+
+  .control {
+    margin-bottom: rem(20);
+  }
+
+  .nameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .name {
+      width: rem(640)
+    }
+  }
+
+  .emailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(20);
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .email {
+      width: rem(640);
+    }
+  }
+
+  .messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(48);
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .message {
+      width: rem(640);
+    }
+  }
+
+  .submitButtonContainer {
+
+  }
+}

@@ -1,0 +1,20 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  cursor: url("/icons/X.png"), auto;
+  background-color: $white-four;
+ 
+}
+
+.modalContent {
+  cursor: default;
+}

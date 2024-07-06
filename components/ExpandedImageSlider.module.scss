@@ -1,0 +1,107 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  position: relative;
+  border-radius: rem(32);
+background-color: yellow;
+  .buttonsAndLike {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .likeIconContainer {
+      bottom: rem(88);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(72);
+      height: rem(72);
+      border-radius: 50%;
+
+      .likeIcon {
+      }
+
+      .likeIconHover {
+        transition: all 1.3s ease;
+      }
+    }
+    .buttonContainer {
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      position: absolute;
+      top: 50%;
+      z-index: 20;
+      transform: translateY(-50%);
+      width: rem(40);
+      height: rem(40);
+      border-radius: 50%;
+      transition: transform 0.2s;
+      background-color: transparent;
+      cursor:auto;
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        width: rem(48);
+        height: rem(48);
+        // background-color: blue;
+        opacity: 1;
+        // margin-left: rem(32);
+        pointer-events:visible;
+      }
+
+      .leftButton {
+      
+   
+      }
+
+      .rightButton {
+        // margin-right: rem(19)
+      }
+    }
+
+    .buttonContainer:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .buttonsAndLike:hover {
+    // opacity: 1;
+    .likeIconContainer {
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+    }
+  }
+
+  .swiper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: rem(310);
+    min-height: rem(248);
+    border-radius: rem(32);
+    object-fit: cover;
+    .swiperSlide {
+      position: relative;
+
+      .image {
+        object-fit: cover;
+      }
+    }
+  }
+}

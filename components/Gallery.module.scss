@@ -1,0 +1,197 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  .bidBuyButtonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    .bidBuyButtons {
+    }
+    .bidContainer {
+      margin-right: rem(20);
+      .bid {
+      }
+    }
+    .buyContainer {
+      .buy {
+      }
+    }
+  }
+
+  .gallery {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-right: rem(12);
+    gap: rem(12);
+    height: rem(475);
+
+    .primaryImageContainer {
+      display: flex;
+      justify-content: center;
+
+      height: rem(475);
+      .primaryImagePositioner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .primaryImage {
+          border-radius: rem(32);
+          box-shadow:
+            10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+            5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+        }
+
+        .likeIconContainer {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: rem(128);
+          height: rem(128);
+          border-radius: 50%;
+          cursor: pointer;
+
+          .likeIconBG {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: rem(150);
+            height: rem(150);
+            transform: translateY(50%);
+            border: 0px solid black;
+            border-radius: 50%;
+            background-color: hsla(195, 91%, 86%, 1);
+
+            .likeIcon {
+              text-align: center;
+              background-color: #bdecfc;
+            }
+          }
+        }
+      }
+    }
+
+    .secondaryImages {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: rem(12);
+   
+      // display: grid;
+      // grid-auto-flow: row; /* Items flow in a row direction */
+      // grid-template-columns: repeat(
+      //   auto-fill,
+      //   minmax(rem(315), 1fr)
+      // ); /* Adjusts columns */
+      // gap: rem(12); /* Gap between items */
+
+      .imageContainer {
+        position: relative;
+        width: rem(315);
+        height: rem(231);
+      }
+
+      .image {
+        border-radius: rem(32);
+        box-shadow:
+          10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+          5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+      }
+      .imageTwoContainer {
+        // margin-right: rem(12);
+
+        .imageTwo {
+        }
+      }
+      .imageThreeContainer {
+        .imageThree {
+        }
+
+        .allImagesBtn {
+          width: rem(202);
+          position: absolute;
+          left: 50%;
+          top: 85%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+        }
+      }
+      .imageFourContainer {
+        // margin-right: rem(12);
+
+        .imageFour {
+        }
+      }
+      .imageFiveContainer {
+        .imageFive {
+        }
+        .allImagesBtn {
+          width: rem(202);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+        }
+      }
+    }
+
+ 
+
+    
+      .allImagesBtn {
+        position: absolute;
+        top: 75%;
+        right: rem(56);
+        // transform: translate(-50%, -50%);
+        z-index: 5;
+        width: rem(202);
+      }
+    
+    
+  }
+
+  .postMetrics {
+    width: rem(280);
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    color: $black-four;
+    font-size: rem(12);
+    margin-top: rem(16);
+    margin-left: rem(16);
+
+    .likes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+    .views {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+
+    .postAge {
+      font-size: rem(12);
+      .duration {
+        margin-left: rem(8);
+        margin-right: rem(8);
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@import '@/utils/variables.scss';
+@import '@/utils/functions.scss';
+
+.container {
+  display: flex;
+  background-color: azure;
+
+  .violations {
+    margin-right: rem(100);
+    .violation {
+    }
+
+    .violationLabel {
+    }
+  }
+
+  .moreInfoContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: solid black rem(1);
+
+    .moreInfo {
+      border: none;
+      outline: none;
+    }
+    .exitBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+    }
+    .submitReportBtn {
+      margin: 0 auto;
+    }
+  }
+}

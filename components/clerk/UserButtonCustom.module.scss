@@ -1,0 +1,13 @@
+@import "./utils/variables.scss";
+@import "./utils/functions.scss";
+@import "./utils/breakpoints.scss";
+
+.container {
+
+  .profile {
+    width: rem(34);
+    height: rem(34);
+    cursor: pointer;
+    box-shadow: $shadow-four;
+  }
+}

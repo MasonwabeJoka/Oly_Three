@@ -1,0 +1,36 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    margin-top: rem(52);
+    margin-bottom: rem(32);
+    color: $danger;
+    font-size: $body;
+    font-weight: bold;
+
+    @include larger-than(mobile) {
+      font-size: $h4;
+      margin-top: rem(200);
+      margin-bottom: rem(48);
+    }
+  }
+
+  .selects {
+    margin-bottom: rem(48);
+   
+    .select {
+      margin-bottom: rem(20);
+      
+    }
+  }
+
+  .proceedButtonContainer {
+    margin-bottom: rem(20);
+  }
+}

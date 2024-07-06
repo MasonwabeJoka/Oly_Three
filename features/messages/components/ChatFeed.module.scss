@@ -1,0 +1,23 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.mainSection {
+ 
+  .mainSectionWrapper {
+    .useName {
+      
+    }
+    .bottomSection {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: rem(1098);
+      margin-bottom: rem(24);
+    }
+    
+  }
+}

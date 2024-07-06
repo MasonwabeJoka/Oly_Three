@@ -1,0 +1,18 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  width: rem(640);
+
+  .container {
+    .fr-box, .fr-element, .fr-view {
+      font-family: 'Outfit', sans-serif !important;
+    }
+    .warning {
+      color: $danger;
+      margin-top: rem(8);
+    }
+  }
+}
+

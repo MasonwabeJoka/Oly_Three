@@ -1,0 +1,15 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include larger-than(mobile) {
+    width: 100%;
+
+  }
+
+
+}

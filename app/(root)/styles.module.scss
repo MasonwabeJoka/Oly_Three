@@ -1,0 +1,97 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+@import "layout.module.scss";
+
+body .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: margin-left 0.5s;
+    overflow-x: hidden;
+    width: 100vw;
+    @include larger-than(mobile) {
+      // width: rem(1440);
+    }
+
+    .modalContainer {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      width: 100vw;
+      .modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        pointer-events: auto;
+      }
+    }
+
+    .heroSection {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: rem(96);
+      margin-top: rem(24);
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .features {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .categories {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .featuredListings {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .blog {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+        width: 100%;
+      }
+    }
+
+    .videoAd {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
+    }
+    .sponsoredArticles {
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+        width: 100%;
+      }
+    }
+  }
+}

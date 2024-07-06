@@ -1,0 +1,40 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.sponsoredArticlesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  .title {
+    margin-bottom: rem(56);
+    font-weight: 600;
+  }
+
+  .articlesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .sponsoredBy {
+      display: flex;
+      margin-left: auto;
+      height: rem(24);
+    }
+    .articles {
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(136);
+
+    .moreArticlesBtn {
+      margin-bottom: rem(20);
+    }
+  }
+}

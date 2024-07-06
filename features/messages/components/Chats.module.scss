@@ -1,0 +1,11 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.chats {
+  .chat {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: rem(16);
+  }
+}

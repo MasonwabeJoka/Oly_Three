@@ -1,0 +1,12 @@
+{
+  "id": "mig_clm6vfe5es60mq882lsg",
+  "parentID": "mig_clm6vcu5es60mq882lr0",
+  "checksum": "1:03f4b13f40356620929b00d40deb88d30c93c2f471d729dc403fd5f24b02101b",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Vehicles"
+      }
+    }
+  ]
+}

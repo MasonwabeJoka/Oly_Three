@@ -1,0 +1,120 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.editorContainer {
+  text-align: left;
+  overflow: hidden;
+}
+
+.editorContainer p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.emptyEditor {
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+  &::before {
+    content: attr(data-placeholder);
+    color: #aaa; // Adjust the color as needed
+    pointer-events: none;
+    display: block;
+    height: 0;
+  }
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  width: rem(640);
+}
+
+.editorContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  color: $black-four; 
+  align-items: flex-start;
+  width: 100%;
+  height: rem(240);
+  max-height: rem(240);
+  gap: 0.75rem;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: rem(32);
+  border-radius:  0 0 rem(32) rem(32);
+  outline: none;
+  box-shadow: $shadow-two;
+  background-color: $white-one;
+  background-color: aquamarine;
+  // margin-top: rem(1000)
+}
+
+.editorContent [contenteditable="true"] {
+  /* Styles for the editable content area */
+  padding: 20px; /* Add padding to the text */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  outline: none; /* Ensure the cursor is visible */
+}
+
+.xxLarge {
+  @include larger-than(mobile) {
+    width: rem(1296);
+    height: rem(56);
+  }
+}
+
+.xxLargeFeed {
+  width: rem(954);
+  min-height: rem(56);
+}
+
+.xLarge {
+  @include larger-than(mobile) {
+    width: rem(1078);
+    min-height: rem(56);
+  }
+}
+
+.xLargeFeed {
+  width: rem(793);
+  min-height: rem(56);
+}
+
+.large {
+  width: rem(311);
+  min-height: rem(56);
+  @include larger-than(mobile) {
+    width: rem(514);
+    min-height: rem(56);
+    
+  }
+}
+
+.largeFeed {
+  width: rem(471);
+  min-height: rem(56);
+  // max-height: rem(240);
+}
+
+.medium {
+  width: rem(202);
+  min-height: rem(56);
+  @include larger-than(mobile) {
+    width: rem(424);
+    min-height: rem(56);
+  }
+}
+
+.mediumFeed {
+  width: rem(310);
+  min-height: rem(48);
+}

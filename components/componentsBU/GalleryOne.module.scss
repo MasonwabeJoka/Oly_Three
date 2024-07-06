@@ -1,0 +1,159 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  .bidBuyButtonsContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    // background-color: lime;
+    .bidBuyButtons {
+    }
+    .bidContainer {
+      margin-right: rem(20);
+      .bid {
+      }
+    }
+    .buyContainer {
+      .buy {
+      }
+    }
+  }
+
+  .gallery {
+    display: flex;
+
+    .primaryImageContainer {
+      // width: rem(642);
+      // height: rem(472.75);
+      margin-right: rem(12);
+
+      .primaryImagePositioner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .primaryImage {
+          border-radius: rem(32);
+          box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+            5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+        }
+
+        .likeIconContainer {
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: rem(128);
+          height: rem(128);
+          border-radius: 50%;
+          cursor: pointer;
+
+          .likeIconBG {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: rem(150);
+            height: rem(150);
+            transform: translateY(50%);
+            border: 0px solid black;
+            border-radius: 50%;
+            background-color: hsla(195, 91%, 86%, 1);
+
+            .likeIcon {
+              text-align: center;
+              background-color: #bdecfc;
+            }
+          }
+        }
+      }
+    }
+
+    .secondaryImages {
+      display: flex;
+      flex-wrap: wrap;
+      width: rem(642);
+      border-radius: rem(32);
+
+      .imageContainer {
+        position: relative;
+        width: rem(315);
+        height: rem(231);
+      }
+
+      .image {
+        border-radius: rem(32);
+        box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+          5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+      }
+      .imageOneContainer {
+        margin-right: rem(12);
+  
+        .imageOne {
+        }
+      }
+      .imageTwoContainer {
+        // margin-bottom: rem(12);
+        .imageTwo {
+        }
+      }
+      .imageThreeContainer {
+        margin-right: rem(12);
+        .imageThree {
+        }
+      }
+      .imageFourContainer {
+        .imageFour {
+        }
+        .allImagesBtn {
+          width: rem(202);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 5;
+        }
+      }
+    }
+  }
+
+  .postMetrics {
+    width: rem(280);
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    color: $black-four;
+    font-size: rem(12);
+    margin-top: rem(16);
+    margin-left: rem(16);
+
+    .likes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+    .views {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+
+    .postAge {
+      font-size: rem(12);
+      .duration {
+        margin-left: rem(8);
+        margin-right: rem(8);
+      }
+    }
+  }
+}

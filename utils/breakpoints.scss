@@ -1,0 +1,25 @@
+/* 640px | 1024 | 1400 */
+$larger-than: (
+  "mobile": "40em",
+  "tablet": "64em",
+  "desktop": "87.5em",
+);
+
+/* 639px | 1023 | 1399 */
+$smaller-than: (
+  "mobile": "39.9375em",
+  "tablet": "63.9375em",
+  "desktop": "87.4375em",
+);
+
+@mixin larger-than($size) {
+  @media (min-width: map-get($larger-than, $size)) {
+    @content;
+  }
+}
+
+@mixin smaller-than($size) {
+  @media (max-width: map-get($smaller-than, $size)) {
+    @content;
+  }
+}
