@@ -1,50 +1,63 @@
-import { PortableTextBlock } from "sanity";
+import { z } from 'zod';
+import { PortableTextBlockSchema } from "./PortableTextBlock"; 
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
 
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+// Slug type
+const SlugSchema = z.object({
+  _type: z.literal('slug'),
+  current: z.string(),
+});
 
-type Slug = {
-    _type: 'slug';
-    current: string;
-};
+// ForegroundColour type
+const ForegroundColourSchema = z.object({
+  foreground: z.string(),
+});
 
-type ForegroundColour = {
-    foreground: string;
-}
+// Category type
+const CategorySchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  slug: SlugSchema,
+  title: z.string(),
+  description: z.array(PortableTextBlockSchema),
+  nickName: z.string().optional(),
+  mainCategory: z.string().optional(),
+  parentCategory: z.lazy(() => CategorySchema).optional(), // Recursive definition
+  childrenCategories: z.array(z.lazy(() => CategorySchema)).optional(), // Recursive definition
+  order: z.number().optional(),
+  breadCrumbs: z.array(z.string()).optional(),
+  featured: z.boolean(),
+  displayOrder: z.number().optional(),
+  image: z.object({
+    _type: z.literal('image'),
+    asset: ReferenceSchema,
+  }).optional(),
+  foreground: ForegroundColourSchema.optional(),
+  icon: z.string().optional(),
+  creationDate: z.string().date(), // Date in ISO format
+  lastUpdated: z.string().date(), // Date in ISO format
+  createdBy: ReferenceSchema,
+  seoTitle: z.array(PortableTextBlockSchema).optional(),
+  seoDescription: z.array(PortableTextBlockSchema).optional(),
+  relatedCategories: z.array(ReferenceSchema).optional(),
+  keywords: z.array(z.string()).optional(),
+  visibility: z.enum(['public', 'private']),
+  audience: z.string().optional(),
+  geographicalFocus: z.string().optional(),
+  averageDailyViews: z.number().optional(),
+  subscriberCount: z.number().optional(),
+  accessRestrictions: z.array(z.string()).optional(),
+});
 
-export type Category = {
-    _id: string;
-    _createdAt: Date;
-    slug: Slug;
-    title: string;
-    description: PortableTextBlock[];
-    nickName?: string;
-    mainCategory?: string;
-    parentCategory?: Category;
-    childrenCategories?: Category[];
-    order?: number;
-    breadCrumbs?: string[];
-    featured: boolean;
-    displayOrder?: number;
-    image?: {
-        _type: 'image';
-        asset: Reference;
-    };
-    foreground?: ForegroundColour;
-    icon?: string;
-    creationDate: string; // Date in ISO format
-    lastUpdated: string; // Date in ISO format
-    createdBy: Reference;
-    seoTitle?: PortableTextBlock[];
-    seoDescription?: PortableTextBlock[];
-    relatedCategories?: Reference[];
-    keywords?: string[];
-    visibility: 'public' | 'private';
-    audience?: string;
-    geographicalFocus?: string;
-    averageDailyViews?: number;
-    subscriberCount?: number;
-    accessRestrictions?: string[];
-};
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type Slug = z.infer<typeof SlugSchema>;
+export type ForegroundColour = z.infer<typeof ForegroundColourSchema>;
+export type Category = z.infer<typeof CategorySchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, SlugSchema, ForegroundColourSchema, CategorySchema };

@@ -17,6 +17,7 @@ import Menu from "@/components/Menu";
 import { useModalStore } from "@/store/modalStore";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { useResponsive } from "@/utils/useResponsive";
+import AboveFoldAd from "@/components/ads/AboveFoldAd";
 
 const Home = () => {
   const showNotificationsModal = useModalStore(
@@ -91,12 +92,18 @@ const Home = () => {
           <section className={styles.heroSection}>
             <HeroSection />
           </section>
-          <section className={styles.features}>
-            <Features />
+          <section className={styles.aboveFoldAd}>
+            <AboveFoldAd />
           </section>
+
           <section className={styles.categories}>
             <FeaturedCategories />
           </section>
+
+          <section className={styles.features}>
+            <Features />
+          </section>
+          
           <section className={styles.featuredListings}>
             <FeaturedListings />
           </section>

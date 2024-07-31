@@ -174,7 +174,7 @@ const ProfileSettings = () => {
             autoFocus={false}
             autoComplete="on"
             disabled={false}
-            required={false}
+            required={true}
             value={""}
             {...register("name")}
           />
@@ -190,7 +190,7 @@ const ProfileSettings = () => {
             autoFocus={false}
             autoComplete="on"
             disabled={false}
-            required={false}
+            required={true}
             value={""}
             {...register("lastName")}
           />
@@ -207,7 +207,7 @@ const ProfileSettings = () => {
             autoFocus={false}
             autoComplete="on"
             disabled={false}
-            required={false}
+            required={true}
             {...register("email")}
           />
           <p className={styles.errorMessage}>{errors.phone?.message}</p>
@@ -222,7 +222,7 @@ const ProfileSettings = () => {
             autoFocus={false}
             autoComplete="off"
             disabled={false}
-            required={false}
+            required={true}
             {...register("phone")}
           />
 
@@ -255,14 +255,14 @@ const ProfileSettings = () => {
                   "Snapchat",
                   "Other",
                 ]}
-                initialValue="Social Media Links"
+                currentValue="Social Media Links"
                 selectSize="large"
                 label="Provinces"
                 id="provinces"
                 name="provinces"
                 ariaLabel="Provinces"
                 autoFocus={false}
-                required={false}
+                required={true}
                 onChange={handleSelect}
               />
             </div>
@@ -271,7 +271,7 @@ const ProfileSettings = () => {
                 <p className={styles.errorMessage}>
                   {errors.socialMediaUrl?.message}
                 </p>
-                <div style={{marginBottom: "1rem"}}>
+                <div style={{ marginBottom: "1rem" }}>
                   <Input
                     className={styles.otherSocialMedia}
                     isSearchBar={true}
@@ -287,7 +287,7 @@ const ProfileSettings = () => {
                     iconSrcRight=""
                     iconWidth={32}
                     iconHeight={32}
-                    required={false}
+                    required={true}
                     value={otherSocialMedia}
                     onChange={mergeOnChange(
                       register("socialMediaUrl").onChange,
@@ -312,7 +312,7 @@ const ProfileSettings = () => {
                   iconSrcRight=""
                   iconWidth={32}
                   iconHeight={32}
-                  required={false}
+                  required={true}
                   {...register("socialMediaUrl")}
                 />
               </div>
@@ -335,7 +335,7 @@ const ProfileSettings = () => {
                   iconSrcRight=""
                   iconWidth={32}
                   iconHeight={32}
-                  required={false}
+                  required={true}
                   {...register("socialMediaUrl")}
                 />
               </div>

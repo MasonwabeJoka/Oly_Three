@@ -38,6 +38,9 @@ import { slide } from "./documents/slides"
 import { page } from "./documents/page"
 import { category } from "./documents/categories"
 import { Details } from "./documents/details"
+import {imageFile} from "./documents/imageFile"
+import {videoFile} from "./documents/videoFile"
+import {attachment} from "./documents/attachment"
 
 
 export const schemas = [
@@ -80,5 +83,8 @@ export const schemas = [
     slide,
     page,
     category,
-    Details
+    Details,
+    imageFile,
+    videoFile,
+    attachment,
 ]

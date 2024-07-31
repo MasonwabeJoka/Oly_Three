@@ -9,9 +9,14 @@
   position: relative;
   width: rem(360);
   height: 100vh;
+
   @include larger-than(mobile) {
-    width: rem(1002);
+    width: rem(1098);
     left: rem(-48);
+  }
+  @include larger-than(desktop) {
+    width: rem(1098);
+    left: rem(48)
   }
 
   .mobileSubcategoriesContainer {
@@ -24,7 +29,7 @@
 
   .wrapper {
     margin-right: rem(96);
-    
+
     .title {
       display: flex;
       justify-content: center;
@@ -49,15 +54,20 @@
       }
     }
 
-    .navButtons {
+    .navButtonsContainer {
       margin-right: rem(48);
       display: flex;
       justify-content: flex-end;
       margin-top: rem(32);
       margin-bottom: rem(16);
       width: rem(1002);
+      @include larger-than(desktop) {
+        width: 83%;
+        .navButtons {
+          margin-right: rem(44);
+        }
+      }
     }
-
 
     // .subcategoriesNavButtons {
     //   display: flex;
@@ -73,7 +83,6 @@
     //     align-items: center;
     //   }
     // }
-
 
     .proceedButtonContainer {
       margin-left: rem(48);

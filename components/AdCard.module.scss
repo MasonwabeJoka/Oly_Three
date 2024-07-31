@@ -7,29 +7,23 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  // width: rem(310);
-  // min-height: rem(248);
   border-radius: rem(32);
   background: $grey-one;
   cursor: pointer;
   box-shadow: $shadow-six;
   margin-top: rem(-8);
-
+  // padding-bottom: rem(96);
   .imageContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: rem(32);
-    // width: rem(310);
-    // min-height: rem(248);
+
 
     .image {
-      border-radius: rem(32);
       display: flex;
       justify-content: center;
       align-items: center;
-      // object-fit: contain;
     }
   }
 
@@ -42,29 +36,34 @@
     letter-spacing: rem(1.1);
     line-height: 2 !important;
     text-transform: uppercase;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    background-color: $grey-one;
     color: rgb(233, 252, 255);
+    color: $black-four;
     width: 100%;
     height: rem(96);
     z-index: 1;
-    border-radius: rem(4) rem(4) rem(32) rem(32);
+    border-radius: rem(0) rem(0) rem(32) rem(32);
     padding: 0 rem(8) rem(8) rem(8);
-    // background-color: white;
+   
 
     .titleDescription {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 80%;
-      margin-top: auto;
-      padding-bottom: rem(16);
+      height: 100%;
       .title {
         padding: rem(8) rem(0) rem(4) rem(20);
         line-height: 1.2;
-        
       }
     }
     .price {
-      margin: auto;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
       padding: rem(16);
       text-align: center;
+      height:100%; 
     }
   }
 
@@ -80,18 +79,17 @@
   .detailsHovered {
     position: static;
     display: block;
-    background: $grey-one;
-    // background: $white-two;
     color: $black-four;
-
+    background: $grey-one;
     height: 100%;
-    margin-bottom: rem(8);
+  
 
     .titleDescription {
       width: 100%;
-
+      margin-bottom: rem(-12);
+    
       .title {
-        padding: rem(16) rem(20) rem(4);
+        padding: rem(32) rem(20) rem(4);
         font-size: rem(16);
         margin-bottom: rem(8);
         line-height: 1.5;
@@ -106,8 +104,8 @@
       }
     }
     .price {
-      margin-bottom: rem(16);
       font-size: $h2;
+      margin-bottom: rem(8);
     }
   }
 }
@@ -211,10 +209,9 @@
       }
     }
 
-   
-
     .details {
       display: flex;
+      
       flex-direction: column;
       width: rem(570);
       height: rem(250);
@@ -276,7 +273,7 @@
             margin-top: auto;
             width: 100%;
             height: rem(24);
-
+          
             .price {
             }
 

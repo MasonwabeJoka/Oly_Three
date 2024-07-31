@@ -1,5 +1,5 @@
-import { defineType, defineField } from 'sanity';
 
+import { defineType, defineField } from 'sanity';
 
 export const ad = defineType({
     name: 'ad',
@@ -23,6 +23,14 @@ export const ad = defineType({
             type: 'reference',
             to: [{ type: 'user' }],
             description: 'The user who posted the ad.',
+        }),
+
+        defineField({
+            name: 'category',
+            title: 'Category',
+            type: 'reference',
+            to: [{ type: 'category' }],
+            description: 'The category under which the ad falls.',
         }),
         defineField({
             name: 'title',
@@ -49,8 +57,24 @@ export const ad = defineType({
             title: 'Price',
             type: 'number',
             description: 'Price for item advertised.',
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) => Rule.required().min(0).max(999999999),
         }),
+
+        defineField({
+            name: 'priceId',
+            title: 'Price ID',
+            type: 'string',
+            description: 'The  price ID associated with this product, for Payment Processing services like Stripe.',
+            readOnly: true, 
+        }),
+        defineField({
+            name: 'stripeId',
+            title: 'Stripe ID',
+            type: 'string',
+            description: 'The  stripe ID associated with this product.',
+            readOnly: true, 
+        }),
+        
 
         defineField({
             name: 'pricingOption',
@@ -70,40 +94,125 @@ export const ad = defineType({
         }),
 
         defineField({
+            name: 'approvedForSale',
+            title: 'Approved For Sale',
+            type: 'string',
+            description: 'The status indicating whether the product is approved for sale.',
+            options: {
+                list: [
+                    { title: 'Approved', value: 'approved' },
+                    { title: 'Pending', value: 'pending' },
+                    { title: 'Denied', value: 'denied' },
+                ],
+            },
+            initialValue: 'approved',
+        }),
+
+        defineField({
             name: 'images',
             title: 'Images',
             type: 'array',
-            of: [{
-              type: 'image',
-              options: {
-                hotspot: true, 
-                metadata: [
-                    'blurhash',   
-                    'lqip',      
-                    'palette',   
-                    'exif',       
-                    'location',   
-                  ],
+            of: [
+              {
+                type: 'reference',
+                to: [{ type: 'imageFile' }],
+                options: {
+                    metadata: [
+                        'blurhash',   
+                        'lqip',      
+                        'palette',   
+                        'exif',       
+                        'location',   
+                      ],
+                    filter: ({ context }: any) => {
+    
+                        const currentUserId = context.currentUser?.id;
+          
+                        return {
+                          filter: '_id == $userId',
+                          params: {
+                            userId: currentUserId,
+                          },
+                        };
               },
-              fields: [
-                {
-                  name: 'alt',
-                  title: 'Alternative Text',
-                  type: 'string',
-                  options: {
-                    isHighlighted: true // Makes this field easily accessible
-                  }
-                }
-              ]
-            }]
+            },
+        }
+            ],
+            validation: (Rule) => Rule.max(30),
           }),
 
           defineField({
-            name: 'category',
-            title: 'Category',
-            type: 'string',
-            description: 'The category under which the ad falls.',
-        }),
+            name: 'videos',
+            title: 'Videos',
+            type: 'array',
+            of: [
+              {
+                type: 'reference',
+                to: [{ type: 'videoFile' }],
+                options: {
+                  metadata: [
+                    'duration',       // Length of the video in seconds
+                    'format',         // File format or codec used
+                    'resolution',     // Dimensions of the video (width x height)
+                    'fileSize',       // Size of the video file
+                    'aspectRatio',    // Ratio of width to height (e.g., 16:9, 4:3)
+                    'creationDate',   // When the video was created or last modified
+                    'frameRate',      // Number of frames per second (fps)
+                    'bitrate',        // Bitrate of the video (kbps or Mbps)
+                    'codec',          // Encoding method used (e.g., H.264, HEVC)
+                    'audioChannels',  // Number of audio channels (e.g., stereo, 5.1 surround)
+                    'tags'            // Any additional metadata tags
+                  ],
+                  filter: ({ context }: any) => {
+                    const currentUserId = context.currentUser?.id;
+                    return {
+                      filter: '_id == $userId',
+                      params: {
+                        userId: currentUserId,
+                      },
+                    };
+                  },
+                },
+              },
+            ],
+            validation: (Rule) => Rule.max(1), // adjust validation as needed
+          }),
+          
+          defineField({
+            name: 'attachments',
+            title: 'Attachments',
+            type: 'array',
+            of: [
+              {
+                type: 'reference',
+                to: [{ type: 'attachment' }],
+                options: {
+                  metadata: [
+                    'size',            // Size of the file
+                    'format',          // File format or type (e.g., PDF, DOCX)
+                    'creationDate',    // When the file was created or last modified
+                    'modifiedDate',    // Last modified date
+                    'author',          // Author or creator of the file
+                    'pageCount',       // Number of pages (for documents)
+                    'title',           // Title of the document (if applicable)
+                    'tags'             // Any additional metadata tags
+                  ],
+                  filter: ({ context }: any) => {
+                    const currentUserId = context.currentUser?.id;
+                    return {
+                      filter: '_id == $userId',
+                      params: {
+                        userId: currentUserId,
+                      },
+                    };
+                  },
+                },
+              },
+            ],
+            validation: (Rule) => Rule.max(20), // adjust validation as needed
+          }),
+
+   
         defineField({
             name: 'featuredImage',
             title: 'Featured Image',

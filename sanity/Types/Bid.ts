@@ -1,17 +1,28 @@
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+import { z } from 'zod';
 
-export type Bid = {
-    _id: string;
-    _createdAt: Date;
-    amount: number;
-    bidder: Reference;
-    bidDate: string; // Date in ISO format
-    associatedAd: Reference;
-    isLive: boolean;
-    bidStartTime?: string; // Optional, Date in ISO format
-    bidDropOutTime?: string; // Optional, Date in ISO format
-    bidStatus: 'bidding' | 'dropped-out';
-};
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
+
+// Bid type
+const BidSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  amount: z.number(),
+  bidder: ReferenceSchema,
+  bidDate: z.string().date(), // Date in ISO format
+  associatedAd: ReferenceSchema,
+  isLive: z.boolean(),
+  bidStartTime: z.string().date().optional(), // Optional, Date in ISO format
+  bidDropOutTime: z.string().date().optional(), // Optional, Date in ISO format
+  bidStatus: z.enum(['bidding', 'dropped-out']),
+});
+
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type Bid = z.infer<typeof BidSchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, BidSchema };

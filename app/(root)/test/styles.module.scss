@@ -3,23 +3,10 @@
 @import "@/utils/breakpoints.scss";
 
 .container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: rem(16);
-  margin-right: rem(48);
-  margin-top: rem(-24);
-  width: fit-content;
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .right {
-
-  }
-
-  .left {
-    transform: rotate(180)
-  }
+  
 }
+
+.customNumberInput {
+
+}
+

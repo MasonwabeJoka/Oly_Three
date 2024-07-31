@@ -1,13 +1,23 @@
-import { PortableTextBlock } from "sanity";
+import { z } from 'zod';
+import { PortableTextBlockSchema } from "./PortableTextBlock"; // Assuming PortableTextBlockSchema is defined and exported in this file
 
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
 
-export type AuditEntry = {
-    actionDate: string; // Date in ISO format
-    action: string;
-    actionBy: Reference;
-    comments: PortableTextBlock[]; // Assuming the comments are in Portable Text format
-};
+// AuditEntry type
+const AuditEntrySchema = z.object({
+  actionDate: z.string().date(), // Date in ISO format
+  action: z.string(),
+  actionBy: ReferenceSchema,
+  comments: z.array(PortableTextBlockSchema), // Assuming the comments are in Portable Text format
+});
+
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type AuditEntry = z.infer<typeof AuditEntrySchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, AuditEntrySchema };

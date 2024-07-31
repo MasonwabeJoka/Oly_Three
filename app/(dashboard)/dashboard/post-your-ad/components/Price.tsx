@@ -1,18 +1,38 @@
 "use client";
 import styles from "./Price.module.scss";
-import Link from "next/link";
+import { useFormContext } from "react-hook-form";
+import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import Select from "@/components/Select";
 import NumberInput from "@/components/NumberInput";
 import Icon from "@/components/Icon";
-import Button from "@/components/Buttons";
 import { useEffect, useState, ChangeEvent } from "react";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import Modal from "@/components/Modal";
 import TransactionFee from "@/components/modals/TransactionFeeModal";
+import { DevTool } from "@hookform/devtools";
 
-const Price = () => {
-  const [price, setPrice] = useState<string>("");
+interface PriceProps {
+  priceValue: number;
+  setPriceValue: (value: number) => void;
+  priceType: string;
+  setPriceType: (value: string) => void;
+}
+const Price = ({
+  priceValue,
+  setPriceValue,
+  priceType,
+  setPriceType,
+}: PriceProps) => {
+  const [price, setPrice] = useState<number>(0);
 
+  const {
+    register,
+    control,
+    formState: { errors },
+    getValues,
+    setValue,
+    watch,
+  } = useFormContext();
   // Cleans the string and parses it into a float. Returns 0 if the input is invalid.
   function parseToNumber(input: string | number): number {
     if (typeof input === "number") return input;
@@ -34,19 +54,19 @@ const Price = () => {
     setPrice(event.target.value);
   };
 
-  const incrementPrice = () => {
-    setPrice((prevPrice) => {
-      const newValue = parseToNumber(prevPrice) + 1;
-      return newValue.toString();
-    });
-  };
+  // const incrementPrice = () => {
+  //   setPrice((prevPrice) => {
+  //     const newValue = parseToNumber(prevPrice) + 1;
+  //     return newValue.toString();
+  //   });
+  // };
 
-  const decrementPrice = () => {
-    setPrice((prevPrice) => {
-      const newValue = Math.max(0, parseToNumber(prevPrice) - 1);
-      return newValue.toString();
-    });
-  };
+  // const decrementPrice = () => {
+  //   setPrice((prevPrice) => {
+  //     const newValue = Math.max(0, parseToNumber(prevPrice) - 1);
+  //     return newValue.toString();
+  //   });
+  // };
 
   const [showTransactionFeeModal, setShowTransactionFeeModal] =
     useState<boolean>(false);
@@ -58,7 +78,6 @@ const Price = () => {
   return (
     <form className={styles.container}>
       <h4 className={styles.title}>Set Price</h4>
-
       <div className={styles.mainSection}>
         <div className={styles.controls}>
           <Select
@@ -70,11 +89,10 @@ const Price = () => {
               "Auction",
               "Price On Request",
             ]}
-            initialValue="Choose Pricing Option"
+            currentValue="Choose Pricing Option"
             selectSize="large"
             selectPrompt="Price Types"
             label="Price Types"
-            name="price-types"
             id="price-types"
             ariaLabel="Price Types Select"
             autoFocus={false}
@@ -83,25 +101,31 @@ const Price = () => {
             required={true}
             multiple={false}
             dashboard
+            error={errors.priceType?.message as string}
+            {...register("priceType")}
+            onChange={(e) => setPriceType(e.target.value)}
           />
         </div>
 
         <div className={`${styles.controls} ${styles.priceContainer}`}>
           <NumberInput
             className={styles.price}
+            min={0}
+            max={9999999999}
+            step={100}
+            debounceTime={500}
+            value={price}
             inputSize="large"
             placeholder="Price"
-            label="Price"
-            id="price"
-            name="price"
-            ariaLabel="Price Input Field"
             autoFocus={false}
             required={true}
-            value={price}
-            onChange={handlePriceChange}
-            onIncrement={incrementPrice}
-            onDecrement={decrementPrice}
             dashboard
+            error={errors.price?.message as string}
+            {...register("price")}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              const valueAsNumber = Number(e.target.value); // Convert to number
+              setPriceValue(valueAsNumber);
+            }}
           />
         </div>
         <div className={styles.priceDisplay}>
@@ -169,6 +193,7 @@ const Price = () => {
           />
         </Link>
       </div> */}
+      <DevTool control={control} />
     </form>
   );
 };

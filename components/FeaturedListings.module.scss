@@ -7,15 +7,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: rem(1098);
+  width: 95vw;
 
   .title {
-    margin-bottom: rem(56);
+    margin-bottom: rem(96);
     font-weight: 600;
   }
 
   .collage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: rem(136);
+    width: 100%;
+
+    .selectContainer {
+      margin-bottom: rem(136);
+    }
   }
 
   .buttonsAndSearch {
@@ -50,7 +58,8 @@
           margin-bottom: rem(8);
           color: $danger;
         }
-        .location {}
+        .location {
+        }
       }
     }
   }

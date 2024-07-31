@@ -1,33 +1,48 @@
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+import { z } from 'zod';
 
-type GeoPoint = {
-    _type: 'geopoint';
-    lat: number;
-    lng: number;
-    alt?: number; // Include if altitude is relevant
-};
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
 
-type FilterCriteria = {
-    categories: Reference[]; // Array of references to 'category' documents
-    // Include additional filter criteria as needed (e.g., price range, item condition, etc.)
-};
+// GeoPoint type
+const GeoPointSchema = z.object({
+  _type: z.literal('geopoint'),
+  lat: z.number(),
+  lng: z.number(),
+  alt: z.number().optional(), // Optional altitude
+});
 
-export type LocationBasedSearch = {
-    _id: string;
-    _createdAt: Date;
-    userId: Reference; // Reference to a 'user' document
-    country: string;
-    stateOrProvince: string;
-    city: string;
-    suburb: string;
-    searchRadius: number;
-    baseLocation: GeoPoint;
-    includeNearbyAreas: boolean;
-    filterCriteria: FilterCriteria;
-    savedSearchName: string;
-    lastUsed: string; // Date in ISO format
-    // Include any other fields as needed
-};
+// FilterCriteria type
+const FilterCriteriaSchema = z.object({
+  categories: z.array(ReferenceSchema), // Array of references to 'category' documents
+  // Add any additional filter criteria fields as needed here
+});
+
+// LocationBasedSearch type
+const LocationBasedSearchSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  userId: ReferenceSchema, // Reference to a 'user' document
+  country: z.string(),
+  stateOrProvince: z.string(),
+  city: z.string(),
+  suburb: z.string(),
+  searchRadius: z.number(),
+  baseLocation: GeoPointSchema,
+  includeNearbyAreas: z.boolean(),
+  filterCriteria: FilterCriteriaSchema,
+  savedSearchName: z.string(),
+  lastUsed: z.string(), // Date in ISO format
+  // Add any additional fields as needed here
+});
+
+// Inferring the TypeScript types from the Zod schemas
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type GeoPoint = z.infer<typeof GeoPointSchema>;
+export type FilterCriteria = z.infer<typeof FilterCriteriaSchema>;
+export type LocationBasedSearch = z.infer<typeof LocationBasedSearchSchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, GeoPointSchema, FilterCriteriaSchema, LocationBasedSearchSchema };

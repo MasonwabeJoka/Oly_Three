@@ -19,7 +19,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationOne" className={styles.violationLabel}>
           This ad is illegal or fraudulent
@@ -34,7 +34,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationTwo" className={styles.violationLabel}>
           The post displays explicit or violent content
@@ -49,7 +49,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationThree" className={styles.violationLabel}>
           The ad is spam
@@ -64,7 +64,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationFour" className={styles.violationLabel}>
           The ad is in a wrong category
@@ -79,7 +79,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationFive" className={styles.violationLabel}>
           The ad is against posting rules
@@ -94,7 +94,7 @@ const ReportAd = () => {
           name="violation"
           ariaLabel="Violation radio button"
           autoFocus={false}
-          required={false}
+          required={true}
         />
         <label htmlFor="violationSix" className={styles.violationLabel}>
           Other violations
@@ -109,7 +109,7 @@ const ReportAd = () => {
           name="more-info"
           rows={10}
           cols={50}
-          required={false}
+          required={true}
         />
         <div className={styles.exitBtn}>
           <Button

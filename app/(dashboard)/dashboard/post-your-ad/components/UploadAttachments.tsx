@@ -8,7 +8,11 @@ const UploadAttachments = () => {
     <div className={styles.container}>
       <h4 className={styles.title}>Upload Attachments</h4>
       <div className={styles.uploadBox}>
-        <UploadBox mediaType="attachment" required={false} accept="application/*, text/*,image/*"/>
+        <UploadBox
+          mediaType="attachment"
+          required={true}
+          accept="application/*, text/*,image/*"
+        />
       </div>
       {/* <div className={styles.buttons}>
         <div className={styles.buttonContainer}>

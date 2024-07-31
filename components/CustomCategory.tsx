@@ -21,7 +21,7 @@ const CustomCategory = () => {
         name="submitProduct"
         ariaLabel="Submit Your Product"
         autoFocus={false}
-        required={false}
+        required={true}
       />
       <Button
         className={styles.submitButton}

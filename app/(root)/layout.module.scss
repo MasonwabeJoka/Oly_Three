@@ -23,9 +23,9 @@
   background-color: $warning-hover;
 }
 
-@supports (scrollbar-color: $warning transparent) {
+@supports (scrollbar-color: $warning-hover transparent) {
   .html {
-    scrollbar-color: $warning transparent;
+    scrollbar-color: $warning-hover transparent;
     scrollbar-width: auto;
   }
 }

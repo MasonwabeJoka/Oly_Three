@@ -170,6 +170,14 @@ export const user = defineType({
           }),
 
           defineField({
+            name: 'transactions',
+            title: 'Transactions',
+            type: 'array',
+            description: 'A list of orders associated with the user.',
+            of: [{ type: 'reference', to: { type: 'transaction' } }],
+          }),
+
+          defineField({
             name: 'participatedAuctions',
             title: 'Participated Auctions',
             type: 'array',
@@ -384,6 +392,7 @@ export const user = defineType({
             ],
             description: 'The user\'s preferences for receiving notifications.'
           }),
+          
           defineField({
             name: 'privacySettings',
             title: 'Privacy Settings',

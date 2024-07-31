@@ -1,47 +1,53 @@
 "use client";
 import styles from "./Details.module.scss";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
 import { featuresData } from "@/data/FeaturesData";
 import { DevTool } from "@hookform/devtools";
-import { detailsFormSchema } from "@/lib/validations/formValidations";
+import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import EditModeForm from "@/components/forms/EditModeForm";
 import SelectedDetail from "@/components/forms/SelectedDetail";
-import { FormWrapper } from "./FormWrapper";
 
-type FormValues = z.infer<typeof detailsFormSchema>;
+type FormValues = z.infer<typeof multiStepFormSchema>;
 // TODO: On edit mode the textarea should grow with text.
 // TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
-const Details = () => {
-  const router = useRouter();
-  const form = useForm<FormValues>({
-    resolver: zodResolver(detailsFormSchema),
-  });
-
+type DetailsProps = {
+  condition: string;
+  setCondition: (value: string) => void;
+  selectDetail: string;
+  setSelectDetail: (value: string) => void;
+  detail: string;
+  setDetail: (value: string) => void;
+};
+const Details = ({
+  condition,
+  setCondition,
+  selectDetail,
+  setSelectDetail,
+  detail,
+  setDetail,
+}: DetailsProps) => {
   const {
     register,
     control,
-    handleSubmit: submitDetails,
-    formState,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+    getValues,
     setValue,
     watch,
-  } = form;
-  const {
-    register: registerSelectedDetail,
-    handleSubmit: handleSubmitSelectedDetail,
-  } = form;
-  const { errors, isDirty, isValid, isSubmitting } = formState;
-  const { errors: errorsSelectedDetail } = formState;
-  const [detailId, setDetailId] = useState<string | null>(null);
-  const chooseDetail = watch("chooseDetail");
+  } = useFormContext();
+
+  const [detailId, setDetailId] = useState<string | number | null>(null);
+  const conditionValue = getValues("condition");
+  const selectDetailValue = watch("selectDetail");
+
+  const isSelectDetailDirty = dirtyFields.selectDetailValue;
 
   const onSubmitDetail = (data: FormValues) => {
     console.log(data);
@@ -59,10 +65,7 @@ const Details = () => {
   let matchFound = false;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
-      shouldDirty: true,
-      shouldTouch: true,
-    });
+    setDetail(e.target.value);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -72,140 +75,137 @@ const Details = () => {
   };
 
   return (
-    <FormWrapper>
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={submitDetails(onSubmitDetail)}>
-          <fieldset className={styles.titleContainer}>
-            <legend className={styles.title}>Product Details</legend>
-          </fieldset>
-          <div className={styles.formElements}>
-            <div className={styles.conditionsContainer}>
-              <Select
-                options={conditions}
-                className={styles.conditions}
-                initialValue="Condition"
-                selectSize="large"
-                selectColourType="normal"
-                label="Choose a condition"
-                id="conditions"
-                ariaLabel="Conditions"
-                autoFocus={false}
-                autoComplete="off"
-                disabled={false}
-                required={false}
-                multiple={false}
-                {...register("condition")}
-                onChange={(e) => {
-                  setValue("condition", e.target.value, {
-                    shouldDirty: true,
-                    shouldTouch: true,
-                  });
-                }}
-                error={errors.condition?.message as string}
-              />
-            </div>
-            <div className={styles.chooseDetailContainer}>
-              <Select
-                options={details}
-                className={styles.chooseDetail}
-                initialValue="See a list of details you can include"
-                selectSize="large"
-                selectColourType="normal"
-                label="Choose a detail"
-                id="choose-detail"
-                ariaLabel="Choose Detail Select"
-                autoFocus={false}
-                autoComplete="off"
-                disabled={false}
-                required={false}
-                multiple={false}
-                {...register("chooseDetail")}
-              />
-            </div>
+    <div className={styles.container}>
+      <form className={styles.form}>
+        <fieldset className={styles.titleContainer}>
+          <legend className={styles.title}>Product Details</legend>
+        </fieldset>
+        <div className={styles.formElements}>
+          <div className={styles.conditionsContainer}>
+            <Select
+              options={conditions}
+              className={styles.conditions}
+              currentValue={conditionValue}
+              selectSize="large"
+              selectColourType="normal"
+              label="Choose a condition"
+              id="conditions"
+              ariaLabel="Conditions"
+              autoFocus={false}
+              autoComplete="off"
+              disabled={false}
+              required={false}
+              multiple={false}
+              error={errors.condition?.message as string}
+              {...register("condition")}
+              onChange={(e) => setCondition(e.target.value)}
+            />
+          </div>
+          <div className={styles.selectDetailContainer}>
+            <Select
+              options={details}
+              className={styles.selectDetail}
+              currentValue="See a list of details you can include"
+              selectSize="large"
+              selectColourType="normal"
+              label="Choose a detail"
+              id="choose-detail"
+              ariaLabel="Choose Detail Select"
+              autoFocus={false}
+              autoComplete="off"
+              disabled={false}
+              required={false}
+              multiple={false}
+              error={errors.selectDetail?.message as string}
+              {...register("selectDetail")}
+              onChange={(e) => setSelectDetail(e.target.value)}
+            />
+          </div>
 
-            {DetailsData.map((detail) => {
-              if (!matchFound && chooseDetail === detail.detail) {
-                matchFound = true;
-                return (
-                  <SelectedDetail
-                    id={detail.id}
-                    detail={detail.detail}
-                    description={detail.description}
-                    example={detail.example}
-                    key={detail.id}
-                    register={registerSelectedDetail}
-                    setValue={setValue}
-                    errors={errorsSelectedDetail}
-                    handleSubmit={handleSubmitSelectedDetail}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
+          {DetailsData.map((detail) => {
+            if (!matchFound && selectDetailValue === detail.detail) {
+              matchFound = true;
+              return (
+                <SelectedDetail
+                  id={detail.id}
+                  detail={detail.detail}
+                  description={detail.description}
+                  example={detail.example}
+                  isFieldDirty={isSelectDetailDirty}
+                  key={detail.id}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  handleSubmit={handleSubmit}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
 
-            <ul className={styles.details}>
-              {featuresData.map((detail) =>
-                detailId !== detail.id ? (
-                  <li key={detail.id} className={styles.detail}>
-                    <div className={styles.detailButtons}>
-                      <div className={styles.editButtonContainer}>
-                        <Button
-                          className={`${styles.editButton} ${styles.detailButton}`}
-                          buttonChildren={
-                            <Image
-                              src="/icons/pencil.png"
-                              alt="edit-icon"
-                              width={18}
-                              height={18}
-                            />
-                          }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="edit-btn"
-                          type="button"
-                          ariaLabel="Edit Button"
-                          autoFocus={false}
-                          disabled={false}
-                          onClick={() => editDetail(detail.id)}
-                        />
-                      </div>
-                      <div className={styles.deleteButtonContainer}>
-                        <Button
-                          className={`${styles.deleteButton} ${styles.detailButton}`}
-                          buttonChildren={
-                            <Image
-                              src="/icons/trash.png"
-                              alt="delete-icon"
-                              width={24}
-                              height={24}
-                            />
-                          }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="delete-btn"
-                          type="button"
-                          ariaLabel="Delete Button"
-                          autoFocus={false}
-                          disabled={false}
-                        />
-                      </div>
+          <ul className={styles.details}>
+            {featuresData.map((detail) =>
+              detailId !== detail.id ? (
+                <li key={detail.id} className={styles.detail}>
+                  <div className={styles.detailButtons}>
+                    <div className={styles.editButtonContainer}>
+                      <Button
+                        className={`${styles.editButton} ${styles.detailButton}`}
+                        buttonChildren={
+                          <Image
+                            src="/icons/pencil.png"
+                            alt="edit-icon"
+                            width={18}
+                            height={18}
+                          />
+                        }
+                        buttonType="roundStandardFeed"
+                        buttonSize=""
+                        name="edit-btn"
+                        type="button"
+                        ariaLabel="Edit Button"
+                        autoFocus={false}
+                        disabled={false}
+                        onClick={() => editDetail(detail.id)}
+                      />
                     </div>
-                    <p className={styles.detailText}>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Earum, perspiciatis odio qui nihil nesciunt repellat
-                      ducimus iste voluptatem quod recusandae.
-                    </p>
-                  </li>
-                ) : (
-                  <EditModeForm />
-                )
-              )}
-            </ul>
+                    <div className={styles.deleteButtonContainer}>
+                      <Button
+                        className={`${styles.deleteButton} ${styles.detailButton}`}
+                        buttonChildren={
+                          <Image
+                            src="/icons/trash.png"
+                            alt="delete-icon"
+                            width={24}
+                            height={24}
+                          />
+                        }
+                        buttonType="roundStandardFeed"
+                        buttonSize=""
+                        name="delete-btn"
+                        type="button"
+                        ariaLabel="Delete Button"
+                        autoFocus={false}
+                        disabled={false}
+                      />
+                    </div>
+                  </div>
+                  <p className={styles.detailText}>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Earum, perspiciatis odio qui nihil nesciunt repellat ducimus
+                    iste voluptatem quod recusandae.
+                  </p>
+                </li>
+              ) : (
+                <EditModeForm />
+              )
+            )}
+          </ul>
 
-            {/* <nav className={styles.buttons}>
+          {/* <nav className={styles.buttons}>
             <Button
               className={styles.proceedButton}
               buttonChildren="Proceed"
@@ -233,11 +233,10 @@ const Details = () => {
               />
             </div>
           </nav> */}
-          </div>
-        </form>
-        <DevTool control={control} />
-      </div>
-    </FormWrapper>
+        </div>
+      </form>
+      <DevTool control={control} />
+    </div>
   );
 };
 

@@ -41,7 +41,7 @@ const MessagesSidebar: React.FC<MessagesSidebarProps> = (
             name="search-bar"
             ariaLabel="Search"
             autoFocus={false}
-            required={false}
+            required={true}
           />
         </div>
         <Chats

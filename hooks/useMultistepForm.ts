@@ -1,3 +1,4 @@
+'use client';
 import { ReactElement, useState } from "react"
 
 export const useMultistepForm = (steps: ReactElement[]) => { //array of steps in a multistep form

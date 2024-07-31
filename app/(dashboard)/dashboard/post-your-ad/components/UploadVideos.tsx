@@ -1,4 +1,4 @@
-import styles from './UploadVideos.module.scss'
+import styles from "./UploadVideos.module.scss";
 import Link from "next/link";
 import Button from "@/components/Buttons";
 import UploadBox from "@/components/UploadBox";
@@ -8,7 +8,7 @@ const UploadVideos = () => {
     <div className={styles.container}>
       <h4 className={styles.title}>Upload Videos</h4>
       <div className={styles.uploadBox}>
-        <UploadBox mediaType="video" required={false} accept="video/*"/>
+        <UploadBox mediaType="video" required={true} accept="video/*" />
       </div>
       {/* <div className={styles.buttons}>
         <div className={styles.buttonContainer}>

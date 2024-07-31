@@ -4,7 +4,7 @@
 
 .container {
   position: relative;
-  border-radius: rem(32);
+
 
   .buttonsAndLike {
     position: absolute;
@@ -92,7 +92,7 @@
     left: 0;
     width: rem(310);
     min-height: rem(248);
-    border-radius: rem(32);
+    border-radius: rem(32) rem(32) rem(0) rem(0);
     object-fit: cover;
 
     .swiperSlide {

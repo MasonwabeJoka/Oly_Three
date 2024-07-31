@@ -92,7 +92,7 @@ const Features = () => {
             <Select
               options={conditions}
               className={styles.conditions}
-              initialValue="Condition"
+              currentValue="Condition"
               selectSize="large"
               selectColourType="normal"
               label="Choose a condition"
@@ -101,7 +101,7 @@ const Features = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               {...register("condition")}
               onChange={(e: any) => {
@@ -112,14 +112,14 @@ const Features = () => {
               }}
             />
           </div>
-          <div className={styles.chooseDetailContainer}>
+          <div className={styles.selecteDetailContainer}>
             <p className={styles.errorMessage}>
               {errors.selectedDetail?.message}
             </p>
             <Select
               options={details}
-              className={styles.chooseDetail}
-              initialValue="See a list of details you can include"
+              className={styles.selectDetail}
+              currentValue="Choose details to include"
               selectSize="large"
               selectColourType="normal"
               label="Choose a detail"
@@ -128,7 +128,7 @@ const Features = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               {...register("selectedDetail")}
               onChange={(e: any) => {
@@ -274,7 +274,7 @@ const Features = () => {
                     id="edit-detail"
                     size="large"
                     label="Edit Detail"
-                    required={false}
+                    required={true}
                     {...register("editDetail")}
                     onChange={(e: any) => {
                       setValue("editDetail", e.target.value, {
@@ -328,7 +328,9 @@ const Features = () => {
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={()=> router.push("/dashboard/post-your-ad/select-a-category")}
+              onClick={() =>
+                router.push("/dashboard/post-your-ad/select-a-category")
+              }
             />
           </nav>
         </div>

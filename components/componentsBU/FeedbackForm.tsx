@@ -30,7 +30,7 @@ const FeedbackForm = () => {
           id="name"
           name="name"
           ariaLabel="Name Field"
-          required={false}
+          required={true}
         />
       </div>
       <div className={`${styles.emailContainer} ${styles.control}`}>
@@ -46,7 +46,7 @@ const FeedbackForm = () => {
           id="email"
           name="email"
           ariaLabel="Email Field"
-          required={false}
+          required={true}
         />
       </div>
       <div className={`${styles.messageContainer} ${styles.control}`}>
@@ -57,7 +57,7 @@ const FeedbackForm = () => {
           id="message"
           name="message"
           size="large"
-          required={false}
+          required={true}
           onChange={() => {}}
           onSubmit={() => {}}
           style={{

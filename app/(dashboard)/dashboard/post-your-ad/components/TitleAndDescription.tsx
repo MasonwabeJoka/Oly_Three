@@ -1,5 +1,5 @@
 "use client";
-import styles from './TitleAndDescription.module.scss'
+import styles from "./TitleAndDescription.module.scss";
 import Link from "next/link";
 import Input from "@/components/Input";
 import Button from "@/components/Buttons";
@@ -81,9 +81,9 @@ const TitleAndDescription = () => {
             disabled={false}
             dashboard
           />
-        </Link> */}
+        </Link>
 
-        {/* <div className={styles.backButtonContainer}>
+        <div className={styles.backButtonContainer}>
           <Link href="/dashboard/post-your-ad/price">
             <Button
               className={styles.backButton}

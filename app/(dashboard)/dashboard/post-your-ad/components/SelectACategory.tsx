@@ -17,7 +17,7 @@ import MobileSubcategories from "@/components/MobileSubcategories";
 import Button from "@/components/Buttons";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 
-const SelectACategory = () => {
+const PostYourAd = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [showButtons, setShowButtons] = useState<boolean>(false);
@@ -206,7 +206,7 @@ const SelectACategory = () => {
               );
             })}
           </div>
-          {/* <div className={styles.goBackButtonContainer}>
+          <div className={styles.goBackButtonContainer}>
             <Button
               className={styles.goBackButton}
               buttonChildren="Go Back"
@@ -219,7 +219,7 @@ const SelectACategory = () => {
               disabled={false}
               ariaHidden={false}
             />
-          </div> */}
+          </div>
         </div>
       </MaxWidthWrapper>
     );
@@ -232,4 +232,4 @@ const SelectACategory = () => {
   }
 };
 
-export default SelectACategory;
+export default PostYourAd;

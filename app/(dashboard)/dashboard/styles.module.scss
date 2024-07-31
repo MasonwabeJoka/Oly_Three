@@ -8,8 +8,49 @@
   align-items: center;
   @include larger-than(mobile) {
     width: 100%;
-
+    height: 100vh;
   }
 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
 
+    .title {
+      position: fixed;
+      font-size: $body;
+      font-weight: bold;
+      color: $danger;
+      margin-top: rem(56);
+      
+      @include larger-than(mobile) {
+        font-size: $h4;
+        margin-top: rem(24);
+        position: static;
+        margin-bottom: rem(48);
+      }
+    }
+    .cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16vh;
+      @include larger-than(mobile) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      .card {
+        margin-bottom: rem(24);
+
+        @include larger-than(mobile) {
+          margin-bottom: rem(24);
+          margin-right: rem(24);
+        }
+      }
+    }
+  }
 }

@@ -15,21 +15,21 @@ const Location = () => {
         <div className={styles.select}>
           <Select
             options={locations[0].provinces}
-            initialValue="Select your province"
+            currentValue="Select your province"
             selectSize="large"
             label="Provinces"
             id="provinces"
             name="provinces"
             ariaLabel="Provinces"
             autoFocus={false}
-            required={false}
+            required={true}
             dashboard
           />
         </div>
         <div className={styles.select}>
           <Select
             options={locations[0].city}
-            initialValue="Select your city"
+            currentValue="Select your city"
             selectSize="large"
             label="Cities"
             id="cities"
@@ -37,14 +37,14 @@ const Location = () => {
             ariaLabel="Cities"
             disabled={false}
             autoFocus={false}
-            required={false}
+            required={true}
             dashboard
           />
         </div>
         <div className={styles.select}>
           <Select
             options={locations[0].suburb}
-            initialValue="Select your suburb"
+            currentValue="Select your suburb"
             selectSize="large"
             label="Suburbs"
             id="suburbs"
@@ -52,7 +52,7 @@ const Location = () => {
             ariaLabel="Suburbs"
             disabled={false}
             autoFocus={false}
-            required={false}
+            required={true}
             dashboard
           />
         </div>

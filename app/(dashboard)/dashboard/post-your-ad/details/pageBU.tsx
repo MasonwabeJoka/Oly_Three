@@ -90,11 +90,10 @@ const Details = () => {
         </fieldset>
         <div className={styles.formElements}>
           <div className={styles.conditionsContainer}>
-
             <Select
               options={conditions}
               className={styles.conditions}
-              initialValue="Condition"
+              currentValue="Condition"
               selectSize="large"
               selectColourType="normal"
               label="Choose a condition"
@@ -103,17 +102,17 @@ const Details = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               {...register("condition")}
               error={errors.condition?.message as string}
             />
           </div>
-          <div className={styles.chooseDetailContainer}>
+          <div className={styles.selecteDetailContainer}>
             <Select
               options={details}
-              className={styles.chooseDetail}
-              initialValue="See a list of details you can include"
+              className={styles.selectDetail}
+              currentValue="Choose details to include"
               selectSize="large"
               selectColourType="normal"
               label="Choose a detail"
@@ -122,7 +121,7 @@ const Details = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               {...register("selectedDetail")}
             />
@@ -157,6 +156,7 @@ const Details = () => {
                         autoFocus={false}
                         iconSrcRight=""
                         iconPosition="right"
+                        z
                         iconWidth={32}
                         iconHeight={32}
                         required={true}
@@ -253,7 +253,7 @@ const Details = () => {
                     id="edit-detail"
                     size="large"
                     label="Edit Detail"
-                    required={false}
+                    required={true}
                     {...register("editDetail")}
                     error={errors.detail?.message as string}
                     // onChange={(e: any) => {

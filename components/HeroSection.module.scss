@@ -10,11 +10,16 @@
   height: 95vh;
   border-radius: rem(100) rem(150) rem(150) rem(100);
   gap: rem(100);
-  background-color: $blue-one;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("/heroBG.jpg");
+  background-color: $white-three;
 
-
+  .star {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 5;
+    width: 500;
+    height: 500;
+  }
 
   .mainTitle {
     width: rem(359);
@@ -24,18 +29,13 @@
     font-weight: 600;
     line-height: 1;
     text-align: center;
-    color: #E8CCC9;
-    color: #f8dad7;
-    // text-shadow: rem(5) rem(5) rem(30) #4a4a4a;
-    // text-shadow: rem(1) rem(1) rem(3) #4a4a4a;
-    text-shadow: rem(1) rem(1) rem(5) #474747;
-
+    color: $black-four;
 
     @include larger-than(mobile) {
-      width: rem(645);
+      width: rem(740);
       margin-top: rem(96);
-      font-size: $h0;
-      line-height: 1;
+      font-size: 64px;
+      line-height: 1.2;
     }
   }
 

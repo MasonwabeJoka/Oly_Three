@@ -41,11 +41,16 @@ body .container {
       margin-bottom: rem(96);
       margin-top: rem(24);
       @include larger-than(mobile) {
-        margin-bottom: rem(192);
+        margin-bottom: rem(280);
       }
     }
-
+    .aboveFoldAd {
+      width: 100%;
+      margin-top: rem(32);
+      margin-bottom: rem(256);
+    }
     .features {
+      width: 95vw;
       margin-bottom: rem(96);
 
       @include larger-than(mobile) {

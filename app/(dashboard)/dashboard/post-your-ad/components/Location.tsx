@@ -15,7 +15,7 @@ const Location = () => {
         <div className={styles.select}>
           <Select
             options={locations[0].provinces}
-            initialValue="Select your province"
+            currentValue="Select your province"
             selectSize="large"
             label="Provinces"
             id="provinces"
@@ -29,7 +29,7 @@ const Location = () => {
         <div className={styles.select}>
           <Select
             options={locations[0].city}
-            initialValue="Select your city"
+            currentValue="Select your city"
             selectSize="large"
             label="Cities"
             id="cities"
@@ -44,7 +44,7 @@ const Location = () => {
         <div className={styles.select}>
           <Select
             options={locations[0].suburb}
-            initialValue="Select your suburb"
+            currentValue="Select your suburb"
             selectSize="large"
             label="Suburbs"
             id="suburbs"
@@ -90,9 +90,9 @@ const Location = () => {
           disabled={false}
           dashboard
         />
-      </Link> */}
+      </Link>
 
-      {/* <Link
+      <Link
         href="/dashboard/post-your-ad/upload-media"
         className={styles.backButtonContainer}
       >

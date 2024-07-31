@@ -5,15 +5,15 @@ interface TransactionFeeProps {
   setShowTransactionFeeModal: (value: boolean) => void;
 }
 
-const TransactionFee: React.FC<TransactionFeeProps> = ({ setShowTransactionFeeModal }) => {
+const TransactionFee: React.FC<TransactionFeeProps> = ({
+  setShowTransactionFeeModal,
+}) => {
   return (
     <div className={styles.container}>
       <p>
-        Our platform handles all payments directly, enhancing both security and
-        convenience. This approach allows us to streamline the buying and
-        selling process, making it easier and safer for everyone involved. A fee
-        is included in the item price, resulting in the total price displayed to
-        potential buyers on the site.
+        Oly handles all payments directly, enhancing both security and
+        convenience. A fee is included in the item price, resulting in the total
+        price displayed to buyers.
       </p>
       <Button
         className={styles.okayButton}

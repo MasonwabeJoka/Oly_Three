@@ -116,7 +116,7 @@ const Post = ({ userId }: { userId: string }) => {
             name="post"
             rows={10}
             cols={50}
-            required={false}
+            required={true}
           />
         </div>
         <Button

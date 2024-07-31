@@ -21,7 +21,8 @@ const FeedbackForm = () => {
     resolver: zodResolver(feedbackFormSchema),
   });
 
-  const { register, control, handleSubmit, setValue, setError, formState } = form;
+  const { register, control, handleSubmit, setValue, setError, formState } =
+    form;
   const { errors, isDirty, isValid, isSubmitting } = formState;
 
   const onError = (errors: FieldErrors<FormValues>) => {
@@ -68,7 +69,7 @@ const FeedbackForm = () => {
           autoFocus={false}
           id="name"
           ariaLabel="Name Field"
-          required={false}
+          required={true}
           {...register("name")}
           onChange={(e) => {
             setValue("name", e.target.value, {
@@ -91,7 +92,7 @@ const FeedbackForm = () => {
           autoFocus={false}
           id="email"
           ariaLabel="Email Field"
-          required={false}
+          required={true}
           {...register("email")}
           onChange={(e) => {
             setValue("email", e.target.value, {
@@ -109,7 +110,7 @@ const FeedbackForm = () => {
           label="Message"
           id="message"
           size="large"
-          required={false}
+          required={true}
           onSubmit={() => {}}
           style={{
             padding: "2rem 4rem 2rem 4rem",

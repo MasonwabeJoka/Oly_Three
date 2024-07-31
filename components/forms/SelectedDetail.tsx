@@ -1,20 +1,22 @@
 "use client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "@/components/Input";
 import Button from "@/components/Buttons";
 import { DevTool } from "@hookform/devtools";
-import { detailsFormSchema } from "@/lib/validations/formValidations";
+import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import styles from "./SelectedDetail.module.scss";
 
-type FormValues = z.infer<typeof detailsFormSchema>;
+type FormValues = z.infer<typeof multiStepFormSchema>;
 type SelectedDetailProps = {
   id: string | number;
   detail: string;
+  initialValue: string;
   description: string;
   example: string | string[];
+  isFieldDirty: boolean | undefined;
   setValue: any;
   handleSubmit: any;
   handleChange: any;
@@ -26,14 +28,19 @@ type SelectedDetailProps = {
 const SelectedDetail = ({
   id,
   detail,
+  initialValue,
   description,
   example,
+  isFieldDirty,
   register,
   errors,
   handleChange,
   handleBlur,
   handleSubmit,
+  ...data
 }: SelectedDetailProps) => {
+  const { reset, control, formState, trigger } = useFormContext();
+
   const enterDetail = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const detail = (e.target as HTMLInputElement).value.trim();
     if (e.key === "Enter" && detail) {
@@ -44,15 +51,17 @@ const SelectedDetail = ({
     }
   };
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(detailsFormSchema),
-  });
-
-  const {formState } = form;
-  const { isSubmitting } = formState;
+  const clickHandler = async () => {
+    // trigger to validate detail field
+    await trigger("detail", {
+      // focus on first field with error
+      shouldFocus: true,
+    });
+  };
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
+    reset();
     // Perform any additional actions on submit
   };
 
@@ -66,6 +75,7 @@ const SelectedDetail = ({
             <Input
               className={styles.selectedDetailInput}
               inputType="text"
+              currentValue={initialValue}
               inputColourType="normal"
               inputSize="large"
               label="Chosen Detail"
@@ -86,8 +96,8 @@ const SelectedDetail = ({
               onKeyDown={enterDetail}
               onChange={handleChange}
               onBlur={handleBlur}
-              {...register("detail")} // Ensure you pass register correctly
-              error={errors.detail?.message as string} // Display error messages correctly
+              error={errors.detail?.message as string}
+              {...register("detail")}
             />
           </div>
 
@@ -96,18 +106,19 @@ const SelectedDetail = ({
               className={styles.proceedButton}
               buttonChildren="Submit Detail"
               buttonType="normal"
-              type="submit"
+              type="button"
               buttonSize="large"
               name="proceed-btn"
               aria-label="Proceed Button"
               autoFocus={false}
-              disabled={isSubmitting}
+              disabled={false}
               dashboard
+              onClick={clickHandler}
             />
           </div>
         </div>
       </form>
-      <DevTool control={form.control} />{" "}
+      <DevTool control={control} />
       {/* Ensure to pass form.control to DevTool */}
     </>
   );

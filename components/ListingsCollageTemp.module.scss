@@ -1,0 +1,24 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .listingsContainer {
+    display: flex;
+    justify-content: center;
+    gap: rem(32);
+    width: 85%;
+  }
+}
+.cardContainer {
+  background-color: greenyellow;
+  .card {
+    width: fit-content;
+    margin-bottom: rem(40);
+  }
+}

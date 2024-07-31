@@ -1,13 +1,24 @@
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+import { z } from 'zod';
 
-export type LocationBasedAdTargeting = {
-    _id: string;
-    _createdAt: Date;
-    adId: Reference; // Reference to an 'ad' document
-    targetLocations: Reference[]; // Array of references to 'location' documents
-    exclusionZones: Reference[]; // Array of references to 'location' documents for exclusion
-    // Include any other fields as needed
-};
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
+
+// LocationBasedAdTargeting type
+const LocationBasedAdTargetingSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  adId: ReferenceSchema, // Reference to an 'ad' document
+  targetLocations: z.array(ReferenceSchema), // Array of references to 'location' documents
+  exclusionZones: z.array(ReferenceSchema), // Array of references to 'location' documents for exclusion
+  // Add any additional fields as needed here
+});
+
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type LocationBasedAdTargeting = z.infer<typeof LocationBasedAdTargetingSchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, LocationBasedAdTargetingSchema };

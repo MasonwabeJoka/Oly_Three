@@ -17,7 +17,7 @@ type TabsProps = {
   width: number;
   altWidth?: number;
   tabs: Tab[];
-  data: any[];
+  data?: any[];
   onClickHandlers?: (
     | ((event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
     | undefined
@@ -60,6 +60,7 @@ const Tabs: React.FC<TabsProps> = ({
             justifyContent: "center",
             // justifyContent: tabs.length < 4 ? "center" : "flex-start",
             width: dashboard ? "16.6875rem" : "19.1475rem",
+            // width: dashboard ? "16.6875rem" : "19.1475rem",
           }}
         >
           {tabs?.map((tab, index) => {
@@ -82,7 +83,7 @@ const Tabs: React.FC<TabsProps> = ({
                     <div
                       className={styles.count}
                       style={{
-                        backgroundColor: isActive === index ? "white" : "#e4e6e7",
+                        backgroundColor: isActive === index ? "white" : "#ffffff",
                       }}
                     >
                       <div
@@ -102,7 +103,7 @@ const Tabs: React.FC<TabsProps> = ({
                   }
                   style={{ width: "100%" }}
                 >
-                  {data[index].map((item, index) => {
+                  {data &&data[index].map((item, index) => {
                     return (
                       <li key={index} className={styles.option}>
                         <div>{item}</div>
@@ -125,7 +126,8 @@ const Tabs: React.FC<TabsProps> = ({
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: tabs.length < 4 ? "center" : "flex-start",
+          justifyContent: tabs.length < 4 ? "flex-start" : "center",
+
           width: condition
             ? `${altWidth && altWidth / 16}rem`
             : `${width / 16}rem`,
@@ -156,7 +158,7 @@ const Tabs: React.FC<TabsProps> = ({
               {count !== null && count !== 0 && (
                 <div
                   className={styles.count}
-                  style={{ backgroundColor: isActive === index ? "white" : "#e4e6e7", }}
+                  style={{ backgroundColor: isActive === index ? "white" : "#ffffff", }}
                 >
                   <div
                     style={{

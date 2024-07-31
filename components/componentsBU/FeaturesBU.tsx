@@ -20,7 +20,7 @@ const Features = () => {
             mobileSrc={slides.mobileSrc}
             slideName={slides.slideName}
             slideTitle={slides.slideTitle}
-            initialValue={initialValue}
+            currentValue={initialValue}
             data={slides}
           />
         ) : (
@@ -29,7 +29,7 @@ const Features = () => {
             mobileSrc={slides.mobileSrc}
             slideName={slides.slideName}
             slideTitle={slides.slideTitle}
-            initialValue={initialValue}
+            currentValue={initialValue}
             data={slides}
           />
         )}

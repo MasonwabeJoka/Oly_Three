@@ -24,7 +24,7 @@ interface SelectProps {
   required: boolean;
   selectDescription?: string;
   form?: string;
-  initialValue: any;
+  currentValue: any;
   setterValue?: any;
   value?: any;
   onChange?: any;
@@ -82,7 +82,7 @@ const Select = ({
   label,
   autoComplete,
   id,
-  initialValue,
+  currentValue,
   setterValue,
   name,
   ariaLabel,
@@ -95,7 +95,7 @@ const Select = ({
   ...otherProps
 }: SelectProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const [selectedOption, setSelectedOption] = useState<string>(initialValue);
+  const [selectedOption, setSelectedOption] = useState<string>(currentValue);
   const selectRef = useRef<HTMLDivElement | null>(null);
   const [showOptions, setShowOptions] = useState<boolean>(false);
 
@@ -146,8 +146,8 @@ const Select = ({
   return (
     <div ref={selectRef}>
       <div className={`${styles.selectMenu}`}>
-      {error &&<p className={styles.errorMessage}>{error as string}</p>}
-      
+        {error && <p className={styles.errorMessage}>{error as string}</p>}
+
         <div
           className={styles.selectContainer}
           onClick={() => setShowOptions(!showOptions)}
@@ -156,11 +156,10 @@ const Select = ({
           // ref={selectRef}
           {...(reactHookFormProps ?? {})}
         >
-          
           <div className={selectClass}>
             <p
               style={{
-                color: selectedOption === initialValue ? "#67787c" : "#434b4d",
+                color: selectedOption === currentValue ? "#67787c" : "#434b4d",
               }}
             >
               {selectedOption}
@@ -207,13 +206,13 @@ export default Select;
 {
   /* <Select
   options={[]}
-  initialValue="Select your province"
+  currentValue="Select your province"
   selectSize="large"
   label="Provinces"
   id="provinces"
   name="provinces"
   ariaLabel="Provinces"
   autoFocus={false}
-  required={false}
+  required={true}
 />; */
 }

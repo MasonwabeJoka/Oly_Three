@@ -17,6 +17,14 @@ export const transaction = {
             description: 'The user involved in the transaction.'
         },
         {
+            name: 'ads',
+            title: 'Ads',
+            type: 'array',
+            of: [{ type:'reference', to: [{ type: 'ad' }] }],
+            description: 'The ads related to the transaction, if applicable.',
+            validation: (Rule: any) => Rule.required()
+        },
+        {
             name: 'transactionType',
             title: 'Transaction Type',
             type: 'string',
@@ -54,6 +62,22 @@ export const transaction = {
             type: 'datetime',
             description: 'The date and time when the transaction occurred.'
         },
+        {
+            name: 'paymentStatus',
+            title: 'Payment Status',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Paid', value: 'paid' },
+                    { title: 'Unpaid', value: 'unpaid' },
+                    { title: 'Partially Paid', value: 'partiallyPaid' },
+                    { title: 'Overdue', value: 'overdue' },
+                ],
+            },
+            description: 'The current payment status of the transaction.'
+        },
+
+      
         {
             name: 'status',
             title: 'Status',
@@ -184,20 +208,7 @@ export const transaction = {
             of: [{ type: 'file' }],
             description: 'Attachments related to the transaction, such as invoices or contracts.'
         },
-        {
-            name: 'paymentStatus',
-            title: 'Payment Status',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Paid', value: 'paid' },
-                    { title: 'Unpaid', value: 'unpaid' },
-                    { title: 'Partially Paid', value: 'partiallyPaid' },
-                    { title: 'Overdue', value: 'overdue' },
-                ],
-            },
-            description: 'The current payment status of the transaction.'
-        },
+       
         {
             name: 'invoiceNumber',
             title: 'Invoice Number',

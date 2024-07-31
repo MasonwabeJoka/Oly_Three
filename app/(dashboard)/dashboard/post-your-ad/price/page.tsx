@@ -70,7 +70,7 @@ const Price = () => {
               "Auction",
               "Price On Request",
             ]}
-            initialValue="Choose Pricing Option"
+            currentValue="Choose Pricing Option"
             selectSize="large"
             selectPrompt="Price Types"
             label="Price Types"

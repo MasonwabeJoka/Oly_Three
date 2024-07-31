@@ -261,6 +261,7 @@ const Input = forwardRef(
           )}
           <input
             className={inputClass}
+            {...(reactHookFormProps ?? {})}
             {...otherProps}
             type={inputType}
             placeholder={placeholder}
@@ -276,7 +277,6 @@ const Input = forwardRef(
             readOnly={readonly}
             required={required}
             form={form}
-            {...(reactHookFormProps ?? {})}
           />
           {iconPosition && (
             <>

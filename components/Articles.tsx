@@ -39,7 +39,7 @@ const ArticlesTwo: React.FC<Props> = ({
 
   return (
     <div className={styles.articleSection}>
-      <Swiper className={styles.swipper} spaceBetween={-72} slidesPerView={4}>
+      <Swiper className={styles.swipper} spaceBetween={-200} slidesPerView={5}>
         {data.map((article: any, index: number) => {
           return (
             <SwiperSlide className={styles.article} key={article.id}>

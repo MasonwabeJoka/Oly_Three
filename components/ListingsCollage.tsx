@@ -1,13 +1,17 @@
-import styles from "./ListingsCollage.module.scss";
 import { useEffect, useState } from "react";
 import AdCard from "@/components/AdCard";
 import Masonry from "react-masonry-css";
-import { fetchAds } from "@/sanity/actions/adsActions";
-import { Ad } from "@/sanity/Types/Ad";
 import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
 import { richTextLength } from "@/lib/richTextLength";
-import { useFetchAdStore } from "@/store/adsData";
+import { useFetchAdStore } from "@/store/useFetchStore";
+import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
+import { ImageFile } from "@/sanity/Types/ImageFile";
+import { Image as SanityImage } from "sanity";
+import Image from "next/image";
+import { useInView } from "react-intersection-observer";
+import { Ad } from "@/sanity/Types/Ad";
+import styles from "./ListingsCollage.module.scss";
 
 type ListingsCollageProps = {
   isDeletable?: boolean;
@@ -29,35 +33,94 @@ const ListingsCollage = ({
   cardSize,
 }: ListingsCollageProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const { adsData, fetchAds, imageUrls } = useFetchAdStore();
+  const { ads, fetchAds, imageUrls, hasMore } = useFetchAdStore();
+  const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
+  const [adImages, setAdImages] = useState<SanityImage[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+  });
 
   useEffect(() => {
-    fetchAds(); // Fetch ads when the component mounts
-  }, [fetchAds]);
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await fetchAds({
+        limit: 4,
+        page,
+        offset: 0,
+        sortOrder: "asc",
+        sortBy: "postedOn",
+      }); // Fetch ads with parameters
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [page, fetchAds]);
+
+  useEffect(() => {
+    if (inView && hasMore) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, [inView, hasMore]);
+
+  useEffect(() => {
+    const getImageIds = async () => {
+      if (adImages && adImages.length > 0) {
+        const imageRefs = adImages.map((image) => image._ref);
+        const imageFilesByIds = await getImageFilesById(imageRefs as string[]);
+        setImageFiles(imageFilesByIds);
+      }
+    };
+
+    getImageIds();
+  }, [adImages]);
+
+  useEffect(() => {
+    if (ads && Array.isArray(ads)) {
+      const adImagesArray = ads.flatMap((ad) => ad.images);
+      setAdImages(adImagesArray);
+    }
+  }, [ads]);
 
   const breakpointColumnsObj = {
-    default: 3,
-    2500: isSidebarOpen || isDashboard ? 3 : 4,
+    default: 4,
+    2500: isSidebarOpen || isDashboard ? 4 : 5,
     800: 2,
     639: 1,
   };
 
-  // Convert array to JSX items
-  const cards = adsData.map((ad, index) => {
+  const cards = ads.map((ad, index) => {
+    const adImages = Array.isArray(ad.images) ? ad.images : [];
 
-    // Filter out undefined values from aspectRatios
-    const aspectRatios = ad.images?.map((image) => image.aspectRatio).filter((ratio): ratio is number => ratio !== undefined);
+    const aspectRatios = adImages
+      .map((image) => image.aspectRatio)
+      .filter((ratio): ratio is number => typeof ratio === "number");
+
+    const urls: string[] = imageFiles
+      .map((imageFile) => {
+        const matchingImage = adImages.find(
+          (img) => img._ref === imageFile._id
+        );
+        return matchingImage ? imageFile.image.url : undefined;
+      })
+      .filter((url): url is string => typeof url === "string");
 
     return (
-      <Link href={`/${ad.slug}`}>
-        <div className={styles.card} key={ad._id}>
+      <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
+        <div className={styles.card}>
           <AdCard
             ad={ad}
             id={ad._id}
             index={index}
             cardType="box"
             cardSize={cardSize}
-            images={imageUrls}
+            images={urls}
             title={ad.title}
             price={ad.price}
             aspectRatios={aspectRatios}
@@ -78,18 +141,35 @@ const ListingsCollage = ({
     );
   });
 
-  return (
-    <Masonry
-      className={styles.listingsContainer}
-      breakpointCols={breakpointColumnsObj}
-      columnClassName={styles.listingsContainerColumns}
-      style={{
-        maxWidth: isDashboard || isFeed ? "59.625rem" : "81.25rem",
-      }}
-    >
-      {cards}
-    </Masonry>
-  );
+  if (isClient) {
+    return (
+      <section className={styles.container}>
+        <Masonry
+          className={styles.listingsContainer}
+          breakpointCols={breakpointColumnsObj}
+          columnClassName={styles.listingsContainerColumns}
+          style={{
+            maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
+          }}
+        >
+          {cards}
+        </Masonry>
+        <div ref={ref} className={styles.loading}>
+          {loading && hasMore ? (
+            <Image
+              src="/spinner.svg"
+              alt="spinner"
+              width={56}
+              height={56}
+              className={styles.spinner}
+            />
+          ) : null}
+        </div>
+      </section>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default ListingsCollage;

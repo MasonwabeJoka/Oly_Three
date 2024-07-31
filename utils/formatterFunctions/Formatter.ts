@@ -107,46 +107,57 @@ type Currency = 'ZAR' | 'USD' | 'EUR' | 'GBP'; // Extend this list with more cur
 interface PriceFormatOptions {
     locale?: string;
     currency?: Currency;
+    showCurrency?: boolean; // Determines if currency is shown at the end of amount
     useGrouping?: boolean; // Whether to use grouping separators, such as thousands separators
     showCents?: boolean; // Determines if decimals are shown
+    formatThousands?: boolean; // Determines if K suffix is shown for thousands    
+    formatMillions?: boolean; // Determines if K suffix is shown for millions    
 }
 
 export function formatPrice(value: number, options?: PriceFormatOptions): string {
     const {
         locale = 'en-ZA',
         currency = 'ZAR',
+        showCurrency = true,
         useGrouping = true,
-        showCents = false, // Defaults to not showing decimals
+        showCents = false,
+        formatThousands = true,
+        formatMillions = true,
     } = options || {};
 
-    const fractionDigits = showCents ? 2 : 0; // Show two decimals if showCents is true, otherwise none
+    const fractionDigits = showCents ? 2 : 0;
+
+    let formattedValue: string;
 
     if (value < 100000) {
-        // For numbers less than 100,000, format according to the locale and currency
-        return new Intl.NumberFormat(locale, {
-            style: 'currency',
+        formattedValue = new Intl.NumberFormat(locale, {
+            style: showCurrency ? 'currency' : 'decimal',
             currency: currency,
             useGrouping: useGrouping,
             minimumFractionDigits: fractionDigits,
             maximumFractionDigits: fractionDigits,
         }).format(value);
     } else {
-        // For larger numbers, apply custom formatting with 'K' for thousands and 'M' for millions
         let suffix = '';
-        let formattedValue = value;
-        if (value >= 1000000) {
-            formattedValue = value / 1000000;
+        let baseValue = value;
+
+        if (value >= 1000000 && formatMillions) {
+            baseValue = value / 1000000;
             suffix = 'M';
-        } else if (value >= 1000) {
-            formattedValue = value / 1000;
+        } else if (value >= 1000 && formatThousands) {
+            baseValue = value / 1000;
             suffix = 'K';
         }
-        return new Intl.NumberFormat(locale, {
+
+        formattedValue = new Intl.NumberFormat(locale, {
             useGrouping: useGrouping,
             minimumFractionDigits: fractionDigits,
             maximumFractionDigits: fractionDigits,
-        }).format(formattedValue) + suffix + ` ${currency}`;
+        }).format(baseValue) + suffix;
     }
+
+    // Prepend "R" to the formatted value only if showCurrency is false
+    return showCurrency ? formattedValue : `R${formattedValue}`;
 }
 
 

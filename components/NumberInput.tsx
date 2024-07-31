@@ -1,28 +1,10 @@
+"use client";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import styles from "./NumberInput.module.scss";
-import Image from "next/image";
-import { useRef, useState } from "react";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-
-interface InputProps {
-  className?: string;
-  inputSize: keyof typeof INPUT_SIZE.regular | keyof typeof INPUT_SIZE.feed | keyof typeof INPUT_SIZE.dashboard;
-  inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
-  placeholder?: string;
-  dashboard?: boolean;
-  label: string;
-  id: string;
-  name: string;
-  ariaLabel: string;
-  autoFocus: boolean;
-  autoComplete?: "on" | "off";
-  readonly?: boolean;
-  required: boolean;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onIncrement: () => void;
-  onDecrement: () => void;
-}
+import { UseFormRegisterReturn } from "react-hook-form";
+import Image from "next/image";
 
 const INPUT_SIZE = {
   regular: {
@@ -61,50 +43,112 @@ const INPUT_COLOUR_TYPE = {
   "": "",
 };
 
-const NumberInput = ({
-  className,
+interface NumberInputProps {
+  value: number | string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  min?: number| string;
+  max?: number| string;
+  step?: number;
+  debounceTime?: number;
+  className?: string;
+  placeholder?: string;
+  inputSize:
+    | keyof typeof INPUT_SIZE.regular
+    | keyof typeof INPUT_SIZE.feed
+    | keyof typeof INPUT_SIZE.dashboard;
+  inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
+  dashboard?: boolean;
+  autoFocus?: boolean;
+  required: boolean;
+  reactHookFormProps?: UseFormRegisterReturn;
+  error?: string;
+  [key: string]: any;
+}
+
+const NumberInput: React.FC<NumberInputProps> = ({
   inputSize,
-  inputColourType,
-  placeholder,
-  dashboard,
-  label,
-  id,
-  name,
-  ariaLabel,
-  autoFocus,
-  autoComplete,
-  readonly,
-  required,
+  inputColourType = "normal",
   value,
   onChange,
-  onIncrement,
-  onDecrement,
-}: InputProps): JSX.Element => {
+  min,
+  max,
+  step,
+  debounceTime = 300,
+  className,
+  placeholder,
+  dashboard,
+  autoFocus = false,
+  required = true,
+  reactHookFormProps,
+  error,
+  ...restProps
+}) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const [isPlaceholderActive, setIsPlaceholderActive] = useState(true);
-  const [internalPlaceholder, setInternalPlaceholder] = useState(placeholder);
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value === "") {
-      setIsPlaceholderActive(true);
+  const [internalValue, setInternalValue] = useState<string>(value?.toString());
+
+  useEffect(() => {
+    setInternalValue(value?.toString());
+  }, [value]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const numericValue = parseFloat(internalValue);
+      if (!isNaN(numericValue) && numericValue !== value) {
+        onChange?.({
+          target: {
+            value: numericValue.toString(),
+          },
+        } as ChangeEvent<HTMLInputElement>);
+      }
+    }, debounceTime);
+  
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [internalValue, debounceTime, value, onChange]);
+  
+
+  const handleInternalChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInternalValue(e.target.value);
+    
+    // Call the external onChange handlers
+    if (onChange) {
+      onChange(e);
+    }
+    if (reactHookFormProps?.onChange) {
+      reactHookFormProps.onChange(e);
+    }
+  };
+
+  const handleArrowClick = (direction: "up" | "down") => {
+    let newValue = parseFloat(internalValue) || 0;
+    if (direction === "up") {
+      newValue += step || 1;
     } else {
-      setIsPlaceholderActive(false);
+      newValue -= step || 1;
     }
-    onChange(event);
-  };
-
-  const handleFocus = () => {
-    setIsPlaceholderActive(false);
-    setInternalPlaceholder("");
-  };
-
-  useOnClickOutside(inputRef, () => {
-    if (value === "") {
-      setIsPlaceholderActive(true);
-      setInternalPlaceholder(placeholder);
+    if (
+      (min !== undefined && newValue < min) ||
+      (max !== undefined && newValue > max)
+    ) {
+      return;
     }
-  });
+  
+    setInternalValue(newValue.toString());
+  
+    // Construct a synthetic event object
+    const event = {
+      target: {
+        value: newValue.toString(),
+      },
+    } as ChangeEvent<HTMLInputElement>;
+  
+    // Call onChange with the synthetic event object
+    onChange?.(event);
+  };
+  
+ 
 
   let sizeClass = "";
   sizeClass = isSidebarOpen
@@ -117,40 +161,46 @@ const NumberInput = ({
 
   return (
     <div className={styles.container}>
-      <input
-        ref={inputRef}
-        type="number"
-        className={inputClass}
-        value={isPlaceholderActive ? "" : value}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        placeholder={internalPlaceholder}
-      />
-      {!isPlaceholderActive && (
-        <div className={styles.arrows} ref={inputRef}>
+      {error && <p className={styles.errorMessage}>{error as string}</p>}
+
+      <div className={styles.wrapper}>
+        <input
+          type="number"
+          value={internalValue}
+          onChange={handleInternalChange}
+          min={min}
+          max={max}
+          step={step}
+          autoFocus={autoFocus}
+          required={required}
+          placeholder={placeholder}
+          className={inputClass}
+          {...reactHookFormProps}
+          {...restProps}
+        />
+        <div className={styles.arrows}>
           <div className={styles.upArrow}>
             <Image
               src="/icons/arrow-up.png"
               alt="Increment"
               width={24}
               height={24}
-              onClick={onIncrement}
+              onClick={() => handleArrowClick("up")}
             />
           </div>
           <div className={styles.downArrow}>
             <Image
               src="/icons/arrow-down.png"
-              alt="Decrement"
+              alt="Decrease"
               width={24}
               height={24}
-              onClick={onDecrement}
+              onClick={() => handleArrowClick("down")}
             />
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export default NumberInput;
-  

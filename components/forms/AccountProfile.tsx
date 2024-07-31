@@ -188,7 +188,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
           name="bio"
           rows={10}
           cols={50}
-          required={false}
+          required={true}
         />
       </div>
       <Button

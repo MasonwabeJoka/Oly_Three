@@ -11,7 +11,7 @@ import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "sanity";
 import { richTextLength } from "@/lib/richTextLength";
 import useSidebarStore from "@/store/useSidebarStore";
-import { useFetchAdStore } from "@/store/adsData";
+import { useFetchAdStore } from "@/store/useFetchStore";
 
 type ListingsExpandedProps = {
   isDeletable: boolean;

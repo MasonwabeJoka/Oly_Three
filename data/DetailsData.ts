@@ -189,8 +189,8 @@ export const DetailsData: Detail[] = [
 
     {
         id: 31,
-        detail: "Define Your Own Details",
-        description: "Feel free to add your own details that haven't been listed. We recommend providing a maximum two word title followed by a colon (:).",
+        detail: "Define Your Own Detail",
+        description: "Feel free to add your own detail. We recommend starting with a title (maximum 3 words), followed by a colon.",
         example: "Title: Your detail here."
     },
 ];

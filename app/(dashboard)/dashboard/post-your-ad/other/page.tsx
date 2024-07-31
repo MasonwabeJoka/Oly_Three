@@ -11,14 +11,14 @@ const Other = () => {
       <div className={styles.selectCategory}>
         <Select
           options={[]}
-          initialValue="Select a category"
+          currentValue="Select a category"
           selectSize="large"
           label="Categories"
           id="categories"
           name="categories"
           ariaLabel="Categories"
           autoFocus={false}
-          required={false}
+          required={true}
         />
       </div>
       <div className={styles.customItemContainer}>

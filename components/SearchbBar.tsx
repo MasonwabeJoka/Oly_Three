@@ -51,7 +51,6 @@ const SearchBar = () => {
   const selectedSuggestion = (suggestion: any) => {
     setInputValue(suggestion);
     setActiveSuggestions([]);
-  
   };
 
   return (
@@ -73,7 +72,7 @@ const SearchBar = () => {
         value={inputValue && inputValue}
         onChange={handleInputChange}
         autoFocus={false}
-        required={false}
+        required={true}
       />
       {activeSuggestions.length > 0 && (
         <ul className={styles.searchSuggestions}>

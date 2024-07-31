@@ -139,7 +139,7 @@ const TypingArea = (props) => {
           id="input-area"
           name="input-area"
           size="large"
-          required={false}
+          required={true}
           value={value}
           onChange={handleTextChange}
           style={{ height: textareaHeight }}

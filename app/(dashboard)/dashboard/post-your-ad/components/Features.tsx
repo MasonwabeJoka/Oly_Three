@@ -1,125 +1,92 @@
 "use client";
 import styles from "./Features.module.scss";
-import { useState } from "react";
-import { useForm, FieldErrors } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
+import { useFormContext, Controller } from "react-hook-form";
 import { z } from "zod";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Select from "@/components/Select";
-import Input from "@/components/Input";
 import Button from "@/components/Buttons";
-import TextArea from "@/components/TextArea";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
 import { featuresData } from "@/data/FeaturesData";
 import { DevTool } from "@hookform/devtools";
-import { detailsFormSchema } from "@/lib/validations/formValidations";
-import Icon from "@/components/Icon";
+import { multiStepFormSchema } from "@/lib/validations/formValidations";
+import EditModeForm from "@/components/forms/EditModeForm";
+import SelectedFeature from "@/components/forms/SelectedFeature";
 
-type FormValues = z.infer<typeof detailsFormSchema>;
+type FormValues = z.infer<typeof multiStepFormSchema>;
 // TODO: On edit mode the textarea should grow with text.
-//TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
-const Features = () => {
-  const router = useRouter();
-  const form = useForm<FormValues>({
-    resolver: zodResolver(detailsFormSchema),
-    defaultValues: {
-      selectedDetail: "",
-      condition: "",
-      detail: "",
-      moreDetails: "",
-      editDetail: "",
-    },
-  });
+// TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
 
-  const { register, control, handleSubmit, formState, setValue, watch } = form;
-  const { errors, isDirty, isValid, isSubmitting } = formState;
-  const [detailId, setDetailId] = useState(null);
-  const selectedDetail = watch("selectedDetail");
+type FeaturesProps = {
+  selectFeature?: string;
+  setSelectFeature: (value: string) => void;
+  feature: string;
+  setFeature: (value: string) => void;
+};
 
-  const onSubmit = (data) => {
+const Features = ({
+  selectFeature,
+  setSelectFeature,
+  feature,
+  setFeature,
+}: FeaturesProps) => {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    setValue,
+    watch,
+  } = useFormContext();
+
+  const [detailId, setDetailId] = useState<string | number | null>(null);
+  const selectFeatureValue = watch("selectFeature");
+
+  const onSubmitDetail = (data: FormValues) => {
     console.log(data);
     setDetailId(null);
     // Perform any additional actions here
   };
 
-  const handleProceed = async (e) => {
-    e.preventDefault();
-    // const isValid = await handleSubmit(onSubmit)();
-    if (isValid) {
-      router.push("/dashboard/post-your-ad/features");
-    }
-  };
-
-  const handleBack = async (e) => {
-    e.preventDefault();
-    // const isValid = await handleSubmit(onSubmit)();
-    if (isValid) {
-      router.push("/dashboard/post-your-ad/select-a-category");
-    }
-  };
-
-  const editDetail = (id) => {
+  const editDetail = (id: string) => {
     setDetailId(id);
   };
 
   const conditions = ConditionsData.map((detail) => detail.condition);
   const details = DetailsData.map((detail) => detail.detail);
 
-  const enterDetail = (e) => {
-    const detail = e.target.value.trim();
-    if (e.key === "Enter" && detail) {
-      let details = JSON.parse(localStorage.getItem("details") || "[]");
-      const detailItem = { id: 1, detail };
-      details.push(detailItem);
-      localStorage.setItem("details", JSON.stringify(details));
-    }
+  let matchFound = false;
+
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValue(e.target.name as keyof FormValues, e.target.value, {
+  //     shouldDirty: true,
+  //     shouldTouch: true,
+  //   });
+  // };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFeature(e.target.value);
   };
 
-  let matchFound = false;
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setValue(e.target.name as keyof FormValues, e.target.value, {
+      shouldTouch: true,
+    });
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form}>
         <fieldset className={styles.titleContainer}>
-          <legend className={styles.title}>Product Details</legend>
+          <legend className={styles.title}>Product Features</legend>
         </fieldset>
         <div className={styles.formElements}>
-          <div className={styles.conditionsContainer}>
-            <p className={styles.errorMessage}>{errors.condition?.message}</p>
-            <Select
-              options={conditions}
-              className={styles.conditions}
-              initialValue="Condition"
-              selectSize="large"
-              selectColourType="normal"
-              label="Choose a condition"
-              id="conditions"
-              ariaLabel="Conditions"
-              autoFocus={false}
-              autoComplete="off"
-              disabled={false}
-              required={false}
-              multiple={false}
-              {...register("condition")}
-              onChange={(e: any) => {
-                setValue("condition", e.target.value, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                });
-              }}
-            />
-          </div>
-          <div className={styles.chooseDetailContainer}>
-            <p className={styles.errorMessage}>
-              {errors.selectedDetail?.message}
-            </p>
+          <div className={styles.selecteDetailContainer}>
             <Select
               options={details}
-              className={styles.chooseDetail}
-              initialValue="See a list of details you can include"
+              className={styles.selectDetail}
+              currentValue={selectFeatureValue}
               selectSize="large"
               selectColourType="normal"
               label="Choose a detail"
@@ -130,81 +97,29 @@ const Features = () => {
               disabled={false}
               required={false}
               multiple={false}
-              {...register("selectedDetail")}
-              onChange={(e: any) => {
-                setValue("selectedDetail", e.target.value, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                });
-              }}
+              error={errors.selectDetail?.message as string}
+              {...register("selectFeature")}
+              onChange={(e) => setSelectFeature(e.target.value)}
             />
           </div>
 
           {DetailsData.map((detail) => {
-            // matchFound is there to prevent duplicates
-            if (!matchFound && selectedDetail === detail.detail) {
+            if (!matchFound && selectFeatureValue === detail.detail) {
               matchFound = true;
               return (
-                <>
-                  <p className={styles.errorMessage}>
-                    {errors.detail?.message}
-                  </p>
-
-                  <div key={detail.id} className={styles.chosenDetailContainer}>
-                    <p className={styles.chosenDetailTitle}>{detail.detail}</p>
-                    <p className={styles.chosenDetailDescription}>
-                      {detail.description}
-                    </p>
-                    {/* Todo: Limit characters to 20 and add... at the end. */}
-                    <div className={styles.chosenDetail}>
-                      <Input
-                        className={styles.chosenDetailInput}
-                        inputType="text"
-                        inputColourType="normal"
-                        inputSize="large"
-                        label="Chosen Detail"
-                        placeholder={`Eg: ${
-                          detail.example.length > 55
-                            ? detail.example.slice(0, 55) + "..."
-                            : detail.example
-                        }`}
-                        id="detail"
-                        ariaLabel="Chosen Detail"
-                        autoFocus={false}
-                        iconSrcRight=""
-                        iconPosition="right"
-                        iconWidth={32}
-                        iconHeight={32}
-                        required={true}
-                        autoComplete="off"
-                        onKeyUp={enterDetail}
-                        {...register("detail")}
-                        onChange={(e: any) => {
-                          setValue("detail", e.target.value, {
-                            shouldDirty: true,
-                            shouldTouch: true,
-                          });
-                        }}
-                      />
-                    </div>
-
-                    <div className={styles.submitButtonContainer}>
-                      <Button
-                        className={styles.proceedButton}
-                        buttonChildren="Submit Detail"
-                        buttonType="normal"
-                        type="submit"
-                        buttonSize="large"
-                        name="proceed-btn"
-                        ariaLabel="Proceed Button"
-                        autoFocus={false}
-                        disabled={false}
-                        dashboard
-                        onClick={handleSubmit(onSubmit)}
-                      />
-                    </div>
-                  </div>
-                </>
+                <SelectedFeature
+                  id={detail.id}
+                  detail={detail.detail}
+                  description={detail.description}
+                  example={detail.example}
+                  key={detail.id}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  handleSubmit={handleSubmit}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
               );
             } else {
               return null;
@@ -265,39 +180,7 @@ const Features = () => {
                   </p>
                 </li>
               ) : (
-                <div key={detail.id} className={styles.editMode}>
-                  <p className={styles.errorMessage}>
-                    {errors.editDetail?.message}
-                  </p>
-                  <TextArea
-                    className={styles.editDetail}
-                    id="edit-detail"
-                    size="large"
-                    label="Edit Detail"
-                    required={false}
-                    {...register("editDetail")}
-                    onChange={(e: any) => {
-                      setValue("editDetail", e.target.value, {
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                    }}
-                  />
-                  <div
-                    className={styles.submitButton}
-                    onClick={handleSubmit(onSubmit)}
-                  >
-                    <div className={styles.iconContainer}>
-                      <Icon
-                        className={styles.icon}
-                        src="/icons/check.png"
-                        alt="submit-icon"
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <EditModeForm />
               )
             )}
           </ul>
@@ -309,27 +192,26 @@ const Features = () => {
               buttonType="primary"
               buttonSize="large"
               name="proceed-btn"
-              type="button"
+              type="submit"
               ariaLabel="Proceed Button"
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={handleProceed}
             />
-
-            <Button
-              className={styles.backButton}
-              buttonChildren="Back"
-              buttonType="normal"
-              buttonSize="large"
-              name="back-btn"
-              type="button"
-              ariaLabel="Back Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-              onClick={()=> router.push("/dashboard/post-your-ad/select-a-category")}
-            />
+            <div className={styles.backButtonContainer}>
+              <Button
+                className={styles.backButton}
+                buttonChildren="Back"
+                buttonType="normal"
+                buttonSize="large"
+                name="back-btn"
+                type="submit"
+                ariaLabel="Back Button"
+                autoFocus={false}
+                disabled={false}
+                dashboard
+              />
+            </div>
           </nav> */}
         </div>
       </form>

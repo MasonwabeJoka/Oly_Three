@@ -19,7 +19,7 @@ const Footer = () => {
           id="email"
           name="email"
           ariaLabel="Email input"
-          required={false}
+          required={true}
         />
       </aside>
       <main className={styles.mainSection}>

@@ -44,7 +44,7 @@ const Messages = () => {
                   name="search-bar"
                   ariaLabel="Search"
                   autoFocus={false}
-                  required={false}
+                  required={true}
                   {...register("search-bar")}
                 />
               </div>

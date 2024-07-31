@@ -1,40 +1,25 @@
-import { defineType, defineField } from 'sanity';
+import { z } from 'zod';
+import { PortableTextBlockSchema } from "./PortableTextBlock"; // Assuming PortableTextBlockSchema is defined and exported in this file
 
-export const feedback = defineType({
-    name: 'feedback',
-    title: 'Feedback',
-    type: 'document',
-    fields: [
-        defineField({
-            name: 'submittedBy',
-            title: 'Submitted By',
-            type: 'reference',
-            to: [{ type: 'user' }],
-            description: 'The user who submitted the feedback.',
-        }),
-        defineField({
-            name: 'message',
-            title: 'Message',
-            type: 'array',
-            of: [
-                {
-                    type: 'block'
-                }
-            ],
-            description: 'The content of the feedback message.',
-        }),
-        defineField({
-            name: 'rating',
-            title: 'Rating',
-            type: 'number',
-            description: 'The rating score provided by the user.',
-        }),
-        defineField({
-            name: 'createdAt',
-            title: 'Created At',
-            type: 'datetime',
-            description: 'The date and time when the feedback was created.',
-        }),
-        
-    ],
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
 });
+
+// Feedback type
+const FeedbackSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  submittedBy: ReferenceSchema, // Reference to a 'user' document
+  message: z.array(PortableTextBlockSchema), // Assuming the message is in Portable Text format
+  rating: z.number(),
+  createdAt: z.string(), // Date in ISO format
+});
+
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type Feedback = z.infer<typeof FeedbackSchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, FeedbackSchema };

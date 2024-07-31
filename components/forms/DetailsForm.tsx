@@ -25,13 +25,22 @@ const Details = () => {
     resolver: zodResolver(detailsFormSchema),
   });
 
-  const { register, control, handleSubmit: submitDetails, formState, setValue, watch } = form;
-  const { register: registerSelectedDetail, handleSubmit: handleSubmitSelectedDetail } = form;
+  const {
+    register,
+    control,
+    handleSubmit: submitDetails,
+    formState,
+    setValue,
+    watch,
+  } = form;
+  const {
+    register: registerSelectedDetail,
+    handleSubmit: handleSubmitSelectedDetail,
+  } = form;
   const { errors, isDirty, isValid, isSubmitting } = formState;
-  const { errors: errorsSelectedDetail} = formState;
+  const { errors: errorsSelectedDetail } = formState;
   const [detailId, setDetailId] = useState<string | null>(null);
-  const chooseDetail = watch("chooseDetail");
-
+  const selectDetail = watch("selectDetail");
 
   const onSubmitDetail = (data: FormValues) => {
     console.log(data);
@@ -72,7 +81,7 @@ const Details = () => {
             <Select
               options={conditions}
               className={styles.conditions}
-              initialValue="Condition"
+              currentValue="Condition"
               selectSize="large"
               selectColourType="normal"
               label="Choose a condition"
@@ -81,7 +90,7 @@ const Details = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               {...register("condition")}
               onChange={(e) => {
@@ -93,11 +102,11 @@ const Details = () => {
               error={errors.condition?.message as string}
             />
           </div>
-          <div className={styles.chooseDetailContainer}>
+          <div className={styles.selecteDetailContainer}>
             <Select
               options={details}
-              className={styles.chooseDetail}
-              initialValue="See a list of details you can include"
+              className={styles.selectDetail}
+              currentValue="Choose details to include"
               selectSize="large"
               selectColourType="normal"
               label="Choose a detail"
@@ -106,14 +115,14 @@ const Details = () => {
               autoFocus={false}
               autoComplete="off"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
-              {...register("chooseDetail")}
+              {...register("selectDetail")}
             />
           </div>
 
           {DetailsData.map((detail) => {
-            if (!matchFound && chooseDetail === detail.detail) {
+            if (!matchFound && selectDetail === detail.detail) {
               matchFound = true;
               return (
                 <SelectedDetail

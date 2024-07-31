@@ -22,7 +22,7 @@ type Props = {
   id?: Ad["_id"];
   images?: string[];
   title?: Ad["title"];
-  description?: string | PortableTextBlock[];
+  description?: string | PortableTextBlock[]|null;
   postAge?: Ad["postedOn"];
   price?: Ad["price"];
   cardSize?:
@@ -170,12 +170,18 @@ const AdCard: React.FC<Props> = ({
             onMouseEnter={() => setIsCardHovered(true)}
           >
             <div className={styles.titleDescription}>
-              <p className={styles.title}>{`${title?.slice(0, 96)}...`}</p>
+              <p className={styles.title}>{`${title?.slice(0, 96)}`}</p>
 
               <p className={styles.description}>{descriptionString}</p>
             </div>
             <h3 className={styles.price}>
-              {price ? Formatter.formatLargeNumber(price) : ""}
+              {price
+                ? Formatter.formatPrice(price, {
+                    showCurrency: false,
+                    formatMillions: false,
+                    formatThousands: false,
+                  })
+                : ""}
             </h3>
           </div>
         )}
@@ -189,6 +195,7 @@ const AdCard: React.FC<Props> = ({
         className={`${cardSize ? sizeClass : ""} ${styles.boxCard} `}
         onMouseEnter={() => setIsCardHovered(true)}
         onMouseLeave={() => setIsCardHovered(false)}
+        style={{ paddingBottom: isCardHovered ? "0" : "6rem" }}
       >
         <ImageContainer />
         <Details />
@@ -199,10 +206,7 @@ const AdCard: React.FC<Props> = ({
   const ExpandedImageContainer = () => {
     return (
       <div className={styles.centerImageWrapper}>
-        <div
-          className={styles.imageContainer}
-          
-        >
+        <div className={styles.imageContainer}>
           <ExpandedImageSlider
             urls={images}
             hasLikeButton={true}

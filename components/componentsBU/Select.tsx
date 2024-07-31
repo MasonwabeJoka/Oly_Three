@@ -190,13 +190,13 @@ export default Select;
 {
   /* <Select
   options={[]}
-  initialValue="Select your province"
+  currentValue="Select your province"
   selectSize="large"
   label="Provinces"
   id="provinces"
   name="provinces"
   ariaLabel="Provinces"
   autoFocus={false}
-  required={false}
+  required={true}
 />; */
 }

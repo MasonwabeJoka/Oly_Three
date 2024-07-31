@@ -79,7 +79,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           >
             <Select
               options={options()}
-              initialValue="Promotion duration"
+              currentValue="Promotion duration"
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
@@ -92,7 +92,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               autoFocus={false}
               autoComplete="on"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               dashboard={isDashboard}
             />
@@ -152,7 +152,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           <div className={styles.setPromotionDurationContainer}>
             <Select
               options={options()}
-              initialValue="Promotion duration"
+              currentValue="Promotion duration"
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
@@ -165,7 +165,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               autoFocus={false}
               autoComplete="on"
               disabled={false}
-              required={false}
+              required={true}
               multiple={false}
               dashboard={isDashboard}
             />

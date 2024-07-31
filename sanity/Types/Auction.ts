@@ -1,29 +1,41 @@
-type Reference = {
-    _ref: string;
-    _type: string;
-};
+import { z } from 'zod';
+import { PortableTextBlockSchema } from "./PortableTextBlock";
 
-export type Auction = {
-    _id: string;
-    _createdAt: Date;
-    startingPrice: number;
-    estimatedPrice: number;
-    highestBid: Reference;
-    serviceFeeBidder: number;
-    serviceFeeAdvertiser: number;
-    liveBiddingStart: string; // Date in ISO format
-    duration: number;
-    timeLeft: number;
-    minimumBid: number;
-    biddersList: Reference[];
-    currentLiveBidders: Reference[];
-    totalBidders: number;
-    currentLiveBiddersCount: number;
-    lots: Reference[];
-    upcoming: boolean;
-    favoritedBy: Reference[];
-    partOfMyAuctions: boolean;
-    buyNowOption: boolean;
-    auctionType: 'live' | 'timed' | 'buy-now';
-    remainingTime: string; // Date in ISO format
-};
+// Reference type
+const ReferenceSchema = z.object({
+  _ref: z.string(),
+  _type: z.string(),
+});
+
+// Auction type
+const AuctionSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  startingPrice: z.number(),
+  estimatedPrice: z.number(),
+  highestBid: ReferenceSchema,
+  serviceFeeBidder: z.number(),
+  serviceFeeAdvertiser: z.number(),
+  liveBiddingStart: z.string().date(), // Date in ISO format
+  duration: z.number(),
+  timeLeft: z.number(),
+  minimumBid: z.number(),
+  biddersList: z.array(ReferenceSchema),
+  currentLiveBidders: z.array(ReferenceSchema),
+  totalBidders: z.number(),
+  currentLiveBiddersCount: z.number(),
+  lots: z.array(ReferenceSchema),
+  upcoming: z.boolean(),
+  favoritedBy: z.array(ReferenceSchema),
+  partOfMyAuctions: z.boolean(),
+  buyNowOption: z.boolean(),
+  auctionType: z.enum(['live', 'timed', 'buy-now']),
+  remainingTime: z.string().date(), // Date in ISO format
+});
+
+// Inferring the TypeScript type from the Zod schema
+export type Reference = z.infer<typeof ReferenceSchema>;
+export type Auction = z.infer<typeof AuctionSchema>;
+
+// Exporting the schemas
+export { ReferenceSchema, AuctionSchema };

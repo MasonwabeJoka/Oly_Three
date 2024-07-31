@@ -1,19 +1,30 @@
-type GeoPoint = {
-    _type: 'geopoint';
-    lat: number;
-    lng: number;
-    alt?: number; // Include if altitude is relevant
-};
+import { z } from 'zod';
 
-export type Location = {
-    _id: string;
-    _createdAt: Date;
-    coordinates: GeoPoint;
-    address: string;
-    suburb: string;
-    city: string;
-    region: string;
-    country: string;
-    postalCode: string;
-    // Include any other fields as needed
-};
+// GeoPoint type
+const GeoPointSchema = z.object({
+  _type: z.literal('geopoint'),
+  lat: z.number(),
+  lng: z.number(),
+  alt: z.number().optional(), // Optional altitude
+});
+
+// Location type
+const LocationSchema = z.object({
+  _id: z.string(),
+  _createdAt: z.date(),
+  coordinates: GeoPointSchema,
+  address: z.string(),
+  suburb: z.string(),
+  city: z.string(),
+  region: z.string(),
+  country: z.string(),
+  postalCode: z.string(),
+  // Add any additional fields as needed here
+});
+
+// Inferring the TypeScript types from the Zod schemas
+export type GeoPoint = z.infer<typeof GeoPointSchema>;
+export type Location = z.infer<typeof LocationSchema>;
+
+// Exporting the schemas
+export { GeoPointSchema, LocationSchema };

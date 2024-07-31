@@ -10,8 +10,8 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
 import Link from "next/link";
+import Select from "./Select";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
@@ -37,6 +37,19 @@ const FeaturedListings = () => {
     <div className={styles.listingsSection}>
       <Title className={styles.title}>Featured Listings</Title>
       <div className={styles.collage}>
+        <div className={styles.selectContainer}>
+          <Select
+             options={["All Categories","Properties", "Vehicles", "Jobs","Services" ]}
+             currentValue="All Categories"
+             selectSize="large"
+             label="Categories"
+             id="categories"
+             name="categories"
+             ariaLabel="categories"
+             autoFocus={false}
+             required={true}
+          />
+        </div>
         <ListingsCollage
           isDeletable={false}
           isDashboard={false}

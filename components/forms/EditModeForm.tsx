@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
 import TextArea from "@/components/TextArea";
 import Button from "@/components/Buttons";
 import { DevTool } from "@hookform/devtools";
@@ -14,7 +13,7 @@ import SelectedDetail from "./SelectedDetail";
 
 type FormValues = z.infer<typeof detailsFormSchema>;
 
-const EditModeForm = () => {
+const EditModeForm = ({initialValue}) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(detailsFormSchema),
   });
@@ -32,7 +31,8 @@ const EditModeForm = () => {
           id="edit-detail"
           size="large"
           label="Edit Detail"
-          required={false}
+          value={initialValue}
+          required={true}
           {...register("editDetail")}
           error={errors.detail?.message as string}
         />

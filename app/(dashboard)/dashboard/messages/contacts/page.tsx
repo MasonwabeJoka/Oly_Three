@@ -26,7 +26,7 @@ const Contacts = () => {
           name="search-bar"
           ariaLabel="Search"
           autoFocus={false}
-          required={false}
+          required={true}
         />
       </div>
       <div className={styles.contacts}>

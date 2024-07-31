@@ -82,27 +82,133 @@ export const profileSchema = z.object({
     .optional()
 });
 
-export const detailsFormSchema = z.object({
+
+
+// export const multiStepFormSchema = z.object({
+//   condition: z.string().optional(),
+//   selectDetail: z.string().optional(),
+
+//   detail: z.string().optional(),
+
+//   moreDetails: z.string().optional(),
+
+//   editDetail: z.string().optional(),
+
+//   selectFeature: z.string().optional(),
+
+//   feature: z.string().optional(),
+
+//   priceType:z.string().optional(),
+
+//   price: z.string().optional(),
+
+//   title: z.string().optional(),
+
+//   description: z.string().optional(),
+
+//   province: z.string().optional(),
+
+//   city: z.string().optional(),
+
+//   suburb: z.string().optional(),
+
+//   promotionDuration: z.string().optional(),
+// });
+
+export const multiStepFormSchema = z.object({
   condition: z.string({
     required_error: "Please select a condition.",
     invalid_type_error: "Condition must be a string.",
-  }).refine((val) => val !== "", {
-    message: "Please select an option.",
+  })
+
+  .refine((val) => val !== "" && val !== "Condition", {
+    message: "Please select a valid condition.",
   }),
-  chooseDetail: z.string({
+
+  selectDetail: z.string({
     required_error: "Please select a condition.",
     invalid_type_error: "Condition must be a string.",
   }).refine((val) => val !== "", {
     message: "Please select an option.",
   }),
+
   detail: z.string({
     required_error: "Please select a condition.",
     invalid_type_error: "Condition must be a string.",
   }).refine((val) => val !== "", {
     message: "Please select an option.",
   }),
+
   moreDetails: z.string().optional(),
+
   editDetail: z.string().optional(),
+
+  selectFeature: z.string().optional(),
+
+  feature: z.string({
+    required_error: "Please select a condition.",
+    invalid_type_error: "Condition must be a string.",
+  }).refine((val) => val !== "", {
+    message: "Feature Error Message",
+  }),
+
+  priceType: z.string({
+    required_error: "Please select a condition.",
+    invalid_type_error: "Condition must be a string.",
+  })
+
+  .refine((val) => val !== "" && val !== "Condition", {
+    message: "Price type error message.",
+  }),
+
+  // price: z.string({
+  //   required_error: "Price is required.",
+  //   invalid_type_error: "Price must be a number.",
+  // }),
+  price: z.number({
+    required_error: "Price is required.",
+    invalid_type_error: "Price must be a number.",
+  }).positive({
+    message: "Price must be greater than 0.",
+  }),
+
+  title: z.string({
+    required_error: "Title is required.",
+    invalid_type_error: "Title must be a string.",
+  }).min(5, "Title must be at least 5 characters long."),
+
+  description: z.string({
+    required_error: "Description is required.",
+    invalid_type_error: "Description must be a string.",
+  }).min(10, "Description must be at least 10 characters long."),
+
+  province: z.string({
+    required_error: "Please select a province.",
+    invalid_type_error: "Province must be a string.",
+  }).refine((val) => val !== "Province", {
+    message: "Please select a valid province.",
+  }),
+
+  city: z.string({
+    required_error: "Please select a city.",
+    invalid_type_error: "City must be a string.",
+  }).refine((val) => val !== "City", {
+    message: "Please select a valid city.",
+  }),
+
+  suburb: z.string({
+    required_error: "Please select a suburb.",
+    invalid_type_error: "Suburb must be a string.",
+  }).refine((val) => val !== "Suburb", {
+    message: "Please select a valid suburb.",
+  }),
+
+  promotionDuration: z.string({
+    required_error: "Please select a promotion duration.",
+    invalid_type_error: "Promotion duration must be a string.",
+  }).refine((val) => val !== "Select Duration", {
+    message: "Please select a valid promotion duration.",
+  }),
 });
 
 
