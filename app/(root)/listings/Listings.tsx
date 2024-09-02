@@ -20,7 +20,7 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
+
 import Button from "@/components/Buttons";
 
 type FormValues = z.infer<typeof searchFormSchema>;
@@ -48,15 +48,15 @@ const Listings = () => {
   const { ads, fetchAds, imageUrls } = useFetchAdStore();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
-    
+
     if (isClient) {
       fetchAds({
         limit: 5,
@@ -68,9 +68,7 @@ const Listings = () => {
     }
 
     setLoading(false);
-  }, [isClient, page]); 
-
-
+  }, [isClient, page]);
 
   const locations = ads.map((ad) => ad.location);
 
@@ -121,7 +119,6 @@ const Listings = () => {
   }, []);
 
   useEffect(() => {
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -259,271 +256,278 @@ const Listings = () => {
 
   return (
     <div className={styles.container}>
-    {/* <aside className={styles.sidebar}>
+      {/* <aside className={styles.sidebar}>
       <Map locations={locations}/>
     </aside> */}
-    <div className={styles.main}>
-      <div className={styles.modalContainer}>
-        <div className={styles.modal}>
-          <Modal
-            showModal={showNotificationsModal}
-            setShowModal={setShowNotificationsModal}
-            modalContent={<Menu />}
-          />
-        </div>
-      </div>
-      <form
-        id="Listings Search"
-        className={styles.searchContainer}
-        onSubmit={handleSubmit(onSubmit, onError)}
-        noValidate
-      >
-        <fieldset className={styles.search}>
-          <div className={styles.categories}>
-            <Select
-              options={[
-                "All Categories",
-                "Properties",
-                "Vehicles",
-                "Jobs",
-                "Services",
-              ]}
-              currentValue="All Categories"
-              selectSize="xLarge"
-              label="Provinces"
-              id="provinces"
-              name="provinces"
-              ariaLabel="Provinces"
-              autoFocus={false}
-              required={true}
+      <div className={styles.main}>
+        <div className={styles.modalContainer}>
+          <div className={styles.modal}>
+            <Modal
+              showModal={showNotificationsModal}
+              setShowModal={setShowNotificationsModal}
+              modalContent={<Menu />}
             />
           </div>
-          <div className={styles.searchTerm}>
-            <p className={styles.errorMessage}>
-              {errors.searchTerm?.message}
-            </p>
-            <div
-              className={`${styles.breadcrumbs} ${styles.searchTermBreadcrumbs}`}
-            >
-              <Breadcrumbs
-                homeBreadcrumb={{ id: 1, name: "All Categories", href: "#" }}
-                firstBreadcrumb={{
-                  id: 2,
-                  name: "Electronics & Computers",
-                  href: "#",
-                }}
-                searchResult={{ id: 3, name: "Computer", href: "#" }}
-              />
-            </div>
-            <div className={styles.searchTermInputContainer}>
-              <Input
-                className={`${styles.formInput} ${styles.searchTermInput}`}
-                isSearchBar={true}
-                suggestions={suggestions}
-                inputSize="xLarge"
-                inputType="text"
-                label="Search Field: "
-                placeholder="What are you looking for?"
-                id="searchTerm"
-                ariaLabel="Search Term"
-                autoComplete="on"
+        </div>
+        <form
+          id="Listings Search"
+          className={styles.searchContainer}
+          onSubmit={handleSubmit(onSubmit, onError)}
+          noValidate
+        >
+          <fieldset className={styles.search}>
+            <div className={styles.categories}>
+              <Select
+                options={[
+                  "All Categories",
+                  "Properties",
+                  "Vehicles",
+                  "Jobs",
+                  "Services",
+                ]}
+                currentValue="All Categories"
+                selectSize="xLarge"
+                label="Provinces"
+                id="provinces"
+                name="provinces"
+                ariaLabel="Provinces"
                 autoFocus={false}
                 required={true}
-                form="Listings Search"
-                iconSrcLeft=""
-                iconSrcRight="/icons/search.png"
-                iconPosition="right"
-                iconWidth={32}
-                iconHeight={32}
-                {...register("searchTerm")}
-                onChange={(e) => {
-                  setValue("searchTerm", e.target.value, {
-                    shouldDirty: true,
-                    shouldTouch: true,
-                  });
-                }}
               />
             </div>
+            <div className={styles.searchTerm}>
+              <p className={styles.errorMessage}>
+                {errors.searchTerm?.message}
+              </p>
+              <div
+                className={`${styles.breadcrumbs} ${styles.searchTermBreadcrumbs}`}
+              >
+                <Breadcrumbs
+                  homeBreadcrumb={{ id: 1, name: "All Categories", href: "#" }}
+                  firstBreadcrumb={{
+                    id: 2,
+                    name: "Electronics & Computers",
+                    href: "#",
+                  }}
+                  searchResult={{ id: 3, name: "Computer", href: "#" }}
+                />
+              </div>
+              <div className={styles.searchTermInputContainer}>
+                <Input
+                  className={`${styles.formInput} ${styles.searchTermInput}`}
+                  isSearchBar={true}
+                  suggestions={suggestions}
+                  inputSize="xLarge"
+                  inputType="text"
+                  label="Search Field: "
+                  placeholder="What are you looking for?"
+                  id="searchTerm"
+                  ariaLabel="Search Term"
+                  autoComplete="on"
+                  autoFocus={false}
+                  required={true}
+                  form="Listings Search"
+                  iconSrcLeft=""
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  {...register("searchTerm")}
+                  onChange={(e) => {
+                    setValue("searchTerm", e.target.value, {
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    });
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className={styles.location}>
+              <p className={styles.errorMessage}>
+                {errors.locationSearch?.message}
+              </p>
+              <div
+                className={`${styles.breadcrumbs} ${styles.locationBreadcrumbs}`}
+              >
+                <Breadcrumbs
+                  homeBreadcrumb={{ id: 4, name: "South Africa", href: "#" }}
+                  firstBreadcrumb={{ id: 5, name: "Gauteng", href: "#" }}
+                  secondBreadcrumb={{ id: 6, name: "Johannesburg", href: "#" }}
+                  searchResult={{ id: 7, name: "Sandton", href: "#" }}
+                />
+              </div>
+              <div className={styles.locationInputContainer}>
+                <Input
+                  className={`${styles.formInput} ${styles.locationInput}`}
+                  isSearchBar={true}
+                  suggestions={suggestions}
+                  inputSize="xLarge"
+                  inputType="text"
+                  label="Location: "
+                  placeholder="Search by city, province, township..."
+                  id="LocationSearch"
+                  ariaLabel="Location"
+                  autoComplete="on"
+                  autoFocus={false}
+                  required
+                  form="Listings Search"
+                  iconSrcLeft=""
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  {...register("locationSearch")}
+                  onChange={(e) => {
+                    setValue("locationSearch", e.target.value, {
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    });
+                  }}
+                />
+              </div>
+            </div>
+          </fieldset>
+          <div className={styles.searchButton}>
+            <Button
+              buttonChildren={"Search"}
+              className={styles.search}
+              buttonType="normal"
+              buttonSize="xLarge"
+              name="Search Button"
+              type="submit"
+              ariaLabel="Search Button"
+              autoFocus={false}
+              disabled={isSubmitting}
+            />
           </div>
-  
-          <div className={styles.location}>
-            <p className={styles.errorMessage}>
-              {errors.locationSearch?.message}
-            </p>
-            <div
-              className={`${styles.breadcrumbs} ${styles.locationBreadcrumbs}`}
-            >
-              <Breadcrumbs
-                homeBreadcrumb={{ id: 4, name: "South Africa", href: "#" }}
-                firstBreadcrumb={{ id: 5, name: "Gauteng", href: "#" }}
-                secondBreadcrumb={{ id: 6, name: "Johannesburg", href: "#" }}
-                searchResult={{ id: 7, name: "Sandton", href: "#" }}
-              />
-            </div>
-            <div className={styles.locationInputContainer}>
-              <Input
-                className={`${styles.formInput} ${styles.locationInput}`}
-                isSearchBar={true}
-                suggestions={suggestions}
-                inputSize="xLarge"
-                inputType="text"
-                label="Location: "
-                placeholder="Search by city, province, township..."
-                id="LocationSearch"
-                ariaLabel="Location"
-                autoComplete="on"
-                autoFocus={false}
-                required
-                form="Listings Search"
-                iconSrcLeft=""
-                iconSrcRight="/icons/search.png"
-                iconPosition="right"
-                iconWidth={32}
-                iconHeight={32}
-                {...register("locationSearch")}
-                onChange={(e) => {
-                  setValue("locationSearch", e.target.value, {
-                    shouldDirty: true,
-                    shouldTouch: true,
-                  });
-                }}
-              />
-            </div>
+        </form>
+
+        <div className={styles.filters}>
+          <div ref={tabsRef}>
+            <Tabs
+              tabs={["Make", "Model", "Body Type", "More Filters+"]}
+              condition={!expanded}
+              width={954}
+              altWidth={988}
+              onClickHandlers={[undefined, undefined, undefined, undefined]}
+              dashboard={false}
+            />
           </div>
-        </fieldset>
-        <div className={styles.searchButton}>
-          <Button
-            buttonChildren={"Search"}
-            className={styles.search}
-            buttonType="normal"
-            buttonSize="xLarge"
-            name="Search Button"
-            type="submit"
-            ariaLabel="Search Button"
-            autoFocus={false}
-            disabled={isSubmitting}
-          />
         </div>
-      </form>
-      <DevTool control={control} />
-      <div className={styles.filters}>
-        <div ref={tabsRef}>
-          <Tabs
-            tabs={["Make", "Model", "Body Type", "More Filters+"]}
-            condition={!expanded}
-            width={954}
-            altWidth={988}
-            onClickHandlers={[undefined, undefined, undefined, undefined]}
-            dashboard={false}
-          />
-        </div>
-      </div>
-      <div
-        style={{
-          backgroundColor: "#edf2f7",
-          width: "100vw",
-          height: "7.75rem",
-          borderRadius: "0 0 2rem 2rem",
-          pointerEvents: "none",
-        }}
-        id="blockingDiv"
-      ></div>
-      <div className={styles.listingsContainer}>
         <div
-          ref={sortingContainerRef}
-          className={styles.sortingContainer}
-          id="sortingButtons"
-        >
-          <Tabs
-            tabs={[
-              "Order",
-              "Price Range",
-              "Show Feed/Show Map",
-              expanded ? "Collage View" : "Expanded View",
-            ]}
-            condition={!expanded}
-            width={954}
-            altWidth={altWidth}
-            onClickHandlers={[
-              showSortOptions,
-              showPriceOptions,
-              showFeed,
-              changeViews,
-            ]}
-            dashboard={false}
-          />
-  
-          {sortOptions ? (
-            <ul
-              className={sortOptions ? styles.options : styles.hideOptions}
-              id="sortingOptions"
-              style={{ width: expanded ? "100%" : "112%" }}
-            >
-              {SortData.map((option) => (
-                <li
-                  key={option.id}
-                  className={styles.option}
-                  onClick={handleSelect}
-                  style={{ width: expanded ? "57.24rem" : optionsWidth }}
-                >
-                  <div>
-                    <span className={styles.optionText}>{option.result}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : priceOptions ? (
-            <ul
-              className={priceOptions ? styles.options : styles.hideOptions}
-              id="priceOptions"
-              style={{
-                width: expanded ? "100%" : "112%",
-                borderRadius: expanded
-                  ? "0 0 3.125rem 3.125rem"
-                  : "0 0 5rem 5rem",
-              }}
-            >
-              {PriceRanges.map((element) => {
-                return (
+          style={{
+            backgroundColor: "#edf2f7",
+            width: "100vw",
+            height: "7.75rem",
+            borderRadius: "0 0 2rem 2rem",
+            pointerEvents: "none",
+          }}
+          id="blockingDiv"
+        ></div>
+        <div className={styles.listingsContainer}>
+          <div
+            ref={sortingContainerRef}
+            className={styles.sortingContainer}
+            id="sortingButtons"
+          >
+            <Tabs
+              tabs={[
+                "Order",
+                "Price Range",
+                "Show Feed/Show Map",
+                expanded ? "Collage View" : "Expanded View",
+              ]}
+              condition={!expanded}
+              width={954}
+              altWidth={altWidth}
+              onClickHandlers={[
+                showSortOptions,
+                showPriceOptions,
+                showFeed,
+                changeViews,
+              ]}
+              dashboard={false}
+            />
+
+            {sortOptions ? (
+              <ul
+                className={sortOptions ? styles.options : styles.hideOptions}
+                id="sortingOptions"
+                style={{ width: expanded ? "100%" : "112%" }}
+              >
+                {SortData.map((option) => (
                   <li
-                    key={element.id}
-                    value={element.result}
+                    key={option.id}
                     className={styles.option}
+                    onClick={handleSelect}
                     style={{ width: expanded ? "57.24rem" : optionsWidth }}
                   >
-                    <div style={{ display: "flex", gap: "56px" }}>
-                      <span>{element.result[0]}</span>
-                      <span>-</span>
-                      <span>{element.result[1]}</span>
+                    <div>
+                      <span className={styles.optionText}>{option.result}</span>
                     </div>
                   </li>
-                );
-              })}
-            </ul>
-          ) : (
-            ""
-          )}
-        </div>
-        <div
-          ref={observedDivRef}
-          style={{ height: "1px", visibility: "hidden" }}
-        ></div>
-  
-        <div ref={listingsRef} className={styles.listings}>
-          {expanded ? (
-            <ListingsExpanded
-              avatars={avatars}
-              isDeletable={false}
-              isDashboard={false}
-            />
-          ) : (
-            <PaginatedListingsCollage isDeletable={false} isDashboard={false} />
-          )}
+                ))}
+              </ul>
+            ) : priceOptions ? (
+              <ul
+                className={priceOptions ? styles.options : styles.hideOptions}
+                id="priceOptions"
+                style={{
+                  width: expanded ? "100%" : "112%",
+                  borderRadius: expanded
+                    ? "0 0 3.125rem 3.125rem"
+                    : "0 0 5rem 5rem",
+                }}
+              >
+                {PriceRanges.map((element) => {
+                  return (
+                    <li
+                      key={element.id}
+                      value={element.result}
+                      className={styles.option}
+                      style={{ width: expanded ? "57.24rem" : optionsWidth }}
+                    >
+                      <div style={{ display: "flex", gap: "56px" }}>
+                        <span>{element.result[0]}</span>
+                        <span>-</span>
+                        <span>{element.result[1]}</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              ""
+            )}
+          </div>
+          <div
+            ref={observedDivRef}
+            style={{ height: "1px", visibility: "hidden" }}
+          ></div>
+
+          <div ref={listingsRef} className={styles.listings}>
+            {expanded ? (
+              <ListingsExpanded
+                avatars={avatars}
+                isDeletable={false}
+                isDashboard={false}
+           
+              />
+            ) : (
+              <PaginatedListingsCollage
+                isDeletable={false}
+                isDashboard={false}
+                limit={4}
+                page={1}
+                sortBy="postedOn"
+                sortOrder="desc"
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
   );
 };
 

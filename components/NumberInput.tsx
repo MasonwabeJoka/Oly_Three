@@ -1,8 +1,7 @@
 "use client";
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, forwardRef, Ref } from "react";
 import styles from "./NumberInput.module.scss";
 import useSidebarStore from "@/store/useSidebarStore";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Image from "next/image";
 
@@ -45,9 +44,10 @@ const INPUT_COLOUR_TYPE = {
 
 interface NumberInputProps {
   value: number | string;
+  id: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  min?: number| string;
-  max?: number| string;
+  min?: number | string;
+  max?: number | string;
   step?: number;
   debounceTime?: number;
   className?: string;
@@ -65,11 +65,12 @@ interface NumberInputProps {
   [key: string]: any;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
   inputSize,
   inputColourType = "normal",
   value,
   onChange,
+  id,
   min,
   max,
   step,
@@ -82,7 +83,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   reactHookFormProps,
   error,
   ...restProps
-}) => {
+}, ref) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
 
   const [internalValue, setInternalValue] = useState<string>(value?.toString());
@@ -168,6 +169,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
           type="number"
           value={internalValue}
           onChange={handleInternalChange}
+          id={id}
           min={min}
           max={max}
           step={step}
@@ -177,6 +179,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
           className={inputClass}
           {...reactHookFormProps}
           {...restProps}
+          ref={ref} // Forward the ref to the input element
         />
         <div className={styles.arrows}>
           <div className={styles.upArrow}>
@@ -201,6 +204,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
       </div>
     </div>
   );
-};
+});
+
+NumberInput.displayName = "NumberInput"; // Set a display name for the component
 
 export default NumberInput;

@@ -240,8 +240,6 @@ const Input = forwardRef(
 
     return (
       <div className={styles.container}>
-       
-
         {children}
 
         {label && (
@@ -250,7 +248,7 @@ const Input = forwardRef(
           </label>
         )}
         <div className={styles.inputContainer}>
-        {error && <p className={styles.errorMessage}>{error as string}</p>}
+          {error && <p className={styles.errorMessage}>{error as string}</p>}
           {iconPosition === "left" && iconSrcLeft && (
             <Image
               src={iconSrcLeft}
@@ -284,7 +282,6 @@ const Input = forwardRef(
                 <div
                   className={styles.rightIconContainer}
                   onClick={clearInputAndSuggestions}
-                  
                 >
                   {iconSrcRight ? (
                     <Image
@@ -346,5 +343,28 @@ const Input = forwardRef(
   }
 );
 
-
 export default Input;
+
+{/* <Input
+      className={styles.accountName}
+      isSearchBar={false}
+      inputType="text"
+      inputSize="large"
+      iconSrcRight="/icons/search.png"
+      iconPosition="right"
+      iconWidth={32}
+      iconHeight={32}
+      label="Account Name"
+      id="searchTerm"
+      placeholder="Enter account holder's name"
+      ariaLabel="Account Name"
+      autoComplete="off"
+      required
+      {...register("searchTerm")}
+      onChange={(e) => {
+        setValue("searchTerm", e.target.value, {
+          shouldDirty: true,
+          shouldTouch: true,
+        });
+      }}
+/>; */}

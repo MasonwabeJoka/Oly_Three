@@ -6,7 +6,6 @@ import Link from "next/link";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { useModalStore } from "@/store/modalStore";
 
 type FormValues = {
@@ -159,7 +158,6 @@ const HeroSectionSearch = () => {
           </div>
         </div>
       </form>
-      <DevTool control={control} />
     </>
   );
 };

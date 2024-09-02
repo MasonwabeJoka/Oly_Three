@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import { Ad } from "@/sanity/Types/Ad";
 import styles from "./ListingsCollage.module.scss";
+import Spinner from "./Spinner";
 
 type ListingsCollageProps = {
   isDeletable?: boolean;
@@ -21,6 +22,10 @@ type ListingsCollageProps = {
   isDashboard: boolean;
   isFeed?: boolean;
   cardSize?: "standard" | "small" | "large";
+  limit: number;
+  page?: number;
+  sortOrder: "asc" | "desc";
+  sortBy: string;
 };
 
 const ListingsCollage = ({
@@ -31,12 +36,16 @@ const ListingsCollage = ({
   isDashboard,
   isFeed,
   cardSize,
+  limit,
+  page = 1,
+  sortOrder,
+  sortBy,
 }: ListingsCollageProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const { ads, fetchAds, imageUrls, hasMore } = useFetchAdStore();
   const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
   const [adImages, setAdImages] = useState<SanityImage[]>([]);
-  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(page);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { ref, inView } = useInView({
@@ -51,21 +60,21 @@ const ListingsCollage = ({
     const fetchData = async () => {
       setLoading(true);
       await fetchAds({
-        limit: 4,
-        page,
+        limit: limit,
+        page: pageNumber,
         offset: 0,
-        sortOrder: "asc",
-        sortBy: "postedOn",
+        sortBy: sortBy,
+        sortOrder: sortOrder,
       }); // Fetch ads with parameters
       setLoading(false);
     };
 
     fetchData();
-  }, [page, fetchAds]);
+  }, [pageNumber, fetchAds]);
 
   useEffect(() => {
     if (inView && hasMore) {
-      setPage((prevPage) => prevPage + 1);
+      setPageNumber((prevPage) => prevPage + 1);
     }
   }, [inView, hasMore]);
 
@@ -156,13 +165,7 @@ const ListingsCollage = ({
         </Masonry>
         <div ref={ref} className={styles.loading}>
           {loading && hasMore ? (
-            <Image
-              src="/spinner.svg"
-              alt="spinner"
-              width={56}
-              height={56}
-              className={styles.spinner}
-            />
+            <Spinner />
           ) : null}
         </div>
       </section>

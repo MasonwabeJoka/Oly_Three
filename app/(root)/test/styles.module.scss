@@ -3,10 +3,39 @@
 @import "@/utils/breakpoints.scss";
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+  .reviewSectionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: bisque;
+    .title {
+      font-size: $h3;
+      text-align: center;
+    }
+
+    .description {
+      text-align: center;
+    }
+
+    .reviewSection {
+
+      .section {
   
+      }
+    }
+
+  }
+  
+
+
+    @include larger-than(mobile) {
+        width: rem(1098);
+      }
 }
-
-.customNumberInput {
-
-}
-

@@ -9,7 +9,7 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
+
 
 type FormValues = z.infer<typeof passwordSchema>;
 
@@ -136,8 +136,7 @@ const PasswordSettings = () => {
         />
       </div>
 
-      {/* DevTool for debugging form state */}
-      <DevTool control={control} />
+ 
     </form>
   );
 };

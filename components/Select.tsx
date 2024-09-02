@@ -1,5 +1,5 @@
 import styles from "./Select.module.scss";
-import { useState, useRef, useEffect } from "react";
+import { useState, forwardRef, useRef, useEffect } from "react";
 import Icon from "@/components/Icon";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
@@ -13,7 +13,7 @@ interface SelectProps {
     | keyof typeof SELECT_SIZE.dashboard;
   selectColourType?: keyof typeof SELECT_COLOUR_TYPE;
   label: string;
-  options: string[];
+  options: string[] | { label: string; value: any }[];
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   id: string;
@@ -70,149 +70,155 @@ const SELECT_COLOUR_TYPE = {
   "": "",
 };
 
-const Select = ({
-  value,
-  options,
-  reactHookFormProps,
-  error,
-  selectSize,
-  selectColourType = "normal",
-  className,
-  legend,
-  label,
-  autoComplete,
-  id,
-  currentValue,
-  setterValue,
-  name,
-  ariaLabel,
-  required,
-  selectDescription,
-  onChange,
-  onBlur,
-  children,
-  dashboard = false,
-  ...otherProps
-}: SelectProps) => {
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const [selectedOption, setSelectedOption] = useState<string>(currentValue);
-  const selectRef = useRef<HTMLDivElement | null>(null);
-  const [showOptions, setShowOptions] = useState<boolean>(false);
+const Select = forwardRef<HTMLDivElement, SelectProps>(
+  (
+    {
+      value,
+      options,
+      reactHookFormProps,
+      error,
+      selectSize,
+      selectColourType = "normal",
+      className,
+      legend,
+      label,
+      autoComplete,
+      id,
+      currentValue,
+      setterValue,
+      name,
+      ariaLabel,
+      required,
+      selectDescription,
+      onChange,
+      onBlur,
+      children,
+      dashboard = false,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+    const [selectedOption, setSelectedOption] = useState<string>(currentValue);
+    const selectRef = useRef<HTMLDivElement | null>(null);
+    const [showOptions, setShowOptions] = useState<boolean>(false);
 
-  useOnClickOutside(selectRef, () => setShowOptions(false));
+    useOnClickOutside(selectRef, () => setShowOptions(false));
 
-  useEffect(() => {
-    const useEscKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setShowOptions(false);
+    useEffect(() => {
+      const useEscKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setShowOptions(false);
+        }
+      };
+
+      document.addEventListener("keydown", useEscKey);
+      return () => {
+        document.removeEventListener("keydown", useEscKey);
+      };
+    }, []);
+
+    const handleSelect = (optionText: string) => {
+      setSelectedOption(optionText);
+      setShowOptions(false);
+
+      // Trigger onChange event with the new value using type assertion
+      if (onChange) {
+        onChange({
+          target: { value: optionText, name } as unknown as EventTarget &
+            HTMLSelectElement,
+        } as React.ChangeEvent<HTMLSelectElement>);
       }
     };
 
-    document.addEventListener("keydown", useEscKey);
-    return () => {
-      document.removeEventListener("keydown", useEscKey);
-    };
-  }, []);
+    let sizeClass = "";
 
-  const handleSelect = (optionText: string) => {
-    setSelectedOption(optionText);
-    setShowOptions(false);
-
-    // Trigger onChange event with the new value using type assertion
-    if (onChange) {
-      onChange({
-        target: { value: optionText, name } as unknown as EventTarget &
-          HTMLSelectElement,
-      } as React.ChangeEvent<HTMLSelectElement>);
-    }
-  };
-
-  let sizeClass = "";
-
-  if (isSidebarOpen) {
-    sizeClass = SELECT_SIZE.feed[selectSize];
-  } else {
-    if (dashboard) {
-      sizeClass = SELECT_SIZE.dashboard[selectSize];
+    if (isSidebarOpen) {
+      sizeClass = SELECT_SIZE.feed[selectSize];
     } else {
-      sizeClass = SELECT_SIZE.regular[selectSize];
+      if (dashboard) {
+        sizeClass = SELECT_SIZE.dashboard[selectSize];
+      } else {
+        sizeClass = SELECT_SIZE.regular[selectSize];
+      }
     }
-  }
 
-  const selectClass = `${styles.select}  ${sizeClass} ${
-    selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-  } ${className}`;
+    const selectClass = `${styles.select} ${sizeClass} ${
+      selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
+    } ${className}`;
 
-  return (
-    <div ref={selectRef}>
-      <div className={`${styles.selectMenu}`}>
-        {error && <p className={styles.errorMessage}>{error as string}</p>}
+    return (
+      <div ref={selectRef}>
+        <div className={`${styles.selectMenu}`}>
+          {error && <p className={styles.errorMessage}>{error as string}</p>}
 
-        <div
-          className={styles.selectContainer}
-          onClick={() => setShowOptions(!showOptions)}
-          // onChange={onChange}
-          // onBlur={onBlur}
-          // ref={selectRef}
-          {...(reactHookFormProps ?? {})}
-        >
-          <div className={selectClass}>
-            <p
-              style={{
-                color: selectedOption === currentValue ? "#67787c" : "#434b4d",
-              }}
-            >
-              {selectedOption}
-            </p>
+          <div
+            className={styles.selectContainer}
+            onClick={() => setShowOptions(!showOptions)}
+            {...(reactHookFormProps ?? {})}
+          >
+            <div className={selectClass}>
+              <p
+                style={{
+                  color:
+                    selectedOption === currentValue ? "#67787c" : "#434b4d",
+                }}
+              >
+                {selectedOption}
+              </p>
+            </div>
+
+            <span className={styles.dropdownIconContainer} ref={selectRef}>
+              <Icon
+                className={`${styles.dropdownIconOpen}  ${styles.dropdownIcon}`}
+                src="/icons/chevron-down.png"
+                alt="chevron"
+                width={28}
+                height={28}
+              />
+            </span>
           </div>
-
-          <span className={styles.dropdownIconContainer} ref={selectRef}>
-            <Icon
-              className={`${styles.dropdownIconOpen}  ${styles.dropdownIcon}`}
-              src="/icons/chevron-down.png"
-              alt="chevron"
-              width={28}
-              height={28}
-            />
-          </span>
         </div>
-      </div>
-      {showOptions && (
+
         <ul className={showOptions ? styles.options : styles.hideOptions}>
-          {options.map((option, index) => (
-            <li
-              key={option?.id || index}
-              className={sizeClass}
-              onClick={() => {
-                handleSelect(option);
-              }}
-              style={{
-                marginBottom: "0.5rem",
-              }}
-            >
-              <div className={styles.option}>
-                <span className={styles.optionText}>{option}</span>
-              </div>
-            </li>
-          ))}
+          {options.map((option, index) => {
+            const label = typeof option === "string" ? option : option.label;
+            const value = typeof option === "string" ? option : option.value;
+            return (
+              <li
+                key={index}
+                className={sizeClass}
+                onClick={() => handleSelect(label)}
+                style={{
+                  marginBottom: "0.5rem",
+                }}
+              >
+                <div className={styles.option}>
+                  <span className={styles.optionText}>{label}</span>
+                </div>
+              </li>
+            );
+          })}
         </ul>
-      )}
-    </div>
-  );
-};
+      </div>
+    );
+  }
+);
+
+Select.displayName = "Select"; // Set displayName for better debugging
 
 export default Select;
 
 {
   /* <Select
-  options={[]}
-  currentValue="Select your province"
-  selectSize="large"
-  label="Provinces"
-  id="provinces"
-  name="provinces"
-  ariaLabel="Provinces"
-  autoFocus={false}
-  required={true}
+    options={[]}
+    initialValue="Select your province"
+    selectSize="large"
+    label="Provinces"
+    id="provinces"
+    name="provinces"
+    ariaLabel="Provinces"
+    autoFocus={false}
+    required={false}
 />; */
 }

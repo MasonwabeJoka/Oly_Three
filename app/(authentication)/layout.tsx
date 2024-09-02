@@ -1,7 +1,7 @@
 import styles from "./layout.module.scss";
 import { ClerkProvider } from "@clerk/nextjs";
 import Outfit from "next/font/local";
-import ErrorBoundary from "@/utils/ErrorBoundary";
+
 
 export const metadata = {
   title: "Access OLY: Sign In or Join Today",

@@ -8,15 +8,19 @@
   justify-content: center;
   align-items: center;
 
+  @include larger-than(mobile) {
+    width: rem(1098);
+  }
+
   .title {
     margin-top: rem(52);
     margin-bottom: rem(32);
     color: $danger;
-    font-size: $body;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: rem(20);
 
     @include larger-than(mobile) {
-      font-size: $h4;
+
       margin-top: rem(224);
       margin-bottom: rem(48);
     }

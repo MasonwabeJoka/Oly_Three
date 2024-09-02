@@ -1,50 +1,36 @@
+import { FormWrapper } from "./FormWrapper";
 import styles from "./UploadPhotos.module.scss";
-import Link from "next/link";
-import Button from "@/components/Buttons";
 import UploadBox from "@/components/UploadBox";
+import UploadsSection from "../components/UploadsSection";
+import Button from "@/components/Buttons";
 
-const UploadPhotos = () => {
+const UploadPhotos = ({ goTo }: { goTo: (index: number) => void }) => {
   return (
-    <div className={styles.container}>
-      <h4 className={styles.title}>Upload Photos</h4>
-      <div className={styles.uploadBox}>
-        <UploadBox mediaType="photo" required={true} accept="image/*" />
+    <FormWrapper title="Upload Photos">
+      <div className={styles.container}>
+        <div className={styles.uploadBox}>
+          <UploadBox mediaType="photo" required={true} accept="image/*" />
+        </div>
+        <div className={styles.uploadedPhotos}>
+          <UploadsSection />
+        </div>
+        <div className={styles.buttonContainer}>
+          <Button
+            className={styles.reorderButton}
+            buttonChildren="Reorder Photos"
+            buttonType="normal"
+            buttonSize="large"
+            name="reorder-btn"
+            type="button"
+            ariaLabel="Reorder Photos Button"
+            autoFocus={false}
+            disabled={false}
+            dashboard
+            onClick={() => goTo(14)}
+          />
+        </div>
       </div>
-      {/* <div className={styles.buttons}>
-        <div className={styles.buttonContainer}>
-          <Link href="/dashboard/my-ads/promote-your-ads">
-            <Button
-              className={styles.proceedButton}
-              buttonChildren="Proceed"
-              buttonType="normal"
-              buttonSize="large"
-              name="proceed-btn"
-              type="button"
-              ariaLabel="Proceed Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-            />
-          </Link>
-        </div>
-        <div className={styles.buttonContainer}>
-          <Link href="/dashboard/post-your-ad/upload-media">
-            <Button
-              className={styles.backButton}
-              buttonChildren="Back"
-              buttonType="normal"
-              buttonSize="large"
-              name="back-btn"
-              type="button"
-              ariaLabel="Back Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-            />
-          </Link>
-        </div>
-      </div> */}
-    </div>
+    </FormWrapper>
   );
 };
 

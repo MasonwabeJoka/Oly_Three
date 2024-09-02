@@ -11,7 +11,6 @@ import Button from "@/components/Buttons";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
 import { featuresData } from "@/data/FeaturesData";
-import { DevTool } from "@hookform/devtools";
 import { detailsFormSchema } from "@/lib/validations/formValidations";
 import EditModeForm from "@/components/forms/EditModeForm";
 import SelectedDetail from "./SelectedDetail";
@@ -233,7 +232,6 @@ const Details = () => {
           </nav>
         </div>
       </form>
-      <DevTool control={control} />
     </div>
   );
 };

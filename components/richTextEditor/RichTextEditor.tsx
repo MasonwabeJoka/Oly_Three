@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RichTextEditor.module.scss";
 import "./richTextEditorGlobalStyles.scss";
-import {UseFormRegisterReturn} from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import FroalaEditor from "react-froala-wysiwyg";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/css/froala_editor.pkgd.min.css";
@@ -10,27 +10,20 @@ import "froala-editor/js/plugins/paragraph_style.min.js";
 import "froala-editor/js/plugins/lists.min.js";
 import "froala-editor/js/plugins/emoticons.min.js";
 import "froala-editor/js/plugins/char_counter.min.js";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-// Todo: Show message if pasted text exceeds max character count.
-// Todo: Change the colour of selected buttons.
-interface RichTextEditorProps {
-  maxCharacters: number;
-  reactHookFormProps?: UseFormRegisterReturn;
-  error?: string;
-}
+const RichTextEditor = ({ name, setValue, content, error }) => {
+  const { register } = useFormContext();
+  const [isClient, setIsClient] = useState(false);
 
-const RichTextEditor: React.FC<RichTextEditorProps> = ({ maxCharacters, reactHookFormProps, error }) => {
-  const [warningMessage, setWarningMessage] = useState("");
-  const [content, setContent] = useState("");
+  useEffect(() => {
+    register(name, { required: true });
+  }, [register, name]);
 
-  const handleModelChange = (model: any) => {
-    setContent(model);
-    if (model.length > maxCharacters) {
-      setWarningMessage(`You have exceeded the maximum character limit of ${maxCharacters}.`);
-    } else {
-      setWarningMessage("");
-    }
-  };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const config = {
     heightMin: 240,
@@ -51,8 +44,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ maxCharacters, reactHoo
       "formatUL",
       "spellChecker",
       "|",
-      "|",
-      "|",
       "undo",
       "redo",
     ],
@@ -69,29 +60,25 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ maxCharacters, reactHoo
     charCounterCount: true,
     pastePlain: true,
     fontFamilyDefaultSelection: "Outfit",
-    events: {
-      'charCounter.update': function (count) {
-        if (count > maxCharacters) {
-          setWarningMessage(`You have exceeded the maximum character limit of ${maxCharacters}.`);
-        } else {
-          setWarningMessage("");
-        }
-      }
-    }
   };
 
-  return (
-    <div id="editor" className={styles.container}>
-        {warningMessage && <div className={styles.warning}>{warningMessage}</div>}
-      <FroalaEditor
-        tag="textarea"
-        config={config}
-        model={content}
-        onModelChange={handleModelChange}
-      />
-    
+  
+
+  return isClient ? (
+    <div className={styles.container}>
+      {error?.message && <p className={styles.errorMessage}>{error.message}</p>}
+      <div id="editor" className={styles.editorContainer}>
+        <FroalaEditor
+          tag="textarea"
+          config={config}
+          model={content || ""} // Ensure model is never undefined
+          onModelChange={(model) =>
+            setValue(name, model, { shouldValidate: true })
+          }
+        />
+      </div>
     </div>
-  );
+  ) : null;
 };
 
 export default RichTextEditor;

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 type Props = {
   showModal: boolean;
   setShowModal: (value: boolean) => void;
-  modalContent: JSX.Element;
+  modalContent: JSX.Element | null;
   dashboard?: boolean;
 };
 

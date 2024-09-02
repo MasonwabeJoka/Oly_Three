@@ -10,7 +10,6 @@ import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
 import { ImageFile } from "@/sanity/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
 import Image from "next/image";
-import { useInView } from "react-intersection-observer";
 
 type PaginatedListingsCollageProps = {
   isDeletable?: boolean;
@@ -20,6 +19,10 @@ type PaginatedListingsCollageProps = {
   isDashboard: boolean;
   isFeed?: boolean;
   cardSize?: "standard" | "small" | "large";
+  limit: number;
+  page?: number;
+  sortOrder: "asc" | "desc";
+  sortBy: string;
 };
 
 const PaginatedListingsCollage = ({
@@ -30,17 +33,18 @@ const PaginatedListingsCollage = ({
   isDashboard,
   isFeed,
   cardSize,
+  limit,
+  page = 1,
+  sortOrder,
+  sortBy,
 }: PaginatedListingsCollageProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const { ads, fetchAds, imageUrls, hasMore } = useFetchAdStorePaginated();
   const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
   const [adImages, setAdImages] = useState<SanityImage[]>([]);
-  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(page);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-  });
 
   useEffect(() => {
     setIsClient(true);
@@ -49,21 +53,25 @@ const PaginatedListingsCollage = ({
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await fetchAds({
-        limit: 5,
-        page,
-        offset: 0,
-        sortOrder: "asc",
-        sortBy: "postedOn",
-      }); // Fetch ads with parameters
+
+      if (isClient) {
+        await fetchAds({
+          limit: limit,
+          page: pageNumber,
+          offset: 0,
+          sortBy: sortBy,
+          sortOrder: sortOrder,
+        });
+      }
+
       setLoading(false);
     };
 
     fetchData();
-  }, [page, fetchAds]);
+  }, [isClient, pageNumber]);
 
-  const handleNextPage = () => setPage((prev) => prev + 1);
-  const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setPageNumber((prev) => prev + 1);
+  const handlePrevPage = () => setPageNumber((prev) => Math.max(prev - 1, 1));
 
   useEffect(() => {
     const getImageIds = async () => {
@@ -107,8 +115,6 @@ const PaginatedListingsCollage = ({
       })
       .filter((url): url is string => typeof url === "string");
 
-      
-
     return (
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
@@ -139,9 +145,19 @@ const PaginatedListingsCollage = ({
     );
   });
 
-  if (isClient) {
-    return (
-      <section className={styles.container}>
+  return (
+    <section className={styles.container}>
+      {loading && hasMore ? (
+        <div className={styles.loading}>
+          <Image
+            src="/spinner.svg"
+            alt="spinner"
+            width={56}
+            height={56}
+            className={styles.spinner}
+          />
+        </div>
+      ) : (
         <Masonry
           className={styles.listingsContainer}
           breakpointCols={breakpointColumnsObj}
@@ -152,31 +168,18 @@ const PaginatedListingsCollage = ({
         >
           {cards}
         </Masonry>
-        <div ref={ref} className={styles.loading}>
-          {loading && hasMore ? (
-            <Image
-              src="/spinner.svg"
-              alt="spinner"
-              width={56}
-              height={56}
-              className={styles.spinner}
-            />
-          ) : null}
-        </div>
-        <div className={styles.paginationControls}>
-        <button onClick={handlePrevPage} disabled={page === 1}>
+      )}
+
+      <div className={styles.paginationControls}>
+        <button onClick={handlePrevPage} disabled={pageNumber === 1}>
           Previous
         </button>
         <button onClick={handleNextPage} disabled={loading}>
           Next
         </button>
       </div>
-      
-      </section>
-    );
-  } else {
-    return null;
-  }
+    </section>
+  );
 };
 
 export default PaginatedListingsCollage;

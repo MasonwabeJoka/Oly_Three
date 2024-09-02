@@ -20,26 +20,9 @@
     flex-direction: column;
     align-items: center;
     @include larger-than(mobile) {
-      margin-top: rem(56);
-    }
-    .titleContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .title {
-        margin-top: rem(52);
-        margin-bottom: rem(32);
-        color: $danger;
-        font-weight: bold;
-        font-size: $body;
 
-        @include larger-than(mobile) {
-          font-size: $h4;
-          margin-top: rem(124);
-          margin-bottom: rem(48);
-        }
-      }
     }
+   
 
     .formElements {
       display: flex;
@@ -57,7 +40,7 @@
         margin-bottom: rem(20);
       }
 
-      .selecteDetailContainer {
+      .selectDetailContainer {
         margin-bottom: rem(20);
       }
 
@@ -74,7 +57,7 @@
         margin-bottom: rem(48);
 
         .chosenDetailTitle {
-          color: $black-four;
+          color: $danger;
           margin-top: rem(24);
           margin-bottom: rem(8);
           text-align: center;

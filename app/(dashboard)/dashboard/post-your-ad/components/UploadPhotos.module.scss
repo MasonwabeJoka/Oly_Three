@@ -7,7 +7,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+ 
+  @include larger-than(mobile) {
+    width: rem(1098);
+  }
+
 
   .title {
     margin-bottom: rem(48);
@@ -16,15 +20,16 @@
   }
 
   .uploadBox {
+    margin-bottom: rem(64);
   }
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: rem(64);
 
-    .buttonContainer {
-      margin-bottom: rem(20);
-    }
+  .uploadedPhotos {
+
+    padding: 0 rem(100);
+    width: 100%;
+  }
+
+  .buttonContainer {
+    margin-bottom: rem(16);
   }
 }

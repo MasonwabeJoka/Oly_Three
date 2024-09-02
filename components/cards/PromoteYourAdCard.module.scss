@@ -35,7 +35,9 @@
     align-items: center;
     width: 100%;
 
-    .icon {
+    .iconContainer {
+      box-shadow: $shadow-one;
+      border-radius: 100%;
     }
     .formControls {
       display: flex;
@@ -47,10 +49,11 @@
       .setPromotionDurationContainer {
         margin-bottom: rem(20);
         .setPromotionDuration {
-          background-color: $white-three;
+          background-color: $white-one;
         }
       }
       .moreInfoButton {
+        background-color: $white-one;
       }
     }
 
@@ -64,6 +67,7 @@
       height: rem(72);
       border-radius: 50%;
       background-color: $white-one;
+      box-shadow: $shadow-one;
 
       .price {
         font-weight: 600;

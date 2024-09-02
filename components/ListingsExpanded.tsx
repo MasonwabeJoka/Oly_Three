@@ -2,7 +2,7 @@ import styles from "./ListingsExpanded.module.scss";
 import { useEffect, useState } from "react";
 import { listingsData } from "@/data/ListingsData";
 import { urlFor } from "@/lib/client";
-import { fetchAds } from "@/sanity/actions/adsActions";
+import { fetchAds } from "@/sanity/actions/fetchAds";
 import { Ad } from "@/sanity/Types/Ad";
 import { fetchListings } from "@/sanity/sanity_utils/tempActions";
 import AdCard from "./AdCard";

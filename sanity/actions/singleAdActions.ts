@@ -8,20 +8,21 @@ const client = createClient(ClientConfig);
 
 export const fetchAd = async (slug: string): Promise<Ad | undefined> => {
     try {
-      const ad = await client.fetch(groq`*[_type == "ad" && slug.current == $slug][0]{
+      const ad = await client.fetch(groq`*[_type == "ad" && slug.current == $slug && approvedForSale == "approved"][0]{
         _id,
         "slug": slug.current,
         title,
         description, 
         price,
         pricingOption,
+        approvedForSale,
         images[]{
         _key,
-        "url": asset->url,
-        "aspectRatio": asset->metadata.dimensions.aspectRatio,
-        "width": asset->metadata.dimensions.width,
-        "height": asset->metadata.dimensions.height,
-        alt
+        "alt": *[_type == "imageFile" && _id == ^._ref][0].image.alt,
+        "aspectRatio": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.aspectRatio,
+        "width": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.width,
+        "height": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.height,
+        "url": *[_type == "imageFile" && _id == ^._ref][0].image.asset->url
       },
         featuredImage,
         postedOn,

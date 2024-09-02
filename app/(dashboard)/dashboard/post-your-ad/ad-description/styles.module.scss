@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  @include larger-than(mobile) {
+    width: rem(1098);
+  }
+
 
   .pageTitle {
     margin-top: rem(52);

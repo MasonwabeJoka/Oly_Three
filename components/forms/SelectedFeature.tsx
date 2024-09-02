@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "@/components/Input";
 import Button from "@/components/Buttons";
-import { DevTool } from "@hookform/devtools";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import styles from "./SelectedFeature.module.scss";
 
@@ -65,7 +64,7 @@ const SelectedFeature = ({
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div key={id} className={styles.selectedDetailContainer}>
           <p className={styles.selectedDetailTitle}>{detail}</p>
           <p className={styles.selectedDetailDescription}>{description}</p>
@@ -114,9 +113,8 @@ const SelectedFeature = ({
             />
           </div>
         </div>
-      </form>
-      <DevTool control={control} />
-      {/* Ensure to pass form.control to DevTool */}
+      </div>
+
     </>
   );
 };

@@ -84,38 +84,13 @@ export const profileSchema = z.object({
 
 
 
-// export const multiStepFormSchema = z.object({
-//   condition: z.string().optional(),
-//   selectDetail: z.string().optional(),
 
-//   detail: z.string().optional(),
+export const multiStepFormSchema = z.object({ 
+  category: z.string({
+    required_error: "Please select a category.",
+    invalid_type_error: "Category must be a string.",
+  }),
 
-//   moreDetails: z.string().optional(),
-
-//   editDetail: z.string().optional(),
-
-//   selectFeature: z.string().optional(),
-
-//   feature: z.string().optional(),
-
-//   priceType:z.string().optional(),
-
-//   price: z.string().optional(),
-
-//   title: z.string().optional(),
-
-//   description: z.string().optional(),
-
-//   province: z.string().optional(),
-
-//   city: z.string().optional(),
-
-//   suburb: z.string().optional(),
-
-//   promotionDuration: z.string().optional(),
-// });
-
-export const multiStepFormSchema = z.object({
   condition: z.string({
     required_error: "Please select a condition.",
     invalid_type_error: "Condition must be a string.",
@@ -125,12 +100,7 @@ export const multiStepFormSchema = z.object({
     message: "Please select a valid condition.",
   }),
 
-  selectDetail: z.string({
-    required_error: "Please select a condition.",
-    invalid_type_error: "Condition must be a string.",
-  }).refine((val) => val !== "", {
-    message: "Please select an option.",
-  }),
+  selectDetail: z.string().optional(),
 
   detail: z.string({
     required_error: "Please select a condition.",
@@ -152,19 +122,6 @@ export const multiStepFormSchema = z.object({
     message: "Feature Error Message",
   }),
 
-  priceType: z.string({
-    required_error: "Please select a condition.",
-    invalid_type_error: "Condition must be a string.",
-  })
-
-  .refine((val) => val !== "" && val !== "Condition", {
-    message: "Price type error message.",
-  }),
-
-  // price: z.string({
-  //   required_error: "Price is required.",
-  //   invalid_type_error: "Price must be a number.",
-  // }),
   price: z.number({
     required_error: "Price is required.",
     invalid_type_error: "Price must be a number.",
@@ -172,15 +129,49 @@ export const multiStepFormSchema = z.object({
     message: "Price must be greater than 0.",
   }),
 
+  pricingOption: z.string({
+    required_error: "Please select a pricing option.",
+    invalid_type_error: "Pricing option must be a string.",
+  }).refine((val) => val !== "" && val !== "Select Pricing Option", {
+    message: "Please select a valid pricing option.",
+  }),
+
+  bankName: z.string({
+    required_error: "Please enter a bank name.",
+    invalid_type_error: "Bank name must be a string.",
+  }).min(2, "Bank name must be at least 2 characters long."),
+
+  accountName: z.string({
+    required_error: "Please enter an account name.",
+    invalid_type_error: "Account name must be a string.",
+  }).min(2, "Account name must be at least 2 characters long."),
+
+  accountNumber: z.string({
+    required_error: "Please enter an account number.",
+    invalid_type_error: "Account number must be a string.",
+  }).regex(/^\d{10,}$/, "Account number must be at least 10 digits long."),
+
   title: z.string({
     required_error: "Title is required.",
     invalid_type_error: "Title must be a string.",
   }).min(5, "Title must be at least 5 characters long."),
 
-  description: z.string({
-    required_error: "Description is required.",
-    invalid_type_error: "Description must be a string.",
-  }).min(10, "Description must be at least 10 characters long."),
+  description: z
+  .string()
+  .max(600, "Description must be at most 600 characters long")
+  .transform((val) => val.replace(/<[^>]*>?/gm, "")), // Then transform to remove HTML tags
+
+  image: z.string().optional().refine((val) => val !== "", {
+    message: "Please upload an image.",
+  }),
+
+  video: z.string().optional().refine((val) => val !== "", {
+    message: "Please upload a video.",
+  }),
+
+  attachment: z.string().optional().refine((val) => val !== "", {
+    message: "Please upload an attachment.",
+  }),
 
   province: z.string({
     required_error: "Please select a province.",
@@ -203,12 +194,48 @@ export const multiStepFormSchema = z.object({
     message: "Please select a valid suburb.",
   }),
 
+  customLocation: z.string().optional().refine((val) => val !== "", {
+    message: "Please provide a custom location.",
+  }),
+
   promotionDuration: z.string({
     required_error: "Please select a promotion duration.",
     invalid_type_error: "Promotion duration must be a string.",
   }).refine((val) => val !== "Select Duration", {
     message: "Please select a valid promotion duration.",
   }),
+
+  "Reason for Selling": z.string().optional(),
+  "Accessories Included": z.string().optional(),
+  "Warranty Information": z.string().optional(),
+  "Ownership": z.string().optional(),
+  "Condition": z.string().optional(),
+  "History": z.string().optional(),
+  "Customizations": z.string().optional(),
+  "Maintenance History": z.string().optional(),
+  "Compatibility": z.string().optional(),
+  "Original Packaging": z.string().optional(),
+  "Usage History": z.string().optional(),
+  "Storage": z.string().optional(),
+  "Original Purchase Date": z.string().optional(),
+  "Upgrades": z.string().optional(),
+  "Additional Features": z.string().optional(),
+  "Service Records": z.string().optional(),
+  "User Manual Availability": z.string().optional(),
+  "Manufacturer Support": z.string().optional(),
+  "Compatibility with Accessories": z.string().optional(),
+  "Packaging Condition": z.string().optional(),
+  "Product History": z.string().optional(),
+  "Transferability": z.string().optional(),
+  "Pet/Smoke Exposure": z.string().optional(),
+  "Regulatory Compliance": z.string().optional(),
+  "Special Features": z.string().optional(),
+  "Documentation": z.string().optional(),
+  "Certification": z.string().optional(),
+  "Age": z.string().optional(),
+  "Environmental Impact": z.string().optional(),
+  "Known Issues": z.string().optional(),
+  "Define Your Own Detail": z.string().optional(),
 });
 
 

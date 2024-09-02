@@ -1,47 +1,25 @@
 "use client";
 import styles from "./TitleAndDescription.module.scss";
-import Link from "next/link";
 import Input from "@/components/Input";
 import Button from "@/components/Buttons";
-import { useState, useEffect } from "react";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import RichTextEditor from "@/components/richTextEditor/RichTextEditor";
-import { v4 as uuidv4 } from "uuid";
-import useFeedStore from "@/store/feedStore";
+import { useFormContext } from "react-hook-form";
+import { FormWrapper } from "./FormWrapper";
 
 const TitleAndDescription = () => {
-  const [isFocused, setIsFocused] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useFormContext();
 
-  const [content, setContent] = useState<string>("");
+  const content = watch("description") || "";
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-
-    const data = {
-      id: uuidv4(),
-      content: content,
-    };
-
-    const existingDataString = localStorage.getItem("myData");
-    const existingData = existingDataString
-      ? JSON.parse(existingDataString)
-      : [];
-    const updatedData = [...existingData, data];
-    localStorage.setItem("myData", JSON.stringify(updatedData));
-    setContent("");
-  };
-
-  const handleContentChange = (content: any) => {
-    setContent(content);
-  };
-
-  const onBlur = (e) => {
-    if (e.target.value === "") setIsFocused(false);
-  };
   return (
-    <MaxWidthWrapper className={styles.maxWidthWrapper}>
-      <form onSubmit={handleSubmit} className={styles.container}>
-        <legend className={styles.pageTitle}>Ad Description</legend>
+    <FormWrapper title="Ad Description">
+      <div className={styles.container}>
         <div className={styles.titleContainer}>
           <Input
             className={styles.title}
@@ -50,7 +28,6 @@ const TitleAndDescription = () => {
             placeholder="Write a title for your ad."
             label="Write a title for your ad"
             id="title"
-            name="title"
             ariaLabel="Title Field"
             autoFocus={false}
             autoComplete="off"
@@ -59,48 +36,20 @@ const TitleAndDescription = () => {
             iconHeight={32}
             disabled={false}
             required={true}
+            error={errors.title?.message as string} // Extract message as string
+            {...register("title")} // Spread register props (including name)
           />
         </div>
         <div className={styles.descriptionContainer}>
-          <RichTextEditor maxCharacters={600}/>
-        </div>
-
-        {/* <Link
-          href="/dashboard/post-your-ad/upload-media"
-          className={styles.proceedButtonContainer}
-        >
-          <Button
-            className={styles.proceedButton}
-            buttonChildren="Proceed"
-            buttonType="primary"
-            buttonSize="large"
-            name="proceed-btn"
-            type="button"
-            ariaLabel="Proceed Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard
+          <RichTextEditor
+            name="description"
+            setValue={setValue}
+            content={content}
+            error={errors?.description}
           />
-        </Link>
-
-        <div className={styles.backButtonContainer}>
-          <Link href="/dashboard/post-your-ad/price">
-            <Button
-              className={styles.backButton}
-              buttonChildren="Back"
-              buttonType="normal"
-              buttonSize="large"
-              name="back-btn"
-              type="button"
-              ariaLabel="Back Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-            />
-          </Link>
-        </div> */}
-      </form>
-    </MaxWidthWrapper>
+        </div>
+      </div>
+    </FormWrapper>
   );
 };
 

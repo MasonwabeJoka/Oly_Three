@@ -1,4 +1,4 @@
-import { Ad } from '@/payload.types'
+import { Ad } from '@/sanity/Types/Ad'
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
 
@@ -31,7 +31,7 @@ export const useCart = create<CartState>()(
             }),
             // REMOVE
             removeItem: (id) => set((state)=> ({
-                items: state.items.filter((item) => item.ad.id !== id)
+                items: state.items.filter((item) => item.ad._id !== id)
             })),
             // CLEAR
             clearCar: () => set({items: []}),

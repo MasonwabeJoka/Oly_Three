@@ -24,6 +24,7 @@ const CategorySchema = z.object({
   slug: SlugSchema,
   title: z.string(),
   description: z.array(PortableTextBlockSchema),
+  url: z.string().url(),
   nickName: z.string().optional(),
   mainCategory: z.string().optional(),
   parentCategory: z.lazy(() => CategorySchema).optional(), // Recursive definition

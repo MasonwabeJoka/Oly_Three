@@ -5,12 +5,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import { Ad } from "@/sanity/Types/Ad";
-import { useFetchAdStore } from "@/store/adsData";
+import { useFetchAdStore } from "@/store/useFetchStore";
 
 type ImageGroup = {
   id: Ad["_id"]; // Unique identifier for the group
   images?: Ad["images"]; // Array of images
-  aspectRatios: number[]; // Array of aspect ratios
+  aspectRatios: (number | undefined)[] | undefined; // Array of aspect ratios
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 // Todo: Use grid for the layout of images in the Gallery
@@ -18,7 +18,7 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
   const [isHeartHovered, setIsHeartHovered] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
-
+  
   let totalImages = images;
   if (aspectRatios) {
     if (

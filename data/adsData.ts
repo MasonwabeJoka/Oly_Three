@@ -1,424 +1,204 @@
 const ads = [
-    {
-      title: "Spacious Family Home",
-      description: "A beautiful 4-bedroom family home with a large garden.",
-      price: 500000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?house1",
-        "https://source.unsplash.com/random/600x800/?house2",
-        "https://source.unsplash.com/random/800x600/?house3",
-        "https://source.unsplash.com/random/600x800/?house4",
-        "https://source.unsplash.com/random/800x600/?house5",
-        "https://source.unsplash.com/random/600x800/?house6",
-        "https://source.unsplash.com/random/800x600/?house7",
-        "https://source.unsplash.com/random/600x800/?house8",
-        "https://source.unsplash.com/random/800x600/?house9"
-      ],
-      details: "Located in a quiet neighborhood, close to schools and parks.",
-      features: ["4 bedrooms", "3 bathrooms", "2 car garage", "Large garden"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Modern Apartment Downtown",
-      description: "A stylish 2-bedroom apartment in the heart of the city.",
-      price: 300000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?apartment1",
-        "https://source.unsplash.com/random/600x800/?apartment2",
-        "https://source.unsplash.com/random/800x600/?apartment3",
-        "https://source.unsplash.com/random/600x800/?apartment4",
-        "https://source.unsplash.com/random/800x600/?apartment5",
-        "https://source.unsplash.com/random/600x800/?apartment6",
-        "https://source.unsplash.com/random/800x600/?apartment7",
-        "https://source.unsplash.com/random/600x800/?apartment8",
-        "https://source.unsplash.com/random/800x600/?apartment9"
-      ],
-      details: "Close to public transport and shopping centers.",
-      features: ["2 bedrooms", "2 bathrooms", "Balcony", "City view"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Luxury Villa with Pool",
-      description: "A stunning villa with a private pool and breathtaking views.",
-      price: 1500000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?villa1",
-        "https://source.unsplash.com/random/600x800/?villa2",
-        "https://source.unsplash.com/random/800x600/?villa3",
-        "https://source.unsplash.com/random/600x800/?villa4",
-        "https://source.unsplash.com/random/800x600/?villa5",
-        "https://source.unsplash.com/random/600x800/?villa6",
-        "https://source.unsplash.com/random/800x600/?villa7",
-        "https://source.unsplash.com/random/600x800/?villa8",
-        "https://source.unsplash.com/random/800x600/?villa9"
-      ],
-      details: "Located in a gated community with 24/7 security.",
-      features: ["5 bedrooms", "4 bathrooms", "Private pool", "Ocean view"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Family SUV",
-      description: "A reliable SUV perfect for family trips.",
-      price: 25000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?suv1",
-        "https://source.unsplash.com/random/600x800/?suv2",
-        "https://source.unsplash.com/random/800x600/?suv3",
-        "https://source.unsplash.com/random/600x800/?suv4",
-        "https://source.unsplash.com/random/800x600/?suv5",
-        "https://source.unsplash.com/random/600x800/?suv6",
-        "https://source.unsplash.com/random/800x600/?suv7",
-        "https://source.unsplash.com/random/600x800/?suv8",
-        "https://source.unsplash.com/random/800x600/?suv9"
-      ],
-      details: "Low mileage and in excellent condition.",
-      features: ["7 seats", "Automatic transmission", "Air conditioning", "GPS"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Compact City Car",
-      description: "A fuel-efficient compact car ideal for city driving.",
-      price: 15000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?car1",
-        "https://source.unsplash.com/random/600x800/?car2",
-        "https://source.unsplash.com/random/800x600/?car3",
-        "https://source.unsplash.com/random/600x800/?car4",
-        "https://source.unsplash.com/random/800x600/?car5",
-        "https://source.unsplash.com/random/600x800/?car6",
-        "https://source.unsplash.com/random/800x600/?car7",
-        "https://source.unsplash.com/random/600x800/?car8",
-        "https://source.unsplash.com/random/800x600/?car9"
-      ],
-      details: "Great fuel economy and easy to park.",
-      features: ["4 seats", "Manual transmission", "Bluetooth", "Airbags"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Luxury Sedan",
-      description: "A high-end sedan with all the latest features.",
-      price: 60000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?sedan1",
-        "https://source.unsplash.com/random/600x800/?sedan2",
-        "https://source.unsplash.com/random/800x600/?sedan3",
-        "https://source.unsplash.com/random/600x800/?sedan4",
-        "https://source.unsplash.com/random/800x600/?sedan5",
-        "https://source.unsplash.com/random/600x800/?sedan6",
-        "https://source.unsplash.com/random/800x600/?sedan7",
-        "https://source.unsplash.com/random/600x800/?sedan8",
-        "https://source.unsplash.com/random/800x600/?sedan9"
-      ],
-      details: "Impeccable condition with full service history.",
-      features: ["Leather seats", "Sunroof", "Heated seats", "Advanced safety features"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Charming Cottage",
-      description: "A cozy 2-bedroom cottage in the countryside.",
-      price: 200000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?cottage1",
-        "https://source.unsplash.com/random/600x800/?cottage2",
-        "https://source.unsplash.com/random/800x600/?cottage3",
-        "https://source.unsplash.com/random/600x800/?cottage4",
-        "https://source.unsplash.com/random/800x600/?cottage5",
-        "https://source.unsplash.com/random/600x800/?cottage6",
-        "https://source.unsplash.com/random/800x600/?cottage7",
-        "https://source.unsplash.com/random/600x800/?cottage8",
-        "https://source.unsplash.com/random/800x600/?cottage9"
-      ],
-      details: "Surrounded by nature, perfect for a peaceful retreat.",
-      features: ["2 bedrooms", "1 bathroom", "Fireplace", "Garden"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Classic Muscle Car",
-      description: "A vintage muscle car in pristine condition.",
-      price: 45000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?musclecar1",
-        "https://source.unsplash.com/random/600x800/?musclecar2",
-        "https://source.unsplash.com/random/800x600/?musclecar3",
-        "https://source.unsplash.com/random/600x800/?musclecar4",
-        "https://source.unsplash.com/random/800x600/?musclecar5",
-        "https://source.unsplash.com/random/600x800/?musclecar6",
-        "https://source.unsplash.com/random/800x600/?musclecar7",
-        "https://source.unsplash.com/random/600x800/?musclecar8",
-        "https://source.unsplash.com/random/800x600/?musclecar9"
-      ],
-      details: "Fully restored with original parts.",
-      features: ["V8 engine", "Manual transmission", "Leather seats", "Custom paint job"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Beachfront Condo",
-      description: "A luxurious condo with stunning ocean views.",
-      price: 750000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?condo1",
-        "https://source.unsplash.com/random/600x800/?condo2",
-        "https://source.unsplash.com/random/800x600/?condo3",
-        "https://source.unsplash.com/random/600x800/?condo4",
-        "https://source.unsplash.com/random/800x600/?condo5",
-        "https://source.unsplash.com/random/600x800/?condo6",
-        "https://source.unsplash.com/random/800x600/?condo7",
-        "https://source.unsplash.com/random/600x800/?condo8",
-        "https://source.unsplash.com/random/800x600/?condo9"
-      ],
-      details: "Located in a prime area with private beach access.",
-      features: ["3 bedrooms", "2 bathrooms", "Balcony", "Ocean view"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Convertible Sports Car",
-      description: "A sleek convertible perfect for summer drives.",
-      price: 70000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?convertible1",
-        "https://source.unsplash.com/random/600x800/?convertible2",
-        "https://source.unsplash.com/random/800x600/?convertible3",
-        "https://source.unsplash.com/random/600x800/?convertible4",
-        "https://source.unsplash.com/random/800x600/?convertible5",
-        "https://source.unsplash.com/random/600x800/?convertible6",
-        "https://source.unsplash.com/random/800x600/?convertible7",
-        "https://source.unsplash.com/random/600x800/?convertible8",
-        "https://source.unsplash.com/random/800x600/?convertible9"
-      ],
-      details: "Low mileage and in excellent condition.",
-      features: ["2 seats", "Automatic transmission", "Bluetooth", "Leather seats"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Mountain Cabin",
-      description: "A rustic cabin in the mountains, perfect for a getaway.",
-      price: 350000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?cabin1",
-        "https://source.unsplash.com/random/600x800/?cabin2",
-        "https://source.unsplash.com/random/800x600/?cabin3",
-        "https://source.unsplash.com/random/600x800/?cabin4",
-        "https://source.unsplash.com/random/800x600/?cabin5",
-        "https://source.unsplash.com/random/600x800/?cabin6",
-        "https://source.unsplash.com/random/800x600/?cabin7",
-        "https://source.unsplash.com/random/600x800/?cabin8",
-        "https://source.unsplash.com/random/800x600/?cabin9"
-      ],
-      details: "Secluded location with breathtaking views.",
-      features: ["3 bedrooms", "2 bathrooms", "Fireplace", "Hot tub"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Electric Hatchback",
-      description: "A compact electric car with excellent range.",
-      price: 30000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?hatchback1",
-        "https://source.unsplash.com/random/600x800/?hatchback2",
-        "https://source.unsplash.com/random/800x600/?hatchback3",
-        "https://source.unsplash.com/random/600x800/?hatchback4",
-        "https://source.unsplash.com/random/800x600/?hatchback5",
-        "https://source.unsplash.com/random/600x800/?hatchback6",
-        "https://source.unsplash.com/random/800x600/?hatchback7",
-        "https://source.unsplash.com/random/600x800/?hatchback8",
-        "https://source.unsplash.com/random/800x600/?hatchback9"
-      ],
-      details: "Excellent condition with full service history.",
-      features: ["5 seats", "Automatic transmission", "Air conditioning", "Bluetooth"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Downtown Loft",
-      description: "A modern loft in a vibrant downtown area.",
-      price: 450000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?loft1",
-        "https://source.unsplash.com/random/600x800/?loft2",
-        "https://source.unsplash.com/random/800x600/?loft3",
-        "https://source.unsplash.com/random/600x800/?loft4",
-        "https://source.unsplash.com/random/800x600/?loft5",
-        "https://source.unsplash.com/random/600x800/?loft6",
-        "https://source.unsplash.com/random/800x600/?loft7",
-        "https://source.unsplash.com/random/600x800/?loft8",
-        "https://source.unsplash.com/random/800x600/?loft9"
-      ],
-      details: "Open floor plan with high ceilings and modern finishes.",
-      features: ["2 bedrooms", "2 bathrooms", "Balcony", "City view"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Luxury SUV",
-      description: "A top-of-the-line SUV with all the bells and whistles.",
-      price: 80000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?luxurysuv1",
-        "https://source.unsplash.com/random/600x800/?luxurysuv2",
-        "https://source.unsplash.com/random/800x600/?luxurysuv3",
-        "https://source.unsplash.com/random/600x800/?luxurysuv4",
-        "https://source.unsplash.com/random/800x600/?luxurysuv5",
-        "https://source.unsplash.com/random/600x800/?luxurysuv6",
-        "https://source.unsplash.com/random/800x600/?luxurysuv7",
-        "https://source.unsplash.com/random/600x800/?luxurysuv8",
-        "https://source.unsplash.com/random/800x600/?luxurysuv9"
-      ],
-      details: "Perfect condition with all the latest features.",
-      features: ["7 seats", "Automatic transmission", "Sunroof", "Advanced safety features"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Suburban House",
-      description: "A spacious house in a quiet suburban neighborhood.",
-      price: 400000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?suburbanhouse1",
-        "https://source.unsplash.com/random/600x800/?suburbanhouse2",
-        "https://source.unsplash.com/random/800x600/?suburbanhouse3",
-        "https://source.unsplash.com/random/600x800/?suburbanhouse4",
-        "https://source.unsplash.com/random/800x600/?suburbanhouse5",
-        "https://source.unsplash.com/random/600x800/?suburbanhouse6",
-        "https://source.unsplash.com/random/800x600/?suburbanhouse7",
-        "https://source.unsplash.com/random/600x800/?suburbanhouse8",
-        "https://source.unsplash.com/random/800x600/?suburbanhouse9"
-      ],
-      details: "Close to schools and parks.",
-      features: ["4 bedrooms", "3 bathrooms", "Garage", "Backyard"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Off-Road Truck",
-      description: "A rugged truck built for off-road adventures.",
-      price: 35000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?offroadtruck1",
-        "https://source.unsplash.com/random/600x800/?offroadtruck2",
-        "https://source.unsplash.com/random/800x600/?offroadtruck3",
-        "https://source.unsplash.com/random/600x800/?offroadtruck4",
-        "https://source.unsplash.com/random/800x600/?offroadtruck5",
-        "https://source.unsplash.com/random/600x800/?offroadtruck6",
-        "https://source.unsplash.com/random/800x600/?offroadtruck7",
-        "https://source.unsplash.com/random/600x800/?offroadtruck8",
-        "https://source.unsplash.com/random/800x600/?offroadtruck9"
-      ],
-      details: "In excellent condition with low mileage.",
-      features: ["4WD", "Automatic transmission", "Air conditioning", "Tow package"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Lakefront Cabin",
-      description: "A charming cabin with direct access to the lake.",
-      price: 500000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?lakefrontcabin1",
-        "https://source.unsplash.com/random/600x800/?lakefrontcabin2",
-        "https://source.unsplash.com/random/800x600/?lakefrontcabin3",
-        "https://source.unsplash.com/random/600x800/?lakefrontcabin4",
-        "https://source.unsplash.com/random/800x600/?lakefrontcabin5",
-        "https://source.unsplash.com/random/600x800/?lakefrontcabin6",
-        "https://source.unsplash.com/random/800x600/?lakefrontcabin7",
-        "https://source.unsplash.com/random/600x800/?lakefrontcabin8",
-        "https://source.unsplash.com/random/800x600/?lakefrontcabin9"
-      ],
-      details: "Ideal for fishing and water sports.",
-      features: ["3 bedrooms", "2 bathrooms", "Dock", "Fireplace"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Hybrid Sedan",
-      description: "An eco-friendly sedan with hybrid technology.",
-      price: 25000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?hybridsedan1",
-        "https://source.unsplash.com/random/600x800/?hybridsedan2",
-        "https://source.unsplash.com/random/800x600/?hybridsedan3",
-        "https://source.unsplash.com/random/600x800/?hybridsedan4",
-        "https://source.unsplash.com/random/800x600/?hybridsedan5",
-        "https://source.unsplash.com/random/600x800/?hybridsedan6",
-        "https://source.unsplash.com/random/800x600/?hybridsedan7",
-        "https://source.unsplash.com/random/600x800/?hybridsedan8",
-        "https://source.unsplash.com/random/800x600/?hybridsedan9"
-      ],
-      details: "Great fuel economy and low emissions.",
-      features: ["5 seats", "Automatic transmission", "Bluetooth", "Air conditioning"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Penthouse Suite",
-      description: "A luxurious penthouse with panoramic city views.",
-      price: 1000000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?penthouse1",
-        "https://source.unsplash.com/random/600x800/?penthouse2",
-        "https://source.unsplash.com/random/800x600/?penthouse3",
-        "https://source.unsplash.com/random/600x800/?penthouse4",
-        "https://source.unsplash.com/random/800x600/?penthouse5",
-        "https://source.unsplash.com/random/600x800/?penthouse6",
-        "https://source.unsplash.com/random/800x600/?penthouse7",
-        "https://source.unsplash.com/random/600x800/?penthouse8",
-        "https://source.unsplash.com/random/800x600/?penthouse9"
-      ],
-      details: "Located in the heart of the city with private elevator access.",
-      features: ["3 bedrooms", "3 bathrooms", "Private terrace", "City view"],
-      categories: ["Properties"]
-    },
-    {
-      title: "Convertible Coupe",
-      description: "A stylish convertible coupe with a powerful engine.",
-      price: 60000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?convertiblecoupe1",
-        "https://source.unsplash.com/random/600x800/?convertiblecoupe2",
-        "https://source.unsplash.com/random/800x600/?convertiblecoupe3",
-        "https://source.unsplash.com/random/600x800/?convertiblecoupe4",
-        "https://source.unsplash.com/random/800x600/?convertiblecoupe5",
-        "https://source.unsplash.com/random/600x800/?convertiblecoupe6",
-        "https://source.unsplash.com/random/800x600/?convertiblecoupe7",
-        "https://source.unsplash.com/random/600x800/?convertiblecoupe8",
-        "https://source.unsplash.com/random/800x600/?convertiblecoupe9"
-      ],
-      details: "Low mileage and in excellent condition.",
-      features: ["2 seats", "Automatic transmission", "Bluetooth", "Leather seats"],
-      categories: ["Vehicles"]
-    },
-    {
-      title: "Countryside Farmhouse",
-      description: "A traditional farmhouse with modern amenities.",
-      price: 600000,
-      pricingOption: "For Sale",
-      images: [
-        "https://source.unsplash.com/random/800x600/?farmhouse1",
-        "https://source.unsplash.com/random/600x800/?farmhouse2",
-        "https://source.unsplash.com/random/800x600/?farmhouse3",
-        "https://source.unsplash.com/random/600x800/?farmhouse4",
-        "https://source.unsplash.com/random/800x600/?farmhouse5",
-        "https://source.unsplash.com/random/600x800/?farmhouse6",
-        "https://source.unsplash.com/random/800x600/?farmhouse7",
-        "https://source.unsplash.com/random/600x800/?farmhouse8",
-        "https://source.unsplash.com/random/800x600/?farmhouse9"
-      ],
-      details: "Located on a large plot of land with stunning views.",
-      features: ["5 bedrooms", "4 bathrooms", "Barn", "Garden"],
-      categories: ["Properties"]
-    }
+  {
+    title: "Spacious Family Home",
+    description: "A beautiful 4-bedroom family home with a large garden.",
+    price: 500000,
+    pricingOption: "For Sale",
+    images: [
+      "https://images.unsplash.com/photo-1600607686669-6c7c3e56e1f6",
+      "https://images.unsplash.com/photo-1598928506313-9d87a04e3883",
+      "https://images.unsplash.com/photo-1560448204-4dd8f0f5f2a9",
+      "https://images.unsplash.com/photo-1606818974626-4a307a5c2001",
+      "https://images.unsplash.com/photo-1590540179220-a5ae14d9241b",
+      "https://images.unsplash.com/photo-1560185127-6f34f87b73ef",
+      "https://images.unsplash.com/photo-1600573475282-8e03edc6b5c2",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+      "https://images.unsplash.com/photo-1580596779601-d51470b2c5a4"
+    ],
+    details: "Located in a quiet neighborhood, close to schools and parks.",
+    features: ["4 bedrooms", "3 bathrooms", "2 car garage", "Large garden"],
+    categories: ["Properties"]
+  },
+  {
+    title: "Modern Apartment Downtown",
+    description: "A stylish 2-bedroom apartment in the heart of the city.",
+    price: 300000,
+    pricingOption: "For Sale",
+    images: [
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
+      "https://images.unsplash.com/photo-1605276378101-3f17c82b0e95",
+      "https://images.unsplash.com/photo-1618229727351-fae3a7d3d54f",
+      "https://images.unsplash.com/photo-1600592784378-6a733d3c092e",
+      "https://images.unsplash.com/photo-1601882107410-4528b34f748a",
+      "https://images.unsplash.com/photo-1597004082604-6d27bd9b38f6",
+      "https://images.unsplash.com/photo-1612746360920-084b7b6b4410",
+      "https://images.unsplash.com/photo-1505245208761-ba872912fac0",
+      "https://images.unsplash.com/photo-1582502431352-dcc39c8c01d2"
+    ],
+    details: "Close to public transport and shopping centers.",
+    features: ["2 bedrooms", "2 bathrooms", "Balcony", "City view"],
+    categories: ["Properties"]
+  },
+  {
+    title: "Luxury Villa with Pool",
+    description: "A stunning villa with a private pool and breathtaking views.",
+    price: 1500000,
+    pricingOption: "For Sale",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+      "https://images.unsplash.com/photo-1606075392984-ef51d40fdbb0",
+      "https://images.unsplash.com/photo-1590040532807-dba965a3baef",
+      "https://images.unsplash.com/photo-1560185898-b60d3fb97bc0",
+      "https://images.unsplash.com/photo-1560185977-70ac4ac943d6",
+      "https://images.unsplash.com/photo-1600592784378-6a733d3c092e",
+      "https://images.unsplash.com/photo-1590858733352-557f5fe69423",
+      "https://images.unsplash.com/photo-1600573475282-8e03edc6b5c2",
+      "https://images.unsplash.com/photo-1590414524493-d473b6c2a4d1"
+    ],
+    details: "Located in a gated community with 24/7 security.",
+    features: ["5 bedrooms", "4 bathrooms", "Private pool", "Ocean view"],
+    categories: ["Properties"]
+  },
+  {
+    title: "Family SUV",
+    description: "A reliable SUV perfect for family trips.",
+    price: 25000,
+    pricingOption: "For Sale",
+    images: [
+      "https://images.unsplash.com/photo-1616161613122-47801d5ae11e",
+      "https://images.unsplash.com/photo-1611123968528-ae73f6f155d3",
+      "https://images.unsplash.com/photo-1610871154947-44ffdc0e00b1",
+      "https://images.unsplash.com/photo-1518325536516-4f45282382c2",
+      "https://images.unsplash.com/photo-1612456598566-7a05d3aabf56",
+      "https://images.unsplash.com/photo-1608596953021-9d1e85cc8a2f",
+      "https://images.unsplash.com/photo-1600051300545-7d1ff5a9ad10",
+      "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+      "https://images.unsplash.com/photo-1594349633709-e1d4e74f4566"
+    ],
+    details: "Low mileage and in excellent condition.",
+    features: ["7 seats", "Automatic transmission", "Air conditioning", "GPS"],
+    categories: ["Vehicles"]
+  },
+  {
+    title: "Compact City Car",
+    description: "A fuel-efficient compact car ideal for city driving.",
+    price: 15000,
+    pricingOption: "For Sale",
+    images: [
+      "https://images.unsplash.com/photo-1600110812497-df72ebd344b2",
+      "https://images.unsplash.com/photo-1603145733174-6232b8748c8e",
+      "https://images.unsplash.com/photo-1582580622427-c9dd9691e021",
+      "https://images.unsplash.com/photo-1597699400098-50f96d4f2735",
+      "https://images.unsplash.com/photo-1583454110557-bd7c8e4b3e70",
+      "https://images.unsplash.com/photo-1591874526725-d8b4b96e6184",
+      "https://images.unsplash.com/photo-1580795690759-0d1e9c3a0f92",
+      "https://images.unsplash.com/photo-1559752038-5487a9533c85",
+      "https://images.unsplash.com/photo-1597699400098-50f96d4f2735"
+    ],
+    details: "Great fuel economy and easy to park.",
+    features: ["4 seats", "Manual transmission", "Bluetooth", "Airbags"],
+    categories: ["Vehicles"]
+  },
+  {
+    title: "Hybrid Sedan",
+    description: "An eco-friendly sedan with hybrid technology.",
+    price: 25000,
+    pricingOption: "For Sale",
+    images: [
+      "https://source.unsplash.com/random/800x600/?hybridsedan1",
+      "https://source.unsplash.com/random/600x800/?hybridsedan2",
+      "https://source.unsplash.com/random/800x600/?hybridsedan3",
+      "https://source.unsplash.com/random/600x800/?hybridsedan4",
+      "https://source.unsplash.com/random/800x600/?hybridsedan5",
+      "https://source.unsplash.com/random/600x800/?hybridsedan6",
+      "https://source.unsplash.com/random/800x600/?hybridsedan7",
+      "https://source.unsplash.com/random/600x800/?hybridsedan8",
+      "https://source.unsplash.com/random/800x600/?hybridsedan9"
+    ],
+    details: "In excellent condition with full service history.",
+    features: ["5 seats", "Automatic transmission", "Bluetooth", "Hybrid engine"],
+    categories: ["Vehicles"]
+  },
+  {
+    title: "Penthouse Apartment",
+    description: "A luxurious penthouse with panoramic city views.",
+    price: 1000000,
+    pricingOption: "For Sale",
+    images: [
+      "https://source.unsplash.com/random/800x600/?penthouse1",
+      "https://source.unsplash.com/random/600x800/?penthouse2",
+      "https://source.unsplash.com/random/800x600/?penthouse3",
+      "https://source.unsplash.com/random/600x800/?penthouse4",
+      "https://source.unsplash.com/random/800x600/?penthouse5",
+      "https://source.unsplash.com/random/600x800/?penthouse6",
+      "https://source.unsplash.com/random/800x600/?penthouse7",
+      "https://source.unsplash.com/random/600x800/?penthouse8",
+      "https://source.unsplash.com/random/800x600/?penthouse9"
+    ],
+    details: "Located in a prestigious building with private amenities.",
+    features: ["4 bedrooms", "3 bathrooms", "Private elevator", "Rooftop terrace"],
+    categories: ["Properties"]
+  },
+  {
+    title: "Vintage Convertible",
+    description: "A classic convertible in mint condition.",
+    price: 55000,
+    pricingOption: "For Sale",
+    images: [
+      "https://source.unsplash.com/random/800x600/?vintageconvertible1",
+      "https://source.unsplash.com/random/600x800/?vintageconvertible2",
+      "https://source.unsplash.com/random/800x600/?vintageconvertible3",
+      "https://source.unsplash.com/random/600x800/?vintageconvertible4",
+      "https://source.unsplash.com/random/800x600/?vintageconvertible5",
+      "https://source.unsplash.com/random/600x800/?vintageconvertible6",
+      "https://source.unsplash.com/random/800x600/?vintageconvertible7",
+      "https://source.unsplash.com/random/600x800/?vintageconvertible8",
+      "https://source.unsplash.com/random/800x600/?vintageconvertible9"
+    ],
+    details: "Fully restored with original parts.",
+    features: ["V8 engine", "Manual transmission", "Leather seats", "Custom paint job"],
+    categories: ["Vehicles"]
+  },
+  {
+    title: "Seaside Villa",
+    description: "A beautiful villa overlooking the ocean.",
+    price: 1200000,
+    pricingOption: "For Sale",
+    images: [
+      "https://source.unsplash.com/random/800x600/?seasidevilla1",
+      "https://source.unsplash.com/random/600x800/?seasidevilla2",
+      "https://source.unsplash.com/random/800x600/?seasidevilla3",
+      "https://source.unsplash.com/random/600x800/?seasidevilla4",
+      "https://source.unsplash.com/random/800x600/?seasidevilla5",
+      "https://source.unsplash.com/random/600x800/?seasidevilla6",
+      "https://source.unsplash.com/random/800x600/?seasidevilla7",
+      "https://source.unsplash.com/random/600x800/?seasidevilla8",
+      "https://source.unsplash.com/random/800x600/?seasidevilla9"
+    ],
+    details: "Located in a peaceful area with private beach access.",
+    features: ["5 bedrooms", "4 bathrooms", "Private pool", "Ocean view"],
+    categories: ["Properties"]
+  },
+  {
+    title: "Urban Studio",
+    description: "A modern studio apartment in the city center.",
+    price: 200000,
+    pricingOption: "For Sale",
+    images: [
+      "https://source.unsplash.com/random/800x600/?urbanstudio1",
+      "https://source.unsplash.com/random/600x800/?urbanstudio2",
+      "https://source.unsplash.com/random/800x600/?urbanstudio3",
+      "https://source.unsplash.com/random/600x800/?urbanstudio4",
+      "https://source.unsplash.com/random/800x600/?urbanstudio5",
+      "https://source.unsplash.com/random/600x800/?urbanstudio6",
+      "https://source.unsplash.com/random/800x600/?urbanstudio7",
+      "https://source.unsplash.com/random/600x800/?urbanstudio8",
+      "https://source.unsplash.com/random/800x600/?urbanstudio9"
+    ],
+    details: "Ideal for professionals or students.",
+    features: ["1 bedroom", "1 bathroom", "City view", "Open plan"],
+    categories: ["Properties"]
+  }
   ];
   
   export default ads;

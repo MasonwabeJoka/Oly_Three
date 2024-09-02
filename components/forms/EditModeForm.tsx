@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import TextArea from "@/components/TextArea";
 import Button from "@/components/Buttons";
-import { DevTool } from "@hookform/devtools";
 import { detailsFormSchema } from "@/lib/validations/formValidations";
 import Icon from "@/components/Icon";
 import SelectedDetail from "./SelectedDetail";

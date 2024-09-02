@@ -39,21 +39,31 @@ const FeaturedListings = () => {
       <div className={styles.collage}>
         <div className={styles.selectContainer}>
           <Select
-             options={["All Categories","Properties", "Vehicles", "Jobs","Services" ]}
-             currentValue="All Categories"
-             selectSize="large"
-             label="Categories"
-             id="categories"
-             name="categories"
-             ariaLabel="categories"
-             autoFocus={false}
-             required={true}
+            options={[
+              "All Categories",
+              "Properties",
+              "Vehicles",
+              "Jobs",
+              "Services",
+            ]}
+            currentValue="All Categories"
+            selectSize="large"
+            label="Categories"
+            id="categories"
+            name="categories"
+            ariaLabel="categories"
+            autoFocus={false}
+            required={true}
           />
         </div>
         <ListingsCollage
           isDeletable={false}
           isDashboard={false}
           cardSize="standard"
+          limit={4}
+          page={1}
+          sortBy="postedOn"
+          sortOrder="desc"
         />
       </div>
 
@@ -152,7 +162,7 @@ const FeaturedListings = () => {
             />
           </div>
         </form>
-        {/* <DevTool control={control} /> */}
+
       </div>
     </div>
   );

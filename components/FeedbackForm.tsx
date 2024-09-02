@@ -8,7 +8,7 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { feedbackFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
+
 
 type FormValues = z.infer<typeof feedbackFormSchema>;
 
@@ -134,7 +134,7 @@ const FeedbackForm = () => {
           disabled={false}
         />
       </div>
-      <DevTool control={control} />
+
     </form>
   );
 };

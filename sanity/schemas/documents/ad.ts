@@ -64,14 +64,14 @@ export const ad = defineType({
             name: 'priceId',
             title: 'Price ID',
             type: 'string',
-            description: 'The  price ID associated with this product, for Payment Processing services like Stripe.',
-            readOnly: true, 
+            description: 'The  price ID associated with this product, for Payment Processing services like Paystack.',
         }),
+        
         defineField({
-            name: 'stripeId',
-            title: 'Stripe ID',
+            name: 'paystackId',
+            title: 'Paystack ID',
             type: 'string',
-            description: 'The  stripe ID associated with this product.',
+            description: 'The paystack ID associated with this product.',
             readOnly: true, 
         }),
         
@@ -82,7 +82,7 @@ export const ad = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'Negotiable', value: 'negotiable' },
+                    { title: 'Negotiable Price', value: 'negotiable' },
                     { title: 'Free', value: 'free' },
                     { title: 'Auction', value: 'auction' },
                     { title: 'Fixed Price', value: 'fixed_price' },
@@ -107,6 +107,29 @@ export const ad = defineType({
             },
             initialValue: 'approved',
         }),
+        defineField({//Todo: I think this must be part of user schema and not ad schema
+          name: 'bankName',
+          title: 'Bank Name',
+          type: 'string',
+          description: 'The name of the bank associated with the account.',
+          validation: (Rule) => Rule.required().min(1, "Bank name is required"),
+      }),
+      
+      defineField({//Todo: I think this must be part of user schema and not ad schema
+          name: 'accountName',
+          title: 'Account Name',
+          type: 'string',
+          description: 'The name of the account holder.',
+          validation: (Rule) => Rule.required().min(1, "Account name is required"),
+      }),
+      
+      defineField({//Todo: I think this must be part of user schema and not ad schema
+          name: 'accountNumber',
+          title: 'Account Number',
+          type: 'string',
+          description: 'The bank account number.',
+          validation: (Rule) => Rule.required().min(1, "Account number is required"),
+      }),
 
         defineField({
             name: 'images',
@@ -289,13 +312,7 @@ export const ad = defineType({
             description: 'The location of the ad.',
         }),
 
-        defineField({
-            name: 'attachment',
-            title: 'Attachment',
-            type: 'file',
-            description: 'An attachment related to the ad, such as a PDF document.',
-        }),
-    
+   
         defineField({
             name: 'promotions',
             title: 'Promotions',

@@ -1,0 +1,30 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.swipper {
+  display: flex;
+  flex-direction: column;
+  .videoContainer {
+    height: auto;
+    width: rem(310);
+    scroll-snap-align: start;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: rem(24);
+  }
+
+  .navButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: rem(16);
+
+    margin-bottom: rem(16);
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

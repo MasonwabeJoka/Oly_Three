@@ -1,0 +1,18 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.progressBarContainer {
+  height: rem(16);
+  background-color: $white-two;
+
+  @include larger-than(mobile) {
+    width: rem(1098);
+  }
+}
+
+.progressBar {
+  height: 100%;
+  background-color: $primary-hover;
+  transition: width 0.3s ease-in-out;
+}

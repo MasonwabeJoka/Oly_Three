@@ -101,7 +101,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           <Button
             className={styles.moreInfoButton}
             buttonChildren="More Info"
-            buttonType="info"
+            buttonType="normal"
             buttonSize="medium"
             name="more-info-btn"
             type="button"
@@ -139,6 +139,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.wrapper} ref={wrapperRef}>
+        <div className={styles.iconContainer}>
         <Icon
           className={styles.icon}
           src={src}
@@ -146,6 +147,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           width={64}
           height={64}
         />
+        </div>
         <div className={styles.formControls}>
           <p className={styles.title}>{title}</p>
 
@@ -174,7 +176,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           <Button
             className={styles.moreInfoButton}
             buttonChildren="More Info"
-            buttonType="info"
+            buttonType="normal"
             buttonSize="medium"
             name="more-info-btn"
             type="button"

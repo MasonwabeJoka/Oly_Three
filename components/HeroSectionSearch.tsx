@@ -9,7 +9,6 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
 import { useModalStore } from "@/store/modalStore";
 import Image from "next/image";
 
@@ -173,7 +172,6 @@ const HeroSectionSearch = () => {
           </div>
         </div>
       </form>
-      {/* <DevTool control={control} /> */}
     </div>
   );
 };

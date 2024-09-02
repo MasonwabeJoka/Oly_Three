@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { UserSchema } from "./User";
 import { DetailsSchema } from "./Details";
 import {PortableTextBlockSchema} from "./PortableTextBlock";
+import { CategorySchema } from './Category';
 
 
 
@@ -51,22 +52,26 @@ export const AdSchema = z.object({
   _id: z.string(),
   slug: z.string(),
   user: z.lazy(() => UserSchema),
+  category: z.lazy(() => CategorySchema),
   userId: z.string(),
   title: z.string(),
   description: z.array(PortableTextBlockSchema).optional().nullable(),
   price: z.number(),
   priceId: z.string(),
-  stripeId: z.string(),
-  pricingOption: z.enum(['Negotiable', 'Free', 'Auction', 'Fixed Price', 'Contact for Price']),
-  approvedForSale: z.enum(['Approved', 'Pending', 'Denied']),
+  paystackId: z.string(),
+  pricingOption: z.enum(['Fixed Price', 'Auction', 'Negotiable Price', 'Free', 'Contact For Price']),
+  approvedForSale: z.enum(['approved', 'pending', 'denied']),
+  bankName: z.string().min(1, "Bank name is required"), //Todo: I think this must be part of user schema and not ad schema
+  accountName: z.string().min(1, "Account name is required"),//Todo: I think this must be part of user schema and not ad schema
+  accountNumber: z.string().min(1, "Account number is required"),//Todo: I think this must be part of user schema and not ad schema
   images: z.array(ImageSchema),
   videos: z.array(VideoSchema).optional(),
   attachments: z.array(AttachmentSchema).optional(),
   featuredImage: ImageSchema,
   postedOn: z.string(),
-  details: z.lazy(() => DetailsSchema).optional(),
+  details: z.array(DetailsSchema).optional(),
   features: z.array(z.string()).optional(),
-  condition: z.enum(['new', 'like-new', 'gently-used', 'used']),
+  condition: z.enum(['New', 'Like New', 'Gently Used', 'Used']),
   quantity: z.number().optional(),
   avatar: z.object({
     _ref: z.string(),
@@ -74,6 +79,7 @@ export const AdSchema = z.object({
   }),
   location: z.object({
     suburb: z.string(),
+    
     city: z.string(),
   }),
   city: z.string(),
@@ -86,8 +92,8 @@ export const AdSchema = z.object({
     }),
   }).optional(),
   promotions: z.array(z.object({
-    platform: z.enum(['oly', 'facebook', 'google-ads', 'instagram', 'linkedin']),
-    duration: z.enum(['1day', '7days', '2weeks', '1month', '3months']),
+    platform: z.enum(['Oly', 'Facebook', 'Google Ads', 'Instagram', 'Linkedin']),
+    duration: z.enum(['1 Day', '7 Days', '2 Weeks', '1 Month', '3 Months']),
     remainingDays: z.number(),
   })).optional(),
   bids: z.array(z.object({

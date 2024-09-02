@@ -19,6 +19,7 @@ import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
 
+
 const Home = () => {
   const showNotificationsModal = useModalStore(
     (state) => state.showNotificationsModal

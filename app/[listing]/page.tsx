@@ -27,7 +27,15 @@ import { notFound } from "next/navigation";
 import SimilarAds from "@/components/SimilarAds";
 import AdCarousel from "@/components/carousels/AdCarousel";
 import Modal from "@/components/Modal";
+import ListingImages from "@/app/[listing]/components/ListingImages";
+import { Image as ImageType } from "@/sanity/Types/Ad";
+import PriceSection from "./components/PriceSection";
+import ButtonsContainer from "./components/ButtonsContainer";
+import GoodToKnow from "./components/GoodToKnow";
+import Cart from "./components/Cart";
+import { useCart } from "@/store/useCart";
 
+// Todo: Reformat by moving components into their own files.
 type ParamsProp = {
   params: {
     listing: string;
@@ -37,9 +45,10 @@ type ParamsProp = {
 const Listing = ({ params }: ParamsProp) => {
   const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
   const [showImages, setShowImages] = useState(false);
-  const [isAuction, setIsAuction] = useState(true);
+  const [isAuction, setIsAuction] = useState(false);
   const [ad, setAd] = useState<Ad | null>(null);
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState("MainSection");
+  const { addItem } = useCart();
   const [isClient, setIsClient] = useState(false);
   const { listing } = params;
 
@@ -65,72 +74,40 @@ const Listing = ({ params }: ParamsProp) => {
     setIsSidebarOpen(false);
   }, []);
 
-  const BREADCRUMBS = [
-    { id: 1, name: "Home", href: "#" },
-    { id: 2, name: "Properties For Sale", href: "#" },
-    { id: 3, name: "Gauteng", href: "#" },
-    { id: 4, name: "Bryanston", href: "#" },
-  ];
+  // // Calculate Greatest Common Divisor (GCD) between two numbers
+  // function findGreatestCommonDivisor(
+  //   firstNumber: number,
+  //   secondNumber: number
+  // ): number {
+  //   while (secondNumber !== 0) {
+  //     let temporary = secondNumber;
+  //     secondNumber = firstNumber % secondNumber;
+  //     firstNumber = temporary;
+  //   }
+  //   return firstNumber;
+  // }
 
-  // Calculate Greatest Common Divisor (GCD) between two numbers
-  function findGreatestCommonDivisor(
-    firstNumber: number,
-    secondNumber: number
-  ): number {
-    while (secondNumber !== 0) {
-      let temporary = secondNumber;
-      secondNumber = firstNumber % secondNumber;
-      firstNumber = temporary;
-    }
-    return firstNumber;
-  }
+  // // Function to calculate and return the aspect ratio as a decimal value
+  // function calculateAspectRatio(
+  //   imageWidth: number,
+  //   imageHeight: number
+  // ): number {
+  //   const greatestCommonDivisor = findGreatestCommonDivisor(
+  //     imageWidth,
+  //     imageHeight
+  //   ); //https://www.youtube.com/watch?v=jFd-6EPfnec
+  //   const width = imageWidth / greatestCommonDivisor;
+  //   const height = imageHeight / greatestCommonDivisor;
+  //   return width / height;
+  // }
 
-  // Function to calculate and return the aspect ratio as a decimal value
-  function calculateAspectRatio(
-    imageWidth: number,
-    imageHeight: number
-  ): number {
-    const greatestCommonDivisor = findGreatestCommonDivisor(
-      imageWidth,
-      imageHeight
-    ); //https://www.youtube.com/watch?v=jFd-6EPfnec
-    const width = imageWidth / greatestCommonDivisor;
-    const height = imageHeight / greatestCommonDivisor;
-    return width / height;
-  }
-
-  const aspectRatios: number[] = ad?.images.map(
-    (image: any) => image.aspectRatio
+  const aspectRatios: (number | undefined)[] | undefined = ad?.images.map(
+    (image: ImageType) => image.aspectRatio
   );
+
   //Todo: When I click on an image in the Gallery open the modal and show that image in the modal
   //Todo: Add map to the modal
   //Todo: Add Map, Images, and Exit tabs in the modal
-
-  const ListingImages = () => {
-    return (
-      <div className={styles.listingImages}>
-        <div className={styles.galleryContainer}>
-          <div className={styles.breadcrumbsContainer}>
-            <Breadcrumbs
-              homeBreadcrumb={BREADCRUMBS[0]}
-              firstBreadcrumb={BREADCRUMBS[1]}
-              secondBreadcrumb={BREADCRUMBS[2]}
-              searchResult={BREADCRUMBS[3]}
-              breadcrumbs={BREADCRUMBS}
-            />
-          </div>
-          <div className={styles.gallery}>
-            <Gallery
-              id={ad?._id}
-              images={ad?.images?.slice(0, 5)}
-              onClick={showAllImages}
-              aspectRatios={aspectRatios}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const MainSection = () => {
     return (
@@ -141,147 +118,66 @@ const Listing = ({ params }: ParamsProp) => {
             : ad?.title}
         </h1>
         <div className={styles.priceSection}>
-          {isAuction ? (
-            <>
-              <p className={styles.priceLabel}>Current Price</p>
-              <h1 className={styles.price}>
-                {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`}
-              </h1>
-              <div className={styles.countDown}>
-                <span className={styles.countDownPeriod}>1d</span>
-                <span className={styles.countDownPeriod}>15h</span>
-                <span className={styles.countDownPeriod}>56m</span>
-                <span className={styles.lastCountDownPeriod}>08s</span>
-              </div>
-              <p className={styles.buyNowLabel}>Buy Now</p>
-              <h3 className={styles.buyNow}>R2550</h3>
-            </>
-          ) : (
-            <>
-              <p className={styles.priceLabel}>Price</p>
-              <h1 className={styles.nonAuctionPrice}>
-                {/* {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`} */}
-                {ad?.price &&
-                  Formatter.formatPrice(ad?.price, { showCents: false })}
-              </h1>
-            </>
-          )}
+          <PriceSection ad={ad} isAuction={isAuction} />
         </div>
         <div className={styles.buttonsContainer}>
-          {isAuction ? (
-            <>
-              <div className={`${styles.buttons} ${styles.bidContainer}`}>
-                <Button
-                  className={styles.bidButton}
-                  buttonChildren="Place bid"
-                  buttonType="primary"
-                  buttonSize="medium"
-                  name="bid-button"
-                  type="button"
-                  ariaLabel="Bid Button"
-                  autoFocus={false}
-                  disabled={false}
-                  ariaHidden={false}
-                />
-              </div>
-              <div className={`${styles.buttons} ${styles.buyContainer}`}>
-                <Button
-                  className={styles.buyButton}
-                  buttonChildren="Buy Now"
-                  buttonType="normal"
-                  buttonSize="medium"
-                  name="buy-btn"
-                  type="button"
-                  ariaLabel="Buy Button"
-                  autoFocus={false}
-                  disabled={false}
-                  ariaHidden={false}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                className={`${styles.buttons} ${styles.contactSellerContainer}`}
-              >
-                <Button
-                  className={styles.contactSellerBtn}
-                  buttonChildren="Contact Seller"
-                  buttonType="primary"
-                  buttonSize="medium"
-                  name="contact-seller-btn"
-                  type="button"
-                  ariaLabel="Contact Seller Button"
-                  autoFocus={false}
-                  disabled={false}
-                  ariaHidden={false}
-                  onClick={() => setCurrentlyDisplayed("Chat")}
-                />
-              </div>
-              <div className={`${styles.buttons} ${styles.buyContainer}`}>
-                <Button
-                  className={styles.buyButton}
-                  buttonChildren="Buy Now"
-                  buttonType="normal"
-                  buttonSize="medium"
-                  name="buy-btn"
-                  type="button"
-                  ariaLabel="Buy Button"
-                  autoFocus={false}
-                  disabled={false}
-                  ariaHidden={false}
-                  onClick={() => setCurrentlyDisplayed("ConfirmYourPurchase")}
-                />
-              </div>
-            </>
-          )}
+          <ButtonsContainer
+            isAuction={isAuction}
+            placeBid={() => setCurrentlyDisplayed("Payment")}
+            contactSeller={() => setCurrentlyDisplayed("Chat")}
+            buyNow={() => {
+              ad && addItem(ad);
+              setCurrentlyDisplayed("Cart");
+              // setCurrentlyDisplayed("ConfirmYourPurchase");
+            }}
+          />
         </div>
 
         <div className={styles.description}>
-          <p>{ad && <PortableText value={ad.description} />}</p>
+          {ad && <PortableText value={ad.description as any} />}
         </div>
       </>
     );
   };
 
-  const GoodToKnow = () => {
-    return (
-      <div className={`${styles.moreInfoContainer} ${styles.detailsContainer}`}>
-        <h4 className={`${styles.title} ${styles.detailsTitle}`}>
-          Good To Know
-        </h4>
-        <div className={`${styles.infoItems} ${styles.details}`}>
-          {ad?.details?.map((details, index) => {
-            // Check if the details object has an array value
-            if (Array.isArray(details.arrayKey)) {
-              // Join the array elements into a comma-separated string
-              const arrayString = details.arrayKey.join(", ");
-              // Create a new object with the string value instead of the array
-              details = { ...details, arrayKey: arrayString };
-            }
-            const detailsArray = Object.values(details) as string[];
-            return (
-              <div
-                className={`${styles.infoItem} ${styles.detail}`}
-                key={index}
-              >
-                <div className={styles.bulletContainer}>
-                  <div className={styles.bullet} key={index}></div>
-                </div>
-                <div
-                  className={`${styles.infoItemContainer} ${styles.detailContainer}`}
-                >
-                  {detailsArray.map((detail, index) => {
-                    return <p key={index}>{detail}</p>;
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
+  // const GoodToKnow = () => {
+  //   return (
+  //     <div className={`${styles.moreInfoContainer} ${styles.detailsContainer}`}>
+  //       <h4 className={`${styles.title} ${styles.detailsTitle}`}>
+  //         Good To Know
+  //       </h4>
+  //       <div className={`${styles.infoItems} ${styles.details}`}>
+  //         {ad?.details?.map((details, index) => {
+  //           // Check if the details object has an array value
+  //           if (Array.isArray(details.arrayKey)) {
+  //             // Join the array elements into a comma-separated string
+  //             const arrayString = details.arrayKey.join(", ");
+  //             // Create a new object with the string value instead of the array
+  //             details = { ...details, arrayKey: arrayString };
+  //           }
+  //           const detailsArray = Object.values(details) as string[];
+  //           return (
+  //             <div
+  //               className={`${styles.infoItem} ${styles.detail}`}
+  //               key={index}
+  //             >
+  //               <div className={styles.bulletContainer}>
+  //                 <div className={styles.bullet} key={index}></div>
+  //               </div>
+  //               <div
+  //                 className={`${styles.infoItemContainer} ${styles.detailContainer}`}
+  //               >
+  //                 {detailsArray.map((detail, index) => {
+  //                   return <p key={index}>{detail}</p>;
+  //                 })}
+  //               </div>
+  //             </div>
+  //           );
+  //         })}
+  //       </div>
+  //     </div>
+  //   );
+  // };
   const Features = () => {
     return (
       <div
@@ -311,24 +207,6 @@ const Listing = ({ params }: ParamsProp) => {
     );
   };
 
-  const SimilarAdsComponent = () => {
-    return (
-      <div>
-        <h4 className={`${styles.title} ${styles.similarAds}`}>
-          Sponsored Ads
-        </h4>
-        <div className={styles.collage}>
-          <SimilarAds
-            query={{ category: ad?.category, sort: "desc", limit: 4 }}
-            isDashboard={false}
-            isDeletable={false}
-            cardSize="standard"
-          />
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div
       className={styles.container}
@@ -341,7 +219,12 @@ const Listing = ({ params }: ParamsProp) => {
       <div className={styles.listingContainer}>
         {!showImages ? (
           <>
-            <ListingImages />
+            <ListingImages
+              id={ad?._id}
+              images={ad?.images?.slice(0, 5)}
+              onClick={showAllImages}
+              aspectRatios={aspectRatios}
+            />
             <MaxWidthWrapper className={styles.maxWidthWrapper}>
               <section className={styles.listingDetails}>
                 <div className={styles.topSection}>
@@ -352,6 +235,10 @@ const Listing = ({ params }: ParamsProp) => {
                     <div className={styles.details}>
                       {currentlyDisplayed === "MainSection" ? (
                         <MainSection />
+                      ) : currentlyDisplayed === "Cart" ? (
+                        <Cart    confirmPurchase={() => {
+                          setCurrentlyDisplayed("ConfirmYourPurchase");
+                        }}/>
                       ) : currentlyDisplayed === "ConfirmYourPurchase" ? (
                         <ConfirmYourPurchase
                           olySecurePaymentLink={() => {
@@ -363,7 +250,6 @@ const Listing = ({ params }: ParamsProp) => {
                           contactSellerBtn={() => {
                             setCurrentlyDisplayed("Chat");
                           }}
-                          ad={ad!}
                         />
                       ) : currentlyDisplayed === "OlySecurePayment" ? (
                         <OlySecurePayment
@@ -382,9 +268,16 @@ const Listing = ({ params }: ParamsProp) => {
                     </div>
                   </div>
                 </div>
-                <GoodToKnow />
+                <div
+                  className={`${styles.moreInfoContainer} ${styles.detailsContainer}`}
+                >
+                  <h4 className={`${styles.title} ${styles.detailsTitle}`}>
+                    Good To Know
+                  </h4>
+                  <GoodToKnow ad={ad} />
+                </div>
                 <Features />
-                <SimilarAdsComponent />
+                <SimilarAds />
                 <div style={{ height: "6rem" }}></div>
               </section>
             </MaxWidthWrapper>

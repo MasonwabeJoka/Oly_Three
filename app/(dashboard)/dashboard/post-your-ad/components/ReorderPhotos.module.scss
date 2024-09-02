@@ -1,0 +1,114 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+@import "@/utils/breakpoints.scss";
+
+.rect {
+  border-radius: rem(32);
+  gap: rem(8);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .description {
+    margin-bottom: rem(64);
+  }
+  .wrapper {
+    display: flex;
+    margin-bottom: rem(64);
+
+    .primary {
+      background-color: aqua;
+      width: rem(513);
+      height: rem(378.2);
+    }
+
+    .secondary {
+      display: flex;
+      flex-wrap: wrap;
+      width: rem(513);
+      height: rem(378.2);
+      .one {
+        background-color: aquamarine;
+        width: rem(252);
+        height: rem(184);
+      }
+      .two {
+        background-color: rgb(221, 127, 255);
+        width: rem(252);
+        height: rem(184);
+      }
+      .three {
+        background-color: rgb(255, 127, 142);
+        width: rem(252);
+        height: rem(184);
+      }
+      .four {
+        background-color: rgb(221, 255, 127);
+        width: rem(252);
+        height: rem(184);
+      }
+    }
+  }
+
+  .uploadedPhotosContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 95%;
+    padding: rem(96) 0;
+    margin-bottom: rem(64);
+    border-radius: rem(32);
+    background-color: $white-one;
+    box-shadow: $shadow-two;
+
+    .uploadedPhotos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: rem(32);
+      margin-bottom: rem(96);
+      .photoContainer {
+        position: relative;
+        background-color: $grey-one;
+        height: auto;
+        width: rem(248);
+        height: rem(186.4);
+        scroll-snap-align: start;
+        transition: transform 0.3s ease-in-out;
+        border-radius: rem(32);
+       cursor:grab;
+       &:active {
+        cursor: grabbing;
+       }
+
+        .deleteButtonContainer {
+          position: absolute;
+          top: rem(8);
+          right: rem(12);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $white-one;
+          width: rem(28);
+          height: rem(28);
+          border-radius: 50%;
+          cursor: pointer;
+          .deleteButton {
+          }
+        }
+
+        .image {
+          border-radius: rem(32);
+          box-shadow: $shadow-one;
+        }
+      }
+    }
+
+    .photoInputContainer {
+    }
+  }
+}

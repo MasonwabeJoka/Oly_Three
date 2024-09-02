@@ -6,17 +6,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
   width: rem(360);
-  height: 100vh;
 
   @include larger-than(mobile) {
     width: rem(1098);
-    left: rem(-48);
   }
   @include larger-than(desktop) {
     width: rem(1098);
-    left: rem(48)
   }
 
   .mobileSubcategoriesContainer {
@@ -30,65 +26,12 @@
   .wrapper {
     margin-right: rem(96);
 
-    .title {
-      display: flex;
-      justify-content: center;
-      margin-top: rem(32);
-      margin-bottom: rem(48);
-      color: $danger;
-      font-weight: bold;
-      margin-left: rem(48);
-    }
-
     .swipper {
       width: rem(1440);
       margin-left: rem(48);
-    }
 
-    .categories {
-      display: flex;
-      margin-left: rem(48);
-
-      .category {
-        margin-right: rem(16);
-      }
-    }
-
-    .navButtonsContainer {
-      margin-right: rem(48);
-      display: flex;
-      justify-content: flex-end;
-      margin-top: rem(32);
-      margin-bottom: rem(16);
-      width: rem(1002);
-      @include larger-than(desktop) {
-        width: 83%;
-        .navButtons {
-          margin-right: rem(44);
-        }
-      }
-    }
-
-    // .subcategoriesNavButtons {
-    //   display: flex;
-    //   justify-content: flex-end;
-    //   align-items: center;
-    //   gap: rem(16);
-    //   margin-top: rem(32);
-    //   margin-right: rem(48);
-    //   width: rem(1002);
-    //   .button {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //   }
-    // }
-
-    .proceedButtonContainer {
-      margin-left: rem(48);
-      display: flex;
-      justify-content: center;
-      .proceedButton {
+      .navButtons {
+        margin-top: rem(16);
       }
     }
   }

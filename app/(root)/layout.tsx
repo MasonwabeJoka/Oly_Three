@@ -8,7 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ErrorBoundary from "@/utils/ErrorBoundary";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
-
+import  QueryProvider  from "./queryProvider";
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
   description:
@@ -33,33 +33,35 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${outfit.className} ${styles.html}`}>
         <body className={styles.body}>
-          <div className={styles.wrapper}>
-            <aside className={styles.feed}>
-              <Feed />
-            </aside>
-            <div className={styles.main}>
-              <nav className={styles.nav}>
-                <Navbar />
-              </nav>
-              <main className={styles.children}>
-                {children}
-                <Toaster 
-                  richColors 
-                  toastOptions={{
-                    style: {
-                      height: "60px", 
-                      padding: "32px 28px",
-                    },
-                    className: 'class',
-                  }}
-                />
-              </main>
+          <QueryProvider>
+            <div className={styles.wrapper}>
+              <aside className={styles.feed}>
+                <Feed />
+              </aside>
+              <div className={styles.main}>
+                <nav className={styles.nav}>
+                  <Navbar />
+                </nav>
+                <main className={styles.children}>
+                  {children}
+                  <Toaster
+                    richColors
+                    toastOptions={{
+                      style: {
+                        height: "60px",
+                        padding: "32px 28px",
+                      },
+                      className: "class",
+                    }}
+                  />
+                </main>
+              </div>
             </div>
-          </div>
 
-          <footer className={styles.footer}>
-            <Footer />
-          </footer>
+            <footer className={styles.footer}>
+              <Footer />
+            </footer>
+          </QueryProvider>
         </body>
       </html>
     </ClerkProvider>

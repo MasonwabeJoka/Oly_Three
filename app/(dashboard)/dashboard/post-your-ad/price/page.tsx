@@ -9,7 +9,7 @@ import { useEffect, useState, ChangeEvent } from "react";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import Modal from "@/components/Modal";
 import TransactionFee from "@/components/modals/TransactionFeeModal";
-
+// TODO: Remove Transaction Fee
 const Price = () => {
   const [price, setPrice] = useState<string>("");
 
@@ -62,7 +62,7 @@ const Price = () => {
       <div className={styles.mainSection}>
         <div className={styles.controls}>
           <Select
-            className={styles.priceTypes}
+            className={styles.pricingOptions}
             options={[
               "Selling Price",
               "Negotiable Price",

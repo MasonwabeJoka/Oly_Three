@@ -1,9 +1,9 @@
-"use client";
-import styles from "./styles.module.scss";
-import DetailsForm from "@/components/forms/DetailsForm";
+// "use client";
+// import styles from "./styles.module.scss";
+import Details from "../components/Details";
 
-const Details = () => {
-  return <DetailsForm />;
-};
+// const Details = () => {
+//   return <DetailsForm />;
+// };
 
-export default Details;
+// export default Details;

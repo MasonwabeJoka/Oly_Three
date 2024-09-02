@@ -8,6 +8,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "./NavButtons";
 
+
 type DataType = {
   id: number;
   author: string;

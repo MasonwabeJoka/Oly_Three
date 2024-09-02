@@ -36,7 +36,12 @@ export const category = defineType({
             ],
             description: 'A brief description of the category or subcategory.',
         }),
-
+        defineField({
+            name: 'url',
+            title: 'URL',
+            type: 'url',
+            description: 'The URL of the category page.',
+        }),
         defineField({
             name: 'image',
             title: 'Image',
@@ -46,6 +51,7 @@ export const category = defineType({
             },
             description: 'An image representing the category.',
         }),
+        
         defineField({
             name: 'parentCategory',
             title: 'Parent Category',

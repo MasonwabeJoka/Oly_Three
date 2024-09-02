@@ -38,7 +38,7 @@ const SellerDetails = () => {
           <Avatar
             className={styles.avatar}
             avatar="/profilePic.jpg"
-            imageAlt="Avatar"
+            isOnline={true}
             avatarSize="large"
           />
           <div className={styles.details}>

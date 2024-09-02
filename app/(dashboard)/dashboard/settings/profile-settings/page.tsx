@@ -11,7 +11,7 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import { DevTool } from "@hookform/devtools";
+
 
 type FormValues = z.infer<typeof profileSchema>;
 const ProfileSettings = () => {
@@ -360,8 +360,7 @@ const ProfileSettings = () => {
           onClick={() => {}}
         />
       </div>
-      {/* DevTool for debugging form state */}
-      <DevTool control={control} />
+
     </form>
   );
 };
