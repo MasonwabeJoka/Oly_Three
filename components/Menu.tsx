@@ -13,38 +13,35 @@ import { useClerk } from "@clerk/clerk-react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { sign } from "crypto";
 
-const Notifications = () => {
+const Menu = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const router = useRouter();
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showMenuModal);
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
 
   const { signOut } = useClerk();
 
   const handleSignOut = () => {
     signOut();
-    setShowNotificationsModal(false);
+    setShowMenuModal(false);
   };
 
   const containerStyles = {
     width: isMobile ? "100vw" : isSidebarOpen ? "85vw" : "51.51rem",
     // width: isMobile ? "100vw" : isSidebarOpen ? "49.375rem" : "60.60rem",
-    minHeight: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "80vh",
+    height: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "80vh",
     // minHeight: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "45.875rem",
     boxShadow: isMobile ? "none" : "none",
     // boxShadow: isMobile ? "none" : shadow,
+    
   };
 
-  const notificationsStyles = {
+  const menuStyles = {
     columnGap: isMobile ? "1rem" : isSidebarOpen ? "3rem" : "3rem",
-    padding: isMobile ? "" : "3rem 3rem 12rem 3rem",
+    // padding: isMobile ? "" : "3rem 3rem 12rem 3rem",
   };
-  const notificationStyles = {
+  const menuItemStyles = {
     width: isMobile ? "6rem" : isSidebarOpen ? "12rem" : "12rem",
     height: isMobile ? "6rem" : isSidebarOpen ? "12rem" : "12rem",
     marginBottom: isMobile ? "1rem" : isSidebarOpen ? "1rem" : "1rem",
@@ -61,19 +58,14 @@ const Notifications = () => {
   return (
     <MaxWidthWrapper className={styles.maxWidthWrapper}>
       <div className={styles.container} style={containerStyles}>
-        <ul className={styles.notifications} style={notificationsStyles}>
-          {MenuData.map((notification: any) => {
-            const { id, icon, text, path } = notification;
+        <ul className={styles.menuStyles} style={menuStyles}>
+          {MenuData.map((menuItem: any) => {
+            const { id, icon, text, path } = menuItem;
             return (
-              <Link href={path}>
-                <li
-                  key={id}
-                  className={styles.notification}
-                  style={notificationStyles}
-                  
-                >
+              <Link href={path} key={id}>
+                <li className={styles.menuItem} style={menuItemStyles}>
                   {text === "Logout" ? (
-                    <>
+                    <div>
                       <SignedIn>
                         <div
                           className={styles.iconContainer}
@@ -93,7 +85,7 @@ const Notifications = () => {
                         <div
                           className={styles.iconContainer}
                           style={iconContainerSize}
-                          onClick={() => setShowNotificationsModal(false)}
+                          onClick={() => setShowMenuModal(false)}
                         >
                           <Icon
                             src={icon}
@@ -104,7 +96,7 @@ const Notifications = () => {
                           />
                         </div>
                       </SignedOut>
-                    </>
+                    </div>
                   ) : (
                     <div
                       className={styles.iconContainer}
@@ -140,7 +132,7 @@ const Notifications = () => {
               autoFocus={false}
               disabled={false}
               ariaHidden={false}
-              onClick={() => setShowNotificationsModal(false)}
+              onClick={() => setShowMenuModal(false)}
             />
           </div>
         )}
@@ -149,4 +141,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default Menu;

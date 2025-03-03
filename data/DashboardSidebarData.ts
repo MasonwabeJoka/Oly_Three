@@ -1,8 +1,9 @@
 import {usePathname} from "next/navigation";
+import useFormStore from "@/app/(dashboard)/dashboard/post-your-ad/store/useFormStore";
 
 const DashboardSidebarData = () => {
   const pathname= usePathname()
-  
+  const { setCurrentStepIndex } = useFormStore();
  const data = [
   {
     id: 1,
@@ -18,8 +19,8 @@ const DashboardSidebarData = () => {
     icon: '/icons/dashboard-sidebar/post-your-ad.png',
     active_icon: '/icons/dashboard-sidebar/post-your-ad-hovered.png',
     label: 'Post Your Ad',
-    link: '/dashboard/post-your-ad/home',
-    active: pathname === "/dashboard/post-your-ad/select-a-category" || pathname === "/dashboard/post-your-ad/home",
+    link: '/dashboard/post-your-ad',
+    active: pathname === "/dashboard/post-your-ad",
     onClick: () => {}
 },
 {

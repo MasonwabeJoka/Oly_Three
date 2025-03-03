@@ -1,5 +1,5 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
 
 .breadcrumbs {
   color: $grey-two;
@@ -19,9 +19,7 @@
   }
 
   .lastBreadcrumb {
-   
   }
-  
 
   .searchResult {
     font-weight: 500;

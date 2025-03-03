@@ -1,9 +1,7 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .form {
- 
   .selectedDetailContainer {
     padding: rem(16) rem(32);
     position: relative;

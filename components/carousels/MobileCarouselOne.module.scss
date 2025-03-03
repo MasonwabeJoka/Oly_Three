@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -21,7 +20,7 @@
       display: flex;
       flex-direction: column;
       width: rem(311);
-      border-radius: rem(32) ;
+      border-radius: rem(32);
       padding: 0;
       background-color: $white-four;
       z-index: 5;
@@ -40,8 +39,6 @@
           line-height: normal;
         }
       }
-
-   
     }
   }
   .slideDotsContainer {

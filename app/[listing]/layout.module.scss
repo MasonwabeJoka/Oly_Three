@@ -1,10 +1,7 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"); /* normalization from cdnjs.com/libraries/normalize*/
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
-
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import "@/app/globals.css";
 .html {
   scroll-behavior: smooth;
 }
@@ -132,6 +129,6 @@
   }
 }
 
-:export {
-  body: body;
-}
+// :export {
+//   body: body;
+// }

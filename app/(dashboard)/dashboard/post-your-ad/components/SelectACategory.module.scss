@@ -1,12 +1,23 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: rem(360);
+
+  .titleContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: rem(32);
+    width: 100%;
+    .title {
+      color: $danger;
+      font-size: rem(20);
+      font-weight: 600;
+    }
+  }
 
   @include larger-than(mobile) {
     width: rem(1098);
@@ -25,14 +36,24 @@
 
   .wrapper {
     margin-right: rem(96);
+    width: 100%;
 
     .swipper {
       width: rem(1440);
       margin-left: rem(48);
-
-      .navButtons {
-        margin-top: rem(16);
-      }
     }
+  }
+
+  .subcategories {
+    height: auto;
+    padding-bottom: rem(16);
+  }
+  .navButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: rem(1098);
+    padding-right: rem(72);
+    margin-bottom: rem(16);
   }
 }

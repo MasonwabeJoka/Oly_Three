@@ -6,6 +6,7 @@ import { useSwiper } from "swiper/react";
 const NavButtons = () => {
   const swiper = useSwiper();
  
+ 
   return (
     <div className={styles.container}>
       <div className={styles.prev}>
@@ -27,7 +28,7 @@ const NavButtons = () => {
           ariaLabel="Nav Previous Button"
           autoFocus={false}
           disabled={false}
-          onClick={() => swiper.slidePrev()}
+          onClick={() => swiper?.slidePrev()}
         />
       </div>
       <div className={styles.next}>
@@ -49,7 +50,7 @@ const NavButtons = () => {
           ariaLabel="Nav Next Button"
           autoFocus={false}
           disabled={false}
-          onClick={() => swiper.slideNext()}
+          onClick={() => swiper?.slideNext()}
         />
       </div>
     </div>

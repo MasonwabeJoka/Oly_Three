@@ -1,12 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .theirMessageContainer {
   display: flex;
   margin-bottom: rem(24);
   align-items: flex-start;
-  // background-color: yellow;
 
   .avatarContainer {
     margin-right: rem(36);

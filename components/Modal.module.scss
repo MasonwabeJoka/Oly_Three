@@ -1,20 +1,24 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .modalOverlay {
-  position: fixed;
-  top: 0;
+  position: fixed; /* Stays in place when scrolling */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the element */
+  z-index: 5; /* Ensures it's above other content */
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 100;
   cursor: url("/icons/X.png"), auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: $white-four;
- 
-}
-
-.modalContent {
-  cursor: default;
+  .modalContent {
+    cursor: default;
+    height: 100vh;
+  }
 }

@@ -1,4 +1,4 @@
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import ClientConfig from "../config/client-config"
 import { groq } from "next-sanity"
 import { ImageFile } from '../Types/ImageFile';
@@ -22,5 +22,6 @@ export async function getImageFilesById(ids: string[]): Promise<ImageFile[]> {
   const params = { ids };
   
   const imageFiles = await client.fetch(query, params);
+
   return imageFiles;
 }

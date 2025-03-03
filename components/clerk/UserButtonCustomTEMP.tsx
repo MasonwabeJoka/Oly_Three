@@ -9,7 +9,7 @@ const UserButton = () => {
   const setShowModal = useNotificationsModalStore(
     (state) => state.setShowModal
   );
-  const setShowNotificationsModal = useNotificationsModalStore(
+  const setShowMenuModal = useNotificationsModalStore(
     (state) => state.setShowModal
   );
   const { user } = useUser();

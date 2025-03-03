@@ -1,14 +1,11 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   width: rem(311);
 
   @include larger-than(mobile) {
     width: rem(1098);
-  
-   
   }
 
   .titleContainer {
@@ -25,10 +22,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 114%;
     padding-left: rem(100);
     padding-right: rem(100);
-   margin-bottom: rem(64);
+    margin-bottom: rem(64);
+
     .children {
       width: 100%;
     }

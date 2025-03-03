@@ -1,6 +1,8 @@
 import styles from "./layout.module.scss";
 import { ClerkProvider } from "@clerk/nextjs";
-import Outfit from "next/font/local";
+// import Outfit from "next/font/local";
+
+import  localFont  from 'next/font/local'
 
 
 export const metadata = {
@@ -9,11 +11,11 @@ export const metadata = {
     "Whether you're returning or new, access OLY Marketplace with ease. Discover deals, showcase items, and connect with a trusted community of members.",
 };
 
-const outfit = Outfit({
-  src: "./outfit.ttf",
-  display: "swap",
-  fallback: ["roboto", "system-ui", "arial"],
-});
+const outfit = localFont({
+  src: './outfit.ttf',
+  display: 'swap',
+  fallback: ['roboto', 'system-ui', 'arial'],
+})
 export default function RootLayout({
   children,
 }: {
@@ -21,9 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={outfit.className}>
-        <body className={styles.body}>{children}</body>
-      </html>
+      <div className={outfit.className}>
+        <div className={styles.body}>{children}</div>
+      </div>
     </ClerkProvider>
   );
 }

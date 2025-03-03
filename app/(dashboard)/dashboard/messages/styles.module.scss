@@ -1,8 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
-.container ::-webkit-scrollbar-track {
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *; .container: : -webkit-scrollbar-track {
   margin-block: rem(80) !important;
 }
 
@@ -43,7 +41,7 @@
           // box-shadow:
           //   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
           //   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-            box-shadow: $shadow-one;
+          box-shadow: $shadow-one;
           cursor: pointer;
 
           .avatarContainer {
@@ -104,7 +102,7 @@
       width: rem(662);
       height: 96vh;
       margin-left: rem(32);
-      // margin-top: rem(96);
+
       overflow: auto;
 
       .mainSectionWrapper {
@@ -113,7 +111,6 @@
           display: flex;
           margin-bottom: rem(24);
           align-items: flex-start;
-          // background-color: yellow;
 
           .avatarContainer {
             margin-right: rem(36);
@@ -136,7 +133,7 @@
                 box-shadow:
                   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
                   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-                  box-shadow: $shadow-one;
+                box-shadow: $shadow-one;
               }
             }
           }
@@ -174,7 +171,7 @@
                 box-shadow:
                   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
                   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-                  box-shadow: $shadow-one;
+                box-shadow: $shadow-one;
               }
             }
           }

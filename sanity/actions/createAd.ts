@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import ClientConfig from '../config/client-config';
 import { AdSchema } from '../Types/Ad';
 

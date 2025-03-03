@@ -1,9 +1,7 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .form {
- 
   .selectedDetailContainer {
     position: relative;
     padding: rem(16) rem(32);
@@ -30,22 +28,30 @@
       border-radius: 50%;
       cursor: pointer;
 
-      
       .deleteButton {
       }
     }
-
-    .selectedDetailTitle {
-      color: $black-four;
-      margin-top: rem(24);
-      margin-bottom: rem(8);
+    .selectedDetailDescriptionContainer {
       text-align: center;
-    }
 
-    .selectedDetailDescription {
-      color: $grey-four;
-      text-align: center;
-      margin-bottom: rem(48);
+      .selectedDetailTitle {
+        color: $black-four;
+        margin-top: rem(24);
+        margin-bottom: rem(8);
+        padding: 0 rem(16);
+        text-align: center;
+      }
+
+      .selectedDetailDescription {
+        color: $grey-four;
+        text-align: center;
+        padding: 0 rem(16);
+      }
+
+      .selectedDetailExample {
+        color: $grey-four;
+        padding: 0 rem(16);
+      }
     }
 
     .selectedDetailInputContainer {

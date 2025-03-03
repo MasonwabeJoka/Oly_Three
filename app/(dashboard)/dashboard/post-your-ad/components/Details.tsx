@@ -8,19 +8,19 @@ import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
-import { featuresData } from "@/data/FeaturesData";
-import { multiStepFormSchema } from "@/lib/validations/formValidations";
+// import { multiStepFormSchema } from "@/lib/validations/formValidations";
+import { detailsValidations } from "../validations/multiStepFormValidations";
 import EditMode from "../../../dashboard/post-your-ad/components/EditMode";
 import SelectedDetail from "./SelectedDetail";
 import { FormWrapper } from "./FormWrapper";
-import useFormStore from "../store/useFormStore";
 
-type FormValues = z.infer<typeof multiStepFormSchema>;
+type FormValues = z.infer<typeof detailsValidations>;
 // TODO: On edit mode the textarea should grow with text.
 // TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
 
 const Details = () => {
   const [matchFound, setMatchFound] = useState(true);
+  const [showSpecificationForm, setShowSpecificationForm] = useState(false);
 
   const {
     register,
@@ -111,7 +111,6 @@ const Details = () => {
                 id="conditions"
                 ariaLabel="Conditions"
                 autoFocus={false}
-                autoComplete="off"
                 disabled={false}
                 required={false}
                 multiple={false}
@@ -119,11 +118,12 @@ const Details = () => {
                 {...register("condition")}
               />
             </div>
+
             <div className={styles.selectDetailContainer}>
               <Select
                 options={detailsTitles}
                 className={styles.selectDetail}
-                currentValue="See a list of details you can include"
+                currentValue="Select a product detail"
                 selectSize="large"
                 selectColourType="normal"
                 label="Choose a detail"
@@ -160,7 +160,7 @@ const Details = () => {
                     details={details}
                     setDetails={setDetails}
                     watch={watch}
-                    setMatchFound={setMatchFound}
+                    setMatchFound={() => setMatchFound(false)}
                   />
                 );
               } else {
@@ -239,6 +239,122 @@ const Details = () => {
                 )
               )}
             </ul>
+            <div className={styles.addSpecificationsContainer}>
+              <Button
+                className={styles.addSpecifications}
+                buttonChildren="Add product specifications"
+                buttonType="normal"
+                buttonSize="large"
+                name="addSpecification"
+                type="button"
+                ariaLabel="Add Product Specification Button"
+                autoFocus={false}
+                disabled={false}
+                onClick={() => setShowSpecificationForm(!showSpecificationForm)}
+              />
+            </div>
+            {showSpecificationForm && (
+              <>
+                <SelectedDetail
+                  id={"a"}
+                  initialValue="Select a product detail to add"
+                  detail={
+                    "Provide details such as dimensions, weight, or any other relevant technical specifications."
+                  }
+                  description={
+                    "If you use a colon (:) to separate the label from the value, the label will be displayed in bold to make key details stand out."
+                  }
+                  boldTextExample={"Screen size"}
+                  normalTextExample={"6.1 inches"}
+                  placeholder={"Add product specification"}
+                  isFieldDirty={isSelectDetailDirty}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  trigger={trigger}
+                  selectDetailValue={selectDetailValue}
+                  details={details}
+                  setDetails={setDetails}
+                  watch={watch}
+                  setMatchFound={() => setShowSpecificationForm(false)}
+                />
+                <ul className={styles.details}>
+                  {details.map((detail: any, index) =>
+                    editIndex !== index ? (
+                      <li key={index} className={styles.detail}>
+                        <div className={styles.detailButtons}>
+                          <div className={styles.editButtonContainer}>
+                            <Button
+                              className={`${styles.editButton} ${styles.detailButton}`}
+                              buttonChildren={
+                                <Image
+                                  src="/icons/pencil.png"
+                                  alt="edit-icon"
+                                  width={18}
+                                  height={18}
+                                />
+                              }
+                              buttonType="roundStandardFeed"
+                              buttonSize=""
+                              name="edit-btn"
+                              type="button"
+                              ariaLabel="Edit Button"
+                              autoFocus={false}
+                              disabled={false}
+                              onClick={() => editDetail(index)}
+                            />
+                          </div>
+                          <div className={styles.deleteButtonContainer}>
+                            <Button
+                              className={`${styles.deleteButton} ${styles.detailButton}`}
+                              buttonChildren={
+                                <Image
+                                  src="/icons/trash.png"
+                                  alt="delete-icon"
+                                  width={24}
+                                  height={24}
+                                />
+                              }
+                              buttonType="roundStandardFeed"
+                              buttonSize=""
+                              name="delete-btn"
+                              type="button"
+                              ariaLabel="Delete Button"
+                              autoFocus={false}
+                              disabled={false}
+                              onClick={() => handleDeleteItem(index)}
+                            />
+                          </div>
+                        </div>
+                        <p className={styles.detailText}>
+                          <span style={{ fontWeight: "600" }}>
+                            {detail?.selectDetail}:
+                          </span>
+                          {"  "}
+                          <span>{detail?.value}</span>
+                        </p>
+                      </li>
+                    ) : (
+                      <EditMode
+                        editValue={editValue}
+                        setValue={setValue}
+                        updateDetail={(updatedValue: string) =>
+                          updateDetail(index, updatedValue)
+                        }
+                        cancelEdit={cancelEdit}
+                        register={register}
+                        errors={errors}
+                        watch={watch}
+                        key={index}
+                      />
+                    )
+                  )}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       </div>

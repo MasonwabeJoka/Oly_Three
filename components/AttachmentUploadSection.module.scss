@@ -1,0 +1,64 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: $white-two;
+  border-radius: rem(32);
+  // row-gap: rem(20);
+  .attachmentContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: rem(920);
+    padding: rem(32);
+    border-radius: rem(32);
+    cursor: pointer;
+
+    .iconContainer {
+      width: rem(80);
+      height: rem(80);
+      border-radius: rem(16);
+      background-color: $grey-one;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 54%;
+      height: inherit;
+      margin-left: rem(48);
+
+      .title {
+        font-size: $h4;
+      }
+    }
+
+    .publishButtonContainer {
+      display: flex;
+      align-items: center;
+      margin-left: rem(48);
+      margin-right: rem(64);
+
+      .publishButton {
+      }
+
+      .publishButtonText {
+        margin-left: rem(8);
+      }
+    }
+
+    .deleteButton {
+      background-color: $white-four;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(24);
+      height: rem(24);
+      border-radius: 50%;
+      margin-right: rem(16);
+    }
+  }
+}

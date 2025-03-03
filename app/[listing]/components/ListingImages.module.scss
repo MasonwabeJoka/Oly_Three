@@ -1,20 +1,19 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.listingImages {
+  margin-top: rem(56);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .listingImages {
-      margin-top: rem(56);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  .breadcrumbsContainer {
+    margin: rem(96) rem(0) rem(8) rem(32);
+  }
 
-      .breadcrumbsContainer {
-        margin: rem(96) rem(0) rem(8) rem(32);
-      }
-
-      .gallery {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

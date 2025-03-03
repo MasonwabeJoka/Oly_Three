@@ -15,7 +15,8 @@ const ads = [
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
       "https://images.unsplash.com/photo-1580596779601-d51470b2c5a4"
     ],
-    details: "Located in a quiet neighborhood, close to schools and parks.",
+    details: ["Located in a quiet neighborhood, close to schools and parks."],
+    
     features: ["4 bedrooms", "3 bathrooms", "2 car garage", "Large garden"],
     categories: ["Properties"]
   },

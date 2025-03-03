@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .swipper {
   display: flex;
   flex-direction: column;
@@ -13,18 +12,11 @@
     margin-bottom: rem(24);
   }
 
-  .navButtons {
+  .buttonsContainer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: rem(16);
-
-    margin-bottom: rem(16);
-
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    gap: rem(240);
+    margin-right: 14.6%;
   }
 }

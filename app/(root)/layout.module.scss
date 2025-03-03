@@ -1,10 +1,15 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"); /* normalization from cdnjs.com/libraries/normalize*/
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import "@/app/globals.css";
 .html {
   scroll-behavior: smooth;
+  height: 100%;
+  font-family:
+    var(--font-outfit),
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 .html::-webkit-scrollbar {
   width: rem(12);
@@ -36,7 +41,7 @@
   align-items: center;
   box-sizing: border-box;
   width: 100vw;
-  height: auto;
+  height: 100%;
   background-color: $white-four;
   font-size: rem(16);
   -webkit-font-smoothing: antialiased;
@@ -72,16 +77,16 @@
     margin-top: 0;
   }
   h1 {
-    font-size: $h1;
+    font-size: $h1 !important;
   }
   h2 {
-    font-size: $h2;
+    font-size: $h2 !important;
   }
   h3 {
-    font-size: $h3;
+    font-size: $h3 !important;
   }
   h4 {
-    font-size: $h4;
+    font-size: $h4 !important;
     font-weight: normal;
   }
 
@@ -117,6 +122,7 @@
 
   .wrapper {
     display: flex;
+    min-height: 100vh;
     justify-content: center;
 
     .feed {
@@ -130,7 +136,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative; 
+      position: relative;
       .nav {
         display: flex;
         justify-content: center;
@@ -142,7 +148,6 @@
     }
     // Make sure the children fill up as much content as they can
     .children {
-     
       flex-grow: 1;
       flex-shrink: 1;
       flex-basis: 0%;
@@ -156,6 +161,6 @@
   }
 }
 
-:export {
-  body: body;
-}
+// :export {
+//   body: body;
+// }

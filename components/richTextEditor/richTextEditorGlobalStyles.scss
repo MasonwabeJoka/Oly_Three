@@ -1,8 +1,7 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
 * {
   font-family: "Outfit", sans-serif !important;
 }
@@ -84,7 +83,7 @@
 .fr-logo {
   display: none !important; /* Hide toolbar logo */
 }
-#fr-logo>span {
+#fr-logo > span {
   display: none !important; /* Hide toolbar logo */
 }
 

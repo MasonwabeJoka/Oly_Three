@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .tabs {
   display: flex;
   border-radius: rem(32);
@@ -21,7 +20,7 @@
     border-radius: rem(32);
     background-color: $white-three;
     box-shadow: $shadow-one;
-    
+
     .count {
       position: absolute;
       top: 50%;

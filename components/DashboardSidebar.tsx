@@ -8,7 +8,8 @@ import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import { User } from "@/sanity/Types/User";
-import  DashboardSidebarData  from "@/data/DashboardSidebarData";
+import { useUser } from "@clerk/nextjs";
+import DashboardSidebarData from "@/data/DashboardSidebarData";
 
 interface CurrentUserTemp {
   conversationIds: string[];
@@ -20,7 +21,6 @@ interface CurrentUserTemp {
   name: string;
   messageIds: string[];
   updatedAt: string;
-
 }
 interface DashboardSidebarProps {
   // currentUser: User;
@@ -34,7 +34,8 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
-  const data = DashboardSidebarData()
+  const data = DashboardSidebarData();
+  const { user, isSignedIn, isLoaded } = useUser();
 
   const logoStyles = {
     marginTop: isMobile ? "1rem" : "1.5rem",
@@ -43,22 +44,29 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
 
   return (
     <div className={styles.container}>
-       {!isMobile && (
+      {!isMobile && (
         <Link href="/" className={styles.logo} style={logoStyles}>
           <Image src="/logo.png" width={80} height={33.3} alt="logo" />
         </Link>
       )}
 
       <div className={styles.profile}>
-        <Avatar
+        {user?.hasImage && (
+          <Avatar
+            className={styles.avatar}
+            avatar={user?.imageUrl || "/profilePic.jpg"}
+            avatarSize={isMobile ? "regular" : "large"}
+          />
+        )}
+        {/* <Avatar
           className={styles.avatar}
           avatar={currentUser?.image || "/profilePic.jpg"}
           avatarSize={isMobile ? "regular" : "large"}
-        />
-        {!isMobile && <p className={styles.name}>Mongezi Shezi</p>}
+        /> */}
+        {!isMobile && <p className={styles.name}>{user?.fullName || user?.username}</p>}
       </div>
       <div>
-      <ul className={styles.mainMenu} role="list">
+        <ul className={styles.mainMenu} role="list">
           {data.slice(0, -1).map((menuItem) => {
             const { id, icon, active_icon, label, link, active, onClick } =
               menuItem;

@@ -1,18 +1,17 @@
-// import "../globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Feed from "@/components/Feed";
-import Footer from "@/components/layouts/Footer";
 import styles from "./layout.module.scss";
 import Outfit from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import ErrorBoundary from "@/utils/ErrorBoundary";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
-import  QueryProvider  from "./queryProvider";
+import QueryProvider from "./queryProvider";
+
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
   description:
-    "OLY Redefines classifieds for the modern age. From seamless auctions to Instagram-inspired feeds, enjoy a platform designed for today's digital trading. Promote with ease on social channels, like Facebook and expand your reach.",
+    "OLY Redefines classifieds for the modern age. From seamless auctions to Instagram-inspired feeds, enjoy a platform designed for today's digital trading.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -57,10 +56,6 @@ export default function RootLayout({
                 </main>
               </div>
             </div>
-
-            <footer className={styles.footer}>
-              <Footer />
-            </footer>
           </QueryProvider>
         </body>
       </html>

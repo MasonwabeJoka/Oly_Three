@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity';
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import ClientConfig from "../config/client-config"
 import { Category } from '../Types/Category';
 

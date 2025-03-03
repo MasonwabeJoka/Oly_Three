@@ -11,49 +11,44 @@ import ReviewTitleAndDescription from "./reviewForm/ReviewTitleAndDescription";
 import ReviewVideos from "./reviewForm/ReviewVideos";
 import { FormWrapper } from "./FormWrapper";
 
-const SubmitForm = ({ goTo }: { goTo: (index: number) => void }) => {
+const SubmitForm = () => {
   // https://chatgpt.com/share/45cb30a0-a739-4224-bea5-82b0c352dd28
   return (
     <FormWrapper title="Review Your Listing">
       <div className={styles.container}>
         <div className={styles.reviewSectionContainer}>
-          <p className={styles.description}>
-            Please review the information below to ensure everything is correct.
-            If you need to make any changes, click the "Edit" button next to the
-            relevant section.
-          </p>
           <div className={styles.reviewSection}>
             <div className={styles.section}>
-              <ReviewCategories goTo={goTo}/>
+              <ReviewCategories />
             </div>
             <div className={styles.section}>
-              <ReviewTitleAndDescription goTo={goTo}/>
+              <ReviewTitleAndDescription />
             </div>
             <div className={styles.section}>
-              <ReviewPrice goTo={goTo}/>
+              <ReviewPrice />
             </div>
             <div className={styles.section}>
-              <ReviewDetails goTo={goTo}/>
+              <ReviewDetails />
             </div>
             <div className={styles.section}>
-              <ReviewLocation goTo={goTo}/>
+              <ReviewLocation />
             </div>
             <div className={styles.section}>
-              <ReviewFeatures goTo={goTo}/>
+              <ReviewFeatures />
             </div>
             <div className={styles.section}>
-              <ReviewPhotos goTo={goTo}/>
+              <ReviewPhotos />
             </div>
             <div className={styles.section}>
-              <ReviewVideos goTo={goTo}/>
+              <ReviewVideos />
             </div>
             <div className={styles.section}>
-              <ReviewAttachments goTo={goTo}/>
+              <ReviewAttachments />
             </div>
           </div>
         </div>
         <div className={styles.confirmation}>
-          By clicking the "Finish" button below, you confirm that all the
+          By clicking the "Publish My Listing" button below, you confirm that all the
           information provided is accurate and that you agree to our{" "}
           <Link href="#" className={styles.link}>
             terms and conditions.

@@ -1,25 +1,23 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .buttonsContainer {
-    display: flex;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: rem(56);
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: rem(56);
 
-    .buttons {
-    }
-    .bidContainer {
-      margin-right: rem(20);
-      .bidButton {
-        margin-bottom: rem(16);
-      }
-    }
-    .buyContainer {
-      margin-bottom: rem(20);
-   
-    }
-    .contactSellerContainer {
+  .buttons {
+  }
+  .bidContainer {
+    margin-right: rem(20);
+    .bidButton {
+      margin-bottom: rem(16);
     }
   }
+  .buyContainer {
+    margin-bottom: rem(20);
+  }
+  .contactSellerContainer {
+  }
+}

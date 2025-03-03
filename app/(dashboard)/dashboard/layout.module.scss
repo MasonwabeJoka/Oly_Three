@@ -1,8 +1,7 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"); /* normalization from cdnjs.com/libraries/normalize*/
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import "@/app/globals.css";
 .html {
   scroll-behavior: smooth;
 }
@@ -43,7 +42,6 @@
   overflow-x: hidden;
   scroll-behavior: smooth;
 
-   
   @include larger-than(mobile) {
     width: 100vw;
   }
@@ -123,7 +121,6 @@
       flex-direction: row;
       // width: rem(1440);
       width: 100vw;
-   
     }
     @include larger-than(desktop) {
       width: 80vw;
@@ -163,18 +160,16 @@
       flex-direction: column;
       align-items: center;
       margin-left: rem(32);
- 
+
       @include larger-than(mobile) {
         display: unset;
         width: rem(1098);
         margin-left: auto;
-      
       }
       @include larger-than(desktop) {
         display: unset;
         width: 72%;
         margin: 0;
-      
       }
 
       .logo {
@@ -186,6 +181,4 @@
       }
     }
   }
-
-
 }

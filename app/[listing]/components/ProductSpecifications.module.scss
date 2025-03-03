@@ -1,0 +1,50 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.specsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  min-height: rem(200);
+
+  .title {
+    color: $danger;
+    font-weight: 600;
+    margin-top: rem(64);
+    margin-bottom: rem(24);
+  }
+
+  .infoItems {
+    max-width: 72%;
+    margin: 0 auto rem(96);
+    column-count: 2;
+    column-gap: rem(48);
+    padding-top: rem(48);
+
+    .infoItem {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: rem(16);
+
+      .bulletContainer {
+        .bullet {
+          position: relative;
+          width: rem(24);
+          height: rem(12);
+          border: rem(1) solid $grey-four;
+          border-radius: rem(6);
+          margin-right: rem(20);
+          margin-top: rem(8);
+          break-after: always;
+          box-shadow: 2px 2px 3px rgb(177, 189, 189);
+        }
+      }
+      .infoItemContainer {
+        p {
+          font-size: $h4;
+        }
+      }
+    }
+  }
+}

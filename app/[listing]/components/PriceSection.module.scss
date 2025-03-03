@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .priceSection {
   display: flex;
   flex-direction: column;
@@ -9,15 +8,17 @@
   margin-bottom: rem(56);
 
   .priceLabel {
-    margin-bottom: rem(-8);
+    // margin-bottom: rem(-8);
   }
   .price {
     margin-bottom: rem(16);
     font-weight: 600;
+    font-size: $h2;
   }
 
   .nonAuctionPrice {
     font-weight: 600;
+    font-size: $h2;
   }
 
   .countDown {

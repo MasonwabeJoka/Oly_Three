@@ -4,7 +4,7 @@ import {
   PartialAd,
   PartialAdSchema,
 } from "@/sanity/Types/PartialSchemas/AdPartial";
-import { fetchAds } from "@/sanity/actions/fetchAdsTemp";
+import { fetchAds } from "@/sanity/actions/fetchAds";
 import { FetchAdsParams } from "@/sanity/actions/fetchAds";
 
 interface FetchAdStore {

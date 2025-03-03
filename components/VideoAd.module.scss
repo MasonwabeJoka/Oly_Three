@@ -1,36 +1,33 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .videoAdContainer {
-    width: rem(311);
-    height: rem(175);
-    padding: 0;
-    margin: rem(100) auto;
-    
-    @include larger-than(mobile) {
-        width: rem(628);
-        height: rem(353.25);
-    }
+  width: rem(311);
+  height: rem(175);
+  padding: 0;
+  margin: rem(100) auto;
 
-    .titleContainer {
-        display: flex;
-        text-align: center;
-        height: fit-content;
-        margin: 0 auto;
-        background-color: white;
-        .title {
-            flex-basis: 87%;
-        }
-    }
+  @include larger-than(mobile) {
+    width: rem(628);
+    height: rem(353.25);
+  }
 
-    .button {
-        width: auto;
-        height: fit-content;
-
+  .titleContainer {
+    display: flex;
+    text-align: center;
+    height: fit-content;
+    margin: 0 auto;
+    background-color: white;
+    .title {
+      flex-basis: 87%;
     }
+  }
 
-    .video {
-        
-    }
+  .button {
+    width: auto;
+    height: fit-content;
+  }
+
+  .video {
+  }
 }

@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -23,7 +22,7 @@
       font-weight: bold;
       color: $danger;
       margin-top: rem(56);
-      
+
       @include larger-than(mobile) {
         font-size: $h4;
         margin-top: rem(24);

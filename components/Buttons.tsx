@@ -2,6 +2,8 @@
 import styles from "./Buttons.module.scss";
 import useSidebarStore from "@/store/useSidebarStore";
 import React, { ButtonHTMLAttributes } from "react";
+
+//Todo: Change Button colour to $back-four on hover or if primary button.
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   buttonChildren: any;

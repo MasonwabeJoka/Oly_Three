@@ -4,7 +4,7 @@ import Icon from "@/components/Icon";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { UseFormRegisterReturn } from "react-hook-form";
-
+// Todo: Change colour on hover
 interface SelectProps {
   className?: string;
   selectSize:
@@ -157,7 +157,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             onClick={() => setShowOptions(!showOptions)}
             {...(reactHookFormProps ?? {})}
           >
-            <div className={selectClass}>
+            <div
+              className={selectClass}
+              style={{
+                backgroundColor: showOptions ? "#ffffff" : "#f3f7fa",
+                
+              }}
+            >
               <p
                 style={{
                   color:

@@ -12,11 +12,32 @@ export const auction = defineType({
             description: 'The initial price at which the auction starts.',
         }),
         defineField({
-            name: 'estimatedPrice',
-            title: 'Estimated Price',
+            name: 'reservePrice',
+            title: 'Reserve Price',
             type: 'number',
-            description: 'The estimated price range for the auctioned item.',
+            description: 'The minimum price that must be met in an auction.',
+            validation: (Rule) => Rule.min(0).max(999999999).warning('Reserve price must be a valid number between 0 and 999,999,999'),
         }),
+        defineField({
+            name: 'buyNowPrice',
+            title: 'Buy Now Price',
+            type: 'number',
+            description: 'The price at which the item can be bought immediately in an auction.',
+            validation: (Rule) => Rule.min(0).max(999999999).warning('Buy Now price must be a valid number between 0 and 999,999,999'),
+        }),
+        defineField({
+            name: 'ending',
+            title: 'Auction Ending',
+            type: 'datetime',
+            description: 'The date and time when the auction will end.',
+            options: {
+                dateFormat: 'YYYY-MM-DD',
+                timeFormat: 'HH:mm',
+                calendarTodayLabel: 'Today',
+            },
+            validation: (Rule) => Rule.required().warning('Auction ending time must be set.'),
+        }),
+  
         defineField({
             name: 'highestBid',
             title: 'Highest Bid',

@@ -15,6 +15,9 @@ import MobileSubcategories from "@/components/MobileSubcategories";
 import Button from "@/components/Buttons";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { FormWrapper } from "./FormWrapper";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { categoriesValidations } from "../validations/multiStepFormValidations";
+
 
 const SelectACategory = ({
   goTo,
@@ -97,7 +100,7 @@ const SelectACategory = ({
               slidesPerView={6}
               slidesOffsetAfter={240}
             >
-              <div className={styles.categories} style={{backgroundColor: "red"}}>
+              <div className={styles.categories}>
                 {categories.map((category) => {
                   return (
                     <SwiperSlide
@@ -114,14 +117,16 @@ const SelectACategory = ({
                   );
                 })}
               </div>
-              <div className={styles.navButtons}>
+              <div className={styles.navButtons} style={{ marginTop: "1rem" }}>
                 <NavButtons />
               </div>
             </Swiper>
 
             {activeCategory && activeCategory?.subcategories.length > 0 && (
-              <>
-                <h4 className={styles.title}>{activeCategory.category}</h4>
+              <div className={styles.subcategories}>
+                <div className={styles.titleContainer}>
+                  <h4 className={styles.title}>{activeCategory.category}</h4>
+                </div>
                 <div
                   style={{
                     marginLeft: "3rem",
@@ -129,7 +134,7 @@ const SelectACategory = ({
                   }}
                 >
                   <Swiper
-                    spaceBetween={8}
+                    spaceBetween={0}
                     slidesPerView="auto"
                     direction={"horizontal"}
                     freeMode={true}
@@ -192,7 +197,7 @@ const SelectACategory = ({
                     )}
                   </Swiper>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

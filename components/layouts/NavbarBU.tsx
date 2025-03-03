@@ -16,23 +16,18 @@ const Navbar = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
   const { user, isSignedIn, isLoaded } = useUser();
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showModal);
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
 
   const openOlyFeed = () => {
     setIsSidebarOpen(true);
   };
 
   const openModal = () => {
-    setShowNotificationsModal(true);
+    setShowMenuModal(true);
   };
 
   const isMobile = useIsMobileStore((state) => state.isMobile);
-
 
   return (
     <div

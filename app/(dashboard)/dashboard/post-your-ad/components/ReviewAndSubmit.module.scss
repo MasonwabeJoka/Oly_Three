@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -17,11 +16,15 @@
     flex-direction: column;
     align-items: center;
     width: 80%;
-
-    .description {
-      text-align: center;
-      padding: 0 rem(120);
+    margin-bottom: rem(64);
+    .descriptionContainer {
       margin-bottom: rem(64);
+
+      .description {
+        text-align: center;
+        padding: 0 rem(120);
+        margin-bottom: rem(16);
+      }
     }
 
     .reviewSection {

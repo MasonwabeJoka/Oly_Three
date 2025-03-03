@@ -3,17 +3,15 @@ import styles from "./Modal.module.scss";
 import { useEffect } from "react";
 
 type Props = {
-  showModal: boolean;
-  setShowModal: (value: boolean) => void;
-  modalContent: JSX.Element | null;
-  dashboard?: boolean;
+  showModal: boolean; // Boolean to show or hide the modal
+  setShowModal: (value: boolean) => void; // Function to close the modal
+  modalContent: JSX.Element; // JSX element to render inside the modal
 };
 
 const Modal = ({
   showModal,
   setShowModal,
   modalContent,
-  dashboard = false,
 }: Props) => {
   // Close modal function
   const handleClose = () => {
@@ -44,15 +42,6 @@ const Modal = ({
         <div
           className={styles.modalOverlay}
           onClick={handleClose}
-          style={
-            { 
-              
-              left: dashboard? "50%" : "0",
-              transform: dashboard ? "translateX(-34.5%)" : "none",
-              width: dashboard ? "57vw" : "100vw",
-
-            }
-        }
         >
           <div
             className={styles.modalContent}

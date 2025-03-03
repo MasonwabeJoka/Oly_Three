@@ -1,38 +1,37 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .menu {
-    display: flex;
-    justify-content: center;
-    margin-bottom: rem(24);
-    @include larger-than(mobile) {
-      gap: rem(16);
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .icon {
-    }
-
-    .menuText {
-      margin: 0;
-      font-weight: normal;
-      font-size: rem(16);
-    }
+  display: flex;
+  justify-content: center;
+  margin-bottom: rem(24);
+  @include larger-than(mobile) {
+    gap: rem(16);
+    justify-content: flex-start;
+    align-items: center;
   }
 
-  .menu:hover {
-    transform: scale(1.05);
+  .icon {
   }
 
-  .logout {
-    display: flex;
-    justify-content: center;
-    
-    @include larger-than(mobile) {
-      font-size: rem(16);
-      justify-content: flex-start;
-      align-items: center;
-    }
+  .menuText {
+    margin: 0;
+    font-weight: normal;
+    font-size: rem(16);
   }
+}
+
+.menu:hover {
+  transform: scale(1.05);
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+
+  @include larger-than(mobile) {
+    font-size: rem(16);
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

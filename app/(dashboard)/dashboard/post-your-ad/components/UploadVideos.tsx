@@ -1,6 +1,7 @@
 import { FormWrapper } from "./FormWrapper";
 import styles from "./UploadVideos.module.scss";
 import UploadBox from "@/components/UploadBox";
+import { uploadVideosValidations } from "../validations/multiStepFormValidations";
 
 const UploadVideos = () => {
   return (

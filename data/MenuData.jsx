@@ -5,7 +5,7 @@ export const MenuData = [
     icon: "/icons/dashboard-sidebar/post-your-ad.png",
     active_icon: '/icons/dashboard-sidebar/post-your-ad-hovered.png',
     text: "Post Your Ad",
-    path: "/dashboard/post-your-ad/select-a-category",
+    path: "/dashboard/post-your-ad",
   },
   {
     id: 2,

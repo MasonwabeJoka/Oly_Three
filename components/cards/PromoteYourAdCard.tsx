@@ -8,6 +8,7 @@ import Icon from "@/components/Icon";
 import useIsDashboardStore from "@/store/isDashboardStore";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
+import { useFormContext } from "react-hook-form";
 
 interface CardProps {
   id: string | number;
@@ -18,12 +19,12 @@ interface CardProps {
 }
 
 const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
-  const [selectedPrice, setSelectedPrice] = useState<number>(price[1]?.price);
+  const [selectedPrice, setSelectedPrice] = useState<number>(price[0]?.price);
   const [selectedDuration, setSelectedDuration] = useState<string>(
-    price[1]?.duration
+    price[0]?.duration
   );
-  const prices = price.map((price) => price.price);
   const durations = price.map((price) => price.duration);
+  const prices = price.map((price) => price.price);
   const isDashboard = useIsDashboardStore((state) => state.isDashboard);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -32,11 +33,17 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedDuration = e.target.value;
+
+    // Find the selected promotion based on the duration
     const selectedPromotion = price.find(
-      (price) => price.duration === selectedDuration
+      (promotion) => promotion.duration === selectedDuration
     );
-    if (selectedPromotion) setSelectedPrice(selectedPromotion?.price);
-    setSelectedDuration(selectedDuration); // Update selectedDuration state
+
+    // Update the price and duration based on the selection
+    if (selectedPromotion) {
+      setSelectedPrice(selectedPromotion.price); // Update the price
+    }
+    setSelectedDuration(selectedDuration); // Update the selected duration
   };
 
   const options = () => {
@@ -44,8 +51,12 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
     return duration;
   };
 
-  // When you select a promotion duration the value of the select must be replaced.
-  // When you select a promotion duration the checkbox must be checked.
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+  //Todo: When you select a promotion duration the value of the select must be replaced.
+  //Todo: When you select a promotion duration the checkbox must be checked.
 
   if (isMobile) {
     return (
@@ -86,7 +97,6 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               selectPrompt="5 Days"
               displayTextArray={["a", "b"]}
               label="Set PromotionDuration"
-              name="set-promotion_duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
@@ -95,6 +105,12 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               required={true}
               multiple={false}
               dashboard={isDashboard}
+              error={errors.promotionDuration?.message as string}
+              {...register("promotionDuration", {
+                onChange: (e) => {
+                  handleSelectChange(e);
+                },
+              })}
             />
           </div>
 
@@ -140,13 +156,13 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
     <div className={styles.container} ref={containerRef}>
       <div className={styles.wrapper} ref={wrapperRef}>
         <div className={styles.iconContainer}>
-        <Icon
-          className={styles.icon}
-          src={src}
-          alt={alt}
-          width={64}
-          height={64}
-        />
+          <Icon
+            className={styles.icon}
+            src={src}
+            alt={alt}
+            width={64}
+            height={64}
+          />
         </div>
         <div className={styles.formControls}>
           <p className={styles.title}>{title}</p>
@@ -154,14 +170,13 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           <div className={styles.setPromotionDurationContainer}>
             <Select
               options={options()}
-              currentValue="Promotion duration"
+              currentValue={selectedDuration} // Display the selected duration
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
-              selectPrompt="5 Days"
-              displayTextArray={["a", "b"]}
-              label="Set PromotionDuration"
-              name="set-promotion_duration"
+              selectPrompt="Select Promotion Duration"
+              displayTextArray={durations} // Display available durations
+              label="Set Promotion Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
@@ -170,6 +185,12 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               required={true}
               multiple={false}
               dashboard={isDashboard}
+              error={errors.promotionDuration?.message as string}
+              {...register("promotionDuration", {
+                onChange: (e) => {
+                  handleSelectChange(e);
+                },
+              })}
             />
           </div>
 

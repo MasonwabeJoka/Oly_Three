@@ -3,7 +3,7 @@ import { SectionWrapper } from "./SectionWrapper";
 
 const ReviewDetails = () => {
   return (
-    <SectionWrapper title="Details">
+    <SectionWrapper title="Details" pageNumber={1}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

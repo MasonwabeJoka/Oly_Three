@@ -7,7 +7,20 @@ import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
 import Image from "next/image";
 import { galleryData } from "@/data/GalleryData";
+import Button from "@/components/Buttons";
+import useEditStore from "../../store/useEditStore";
+import useFormStore from "../../store/useFormStore";
+import useUploadMediaStore from "../../store/useUploadMediaStore";
+
 const ReviewPhotos = () => {
+  const { setIsEditMode } = useEditStore();
+  const { goTo } = useFormStore();
+  const {setUploadVideos} = useUploadMediaStore();
+  const onClick = () => {
+    setIsEditMode(true);
+    goTo(5);
+    setUploadVideos(true);
+  };
   return (
     <MediaSectionWrapper title="Videos">
       <Swiper
@@ -23,8 +36,21 @@ const ReviewPhotos = () => {
           );
         })}
 
-        <div className={styles.navButtons}>
+        <div className={styles.buttonsContainer}>
           <NavButtons />
+          <Button
+              className={styles.editButton}
+              buttonChildren="Edit"
+              buttonType="normal"
+              buttonSize="small"
+              name="edit-btn"
+              type="button"
+              ariaLabel="Edit Button"
+              autoFocus={false}
+              disabled={false}
+              dashboard
+              onClick={onClick}
+            />
         </div>
       </Swiper>
     </MediaSectionWrapper>

@@ -1,19 +1,16 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    .titleContainer {
-       
+  .titleContainer {
+    .title {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+    }
+  }
 
-        .title {
-            position: -webkit-sticky; 
-        position: sticky;
-        top: 0;
-        }
-    }
-  
-    .paragraph {
-      font-size: $h4;
-    }
-  
+  .paragraph {
+    font-size: $h4;
+  }
 }

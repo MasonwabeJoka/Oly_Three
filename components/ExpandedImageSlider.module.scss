@@ -1,11 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   position: relative;
   border-radius: rem(32);
-background-color: yellow;
+  background-color: yellow;
   .buttonsAndLike {
     position: absolute;
     z-index: 10;
@@ -46,7 +45,7 @@ background-color: yellow;
       border-radius: 50%;
       transition: transform 0.2s;
       background-color: transparent;
-      cursor:auto;
+      cursor: auto;
 
       .button {
         display: flex;
@@ -58,12 +57,10 @@ background-color: yellow;
         // background-color: blue;
         opacity: 1;
         // margin-left: rem(32);
-        pointer-events:visible;
+        pointer-events: visible;
       }
 
       .leftButton {
-      
-   
       }
 
       .rightButton {

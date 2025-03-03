@@ -1,18 +1,17 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    width: 100%;
-    .title {
-        margin-top:rem(56);
-        margin-bottom:rem(48);
-        font-size: $h4;
-        color: $danger;
-        font-weight: bold;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  .title {
+    margin-top: rem(56);
+    margin-bottom: rem(48);
+    font-size: $h4;
+    color: $danger;
+    font-weight: bold;
+  }
 }

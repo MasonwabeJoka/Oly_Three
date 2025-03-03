@@ -2,7 +2,7 @@ import styles from "./ReviewLocation.module.scss";
 import { SectionWrapper } from "./SectionWrapper";
 const ReviewLocation = () => {
   return (
-    <SectionWrapper title="Location">
+    <SectionWrapper title="Location" pageNumber={10}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

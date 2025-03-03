@@ -3,7 +3,7 @@ import { SectionWrapper } from './SectionWrapper'
 
 const ReviewBankDetails = () => {
   return (
-    <SectionWrapper title="Bank Details">ReviewBankDetails</SectionWrapper>
+    <SectionWrapper title="Bank Details" pageNumber={4}>ReviewBankDetails</SectionWrapper>
   )
 }
 

@@ -4,7 +4,7 @@ import Select from "@/components/Select";
 
 const ReviewCategories = () => {
   return (
-    <SectionWrapper title="Categories" pageNumber={1}>
+    <SectionWrapper title="Categories" pageNumber={0}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

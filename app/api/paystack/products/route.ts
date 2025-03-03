@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import { z } from 'zod';
 import { getAuth } from '@clerk/nextjs/server';
 import { postAd } from '@/sanity/actions/postAd';

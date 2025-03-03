@@ -11,7 +11,7 @@ const Dashboard = () => {
          
           <h4 className={styles.title}>Dashboard</h4>
           <div className={styles.cards}>
-            <Link href="/dashboard/post-your-ad/home" className={styles.card}>
+            <Link href="/dashboard/post-your-ad" className={styles.card}>
               <LinkCard
                 image="/bear.jpg"
                 label="Post Your Ads"

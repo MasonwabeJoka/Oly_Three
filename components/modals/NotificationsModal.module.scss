@@ -1,9 +1,8 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    width: 100vw;
-    height: 100vh;
-    
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
 }

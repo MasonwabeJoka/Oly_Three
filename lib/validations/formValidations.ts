@@ -121,8 +121,9 @@ export const multiStepFormSchema = z.object({
   }).refine((val) => val !== "", {
     message: "Feature Error Message",
   }),
-
-  price: z.number({
+  
+// `z.coerce.number` allows Zod to automatically convert string inputs to numbers.
+  price: z.coerce.number({
     required_error: "Price is required.",
     invalid_type_error: "Price must be a number.",
   }).positive({
@@ -136,20 +137,68 @@ export const multiStepFormSchema = z.object({
     message: "Please select a valid pricing option.",
   }),
 
+  startingPrice: z.coerce.number({
+    required_error: "Starting price is required.",
+    invalid_type_error: "Starting price must be a number.",
+  }).nonnegative({
+    message: "Starting price must be 0 or greater.",
+  }),
+
+  reservePrice: z.coerce.number({
+    required_error: "Reserve price is required.",
+    invalid_type_error: "Reserve price must be a number.",
+  }).nonnegative({
+    message: "Reserve price must be 0 or greater.",
+  }).optional(),
+
+  buyNowPrice: z.coerce.number({
+    required_error: "Buy Now price is required.",
+    invalid_type_error: "Buy Now price must be a number.",
+  }).positive({
+    message: "Buy Now price must be greater than 0.",
+  }).optional(),
+
+  bidIncrement: z.coerce.number({
+    required_error: "Bid increment is required.",
+    invalid_type_error: "Bid increment must be a number.",
+  }).positive({
+    message: "Bid increment must be greater than 0.",
+  }),
+
+  startTime: z.coerce.date({
+    required_error: "Start time is required.",
+    invalid_type_error: "Start time must be a valid date and time.",
+  }).min(new Date(), {
+    message: "Start time must be in the future.",
+  }),
+
+  endTime: z.string({
+    required_error: "End time is required.",
+    invalid_type_error: "End time must be a string.",
+  }).refine((val) => {
+    const date = new Date(val);
+    return !isNaN(date.getTime());
+  }, {
+    message: "End time must be a valid date and time.",
+  }),
+
   bankName: z.string({
     required_error: "Please enter a bank name.",
     invalid_type_error: "Bank name must be a string.",
   }).min(2, "Bank name must be at least 2 characters long."),
 
-  accountName: z.string({
+  accountHolder: z.string({
     required_error: "Please enter an account name.",
-    invalid_type_error: "Account name must be a string.",
-  }).min(2, "Account name must be at least 2 characters long."),
+    invalid_type_error: "Account holder name must be a string.",
+  }).min(2, "Account holder name must be at least 2 characters long."),
 
-  accountNumber: z.string({
+  accountNumber: z
+  .string({
     required_error: "Please enter an account number.",
     invalid_type_error: "Account number must be a string.",
-  }).regex(/^\d{10,}$/, "Account number must be at least 10 digits long."),
+  })
+  .regex(/^\d+$/, { message: "Account number must contain only digits." })
+  .min(10, { message: "Account number must be at least 10 digits long." }),
 
   title: z.string({
     required_error: "Title is required.",
@@ -176,34 +225,33 @@ export const multiStepFormSchema = z.object({
   province: z.string({
     required_error: "Please select a province.",
     invalid_type_error: "Province must be a string.",
-  }).refine((val) => val !== "Province", {
+  }).refine((val) => val !== "" && val !== "Select your province", {
     message: "Please select a valid province.",
   }),
 
   city: z.string({
     required_error: "Please select a city.",
     invalid_type_error: "City must be a string.",
-  }).refine((val) => val !== "City", {
+  }).refine((val) => val !== "" && val !== "Select your city", {
     message: "Please select a valid city.",
   }),
 
   suburb: z.string({
     required_error: "Please select a suburb.",
     invalid_type_error: "Suburb must be a string.",
-  }).refine((val) => val !== "Suburb", {
+  }).refine((val) => val !== "" && val !== "Select your Suburb", {
     message: "Please select a valid suburb.",
   }),
 
-  customLocation: z.string().optional().refine((val) => val !== "", {
-    message: "Please provide a custom location.",
-  }),
+  customLocation: z.string().optional(),
+  promotionDuration: z.string().optional(),
 
-  promotionDuration: z.string({
-    required_error: "Please select a promotion duration.",
-    invalid_type_error: "Promotion duration must be a string.",
-  }).refine((val) => val !== "Select Duration", {
-    message: "Please select a valid promotion duration.",
-  }),
+  // promotionDuration: z.string({
+  //   required_error: "Please select a promotion duration.",
+  //   invalid_type_error: "Promotion duration must be a string.",
+  // }).refine((val) => val !== "Select Duration", {
+  //   message: "Please select a valid promotion duration.",
+  // }),
 
   "Reason for Selling": z.string().optional(),
   "Accessories Included": z.string().optional(),

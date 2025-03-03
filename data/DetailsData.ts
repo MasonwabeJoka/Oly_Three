@@ -6,6 +6,7 @@ interface Detail {
 }
 
 export const DetailsData: Detail[] = [
+
      {
         id: 1,
         detail: "Reason for Selling",
@@ -190,7 +191,7 @@ export const DetailsData: Detail[] = [
     {
         id: 31,
         detail: "Define Your Own Detail",
-        description: "Feel free to add your own detail. We recommend starting with a title (maximum 3 words), followed by a colon.",
+        description: "If you use a colon (:) to separate the label from the value, the label will be displayed in bold to make key details stand out.",
         example: "Title: Your detail here."
     },
 ];

@@ -1,10 +1,19 @@
 import { FormWrapper } from "./FormWrapper";
 import styles from "./UploadPhotos.module.scss";
 import UploadBox from "@/components/UploadBox";
-import UploadsSection from "../components/UploadsSection";
+import ImageUploadsSection from "../components/ImageUploadsSection";
 import Button from "@/components/Buttons";
+import useUploadMediaStore from "../store/useUploadMediaStore";
+import useUploadFiles from "../store/useUploadFiles";
+import { uploadPhotosValidations } from "../validations/multiStepFormValidations";
 
-const UploadPhotos = ({ goTo }: { goTo: (index: number) => void }) => {
+const UploadPhotos = () => {
+  const { uploadedImages } = useUploadFiles();
+  const { setReorderPhotos, setUploadPhotos } = useUploadMediaStore();
+  const reorderPhotos = () => {
+    setReorderPhotos(true);
+    setUploadPhotos(false);
+  };
   return (
     <FormWrapper title="Upload Photos">
       <div className={styles.container}>
@@ -12,7 +21,7 @@ const UploadPhotos = ({ goTo }: { goTo: (index: number) => void }) => {
           <UploadBox mediaType="photo" required={true} accept="image/*" />
         </div>
         <div className={styles.uploadedPhotos}>
-          <UploadsSection />
+          <ImageUploadsSection uploadedFiles={uploadedImages} />
         </div>
         <div className={styles.buttonContainer}>
           <Button
@@ -26,7 +35,7 @@ const UploadPhotos = ({ goTo }: { goTo: (index: number) => void }) => {
             autoFocus={false}
             disabled={false}
             dashboard
-            onClick={() => goTo(14)}
+            onClick={reorderPhotos}
           />
         </div>
       </div>

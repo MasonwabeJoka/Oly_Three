@@ -180,7 +180,7 @@ const MyAdsCard = ({
                     : description}
                 </p>
                 <div className={styles.cardBottom}>
-                  <h2 className={styles.price}>{price}</h2>
+                  <p className={styles.price}>{price}</p>
                   <div className={styles.icons}>
                     <div ref={statsIconRef}>
                       <Button

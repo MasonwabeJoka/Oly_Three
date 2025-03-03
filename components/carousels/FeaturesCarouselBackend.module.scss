@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -10,11 +9,10 @@
   // height: 70vh;
   min-height: 70vh;
   max-height: 120vh;
-  
+
   background-color: $grey-one;
   border-radius: rem(32);
   box-shadow: $shadow-one;
-
 
   .SlideDataContainer {
     position: relative;
@@ -24,7 +22,6 @@
     width: rem(1200);
     height: 80%;
     overflow-y: auto;
-    // background-color: yellowgreen;
   }
 
   .buttonContainer {

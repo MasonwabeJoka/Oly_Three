@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   .bidBuyButtonsContainer {
     display: flex;
@@ -81,7 +80,7 @@
       flex-direction: column;
       flex-wrap: wrap;
       gap: rem(12);
-   
+
       // display: grid;
       // grid-auto-flow: row; /* Items flow in a row direction */
       // grid-template-columns: repeat(
@@ -141,19 +140,14 @@
       }
     }
 
- 
-
-    
-      .allImagesBtn {
-        position: absolute;
-        top: 75%;
-        right: rem(56);
-        // transform: translate(-50%, -50%);
-        z-index: 5;
-        width: rem(202);
-      }
-    
-    
+    .allImagesBtn {
+      position: absolute;
+      top: 75%;
+      right: rem(56);
+      // transform: translate(-50%, -50%);
+      z-index: 5;
+      width: rem(202);
+    }
   }
 
   .postMetrics {

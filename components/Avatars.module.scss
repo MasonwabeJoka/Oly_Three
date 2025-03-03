@@ -1,8 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .avatarsContainer {
   position: relative;
   border-radius: 50%;
@@ -10,7 +8,7 @@
   outline: rem(4) solid $white-one;
 
   .isOnline {
-    position:absolute;
+    position: absolute;
     top: 0;
     right: 0;
     display: block;
@@ -37,9 +35,9 @@
     height: rem(72);
 
     .isOnline {
-      position:absolute;
+      position: absolute;
       top: 0;
-      right: rem(4) ;
+      right: rem(4);
       width: rem(14);
       height: rem(14);
     }
@@ -64,9 +62,9 @@
   }
 
   .isOnline {
-    position:absolute;
+    position: absolute;
     top: 0;
-    right: rem(-2) ;
+    right: rem(-2);
     width: rem(10);
     height: rem(10);
   }

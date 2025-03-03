@@ -1,0 +1,29 @@
+/* components/DateTimePicker.module.css */
+
+.container {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .datePicker,
+  .timePicker {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  

@@ -13,7 +13,10 @@ type SelectedDetailProps = {
   detail: string;
   initialValue: string;
   description: string;
-  example: string | string[];
+  placeholder?: string | string[];
+  example?: string | string[];
+  normalTextExample?: string;
+  boldTextExample?: string;
   isFieldDirty: boolean | undefined;
   setValue: any;
   handleSubmit: any;
@@ -34,7 +37,10 @@ const SelectedDetail = ({
   detail,
   initialValue,
   description,
+  placeholder,
   example,
+  boldTextExample,
+  normalTextExample,
   isFieldDirty,
   register,
   errors,
@@ -54,10 +60,6 @@ const SelectedDetail = ({
   const close = () => {
     setMatchFound(false);
   };
-
-  
-    
-
 
   const clickHandler = async () => {
     // Trigger validation
@@ -81,7 +83,7 @@ const SelectedDetail = ({
     <>
       <div className={styles.form}>
         <div key={id} className={styles.selectedDetailContainer}>
-          <div className={styles.deleteButtonContainer} onClick={close}>
+          <div className={styles.deleteButtonContainer} onClick={setMatchFound}>
             <Icon
               className={styles.deleteButton}
               src={"/icons/x.svg"}
@@ -90,8 +92,46 @@ const SelectedDetail = ({
               height={20}
             />
           </div>
-          <p className={styles.selectedDetailTitle}>{detail}</p>
-          <p className={styles.selectedDetailDescription}>{description}</p>
+
+          <div className={styles.selectedDetailDescriptionContainer}>
+            <p className={styles.selectedDetailTitle}>{detail}</p>
+            <p
+              className={styles.selectedDetailDescription}
+              style={{
+                marginBottom: placeholder
+                  ? 0
+                  : detail === "Define Your Own Detail"
+                    ? "0.5rem"
+                    : "1.25rem",
+              }}
+            >
+              {description}
+            </p>
+
+            {detail === "Define Your Own Detail" && (
+              <p
+                className={styles.selectedDetailExample}
+                style={{ marginBottom: "1.25rem" }}
+              >
+                eg. {"  "}
+                {"  "}
+                <strong>Warranty Information</strong>:{" "}
+                <span>Still under manufacturer warranty until June 2026.</span>
+              </p>
+            )}
+            {placeholder && (
+              <p
+                className={styles.selectedDetailExample}
+                style={{ marginBottom: "1.25rem" }}
+              >
+                eg. {"  "}
+                {"  "}
+                <strong>{boldTextExample}</strong>:{" "}
+                <span>{normalTextExample}</span>
+              </p>
+            )}
+          </div>
+
           <div className={styles.selectedDetailInputContainer}>
             <Input
               className={styles.selectedDetailInput}
@@ -100,11 +140,21 @@ const SelectedDetail = ({
               inputColourType="normal"
               inputSize="large"
               label="Chosen Detail"
-              placeholder={`Eg: ${
-                typeof example === "string" && example.length > 55
-                  ? example.slice(0, 55) + "..."
+              placeholder={
+                placeholder
+                  ? `${
+                      typeof placeholder === "string" && placeholder.length > 55
+                        ? placeholder.slice(0, 55) + "..."
+                        : placeholder
+                    }`
                   : example
-              }`}
+                    ? `eg. ${
+                        typeof example === "string" && example.length > 55
+                          ? example.slice(0, 55) + "..."
+                          : example
+                      }`
+                    : ""
+              }
               id="detail"
               aria-label="Chosen Detail"
               autoFocus={false}

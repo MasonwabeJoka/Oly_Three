@@ -1,4 +1,5 @@
-@import "./functions.scss";
+@use "./functions" as *;
+
 
 // Colours
 $white-one: #ffffff;
@@ -26,7 +27,7 @@ $primary-hover: #14d6ff;
 $primary-disabled: #ebfcff;
 
 $normal: #f3f7fa;
-$normal-hover: #ccf6ff;
+$normal-hover: #ffffff;
 $normal-disabled: #f3f7fa;
 
 $success: #ccffed;
@@ -45,7 +46,7 @@ $info: #cce4ff;
 $info-hover: #1482ff;
 $info-disabled: #e5f1ff;
 
-// $link: #10badc;
+$link: #10badc;
 
 // Type
 
@@ -91,6 +92,12 @@ $shadow-five:
 $shadow-six:
   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+
+$shadow-seven:-10px -10px 20px #fff,
+10px 10px 20px rgba(169, 196, 203, 0.5),
+5px 5px 10px rgba(169, 196, 203, 0.25),
+0px 420px 168px 0px rgba(0, 0, 0, 0.01),
+-5px -5px 10px rgba(255, 255, 255, 0.5);
 
 // Transitions
 $transition-one: all 0.2s ease;

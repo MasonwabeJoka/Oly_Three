@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .adCard {
   position: relative;
   max-height: rem(616);
@@ -19,7 +18,7 @@
       height: rem(288);
       border-radius: rem(32);
       box-shadow: $shadow-one;
-    
+      background-color: $white-four;
 
       .image {
         border-radius: rem(32);
@@ -71,7 +70,6 @@
         justify-content: flex-end;
         margin: rem(12) rem(24) rem(8) 0;
         cursor: auto;
-    
       }
 
       .detailsWrapper {
@@ -90,8 +88,8 @@
             .titleWrapper {
               margin-top: rem(-6);
               .title {
-                margin-bottom: rem(0);
-                font-weight: bold;
+                margin-bottom: rem(-4);
+                font-weight: 600;
               }
 
               .location {
@@ -103,12 +101,13 @@
 
                 .locationText {
                   padding-bottom: rem(1);
+                  font-size: rem(12);
                 }
               }
             }
 
             .description {
-              width: rem(463);
+              width: rem(450);
               height: rem(104);
               overflow: hidden;
               margin-top: rem(8);
@@ -117,14 +116,14 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              width: 100%;
+              width: rem(463);
               height: fit-content;
-              margin-top: rem(-24);
+              margin-top: rem(16);
 
               .price {
                 height: fit-content;
-                font-weight: bold;
-
+                font-weight: 600;
+                font-size: rem(24);
                 padding: 0;
               }
             }
@@ -138,9 +137,10 @@
                 width: rem(32);
                 height: rem(32);
                 border: none;
-                background: $white-two;
-                filter: drop-shadow(10px 10px 20px rgba(181, 198, 202, 0.5))
-                  drop-shadow(5px 5px 10px rgba(185, 200, 203, 0.25));
+                background: $white-four;
+                // filter: drop-shadow(10px 10px 20px rgba(181, 198, 202, 0.5))
+                //   drop-shadow(5px 5px 10px rgba(185, 200, 203, 0.25));
+                box-shadow: none;
               }
               .icon:hover {
                 background-color: $white-three;
@@ -171,7 +171,6 @@
     box-shadow: $shadow-one;
     border-radius: 0 rem(32) rem(32) rem(32);
     z-index: -5;
-    // background-color: pink;
 
     .analyticsItems {
       display: flex;
@@ -182,9 +181,11 @@
     }
     .whiteOne {
       background-color: $white-one;
+      font-size: rem(14);
     }
     .whiteTwo {
       background-color: $white-three;
+      font-size: rem(14);
     }
   }
   .analyticsItemsContainer {

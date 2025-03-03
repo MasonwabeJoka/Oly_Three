@@ -21,7 +21,7 @@ export default function ListingLayout({
 }) {
   return (
     <ClerkProvider>
-    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+      <html lang="en" className={`${outfit.className} ${styles.html}`}>
       <body className={styles.body}>
         <nav className={styles.nav}>
           <Navbar />

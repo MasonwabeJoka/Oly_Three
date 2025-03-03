@@ -1,14 +1,12 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .expandedCard {
   display: flex;
   align-items: center;
   height: fit-content;
   width: rem(954);
   cursor: pointer;
-
 
   .imageContainer {
     position: relative;
@@ -60,7 +58,8 @@
     width: rem(570);
     height: rem(250);
     border-radius: 0 rem(32) rem(32) 0;
-    box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+    box-shadow:
+      10px 10px 20px 0px rgba(169, 196, 203, 0.5),
       5px 5px 10px 0px rgba(169, 196, 203, 0.25);
 
     .detailsWrapper {
@@ -79,13 +78,12 @@
           margin-top: rem(-6);
           .title {
             margin-bottom: rem(-4);
-           
           }
 
           .location {
             display: flex;
             align-items: center;
-          
+
             .locationText {
               padding-bottom: rem(1);
             }
@@ -105,7 +103,6 @@
           width: 100%;
 
           .price {
-           
           }
 
           .postMetrics {
@@ -115,7 +112,6 @@
             }
 
             .viewCount {
-
             }
           }
         }

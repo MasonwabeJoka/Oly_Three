@@ -1,16 +1,14 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    background-color: #d7e3e8;
-    min-height: 100%;
-    width: 100%;
-    
-    .posts {
-        width: 100%;
-        height: 200px;
-        background-color: rgb(192, 209, 255);
-    }
+  background-color: #d7e3e8;
+  min-height: 100%;
+  width: 100%;
 
+  .posts {
+    width: 100%;
+    height: 200px;
+    background-color: rgb(192, 209, 255);
+  }
 }

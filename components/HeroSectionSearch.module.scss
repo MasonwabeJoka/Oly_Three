@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -22,35 +21,35 @@
     justify-content: center;
     align-items: center;
     margin-top: rem(48);
-  
+
     .buttons {
       display: flex;
       flex-direction: column;
       margin-bottom: rem(64);
-  
+
       .link {
       }
-  
+
       .postYourAdBtn {
         margin-bottom: rem(20);
         background-color: $danger-hover;
         color: $white-one;
       }
-  
+
       .postYourAdBtn:hover {
         background-color: #f83710;
       }
-  
+
       .categoriesBtn {
         background-color: $white-two;
         box-shadow: none;
       }
-  
+
       .categoriesBtn:hover {
         background-color: $white-one;
       }
     }
-  
+
     .searchFields {
       margin-bottom: rem(20);
       .searchTerm {
@@ -58,7 +57,7 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: rem(20);
-  
+
         .searchTermInput {
         }
       }
@@ -70,7 +69,7 @@
           margin-bottom: rem(10);
         }
       }
-  
+
       .errorMessage {
         color: $danger;
         margin-bottom: rem(8);
@@ -81,11 +80,10 @@
         background-color: $white-two;
         box-shadow: none;
       }
-  
+
       .search:hover {
         background-color: $white-one;
       }
     }
   }
 }
-

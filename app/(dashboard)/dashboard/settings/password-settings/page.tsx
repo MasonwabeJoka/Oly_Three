@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 
-
+// TODO: Make the size of controls be for dashboard.
 type FormValues = z.infer<typeof passwordSchema>;
 
 const PasswordSettings = () => {

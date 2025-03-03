@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 
-
+// Todo: Add back button.
 type FormValues = z.infer<typeof profileSchema>;
 const ProfileSettings = () => {
   const [selected, setSelected] = useState("");
@@ -177,6 +177,7 @@ const ProfileSettings = () => {
             required={true}
             value={""}
             {...register("name")}
+            dashboard
           />
           <p className={styles.errorMessage}>{errors.lastName?.message}</p>
           <Input
@@ -193,6 +194,7 @@ const ProfileSettings = () => {
             required={true}
             value={""}
             {...register("lastName")}
+            dashboard
           />
           <p className={styles.errorMessage}>{errors.email?.message}</p>
 
@@ -209,6 +211,7 @@ const ProfileSettings = () => {
             disabled={false}
             required={true}
             {...register("email")}
+            dashboard
           />
           <p className={styles.errorMessage}>{errors.phone?.message}</p>
           <Input
@@ -224,6 +227,7 @@ const ProfileSettings = () => {
             disabled={false}
             required={true}
             {...register("phone")}
+            dashboard
           />
 
           <Link href="/dashboard/settings/password-settings">
@@ -237,6 +241,7 @@ const ProfileSettings = () => {
               ariaLabel="Change Your Password"
               autoFocus={false}
               disabled={false}
+              dashboard
             />
           </Link>
 
@@ -264,6 +269,7 @@ const ProfileSettings = () => {
                 autoFocus={false}
                 required={true}
                 onChange={handleSelect}
+                dashboard
               />
             </div>
             {selected && selected === "Other" ? (
@@ -293,7 +299,9 @@ const ProfileSettings = () => {
                       register("socialMediaUrl").onChange,
                       (e) => handleOtherSocialMediaChange(e.target.value)
                     )}
+                    dashboard
                   />
+                  
                 </div>
                 <p className={styles.errorMessage}>
                   {errors.socialMediaUrl?.message}
@@ -314,6 +322,7 @@ const ProfileSettings = () => {
                   iconHeight={32}
                   required={true}
                   {...register("socialMediaUrl")}
+                  dashboard
                 />
               </div>
             ) : selected && selected !== "Other" ? (
@@ -337,6 +346,7 @@ const ProfileSettings = () => {
                   iconHeight={32}
                   required={true}
                   {...register("socialMediaUrl")}
+                  dashboard
                 />
               </div>
             ) : (
@@ -358,6 +368,7 @@ const ProfileSettings = () => {
           autoFocus={false}
           disabled={false}
           onClick={() => {}}
+          dashboard
         />
       </div>
 

@@ -1,8 +1,7 @@
 'use server';
 import { groq } from 'next-sanity';
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import ClientConfig from "../config/client-config";
-import { Ad } from '../Types/Ad';
 import { PartialAd, PartialAdSchema } from '../Types/PartialSchemas/AdPartial';
 import {z} from 'zod';
 import { fromZodError } from 'zod-validation-error';

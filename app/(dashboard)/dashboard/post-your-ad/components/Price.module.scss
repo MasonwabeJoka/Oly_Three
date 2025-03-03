@@ -1,13 +1,11 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-
 
   @include larger-than(mobile) {
     width: rem(1098);
@@ -21,7 +19,6 @@
     font-size: rem(20);
 
     @include larger-than(mobile) {
-  
       margin-top: rem(168);
       margin-bottom: rem(48);
     }
@@ -33,13 +30,8 @@
 
     .controls {
       margin-bottom: rem(20);
-    
     }
     .priceContainer {
-
     }
   }
-
-
-  
 }

@@ -1,12 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: $white-four;
-
 }

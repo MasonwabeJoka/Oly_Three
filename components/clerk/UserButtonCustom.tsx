@@ -7,18 +7,11 @@ import Image from "next/image";
 import Button from "../Buttons";
 
 const UserButton = () => {
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showModal);
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
   const { user } = useUser();
   return (
-    <div
-      className={styles.container}
-      onClick={() => setShowNotificationsModal(true)}
-    >
+    <div className={styles.container} onClick={() => setShowMenuModal(true)}>
       <Avatar
         className={styles.profile}
         avatar={user?.imageUrl || ""}

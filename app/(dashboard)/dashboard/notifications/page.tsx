@@ -12,6 +12,15 @@ const Notifications = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
 
+  const notificationOptionsTabs = [
+    {
+      title: "Unread",
+      count: 5,
+    },
+    "Read",
+    "Select All",
+    "Delete",
+  ];
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Notifications</h1>
@@ -33,13 +42,13 @@ const Notifications = () => {
                   count: 0,
                 },
                 {
-                  title: "Likes",
-                  count: 2,
-                },
-                {
                   title: "More+",
-                  count: 0,
+                  count: 5,
                 },
+                // {
+                //   title: "Likes",
+                //   count: 2,
+                // },
               ]}
               condition={!expanded}
               width={954}
@@ -60,15 +69,7 @@ const Notifications = () => {
 
         <div className={styles.notificationOptionsTabs}>
           <Tabs
-            tabs={[
-              {
-                title: "Unread",
-                count: 5,
-              },
-              "Read",
-              "Select All",
-              "Delete",
-            ]}
+            tabs={notificationOptionsTabs}
             condition={!expanded}
             width={954}
             altWidth={altWidth}
@@ -84,7 +85,8 @@ const Notifications = () => {
       </div>
       <div className={styles.notificationsContainer}>
         <div className={styles.timeRangeContainer}>
-          <p className={styles.timeRange}>Today</p><div className={styles.count}>5</div>
+          <p className={styles.timeRange}>Today</p>
+          <div className={styles.count}>5</div>
         </div>
         {NotificationsData.map((notification) => (
           <div className={styles.notificationCard} key={notification.id}>

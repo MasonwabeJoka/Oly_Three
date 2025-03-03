@@ -1,10 +1,9 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 
-/* MaxWidthWrapper.module.scss */
 .wrapper {
-  transition: max-width 0.3s ease; /* Example transition for visual effect */
+  transition: max-width 0.3s ease;
 }
 
 .mobile {
@@ -20,5 +19,5 @@
 }
 
 .MessagesSidebarOpen {
-  max-width: 68.625rem; /* Adjust based on your design when sidebar is open */
+  max-width: 68.625rem;
 }

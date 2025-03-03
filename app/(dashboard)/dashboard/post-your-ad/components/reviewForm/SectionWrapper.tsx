@@ -1,22 +1,25 @@
-'use client'
+"use client";
 import { useState } from "react";
 import styles from "./SectionWrapper.module.scss";
 import Button from "@/components/Buttons";
+import useEditStore from "../../store/useEditStore";
+import useFormStore from "../../store/useFormStore";
 type SectionWrapperProps = {
   title: string;
   pageNumber: number;
   children: React.ReactNode;
-  setIsEditMode?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export const SectionWrapper = ({
   title,
   pageNumber,
   children,
 }: SectionWrapperProps) => {
-   const [isEditMode, setIsEditMode] = useState(false);
-
-   const onClick = () => {
+  const { setIsEditMode } = useEditStore();
+  const { goTo } = useFormStore();
+  
+  const onClick = () => {
     setIsEditMode(true);
+    goTo(pageNumber);
   };
   return (
     <div className={styles.container}>

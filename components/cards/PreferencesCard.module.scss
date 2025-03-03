@@ -1,7 +1,6 @@
-@import "@/utils/functions.scss";
-@import "@/utils/variables.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/functions" as *;
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -22,8 +21,7 @@
     padding-bottom: rem(32);
 
     fieldset {
-      margin-top: rem(32) 
-      ;
+      margin-top: rem(32);
       .preferenceType {
         font-size: $h4;
         font-weight: 600;

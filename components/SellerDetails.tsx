@@ -10,22 +10,22 @@ const socialMediaLogos = [
   {
     id: 1,
     app: "Facebook",
-    icon: "/icons/white-facebook-logo.png",
+    icon: "/icons/social-media/facebook.png",
   },
   {
     id: 2,
     app: "Instagram",
-    icon: "/icons/white-instagram-logo.png",
+    icon: "/icons/social-media/instagram.png",
   },
   {
     id: 3,
     app: "X",
-    icon: "/icons/white-x-logo.png",
+    icon: "/icons/social-media/twitter.png",
   },
   {
     id: 4,
     app: "Share",
-    icon: "/icons/white-share-icon.png",
+    icon: "/icons/social-media/youtube.png",
   },
 ];
 

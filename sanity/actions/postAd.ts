@@ -1,5 +1,5 @@
 'use server';
-import { createClient } from '@sanity/client';
+import  createClient  from '@sanity/client';
 import ClientConfig from "../config/client-config";
 import { Ad } from '../Types/Ad';
 const client = createClient(ClientConfig);

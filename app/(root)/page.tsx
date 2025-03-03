@@ -19,14 +19,9 @@ import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
 
-
 const Home = () => {
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showMenuModal);
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
   const showCategoriesModal = useModalStore(
     (state) => state.showCategoriesModal
   );
@@ -73,11 +68,11 @@ const Home = () => {
     <MaxWidthWrapper className={styles.maxWidthWrapper}>
       <div className={styles.container}>
         <div className={styles.main}>
-          <section className={styles.modalContainer}>
+       
             <div className={styles.modal}>
               <Modal
-                showModal={showNotificationsModal}
-                setShowModal={setShowNotificationsModal}
+                showModal={showMenuModal}
+                setShowModal={setShowMenuModal}
                 modalContent={<Menu />}
               />
             </div>
@@ -88,7 +83,7 @@ const Home = () => {
                 modalContent={<Categories />}
               />
             </div>
-          </section>
+        
 
           <section className={styles.heroSection}>
             <HeroSection />
@@ -104,19 +99,19 @@ const Home = () => {
           <section className={styles.features}>
             <Features />
           </section>
-          
+
           <section className={styles.featuredListings}>
             <FeaturedListings />
           </section>
-          <section className={styles.blog}>
+          {/* <section className={styles.blog}>
             <Blog />
-          </section>
+          </section> */}
           <section className={styles.videoAd}>
             <VideoAd />
           </section>
-          <section className={styles.sponsoredArticles}>
+          {/* <section className={styles.sponsoredArticles}>
             <SponsoredArticles />
-          </section>
+          </section> */}
         </div>
       </div>
     </MaxWidthWrapper>

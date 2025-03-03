@@ -41,7 +41,8 @@ import { Details } from "./documents/details"
 import {imageFile} from "./documents/imageFile"
 import {videoFile} from "./documents/videoFile"
 import {attachment} from "./documents/attachment"
-
+import { auctionTest } from "./documents/auctionTest"
+import {bankDetails} from "./documents/bankDetails"
 
 export const schemas = [
     user,
@@ -87,4 +88,6 @@ export const schemas = [
     imageFile,
     videoFile,
     attachment,
+    auctionTest,
+    bankDetails,
 ]

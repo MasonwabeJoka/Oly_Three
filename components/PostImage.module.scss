@@ -1,12 +1,11 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    width: rem(500);
-    height: rem(500);
-    border: black solid 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: rem(500);
+  height: rem(500);
+  border: black solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

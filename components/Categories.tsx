@@ -1,7 +1,5 @@
 "use client";
 import styles from "./Categories.module.scss";
-import { categories } from "@/data/CategoriesData";
-import useFeedStore from "@/store/feedStore";
 import Link from "next/link";
 import { useResponsive } from "@/store/useResponsive";
 import MobileSubcategories from "@/components/MobileSubcategories";
@@ -33,6 +31,9 @@ const Categories = () => {
     (state) => state.setShowCategoriesModal
   );
 
+  const handleCategoriesContainerClick = (e) => {
+    e.stopPropagation();
+  };
   useEffect(() => {
     const fetchCategories = async () => {
       const fetchedCategories = await getCategories();
@@ -61,13 +62,18 @@ const Categories = () => {
           paddingTop: "6rem",
           overflowX: "hidden",
         }}
+        onClick={() => setShowCategoriesModal(false)}
       >
         <div className={styles.categoriesContainer}>
           {fetchedCategories.map((categoryItem, index) => {
             const { id, category, subcategories } = categoryItem;
 
             return (
-              <div className={styles.mobileSubcategoriesContainer}>
+              <div
+                className={styles.mobileSubcategoriesContainer}
+                key={index}
+                onClick={handleCategoriesContainerClick}
+              >
                 <MobileSubcategories
                   options={subcategories}
                   category={category}
@@ -106,9 +112,13 @@ const Categories = () => {
           paddingTop: "3rem",
           paddingLeft: "2rem",
         }}
+        onClick={() => setShowCategoriesModal(false)}
       >
-        <div className={styles.categoriesContainer}>
-          {fetchedCategories.map((categoryItem, index) => {
+        <div
+          className={styles.categoriesContainer}
+          onClick={handleCategoriesContainerClick}
+        >
+          {fetchedCategories.map((categoryItem) => {
             const { _id, title, subcategories } = categoryItem;
             const categoryId = _id;
 
@@ -116,7 +126,7 @@ const Categories = () => {
 
             return (
               <>
-                <div key={_id} className={styles.categoriesSection}>
+                <div key={categoryId} className={styles.categoriesSection}>
                   <h4 className={styles.category}>{title}</h4>
                   {subcategories
                     .slice(0, visibleCount)

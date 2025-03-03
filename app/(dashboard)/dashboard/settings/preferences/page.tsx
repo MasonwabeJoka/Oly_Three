@@ -1,7 +1,8 @@
 import PreferencesCard from "@/components/cards/PreferencesCard";
 import styles from "./styles.module.scss";
 import { preferencesData } from "@/data/PreferencesData";
-
+// Todo: Add back button.
+// Todo: Add pointer cursor for input.
 const Preferences = () => {
   return (
     <main className={styles.container}>

@@ -81,10 +81,15 @@ const ListingsCollage = ({
   useEffect(() => {
     const getImageIds = async () => {
       if (adImages && adImages.length > 0) {
-        const imageRefs = adImages.map((image) => image._ref);
+        const imageRefs = adImages.map((image) => image?._ref);
+
+  
+
         const imageFilesByIds = await getImageFilesById(imageRefs as string[]);
+      
         setImageFiles(imageFilesByIds);
       }
+
     };
 
     getImageIds();
@@ -119,7 +124,7 @@ const ListingsCollage = ({
         return matchingImage ? imageFile.image.url : undefined;
       })
       .filter((url): url is string => typeof url === "string");
-
+  
     return (
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>

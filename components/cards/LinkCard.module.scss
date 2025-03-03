@@ -1,7 +1,6 @@
-@import "@/utils/functions.scss";
-@import "@/utils/variables.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/functions" as *;
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
 .cardContainer {
   position: relative;
   display: flex;
@@ -11,7 +10,7 @@
   cursor: pointer;
   box-shadow: $shadow-one;
   background-color: $grey-one;
-  
+
   @include larger-than(mobile) {
     width: rem(229);
     height: rem(300);
@@ -99,8 +98,6 @@
   }
 }
 .standardDashboard {
-
-
   @include larger-than(mobile) {
     width: rem(224);
     height: rem(256.2);

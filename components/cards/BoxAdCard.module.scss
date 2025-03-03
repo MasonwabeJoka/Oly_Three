@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .adCard {
   display: flex;
   flex-direction: column;
@@ -39,7 +38,8 @@
       border-radius: 50%;
 
       .likeIcon {
-        box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+        box-shadow:
+          10px 10px 20px 0px rgba(169, 196, 203, 0.5),
           5px 5px 10px 0px rgba(169, 196, 203, 0.25);
       }
 

@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   scroll-behavior: smooth;
 }
@@ -24,9 +23,6 @@
   background-color: $warning-hover;
 }
 
-
-
-
 @supports (scrollbar-color: $warning-hover transparent) {
   .container {
     scrollbar-color: $warning-hover transparent;
@@ -40,13 +36,15 @@
   align-items: center;
   position: relative;
   background-color: $white-four;
-  height: rem(740);
+
+  width: 100vw;
   padding-right: rem(12);
   pointer-events: auto;
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
+  pointer-events: auto;
+  cursor: url("/icons/X.png"), auto;
   .mobileSubcategoriesContainer {
     margin-bottom: rem(20);
 
@@ -63,9 +61,10 @@
       width: rem(1440);
       columns: rem(200) 4;
       column-gap: rem(24);
-      padding: rem(96) rem(0) rem(32) rem(96);
+      padding: rem(32) rem(0) rem(32) rem(32);
     }
 
+    // background-color: aquamarine;
     .categoriesSection {
       margin-bottom: rem(24);
       break-before: avoid-column;
@@ -86,7 +85,7 @@
       }
       .subcategoryContainer:hover {
         .subcategory {
-          color: $danger; 
+          color: $danger;
         }
       }
 
@@ -96,7 +95,7 @@
       }
 
       .more:hover {
-        color: $danger; 
+        color: $danger;
         cursor: pointer;
       }
     }
@@ -113,6 +112,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-left: rem(-32);
     }
   }
 }

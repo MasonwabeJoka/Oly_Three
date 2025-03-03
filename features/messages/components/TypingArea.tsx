@@ -149,7 +149,6 @@ const TypingArea = (props) => {
           className={styles.inputArea}
           ref={mirrorDivRef}
           style={{
-            background: "pink",
             height: textareaHeight,
             visibility: "hidden",
             position: "absolute",

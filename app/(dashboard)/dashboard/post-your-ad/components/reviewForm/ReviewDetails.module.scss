@@ -1,12 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   width: rem(720);
 
   .contentContainer {
-
     .content {
       position: relative;
       display: flex;
@@ -20,7 +18,6 @@
         flex-basis: 70%;
         .details {
           .detail {
-
           }
         }
       }

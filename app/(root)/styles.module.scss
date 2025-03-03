@@ -1,9 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 @import "layout.module.scss";
 
-body .container {
+// body
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,17 +21,10 @@ body .container {
       // width: rem(1440);
     }
 
-    .modalContainer {
-      position: absolute;
-      z-index: 2;
-      pointer-events: none;
-      width: 100vw;
-      .modal {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        pointer-events: auto;
-      }
+    .modal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .heroSection {
@@ -40,6 +34,7 @@ body .container {
       align-items: center;
       margin-bottom: rem(96);
       margin-top: rem(24);
+
       @include larger-than(mobile) {
         margin-bottom: rem(280);
       }

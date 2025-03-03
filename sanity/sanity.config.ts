@@ -1,9 +1,9 @@
 import {defineConfig, isDev} from 'sanity'
 import {visionTool} from '@sanity/vision'
-import {structureTool} from 'sanity/structure'
+import {deskTool} from 'sanity/desk'
 import {schemas} from './schemas'
 import {getStartedPlugin} from './plugins/sanity-plugin-tutorial'
-import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
+import {unsplashImageAsset} from "sanity-plugin-asset-source-unsplash"
 
 const devOnlyPlugins = [getStartedPlugin()]
 
@@ -16,7 +16,7 @@ const config = defineConfig({
   basePath: '/admin',
 
 
-  plugins: [structureTool(), visionTool(), unsplashImageAsset(), ...(isDev ? devOnlyPlugins : [])],
+  plugins: [deskTool(), visionTool(), unsplashImageAsset(), ...(isDev ? devOnlyPlugins : [])],
 
   schema: {
     types: schemas,

@@ -3,6 +3,7 @@ import { UserSchema } from "./User";
 import { DetailsSchema } from "./Details";
 import {PortableTextBlockSchema} from "./PortableTextBlock";
 import { CategorySchema } from './Category';
+import { AuctionSchema } from './Auction';
 
 
 
@@ -61,10 +62,9 @@ export const AdSchema = z.object({
   paystackId: z.string(),
   pricingOption: z.enum(['Fixed Price', 'Auction', 'Negotiable Price', 'Free', 'Contact For Price']),
   approvedForSale: z.enum(['approved', 'pending', 'denied']),
-  bankName: z.string().min(1, "Bank name is required"), //Todo: I think this must be part of user schema and not ad schema
-  accountName: z.string().min(1, "Account name is required"),//Todo: I think this must be part of user schema and not ad schema
-  accountNumber: z.string().min(1, "Account number is required"),//Todo: I think this must be part of user schema and not ad schema
-  images: z.array(ImageSchema),
+  bankName: z.string().min(1, "Bank name is required"), 
+  accountHolder: z.string().min(1, "Account holder name is required"),
+  accountNumber: z.string().min(1, "Account number is required"),
   videos: z.array(VideoSchema).optional(),
   attachments: z.array(AttachmentSchema).optional(),
   featuredImage: ImageSchema,
@@ -78,12 +78,14 @@ export const AdSchema = z.object({
     _type: z.string(),
   }),
   location: z.object({
+    province: z.string(),
     suburb: z.string(),
-    
     city: z.string(),
   }),
+  province: z.string(),
   city: z.string(),
   suburb: z.string(),
+  customLocation: z.string(),
   attachment: z.object({
     _type: z.string(),
     asset: z.object({
@@ -104,10 +106,11 @@ export const AdSchema = z.object({
   todaysViews: z.number().optional(),
   totalViews: z.number().optional(),
   unreadMessages: z.number().optional(),
-  associatedAuction: z.object({
-    _ref: z.string(),
-    _type: z.string(),
-  }).optional(),
+  startingPrice: z.number().optional(),
+  reservePrice: z.number().optional(),
+  buyNowPrice: z.number().optional(),
+  ending: z.date().optional(),
+  associatedAuction: AuctionSchema.optional(),
 });
 
 // Automatically inferred TypeScript types

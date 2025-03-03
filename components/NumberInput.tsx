@@ -1,5 +1,11 @@
 "use client";
-import React, { ChangeEvent, useState, useEffect, forwardRef, Ref } from "react";
+import React, {
+  ChangeEvent,
+  useState,
+  useEffect,
+  forwardRef,
+  Ref,
+} from "react";
 import styles from "./NumberInput.module.scss";
 import useSidebarStore from "@/store/useSidebarStore";
 import { UseFormRegisterReturn } from "react-hook-form";
@@ -43,11 +49,11 @@ const INPUT_COLOUR_TYPE = {
 };
 
 interface NumberInputProps {
-  value: number | string;
+  value: number;
   id: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  min?: number | string;
-  max?: number | string;
+  min?: number;
+  max?: number;
   step?: number;
   debounceTime?: number;
   className?: string;
@@ -65,147 +71,165 @@ interface NumberInputProps {
   [key: string]: any;
 }
 
-const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
-  inputSize,
-  inputColourType = "normal",
-  value,
-  onChange,
-  id,
-  min,
-  max,
-  step,
-  debounceTime = 300,
-  className,
-  placeholder,
-  dashboard,
-  autoFocus = false,
-  required = true,
-  reactHookFormProps,
-  error,
-  ...restProps
-}, ref) => {
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
+  (
+    {
+      inputSize,
+      inputColourType = "normal",
+      value,
+      onChange,
+      id,
+      min,
+      max,
+      step,
+      debounceTime = 300,
+      className,
+      placeholder,
+      dashboard,
+      autoFocus = false,
+      required = true,
+      reactHookFormProps,
+      error,
+      ...restProps
+    },
+    ref
+  ) => {
+    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
 
-  const [internalValue, setInternalValue] = useState<string>(value?.toString());
+    const [internalValue, setInternalValue] = useState<number | undefined>(
+      value
+    );
 
-  useEffect(() => {
-    setInternalValue(value?.toString());
-  }, [value]);
+    // Keep internal value in sync with the value prop
+    useEffect(() => {
+      setInternalValue(value);
+    }, [value]);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      const numericValue = parseFloat(internalValue);
-      if (!isNaN(numericValue) && numericValue !== value) {
-        onChange?.({
-          target: {
-            value: numericValue.toString(),
-          },
-        } as ChangeEvent<HTMLInputElement>);
+    // Debounce the change propagation to the parent component
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        if (
+          internalValue !== undefined &&
+          !isNaN(internalValue) &&
+          internalValue !== value
+        ) {
+          // Make sure to propagate a number
+          onChange?.({
+            target: {
+              value: internalValue, // Passing the numeric value
+            },
+          } as unknown as ChangeEvent<HTMLInputElement>);
+        }
+      }, debounceTime);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [internalValue, debounceTime, onChange, value]);
+
+    // Handle internal changes, ensure numeric values are processed
+    const handleInternalChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+
+      // Allow empty input
+      if (value === "") {
+        setInternalValue(undefined);
+        onChange?.(e);
+        return;
       }
-    }, debounceTime);
-  
-    return () => {
-      clearTimeout(handler);
+      // Parse to a float
+      const numericValue = parseFloat(value);
+
+      if (!isNaN(numericValue)) {
+        setInternalValue(numericValue);
+        onChange?.(e);
+      }
     };
-  }, [internalValue, debounceTime, value, onChange]);
-  
 
-  const handleInternalChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInternalValue(e.target.value);
-    
-    // Call the external onChange handlers
-    if (onChange) {
-      onChange(e);
-    }
-    if (reactHookFormProps?.onChange) {
-      reactHookFormProps.onChange(e);
-    }
-  };
+    const handleArrowClick = (direction: "up" | "down") => {
+      let newValue = internalValue || 0;
+      
+      if (direction === "up") {
+        newValue += step || 1;
+      } else {
+        newValue -= step || 1;
+      }
 
-  const handleArrowClick = (direction: "up" | "down") => {
-    let newValue = parseFloat(internalValue) || 0;
-    if (direction === "up") {
-      newValue += step || 1;
-    } else {
-      newValue -= step || 1;
-    }
-    if (
-      (min !== undefined && newValue < min) ||
-      (max !== undefined && newValue > max)
-    ) {
-      return;
-    }
-  
-    setInternalValue(newValue.toString());
-  
-    // Construct a synthetic event object
-    const event = {
-      target: {
-        value: newValue.toString(),
-      },
-    } as ChangeEvent<HTMLInputElement>;
-  
-    // Call onChange with the synthetic event object
-    onChange?.(event);
-  };
-  
- 
+      // Handle min/max constraints
+      if (
+        (min !== undefined && newValue < min) ||
+        (max !== undefined && newValue > max)
+      ) {
+        return;
+      }
 
-  let sizeClass = "";
-  sizeClass = isSidebarOpen
-    ? INPUT_SIZE.feed[inputSize]
-    : dashboard
-      ? INPUT_SIZE.dashboard[inputSize]
-      : INPUT_SIZE.regular[inputSize];
+      setInternalValue(newValue);
+      // Propagate the number change
+      const event = {
+        target: {
+          value: newValue,
+        },
+      } as unknown as ChangeEvent<HTMLInputElement>;
 
-  const inputClass = `${styles.input} ${sizeClass} ${inputColourType ? INPUT_COLOUR_TYPE[inputColourType] : ""} ${className}`;
+      onChange?.(event);
+    };
 
-  return (
-    <div className={styles.container}>
-      {error && <p className={styles.errorMessage}>{error as string}</p>}
+    const sizeClass = isSidebarOpen
+      ? INPUT_SIZE.feed[inputSize]
+      : dashboard
+        ? INPUT_SIZE.dashboard[inputSize]
+        : INPUT_SIZE.regular[inputSize];
 
-      <div className={styles.wrapper}>
-        <input
-          type="number"
-          value={internalValue}
-          onChange={handleInternalChange}
-          id={id}
-          min={min}
-          max={max}
-          step={step}
-          autoFocus={autoFocus}
-          required={required}
-          placeholder={placeholder}
-          className={inputClass}
-          {...reactHookFormProps}
-          {...restProps}
-          ref={ref} // Forward the ref to the input element
-        />
-        <div className={styles.arrows}>
-          <div className={styles.upArrow}>
-            <Image
-              src="/icons/arrow-up.png"
-              alt="Increment"
-              width={24}
-              height={24}
-              onClick={() => handleArrowClick("up")}
-            />
-          </div>
-          <div className={styles.downArrow}>
-            <Image
-              src="/icons/arrow-down.png"
-              alt="Decrease"
-              width={24}
-              height={24}
-              onClick={() => handleArrowClick("down")}
-            />
+    const inputClass = `${styles.input} ${sizeClass} ${inputColourType ? INPUT_COLOUR_TYPE[inputColourType] : ""} ${className}`;
+
+    return (
+      <div className={styles.container}>
+        {error && <p className={styles.errorMessage}>{error as string}</p>}
+
+        <div className={styles.wrapper}>
+          <input
+            type="number"
+            name={reactHookFormProps?.name}
+            value={internalValue !== undefined ? internalValue : ""}
+            onChange={handleInternalChange}
+            id={id}
+            min={min}
+            max={max}
+            step={step}
+            autoFocus={autoFocus}
+            required={required}
+            placeholder={placeholder}
+            className={inputClass}
+            ref={ref}
+            {...reactHookFormProps}
+            {...restProps}
+          />
+          <div className={styles.arrows}>
+            <div className={styles.upArrow}>
+              <Image
+                src="/icons/arrow-up.png"
+                alt="Increment"
+                width={24}
+                height={24}
+                onClick={() => handleArrowClick("up")}
+              />
+            </div>
+            <div className={styles.downArrow}>
+              <Image
+                src="/icons/arrow-down.png"
+                alt="Decrease"
+                width={24}
+                height={24}
+                onClick={() => handleArrowClick("down")}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
-NumberInput.displayName = "NumberInput"; // Set a display name for the component
+NumberInput.displayName = "NumberInput";
 
 export default NumberInput;

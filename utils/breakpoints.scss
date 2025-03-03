@@ -3,14 +3,14 @@ $larger-than: (
   "mobile": "40em",
   "tablet": "64em",
   "desktop": "87.5em",
-);
+) !default;
 
 /* 639px | 1023 | 1399 */
 $smaller-than: (
   "mobile": "39.9375em",
   "tablet": "63.9375em",
   "desktop": "87.4375em",
-);
+) !default;
 
 @mixin larger-than($size) {
   @media (min-width: map-get($larger-than, $size)) {

@@ -1,21 +1,20 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95vw;
 
-    .title {
-        color: $danger;
-        font-weight: 600;
-        margin-top: rem(64);
-        margin-bottom: rem(24);
-      }
+  .title {
+    color: $danger;
+    font-weight: 600;
+    margin-top: rem(64);
+    margin-bottom: rem(24);
+  }
 
-    .collage {
-        width: 100%;
-    }
+  .collage {
+    width: 100%;
+  }
 }

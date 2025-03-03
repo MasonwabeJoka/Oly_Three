@@ -6,6 +6,7 @@ import Image from "next/image";
 import Checkbox from "@/components/Checkbox";
 import Link from "next/link";
 import { useState } from "react";
+import Icon from "../Icon";
 
 type NotificationProps = {
   avatar: string;
@@ -38,6 +39,15 @@ const NotificationsCard = ({
 
   return (
     <div className={styles.container}>
+      {/* <div className={styles.deleteButton}>
+        <Icon
+          className={styles.X}
+          src="/icons/X.png"
+          alt="X"
+          width={10}
+          height={10}
+        />
+      </div> */}
       <section
         className={styles.mainSection}
         onMouseEnter={() => setShowButtons(true)}
@@ -53,18 +63,11 @@ const NotificationsCard = ({
           />
         </div>
         <div className={styles.info}>
-          <p className={styles.notificationType}>
-            {notificationType}
-          </p>
+          <p className={styles.notificationType}>{notificationType}</p>
           <div className={styles.message}>
             <p className={styles.title}>
-              <span className={styles.name}>
-                {name}
-              </span>{" "}
-              liked{" "}
-              <span className={styles.restOfTitle}>
-               {message}
-              </span>
+              <span className={styles.name}>{name}</span> liked{" "}
+              <span className={styles.restOfTitle}>{message}</span>
             </p>
             <p className={styles.body}>{messageBody}</p>
           </div>
@@ -94,11 +97,15 @@ const NotificationsCard = ({
             buttonLinks ? (
               <Link
                 href={buttonLinks[index]}
-                className={`${styles.buttonContainer} ${buttons[0] === button && styles.firstButtonContainer}`}
+                className={`${styles.buttonContainer} ${
+                  buttons[0] === button && styles.firstButtonContainer
+                }`}
                 key={index}
               >
                 <Button
-                  className={`${styles.button} ${buttons[0] === button && styles.firstButton}`}
+                  className={`${styles.button} ${
+                    buttons[0] === button && styles.firstButton
+                  }`}
                   buttonChildren={button}
                   buttonType="normal"
                   buttonSize="medium"

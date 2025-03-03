@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -20,9 +19,7 @@
     flex-direction: column;
     align-items: center;
     @include larger-than(mobile) {
-
     }
-   
 
     .formElements {
       display: flex;
@@ -37,6 +34,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: rem(20);
+      }
+
+      .addSpecificationsContainer {
         margin-bottom: rem(20);
       }
 
@@ -90,7 +91,7 @@
     flex-direction: column;
     align-items: center;
     width: rem(648);
-    margin-bottom: rem(48);
+
     .detail {
       display: flex;
       align-items: center;

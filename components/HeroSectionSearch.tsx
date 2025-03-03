@@ -57,7 +57,7 @@ const HeroSectionSearch = () => {
           <>
             <div className={styles.buttons}>
               <Link
-                href="/dashboard/post-your-ad/select-a-category"
+                href="/dashboard/post-your-ad"
                 className={styles.link}
               >
                 <Button

@@ -1,6 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 
 .progressBarContainer {
   height: rem(16);
@@ -16,3 +16,4 @@
   background-color: $primary-hover;
   transition: width 0.3s ease-in-out;
 }
+

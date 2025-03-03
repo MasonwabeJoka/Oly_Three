@@ -86,6 +86,7 @@ const MobileCarouselOne = ({
                 <div
                   className={styles.dotsContainer}
                   onClick={() => setSlideIndex(index)}
+                  key={index}
                 >
                   <button
                     key={index}

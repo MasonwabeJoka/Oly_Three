@@ -3,7 +3,7 @@ import styles from "./CartItem.module.scss";
 import Image from "next/image";
 import { ImageIcon, X } from "lucide-react";
 import Button from "../../../components/Buttons";
-import { useCart } from "@/store/useCart";
+import { useCart } from "../payment/store/useCart";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
 const CartItem = ({ ad }: { ad: Ad }) => {

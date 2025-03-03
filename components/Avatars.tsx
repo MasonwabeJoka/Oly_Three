@@ -7,7 +7,7 @@ interface AvatarProps {
   className: string;
   avatar: any;
   avatarSize: keyof typeof AVATAR_SIZE;
-  isOnline: boolean;
+  isOnline?: boolean;
   outlineColour?: string;
 }
 
@@ -21,7 +21,7 @@ const Avatar: React.FC<AvatarProps> = ({
   className,
   avatar,
   avatarSize = "regular",
-  isOnline = true,
+  isOnline = false,
   outlineColour = "fff",
 }) => {
   const [hasError, setHasError] = useState(false);

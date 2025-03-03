@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   width: rem(640);
   display: flex;
@@ -13,9 +12,10 @@
     margin-bottom: rem(8);
   }
   .editorContainer {
-    .fr-box, .fr-element, .fr-view {
-      font-family: 'Outfit', sans-serif !important;
+    .fr-box,
+    .fr-element,
+    .fr-view {
+      font-family: "Outfit", sans-serif !important;
     }
   }
 }
-

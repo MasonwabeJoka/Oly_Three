@@ -1,18 +1,17 @@
 "use client";
-//https://www.youtube.com/watch?v=FXWD_etMJWA&list=PLeO8M-2wYaaV5vh2lRWV7qt_-Io8agaf-&index=1
-//https://www.youtube.com/watch?v=uDCBSnWkuH0
-//https://www.youtube.com/watch?v=lW_0InDuejU
-import {
-  FormProvider,
-  useForm,
-  FieldName,
-  SubmitHandler,
-} from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { multiStepFormSchema } from "@/lib/validations/formValidations";
+import {
+  categoriesValidations,
+  detailsValidations,
+  priceValidations,
+  bankAccountValidations,
+  descriptionValidations,
+  uploadMediaValidations,
+  locationValidations,
+  promoteYourAdValidations,
+} from "./validations/multiStepFormValidations";
 import styles from "./styles.module.scss";
-import Button from "@/components/Buttons";
 import SelectACategory from "./components/SelectACategory";
 import Details from "./components/Details";
 import Location from "./components/Location";
@@ -21,74 +20,99 @@ import UploadVideos from "./components/UploadVideos";
 import UploadMedia from "./components/UploadMedia";
 import ReorderPhotos from "./components/ReorderPhotos";
 import UploadAttachments from "./components/UploadAttachments";
-import Features from "./components/Features";
 import Price from "./components/Price";
 import TitleAndDescription from "./components/TitleAndDescription";
 import PromoteYourAd from "./components/PromoteYourAd";
 import ReviewAndSubmit from "./components/ReviewAndSubmit";
-import CreateAccount from "./components/BankAccountDetails";
+import BankAccountDetails from "./components/BankAccountDetails";
+import Congratulations from "./components/Congratulations";
 import useFormStore from "./store/useFormStore";
-import { createAd } from "@/sanity/actions/createAd";
+import useUploadMediaStore from "./store/useUploadMediaStore";
+import Modal from "@/components/Modal";
+import useQAndAStore from "./store/useFAQStore";
+import FAQs from "@/components/Faqs";
+import { auctionFAQs } from "@/data/auctionFAQs";
 
-type FormValues = z.infer<typeof multiStepFormSchema>;
+
+type FormValues = {
+  [key: string]: any; // Dynamic object structure for the different steps
+};
+
 const Dashboard = () => {
+  // Get media upload state from the media store
+  const { uploadPhotos, reorderPhotos, uploadVideos, uploadAttachments } =
+    useUploadMediaStore();
+  
+  // Define validation schemas for each step of the form
+  const validationSchemaSteps = [
+    categoriesValidations,
+    detailsValidations,
+    priceValidations,
+    bankAccountValidations,
+    descriptionValidations,
+    uploadMediaValidations,
+    locationValidations,
+    promoteYourAdValidations,
+  ];
+
+  // Get form state and actions from Zustand form store
+  const { currentStepIndex, goTo, setCategory } = useFormStore();
+
+  // Set up react-hook-form with Zod resolver and default form values from Zustand
   const methods = useForm<FormValues>({
-    resolver: zodResolver(multiStepFormSchema),
-    defaultValues: useFormStore((state) => state.initialData),
+    resolver: zodResolver(validationSchemaSteps[currentStepIndex]),
+    defaultValues: useFormStore((state) => state.formData),  // Updated to reflect formData structure
   });
 
-  const {
-    message,
-    currentStepIndex,
-    isEditMode,
-    next,
-    back,
-    goTo,
-    setCategory,
-  } = useFormStore();
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    trigger,
-    formState: { errors },
-  } = methods;
+  // Get the state to control FAQs modal from Zustand store
+  const { showFAQs, setShowFAQs } = useQAndAStore();
 
   return (
     <FormProvider {...methods}>
       <form className={styles.container}>
+        
         <div className={styles.form}>
+          {/* Render the correct form step based on currentStepIndex */}
           {currentStepIndex === 0 && (
             <SelectACategory goTo={goTo} setCategory={setCategory} />
           )}
 
           {currentStepIndex === 1 && <Details />}
 
-          {currentStepIndex === 2 && <Features />}
+          {currentStepIndex === 2 && !showFAQs ? (
+            <Price />
+          ) : currentStepIndex === 2 && showFAQs ? (
+            <Modal
+              showModal={showFAQs}
+              setShowModal={setShowFAQs}
+              modalContent={<FAQs faqs={auctionFAQs} />}
+            />
+          ) : null}
 
-          {currentStepIndex === 3 && <Price />}
+          {currentStepIndex === 3 && <BankAccountDetails />}
 
-          {currentStepIndex === 4 && <CreateAccount />}
+          {currentStepIndex === 4 && <TitleAndDescription />}
 
-          {currentStepIndex === 5 && <TitleAndDescription />}
+          {/* Conditional rendering based on media upload actions */}
+          {uploadPhotos ? (
+            <UploadPhotos />
+          ) : reorderPhotos ? (
+            <ReorderPhotos />
+          ) : uploadVideos ? (
+            <UploadVideos />
+          ) : uploadAttachments ? (
+            <UploadAttachments />
+          ) : (
+            currentStepIndex === 5 && <UploadMedia />
+          )}
 
-          {currentStepIndex === 6 && <UploadMedia goTo={goTo} />}
+          {currentStepIndex === 6 && <Location />}
 
-          {currentStepIndex === 7 && <UploadPhotos goTo={goTo} />}
+          {currentStepIndex === 7 && <PromoteYourAd />}
 
-          {currentStepIndex === 8 && <UploadVideos goTo={goTo} />}
+          {currentStepIndex === 8 && <Congratulations />}
 
-          {currentStepIndex === 9 && <UploadAttachments goTo={goTo} />}
-
-          {currentStepIndex === 10 && <Location />}
-
-          {currentStepIndex === 11 && <PromoteYourAd />}
-
-          {currentStepIndex === 12 && <ReviewAndSubmit />}
-
-          {currentStepIndex === 13 && <ReorderPhotos />}
+          {currentStepIndex === 9 && <ReviewAndSubmit />}
         </div>
       </form>
     </FormProvider>

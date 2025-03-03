@@ -1,9 +1,7 @@
 import styles from "./UploadAttachments.module.scss";
-import Link from "next/link";
-import Button from "@/components/Buttons";
 import UploadBox from "@/components/UploadBox";
 import { FormWrapper } from "./FormWrapper";
-
+import { uploadAttachmentsValidations } from "../validations/multiStepFormValidations";
 const UploadAttachments = () => {
   return (
     <FormWrapper title="Upload Attachments">

@@ -1,12 +1,10 @@
 "use client";
 import styles from "./TitleAndDescription.module.scss";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import RichTextEditor from "@/components/richTextEditor/RichTextEditor";
 import { useFormContext } from "react-hook-form";
 import { FormWrapper } from "./FormWrapper";
-
+import { descriptionValidations } from "../validations/multiStepFormValidations";
 const TitleAndDescription = () => {
   const {
     register,

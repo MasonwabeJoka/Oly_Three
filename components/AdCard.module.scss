@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .boxCard {
   display: flex;
   flex-direction: column;
@@ -18,7 +17,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 
     .image {
       display: flex;
@@ -44,7 +42,6 @@
     z-index: 1;
     border-radius: rem(0) rem(0) rem(32) rem(32);
     padding: 0 rem(8) rem(8) rem(8);
-   
 
     .titleDescription {
       display: flex;
@@ -58,12 +55,12 @@
       }
     }
     .price {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: rem(16);
       text-align: center;
-      height:100%; 
+      height: 100%;
     }
   }
 
@@ -82,12 +79,11 @@
     color: $black-four;
     background: $grey-one;
     height: 100%;
-  
 
     .titleDescription {
       width: 100%;
       margin-bottom: rem(-12);
-    
+
       .title {
         padding: rem(32) rem(20) rem(4);
         font-size: rem(16);
@@ -211,7 +207,7 @@
 
     .details {
       display: flex;
-      
+
       flex-direction: column;
       width: rem(570);
       height: rem(250);
@@ -273,7 +269,7 @@
             margin-top: auto;
             width: 100%;
             height: rem(24);
-          
+
             .price {
             }
 

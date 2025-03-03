@@ -1,7 +1,6 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
@@ -20,11 +19,32 @@
     font-size: rem(20);
 
     @include larger-than(mobile) {
-
       margin-top: rem(224);
       margin-bottom: rem(48);
     }
   }
+
+  .uploadedPhotos {
+    padding: 0 rem(100);
+    width: 114%;
+  }
+  .uploadedVideosContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(48);
+    margin-bottom: rem(64);
+    row-gap: rem(20);
+    .uploadedVideo {
+    }
+  }
+
+  .uploadedAttachmentsContainer {
+    width: rem(920);
+    margin-top: rem(48);
+    margin-bottom: rem(64);
+  }
+
   .mediaType {
     display: flex;
     flex-direction: column;
@@ -35,6 +55,18 @@
     margin-top: rem(48);
   }
   .buttonContainer {
+  }
+
+  .photosButtonContainer {
+    margin-bottom: rem(20);
+  }
+  .videosButtonContainer {
+    margin-bottom: rem(20);
+  }
+  .videoUrlsContainer {
+    margin-bottom: rem(20);
+  }
+  .attachmentsButtonContainer {
     margin-bottom: rem(20);
   }
 }

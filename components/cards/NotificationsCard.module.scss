@@ -1,17 +1,30 @@
-@import "@/utils/functions.scss";
-@import "@/utils/variables.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/functions" as *;
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: rem(920);
   padding: rem(32);
   border-radius: rem(32);
-  background-color: $white-three;
-  box-shadow: $shadow-one;
+  background-color: $white-two;
+  // box-shadow: $shadow-one;
   cursor: pointer;
+
+  .deleteButton {
+    position: absolute;
+    top: rem(8);
+    right: rem(8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(24);
+    height: rem(24);
+    border-radius: 50%;
+    background-color: $white-three;
+  }
 
   .mainSection {
     display: flex;
@@ -38,7 +51,6 @@
       .message {
         margin-bottom: rem(20);
         .title {
-         
           margin-bottom: rem(16);
           .name {
             font-weight: 600;
@@ -67,17 +79,16 @@
     min-height: rem(148);
     padding-bottom: rem(32);
     border-radius: 0 0 rem(32) rem(32);
-    background-color: $white-two;
+    background-color: $white-one;
     .buttonContainer {
       margin-bottom: rem(20);
- 
+
       .button {
         background-color: $white-four;
       }
 
       .button:hover {
         background-color: $primary;
-        
       }
     }
 
@@ -85,7 +96,6 @@
       margin-top: rem(32);
       .firstButton {
         background-color: $primary;
-
       }
 
       .firstButton:hover {

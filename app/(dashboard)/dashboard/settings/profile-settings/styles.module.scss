@@ -1,12 +1,10 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
-@import "@/utils/breakpoints.scss";
-
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .title {
     font-size: $h4;
     font-weight: bold;
@@ -46,7 +44,6 @@
         margin-bottom: rem(48);
       }
 
-     
       .changePasswordButton {
         color: #67787c;
         margin-bottom: rem(48);
@@ -58,14 +55,12 @@
 
     .socialMediaLinks {
       .otherSocialMedia {
-        
-    // 
+        //
       }
       .selectedSocialMediaContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
-  
       }
       .otherSocialMediaContainer {
         display: flex;
@@ -73,8 +68,6 @@
         align-items: center;
       }
     }
-
-
   }
 
   .buttonsContainer {

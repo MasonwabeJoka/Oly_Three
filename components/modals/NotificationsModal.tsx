@@ -79,6 +79,7 @@ const NotificationsModal = () => {
       ref={modalRef}
       className={styles.container}
       onClick={parentClickHandler}
+      
     >
       <Modal
         modalContent={<Menu />}

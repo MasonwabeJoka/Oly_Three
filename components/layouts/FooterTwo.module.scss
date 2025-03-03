@@ -1,5 +1,5 @@
-@import "@/utils/variables.scss";
-@import "@/utils/functions.scss";
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
 
 .container {
   .newsLetter {
@@ -17,12 +17,9 @@
       width: rem(350);
     }
     .contactsSection {
-      
-
       .contacts {
-        
         .contact {
-            display: flex;
+          display: flex;
         }
         .phoneNumber {
         }
@@ -31,11 +28,11 @@
         .email {
         }
         .icon {
-            background-color: aliceblue;
-            width: rem(50);
-            height: rem(50);
-            border-radius: 50%;
-            margin: 0 rem(10);
+          background-color: aliceblue;
+          width: rem(50);
+          height: rem(50);
+          border-radius: 50%;
+          margin: 0 rem(10);
         }
       }
       .socials {
@@ -43,13 +40,10 @@
       }
     }
     .sectionOne {
-     
     }
     .sectionTwo {
-      
     }
     .sectionThree {
-      
     }
   }
 }

@@ -9,9 +9,9 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
         {isAuction ? (
           <>
             <p className={styles.priceLabel}>Current Price</p>
-            <h1 className={styles.price}>
+            <p className={styles.price}>
               {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`}
-            </h1>
+            </p>
             <div className={styles.countDown}>
               <span className={styles.countDownPeriod}>1d</span>
               <span className={styles.countDownPeriod}>15h</span>
@@ -24,11 +24,11 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
         ) : (
           <>
             <p className={styles.priceLabel}>Price</p>
-            <h1 className={styles.nonAuctionPrice}>
+            <p className={styles.nonAuctionPrice}>
               {/* {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`} */}
               {ad?.price &&
                 Formatter.formatPrice(ad?.price, { showCents: false })}
-            </h1>
+            </p>
           </>
         )}
       </div>

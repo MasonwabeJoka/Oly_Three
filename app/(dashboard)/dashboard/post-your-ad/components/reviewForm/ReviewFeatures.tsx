@@ -1,14 +1,20 @@
-import styles from './ReviewFeatures.module.scss';
-import { SectionWrapper } from './SectionWrapper';
+import styles from "./ReviewFeatures.module.scss";
+import { SectionWrapper } from "./SectionWrapper";
 const ReviewFeatures = () => {
   return (
-    <SectionWrapper title="Features"><div className={styles.container}>
-    <div className={styles.contentContainer}>
-    <div className={styles.content}>
+    <SectionWrapper title="Features" pageNumber={2}>
+      <div className={styles.container}>
+        <div className={styles.contentContainer}>
+          <div className={styles.content}>
             <div className={styles.contentLabel}>Product Specifications</div>
             <div className={styles.contentItem}>
               <ul>
-                <li><span style={{fontWeight: "500"}}>Reason for Selling: </span>Selling camera to.</li>
+                <li>
+                  <span style={{ fontWeight: "500" }}>
+                    Reason for Selling:{" "}
+                  </span>
+                  Selling camera to.
+                </li>
                 {/* <li><span style={{fontWeight: "500"}}>Reason for Selling: </span>Selling camera to upgrade to a professional model for photography business.</li> */}
                 {/* <li><span>Accessories Included: </span>Remote control, HDMI cable, Wall mounting bracket</li> */}
                 {/* <li><span>Warranty Information: </span>Still under manufacturer warranty until June 2025.</li>
@@ -17,10 +23,10 @@ const ReviewFeatures = () => {
               </ul>
             </div>
           </div>
-  
-    </div>
-  </div></SectionWrapper>
-  )
-}
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+};
 
-export default ReviewFeatures
+export default ReviewFeatures;

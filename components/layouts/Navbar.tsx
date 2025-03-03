@@ -16,12 +16,9 @@ const Navbar = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
   const { user, isSignedIn, isLoaded } = useUser();
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showMenuModal);
+
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
 
   const isMobile = useIsMobileStore((state) => state.isMobile);
 
@@ -30,7 +27,7 @@ const Navbar = () => {
   };
 
   const openModal = () => {
-    setShowNotificationsModal(true);
+    setShowMenuModal(true);
   };
 
   return (
@@ -48,7 +45,12 @@ const Navbar = () => {
         }}
       >
         <Link href="/" className={styles.logo} onClick={openOlyFeed}>
-          <Image src="/logo.png" alt="Logo" width={isMobile ? 61.372 : 70.14} height={isMobile ? 28 : 32} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={isMobile ? 61.372 : 70.14}
+            height={isMobile ? 28 : 32}
+          />
         </Link>
         <div className={styles.profileIconContainer}>
           {isSignedIn ? (

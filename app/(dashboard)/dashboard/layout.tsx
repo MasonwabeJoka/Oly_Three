@@ -3,7 +3,7 @@ import "../../globals.css";
 import styles from "./layout.module.scss";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import { ClerkProvider } from "@clerk/nextjs";
-import Outfit from "next/font/local";
+import { localFont } from 'next/font/local'
 import Navbar from "@/components/layouts/Navbar";
 import { currentUser } from "@/app/temp/tempForMessages";
 import "@uploadthing/react/styles.css";
@@ -16,11 +16,11 @@ export const metadata = {
   description: "Dashboard",
 };
 
-const outfit = Outfit({
-  src: "./outfit.ttf",
-  display: "swap",
-  fallback: ["roboto", "system-ui", "arial"],
-});
+const outfit = localFont({
+  src: './outfit.ttf',
+  display: 'swap',
+  fallback: ['roboto', 'system-ui', 'arial'],
+})
 
 export default async function Layout({
   children,

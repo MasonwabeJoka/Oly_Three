@@ -34,12 +34,8 @@ const Listings = () => {
   const [priceOptions, setPriceOptions] = useState(false);
   const [altWidth, setAltWidth] = useState(954);
   const [optionsWidth, setOptionsWidth] = useState("57.24rem");
-  const showNotificationsModal = useModalStore(
-    (state) => state.showNotificationsModal
-  );
-  const setShowNotificationsModal = useModalStore(
-    (state) => state.setShowNotificationsModal
-  );
+  const showMenuModal = useModalStore((state) => state.showMenuModal);
+  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
   const tabsRef = useRef<HTMLDivElement>(null);
   const listingsRef = useRef<HTMLDivElement>(null);
   const sortingContainerRef = useRef<HTMLDivElement>(null);
@@ -263,8 +259,8 @@ const Listings = () => {
         <div className={styles.modalContainer}>
           <div className={styles.modal}>
             <Modal
-              showModal={showNotificationsModal}
-              setShowModal={setShowNotificationsModal}
+              showModal={showMenuModal}
+              setShowModal={setShowMenuModal}
               modalContent={<Menu />}
             />
           </div>
@@ -512,7 +508,6 @@ const Listings = () => {
                 avatars={avatars}
                 isDeletable={false}
                 isDashboard={false}
-           
               />
             ) : (
               <PaginatedListingsCollage

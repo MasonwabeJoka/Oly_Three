@@ -212,7 +212,14 @@ export const user = defineType({
             description: 'A history of transactions made by the user on the platform.'
           }),
           
-          
+          defineField({
+            name: 'bankAccounts',
+            title: 'Bank Accounts',
+            type: 'array',
+            of: [{ type: 'bankDetails' }], // Use the 'bankDetails' object schema here
+            description: 'A list of bank accounts associated with the user.',
+          }),
+            
           defineField({
             name: 'reviews',
             title: 'Reviews',
