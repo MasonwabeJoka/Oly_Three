@@ -7,6 +7,7 @@ import ErrorBoundary from "@/utils/ErrorBoundary";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import QueryProvider from "./queryProvider";
+import Footer from "@/components/layouts/Footer";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
@@ -56,6 +57,9 @@ export default function RootLayout({
                 </main>
               </div>
             </div>
+            <footer className={styles.footer}>
+              <Footer />
+            </footer>
           </QueryProvider>
         </body>
       </html>

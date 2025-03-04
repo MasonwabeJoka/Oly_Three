@@ -41,7 +41,6 @@
   align-items: center;
   box-sizing: border-box;
   width: 100vw;
-  height: 100%;
   background-color: $white-four;
   font-size: rem(16);
   -webkit-font-smoothing: antialiased;
@@ -156,8 +155,9 @@
   }
 
   footer {
-    margin-top: auto; /* push the footer to the bottom of the container */
+    margin-top: auto ; /* push the footer to the bottom of the container */
     margin-bottom: rem(96);
+    background-color: brown;
   }
 }
 

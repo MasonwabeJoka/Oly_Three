@@ -103,15 +103,15 @@ const Home = () => {
           <section className={styles.featuredListings}>
             <FeaturedListings />
           </section>
-          {/* <section className={styles.blog}>
+          <section className={styles.blog}>
             <Blog />
-          </section> */}
+          </section>
           <section className={styles.videoAd}>
             <VideoAd />
           </section>
-          {/* <section className={styles.sponsoredArticles}>
+          <section className={styles.sponsoredArticles}>
             <SponsoredArticles />
-          </section> */}
+          </section>
         </div>
       </div>
     </MaxWidthWrapper>
