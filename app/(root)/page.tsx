@@ -18,6 +18,7 @@ import { useModalStore } from "@/store/modalStore";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
+import BelowFoldAd from "@/components/ads/BelowFoldAd";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -106,8 +107,9 @@ const Home = () => {
           <section className={styles.blog}>
             <Blog />
           </section>
-          <section className={styles.videoAd}>
-            <VideoAd />
+         
+          <section className={styles.belowFoldAd}>
+            <BelowFoldAd />
           </section>
           <section className={styles.sponsoredArticles}>
             <SponsoredArticles />
