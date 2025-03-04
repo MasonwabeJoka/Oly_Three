@@ -41,7 +41,7 @@ const processImages = (images: GalleryImage[]): GalleryImage[] => {
     // Portrait positioning
     if (isPortrait) {
       return {
-        gridColumn: '1',
+        // gridColumn: '1',
         gridRow: '1 / 3',
         aspectRatio: `1/${1/current.aspectRatio}`
       };
