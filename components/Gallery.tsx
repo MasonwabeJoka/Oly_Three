@@ -165,9 +165,7 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
             <>
               <Image
                 className={styles.primaryImage}
-                src={
-                  totalImages && totalImages[0]?.url ? totalImages[0].url : ""
-                }
+                src={totalImages[0]?.url || null}
                 fill={true}
                 alt="Gallery Image"
                 sizes="(max-width: 768px) 100vw"

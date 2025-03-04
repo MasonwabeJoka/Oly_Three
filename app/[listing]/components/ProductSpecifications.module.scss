@@ -1,32 +1,32 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .specsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: auto;
+  width: 100%;
   min-height: rem(200);
-
+  background-color: $white-three;
   .title {
     color: $danger;
     font-weight: 600;
     margin-top: rem(64);
     margin-bottom: rem(24);
   }
-
-  .infoItems {
-    max-width: 72%;
+  .specs {
     margin: 0 auto rem(96);
-    column-count: 2;
-    column-gap: rem(48);
-    padding-top: rem(48);
-
-    .infoItem {
+    padding: rem(48) rem(432) 0;
+    display: grid;
+    grid-template-columns: repeat(2, rem(544));
+    gap: rem(16) rem(48);
+    .spec {
       display: flex;
       align-items: flex-start;
-      margin-bottom: rem(16);
-
+      // margin-bottom: rem(16);
+      width: rem(544);
+      // background-color: red;
       .bulletContainer {
         .bullet {
           position: relative;
@@ -40,9 +40,10 @@
           box-shadow: 2px 2px 3px rgb(177, 189, 189);
         }
       }
-      .infoItemContainer {
+      .textContainer {
         p {
           font-size: $h4;
+          font-weight: 500;
         }
       }
     }

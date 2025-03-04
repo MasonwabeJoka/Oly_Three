@@ -7,7 +7,7 @@ import { useCart } from "../payment/store/useCart";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
 const CartItem = ({ ad }: { ad: Ad }) => {
-  const { url: imageUrl } = ad.images[0];
+  const imageUrl = ad.images[0]?.url || null; // Use null as fallback
 
   const { removeItem } = useCart();
 
@@ -23,17 +23,13 @@ const CartItem = ({ ad }: { ad: Ad }) => {
       <div className={styles.itemWrapper}>
         <div className={styles.imageWrapper}>
           <div className={styles.imageContainer}>
-            {imageUrl ? (
+            {imageUrl && (
               <Image
                 src={imageUrl}
                 alt={ad.title}
                 fill
                 className="absolute object-cover"
               />
-            ) : (
-              <div className={styles.imagePlaceholder}>
-                <ImageIcon aria-hidden className={styles.imageIcon} />
-              </div>
             )}
           </div>
         </div>

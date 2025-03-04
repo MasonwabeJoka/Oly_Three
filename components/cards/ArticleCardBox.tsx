@@ -42,7 +42,7 @@ const ArticleCardBox = ({
 
       <div className={styles.details}>
         <div className={styles.titleContainer}>
-          <h3 className={styles.title}>{title.length > 64 ? `${title.slice(0, 64)}...` : title}</h3>
+          <p className={styles.title}>{title.length > 64 ? `${title.slice(0, 64)}...` : title}</p>
         </div>
         <div className={styles.author}>
           <Avatar
