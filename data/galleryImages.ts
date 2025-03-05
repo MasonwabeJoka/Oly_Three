@@ -95,7 +95,16 @@ export const galleryImages: GalleryGroup[] = [
       { id: "tl1", url: "/listing_images/Landscape/1.jpg", aspectRatio: 1.5 },
       { id: "tp2", url: "/listing_images/Portrait/2.jpg", aspectRatio: 0.67 },
     ]
-  }
+  },
+  {
+    id: "random-images-mixed",
+    title: "Random Images Mixed",
+    images: [
+      // { id: "tl1", url: "/listing_images/Landscape/1.jpg", aspectRatio: 1.5 },
+      { id: "tp1", url: "/listing_images/Portrait/1.jpg", aspectRatio: 0.67 },
+      // { id: "tp2", url: "/listing_images/Portrait/2.jpg", aspectRatio: 0.67 },
+    ]
+  },
 ];
 
 // Helper function to get a specific gallery by ID
