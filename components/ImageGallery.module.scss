@@ -1,0 +1,72 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.likeIconContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(128);
+    height: rem(128);
+    border-radius: 50%;
+    cursor: pointer;
+
+    .likeIconBG {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(150);
+      height: rem(150);
+      transform: translateY(50%);
+      border: 0px solid black;
+      border-radius: 50%;
+      background-color: hsla(195, 91%, 86%, 1);
+
+      .likeIcon {
+        text-align: center;
+        background-color: #bdecfc;
+      }
+    }
+  }
+
+
+
+  .postMetrics {
+    width: rem(280);
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    color: $black-four;
+    font-size: rem(12);
+    margin-top: rem(16);
+    margin-left: rem(16);
+
+    .likes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+    .views {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin-right: rem(4);
+        margin-bottom: rem(-5);
+      }
+    }
+
+    .postAge {
+      font-size: rem(12);
+      .duration {
+        margin-left: rem(8);
+        margin-right: rem(8);
+      }
+    }
+  }

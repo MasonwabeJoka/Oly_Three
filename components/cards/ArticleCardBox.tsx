@@ -47,7 +47,7 @@ const ArticleCardBox = ({
         <div className={styles.author}>
           <Avatar
             className={styles.profilePic}
-            avatar={avatar && avatar}
+            avatar={avatar || null}
             avatarSize="small"
             isOnline={false}
           />

@@ -1,9 +1,6 @@
 import styles from "./layout.module.scss";
 import { ClerkProvider } from "@clerk/nextjs";
-// import Outfit from "next/font/local";
-
-import  localFont  from 'next/font/local'
-
+import localFont from 'next/font/local'
 
 export const metadata = {
   title: "Access OLY: Sign In or Join Today",
@@ -23,9 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <div className={outfit.className}>
-        <div className={styles.body}>{children}</div>
-      </div>
+      <html lang="en" className={outfit.className}>
+        <body className={styles.body}>
+          {children}
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
