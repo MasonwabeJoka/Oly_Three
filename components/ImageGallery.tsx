@@ -16,22 +16,47 @@ const processImages = ({ images }: ImageGalleryProps) => {
   if (!images?.length) return [];
 
   const result = [images[0]];
-  const remaining = images.slice(1);
+  const remaining = images.slice(1, 5);
+  const portraits = remaining.filter((img) => img.aspectRatio < 1).length;
 
-  const portraits = remaining.filter((img) => img.aspectRatio < 1);
-  const landscapes = remaining.filter((img) => img.aspectRatio >= 1);
+  // Add null check for remaining
+  if (!remaining?.length) return result;
+
+  for (let i = 0; i < remaining?.length; i++) {
+    const current = remaining[i];
+    const next = remaining[i + 1];
+
+    if (current?.aspectRatio > 1 && next?.aspectRatio < 1) {
+      result.push(next, current);
+      i++; // Skip the next iteration since we've already added the next image
+    } else if (current) {
+      // Add check for current
+      result.push(current);
+    }
+  }
+
+  // const portraits = remaining.filter((img) => img.aspectRatio < 1);
+  // const landscapes = remaining.filter((img) => img.aspectRatio >= 1);
 
   // Select up to 2 portraits
-  const selectedPortraits = portraits.slice(0, 2);
-  result.push(...selectedPortraits);
-  const portraitCount = selectedPortraits.length;
+  // const selectedPortraits = portraits.slice(0, 2);
+  // result.push(...selectedPortraits);
+  // const portraitCount = selectedPortraits.length;
 
   // Calculate max landscapes based on grid capacity (2 columns - portraits) × 2 rows
-  const maxLandscapes = (2 - portraitCount) * 2;
-  const selectedLandscapes = landscapes.slice(0, maxLandscapes);
-  result.push(...selectedLandscapes);
+  // const maxLandscapes = (2 - portraitCount) * 2;
+  // const selectedLandscapes = landscapes.slice(0, maxLandscapes);
+  // result.push(...selectedLandscapes);
 
-  return result.slice(0, 5); // Ensure max 5 images total
+  // if (portraits === 1) {
+  //   return result.slice(0, 4); // Ensure max 4 images total)
+  // } else if (portraits === 2 && images[2]?.aspectRatio < 1) {
+  //   return result.slice(0, 4); // Ensure max 4 images total)
+  // } else {
+  //   return result.slice(0, 5); // Ensure max 5 images total
+  // }
+
+  return result.slice(0, 4);
 };
 
 // Grid positioning logic
@@ -46,7 +71,7 @@ const getGridPosition = (
     // Portrait images get their own column
     const portraitIndex = images
       .slice(0, index + 1)
-      .filter((img) => img.aspectRatio < 1).length;
+      .filter((img) => img.aspectRatio < 1)?.length;
 
     return {
       gridColumn: portraitIndex,
@@ -59,7 +84,7 @@ const getGridPosition = (
   const portraitCount = images.filter((img) => img.aspectRatio < 1).length;
   const landscapeIndex = images
     .slice(0, index)
-    .filter((img) => img.aspectRatio >= 1).length;
+    .filter((img) => img.aspectRatio >= 1)?.length;
 
   // Calculate position based on available columns
   const col = portraitCount + Math.floor(landscapeIndex / 2) + 1;
@@ -71,10 +96,14 @@ const getGridPosition = (
     aspectRatio: `${current.aspectRatio}/1`,
   };
 };
-const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
+const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const [isHeartHovered, setIsHeartHovered] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const displayImages = useMemo(() => processImages({ images }), [images]);
+
+  // Guard clause - return null if no images or if processing resulted in empty array
+  if (!images?.length || !displayImages?.length) return null;
 
   const handleIconClick = () => {
     setIsHeartClicked(!isHeartClicked);
@@ -86,57 +115,59 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
     return "/icons/heart.svg";
   };
 
-  const displayImages = useMemo(() => processImages({ images }), [images]);
-
   // Styles
   const containerStyle = {
     position: "absolute" as const,
     display: "flex",
     gap: "12px",
-    width: "630px",
+    width: images[0]?.aspectRatio < 1 ? "970px" : "1284px",
     height: "475px",
+    clipPath: "inset(-20px -12px -40px -20px)", 
   };
 
   const landscapeFirstImageStyle = {
     display: "flex",
     flex: "0 0 630px",
     justifyContent: "center",
-    height: "100%",
+    height: "475px",
     position: "relative" as const,
   };
   const portraitFirstImageStyle = {
     display: "flex",
     flex: "0 0 315px",
     justifyContent: "center",
-    height: "100%",
+    height: "475px",
     position: "relative" as const,
   };
 
   const gridContainerStyle = {
-    flex: 1,
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)", // Two equal columns
     gridTemplateRows: "repeat(2, 1fr)", // Two equal rows
     gap: "12px",
+    // Remove paddingRight since it's handled in containerStyle
   };
 
   const gridItemStyle = {
     position: "relative" as const,
     overflow: "hidden",
     width: "315px",
+    height: "475px",
   };
 
   const allImagesBtnStyle: React.CSSProperties = {
     width: "202px",
     height: "54px",
-
     position: "relative" as const,
-    right: images.length === 1 ? "68%" : images.length === 2 ||images.length === 3 ? "44%" : "42.5%",
+    right:
+      images?.length === 1
+        ? "67%"
+        : images?.length === 2 || images?.length === 3
+          ? "44%"
+          : "42.5%",
     top: "70%",
     zIndex: 5,
   };
-
-  if (displayImages.length === 0) return null;
 
   const firstImage = displayImages[0];
   const remainingImages = displayImages.slice(1);
@@ -194,7 +225,7 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
         </div>
 
         {/* Secondary Images Grid */}
-        {remainingImages.length > 0 && (
+        {remainingImages?.length > 0 && (
           <>
             <div style={gridContainerStyle}>
               {remainingImages.map((img, index) => {
@@ -211,6 +242,9 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
                         ? `1/${1 / img.aspectRatio}`
                         : `${img.aspectRatio}/1`,
                       height: isPortrait ? "475px" : "231px",
+                      boxShadow:
+                        "10px 10px 20px 0px rgba(169, 196, 203, 0.5), 5px 5px 10px 0px rgba(169, 196, 203, 0.25)",
+                      borderRadius: "32px",
                     }}
                   >
                     <Image
@@ -220,7 +254,6 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       style={{
                         objectFit: "cover",
-                        borderRadius: "32px",
                       }}
                     />
                   </div>
@@ -229,25 +262,23 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
             </div>
           </>
         )}
-            <div style={allImagesBtnStyle}>
-              <Button
-                style={{ width: "202px", height: "54px" }}
-                buttonChildren={
-                  images && images.length > 4
-                    ? "Show All Images"
-                    : "Full Screen"
-                }
-                buttonType="normal"
-                buttonSize="medium"
-                name="allImagesBtn"
-                type="button"
-                ariaLabel="All Images Button"
-                autoFocus={false}
-                disabled={false}
-                formTarget="_blank"
-                onClick={onClick}
-              />
-            </div>
+        <div style={allImagesBtnStyle}>
+          <Button
+            style={{ width: "202px", height: "54px" }}
+            buttonChildren={
+              images && images.length > 4 ? "Show All Images" : "Full Screen"
+            }
+            buttonType="normal"
+            buttonSize="medium"
+            name="allImagesBtn"
+            type="button"
+            ariaLabel="All Images Button"
+            autoFocus={false}
+            disabled={false}
+            formTarget="_blank"
+            onClick={onClick}
+          />
+        </div>
       </div>
       <div className={styles.postMetrics}>
         <div className={styles.likes}>

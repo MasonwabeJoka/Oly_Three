@@ -100,15 +100,15 @@ export const galleryImages: GalleryGroup[] = [
     id: "random-images-mixed",
     title: "Random Images Mixed",
     images: [
+      { id: "fl2", url: "/listing_images/Landscape/5.jpg", aspectRatio: 1.5 },
       { id: "tl1", url: "/listing_images/Landscape/1.jpg", aspectRatio: 1.5 },
-      { id: "fl1", url: "/listing_images/Landscape/4.jpg", aspectRatio: 1.5 },
       { id: "tp1", url: "/listing_images/Portrait/1.jpg", aspectRatio: 0.67 },
       { id: "fl1", url: "/listing_images/Landscape/3.jpg", aspectRatio: 1.5 },
       { id: "tp2", url: "/listing_images/Portrait/2.jpg", aspectRatio: 0.67 },
+      { id: "fl2", url: "/listing_images/Landscape/2.jpg", aspectRatio: 1.5 },
+      { id: "fl1", url: "/listing_images/Landscape/4.jpg", aspectRatio: 1.5 },
       // { id: "fp1", url: "/listing_images/Portrait/1.jpg", aspectRatio: 0.67 },
       // { id: "fp2", url: "/listing_images/Portrait/2.jpg", aspectRatio: 0.67 },
-     { id: "fl2", url: "/listing_images/Landscape/2.jpg", aspectRatio: 1.5 },
-    //  { id: "fl2", url: "/listing_images/Landscape/5.jpg", aspectRatio: 1.5 },
     ]
   },
 ];
@@ -120,6 +120,10 @@ export const getGalleryById = (id: string): GalleryGroup | undefined => {
 
 // Helper function to get random gallery
 export const getRandomGallery = (): GalleryGroup => {
+  if (!galleryImages || galleryImages.length === 0) {
+    // Return a default gallery or throw an error
+    throw new Error('No galleries available');
+  }
   const randomIndex = Math.floor(Math.random() * galleryImages.length);
   return galleryImages[randomIndex];
 };
