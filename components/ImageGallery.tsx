@@ -16,8 +16,8 @@ const processImages = ({ images }: ImageGalleryProps) => {
   if (!images?.length) return [];
 
   const result = [images[0]];
-  const remaining = images.slice(1, 5);
-  const portraits = remaining.filter((img) => img.aspectRatio < 1).length;
+  const remaining = images.slice(1, 4);
+ 
 
   // Add null check for remaining
   if (!remaining?.length) return result;
@@ -34,27 +34,6 @@ const processImages = ({ images }: ImageGalleryProps) => {
       result.push(current);
     }
   }
-
-  // const portraits = remaining.filter((img) => img.aspectRatio < 1);
-  // const landscapes = remaining.filter((img) => img.aspectRatio >= 1);
-
-  // Select up to 2 portraits
-  // const selectedPortraits = portraits.slice(0, 2);
-  // result.push(...selectedPortraits);
-  // const portraitCount = selectedPortraits.length;
-
-  // Calculate max landscapes based on grid capacity (2 columns - portraits) × 2 rows
-  // const maxLandscapes = (2 - portraitCount) * 2;
-  // const selectedLandscapes = landscapes.slice(0, maxLandscapes);
-  // result.push(...selectedLandscapes);
-
-  // if (portraits === 1) {
-  //   return result.slice(0, 4); // Ensure max 4 images total)
-  // } else if (portraits === 2 && images[2]?.aspectRatio < 1) {
-  //   return result.slice(0, 4); // Ensure max 4 images total)
-  // } else {
-  //   return result.slice(0, 5); // Ensure max 5 images total
-  // }
 
   return result.slice(0, 4);
 };
@@ -101,7 +80,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
   const displayImages = useMemo(() => processImages({ images }), [images]);
-
+  const portraitsCount = displayImages.filter((img) => img.aspectRatio < 1).length;
   // Guard clause - return null if no images or if processing resulted in empty array
   if (!images?.length || !displayImages?.length) return null;
 
@@ -122,7 +101,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     gap: "12px",
     width: images[0]?.aspectRatio < 1 ? "970px" : "1284px",
     height: "475px",
-    clipPath: "inset(-20px -12px -40px -20px)", 
+    // clipPath: "inset(-20px -12px -40px -20px)", 
   };
 
   const landscapeFirstImageStyle = {
@@ -145,12 +124,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     gridTemplateColumns: "repeat(2, 1fr)", // Two equal columns
     gridTemplateRows: "repeat(2, 1fr)", // Two equal rows
     gap: "12px",
-    // Remove paddingRight since it's handled in containerStyle
   };
 
   const gridItemStyle = {
     position: "relative" as const,
-    overflow: "hidden",
+    borderRadius: "32px",
     width: "315px",
     height: "475px",
   };
@@ -231,6 +209,25 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               {remainingImages.map((img, index) => {
                 const position = getGridPosition(index, remainingImages);
                 const isPortrait = img.aspectRatio < 1;
+                // PLL-4-4
+                const hideImage = {
+                  display: index > 2 && portraitsCount > 1 ? "none" : "block"
+                };
+
+              //PPL & PLP
+                // const hideImage = {
+                //   display: index > 1 && portraitsCount > 1 ? "none" : "block"
+                // };
+                
+                //LLP-5-4
+                // const hideImage = {
+                //   display: index > 2 && portraitsCount === 1 ? "none" : "block"
+                // };
+
+                // LLLL-5-5
+                // const hideImage = {
+                //   display: index > 3 ? "none" : "block"
+                // };
 
                 return (
                   <div
@@ -238,13 +235,14 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                     style={{
                       ...gridItemStyle,
                       ...position,
+                      ...hideImage,
                       aspectRatio: isPortrait
                         ? `1/${1 / img.aspectRatio}`
                         : `${img.aspectRatio}/1`,
                       height: isPortrait ? "475px" : "231px",
                       boxShadow:
                         "10px 10px 20px 0px rgba(169, 196, 203, 0.5), 5px 5px 10px 0px rgba(169, 196, 203, 0.25)",
-                      borderRadius: "32px",
+                     
                     }}
                   >
                     <Image
@@ -254,6 +252,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       style={{
                         objectFit: "cover",
+                        borderRadius: "32px", // Add border radius here as well
                       }}
                     />
                   </div>

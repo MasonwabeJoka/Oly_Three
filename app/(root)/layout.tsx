@@ -19,7 +19,8 @@ export const metadata = {
 };
 
 const outfit = Outfit({
-  src: "./outfit.ttf",
+  // src: "./outfit.ttf",
+  src: "../../public/fonts/Outfit-VariableFont_wght.ttf",
   display: "swap",
   fallback: ["roboto", "system-ui", "arial"],
 });

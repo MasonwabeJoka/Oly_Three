@@ -1,3 +1,4 @@
+'use client'
 import { RefObject, useEffect } from "react";
 //https://usehooks-ts.com/react-hook/use-on-click-outside
 type Event = MouseEvent | TouchEvent;

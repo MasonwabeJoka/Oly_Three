@@ -1,7 +1,8 @@
+'use client'
 import React, { useState } from "react";
 import styles from "./Avatars.module.scss";
 import Image from "next/image";
-import { User } from "@prisma/client";
+
 
 interface AvatarProps {
   className: string;
