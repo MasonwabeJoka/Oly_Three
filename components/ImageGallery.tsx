@@ -15,27 +15,21 @@ interface ImageGalleryProps {
 const processImages = ({ images }: ImageGalleryProps) => {
   if (!images?.length) return [];
 
+  // Keep the first image as is
   const result = [images[0]];
-  const remaining = images.slice(1, 4);
- 
+  const remaining = images.slice(1, 5);
 
-  // Add null check for remaining
   if (!remaining?.length) return result;
 
-  for (let i = 0; i < remaining?.length; i++) {
-    const current = remaining[i];
-    const next = remaining[i + 1];
+  // Separate portraits and landscapes from remaining images
+  const portraits = remaining.filter(img => img.aspectRatio < 1);
+  const landscapes = remaining.filter(img => img.aspectRatio >= 1);
 
-    if (current?.aspectRatio > 1 && next?.aspectRatio < 1) {
-      result.push(next, current);
-      i++; // Skip the next iteration since we've already added the next image
-    } else if (current) {
-      // Add check for current
-      result.push(current);
-    }
-  }
+  // Combine them with portraits first, then landscapes
+  result.push(...portraits, ...landscapes);
 
-  return result.slice(0, 4);
+  // Return only first 5 images
+  return result.slice(0, 5);
 };
 
 // Grid positioning logic
@@ -101,7 +95,6 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     gap: "12px",
     width: images[0]?.aspectRatio < 1 ? "970px" : "1284px",
     height: "475px",
-    // clipPath: "inset(-20px -12px -40px -20px)", 
   };
 
   const landscapeFirstImageStyle = {
@@ -149,6 +142,66 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
 
   const firstImage = displayImages[0];
   const remainingImages = displayImages.slice(1);
+
+  const hideImage = (index: number, remainingImages: GalleryImage[], portraitsCount: number): React.CSSProperties => {
+    // Get the aspect ratios of the remaining images
+    const patterns = remainingImages.map(img => img.aspectRatio >= 1 ? 'L' : 'P').join('');
+    console.log('Pattern:', patterns);
+    console.log('remainingImages:', remainingImages);
+    switch (patterns) {
+      // Landscape-Portrait-Portrait-Landscape pattern
+      case 'LPPL':
+        return {
+          display: (index === 1 || index === 3) && portraitsCount > 1 ? 'none' : 'block',
+          backgroundColor: 'red',
+        };
+      
+      // Portrait-Portrait-Landscape or Portrait-Landscape-Portrait pattern
+      case 'PPL':
+      case 'PLP':
+        return {
+          display: index > 1 && portraitsCount > 1 ? 'none' : 'block',
+          
+        };
+      
+      // Landscape-Landscape-Portrait pattern
+      case 'LLP':
+        return {
+          display: index === 3 ? 'none' : 'block',
+         
+        };
+     
+      // Portrait-Landscape-Landscape-Landscape pattern
+      case 'PLLL':
+        return {
+          display: index === 3 ? 'none' : 'block',
+        
+        };
+      // Portrait-Portrait-Portrait-Portrait pattern or
+      // Portrait-Portrait-Portrait-Portrait
+      case 'PPPP':
+      case 'PPPL':
+        return {
+          display: index === 2 || index === 3 ? 'none' : 'block',
+        
+        };
+    
+  
+      // Landscape-Landscape-Landscape-Landscape pattern (5 images)
+      case 'LLLL':
+        return {
+          display: index > 3 ? 'none' : 'block',
+          borderRadius: "0px",
+         
+        };
+        
+      // Default case - show all images
+      default:
+        return {
+          display: 'block'
+        };
+    }
+  };
 
   return (
     <>
@@ -209,25 +262,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               {remainingImages.map((img, index) => {
                 const position = getGridPosition(index, remainingImages);
                 const isPortrait = img.aspectRatio < 1;
-                // PLL-4-4
-                const hideImage = {
-                  display: index > 2 && portraitsCount > 1 ? "none" : "block"
-                };
-
-              //PPL & PLP
-                // const hideImage = {
-                //   display: index > 1 && portraitsCount > 1 ? "none" : "block"
-                // };
-                
-                //LLP-5-4
-                // const hideImage = {
-                //   display: index > 2 && portraitsCount === 1 ? "none" : "block"
-                // };
-
-                // LLLL-5-5
-                // const hideImage = {
-                //   display: index > 3 ? "none" : "block"
-                // };
+                const hideImageStyle = hideImage(index, remainingImages, portraitsCount);
 
                 return (
                   <div
@@ -235,7 +270,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                     style={{
                       ...gridItemStyle,
                       ...position,
-                      ...hideImage,
+                      ...hideImageStyle,
                       aspectRatio: isPortrait
                         ? `1/${1 / img.aspectRatio}`
                         : `${img.aspectRatio}/1`,
