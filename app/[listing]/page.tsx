@@ -20,7 +20,6 @@ import MainSection from "./components/MainSection";
 import Features from "./components/Features";
 import ads from '@/data/adsData'
 
-// Todo: Reformat by moving components into their own files.
 type ParamsProp = {
   params: {
     listing: string;

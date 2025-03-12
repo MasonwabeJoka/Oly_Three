@@ -5,11 +5,18 @@ import { useMemo, useState } from "react";
 import type { GalleryImage } from "@/data/galleryImages";
 import Icon from "@/components/Icon";
 import Button from "@/components/Buttons";
+import { Ad } from "@/sanity/Types/Ad";
 
 interface ImageGalleryProps {
-  images: GalleryImage[];
+  id: Ad["_id"];
+  images?: Ad["images"];
+  aspectRatios: (number | undefined)[] | undefined; // Array of aspect ratios
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
+// interface ImageGalleryProps {
+//   images: GalleryImage[];
+//   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+// }
 
 // Image processing with ordering rules
 const processImages = ({ images }: ImageGalleryProps) => {
@@ -22,8 +29,8 @@ const processImages = ({ images }: ImageGalleryProps) => {
   if (!remaining?.length) return result;
 
   // Separate portraits and landscapes from remaining images
-  const portraits = remaining.filter(img => img.aspectRatio < 1);
-  const landscapes = remaining.filter(img => img.aspectRatio >= 1);
+  const portraits = remaining.filter((img) => img.aspectRatio < 1);
+  const landscapes = remaining.filter((img) => img.aspectRatio >= 1);
 
   // Combine them with portraits first, then landscapes
   result.push(...portraits, ...landscapes);
@@ -74,7 +81,9 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
   const displayImages = useMemo(() => processImages({ images }), [images]);
-  const portraitsCount = displayImages.filter((img) => img.aspectRatio < 1).length;
+  const portraitsCount = displayImages.filter(
+    (img) => img.aspectRatio < 1
+  ).length;
   // Guard clause - return null if no images or if processing resulted in empty array
   if (!images?.length || !displayImages?.length) return null;
 
@@ -89,12 +98,21 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   };
 
   // Styles
+
+  const wrapper: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    width: "fit-content",
+    height: "fit-content",
+    marginBottom: "16px",
+  };
+
   const containerStyle = {
-    position: "absolute" as const,
     display: "flex",
     gap: "12px",
-    width: images[0]?.aspectRatio < 1 ? "970px" : "1284px",
+    width: "fit-content",
     height: "475px",
+    marginBottom: "4px",
   };
 
   const landscapeFirstImageStyle = {
@@ -129,82 +147,79 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const allImagesBtnStyle: React.CSSProperties = {
     width: "202px",
     height: "54px",
-    position: "relative" as const,
-    right:
-      images?.length === 1
-        ? "67%"
-        : images?.length === 2 || images?.length === 3
-          ? "44%"
-          : "42.5%",
-    top: "70%",
-    zIndex: 5,
   };
 
   const firstImage = displayImages[0];
   const remainingImages = displayImages.slice(1);
 
-  const hideImage = (index: number, remainingImages: GalleryImage[], portraitsCount: number): React.CSSProperties => {
+  const hideImage = (
+    index: number,
+    remainingImages: GalleryImage[],
+    portraitsCount: number
+  ): React.CSSProperties => {
     // Get the aspect ratios of the remaining images
-    const patterns = remainingImages.map(img => img.aspectRatio >= 1 ? 'L' : 'P').join('');
-    console.log('Pattern:', patterns);
-    console.log('remainingImages:', remainingImages);
+    const patterns = remainingImages
+      .map((img) => (img.aspectRatio >= 1 ? "L" : "P"))
+      .join("");
+    console.log("Pattern:", patterns);
+    console.log("remainingImages:", remainingImages);
     switch (patterns) {
       // Landscape-Portrait-Portrait-Landscape pattern
-      case 'LPPL':
+      case "LPPL":
         return {
-          display: (index === 1 || index === 3) && portraitsCount > 1 ? 'none' : 'block',
-          backgroundColor: 'red',
+          display:
+            (index === 1 || index === 3) && portraitsCount > 1
+              ? "none"
+              : "block",
         };
-      
+
       // Portrait-Portrait-Landscape or Portrait-Landscape-Portrait pattern
-      case 'PPL':
-      case 'PLP':
+      case "PPL":
+      case "PLP":
         return {
-          display: index > 1 && portraitsCount > 1 ? 'none' : 'block',
-          
+          display: index > 1 && portraitsCount > 1 ? "none" : "block",
         };
-      
+
       // Landscape-Landscape-Portrait pattern
-      case 'LLP':
+      case "LLP":
         return {
-          display: index === 3 ? 'none' : 'block',
-         
+          display: index === 3 ? "none" : "block",
         };
-     
+
       // Portrait-Landscape-Landscape-Landscape pattern
-      case 'PLLL':
+      case "PLLL":
         return {
-          display: index === 3 ? 'none' : 'block',
-        
+          display: index === 3 ? "none" : "block",
+        };
+      // Portrait-Landscape-Landscape-Portrait pattern
+      case "PPLL":
+        return {
+          display: index === 2 || index === 3 ? "none" : "block",
         };
       // Portrait-Portrait-Portrait-Portrait pattern or
       // Portrait-Portrait-Portrait-Portrait
-      case 'PPPP':
-      case 'PPPL':
+      case "PPPP":
+      case "PPPL":
         return {
-          display: index === 2 || index === 3 ? 'none' : 'block',
-        
+          display: index === 2 || index === 3 ? "none" : "block",
         };
-    
-  
+
       // Landscape-Landscape-Landscape-Landscape pattern (5 images)
-      case 'LLLL':
+      case "LLLL":
         return {
-          display: index > 3 ? 'none' : 'block',
-          borderRadius: "0px",
-         
+          display: index > 3 ? "none" : "block",
         };
-        
+
       // Default case - show all images
       default:
         return {
-          display: 'block'
+          display: "block",
         };
     }
   };
 
   return (
-    <>
+    <div style={wrapper}>
       <div style={containerStyle}>
         {/* Primary Image Container */}
         <div
@@ -253,6 +268,36 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               )}
             </div>
           </div>
+          {images.length === 1 && (
+            <div
+              style={{
+                ...allImagesBtnStyle,
+                position: "absolute" as const,
+                left: "50%",
+                top: "70%",
+                transform: "translateX(-50%)",
+                zIndex: 5,
+              }}
+            >
+              <Button
+                style={{ width: "202px", height: "54px" }}
+                buttonChildren={
+                  images && images.length > 4
+                    ? "Show All Images"
+                    : "Full Screen"
+                }
+                buttonType="normal"
+                buttonSize="medium"
+                name="allImagesBtn"
+                type="button"
+                ariaLabel="All Images Button"
+                autoFocus={false}
+                disabled={false}
+                formTarget="_blank"
+                onClick={onClick}
+              />
+            </div>
+          )}
         </div>
 
         {/* Secondary Images Grid */}
@@ -262,7 +307,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               {remainingImages.map((img, index) => {
                 const position = getGridPosition(index, remainingImages);
                 const isPortrait = img.aspectRatio < 1;
-                const hideImageStyle = hideImage(index, remainingImages, portraitsCount);
+                const hideImageStyle = hideImage(
+                  index,
+                  remainingImages,
+                  portraitsCount
+                );
 
                 return (
                   <div
@@ -277,7 +326,6 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       height: isPortrait ? "475px" : "231px",
                       boxShadow:
                         "10px 10px 20px 0px rgba(169, 196, 203, 0.5), 5px 5px 10px 0px rgba(169, 196, 203, 0.25)",
-                     
                     }}
                   >
                     <Image
@@ -287,32 +335,229 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       style={{
                         objectFit: "cover",
-                        borderRadius: "32px", // Add border radius here as well
+                        borderRadius: "32px", 
                       }}
                     />
+                    {remainingImages?.length === 1 &&
+                    index === 0 &&
+                    isPortrait ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: "70%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length === 2 &&
+                      index === 1 &&
+                      !isPortrait ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: "37%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length > 1 &&
+                      index === 1 &&
+                      isPortrait ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: "70%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length >= 3 &&
+                      remainingImages[0].aspectRatio < 1 &&
+                      index === 2 ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: isPortrait ? "70%" : "37%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length === 3 &&
+                      remainingImages[0].aspectRatio > 1 &&
+                      index === 2 ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: isPortrait ? "70%" : "144%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length === 1 && index === 0 ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: isPortrait ? "70%" : "144%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : remainingImages?.length === 4 && index === 3 ? (
+                      <div
+                        style={{
+                          ...allImagesBtnStyle,
+                          position: "absolute" as const,
+                          left: "50%",
+                          top: "37%",
+                          transform: "translateX(-50%)",
+                          zIndex: 5,
+                        }}
+                      >
+                        <Button
+                          style={{ width: "202px", height: "54px" }}
+                          buttonChildren={
+                            images && images.length > 4
+                              ? "Show All Images"
+                              : "Full Screen"
+                          }
+                          buttonType="normal"
+                          buttonSize="medium"
+                          name="allImagesBtn"
+                          type="button"
+                          ariaLabel="All Images Button"
+                          autoFocus={false}
+                          disabled={false}
+                          formTarget="_blank"
+                          onClick={onClick}
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 );
               })}
             </div>
           </>
         )}
-        <div style={allImagesBtnStyle}>
-          <Button
-            style={{ width: "202px", height: "54px" }}
-            buttonChildren={
-              images && images.length > 4 ? "Show All Images" : "Full Screen"
-            }
-            buttonType="normal"
-            buttonSize="medium"
-            name="allImagesBtn"
-            type="button"
-            ariaLabel="All Images Button"
-            autoFocus={false}
-            disabled={false}
-            formTarget="_blank"
-            onClick={onClick}
-          />
-        </div>
       </div>
       <div className={styles.postMetrics}>
         <div className={styles.likes}>
@@ -332,7 +577,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
             <Icon
               className={styles.viewsIcon}
               src={getImageSrc()}
-              alt="likes icon"
+              alt="views icon"
               width={20}
               height={20}
             />
@@ -341,11 +586,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
         </div>
         <div className={styles.postAge}>
           <p>
-            Posted <span className={styles.duration}>2 weeks</span>ago
+            Posted <span className={styles.duration}>2 weeks</span> ago
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

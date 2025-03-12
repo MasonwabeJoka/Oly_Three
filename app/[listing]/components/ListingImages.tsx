@@ -2,6 +2,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./ListingImages.module.scss";
 import Gallery from "@/components/Gallery";
 import { Ad } from "@/sanity/Types/Ad";
+import ImageGallery from "@/components/ImageGallery";
+import { imagesData } from "@/data/galleryImages";
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "#" },
@@ -13,10 +15,15 @@ const BREADCRUMBS = [
 type ListingImagesProps = {
   id: string | undefined;
   images?: Ad["images"] | undefined;
-  aspectRatios:(number | undefined)[] | undefined;
+  aspectRatios: (number | undefined)[] | undefined;
   onClick: () => void;
 };
-const ListingImages = ({ id,images, aspectRatios, onClick }: ListingImagesProps) => {
+const ListingImages = ({
+  id,
+  images,
+  aspectRatios,
+  onClick,
+}: ListingImagesProps) => {
   return (
     <div className={styles.listingImages}>
       <div className={styles.galleryContainer}>
@@ -29,11 +36,13 @@ const ListingImages = ({ id,images, aspectRatios, onClick }: ListingImagesProps)
           />
         </div>
         <div className={styles.gallery}>
-          <Gallery
+
+          <ImageGallery
             id={id ? id : ""}
-            images={images ? images : []}
+            // images={images ? images : []}
+            images={imagesData}
             onClick={onClick}
-            aspectRatios={aspectRatios ? aspectRatios : []} 
+            aspectRatios={aspectRatios ? aspectRatios : []}
           />
         </div>
       </div>
