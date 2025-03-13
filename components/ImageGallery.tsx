@@ -12,6 +12,7 @@ interface ImageGalleryProps {
   images?: Ad["images"];
   aspectRatios: (number | undefined)[] | undefined; // Array of aspect ratios
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
 }
 // interface ImageGalleryProps {
 //   images: GalleryImage[];
@@ -110,7 +111,16 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const containerStyle = {
     display: "flex",
     gap: "12px",
-    width: "fit-content",
+    width:
+      images?.length === 1
+        ? "630px"
+        : (images?.length === 2 && images[1].aspectRatio < 1) ||
+            (images?.length === 3 &&
+              images[1].aspectRatio > 1 &&
+              images[2].aspectRatio < 1)
+          ? "957px"
+          : "1284px",
+
     height: "475px",
     marginBottom: "4px",
   };
@@ -280,7 +290,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               }}
             >
               <Button
-                style={{ width: "202px", height: "54px" }}
+                style={{
+                  width: "202px",
+                  height: "54px",
+                  backgroundColor: "white",
+                }}
                 buttonChildren={
                   images && images.length > 4
                     ? "Show All Images"
@@ -335,7 +349,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       style={{
                         objectFit: "cover",
-                        borderRadius: "32px", 
+                        borderRadius: "32px",
                       }}
                     />
                     {remainingImages?.length === 1 &&
@@ -352,7 +366,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -377,13 +395,17 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                           ...allImagesBtnStyle,
                           position: "absolute" as const,
                           left: "50%",
-                          top: "37%",
+                          top: "144%",
                           transform: "translateX(-50%)",
                           zIndex: 5,
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -414,7 +436,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -445,7 +471,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -476,7 +506,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -505,7 +539,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                          style={{ width: "202px", height: "54px", backgroundColor: "white" }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -534,7 +568,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px" }}
+                           style={{ width: "202px", height: "54px", backgroundColor: "white" }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"

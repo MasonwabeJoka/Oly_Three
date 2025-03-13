@@ -1,0 +1,20 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+.container {
+
+  .logo {
+      pointer-events: auto; /* Make the element clickable */
+  
+      filter: drop-shadow(0px 23px 50px rgba(0, 0, 0, 0.1))
+        drop-shadow(0px 92px 92px rgba(0, 0, 0, 0.09))
+        drop-shadow(0px 206px 124px rgba(0, 0, 0, 0.05))
+        drop-shadow(0px 367px 147px rgba(0, 0, 0, 0.01))
+        drop-shadow(0px 573px 160px rgba(0, 0, 0, 0));
+  
+      @include larger-than(mobile) {
+      }
+    }
+}
