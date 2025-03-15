@@ -1,10 +1,10 @@
-import styles from "./Blog.module.scss";
+import styles from "./Blogs.module.scss";
 import Articles from "@/components/Articles";
 import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import useTitleStore from "@/store/titleStore";
 
-const Blog = () => {
+const Blogs = () => {
   const title: string[] = useArticlesStore((state) => state.title);
   const setTitle = useArticlesStore((state) => state.setTitle);
   const description: string = useArticlesStore((state) => state.description);
@@ -61,4 +61,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Blogs;

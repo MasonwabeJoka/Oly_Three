@@ -21,6 +21,14 @@
       // width: rem(1440);
     }
 
+    .nav {
+      display: flex;
+      justify-content: center;
+      width: 100vw;
+
+      @include larger-than(mobile) {
+      }
+    }
     .modal {
       display: flex;
       flex-direction: column;

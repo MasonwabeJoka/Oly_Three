@@ -206,14 +206,14 @@ const SelectACategory = ({
   };
   const SelectACategoryMobile = () => {
     return (
-      <MaxWidthWrapper className={styles.maxWidthWrapper}>
+      <div div>
         <div className={styles.container}>
           <div className={styles.categoriesContainer}>
             {categories.map((categoryItem, index) => {
               const { id, category, subcategories } = categoryItem;
 
               return (
-                <div className={styles.mobileSubcategoriesContainer}>
+                <div key={id} className={styles.mobileSubcategoriesContainer}>
                   <MobileSubcategories
                     options={subcategories}
                     category={category}
@@ -240,7 +240,7 @@ const SelectACategory = ({
             />
           </div>
         </div>
-      </MaxWidthWrapper>
+      </div>
     );
   };
 

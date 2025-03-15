@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Blog from "@/components/Blog";
+import Blogs from "@/components/Blogs";
 import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
@@ -15,10 +15,10 @@ import Modal from "@/components/Modal";
 import Categories from "@/components/Categories";
 import Menu from "@/components/Menu";
 import { useModalStore } from "@/store/modalStore";
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
+import Navbar from "@/components/layouts/Navbar";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -66,25 +66,26 @@ const Home = () => {
   }, [isMobile]);
 
   return (
-    <MaxWidthWrapper className={styles.maxWidthWrapper}>
+    <div>
       <div className={styles.container}>
         <div className={styles.main}>
-       
-            <div className={styles.modal}>
-              <Modal
-                showModal={showMenuModal}
-                setShowModal={setShowMenuModal}
-                modalContent={<Menu />}
-              />
-            </div>
-            <div className={styles.modal}>
-              <Modal
-                showModal={showCategoriesModal}
-                setShowModal={setShowCategoriesModal}
-                modalContent={<Categories />}
-              />
-            </div>
-        
+        <nav className={styles.nav}>
+          <Navbar />
+        </nav>
+          <div className={styles.modal}>
+            <Modal
+              showModal={showMenuModal}
+              setShowModal={setShowMenuModal}
+              modalContent={<Menu />}
+            />
+          </div>
+          <div className={styles.modal}>
+            <Modal
+              showModal={showCategoriesModal}
+              setShowModal={setShowCategoriesModal}
+              modalContent={<Categories />}
+            />
+          </div>
 
           <section className={styles.heroSection}>
             <HeroSection />
@@ -105,9 +106,9 @@ const Home = () => {
             <FeaturedListings />
           </section>
           <section className={styles.blog}>
-            <Blog />
+            <Blogs />
           </section>
-         
+
           <section className={styles.belowFoldAd}>
             <BelowFoldAd />
           </section>
@@ -116,7 +117,7 @@ const Home = () => {
           </section>
         </div>
       </div>
-    </MaxWidthWrapper>
+    </div>
   );
 };
 

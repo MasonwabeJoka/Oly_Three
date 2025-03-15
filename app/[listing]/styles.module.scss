@@ -1,7 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.maxWidthWrapper {
+.wrapper{
   padding: 0 rem(200);
 }
 .container {

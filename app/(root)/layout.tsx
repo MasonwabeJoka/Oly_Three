@@ -1,9 +1,8 @@
-import Navbar from "@/components/layouts/Navbar";
+
 import Feed from "@/components/Feed";
 import styles from "./layout.module.scss";
 import Outfit from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
-import ErrorBoundary from "@/utils/ErrorBoundary";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import QueryProvider from "./queryProvider";
@@ -40,9 +39,9 @@ export default function RootLayout({
                 <Feed />
               </aside>
               <div className={styles.main}>
-                <nav className={styles.nav}>
+                {/* <nav className={styles.nav}>
                   <Navbar />
-                </nav>
+                </nav> */}
                 <main className={styles.children}>
                   {children}
                   <Toaster

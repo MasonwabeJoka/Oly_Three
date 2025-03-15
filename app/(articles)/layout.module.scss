@@ -55,7 +55,6 @@
   padding: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
   * {
     margin: 0;
     padding: 0;
@@ -119,11 +118,6 @@
     height: auto;
   }
 
-  .wrapper {
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-
     .feed {
       display: none;
 
@@ -135,15 +129,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      .nav {
-        display: flex;
-        justify-content: center;
-        width: 100vw;
-        background-color: red;
-        @include larger-than(mobile) {
-        }
-      }
+    
+ 
     }
     // Make sure the children fill up as much content as they can
     .children {
@@ -152,7 +139,7 @@
       flex-basis: 0%;
       // width: rem(1098);
     }
-  }
+  
 
   footer {
     margin-top: auto; /* push the footer to the bottom of the container */
@@ -160,6 +147,3 @@
   }
 }
 
-// :export {
-//   body: body;
-// }

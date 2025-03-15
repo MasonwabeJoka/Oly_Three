@@ -79,7 +79,7 @@ const Listing = ({ params }: ParamsProp) => {
               onClick={() => setShowImages(true)}
               aspectRatios={aspectRatios}
             />
-            <MaxWidthWrapper className={styles.maxWidthWrapper}>
+            <div className={styles.wrapper}>
               <section className={styles.listingDetails}>
                 <div className={styles.topSection}>
                   <div className={styles.sellerDetails}>
@@ -110,7 +110,7 @@ const Listing = ({ params }: ParamsProp) => {
                 <SimilarAds />
                 <div style={{ height: "6rem" }}></div>
               </section>
-            </MaxWidthWrapper>
+            </div>
           </>
         ) : (
           <div className={styles.allImagesContainer}>

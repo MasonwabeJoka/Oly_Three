@@ -1,0 +1,91 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1440);
+
+  .header {
+    position: relative;
+    width: 95%;
+    height: rem(769.5);
+    background-color: aquamarine;
+    border-radius: rem(32);
+    margin-top: rem(32);
+    box-shadow: $shadow-one;
+
+    .homeButton {
+      margin-top: rem(16);
+      margin-left: rem(16);
+      width: fit-content;
+    }
+
+    .shareArticle {
+
+      .copyArticle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        
+        background-color: aquamarine;
+      
+        .icon {
+          display: flex;
+          justify-content: center;
+          width: rem(100);
+          padding: 0 rem(8);
+        
+          background-color: $grey-three;
+          cursor: pointer;
+          gap: rem(4);
+        }
+      }
+      .socialMediaLinks {
+        position: relative;
+        display: flex;
+        width: rem(250);
+        background-color: aquamarine;
+        gap: rem(12);
+  
+        .icon {
+          display: flex;
+          justify-content: center;
+          padding: rem(8);
+          border-radius: 50%;
+          background-color: $grey-three;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .topBar {
+    // background-color: rgb(255, 0, 0);
+    width: 100%;
+    height: rem(100);
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: inherit;
+    height: 100vh;
+
+    .leftSideBar {
+      background-color: rgb(236, 239, 5);
+      width: 20%;
+    }
+
+    .main {
+      background-color: rgb(30, 255, 0);
+      width: 50%;
+    }
+
+    .rightSideBar {
+      background-color: rgb(200, 0, 255);
+      width: 20%;
+    }
+  }
+}
