@@ -1,11 +1,10 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import styles from "./Avatars.module.scss";
 import Image from "next/image";
 
-
 interface AvatarProps {
-  className: string;
+  className?: string;
   avatar: any;
   avatarSize: keyof typeof AVATAR_SIZE;
   isOnline?: boolean;
@@ -47,7 +46,7 @@ const Avatar: React.FC<AvatarProps> = ({
   return (
     <div
       className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className} ${styles.avatarsContainer}`}
-      style={{outline: `0.25rem solid ${outlineColour}`}}
+      style={{ outline: `0.25rem solid ${outlineColour}` }}
     >
       {!hasError && avatar ? (
         <Image
@@ -64,11 +63,7 @@ const Avatar: React.FC<AvatarProps> = ({
         <Placeholder />
       )}
 
-      {isOnline && (
-        <span
-          className={styles.isOnline}
-        />
-      )}
+      {isOnline && <span className={styles.isOnline} />}
     </div>
   );
 };
