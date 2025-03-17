@@ -1,0 +1,66 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+ 
+  .article {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: rem(280);
+    height: rem(350);
+    border-radius: rem(32);
+    box-shadow: $shadow-one;
+    .titleContainer {
+        position: relative;
+        top: 100%;
+        transform: translateY(-100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-height: 70%;
+        min-height: 50%;
+        border-bottom-left-radius: rem(32);
+        border-bottom-right-radius: rem(32);
+        background: linear-gradient(
+            to top,
+            rgba($black-one, .60),
+            rgba($black-one, 0.30)
+          );
+
+        .title {
+            text-align: center; 
+            padding: 0 rem(16); 
+            margin-bottom: rem(16);
+            font-size: $h3;
+            font-weight: 600;
+            color: $white-one;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: rem(16);
+
+            .authorAvatar {
+                margin-bottom: rem(8);
+            }
+            .authorName {
+                font-size: 14px;
+                font-weight: 400;
+                color: $white-one;
+ 
+            }
+        }
+    }
+  }
+}

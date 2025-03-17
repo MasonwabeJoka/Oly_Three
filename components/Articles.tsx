@@ -8,7 +8,6 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "./NavButtons";
 
-
 type DataType = {
   id: number;
   author: string;
@@ -23,7 +22,7 @@ interface Props {
   author: string;
   title: string[];
   description: string;
-  price: string;
+  price?: string;
   data: any;
 }
 
@@ -50,7 +49,6 @@ const ArticlesTwo: React.FC<Props> = ({
                 author={article.author}
                 title={article.title}
                 description={article.description}
-                price={article.price}
               />
             </SwiperSlide>
           );

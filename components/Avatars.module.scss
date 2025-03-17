@@ -67,14 +67,15 @@
     right: rem(-2);
     width: rem(10);
     height: rem(10);
+    
   }
 }
 .tiny {
-  width: rem(16);
-  height: rem(16);
-
+  width: rem(20);
+  height: rem(20);
+  outline: rem(2) solid $white-one !important;
   @include larger-than(mobile) {
-    width: rem(20);
-    height: rem(20);
+    width: rem(28);
+    height: rem(28);
   }
 }

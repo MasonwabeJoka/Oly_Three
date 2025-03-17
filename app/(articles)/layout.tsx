@@ -1,3 +1,4 @@
+import Footer from "@/components/layouts/Footer";
 import styles from "./layout.module.scss";
 import { ClerkProvider } from "@clerk/nextjs";
 import { localFont } from "next/font/local";
@@ -38,6 +39,9 @@ export default async function Layout({
               />
             </div>
           </div>
+          <footer className={styles.footer}>
+              <Footer />
+            </footer>
         </body>
       </html>
     </ClerkProvider>

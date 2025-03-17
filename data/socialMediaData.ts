@@ -17,6 +17,7 @@ export const socialMediaData = [
       url: "https://www.instagram.com",
       icon: "/icons/social-media/instagram.png",
     },
+    
     {
       id: "linkedin",
       name: "LinkedIn",

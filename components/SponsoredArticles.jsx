@@ -39,7 +39,7 @@ const SponsoredArticles = () => {
 
   return (
     <div className={styles.sponsoredArticlesSection}>
-      <Title className={styles.title}>Sponsored Articles</Title>
+      <h1 className={styles.title}>Sponsored Articles</h1>
 
       <div className={styles.articlesContainer}>
         <div className={styles.sponsoredBy}>

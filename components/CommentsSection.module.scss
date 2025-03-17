@@ -1,0 +1,18 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+    background-color: $white-two;
+    border-radius: rem(32);
+    padding:rem(32);
+    .title {
+        margin-bottom: rem(20);
+        font-size: $h3 !important;
+        font-weight: 600;
+
+        .commentCount {
+            margin-right: rem(8)
+        }
+    }
+}

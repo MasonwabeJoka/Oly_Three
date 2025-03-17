@@ -21,7 +21,7 @@ const Blogs = () => {
   return (
     <div className={styles.blogSection}>
       <div className={styles.titleContainer}>
-        <Title className={styles.title}>Blog</Title>
+        <h1 className={styles.title}>Oly Articles</h1>
       </div>
 
       <Articles

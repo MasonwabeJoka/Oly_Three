@@ -2,9 +2,7 @@
 import styles from "./FeaturedCategories.module.scss";
 import { useEffect, useState } from "react";
 import LinkCard from "@/components/cards/LinkCard";
-import { categories } from "@/data/CategoriesData";
 import Button from "@/components/Buttons";
-import useTitleStore from "@/store/titleStore";
 import { useModalStore } from "@/store/modalStore";
 import { getTopCategories } from "@/sanity/actions/topCategoriesActions";
 import { FeaturedCategoriesData } from "@/data/featuredCategoriesData";
@@ -12,7 +10,6 @@ import { Category } from "@/sanity/Types/Category";
 
 const FeaturedCategories = () => {
   const [fetchedCategories, setFetchedCategories] = useState<any>([]);
-  const Title = useTitleStore((state) => state.Title);
   const setShowCategoriesModal = useModalStore(
     (state) => state.setShowCategoriesModal
   );
@@ -34,7 +31,7 @@ const FeaturedCategories = () => {
   return (
     <div className={styles.categoriesSection}>
       <div className={styles.titleContainer}>
-        <Title className={styles.title}>Discover more</Title>
+        <h1 className={styles.title}>Discover more</h1>
       </div>
       <div className={styles.categoriesContainer}>
         {fetchedCategories.slice(0, 12).map((category: Category) => {

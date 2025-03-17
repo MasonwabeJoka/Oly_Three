@@ -3,10 +3,15 @@ import styles from "./Article.module.scss";
 import HomeButton from "./HomeButton";
 import { socialMediaData } from "@/data/socialMediaData";
 import { articleCategories } from "@/data/articlesCategories";
+import { articles } from "@/data/articles";
 import Icon from "./Icon";
 import Pill from "./Pill";
 import Avatar from "./Avatars";
 import TempArticle from "./TempArticle";
+import ArticleCardBox from "./cards/ArticleCardBox";
+import RecommendedArticle from "./cards/RecommendedArticle";
+import CommentsSection from "./CommentsSection";
+
 const Article = () => {
   const boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
     0px 5px 5px 0px rgba(180, 191, 203, 0.17),
@@ -45,7 +50,7 @@ const Article = () => {
               <div>Copy Link</div>
             </div>
             <div className={styles.socialMediaLinks}>
-              {socialMediaData.slice(0, 3).map((socialMedia, index) => (
+              {socialMediaData.slice(0, 4).map((socialMedia, index) => (
                 <div key={index} className={styles.icon}>
                   <Icon
                     src={socialMedia.icon}
@@ -55,6 +60,14 @@ const Article = () => {
                   />
                 </div>
               ))}
+            </div>
+            <div className={styles.more}>
+              <Icon
+                src="/icons/three-dots.png"
+                alt="More Icon"
+                width={12}
+                height={12}
+              />
             </div>
           </div>
         </section>
@@ -146,7 +159,70 @@ const Article = () => {
             <TempArticle />
           </div>
         </main>
-        <aside className={styles.rightSideBar}></aside>
+        <aside className={styles.rightSideBar}>
+          <div className={styles.articleRecommendations}>
+            <h2 className={styles.title}>Recommended</h2>
+
+            <div className={styles.articles}>
+              {articles.map((article, index) => (
+                <div key={index} className={styles.article}>
+                  {/* <ArticleCardBox 
+                    title={article.title}
+                    images=""
+                    author={article.author.name}
+                    avatar={article.author.avatar}
+                    description=""
+                  /> */}
+                  <RecommendedArticle
+                    image={article.coverImage}
+                    title={article.title}
+                    author={article.author.name}
+                    avatar={article.author.avatar}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </section>
+      <section className={styles.articleBottom}>
+        <div className={styles.articleAuthor}>
+          <div className={styles.authorAvatar}>
+            <Avatar avatar="/profilePic.jpg" avatarSize="small" />
+          </div>
+          <div className={styles.authorName}>
+            <p>John Doe</p>
+          </div>
+        </div>
+        <div className={styles.shareArticle}>
+          <div className={styles.copyArticle}>
+            <div className={styles.copyArticleIcon}>
+              <Icon
+                className=""
+                src="/icons/copy.png"
+                alt="Copy Icon"
+                width={15}
+                height={15}
+              />
+            </div>
+            <div>Copy Link</div>
+          </div>
+          <div className={styles.socialMediaLinks}>
+            {socialMediaData.slice(0, 3).map((socialMedia, index) => (
+              <div key={index} className={styles.icon}>
+                <Icon
+                  src={socialMedia.icon}
+                  alt={`${socialMedia.name} Icon`}
+                  width={12}
+                  height={12}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className={styles.commentsSection}>
+        <CommentsSection />
       </section>
     </div>
   );

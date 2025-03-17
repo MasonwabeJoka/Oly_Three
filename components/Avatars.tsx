@@ -15,6 +15,7 @@ const AVATAR_SIZE = {
   large: `${styles.large}`,
   regular: `${styles.regular}`,
   small: `${styles.small}`,
+  tiny: `${styles.tiny}`,
 };
 
 const Avatar: React.FC<AvatarProps> = ({

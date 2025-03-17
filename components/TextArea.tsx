@@ -5,7 +5,7 @@ import React, { forwardRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
-  className: string;
+  className?: string;
   placeholder?: string;
   value?: string;
   label: string;

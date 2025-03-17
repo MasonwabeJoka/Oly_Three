@@ -35,7 +35,7 @@ const FeaturedListings = () => {
 
   return (
     <div className={styles.listingsSection}>
-      <Title className={styles.title}>Featured Listings</Title>
+      <h1 className={styles.title}>Featured Listings</h1>
       <div className={styles.collage}>
         <div className={styles.selectContainer}>
           <Select

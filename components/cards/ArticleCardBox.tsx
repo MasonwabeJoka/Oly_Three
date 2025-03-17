@@ -8,8 +8,7 @@ interface CardProps {
   avatar: string;
   author: string;
   title: string;
-  description: string;
-  price: string;
+  description?: string;
 }
 
 type CustomImageLoader = (props: ImageLoaderProps) => string;
@@ -25,24 +24,32 @@ const ArticleCardBox = ({
   title,
   description,
 }: CardProps): JSX.Element => {
+  // Default image if none provided
+  const defaultImage = "/placeholder-image.jpg"; // Make sure this exists in your public folder
+  const imageSource = images || defaultImage;
+
   return (
     <article className={styles.articleCard}>
       <div className={styles.imageContainer}>
-        <Image
-          className={styles.image}
-          loader={imageLoader}
-          src={images && images}
-          width={310}
-          height={233}
-          alt={title}
-          style={{ height: 233, objectFit: "cover" }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {imageSource && (
+          <Image
+            className={styles.image}
+            // loader={imageLoader}
+            src={imageSource}
+            width={310}
+            height={233}
+            alt={title || "Article image"}
+            style={{ height: 233, objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        )}
       </div>
 
       <div className={styles.details}>
         <div className={styles.titleContainer}>
-          <p className={styles.title}>{title.length > 64 ? `${title.slice(0, 64)}...` : title}</p>
+          <p className={styles.title}>
+            {title?.length > 64 ? `${title.slice(0, 64)}...` : title}
+          </p>
         </div>
         <div className={styles.author}>
           <Avatar

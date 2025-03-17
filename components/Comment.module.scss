@@ -1,0 +1,40 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  .userContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(20);
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-right: rem(20);
+      cursor: pointer;
+      .avatar {
+        margin-right: rem(8);
+      }
+
+      .profileName {
+      }
+    }
+  }
+
+  .comment {
+    margin-bottom: rem(20);
+  }
+  .reactions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+
+    .wrapper {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+    }
+  
+  }
+}
