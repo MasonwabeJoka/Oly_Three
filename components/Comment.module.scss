@@ -13,28 +13,35 @@
       margin-right: rem(20);
       cursor: pointer;
       .avatar {
-        margin-right: rem(8);
+        margin-right: rem(12);
       }
 
-      .profileName {
+      .profileNameContainer {
+        display: flex;
+        flex-direction: column;
+
+        .profileName {
+          font-weight: 600;
+        }
+
+        .commentAge {
+        }
       }
     }
   }
 
   .comment {
-    margin-bottom: rem(20);
+    margin-bottom: rem(12);
   }
   .reactions {
     width: 100%;
     display: flex;
-    justify-content: center;
-   
+    
 
     .wrapper {
-        width: 95%;
-        display: flex;
-        justify-content: space-between;
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
     }
-  
   }
 }

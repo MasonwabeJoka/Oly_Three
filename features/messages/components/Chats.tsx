@@ -16,31 +16,26 @@ interface ChatsProps {
   initialChats: FullChatType[];
 }
 const Chats: React.FC<ChatsProps> = ({ users, initialChats }) => {
-  // const [chats, setChats] = useState(initialChats)
-
   const route = useRouter();
-
   const { chatId, isOpen } = useChat();
 
   return (
     <div className={styles.chats}>
-      {messages?.slice(0, 6).map((chat: any) => {
-        return (
-          <div key={chat.id} className={styles.chat}>
-            <Chat
-              avatar={chat?.image}
-              avatarSize="regular"
-              name={chat.name}
-              messages={chat.messages}
-              chat={chat.messages[chat.messages.length - 1]}
-              createdAt={chat.createdAt}
-              isOnline={chat.isOnline}
-              message={chat}
-              selected={chatId === chat.id}
-            />
-          </div>
-        );
-      })}
+      {messages?.slice(0, 6).map((chat: any) => (
+        <div key={chat.id} className={styles.chat}>
+          <Chat
+            avatar={chat?.image}
+            avatarSize="regular"
+            name={chat.name || ""}
+            messages={chat.messages || []}
+            chat={chat}
+            createdAt={chat.createdAt || ""}
+            isOnline={chat.isOnline || false}
+            message={chat.messages?.[chat.messages?.length - 1]?.text || ""}
+            selected={chatId === chat.id}
+          />
+        </div>
+      ))}
     </div>
   );
 };

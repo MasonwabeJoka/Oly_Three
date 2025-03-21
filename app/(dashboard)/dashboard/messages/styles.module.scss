@@ -1,6 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
-@use "@/utils/breakpoints" as *; .container: : -webkit-scrollbar-track {
+@use "@/utils/breakpoints" as *; 
+.container  -webkit-scrollbar-track {
   margin-block: rem(80) !important;
 }
 

@@ -229,23 +229,7 @@ const ProfileSettings = () => {
             {...register("phone")}
             dashboard
           />
-
-          <Link href="/dashboard/settings/password-settings">
-            <Button
-              className={`${styles.changePasswordButton} ${styles.control}`}
-              buttonChildren="Change Your Password"
-              buttonType="normal"
-              buttonSize="large"
-              name="change password"
-              type="button"
-              ariaLabel="Change Your Password"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-            />
-          </Link>
-
-          <div className={styles.socialMediaLinks}>
+     <div className={styles.socialMediaLinks}>
             <div className={styles.selectContainer}>
               <Select
                 options={[
@@ -353,6 +337,22 @@ const ProfileSettings = () => {
               ""
             )}
           </div>
+          <Link href="/dashboard/settings/password-settings">
+            <Button
+              className={`${styles.changePasswordButton} ${styles.control}`}
+              buttonChildren="Change Your Password"
+              buttonType="normal"
+              buttonSize="large"
+              name="change password"
+              type="button"
+              ariaLabel="Change Your Password"
+              autoFocus={false}
+              disabled={false}
+              dashboard
+            />
+          </Link>
+
+     
         </div>
       </div>
 

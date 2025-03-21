@@ -1,0 +1,143 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: rem(32);
+  background-color: $white-one;
+  box-shadow: $shadow-two;
+
+  // background-color: pink;
+  .label {
+    font-size: $body;
+    color: $black-one;
+  }
+
+  .errorMessage {
+    color: $danger;
+
+  }
+
+  .textareaWrapper {
+    position: relative;
+    width: 100%;
+    border-radius: rem(32);
+    
+    .textarea {
+      width: 100%;
+      min-height: rem(56);
+      max-height: rem(240);
+      padding: rem(32);
+      font-size: $body;
+      line-height: 1.5;
+      color: $black-one;
+      background-color: $white-one;
+      border: none;
+      border-radius: rem(32);
+      outline: none;
+      resize: none;
+      transition: height 0.2s ease;
+      box-shadow: $shadow-two;
+      scroll-behavior: smooth;
+      
+    }
+
+
+    
+   
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: rem(8);
+
+
+  .submitButton {
+    height: rem(40) ;
+    margin-bottom: rem(8);
+    background-color: $primary;
+  } 
+}
+
+.textarea::placeholder {
+  text-align: center; 
+}
+
+  // Move scrollbar styles outside and target the textarea directly
+  textarea::-webkit-scrollbar {
+    width: rem(12);
+    height: rem(12);
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background-color: transparent;
+   
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background-color: $warning-hover;
+    height: rem(54);
+    
+    border-radius: rem(4);
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background-color: $warning-hover;
+  }
+
+  @supports (scrollbar-color: $warning-hover transparent) {
+    textarea {
+      scrollbar-color: $warning-hover transparent;
+      scrollbar-width: auto;
+    }
+  }
+
+  .mirrorDiv {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: rem(56);
+    padding: rem(16);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-size: $body;
+    line-height: 1.5;
+  }
+}
+
+
+
+
+// Size variants
+.xxLarge {
+  @include larger-than(mobile) {
+    width: rem(1296);
+  }
+}
+
+.xLarge {
+  @include larger-than(mobile) {
+    width: rem(1078);
+  }
+}
+
+.large {
+  width: rem(311);
+  @include larger-than(mobile) {
+    width: rem(514);
+  }
+}
+
+.medium {
+  width: rem(202);
+  @include larger-than(mobile) {
+    width: rem(424);
+  }
+}

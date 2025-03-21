@@ -61,6 +61,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .link {
+          margin-bottom: rem(48);
+        }
       }
       .otherSocialMediaContainer {
         display: flex;
