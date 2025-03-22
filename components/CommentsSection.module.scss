@@ -6,6 +6,7 @@
   background-color: $white-two;
   border-radius: rem(32);
   padding: rem(32);
+  // padding-bottom: rem(80);
   .title {
     margin-left: auto;
     width: fit-content;
@@ -31,15 +32,12 @@
 
   .comment {
     width: 80%;
-    // margin-left: rem(16);
     margin-bottom: rem(32);
-    padding: rem(16);
   }
 
   .reply {
     margin-left: rem(56);
     margin-top: rem(32);
-    padding: rem(16);
     width: 80%;
 
    
@@ -47,30 +45,26 @@
   .replyTwo {
     margin-left: rem(128);
     margin-top: rem(32);
-    padding: rem(16);
     width: 80%;
    
   }
   .replyThree {
     margin-left: rem(128);
     margin-top: rem(32);
+    border-radius: rem(16);
     width: 80%;
-    padding: rem(16);
-    background-color: $white-one;
    
   }
   .replyFour {
     margin-left: rem(128);
     margin-top: rem(32);
-    padding: rem(16);
+    border-radius: rem(16);
     width: 80%;
-    background-color: $white-one;
   }
   .replyFive {
     margin-left: rem(128);
     margin-top: rem(32);
-    padding: rem(16);
+    border-radius: rem(16);
     width: 80%;
-    background-color: $white-one;
   }
 }

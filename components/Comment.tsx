@@ -11,7 +11,7 @@ const Comments = () => {
           </div>
           <div className={styles.profileNameContainer}>
             <div className={styles.profileName}>
-              <span>John Doe</span>
+              <span className={styles.fullName}>John Doe</span> <span className={styles.username}>@johndoe</span>
             </div>
             <div className={styles.commentAge}>
               <span>Aug 4</span>
@@ -20,7 +20,7 @@ const Comments = () => {
         </div>
       </div>
       <div className={styles.comment}>
-        This is a sample comment. Lorem ipsum dolor sit amet, consectetur
+      <span className={styles.replyTo}>reply to @manseeker</span>: This is a sample comment. Lorem ipsum dolor sit amet, consectetur
         adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet,
         consectetur adipiscing elit.
       </div>

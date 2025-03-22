@@ -1,7 +1,7 @@
 "use client";
 import styles from "./SponsoredArticles.module.scss";
 import { useState, useEffect } from "react";
-import Articles from "@/components/Articles";
+import Articles from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import { blogData } from "@/data/BlogData";

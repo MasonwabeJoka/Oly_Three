@@ -22,9 +22,20 @@
 
         .profileName {
           font-weight: 600;
+          font-size: $body;
+
+          .fullName {
+            font-weight: 600;
+          }
+
+          .username {
+            font-weight: 300;
+          }
         }
 
         .commentAge {
+          font-weight: 300;
+          font-size: $body;
         }
       }
     }
@@ -32,11 +43,13 @@
 
   .comment {
     margin-bottom: rem(12);
+    .replyTo {
+      font-weight: 550;
+    }
   }
   .reactions {
     width: 100%;
     display: flex;
-    
 
     .wrapper {
       width: 60%;

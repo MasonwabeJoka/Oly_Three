@@ -12,6 +12,7 @@ import TempArticle from "./TempArticle";
 import ArticleCardBox from "./cards/ArticleCardBox";
 import RecommendedArticle from "./cards/RecommendedArticle";
 import CommentsSection from "./CommentsSection";
+  // Todo: onClick of .more in the topBar replace all top bar icons with share icons.
 
 const Article = () => {
   const boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
@@ -51,7 +52,7 @@ const Article = () => {
               <div>Copy Link</div>
             </div>
             <div className={styles.socialMediaLinks}>
-              {socialMediaData.slice(0, 4).map((socialMedia, index) => (
+              {socialMediaData.slice(0, 3).map((socialMedia, index) => (
                 <div key={index} className={styles.icon}>
                   <Icon
                     src={socialMedia.icon}
@@ -81,11 +82,11 @@ const Article = () => {
               <div className={styles.articleTitle}>
                 <p> The Ultimate Guide to Boosting Productivity in 2025</p>
               </div>
-              {/* <div className={styles.articleIntro}>
+              <div className={styles.articleExcerpt}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
                 dolorem atque accusantium quod ad incidunt repudiandae! Labore
                 quis incidunt corrupti...
-              </div> */}
+              </div>
 
               <div className={styles.articleMetadata}>
                 <div className={styles.articleDate}>
@@ -137,6 +138,17 @@ const Article = () => {
             <Icon
               className={styles.icon}
               src="/icons/bookmark.svg"
+              alt="Bookmark Icon"
+              width={20}
+              height={20}
+              // boxShadow={boxShadow}
+            />
+          </div>
+          <div className={`${styles.more} ${styles.iconContainer}`}>
+          
+            <Icon
+              className={styles.icon}
+              src="/icons/three-dots.png"
               alt="Bookmark Icon"
               width={20}
               height={20}
@@ -195,7 +207,7 @@ const Article = () => {
             <p>John Doe</p>
           </div>
         </div>
-        <div className={styles.shareArticle}>
+        <div className={styles.shareArticleBottom}>
           <div className={styles.copyArticle}>
             <div className={styles.copyArticleIcon}>
               <Icon

@@ -1,5 +1,5 @@
 "use client";
-import styles from "./Articles.module.scss";
+import styles from "./ArticlesSlider.module.scss";
 import ArticleCardBox from "./cards/ArticleCardBox";
 import useFeedStore from "@/store/feedStore";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,7 +26,7 @@ interface Props {
   data: any;
 }
 
-const ArticlesTwo: React.FC<Props> = ({
+const ArticleSlider: React.FC<Props> = ({
   images,
   avatars,
   author,
@@ -36,10 +36,11 @@ const ArticlesTwo: React.FC<Props> = ({
   data,
 }) => {
   const isFeedOpen = useFeedStore((state) => state.isFeedOpen);
+  
 
   return (
     <div className={styles.articleSection}>
-      <Swiper className={styles.swipper} spaceBetween={-200} slidesPerView={5}>
+      <Swiper className={styles.swipper} >
         {data.map((article: any, index: number) => {
           return (
             <SwiperSlide className={styles.article} key={article.id}>
@@ -62,4 +63,4 @@ const ArticlesTwo: React.FC<Props> = ({
   );
 };
 
-export default ArticlesTwo;
+export default ArticleSlider;

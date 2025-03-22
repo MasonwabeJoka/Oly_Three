@@ -1,5 +1,5 @@
 import styles from "./Blogs.module.scss";
-import Articles from "@/components/Articles";
+import ArticlesSlider from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import useTitleStore from "@/store/titleStore";
@@ -24,7 +24,7 @@ const Blogs = () => {
         <h1 className={styles.title}>Oly Articles</h1>
       </div>
 
-      <Articles
+      <ArticlesSlider
         images={images.length ? images : data[0].images}
         avatars={avatars.length ? avatars : [""]}
         author={author}

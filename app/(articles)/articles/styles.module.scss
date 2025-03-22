@@ -17,75 +17,45 @@
     box-shadow: $shadow-one;
 
     .topSection {
-      position: relative;
+      position: absolute;
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
       z-index: 50;
       margin-top: rem(32);
+    
       .homeButton {
         margin-left: rem(54);
         width: fit-content;
       }
 
-      .shareArticle {
+      .readArticleButton {
         display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 8px; 
+        white-space: nowrap;
+        color: $black-two;
         margin-right: rem(54);
-    
-        .copyArticle {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          gap: rem(4);
-          background-color: $white-one;
-          padding: rem(4) rem(16);
-          border-radius: rem(32);
-          .copyArticleIcon {
-          }
-        }
-        .socialMediaLinks {
-          position: relative;
-          display: flex;
-          width: fit-content;
-          gap: rem(12);
+        height: rem(48);
+        padding: 0 rem(64);
+        box-shadow: none;
 
-          .icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: rem(32);
-            height: rem(32);
-            border-radius: 50%;
-            background-color: $white-one;
-            cursor: pointer;
-
-            img {
-              width: rem(12);
-              height: rem(12);
-            }
+        &:hover {
+            background-color: $primary-hover;
+            color: $white-one;
           }
-        }
-
-        .more {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background-color: white;
-          cursor: pointer;
-          
-          // If you want to add hover effect
-          &:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-          }
-        }
       }
+
+    
+
+    
     }
+.swipper {
+    width: 100%;
+    height: 100%;
+  
+}
 
     .bottomSection {
       position: absolute;
@@ -97,7 +67,7 @@
       background: linear-gradient(
         to top,
         rgba($black-one, 1),
-        rgba($black-one, 0)
+        rgba($black-one, 0.0)
       );
       // backdrop-filter: blur(8px);
       border-bottom-left-radius: rem(32);
@@ -107,7 +77,7 @@
         margin-left: rem(24);
         // margin-bottom: rem(8);
         color: $black-four;
-        box-shadow: none !important
+        box-shadow: none !important;
       }
 
       .articleDetails {
@@ -129,7 +99,6 @@
             }
           }
 
-       
           .articleExcerpt {
             margin-bottom: rem(12);
             p {
@@ -218,110 +187,67 @@
     }
 
     .main {
-      width: 50%;
-    }
-
-    .rightSideBar {
-      width: 20%;
-
-      .articleRecommendations {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        .title {
-          font-size: $h3 !important;
-          font-weight: 600;
-          margin: 0 auto;
-          margin-bottom: rem(20);
-        }
-
-        .articles {
-          display: flex;
-          flex-direction: column;
-          gap: rem(20);
-        }
-      }
-    }
-  }
-  .articleBottom {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    height: fit-content;
-    margin-bottom: rem(64);
-
-    .articleAuthor {
       display: flex;
-      align-items: center;
-      gap: rem(12);
-      margin-left: rem(54);
-      cursor: pointer;
-
-      .authorAvatar {
-      }
-
-      .authorName {
-      }
-    }
-
-    .shareArticleBottom {
-      display: flex;
-      gap: rem(12);
-      margin-right: rem(54);
-    
-      .copyArticle {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        gap: rem(4);
-        background-color: $white-one;
-        padding: rem(4) rem(16);
-        border-radius: rem(32);
-        .copyArticleIcon {
-        }
-      }
-      .socialMediaLinks {
-        position: relative;
-        display: flex;
-        width: fit-content;
-        gap: rem(12);
-
-        .icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: rem(32);
-          height: rem(32);
-          border-radius: 50%;
-          background-color: $white-one;
-          cursor: pointer;
-
-          img {
-            width: rem(12);
-            height: rem(12);
-          }
-        }
-      }
-      .more {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: rem(32);
-        height: rem(32);
-        border-radius: 50%;
-        background-color: $white-one;
-        cursor: pointer;
-
-        img {
-          width: rem(12);
-          height: rem(12);
-        }
-      }
+      gap: rem(20);
+      flex-wrap: wrap;
+      width: 100%;
+     margin-bottom: rem(54);
     }
   }
+.bottomSection {
 
-  .commentsSection {
-    width: 50%;
-    // height: rem(200);
-  }
+ 
 }
+}
+
+:global(.swiper-pagination) {
+    position: absolute;
+    bottom: rem(48) !important; // Adjust this value to move up/down
+    left: rem(74) !important;   // Adjust this value to move left/right
+    text-align: left;           // Align bullets to the left
+    width: auto !important;     // Allow custom width instead of 100%
+  }
+
+:global(.swiper-pagination-bullet) {
+    width: rem(12);
+    height: rem(12);
+    background-color: $white-one !important;
+    transform: scale(1);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+   background-color: red;
+  }
+  
+  :global(.swiper-pagination-bullet-active) {
+    opacity: 0.8;
+    background-color: $white-one !important;
+    transform: scale(1);
+  }
+  
+  :global(.swiper-pagination-bullet-active-main) {
+    transform: scale(1);
+  }
+  
+  :global(.swiper-pagination-bullet-active-prev) {
+    opacity: 0.5 !important;
+    transform: scale(1);
+    background-color: $white-one !important;
+  }
+  :global(.swiper-pagination-bullet-active-next) {
+    opacity: 0.5 !important;
+    transform: scale(1);
+    background-color: $white-one !important;
+  }
+  
+  :global(.swiper-horizontal > .swiper-pagination-bullets),
+  :global(.swiper-pagination-bullets.swiper-pagination-horizontal) {
+    gap: rem(8);
+  }
+  
+  :global(.swiper-pagination-progressbar) {
+    background: rgba($white-one, 0.25);
+  }
+  
+  :global(.swiper-pagination-progressbar-fill) {
+    background: $primary;
+  }

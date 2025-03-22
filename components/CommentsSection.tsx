@@ -4,7 +4,6 @@ import TextArea from "./TextArea";
 import TextAreaComponent from "./TextAreaComponent";
 import TextAreaTemp from "./TextAreaTemp";
 
-// TODO: Remove reply button for replyThree onwards
 
 const CommentsSection = () => {
   return (
