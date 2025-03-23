@@ -1,0 +1,318 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+
+  .label {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    border-radius: rem(32);
+    margin-bottom: rem(-4);
+
+    .errorMessage {
+      color: $danger;
+      margin-bottom: rem(8);
+    }
+
+    .leftIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: rem(0);
+      height: 100%;
+      width: rem(80);
+
+      .leftIcon {
+      }
+    }
+
+    .rightIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: rem(0);
+      height: 100%;
+      width: rem(80);
+
+      .rightIcon {
+      }
+    }
+
+    .input {
+      border-radius: rem(32);
+      background-color: $white-one;
+      box-shadow: $shadow-two;
+      color: $black-four;
+      text-align: center;
+      border: none;
+      margin: 0;
+      padding: 0;
+      height: rem(56);
+      appearance: none;
+    }
+
+    .input:focus {
+      background-color: $white-one;
+    }
+
+    .error {
+      color: $danger;
+    }
+  }
+
+  .searchSuggestions {
+    max-height: rem(400);
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: rem(8);
+
+    .suggestion {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(32);
+      height: 94%;
+      margin: rem(4) auto 0;
+
+      background-color: $white-two;
+    }
+
+    .suggestion:hover {
+      background-color: $white-three;
+    }
+  }
+
+  @mixin suggestion-width($width) {
+    width: calc(#{$width} * 0.96);
+  }
+
+  .xLarge {
+    width: rem(311);
+    @include larger-than(mobile) {
+      width: rem(954);
+    }
+  }
+
+  .xLarge .suggestion {
+    @include suggestion-width(rem(311));
+    @include larger-than(mobile) {
+      @include suggestion-width(rem(954));
+      height: rem(56);
+    }
+  }
+
+  .xLargeFeed {
+    width: rem(793);
+  }
+
+  .xLargeFeed .suggestion {
+    @include suggestion-width(rem(793));
+    height: rem(56);
+  }
+
+  .xLargeDashboard {
+  }
+
+  .xLargeDashboard .suggestion {
+  }
+
+  .large {
+    width: rem(311);
+
+    @include larger-than(mobile) {
+      width: rem(514);
+    }
+  }
+
+  .large .suggestion {
+    @include suggestion-width(rem(514));
+    height: rem(56);
+  }
+
+  .largeFeed {
+    width: rem(471);
+  }
+
+  .largeFeed .suggestion {
+    @include suggestion-width(rem(471));
+    height: rem(56);
+  }
+
+  .largeDashboard {
+    width: rem(267);
+    height: rem(56);
+    @include larger-than(mobile) {
+      width: rem(471);
+    }
+  }
+
+  .largeDashboard .suggestion {
+    @include suggestion-width(rem(267));
+    @include larger-than(mobile) {
+      @include suggestion-width(rem(471));
+      height: rem(56);
+    }
+  }
+
+  .medium {
+    width: rem(202);
+
+    @include larger-than(mobile) {
+      width: rem(424);
+    }
+  }
+
+  .medium .suggestion {
+    @include suggestion-width(rem(424));
+  }
+
+  .mediumFeed {
+    width: rem(310);
+    height: rem(48);
+  }
+
+  .mediumFeed .suggestion {
+    @include suggestion-width(rem(310));
+  }
+
+  .mediumDashboard {
+  }
+
+  .mediumDashboard .suggestion {
+  }
+
+  .primary {
+  }
+
+  .primary:hover {
+  }
+
+  .primary:active {
+  }
+  .primary:disabled {
+  }
+
+  .primary:focus {
+    outline: $primary-hover;
+  }
+
+  .normal {
+  }
+
+  .normal:hover {
+  }
+  .normal:active {
+  }
+
+  .normal:focus {
+    // outline-offset: rem(1);
+    outline-style: solid;
+    outline-color: $white-one;
+    outline-width: rem(2);
+  }
+
+  .outline {
+  }
+
+  .outline:hover {
+  }
+  .outline:active {
+  }
+  .outline:disabled {
+  }
+
+  .outline:focus {
+  }
+
+  .success {
+  }
+
+  .success:hover {
+  }
+  .success:active {
+  }
+  .success:disabled {
+  }
+
+  .success:focus {
+  }
+
+  .warning {
+  }
+
+  .warning:hover {
+  }
+  .warning:active {
+  }
+  .warning:disabled {
+  }
+
+  .warning:focus {
+  }
+
+  .danger {
+    // outline-offset: rem(1);
+    outline-style: solid;
+    outline-color: $danger;
+    outline-width: rem(2);
+  }
+
+  .danger:hover {
+  }
+  .danger:active {
+  }
+  .danger:disabled {
+  }
+
+  .danger:focus {
+  }
+
+  .info {
+  }
+
+  .info:hover {
+  }
+  .info:active {
+  }
+  .info:disabled {
+  }
+
+  .info:focus {
+  }
+
+  .linkBtn {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .linkBtn:hover {
+  }
+  .linkBtn:active {
+  }
+  .linkBtn:disabled {
+  }
+
+  .linkBtn:focus {
+  }
+
+  .icon {
+    background-color: unset;
+    box-shadow: none;
+  }
+}

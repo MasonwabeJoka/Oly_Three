@@ -34,7 +34,7 @@ export const articles = [
       title: "Top Furniture Trends for 2025",
       slug: "furniture-trends-2025",
       category: "Home & Living",
-      excerpt: "Discover the latest furniture trends that will transform your home in 2024.",
+      excerpt: "Discover the latest furniture trends that will transform your home in 2025.",
       coverImage: "/article_images/furniture-trends.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       author: {
@@ -109,7 +109,7 @@ export const articles = [
       title: "Top Furniture Trends for 2025",
       slug: "furniture-trends-2025",
       category: "Home & Living",
-      excerpt: "Discover the latest furniture trends that will transform your home in 2024.",
+      excerpt: "Discover the latest furniture trends that will transform your home in 2025.",
       coverImage: "/article_images/furniture-trends.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       author: {
@@ -184,7 +184,7 @@ export const articles = [
       title: "Top Furniture Trends for 2025",
       slug: "furniture-trends-2025",
       category: "Home & Living",
-      excerpt: "Discover the latest furniture trends that will transform your home in 2024.",
+      excerpt: "Discover the latest furniture trends that will transform your home in 2025.",
       coverImage: "/article_images/furniture-trends.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       author: {
@@ -259,7 +259,7 @@ export const articles = [
       title: "Top Furniture Trends for 2025",
       slug: "furniture-trends-2025",
       category: "Home & Living",
-      excerpt: "Discover the latest furniture trends that will transform your home in 2024.",
+      excerpt: "Discover the latest furniture trends that will transform your home in 2025.",
       coverImage: "/article_images/furniture-trends.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       author: {
@@ -334,7 +334,7 @@ export const articles = [
       title: "Top Furniture Trends for 2025",
       slug: "furniture-trends-2025",
       category: "Home & Living",
-      excerpt: "Discover the latest furniture trends that will transform your home in 2024.",
+      excerpt: "Discover the latest furniture trends that will transform your home in 2025.",
       coverImage: "/article_images/furniture-trends.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       author: {

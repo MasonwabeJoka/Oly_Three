@@ -1,0 +1,51 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  border-radius: rem(35);
+  box-shadow: $shadow-one;
+  cursor: pointer;
+  .link {
+    position: relative;
+    display: flex;
+    width: rem(336);
+    height: rem(420);
+    border-radius: rem(35);
+    box-shadow: $shadow-one;
+    background: linear-gradient(
+      to top,
+      rgba($black-one, 0.6),
+      rgba($black-one, 0.3)
+    );
+    .textContainer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border-radius: rem(35);
+      background: linear-gradient(
+        to top,
+        rgba($black-one, 0.3),
+        rgba($black-one, 0.3)
+      );
+
+      .text {
+        position: relative;
+        text-align: center;
+        padding: 0 rem(16);
+        margin-bottom: rem(16);
+        line-height: 1.2;
+        font-size: $h1;
+        font-weight: 600;
+        color: $primary;
+
+        // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+}

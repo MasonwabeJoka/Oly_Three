@@ -11,13 +11,14 @@ import Avatar from "@/components/Avatars";
 import RecommendedArticle from "@/components/cards/RecommendedArticle";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination as PaginationDots, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import './styles.css';
 import NavButtons from "@/components/NavButtons";
 import Button from "@/components/Buttons";
+import Pagination from "@/components/Pagination";
 
 // Todo: onClick of .more in the topBar replace all top bar icons with share icons.
 
@@ -82,7 +83,7 @@ const Articles = () => {
             // }
           }}
           navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, PaginationDots, Navigation]}
           loop={true}
         >
           {articles.slice(0, 3).map((article: any, index: number) => (
@@ -211,11 +212,11 @@ const Articles = () => {
         </main>
       </section>
       <section className={styles.bottomSection}>
-        {/* <Pagination
+        <Pagination
           totalPages={totalPages}
           currentPage={currentPage}
           onPageChange={handlePageChange}
-        /> */}
+        />
       </section>
     </div>
   );

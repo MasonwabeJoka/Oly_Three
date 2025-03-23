@@ -5,7 +5,6 @@ import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";
-import VideoAd from "@/components/VideoAd";
 import SponsoredArticles from "@/components/SponsoredArticles";
 import HeroSection from "@/components/HeroSection";
 import useSidebarStore from "@/store/useSidebarStore";
@@ -19,6 +18,7 @@ import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
+import MoreFromOly from "@/components/MoreFromOly";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -66,56 +66,57 @@ const Home = () => {
   }, [isMobile]);
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.main}>
+    <div className={styles.container}>
+      <div className={styles.main}>
         <nav className={styles.nav}>
           <Navbar />
         </nav>
-          <div className={styles.modal}>
-            <Modal
-              showModal={showMenuModal}
-              setShowModal={setShowMenuModal}
-              modalContent={<Menu />}
-            />
-          </div>
-          <div className={styles.modal}>
-            <Modal
-              showModal={showCategoriesModal}
-              setShowModal={setShowCategoriesModal}
-              modalContent={<Categories />}
-            />
-          </div>
-
-          <section className={styles.heroSection}>
-            <HeroSection />
-          </section>
-          <section className={styles.aboveFoldAd}>
-            <AboveFoldAd />
-          </section>
-
-          <section className={styles.categories}>
-            <FeaturedCategories />
-          </section>
-
-          <section className={styles.features}>
-            <Features />
-          </section>
-
-          <section className={styles.featuredListings}>
-            <FeaturedListings />
-          </section>
-          <section className={styles.blog}>
-            <Blogs />
-          </section>
-
-          <section className={styles.belowFoldAd}>
-            <BelowFoldAd />
-          </section>
-          <section className={styles.sponsoredArticles}>
-            <SponsoredArticles />
-          </section>
+        <div className={styles.modal}>
+          <Modal
+            showModal={showMenuModal}
+            setShowModal={setShowMenuModal}
+            modalContent={<Menu />}
+          />
         </div>
+        <div className={styles.modal}>
+          <Modal
+            showModal={showCategoriesModal}
+            setShowModal={setShowCategoriesModal}
+            modalContent={<Categories />}
+          />
+        </div>
+
+        <section className={styles.heroSection}>
+          <HeroSection />
+        </section>
+        <section className={styles.moreFromOly}>
+          <MoreFromOly />
+        </section>
+        <section className={styles.aboveFoldAd}>
+          <AboveFoldAd />
+        </section>
+
+        <section className={styles.categories}>
+          <FeaturedCategories />
+        </section>
+
+        <section className={styles.features}>
+          <Features />
+        </section>
+
+        <section className={styles.featuredListings}>
+          <FeaturedListings />
+        </section>
+        <section className={styles.blog}>
+          <Blogs />
+        </section>
+
+        <section className={styles.belowFoldAd}>
+          <BelowFoldAd />
+        </section>
+        <section className={styles.sponsoredArticles}>
+          <SponsoredArticles />
+        </section>
       </div>
     </div>
   );

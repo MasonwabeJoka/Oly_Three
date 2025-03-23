@@ -1,0 +1,20 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    font-size: $h3 !important;
+    font-weight: 600;
+    color: $black-four;
+    margin-bottom: rem(56);
+  }
+  .classifieds {
+    display: flex;
+    gap: rem(20);
+  }
+}

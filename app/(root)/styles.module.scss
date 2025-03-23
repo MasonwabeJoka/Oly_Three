@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 @import "layout.module.scss";
 
-// body
+
 .container {
   display: flex;
   flex-direction: column;
@@ -44,8 +44,15 @@
       margin-top: rem(24);
 
       @include larger-than(mobile) {
-        margin-bottom: rem(280);
+        margin-bottom: rem(112);
       }
+    }
+
+    .moreFromOly {
+      width: 100%;
+      margin-top: rem(32);
+      margin-bottom: rem(112);
+      gap: rem(20);
     }
     .aboveFoldAd {
       width: 100%;

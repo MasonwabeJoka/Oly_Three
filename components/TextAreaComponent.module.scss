@@ -18,14 +18,13 @@
 
   .errorMessage {
     color: $danger;
-
   }
 
   .textareaWrapper {
     position: relative;
     width: 100%;
     border-radius: rem(32);
-    
+
     .textarea {
       width: 100%;
       min-height: rem(56);
@@ -42,12 +41,7 @@
       transition: height 0.2s ease;
       box-shadow: $shadow-two;
       scroll-behavior: smooth;
-      
     }
-
-
-    
-   
   }
   .buttons {
     display: flex;
@@ -55,17 +49,16 @@
     width: 100%;
     gap: rem(8);
 
+    .submitButton {
+      height: rem(40);
+      margin-bottom: rem(8);
+      background-color: $primary;
+    }
+  }
 
-  .submitButton {
-    height: rem(40) ;
-    margin-bottom: rem(8);
-    background-color: $primary;
-  } 
-}
-
-.textarea::placeholder {
-  text-align: center; 
-}
+  .textarea::placeholder {
+    text-align: center;
+  }
 
   // Move scrollbar styles outside and target the textarea directly
   textarea::-webkit-scrollbar {
@@ -75,13 +68,12 @@
 
   textarea::-webkit-scrollbar-track {
     background-color: transparent;
-   
   }
 
   textarea::-webkit-scrollbar-thumb {
     background-color: $warning-hover;
-    height: rem(54);
-    
+    height: rem(56);
+
     border-radius: rem(4);
   }
 
@@ -111,9 +103,6 @@
     line-height: 1.5;
   }
 }
-
-
-
 
 // Size variants
 .xxLarge {

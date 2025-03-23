@@ -17,7 +17,7 @@ const Blogs = () => {
   const data: any = useArticlesStore((state) => state.data);
   const setData = useArticlesStore((state) => state.setData);
   const Title = useTitleStore((state) => state.Title);
-
+console.log({data});
   return (
     <div className={styles.blogSection}>
       <div className={styles.titleContainer}>

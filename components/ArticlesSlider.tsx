@@ -40,7 +40,7 @@ const ArticleSlider: React.FC<Props> = ({
 
   return (
     <div className={styles.articleSection}>
-      <Swiper className={styles.swipper} >
+      <Swiper className={styles.swipper} spaceBetween={0} slidesPerView={5}>
         {data.map((article: any, index: number) => {
           return (
             <SwiperSlide className={styles.article} key={article.id}>

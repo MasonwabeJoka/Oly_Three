@@ -147,7 +147,7 @@ const INPUT_COLOUR_TYPE = {
   "": "",
 };
 
-const Input = forwardRef(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       isSearchBar,
@@ -181,19 +181,17 @@ const Input = forwardRef(
       children,
       dashboard,
       ...otherProps
-    }: InputProps,
-    ref: Ref<HTMLInputElement>
-  ): JSX.Element => {
+    },
+    ref
+  ) => {
     const [value, setValue] = useState(initialValue);
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-    const [revealedSuggestions, setRevealedSuggestions] = useState<string[]>(
-      []
-    );
+    const [revealedSuggestions, setRevealedSuggestions] = useState<string[]>([]);
 
-    const handleInternalChange = (e) => {
+    const handleInternalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const typedValue = e.target.value;
       setValue(typedValue);
-      if (onChange) onChange(e); // Call the passed onChange prop
+      if (onChange) onChange(e);
 
       if (typedValue.trim() === "") {
         setRevealedSuggestions([]);
@@ -343,6 +341,9 @@ const Input = forwardRef(
   }
 );
 
+// Add display name
+Input.displayName = "Input";
+
 export default Input;
 
 {/* <Input
@@ -368,3 +369,4 @@ export default Input;
         });
       }}
 />; */}
+

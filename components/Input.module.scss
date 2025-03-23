@@ -75,11 +75,15 @@
   }
 
   .searchSuggestions {
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    width: 100%; 
     max-height: rem(400);
     cursor: pointer;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-top: rem(8);
+    margin-top: rem(1);
 
     .suggestion {
       display: flex;

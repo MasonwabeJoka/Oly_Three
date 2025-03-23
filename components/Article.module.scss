@@ -25,16 +25,16 @@
       z-index: 50;
       margin-top: rem(32);
       .homeButton {
-        margin-left: rem(54);
+        margin-left: rem(56);
         width: fit-content;
       }
 
       .shareArticle {
         display: flex;
         align-items: center;
-        gap: 8px; 
-        margin-right: rem(54);
-    
+        gap: 8px;
+        margin-right: rem(56);
+
         .copyArticle {
           display: flex;
           align-items: center;
@@ -78,7 +78,7 @@
           border-radius: 50%;
           background-color: white;
           cursor: pointer;
-          
+
           // If you want to add hover effect
           &:hover {
             background-color: rgba(255, 255, 255, 0.9);
@@ -91,8 +91,8 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      padding-left: rem(54);
-      padding-top: rem(54);
+      padding-left: rem(56);
+      padding-top: rem(56);
       color: $white-one;
       background: linear-gradient(
         to top,
@@ -107,12 +107,12 @@
         margin-left: rem(24);
         // margin-bottom: rem(8);
         color: $black-four;
-        box-shadow: none !important
+        box-shadow: none !important;
       }
 
       .articleDetails {
         display: flex;
-        margin-bottom: rem(54);
+        margin-bottom: rem(56);
 
         padding: rem(24);
         border-radius: rem(32);
@@ -129,17 +129,15 @@
             }
           }
 
-       
           .articleExcerpt {
             margin-bottom: rem(12);
             p {
-            
             }
           }
 
           .articleMetadata {
             display: flex;
-            gap: rem(54);
+            gap: rem(56);
             font-size: rem(14);
             font-weight: 300;
           }
@@ -147,7 +145,7 @@
 
         .rightSection {
           margin-left: auto;
-          margin-right: rem(54);
+          margin-right: rem(56);
           .articleAuthor {
             display: flex;
             align-items: center;
@@ -204,7 +202,7 @@
           align-items: center;
           background-color: $white-one;
           width: 90%;
-          height: rem(54);
+          height: rem(56);
           border-radius: rem(32);
           box-shadow: $shadow-six;
           box-shadow: $shadow-one;
@@ -254,7 +252,7 @@
       display: flex;
       align-items: center;
       gap: rem(12);
-      margin-left: rem(54);
+      margin-left: rem(56);
       cursor: pointer;
 
       .authorAvatar {
@@ -267,8 +265,8 @@
     .shareArticleBottom {
       display: flex;
       gap: rem(12);
-      margin-right: rem(54);
-    
+      margin-right: rem(56);
+
       .copyArticle {
         display: flex;
         align-items: center;
