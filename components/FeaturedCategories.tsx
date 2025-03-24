@@ -30,9 +30,6 @@ const FeaturedCategories = () => {
 
   return (
     <div className={styles.categoriesSection}>
-      <div className={styles.titleContainer}>
-        <h1 className={styles.title}>Featured Categories</h1>
-      </div>
       <div className={styles.categoriesContainer}>
         {fetchedCategories.slice(0, 12).map((category: Category) => {
           return (

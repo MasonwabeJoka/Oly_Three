@@ -39,8 +39,6 @@ const SponsoredArticles = () => {
 
   return (
     <div className={styles.sponsoredArticlesSection}>
-      <h1 className={styles.title}>Sponsored Articles</h1>
-
       <div className={styles.articlesContainer}>
         <div className={styles.sponsoredBy}>
           <p>Sponsored by Taboola</p>

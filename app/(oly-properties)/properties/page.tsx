@@ -5,7 +5,6 @@ import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";
-import VideoAd from "@/components/VideoAd";
 import SponsoredArticles from "@/components/SponsoredArticles";
 import HeroSection from "@/components/HeroSection";
 import useSidebarStore from "@/store/useSidebarStore";
@@ -19,7 +18,6 @@ import { useResponsive } from "@/utils/useResponsive";
 import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import MoreFromOly from "@/components/MoreFromOly";
 
 const Home = () => {
@@ -92,6 +90,7 @@ const Home = () => {
           <HeroSection />
         </section>
         <section className={styles.moreFromOly}>
+          <h2 className={styles.title}>More from Oly</h2>
           <MoreFromOly />
         </section>
         <section className={styles.aboveFoldAd}>
@@ -99,6 +98,7 @@ const Home = () => {
         </section>
 
         <section className={styles.categories}>
+          <h2 className={styles.title}>Featured Categories</h2>
           <FeaturedCategories />
         </section>
 
@@ -107,9 +107,11 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
+        <h2 className={styles.title}>Featured Listings</h2>
           <FeaturedListings />
         </section>
         <section className={styles.blog}>
+        <h2 className={styles.title}>Oly Articles</h2>
           <Blogs />
         </section>
 
@@ -117,6 +119,7 @@ const Home = () => {
           <BelowFoldAd />
         </section>
         <section className={styles.sponsoredArticles}>
+        <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
       </div>

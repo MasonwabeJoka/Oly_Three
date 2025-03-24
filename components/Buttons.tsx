@@ -20,7 +20,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ariaLabel?: string;
   ariaHidden?: boolean;
   autoFocus: boolean;
-  disabled: boolean;
+  disabled?: boolean;
   inputDescription?: string;
   form?: string;
   formAction?: string;

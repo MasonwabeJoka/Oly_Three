@@ -17,13 +17,9 @@ const Blogs = () => {
   const data: any = useArticlesStore((state) => state.data);
   const setData = useArticlesStore((state) => state.setData);
   const Title = useTitleStore((state) => state.Title);
-console.log({data});
+  console.log({ data });
   return (
     <div className={styles.blogSection}>
-      <div className={styles.titleContainer}>
-        <h1 className={styles.title}>Oly Articles</h1>
-      </div>
-
       <ArticlesSlider
         images={images.length ? images : data[0].images}
         avatars={avatars.length ? avatars : [""]}

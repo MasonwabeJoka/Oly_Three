@@ -83,7 +83,8 @@
     cursor: pointer;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-top: rem(1);
+    margin-top: rem(8);
+    z-index: 1;
 
     .suggestion {
       display: flex;

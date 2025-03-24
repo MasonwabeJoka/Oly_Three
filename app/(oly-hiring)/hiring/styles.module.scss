@@ -47,7 +47,15 @@
         margin-bottom: rem(112);
       }
     }
-
+    .title {
+      display: flex;
+      justify-content: center;
+      font-size: $h3 !important;
+      font-weight: 600;
+      color: $black-four;
+      margin-bottom: rem(48);
+     
+    }
     .moreFromOly {
       width: 100%;
       margin-top: rem(32);

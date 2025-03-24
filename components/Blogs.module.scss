@@ -8,14 +8,6 @@
   position: relative;
   width: 100%;
 
-  .titleContainer {
-    .title {
-      margin-bottom: rem(56);
-      font-weight: 600;
-      font-size: $h2 !important;
-    }
-  }
-
   .buttons {
     display: flex;
     flex-direction: column;
