@@ -123,6 +123,7 @@
     display: flex;
     min-height: 100vh;
     justify-content: center;
+  
 
     .feed {
       display: none;
@@ -156,7 +157,7 @@
 
   footer {
     margin-top: auto; /* push the footer to the bottom of the container */
-    margin-bottom: rem(96);
+    
   }
 }
 

@@ -8,6 +8,7 @@ import Icon from "@/components/Icon";
 import Link from "next/link";
 import { useState } from "react";
 import Modal from "../Modal";
+import FeedbackOptions from "../FeedbackOptions";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -41,8 +42,9 @@ const Footer = () => {
           <Modal
             showModal={showFeedbackModal}
             setShowModal={setShowFeedbackModal}
-            modalContent={<FeedbackForm />}
+            modalContent={<FeedbackOptions />}
           />
+    
         </div>
         <div className={styles.socials}>
           <Link

@@ -130,9 +130,10 @@
 
   .topBar {
     display: flex;
+   justify-content: center;
     align-items: center;
     width: 95%;
-    height: rem(96);
+   padding: rem(72) 0;
 
     .icons {
       display: flex;
@@ -186,6 +187,9 @@
       flex-wrap: wrap;
       width: 100%;
       margin-bottom: rem(56);
+      .article {
+        cursor: pointer;
+      }
     }
   }
   .bottomSection {

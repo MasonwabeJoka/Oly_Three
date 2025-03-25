@@ -1,7 +1,8 @@
 "use client";
+import Icon from "./Icon";
 import styles from "./Modal.module.scss";
 import { useEffect } from "react";
-
+// Todo: Consider adding logo that takes you to home screen to modal
 type Props = {
   showModal: boolean; // Boolean to show or hide the modal
   setShowModal: (value: boolean) => void; // Function to close the modal
@@ -43,6 +44,17 @@ const Modal = ({
           className={styles.modalOverlay}
           onClick={handleClose}
         >
+             <div className={styles.exitButtonContainer}>
+        <div className={styles.exitButton}>
+          <Icon
+            src="/icons/x.png"
+            alt="exit Icon"
+            width={20}
+            height={20}
+          />
+        </div>
+        
+      </div>
           <div
             className={styles.modalContent}
             onClick={handleModalContentClick}

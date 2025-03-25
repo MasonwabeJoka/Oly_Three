@@ -13,6 +13,7 @@ import ArticleCardBox from "./cards/ArticleCardBox";
 import RecommendedArticle from "./cards/RecommendedArticle";
 import CommentsSection from "./CommentsSection";
   // Todo: onClick of .more in the topBar replace all top bar icons with share icons.
+  //Todo: Ad listen to this article button (check New York Times articles)
 
 const Article = () => {
   const boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),

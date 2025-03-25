@@ -24,17 +24,17 @@ export default function ListingLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${outfit.className} ${styles.html}`}>
-      <body className={styles.body}>
-        <nav className={styles.nav}>
-          {/* <Navbar /> */}
-          <HomeButton />
-        </nav>
-        <main className={styles.main}>{children}</main>
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
-      </body>
-    </html>
+        <body className={styles.body}>
+          <nav className={styles.nav}>
+            {/* <Navbar /> */}
+            <HomeButton />
+          </nav>
+          <main className={styles.main}>{children}</main>
+          <footer className={styles.footer}>
+            <Footer />
+          </footer>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

@@ -4,14 +4,17 @@
 .container {
   display: flex;
   justify-content: center;
+  width: 100vw;
+  padding-bottom: rem(96) !important;
+  background-color: $grey-one;
 
   @include larger-than(mobile) {
-    width: rem(1440);
+    // width: rem(1440);
   }
 
   .main {
     width: rem(1098);
-    margin-top: rem(164);
+    margin-top: rem(48);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,10 +22,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: rem(48);
+      // .input {
+      //   margin-bottom: rem(20);
+      // }
 
-      margin-bottom: rem(64);
-      .input {
-        margin-bottom: rem(20);
+      .feedbackButton {
+        background-color: $primary-hover;
+        color: $white-one;
       }
     }
     .socials {
@@ -39,7 +46,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding-bottom: rem(96) !important;
   @include larger-than(mobile) {
     width: 100vw;
   }
@@ -54,9 +61,13 @@
       flex-direction: column;
       align-items: center;
 
-      margin-bottom: rem(64);
+      margin-bottom: rem(48);
       .input {
         margin-bottom: rem(20);
+      }
+      .feedbackButton {
+        background-color: $primary-hover;
+        color: $white-one;
       }
     }
     .socials {

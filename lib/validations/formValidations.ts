@@ -15,22 +15,10 @@ export const searchFormSchema = z.object({
   });
 
 export const feedbackFormSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Name field cannot be empty.")
-    .min(3, "Name must be at least 3 characters long.")
-    .refine((val) => val.trim().length > 0, "Name cannot be only spaces."),
-  email: z
-    .string()
-    .min(1, "Email field cannot be empty.")
-    .email("Invalid email format.")
-    .refine((val) => val.trim().length > 0, "Email cannot be only spaces."),
-  message: z
-    .string()
-    .min(1, "Message field cannot be empty.")
-    .min(3, "Message must be at least 3 characters long.")
-    .max(1200, "Message cannot be more than 1200 characters long.")
-    .refine((val) => val.trim().length > 0, "Message cannot be only spaces."),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(1, "Message is required"),
+  attachment: z.any().optional() // Add this line for file attachments
 });
 
 export const passwordSchema = z.object({

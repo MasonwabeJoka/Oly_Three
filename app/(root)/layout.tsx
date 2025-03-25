@@ -33,7 +33,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${outfit.className} ${styles.html}`}>
         <body className={styles.body}>
-          <QueryProvider>
+          {/* <QueryProvider> */}
             <div className={styles.wrapper}>
               <aside className={styles.feed}>
                 <Feed />
@@ -60,7 +60,7 @@ export default function RootLayout({
             <footer className={styles.footer}>
               <Footer />
             </footer>
-          </QueryProvider>
+          {/* </QueryProvider> */}
         </body>
       </html>
     </ClerkProvider>

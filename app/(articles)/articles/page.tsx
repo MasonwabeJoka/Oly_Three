@@ -11,22 +11,28 @@ import Avatar from "@/components/Avatars";
 import RecommendedArticle from "@/components/cards/RecommendedArticle";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination as PaginationDots, Navigation } from "swiper/modules";
+import {
+  Autoplay,
+  Pagination as PaginationDots,
+  Navigation,
+} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-// import './styles.css';
-import NavButtons from "@/components/NavButtons";
 import Button from "@/components/Buttons";
 import Pagination from "@/components/Pagination";
+import Select from "@/components/Select";
 
 // Todo: onClick of .more in the topBar replace all top bar icons with share icons.
+// Todo: Style pagination properly
 
 const Articles = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 9; // Example: 9 total pages
   // Add this new state for initial slide
-  const [initialSlide] = useState(() => Math.floor(Math.random() * articles.slice(0, 3).length));
+  const [initialSlide] = useState(() =>
+    Math.floor(Math.random() * articles.slice(0, 3).length)
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -70,7 +76,7 @@ const Articles = () => {
           }}
           pagination={{
             clickable: true, // Makes bullets clickable
-          
+
             // dynamicBullets: true, // Enables dynamic bullets
             // dynamicMainBullets: 3, // Number of main bullets
             // type: 'progressbar', // Changes to progress bar style
@@ -145,48 +151,17 @@ const Articles = () => {
         </Swiper>
       </header>
       <section className={styles.topBar}>
-        <div className={styles.icons}>
-          <div className={`${styles.comments} ${styles.iconContainer}`}>
-            <Icon
-              className={styles.icon}
-              src="/icons/comments.svg"
-              alt="Comment Icon"
-              width={20}
-              height={20}
-              // boxShadow={boxShadow}
-            />
-          </div>
-          <div className={`${styles.share} ${styles.iconContainer}`}>
-            <Icon
-              className={styles.icon}
-              src="/icons/share.png"
-              alt="Share Icon"
-              width={20}
-              height={20}
-              // boxShadow={boxShadow}
-            />
-          </div>
-          <div className={`${styles.bookmark} ${styles.iconContainer}`}>
-            <Icon
-              className={styles.icon}
-              src="/icons/bookmark.svg"
-              alt="Bookmark Icon"
-              width={20}
-              height={20}
-              // boxShadow={boxShadow}
-            />
-          </div>
-          <div className={`${styles.more} ${styles.iconContainer}`}>
-            <Icon
-              className={styles.icon}
-              src="/icons/three-dots.png"
-              alt="Bookmark Icon"
-              width={20}
-              height={20}
-              // boxShadow={boxShadow}
-            />
-          </div>
-        </div>
+        <Select
+          options={["Recent Articles", "Most Popular Articles"]}
+          initialValue="Sort Articles"
+          selectSize="large"
+          label="Provinces"
+          id="provinces"
+          name="provinces"
+          ariaLabel="Provinces"
+          autoFocus={false}
+          required={false}
+        />
       </section>
       <section className={styles.wrapper}>
         <aside className={styles.leftSideBar}>
@@ -200,7 +175,7 @@ const Articles = () => {
         </aside>
         <main className={styles.main}>
           {articles.map((article: any, index: number) => (
-            <div className={styles.articles} key={article.id}>
+            <div className={styles.article} key={article.id}>
               <RecommendedArticle
                 image={article.coverImage}
                 title={article.title}

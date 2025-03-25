@@ -6,6 +6,7 @@ import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import { blogData } from "@/data/BlogData";
 import useTitleStore from "@/store/titleStore";
+import Link from "next/link";
 
 const SponsoredArticles = () => {
   const title = useArticlesStore((state) => state.title);
@@ -55,28 +56,32 @@ const SponsoredArticles = () => {
         />
       </div>
       <div className={styles.buttons}>
-        <Button
-          className={styles.moreArticlesBtn}
-          buttonChildren="More articles..."
-          buttonType="normal"
-          buttonSize="large"
-          name="More Articles Button"
-          type="button"
-          ariaLabel="More Articles Button"
-          autoFocus={false}
-          disabled={false}
-        />
-        <Button
-          className={styles.forumBtn}
-          buttonChildren="Forum"
-          buttonType="normal"
-          buttonSize="large"
-          name="Forum Button"
-          type="button"
-          ariaLabel="Forum Button"
-          autoFocus={false}
-          disabled={false}
-        />
+        <Link href="/articles">
+          <Button
+            className={styles.moreArticlesBtn}
+            buttonChildren="More articles..."
+            buttonType="normal"
+            buttonSize="large"
+            name="More Articles Button"
+            type="button"
+            ariaLabel="More Articles Button"
+            autoFocus={false}
+            disabled={false}
+          />
+        </Link>
+        <Link href="#">
+          <Button
+            className={styles.forumBtn}
+            buttonChildren="Forum"
+            buttonType="normal"
+            buttonSize="large"
+            name="Forum Button"
+            type="button"
+            ariaLabel="Forum Button"
+            autoFocus={false}
+            disabled={false}
+          />
+        </Link>
       </div>
     </div>
   );

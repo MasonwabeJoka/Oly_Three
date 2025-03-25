@@ -2,23 +2,49 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .modalOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed; /* Stays in place when scrolling */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centers the element */
   z-index: 5; /* Ensures it's above other content */
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 102vh;
+
   z-index: 100;
   cursor: url("/icons/X.png"), auto;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $white-four;
+  .exitButtonContainer {
+    position: relative;
+    left: 95%;
+    top: 5%;
+    // align-items: center;
+    gap: rem(16);
+    cursor: pointer;
+    width: 100%;
+
+    .exitButton {
+      // box-shadow: $shadow-one;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(48);
+      height: rem(48);
+      border-radius: 50%;
+      background-color: $grey-one;
+      cursor: pointer;
+    }
+  }
   .modalContent {
-    cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+    cursor: default;
   }
 }

@@ -3,6 +3,7 @@ import ArticlesSlider from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import useTitleStore from "@/store/titleStore";
+import Link from "next/link";
 
 const Blogs = () => {
   const title: string[] = useArticlesStore((state) => state.title);
@@ -30,28 +31,32 @@ const Blogs = () => {
         data={data}
       />
       <div className={styles.buttons}>
-        <Button
-          className={styles.moreArticlesBtn}
-          buttonType="normal"
-          buttonChildren="More articles..."
-          buttonSize="large"
-          type="button"
-          name="More Articles Button"
-          ariaLabel="More Articles Button"
-          autoFocus={false}
-          disabled={false}
-        />
-        <Button
-          className={styles.forumBtn}
-          buttonType="normal"
-          buttonChildren="Forum"
-          buttonSize="large"
-          type="button"
-          name="Forum Button"
-          ariaLabel="Forum Button"
-          autoFocus={false}
-          disabled={false}
-        />
+        <Link href="/articles">
+          <Button
+            className={styles.moreArticlesBtn}
+            buttonType="normal"
+            buttonChildren="More articles..."
+            buttonSize="large"
+            type="button"
+            name="More Articles Button"
+            ariaLabel="More Articles Button"
+            autoFocus={false}
+            disabled={false}
+          />
+        </Link>
+        <Link href="#">
+          <Button
+            className={styles.forumBtn}
+            buttonType="normal"
+            buttonChildren="Forum"
+            buttonSize="large"
+            type="button"
+            name="Forum Button"
+            ariaLabel="Forum Button"
+            autoFocus={false}
+            disabled={false}
+          />
+        </Link>
       </div>
     </div>
   );

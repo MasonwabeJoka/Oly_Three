@@ -42,6 +42,7 @@
             font-size: $h3;
             font-weight: 450;
             color: $white-two;
+            color: $primary;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
@@ -53,11 +54,15 @@
 
             .authorAvatar {
                 margin-bottom: rem(8);
+
+                .avatar {
+                  outline: rem(2) solid $primary !important;
+                }
             }
             .authorName {
                 font-size: 14px;
                 font-weight: 400;
-                color: $white-one;
+                color: $primary;
  
             }
         }
