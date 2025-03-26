@@ -19,11 +19,11 @@
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $white-four;
+
   .exitButtonContainer {
-    position: relative;
+    position: absolute;
     left: 95%;
-    top: 5%;
-    // align-items: center;
+    top:3%;
     gap: rem(16);
     cursor: pointer;
     width: 100%;
@@ -44,7 +44,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     cursor: default;
   }
 }

@@ -2,7 +2,18 @@ import { create } from 'zustand';
 import { Ad } from '@/sanity/Types/Ad';
 import { FieldName, SubmitHandler } from 'react-hook-form';
 
-export type FormData = {
+
+type FormValues = {
+  [key: string]: any; // Dynamic object structure for the different steps
+};
+
+type Step = {
+  id: string;
+  name: string;
+  fields: (keyof FormValues)[];
+};
+
+type FormData = {
   selectACategory?: string;
   details: { condition: string };
   price: {
@@ -32,46 +43,6 @@ export type FormData = {
   promoteYourAd: { promotionDuration: string };
   reviewYourAd?: string;
 };
-type FormDataFields =
-  | "selectACategory"
-  | "details.condition"
-  | "price.pricingOption"
-  | "price.price"
-  | "createAccount.bankName"
-  | "createAccount.accountHolder"
-  | "createAccount.accountNumber"
-  | "titleAndDescription.title"
-  | "titleAndDescription.description"
-  | "uploadMedia.uploadPhotos"
-  | "uploadMedia.uploadVideos"
-  | "uploadMedia.uploadAttachments"
-  | "location.province"
-  | "location.city"
-  | "location.suburb"
-  | "location.customLocation"
-  | "promoteYourAd.promotionDuration"
-  | "reviewYourAd";
-
-type Step = {
-  id: string;
-  name: string;
-  fields: FormDataFields[];
-};
-
-const steps: Step[] = [
-  { id: "step1", name: "Select a category", fields: ["selectACategory"] },
-  { id: "step2", name: "Details", fields: ["details.condition"] },
-  { id: "step3", name: "Price", fields: ["price.pricingOption", "price.price"] },
-  { id: "step4", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
-  { id: "step5", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
-  { id: "step6", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
-  { id: "step7", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
-  { id: "step8", name: "Promote Your Ad", fields: ["promoteYourAd.promotionDuration"] },
-  { id: "step9", name: "Congratulations", fields: [] },
-  { id: "step10", name: "Review and Submit", fields: ["reviewYourAd"] },
-];
-
-
 
 type FormStore = {
   formData: FormData;
@@ -86,7 +57,7 @@ type FormState = {
   isFirstStep: boolean;
   isLastStep: boolean;
   setMessage: (message: string) => void;
-  next: (trigger: any, handleSubmit: any, onSubmit: SubmitHandler<FormData>) => Promise<void>;
+  next: (trigger: any, handleSubmit: any, onSubmit: SubmitHandler<FormValues>) => Promise<void>;
   back: () => void;
   goTo: (index: number) => void;
   setCategory: (category: string) => void;
@@ -94,7 +65,18 @@ type FormState = {
   setCurrentStepIndex: (index: number) => void;
 };
 
-
+const steps: Step[] = [
+  { id: 'step1', name: 'Select a category', fields: [] },
+  { id: 'step2', name: 'Details', fields: ['condition'] },
+  { id: 'step3', name: 'Price', fields: ['pricingOption', 'price'] },
+  { id: 'step4', name: 'Create Account', fields: ['bankName', 'accountHolder', 'accountNumber'] },
+  { id: 'step5', name: 'Title and Description', fields: ['title', 'description'] },
+  { id: 'step6', name: 'Upload Media', fields: [] },
+  { id: 'step7', name: 'Location', fields: ['province', 'city', 'suburb', 'customLocation'] },
+  { id: 'step8', name: 'Promote Your Ad', fields: ['promotionDuration'] },
+  { id: 'step9', name: 'Congratulations', fields: [] },
+  { id: 'step10', name: 'Review and Submit', fields: [] },
+];
 const setStepInStorage = (index: number) => {
   if (typeof window !== "undefined") {
     localStorage.setItem('currentStepIndex', index.toString());

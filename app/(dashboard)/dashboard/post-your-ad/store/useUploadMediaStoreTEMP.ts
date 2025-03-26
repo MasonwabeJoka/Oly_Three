@@ -6,15 +6,9 @@ interface MediaStore {
   setMediaAction: (action: MediaAction) => void;
 }
 
- const useUploadMediaStore = create<MediaStore>((set) => ({
+const useUploadMediaStore = create<MediaStore>((set) => ({
   mediaAction: 'none',
   setMediaAction: (action) => set({ mediaAction: action }),
-}));
-
-// Definition of resetMediaStates
-export const resetMediaStates = () => {
-  useUploadMediaStore.getState().setMediaAction('none');
-};
+}));;
 
 export default useUploadMediaStore;
-

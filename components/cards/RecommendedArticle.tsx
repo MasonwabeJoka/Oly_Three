@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./RecommendedArticle.module.scss";
 import Avatar from "../Avatars";
+import Link from "next/link";
 
 interface RecommendedArticleProps {
   avatar: string;
@@ -15,7 +16,7 @@ const RecommendedArticle = ({
   image,
 }: RecommendedArticleProps) => {
   return (
-    <div className={styles.container}>
+    <Link href="/article" className={styles.container}>
       <div className={styles.article}>
         <Image
           src={image}
@@ -43,7 +44,7 @@ const RecommendedArticle = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
