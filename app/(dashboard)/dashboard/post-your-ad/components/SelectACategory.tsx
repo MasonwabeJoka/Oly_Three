@@ -17,7 +17,7 @@ import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { FormWrapper } from "./FormWrapper";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { categoriesValidations } from "../validations/multiStepFormValidations";
-
+import { useFormContext } from "react-hook-form";
 
 const SelectACategory = ({
   goTo,
@@ -31,9 +31,11 @@ const SelectACategory = ({
   const [showButtons, setShowButtons] = useState<boolean>(false);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
+  const { setValue } = useFormContext();
 
   const handleSubcategoryClick = (subcategory: string) => {
     setCategory(subcategory);
+    setValue("category.subcategory", subcategory); // Register the subcategory
     goTo(1);
   };
 

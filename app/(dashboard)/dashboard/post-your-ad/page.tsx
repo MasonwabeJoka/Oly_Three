@@ -1,16 +1,7 @@
 "use client";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  categoriesValidations,
-  detailsValidations,
-  priceValidations,
-  bankAccountValidations,
-  descriptionValidations,
-  uploadMediaValidations,
-  locationValidations,
-  promoteYourAdValidations,
-} from "./validations/multiStepFormValidations";
+import { formDataSchema } from "./validations/formDataSchema";
 import styles from "./styles.module.scss";
 import SelectACategory from "./components/SelectACategory";
 import Details from "./components/Details";
@@ -32,30 +23,17 @@ import Modal from "@/components/Modal";
 import useQAndAStore from "./store/useFAQStore";
 import FAQs from "@/components/Faqs";
 import { auctionFAQs } from "@/data/auctionFAQs";
-import FormData from "./store/useFormStore";
+import {type FormData} from "./store/useFormStore";
 
-type FormData = {
-  [key: string]: any; // Dynamic object structure for the different steps
-};
+
 type MediaAction = "photos" | "reorder" | "videos" | "attachments" | "none";
 const Dashboard = () => {
   const { mediaAction } = useUploadMediaStore();
   const { currentStepIndex, goTo, setCategory } = useFormStore();
   const { showFAQs, setShowFAQs } = useQAndAStore();
   
-  const validationSchemaSteps = [
-    categoriesValidations,
-    detailsValidations,
-    priceValidations,
-    bankAccountValidations,
-    descriptionValidations,
-    uploadMediaValidations,
-    locationValidations,
-    promoteYourAdValidations,
-  ];
-
   const methods = useForm<FormData>({
-    resolver: zodResolver(validationSchemaSteps[currentStepIndex]),
+    resolver: zodResolver(formDataSchema),
     defaultValues: useFormStore((state) => state.formData),
   });
 

@@ -18,7 +18,7 @@ const Price = () => {
   } = useFormContext();
 
   const [price, setPrice] = useState<number>(0);
-  const priceType = watch("pricingOption");
+  const priceType = watch("price.pricingOption");
   const { setShowFAQs } = useFAQStore();
 
   const handlePriceChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +34,6 @@ const Price = () => {
     free: { label: "Free", value: "free" },
     contactForPrice: { label: "Contact For Price", value: "contactForPrice" },
   };
-
- 
 
   return (
     <FormWrapper title="Price">
@@ -62,8 +60,9 @@ const Price = () => {
               disabled={false}
               required={true}
               dashboard
-              error={errors.pricingOption?.message as string}
-              {...register("pricingOption")}
+              // error={errors.pricingOption?.message as string}
+              {...register("price.pricingOption")}
+              error={errors.price?.pricingOption?.message}
             />
           </div>
 
@@ -195,7 +194,6 @@ const Price = () => {
                   dashboard
                   onClick={() => setShowFAQs(true)}
                 />
-                
               </div>
             </>
           )}

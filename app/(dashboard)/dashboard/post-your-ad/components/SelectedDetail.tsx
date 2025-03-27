@@ -5,6 +5,7 @@ import { z } from "zod";
 import Input from "@/components/Input";
 import Button from "@/components/Buttons";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
+import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
 
 type FormValues = z.infer<typeof multiStepFormSchema>;

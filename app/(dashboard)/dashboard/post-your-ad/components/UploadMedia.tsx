@@ -11,6 +11,7 @@ import VideoUploadForm from "./VideoUploadForm";
 import VideoUploadCard from "@/components/VideoUploadCard";
 import AttachmentUploadSection from "@/components/AttachmentUploadSection";
 import { attachments } from "@/data/attachments";
+import { useFormContext } from "react-hook-form";
 // Todo: Set validation so that at least one of the media types is selected.
 const UploadMedia = () => {
   const { uploadedImages, uploadedVideos } = useUploadFiles();

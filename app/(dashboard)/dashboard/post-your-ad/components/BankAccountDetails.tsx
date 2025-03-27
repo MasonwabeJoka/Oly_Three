@@ -7,6 +7,7 @@ import Spinner from "@/components/Spinner";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
 import { bankAccountValidations } from "../validations/multiStepFormValidations";
+
 const fetchBanks = async () => {
   try {
     const response = await axios.get("/api/paystack/getBanksList", {

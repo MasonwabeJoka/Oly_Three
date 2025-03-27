@@ -8,13 +8,11 @@ import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
-// import { multiStepFormSchema } from "@/lib/validations/formValidations";
-import { detailsValidations } from "../validations/multiStepFormValidations";
 import EditMode from "../../../dashboard/post-your-ad/components/EditMode";
 import SelectedDetail from "./SelectedDetail";
 import { FormWrapper } from "./FormWrapper";
+import { FormDataSchema } from "../validations/formDataSchema";
 
-type FormValues = z.infer<typeof detailsValidations>;
 // TODO: On edit mode the textarea should grow with text.
 // TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
 
@@ -83,14 +81,14 @@ const Details = () => {
   const detailsTitles = DetailsData.map((detail) => detail.detail);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as keyof FormDataSchema, e.target.value, {
       shouldDirty: true,
       shouldTouch: true,
     });
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as keyof FormDataSchema, e.target.value, {
       shouldTouch: true,
     });
   };
@@ -115,7 +113,7 @@ const Details = () => {
                 required={false}
                 multiple={false}
                 error={errors.condition?.message as string}
-                {...register("condition")}
+                {...register("details.condition")} 
               />
             </div>
 
@@ -135,7 +133,7 @@ const Details = () => {
                 required={false}
                 multiple={false}
                 error={errors.selectDetail?.message as string}
-                {...register("selectDetail")}
+                {...register("details.selectDetail")}
               />
             </div>
             {DetailsData.map((detail) => {
