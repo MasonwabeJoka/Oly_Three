@@ -39,6 +39,7 @@ export type FormData = {
 type FormDataFields =
   | "selectACategory"
   | "details.condition"
+  | "details.selectDetails"
   | "price.pricingOption"
   | "price.price"
   | "createAccount.bankName"
@@ -66,7 +67,7 @@ type Step = {
 // Define all the steps of the form in order
 const steps: Step[] = [
   { id: "step1", name: "Select a category", fields: ["selectACategory"] },
-  { id: "step2", name: "Details", fields: ["details.condition"] },
+  { id: "step2", name: "Details", fields: ["details.condition", "details.selectDetails"] },
   { id: "step3", name: "Price", fields: ["price.pricingOption", "price.price"] },
   { id: "step4", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
   { id: "step5", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },

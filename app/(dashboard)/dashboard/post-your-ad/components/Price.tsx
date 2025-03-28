@@ -15,16 +15,19 @@ const Price = () => {
     formState: { errors },
     setValue,
     watch,
+    trigger,
   } = useFormContext();
 
-  const [price, setPrice] = useState<number>(0);
   const priceType = watch("price.pricingOption");
   const { setShowFAQs } = useFAQStore();
 
-  const handlePriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePriceChange = (event: ChangeEvent<HTMLInputElement>, field: string) => {
     const valueAsNumber = parseFloat(event.target.value) || 0;
-    setPrice(valueAsNumber);
-    setValue("price", valueAsNumber, { shouldValidate: true });
+    setValue(`price.${field}`, valueAsNumber, { 
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   const pricingOption = {
@@ -60,14 +63,12 @@ const Price = () => {
               disabled={false}
               required={true}
               dashboard
-              // error={errors.pricingOption?.message as string}
               {...register("price.pricingOption")}
               error={errors.price?.pricingOption?.message}
             />
           </div>
 
-          {(priceType === "Fixed Price" ||
-            priceType === "Negotiable Price") && (
+          {(priceType === "fixedPrice" || priceType === "negotiable") && (
             <div className={`${styles.controls} ${styles.priceContainer}`}>
               <NumberInput
                 className={styles.price}
@@ -76,20 +77,20 @@ const Price = () => {
                 step={1}
                 debounceTime={500}
                 id="price"
-                value={price}
+                value={watch("price.amount") || 0}
                 inputSize="large"
                 placeholder="Price"
                 autoFocus={false}
                 required={true}
                 dashboard
-                error={errors.price?.message as string}
-                {...register("price")}
-                onChange={handlePriceChange}
+                error={errors.price?.amount?.message}
+                {...register("price.amount")}
+                onChange={(e) => handlePriceChange(e, "amount")}
               />
             </div>
           )}
 
-          {priceType === "Auction" && (
+          {priceType === "auction" && (
             <>
               <div className={`${styles.controls} ${styles.priceContainer}`}>
                 <NumberInput
@@ -99,15 +100,15 @@ const Price = () => {
                   step={100}
                   debounceTime={500}
                   id="startingPrice"
-                  value={price}
+                  value={watch("price.startingPrice") || 0}
                   inputSize="large"
                   placeholder="Starting Price"
                   autoFocus={false}
                   required={true}
                   dashboard
-                  error={errors.startingPrice?.message as string}
-                  {...register("startingPrice")}
-                  onChange={handlePriceChange}
+                  error={errors.price?.startingPrice?.message}
+                  {...register("price.startingPrice")}
+                  onChange={(e) => handlePriceChange(e, "startingPrice")}
                 />
               </div>
               <div className={`${styles.controls} ${styles.priceContainer}`}>
@@ -118,15 +119,15 @@ const Price = () => {
                   step={100}
                   debounceTime={500}
                   id="buyNowPrice"
-                  value={price}
+                  value={watch("price.buyNowPrice") || 0}
                   inputSize="large"
                   placeholder="Buy Now Price"
                   autoFocus={false}
                   required={true}
                   dashboard
-                  error={errors.buyNowPrice?.message as string}
-                  {...register("buyNowPrice")}
-                  onChange={handlePriceChange}
+                  error={errors.price?.buyNowPrice?.message}
+                  {...register("price.buyNowPrice")}
+                  onChange={(e) => handlePriceChange(e, "buyNowPrice")}
                 />
               </div>
 
@@ -134,10 +135,10 @@ const Price = () => {
                 <Select
                   className={styles.auctionDuration}
                   options={[
-                    "1 Day Auction",
-                    "5 Days Auction",
-                    "10 Days Auction",
-                    "Set Custom Duration (Number of Days)",
+                    { label: "1 Day Auction", value: "1" },
+                    { label: "5 Days Auction", value: "5" },
+                    { label: "10 Days Auction", value: "10" },
+                    { label: "Set Custom Duration (Number of Days)", value: "custom" },
                   ]}
                   currentValue="Auction Duration"
                   selectSize="large"
@@ -150,20 +151,20 @@ const Price = () => {
                   disabled={false}
                   required={true}
                   dashboard
-                  error={errors.auctionDuration?.message as string}
-                  {...register("auctionDuration")}
+                  error={errors.price?.auctionDuration?.message}
+                  {...register("price.auctionDuration")}
                 />
               </div>
               <div className={`${styles.controls} ${styles.priceContainer}`}>
                 <Select
                   className={styles.startTime}
                   options={[
-                    "Start Now",
-                    "Start in 4 Hours",
-                    "Start in 24 Hours (1 day)",
-                    "Start in 48 Hours (2 days)",
-                    "Select Custom Date",
-                    "Select Custom Time",
+                    { label: "Start Now", value: "now" },
+                    { label: "Start in 4 Hours", value: "4h" },
+                    { label: "Start in 24 Hours (1 day)", value: "24h" },
+                    { label: "Start in 48 Hours (2 days)", value: "48h" },
+                    { label: "Select Custom Date", value: "customDate" },
+                    { label: "Select Custom Time", value: "customTime" },
                   ]}
                   currentValue="Auction Start Time"
                   selectSize="large"
@@ -176,8 +177,8 @@ const Price = () => {
                   disabled={false}
                   required={true}
                   dashboard
-                  error={errors.startTime?.message as string}
-                  {...register("startTime")}
+                  error={errors.price?.startTime?.message}
+                  {...register("price.startTime")}
                 />
               </div>
               <div className={styles.faqs}>
@@ -204,3 +205,4 @@ const Price = () => {
 };
 
 export default Price;
+

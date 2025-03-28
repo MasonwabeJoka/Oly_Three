@@ -13,10 +13,7 @@ import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import MobileSubcategories from "@/components/MobileSubcategories";
 import Button from "@/components/Buttons";
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { FormWrapper } from "./FormWrapper";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { categoriesValidations } from "../validations/multiStepFormValidations";
 import { useFormContext } from "react-hook-form";
 
 const SelectACategory = ({
@@ -31,12 +28,29 @@ const SelectACategory = ({
   const [showButtons, setShowButtons] = useState<boolean>(false);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
-  const { setValue } = useFormContext();
+  
+  const { 
+    setValue, 
+    formState: { errors },
+    trigger 
+  } = useFormContext();
 
-  const handleSubcategoryClick = (subcategory: string) => {
-    setCategory(subcategory);
-    setValue("category.subcategory", subcategory); // Register the subcategory
-    goTo(1);
+  const handleSubcategoryClick = async (subcategory: string) => {
+    // Set both category and main category
+    const selectedCategory = categories.find(cat => cat.id === activeCategoryId);
+    
+    if (selectedCategory) {
+      setValue("category.main", selectedCategory.category, { shouldValidate: true });
+      setValue("category.subcategory", subcategory, { shouldValidate: true });
+      
+      // Trigger validation
+      const isValid = await trigger(["category.main", "category.subcategory"]);
+      
+      if (isValid) {
+        setCategory(subcategory);
+        goTo(1);
+      }
+    }
   };
 
   // Find the active category object
@@ -59,6 +73,10 @@ const SelectACategory = ({
 
   const handleCategoryClick = (id: number) => {
     setActiveCategoryId(id);
+    const selectedCategory = categories.find(cat => cat.id === id);
+    if (selectedCategory) {
+      setValue("category.main", selectedCategory.category, { shouldValidate: true });
+    }
   };
 
   const categoriesArray = (arr: any, size: number) => {
@@ -93,7 +111,10 @@ const SelectACategory = ({
 
   const SelectACategoryDesktop = () => {
     return (
-      <FormWrapper title="Select a category">
+      <FormWrapper 
+        title="Select a category"
+        error={errors.category?.main?.message || errors.category?.subcategory?.message}
+      >
         <div className={styles.container}>
           <div className={styles.wrapper}>
             <Swiper
@@ -208,7 +229,10 @@ const SelectACategory = ({
   };
   const SelectACategoryMobile = () => {
     return (
-      <div div>
+      <FormWrapper 
+        title="Select a category"
+        error={errors.category?.main?.message || errors.category?.subcategory?.message}
+      >
         <div className={styles.container}>
           <div className={styles.categoriesContainer}>
             {categories.map((categoryItem, index) => {
@@ -222,6 +246,7 @@ const SelectACategory = ({
                     id={id}
                     name={subcategories[index]}
                     ariaLabel={subcategories[index]}
+                    onSubcategorySelect={(subcategory) => handleSubcategoryClick(subcategory)}
                   />
                 </div>
               );
@@ -242,7 +267,7 @@ const SelectACategory = ({
             />
           </div>
         </div>
-      </div>
+      </FormWrapper>
     );
   };
 
@@ -254,3 +279,4 @@ const SelectACategory = ({
 };
 
 export default SelectACategory;
+

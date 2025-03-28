@@ -1,100 +1,167 @@
 "use client";
 import styles from "./Details.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { z } from "zod";
 import Image from "next/image";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
-import EditMode from "../../../dashboard/post-your-ad/components/EditMode";
+import EditMode from "./EditMode";
 import SelectedDetail from "./SelectedDetail";
 import { FormWrapper } from "./FormWrapper";
-import { FormDataSchema } from "../validations/formDataSchema";
+import type { FormDataSchema } from "../validations/formDataSchema";
 
-// TODO: On edit mode the textarea should grow with text.
-// TODO: Fix more input and submitDetail button so that submitDetailContainer button is displayed until the button is clicked
+interface DetailItem {
+  selectDetail: string;
+  value: string;
+}
 
 const Details = () => {
   const [matchFound, setMatchFound] = useState(true);
   const [showSpecificationForm, setShowSpecificationForm] = useState(false);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editValue, setEditValue] = useState("");
+  const [details, setDetails] = useState<DetailItem[]>([]);
 
   const {
     register,
-    handleSubmit,
     formState: { errors, dirtyFields },
     setValue,
     watch,
     trigger,
+    getValues,
   } = useFormContext();
 
-  const [editIndex, setEditIndex] = useState<string | number | null>(null);
-  const [editValue, setEditValue] = useState<any>("");
-  const [details, setDetails] = useState<
-    { selectDetail: string; value: string }[]
-  >([]);
-  const selectDetailValue = watch("selectDetail");
+  const selectDetailValue = watch("details.selectDetail");
+  const formDetails = watch("details.list") || [];
 
-  const isSelectDetailDirty = dirtyFields.selectDetailValue;
+  // Sync local state with form state
+  useEffect(() => {
+    if (formDetails.length > 0 && details.length === 0) {
+      setDetails(formDetails);
+    }
+  }, [formDetails]);
+
+  const updateDetailsInForm = (updatedDetails: DetailItem[]) => {
+    setDetails(updatedDetails);
+    setValue("details.list", updatedDetails, { 
+      shouldValidate: true,
+      shouldDirty: true 
+    });
+  };
 
   const editDetail = (index: number) => {
     setEditIndex(index);
     setEditValue(details[index].value);
   };
 
-  const updateDetail = (index: number, updatedValue: string) => {
-    if (updatedValue.trim() !== "") {
-      // Create a copy of the details array and update the edited detail
+  const updateDetail = async (index: number, updatedValue: string) => {
+    if (updatedValue.trim()) {
       const updatedDetails = [...details];
       updatedDetails[index] = {
         ...updatedDetails[index],
-        value: updatedValue,
+        value: updatedValue.trim()
       };
 
-      // Update the list with the new value
-      setDetails(updatedDetails);
-
-      // Exit edit mode by setting editIndex to null
-      setEditIndex(null);
+      updateDetailsInForm(updatedDetails);
+      
+      const isValid = await trigger("details.list");
+      if (isValid) {
+        setEditIndex(null);
+      }
     }
   };
 
-  const cancelEdit = () => {
-    setEditIndex(null); // Exit edit mode without saving changes
-  };
-
-  // Handle deleting an item from the list
-  const handleDeleteItem = (index: number) => {
-    // Remove the item at the specified index
+  const handleDeleteItem = async (index: number) => {
     const updatedDetails = details.filter((_, i) => i !== index);
-
-    // Update the list with the remaining details
-    setDetails(updatedDetails);
-
-    // If the item being deleted is in edit mode, exit edit mode
+    updateDetailsInForm(updatedDetails);
+    
     if (editIndex === index) {
       setEditIndex(null);
     }
-  };
-  const conditions = ConditionsData.map((detail) => detail.condition);
-  const detailsTitles = DetailsData.map((detail) => detail.detail);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormDataSchema, e.target.value, {
+    await trigger("details.list");
+  };
+
+  const conditions = ConditionsData.map(detail => detail.condition);
+  const detailsTitles = DetailsData.map(detail => detail.detail);
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValue(name as keyof FormDataSchema, value, {
       shouldDirty: true,
       shouldTouch: true,
     });
+    await trigger(name as keyof FormDataSchema);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormDataSchema, e.target.value, {
-      shouldTouch: true,
-    });
-  };
+  const DetailsList = ({ details, editIndex }: { details: DetailItem[], editIndex: number | null }) => (
+    <ul className={styles.details}>
+      {details.map((detail, index) =>
+        editIndex !== index ? (
+          <li key={index} className={styles.detail}>
+            <div className={styles.detailButtons}>
+              <Button
+                className={`${styles.editButton} ${styles.detailButton}`}
+                buttonChildren={
+                  <Image
+                    src="/icons/pencil.png"
+                    alt="edit-icon"
+                    width={18}
+                    height={18}
+                  />
+                }
+                buttonType="roundStandardFeed"
+                name="edit-btn"
+                type="button"
+                ariaLabel="Edit Button"
+                onClick={() => editDetail(index)}
+              />
+              <Button
+                className={`${styles.deleteButton} ${styles.detailButton}`}
+                buttonChildren={
+                  <Image
+                    src="/icons/trash.png"
+                    alt="delete-icon"
+                    width={24}
+                    height={24}
+                  />
+                }
+                buttonType="roundStandardFeed"
+                name="delete-btn"
+                type="button"
+                ariaLabel="Delete Button"
+                onClick={() => handleDeleteItem(index)}
+              />
+            </div>
+            <p className={styles.detailText}>
+              <span style={{ fontWeight: "600" }}>{detail.selectDetail}:</span>
+              {" "}
+              <span>{detail.value}</span>
+            </p>
+          </li>
+        ) : (
+          <EditMode
+            key={index}
+            editValue={editValue}
+            setValue={setValue}
+            updateDetail={(value: string) => updateDetail(index, value)}
+            cancelEdit={() => setEditIndex(null)}
+            register={register}
+            errors={errors}
+            watch={watch}
+          />
+        )
+      )}
+    </ul>
+  );
 
   return (
-    <FormWrapper title="Product Details">
+    <FormWrapper 
+      title="Product Details"
+      error={errors.details?.message as string}
+    >
       <div className={styles.container}>
         <div className={styles.form}>
           <div className={styles.formElements}>
@@ -108,12 +175,8 @@ const Details = () => {
                 label="Choose a condition"
                 id="conditions"
                 ariaLabel="Conditions"
-                autoFocus={false}
-                disabled={false}
-                required={false}
-                multiple={false}
-                error={errors.condition?.message as string}
-                {...register("details.condition")} 
+                error={errors.details?.condition?.message as string}
+                {...register("details.condition")}
               />
             </div>
 
@@ -127,116 +190,37 @@ const Details = () => {
                 label="Choose a detail"
                 id="choose-detail"
                 ariaLabel="Choose Detail Select"
-                autoFocus={false}
                 autoComplete="off"
-                disabled={false}
-                required={false}
-                multiple={false}
-                error={errors.selectDetail?.message as string}
+                error={errors.details?.selectDetail?.message as string}
                 {...register("details.selectDetail")}
               />
             </div>
-            {DetailsData.map((detail) => {
-              if (matchFound === true && selectDetailValue === detail.detail) {
-                return (
-                  <SelectedDetail
-                    id={detail.id}
-                    initialValue="See a list of details you can include"
-                    detail={detail.detail}
-                    description={detail.description}
-                    example={detail.example}
-                    isFieldDirty={isSelectDetailDirty}
-                    key={detail.id}
-                    register={register}
-                    setValue={setValue}
-                    errors={errors}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                    trigger={trigger}
-                    selectDetailValue={selectDetailValue}
-                    details={details}
-                    setDetails={setDetails}
-                    watch={watch}
-                    setMatchFound={() => setMatchFound(false)}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-            <ul className={styles.details}>
-              {details.map((detail: any, index) =>
-                editIndex !== index ? (
-                  <li key={index} className={styles.detail}>
-                    <div className={styles.detailButtons}>
-                      <div className={styles.editButtonContainer}>
-                        <Button
-                          className={`${styles.editButton} ${styles.detailButton}`}
-                          buttonChildren={
-                            <Image
-                              src="/icons/pencil.png"
-                              alt="edit-icon"
-                              width={18}
-                              height={18}
-                            />
-                          }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="edit-btn"
-                          type="button"
-                          ariaLabel="Edit Button"
-                          autoFocus={false}
-                          disabled={false}
-                          onClick={() => editDetail(index)}
-                        />
-                      </div>
-                      <div className={styles.deleteButtonContainer}>
-                        <Button
-                          className={`${styles.deleteButton} ${styles.detailButton}`}
-                          buttonChildren={
-                            <Image
-                              src="/icons/trash.png"
-                              alt="delete-icon"
-                              width={24}
-                              height={24}
-                            />
-                          }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="delete-btn"
-                          type="button"
-                          ariaLabel="Delete Button"
-                          autoFocus={false}
-                          disabled={false}
-                          onClick={() => handleDeleteItem(index)}
-                        />
-                      </div>
-                    </div>
-                    <p className={styles.detailText}>
-                      <span style={{ fontWeight: "600" }}>
-                        {detail?.selectDetail}:
-                      </span>
-                      {"  "}
-                      <span>{detail?.value}</span>
-                    </p>
-                  </li>
-                ) : (
-                  <EditMode
-                    editValue={editValue}
-                    setValue={setValue}
-                    updateDetail={(updatedValue: string) =>
-                      updateDetail(index, updatedValue)
-                    } // Pass the function
-                    cancelEdit={cancelEdit}
-                    register={register}
-                    errors={errors}
-                    watch={watch}
-                    key={index}
-                  />
-                )
-              )}
-            </ul>
+
+            {DetailsData.map((detail) => (
+              matchFound && selectDetailValue === detail.detail && (
+                <SelectedDetail
+                  key={detail.id}
+                  id={detail.id}
+                  initialValue="See a list of details you can include"
+                  detail={detail.detail}
+                  description={detail.description}
+                  example={detail.example}
+                  isFieldDirty={!!dirtyFields.details?.selectDetail}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  handleChange={handleChange}
+                  selectDetailValue={selectDetailValue}
+                  details={details}
+                  setDetails={setDetails}
+                  watch={watch}
+                  setMatchFound={() => setMatchFound(false)}
+                />
+              )
+            ))}
+
+            <DetailsList details={details} editIndex={editIndex} />
+
             <div className={styles.addSpecificationsContainer}>
               <Button
                 className={styles.addSpecifications}
@@ -246,111 +230,32 @@ const Details = () => {
                 name="addSpecification"
                 type="button"
                 ariaLabel="Add Product Specification Button"
-                autoFocus={false}
-                disabled={false}
                 onClick={() => setShowSpecificationForm(!showSpecificationForm)}
               />
             </div>
+
             {showSpecificationForm && (
               <>
                 <SelectedDetail
-                  id={"a"}
+                  id="custom-spec"
                   initialValue="Select a product detail to add"
-                  detail={
-                    "Provide details such as dimensions, weight, or any other relevant technical specifications."
-                  }
-                  description={
-                    "If you use a colon (:) to separate the label from the value, the label will be displayed in bold to make key details stand out."
-                  }
-                  boldTextExample={"Screen size"}
-                  normalTextExample={"6.1 inches"}
-                  placeholder={"Add product specification"}
-                  isFieldDirty={isSelectDetailDirty}
+                  detail="Product Specifications"
+                  description="Provide details such as dimensions, weight, or any other relevant technical specifications."
+                  boldTextExample="Screen size"
+                  normalTextExample="6.1 inches"
+                  placeholder="Add product specification"
+                  isFieldDirty={!!dirtyFields.details?.selectDetail}
                   register={register}
                   setValue={setValue}
                   errors={errors}
                   handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                  trigger={trigger}
                   selectDetailValue={selectDetailValue}
                   details={details}
                   setDetails={setDetails}
                   watch={watch}
                   setMatchFound={() => setShowSpecificationForm(false)}
                 />
-                <ul className={styles.details}>
-                  {details.map((detail: any, index) =>
-                    editIndex !== index ? (
-                      <li key={index} className={styles.detail}>
-                        <div className={styles.detailButtons}>
-                          <div className={styles.editButtonContainer}>
-                            <Button
-                              className={`${styles.editButton} ${styles.detailButton}`}
-                              buttonChildren={
-                                <Image
-                                  src="/icons/pencil.png"
-                                  alt="edit-icon"
-                                  width={18}
-                                  height={18}
-                                />
-                              }
-                              buttonType="roundStandardFeed"
-                              buttonSize=""
-                              name="edit-btn"
-                              type="button"
-                              ariaLabel="Edit Button"
-                              autoFocus={false}
-                              disabled={false}
-                              onClick={() => editDetail(index)}
-                            />
-                          </div>
-                          <div className={styles.deleteButtonContainer}>
-                            <Button
-                              className={`${styles.deleteButton} ${styles.detailButton}`}
-                              buttonChildren={
-                                <Image
-                                  src="/icons/trash.png"
-                                  alt="delete-icon"
-                                  width={24}
-                                  height={24}
-                                />
-                              }
-                              buttonType="roundStandardFeed"
-                              buttonSize=""
-                              name="delete-btn"
-                              type="button"
-                              ariaLabel="Delete Button"
-                              autoFocus={false}
-                              disabled={false}
-                              onClick={() => handleDeleteItem(index)}
-                            />
-                          </div>
-                        </div>
-                        <p className={styles.detailText}>
-                          <span style={{ fontWeight: "600" }}>
-                            {detail?.selectDetail}:
-                          </span>
-                          {"  "}
-                          <span>{detail?.value}</span>
-                        </p>
-                      </li>
-                    ) : (
-                      <EditMode
-                        editValue={editValue}
-                        setValue={setValue}
-                        updateDetail={(updatedValue: string) =>
-                          updateDetail(index, updatedValue)
-                        }
-                        cancelEdit={cancelEdit}
-                        register={register}
-                        errors={errors}
-                        watch={watch}
-                        key={index}
-                      />
-                    )
-                  )}
-                </ul>
+                <DetailsList details={details} editIndex={editIndex} />
               </>
             )}
           </div>
@@ -361,3 +266,5 @@ const Details = () => {
 };
 
 export default Details;
+
+

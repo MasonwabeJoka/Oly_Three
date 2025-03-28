@@ -1,13 +1,12 @@
 import Input from "@/components/Input";
 import styles from "./BankAccountDetails.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@/components/Spinner";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
-import { bankAccountValidations } from "../validations/multiStepFormValidations";
-
+import type { FormDataSchema } from "../validations/formDataSchema";
 const fetchBanks = async () => {
   try {
     const response = await axios.get("/api/paystack/getBanksList", {
@@ -19,9 +18,13 @@ const fetchBanks = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching banks:", error);
-    throw error; // Rethrow to ensure the error is caught by useQuery
+    throw error;
   }
 };
+
+type CreateAccountKey = keyof FormDataSchema["createAccount"];
+
+
 
 const BankAccountDetails = () => {
   const {
@@ -29,29 +32,19 @@ const BankAccountDetails = () => {
     formState: { errors },
     setValue,
     watch,
-  } = useFormContext();
+    trigger,
+  } = useFormContext<FormDataSchema>();
 
-  const handleBankNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("bankName", e.target.value, {
-      shouldDirty: true,
-      shouldTouch: true,
-    });
-  };
-  const handleAccountHolderChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: CreateAccountKey
   ) => {
-    setValue("accountHolder", e.target.value, {
+    setValue(`createAccount.${field}`, e.target.value, {
+      shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
     });
-  };
-  const handleAccountNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setValue("accountNumber", e.target.value, {
-      shouldDirty: true,
-      shouldTouch: true,
-    });
+    trigger(`createAccount.${field}`);
   };
 
   const {
@@ -63,25 +56,18 @@ const BankAccountDetails = () => {
   } = useQuery({
     queryKey: ["banks"],
     queryFn: fetchBanks,
-    enabled: false, // Disable automatic query on mount
+    enabled: false,
   });
 
   useEffect(() => {
-    refetch(); // Manually trigger the query
+    refetch();
   }, [refetch]);
 
-  if (isLoading)
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
+  if (isLoading) return <Spinner />;
   if (isError) return <div>Error fetching banks: {error.message}</div>;
 
   const bankNames = banks?.map((bank: any) => bank.name);
 
-  //Todo: Create a select for saved bank cards/accounts
-  //Todo: The select options should have the bank name and card/account number
   return (
     <FormWrapper title="Bank Account Details">
       <div className={styles.container}>
@@ -98,13 +84,14 @@ const BankAccountDetails = () => {
             iconHeight={32}
             label="Bank Name"
             placeholder="Enter your bank's name"
-            id="bankName"
+            id="bankAccount.bankName"
             ariaLabel="Bank Name"
             autoComplete="off"
             required
-            error={errors.bankName?.message as string}
-            {...register("bankName")}
-            onChange={handleBankNameChange}
+            value={watch("createAccount.bankName") || ""}
+            error={errors.createAccount?.bankName?.message as string}
+            {...register("createAccount.bankName")}
+            onChange={(e) => handleInputChange(e, "bankName")}
           />
         </div>
         <div className={styles.accountHolderContainer}>
@@ -118,14 +105,15 @@ const BankAccountDetails = () => {
             iconWidth={32}
             iconHeight={32}
             label="Account Holder"
-            id="accountHolder"
+            id="createAccount.accountHolder"
             placeholder="Enter account holder's name"
             ariaLabel="Account Holder"
             autoComplete="off"
             required
-            error={errors.accountHolder?.message as string}
-            {...register("accountHolder")}
-            onChange={handleAccountHolderChange}
+            value={watch("createAccount.accountHolder") || ""}
+            error={errors.createAccount?.accountHolder?.message as string}
+            {...register("createAccount.accountHolder")}
+            onChange={(e) => handleInputChange(e, "accountHolder")}
           />
         </div>
         <div className={styles.accountNumberContainer}>
@@ -140,13 +128,14 @@ const BankAccountDetails = () => {
             iconHeight={32}
             label="Account Number"
             placeholder="Enter your account number"
-            id="accountNumber"
+            id="bankAccount.accountNumber"
             ariaLabel="Account Number"
             autoComplete="off"
             required
-            error={errors.accountNumber?.message as string}
-            {...register("accountNumber")}
-            onChange={handleAccountNumberChange}
+            value={watch("createAccount.accountNumber") || ""}
+            error={errors.createAccount?.accountNumber?.message as string}
+            {...register("createAccount.accountNumber")}
+            onChange={(e) => handleInputChange(e, "accountNumber")}
           />
         </div>
       </div>
@@ -155,3 +144,9 @@ const BankAccountDetails = () => {
 };
 
 export default BankAccountDetails;
+
+
+
+
+
+
