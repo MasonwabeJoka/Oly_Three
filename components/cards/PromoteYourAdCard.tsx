@@ -9,6 +9,7 @@ import useIsDashboardStore from "@/store/isDashboardStore";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useFormContext } from "react-hook-form";
+import { FormDataSchema } from "@/app/(dashboard)/dashboard/post-your-ad/validations/formDataSchema";
 
 interface CardProps {
   id: string | number;
@@ -54,7 +55,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormDataSchema>();
   //Todo: When you select a promotion duration the value of the select must be replaced.
   //Todo: When you select a promotion duration the checkbox must be checked.
 
@@ -90,7 +91,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           >
             <Select
               options={options()}
-              currentValue="Promotion duration"
+              initialValue="Promotion duration"
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
@@ -106,11 +107,8 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               multiple={false}
               dashboard={isDashboard}
               error={errors.promotionDuration?.message as string}
-              {...register("promotionDuration", {
-                onChange: (e) => {
-                  handleSelectChange(e);
-                },
-              })}
+              {...register("promoteYourAd.promotionDuration")}
+              onChange={handleSelectChange}
             />
           </div>
 
@@ -170,7 +168,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           <div className={styles.setPromotionDurationContainer}>
             <Select
               options={options()}
-              currentValue={selectedDuration} // Display the selected duration
+              initialValue={selectedDuration}
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
@@ -186,11 +184,8 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               multiple={false}
               dashboard={isDashboard}
               error={errors.promotionDuration?.message as string}
-              {...register("promotionDuration", {
-                onChange: (e) => {
-                  handleSelectChange(e);
-                },
-              })}
+              {...register("promoteYourAd.promotionDuration")}
+              onChange={handleSelectChange}
             />
           </div>
 
@@ -218,3 +213,5 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
 };
 
 export default PromoteYourAdCard;
+
+

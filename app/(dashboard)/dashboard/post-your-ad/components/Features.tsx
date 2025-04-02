@@ -83,7 +83,7 @@ const Features = (
               <Select
                 options={details}
                 className={styles.selectDetail}
-                currentValue={selectFeatureValue}
+                initialValue={selectFeatureValue}
                 selectSize="large"
                 selectColourType="normal"
                 label="Choose a detail"
@@ -219,3 +219,4 @@ const Features = (
 };
 
 export default Features;
+

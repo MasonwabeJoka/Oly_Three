@@ -7,6 +7,7 @@ interface IconProps {
   width?: number;
   height?: number;
   boxShadow?: string;
+  onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
 const Icon = ({ 
   className = "", 
@@ -15,6 +16,7 @@ const Icon = ({
   width = 20, 
   height = 20,
   boxShadow = "none",
+  onClick 
 }: IconProps) => {
   return (
     <Image 
@@ -24,8 +26,10 @@ const Icon = ({
       width={width} 
       height={height}
       style={{ boxShadow: boxShadow }}
+      onClick={onClick}
     />
   );
 };
 
 export default Icon;
+

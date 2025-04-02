@@ -6,7 +6,7 @@ import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";
 import SponsoredArticles from "@/components/SponsoredArticles";
-import HeroSection from "@/components/HeroSection";
+// import HeroSection from "@/components/HeroSection";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useRouter } from "next/navigation";
 import useIsMobileStore from "@/store/useMobileStore";
@@ -19,6 +19,7 @@ import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
 import MoreFromOly from "@/components/MoreFromOly";
+import PropertiesHeroSection from "@/components/PropertiesHeroSection";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -87,7 +88,8 @@ const Home = () => {
         </div>
 
         <section className={styles.heroSection}>
-          <HeroSection />
+          <PropertiesHeroSection mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"/>
+        
         </section>
         <section className={styles.moreFromOly}>
           <h2 className={styles.title}>More from Oly</h2>

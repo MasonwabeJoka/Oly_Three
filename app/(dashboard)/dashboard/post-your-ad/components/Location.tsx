@@ -5,13 +5,13 @@ import Select from "@/components/Select";
 import { locations } from "@/data/LocationData";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
-import { locationValidations } from "../validations/multiStepFormValidations";
+import  { FormDataSchema}  from "../validations/formDataSchema";
 
 const Location = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormDataSchema>();
 
   return (
     <FormWrapper title="Location">
@@ -20,7 +20,7 @@ const Location = () => {
           <div className={styles.select}>
             <Select
               options={locations[0].provinces}
-              currentValue="Select your province"
+              initialValue="Select your province"
               selectSize="large"
               selectColourType="normal"
               label="Province"
@@ -30,14 +30,14 @@ const Location = () => {
               required={false}
               multiple={false}
               dashboard
-              error={errors.province?.message as string}
-              {...register("province")}
+              error={errors.location?.province?.message }
+              {...register("location.province")}
             />
           </div>
           <div className={styles.select}>
             <Select
               options={locations[0].city}
-              currentValue="Select your city"
+              initialValue="Select your city"
               selectSize="large"
               label="City"
               id="city"
@@ -46,8 +46,8 @@ const Location = () => {
               autoFocus={false}
               required={false}
               dashboard
-              error={errors.city?.message as string}
-              {...register("city")}
+              error={errors.location?.city?.message}
+              {...register("location.city")}
             />
           </div>
           <div className={styles.select}>
@@ -62,8 +62,8 @@ const Location = () => {
               autoFocus={false}
               required={false}
               dashboard
-              error={errors.suburb?.message as string}
-              {...register("suburb")}
+              error={errors.location?.suburb?.message}
+              {...register("location.suburb")}
             />
           </div>
           <div className={styles.select}>
@@ -80,8 +80,8 @@ const Location = () => {
               disabled={false}
               required={true}
               dashboard
-              error={errors.customLocation?.message as string}
-              {...register("customLocation")}
+              error={errors.location?.customLocation?.message}
+              {...register("location.customLocation")}
             />
           </div>
         </div>
@@ -90,3 +90,8 @@ const Location = () => {
   );
 };
 export default Location;
+
+
+
+
+

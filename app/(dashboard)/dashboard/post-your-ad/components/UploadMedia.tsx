@@ -5,7 +5,7 @@ import UploadButton from "@/components/UploadButton";
 import ImageUploadsSection from "./ImageUploadsSection";
 import useUploadFiles from "../store/useUploadFiles";
 import Input from "@/components/Input";
-import { useEffect, useState,  } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@/components/Modal";
 import VideoUploadForm from "./VideoUploadForm";
 import VideoUploadCard from "@/components/VideoUploadCard";
@@ -18,7 +18,16 @@ const UploadMedia = () => {
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
+  useEffect(() => {
+    setValue("uploadMedia.images", uploadedImages);
+    setValue("uploadMedia.videos", uploadedVideos);
+  }, [uploadedImages, uploadedVideos, setValue]);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -36,6 +45,7 @@ const UploadMedia = () => {
     setUploadedVideoUrl(videoUrl);
     openModal();
   };
+
   return (
     <FormWrapper title="Upload Media">
       <div className={styles.container}>
@@ -95,15 +105,14 @@ const UploadMedia = () => {
             placeholder="Enter Video URL"
             label="Enter Video URL"
             id="video-url"
-            name="video-url"
             ariaLabel="Video URL Field"
             autoFocus={false}
             autoComplete="off"
             disabled={false}
             required
-            // value={value}
             dashboard
-            onChange={""}
+            {...register("uploadMedia.videoUrl")}
+            error={errors.uploadMedia?.videoUrl?.message}
           />
         </div>
         <div className={styles.uploadedAttachmentsContainer}>

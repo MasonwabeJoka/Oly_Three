@@ -113,7 +113,7 @@ const SelectACategory = ({
     return (
       <FormWrapper 
         title="Select a category"
-        error={errors.category?.main?.message || errors.category?.subcategory?.message}
+        // error={errors.category?.main?.message || errors.category?.subcategory?.message}
       >
         <div className={styles.container}>
           <div className={styles.wrapper}>
@@ -231,7 +231,7 @@ const SelectACategory = ({
     return (
       <FormWrapper 
         title="Select a category"
-        error={errors.category?.main?.message || errors.category?.subcategory?.message}
+        // error={errors.category?.main?.message || errors.category?.subcategory?.message}
       >
         <div className={styles.container}>
           <div className={styles.categoriesContainer}>

@@ -169,7 +169,7 @@ const Details = () => {
               <Select
                 options={conditions}
                 className={styles.conditions}
-                currentValue="Choose a condition"
+                initialValue="Choose a condition"
                 selectSize="large"
                 selectColourType="normal"
                 label="Choose a condition"
@@ -184,7 +184,7 @@ const Details = () => {
               <Select
                 options={detailsTitles}
                 className={styles.selectDetail}
-                currentValue="Select a product detail"
+                initialValue="Select a product detail"
                 selectSize="large"
                 selectColourType="normal"
                 label="Choose a detail"
@@ -266,5 +266,6 @@ const Details = () => {
 };
 
 export default Details;
+
 
 

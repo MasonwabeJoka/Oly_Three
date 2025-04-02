@@ -58,6 +58,7 @@ const TitleAndDescription = () => {
             value={title}
             error={errors.titleAndDescription?.title?.message}
             {...register("titleAndDescription.title")}
+            // error={errors.titleAndDescription?.title?.message}
             onChange={handleTitleChange}
           />
         </div>
@@ -67,6 +68,7 @@ const TitleAndDescription = () => {
             setValue={(value: string) => handleDescriptionChange(value)}
             content={description}
             error={errors.titleAndDescription?.description?.message}
+            // error={errors.titleAndDescription?.description?.message}
           />
         </div>
       </div>
@@ -75,4 +77,3 @@ const TitleAndDescription = () => {
 };
 
 export default TitleAndDescription;
-

@@ -21,9 +21,12 @@ const Price = () => {
   const priceType = watch("price.pricingOption");
   const { setShowFAQs } = useFAQStore();
 
-  const handlePriceChange = (event: ChangeEvent<HTMLInputElement>, field: string) => {
+  const handlePriceChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
     const valueAsNumber = parseFloat(event.target.value) || 0;
-    setValue(`price.${field}`, valueAsNumber, { 
+    setValue(`price.${field}`, valueAsNumber, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
@@ -52,7 +55,7 @@ const Price = () => {
                 pricingOption.free,
                 pricingOption.contactForPrice,
               ]}
-              currentValue="Choose Pricing Option"
+              initialValue="Choose Pricing Option"
               selectSize="large"
               selectPrompt="Price Types"
               label="Price Types"
@@ -68,7 +71,7 @@ const Price = () => {
             />
           </div>
 
-          {(priceType === "fixedPrice" || priceType === "negotiable") && (
+          {(priceType === "Fixed Price" || priceType === "Negotiable") && (
             <div className={`${styles.controls} ${styles.priceContainer}`}>
               <NumberInput
                 className={styles.price}
@@ -84,7 +87,8 @@ const Price = () => {
                 required={true}
                 dashboard
                 error={errors.price?.amount?.message}
-                {...register("price.amount")}
+                {...register("price.price", { valueAsNumber: true })}
+                // error={errors.price?.price?.message}
                 onChange={(e) => handlePriceChange(e, "amount")}
               />
             </div>
@@ -107,7 +111,8 @@ const Price = () => {
                   required={true}
                   dashboard
                   error={errors.price?.startingPrice?.message}
-                  {...register("price.startingPrice")}
+                  {...register("price.startingPrice", { valueAsNumber: true })}
+                  // error={errors.price?.startingPrice?.message}
                   onChange={(e) => handlePriceChange(e, "startingPrice")}
                 />
               </div>
@@ -126,7 +131,8 @@ const Price = () => {
                   required={true}
                   dashboard
                   error={errors.price?.buyNowPrice?.message}
-                  {...register("price.buyNowPrice")}
+                  {...register("price.buyNowPrice", { valueAsNumber: true })}
+                  // error={errors.price?.buyNowPrice?.message}
                   onChange={(e) => handlePriceChange(e, "buyNowPrice")}
                 />
               </div>
@@ -138,7 +144,10 @@ const Price = () => {
                     { label: "1 Day Auction", value: "1" },
                     { label: "5 Days Auction", value: "5" },
                     { label: "10 Days Auction", value: "10" },
-                    { label: "Set Custom Duration (Number of Days)", value: "custom" },
+                    {
+                      label: "Set Custom Duration (Number of Days)",
+                      value: "custom",
+                    },
                   ]}
                   currentValue="Auction Duration"
                   selectSize="large"
@@ -153,6 +162,7 @@ const Price = () => {
                   dashboard
                   error={errors.price?.auctionDuration?.message}
                   {...register("price.auctionDuration")}
+                  // error={errors.price?.auctionDuration?.message}
                 />
               </div>
               <div className={`${styles.controls} ${styles.priceContainer}`}>
@@ -179,6 +189,7 @@ const Price = () => {
                   dashboard
                   error={errors.price?.startTime?.message}
                   {...register("price.startTime")}
+                  // error={errors.price?.startTime?.message}
                 />
               </div>
               <div className={styles.faqs}>

@@ -147,7 +147,7 @@ const Tabs: React.FC<TabsProps> = ({
                 flexShrink: condition
                   ? `${altWidth && (altWidth / 4 - 8) / 16}rem`
                   : `${(width / 4 - 8) / 16}rem`,
-                  color: tabs[index] === "Delete" ? "#ff3c14" : "black",
+                  color: tabs[index] === "Delete" ? "#ff3c14" : "#434b4d",
               }}
               key={index} // Assuming tabs are unique and static, so using index as key
               onClick={(event) => {

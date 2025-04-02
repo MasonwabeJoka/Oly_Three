@@ -24,8 +24,6 @@ const fetchBanks = async () => {
 
 type CreateAccountKey = keyof FormDataSchema["createAccount"];
 
-
-
 const BankAccountDetails = () => {
   const {
     register,
@@ -84,13 +82,14 @@ const BankAccountDetails = () => {
             iconHeight={32}
             label="Bank Name"
             placeholder="Enter your bank's name"
-            id="bankAccount.bankName"
+            id="bankName"
             ariaLabel="Bank Name"
             autoComplete="off"
             required
             value={watch("createAccount.bankName") || ""}
             error={errors.createAccount?.bankName?.message as string}
             {...register("createAccount.bankName")}
+            // error={errors.bankAccount?.bankName?.message}
             onChange={(e) => handleInputChange(e, "bankName")}
           />
         </div>
@@ -113,6 +112,7 @@ const BankAccountDetails = () => {
             value={watch("createAccount.accountHolder") || ""}
             error={errors.createAccount?.accountHolder?.message as string}
             {...register("createAccount.accountHolder")}
+            // error={errors.bankAccount?.accountHolder?.message}
             onChange={(e) => handleInputChange(e, "accountHolder")}
           />
         </div>
@@ -128,13 +128,14 @@ const BankAccountDetails = () => {
             iconHeight={32}
             label="Account Number"
             placeholder="Enter your account number"
-            id="bankAccount.accountNumber"
+            id="accountNumber"
             ariaLabel="Account Number"
             autoComplete="off"
             required
             value={watch("createAccount.accountNumber") || ""}
             error={errors.createAccount?.accountNumber?.message as string}
             {...register("createAccount.accountNumber")}
+            // error={errors.createAccount?.accountNumber?.message}
             onChange={(e) => handleInputChange(e, "accountNumber")}
           />
         </div>
@@ -144,9 +145,3 @@ const BankAccountDetails = () => {
 };
 
 export default BankAccountDetails;
-
-
-
-
-
-

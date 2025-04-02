@@ -1,12 +1,12 @@
 import Image from "next/image";
-import styles from "./HeroSection.module.scss";
-import HeroSectionSearch from "./HeroSectionSearch";
+import styles from "./PropertiesHeroSection.module.scss";
+import PropertiesHeroSectionSearch from "@/components/PropertiesHeroSectionSearch";
 
 interface HeroSectionProps {
   mainTitle?: string;
 }
 
-const HeroSection = ({ mainTitle }: HeroSectionProps) => {
+const PropertiesHeroSection = ({ mainTitle }: HeroSectionProps) => {
   return (
     <div className={styles.mainSection}>
       <div className={styles.star}>
@@ -21,10 +21,10 @@ const HeroSection = ({ mainTitle }: HeroSectionProps) => {
        {mainTitle}
       </h1>
       <div className={styles.heroSectionSearchContainer}>
-        <HeroSectionSearch />
+        <PropertiesHeroSectionSearch />
       </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default PropertiesHeroSection;

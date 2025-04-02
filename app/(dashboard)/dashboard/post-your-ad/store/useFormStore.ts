@@ -73,7 +73,7 @@ const steps: Step[] = [
   { id: "step5", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
   { id: "step6", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
   { id: "step7", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
-  { id: "step8", name: "Promote Your Ad", fields: ["promoteYourAd.promotionDuration"] },
+  { id: "step8", name: "Promote Your Ad", fields: [] },
   { id: "step9", name: "Congratulations", fields: [] }, // No fields here, just a confirmation page
   { id: "step10", name: "Review and Submit", fields: ["reviewYourAd"] },
 ];

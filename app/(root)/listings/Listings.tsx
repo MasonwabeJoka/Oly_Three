@@ -46,6 +46,7 @@ const Listings = () => {
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
+  // TODO:Put breadcrumbs above results instead of above search inputs.
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -281,8 +282,8 @@ const Listings = () => {
                   "Jobs",
                   "Services",
                 ]}
-                currentValue="All Categories"
-                selectSize="xLarge"
+                initialValue="All Categories"
+                selectSize="large"
                 label="Provinces"
                 id="provinces"
                 name="provinces"
@@ -313,7 +314,7 @@ const Listings = () => {
                   className={`${styles.formInput} ${styles.searchTermInput}`}
                   isSearchBar={true}
                   suggestions={suggestions}
-                  inputSize="xLarge"
+                  inputSize="large"
                   inputType="text"
                   label="Search Field: "
                   placeholder="What are you looking for?"
@@ -358,7 +359,7 @@ const Listings = () => {
                   className={`${styles.formInput} ${styles.locationInput}`}
                   isSearchBar={true}
                   suggestions={suggestions}
-                  inputSize="xLarge"
+                  inputSize="large"
                   inputType="text"
                   label="Location: "
                   placeholder="Search by city, province, township..."
@@ -389,7 +390,7 @@ const Listings = () => {
               buttonChildren={"Search"}
               className={styles.search}
               buttonType="normal"
-              buttonSize="xLarge"
+              buttonSize="large"
               name="Search Button"
               type="submit"
               ariaLabel="Search Button"

@@ -50,6 +50,24 @@
 
       .rightIcon {
       }
+
+      .selectedCount {
+        .selectedCount {
+          position: absolute;
+          right: rem(10);
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: $black-four;
+          color: $white-one;
+          border-radius: 50%;
+          width: rem(20);
+          height: rem(20);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: rem(12);
+        }
+      }
     }
 
     .input {
@@ -75,249 +93,263 @@
   }
 
   .searchSuggestions {
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
-    width: 100%; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
     max-height: rem(400);
     cursor: pointer;
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: rem(8);
     z-index: 1;
-
-    .suggestion {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-radius: rem(32);
-      height: 94%;
-      margin: rem(4) auto 0;
-
-      background-color: $white-two;
-    }
-
-    .suggestion:hover {
-      background-color: $white-three;
-    }
+  }
+  .suggestion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: rem(32);
+    height: 94%;
+    margin: rem(4) auto 0;
+    background-color: $white-two;
   }
 
-  @mixin suggestion-width($width) {
-    width: calc(#{$width} * 0.96);
+  .selectAll {
+    background-color: $grey-one;
   }
 
-  .xLarge {
-    width: rem(311);
-    @include larger-than(mobile) {
-      width: rem(954);
-    }
+  .suggestion:hover {
+    background-color: $white-three;
+  }
+  .multiSelectSuggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: rem(400);
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: rem(8);
+    z-index: 1;
   }
 
-  .xLarge .suggestion {
-    @include suggestion-width(rem(311));
-    @include larger-than(mobile) {
-      @include suggestion-width(rem(954));
-      height: rem(56);
-    }
-  }
+}
 
-  .xLargeFeed {
-    width: rem(793);
-  }
+@mixin suggestion-width($width) {
+  width: calc(#{$width} * 0.96);
+}
 
-  .xLargeFeed .suggestion {
-    @include suggestion-width(rem(793));
+.xLarge {
+  width: rem(311);
+  @include larger-than(mobile) {
+    width: rem(954);
+  }
+}
+
+.xLarge .suggestion {
+  @include suggestion-width(rem(311));
+  @include larger-than(mobile) {
+    @include suggestion-width(rem(954));
     height: rem(56);
   }
+}
 
-  .xLargeDashboard {
+.xLargeFeed {
+  width: rem(793);
+}
+
+.xLargeFeed .suggestion {
+  @include suggestion-width(rem(793));
+  height: rem(56);
+}
+
+.xLargeDashboard {
+}
+
+.xLargeDashboard .suggestion {
+}
+
+.large {
+  width: rem(311);
+
+  @include larger-than(mobile) {
+    width: rem(514);
   }
+}
 
-  .xLargeDashboard .suggestion {
-  }
+.large .suggestion {
+  @include suggestion-width(rem(514));
+  height: rem(56);
+}
 
-  .large {
-    width: rem(311);
+.largeFeed {
+  width: rem(471);
+}
 
-    @include larger-than(mobile) {
-      width: rem(514);
-    }
-  }
+.largeFeed .suggestion {
+  @include suggestion-width(rem(471));
+  height: rem(56);
+}
 
-  .large .suggestion {
-    @include suggestion-width(rem(514));
-    height: rem(56);
-  }
-
-  .largeFeed {
+.largeDashboard {
+  width: rem(267);
+  height: rem(56);
+  @include larger-than(mobile) {
     width: rem(471);
   }
+}
 
-  .largeFeed .suggestion {
+.largeDashboard .suggestion {
+  @include suggestion-width(rem(267));
+  @include larger-than(mobile) {
     @include suggestion-width(rem(471));
     height: rem(56);
   }
+}
 
-  .largeDashboard {
-    width: rem(267);
-    height: rem(56);
-    @include larger-than(mobile) {
-      width: rem(471);
-    }
-  }
+.medium {
+  width: rem(202);
 
-  .largeDashboard .suggestion {
-    @include suggestion-width(rem(267));
-    @include larger-than(mobile) {
-      @include suggestion-width(rem(471));
-      height: rem(56);
-    }
+  @include larger-than(mobile) {
+    width: rem(424);
   }
+}
 
-  .medium {
-    width: rem(202);
+.medium .suggestion {
+  @include suggestion-width(rem(424));
+}
 
-    @include larger-than(mobile) {
-      width: rem(424);
-    }
-  }
+.mediumFeed {
+  width: rem(310);
+  height: rem(48);
+}
 
-  .medium .suggestion {
-    @include suggestion-width(rem(424));
-  }
+.mediumFeed .suggestion {
+  @include suggestion-width(rem(310));
+}
 
-  .mediumFeed {
-    width: rem(310);
-    height: rem(48);
-  }
+.mediumDashboard {
+}
 
-  .mediumFeed .suggestion {
-    @include suggestion-width(rem(310));
-  }
+.mediumDashboard .suggestion {
+}
 
-  .mediumDashboard {
-  }
+.primary {
+}
 
-  .mediumDashboard .suggestion {
-  }
+.primary:hover {
+}
 
-  .primary {
-  }
+.primary:active {
+}
+.primary:disabled {
+}
 
-  .primary:hover {
-  }
+.primary:focus {
+  outline: $primary-hover;
+}
 
-  .primary:active {
-  }
-  .primary:disabled {
-  }
+.normal {
+}
 
-  .primary:focus {
-    outline: $primary-hover;
-  }
+.normal:hover {
+}
+.normal:active {
+}
 
-  .normal {
-  }
+.normal:focus {
+  // outline-offset: rem(1);
+  outline-style: solid;
+  outline-color: $white-one;
+  outline-width: rem(2);
+}
 
-  .normal:hover {
-  }
-  .normal:active {
-  }
+.outline {
+}
 
-  .normal:focus {
-    // outline-offset: rem(1);
-    outline-style: solid;
-    outline-color: $white-one;
-    outline-width: rem(2);
-  }
+.outline:hover {
+}
+.outline:active {
+}
+.outline:disabled {
+}
 
-  .outline {
-  }
+.outline:focus {
+}
 
-  .outline:hover {
-  }
-  .outline:active {
-  }
-  .outline:disabled {
-  }
+.success {
+}
 
-  .outline:focus {
-  }
+.success:hover {
+}
+.success:active {
+}
+.success:disabled {
+}
 
-  .success {
-  }
+.success:focus {
+}
 
-  .success:hover {
-  }
-  .success:active {
-  }
-  .success:disabled {
-  }
+.warning {
+}
 
-  .success:focus {
-  }
+.warning:hover {
+}
+.warning:active {
+}
+.warning:disabled {
+}
 
-  .warning {
-  }
+.warning:focus {
+}
 
-  .warning:hover {
-  }
-  .warning:active {
-  }
-  .warning:disabled {
-  }
+.danger {
+  // outline-offset: rem(1);
+  outline-style: solid;
+  outline-color: $danger;
+  outline-width: rem(2);
+}
 
-  .warning:focus {
-  }
+.danger:hover {
+}
+.danger:active {
+}
+.danger:disabled {
+}
 
-  .danger {
-    // outline-offset: rem(1);
-    outline-style: solid;
-    outline-color: $danger;
-    outline-width: rem(2);
-  }
+.danger:focus {
+}
 
-  .danger:hover {
-  }
-  .danger:active {
-  }
-  .danger:disabled {
-  }
+.info {
+}
 
-  .danger:focus {
-  }
+.info:hover {
+}
+.info:active {
+}
+.info:disabled {
+}
 
-  .info {
-  }
+.info:focus {
+}
 
-  .info:hover {
-  }
-  .info:active {
-  }
-  .info:disabled {
-  }
+.linkBtn {
+  background-color: transparent;
+  box-shadow: none;
+}
 
-  .info:focus {
-  }
+.linkBtn:hover {
+}
+.linkBtn:active {
+}
+.linkBtn:disabled {
+}
 
-  .linkBtn {
-    background-color: transparent;
-    box-shadow: none;
-  }
+.linkBtn:focus {
+}
 
-  .linkBtn:hover {
-  }
-  .linkBtn:active {
-  }
-  .linkBtn:disabled {
-  }
-
-  .linkBtn:focus {
-  }
-
-  .icon {
-    background-color: unset;
-    box-shadow: none;
-  }
+.icon {
+  background-color: unset;
+  box-shadow: none;
 }

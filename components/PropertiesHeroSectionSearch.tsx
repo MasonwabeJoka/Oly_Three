@@ -1,18 +1,17 @@
 "use client";
-import styles from "./FeaturedListings.module.scss";
-import { useState } from "react";
-import Button from "@/components/Buttons";
-import ListingsCollage from "@/components/ListingsCollage";
+import React, { useState } from "react";
+import styles from "./PropertiesHeroSectionSearch.module.scss";
+import Button from "./Buttons";
+import Link from "next/link";
 import Input from "@/components/Input";
-import useTitleStore from "@/store/titleStore";
 import { suggestions } from "@/data/SuggestionsData";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
-import Link from "next/link";
-import Select from "./Select";
+import Image from "next/image";
 import Form from "next/form";
+import Select from "./Select";
 
 // Server action (ideally in a separate server file)
 async function searchAction(formData: FormData) {
@@ -20,7 +19,7 @@ async function searchAction(formData: FormData) {
   const searchTerm = formData.get("searchTerm")?.toString();
   const locationSearch = formData.get("locationSearch")?.toString();
 
-  // Server-side validation or processing
+  // Simulate server-side validation or processing
   const schema = z.object({
     searchTerm: z.string().min(1, "Search term is required"),
     locationSearch: z.string().min(1, "Location is required"),
@@ -40,12 +39,10 @@ async function searchAction(formData: FormData) {
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const FeaturedListings = () => {
-  const Title = useTitleStore((state) => state.Title);
-  const [searchTermClicked, setSearchTermClicked] = useState(false);
-  const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+const PropertiesHeroSectionSearch = () => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
+  const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
 
   const {
     register,
@@ -57,7 +54,7 @@ const FeaturedListings = () => {
     resolver: zodResolver(searchFormSchema),
   });
 
-  // Handle form submission with client-side validation and server action
+  // Handle form submission with both client and server validation
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
     formData.append("searchTerm", data.searchTerm);
@@ -80,69 +77,88 @@ const FeaturedListings = () => {
   };
 
   return (
-    <div className={styles.listingsSection}>
-      <div className={styles.collage}>
-        <div className={styles.selectContainer}>
-          <Select
-            options={[
-              "All Categories",
-              "Properties",
-              "Vehicles",
-              "Jobs",
-              "Services",
-            ]}
-            initialValue="All Categories"
-            selectSize="large"
-            label="Categories"
-            id="categories"
-            name="categories"
-            ariaLabel="categories"
-            autoFocus={false}
-            required={true}
-          />
-        </div>
-        <ListingsCollage
-          isDeletable={false}
-          isDashboard={false}
-          cardSize="standard"
-          limit={4}
-          page={1}
-          sortBy="postedOn"
-          sortOrder="desc"
-        />
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <Image src="/logo.png" alt="logo" width={120} height={120} />
       </div>
 
-      <div className={styles.buttonsAndSearch}>
-        <Link href="/listings" className={styles.buttons}>
-          <Button
-            className={styles.button}
-            buttonChildren={"View all listings"}
-            buttonType="primary"
-            buttonSize="large"
-            name="View All Listings Button"
-            type="button"
-            ariaLabel="View All Listings Button"
-            autoFocus={false}
-            disabled={false}
-          />
-        </Link>
+      {/* Use next/form's Form component */}
+      <Form
+        action={searchAction} // Native server action for non-JS fallback
+        onSubmit={handleSubmit(onSubmit)} // React Hook Form's enhanced submission
+        className={styles.buttonsAndSearch}
+        id="buttonsAndSearch"
+        noValidate
+      >
+        <div className={styles.buttons}>
+          <Link href="/dashboard/post-your-ad" className={styles.link}>
+            <Button
+              buttonChildren={"Post Your Ad"}
+              className={styles.postYourAdBtn}
+              buttonType="primary"
+              buttonSize="large"
+              name="Post Your Ad Button"
+              type="button"
+              ariaLabel="Post Your Ad Button"
+              autoFocus={false}
+              disabled={false}
+            />
+          </Link>
 
-        {/* Use next/form's Form component */}
-        <Form
-          action={searchAction} // Native server action for non-JS fallback
-          onSubmit={handleSubmit(onSubmit)} // React Hook Form's enhanced submission
-          className={styles.searchFields}
-          noValidate
-        >
-          <div
-            className={styles.searchTermContainer}
-            onClick={() => setSearchTermClicked(true)}
-          >
+          <div className={styles.propertyTypeContainer}>
+            <Input
+              className={styles.propertyTypeInput}
+              isMultiSelect={true}
+              suggestions={[
+                "House",
+                "Apartment",
+                "Townhouse",
+                "Vacant Land",
+                "Commercial Property",
+                "Industrial Property",
+                "Agricultural Property",
+                "Other Property",
+              ]}
+              inputType="text"
+              inputSize="large"
+              iconSrcRight="/icons/search.png"
+              iconPosition="right"
+              iconWidth={32}
+              iconHeight={32}
+              label="Select Locations"
+              name="locations"
+              id="locations"
+              placeholder="Search for location"
+              ariaLabel="Location Selector"
+              autoComplete="off"
+              autoFocus={false}
+              required
+            />
+          </div>
+          <div className={styles.buyRentSelectContainer}>
+            <Select
+              isMultiSelect={true}
+              className={styles.buyRentSelect}
+              options={["For Sale", "To Let"]}
+              initialValue="For Sale / To Let"
+              selectSize="large"
+              label="Buy or Rent"
+              id="buyRent"
+              name="buyRent"
+              ariaLabel="Buy or Rent Selector"
+              autoFocus={false}
+              required={false}
+            />
+          </div>
+        </div>
+
+        <div className={styles.searchFields}>
+          <div className={styles.searchTerm}>
             <p className={styles.errorMessage}>
               {errors.searchTerm?.message || serverErrors.searchTerm}
             </p>
             <Input
-              className={`${styles.input} ${styles.searchTerm}`}
+              className={styles.searchTermInput}
               isSearchBar={true}
               suggestions={suggestions}
               inputType="text"
@@ -157,6 +173,7 @@ const FeaturedListings = () => {
               name="searchTerm" // Required for FormData
               ariaLabel="Search Term"
               autoComplete="off"
+              autoFocus={false}
               required
               {...register("searchTerm")}
               onChange={(e) =>
@@ -170,14 +187,14 @@ const FeaturedListings = () => {
           </div>
 
           {searchTermSuggestions === 0 && (
-            <div className={styles.locationContainer}>
+            <div className={styles.searchLocation}>
               <p className={styles.errorMessage}>
                 {errors.locationSearch?.message || serverErrors.locationSearch}
               </p>
               <Input
-                className={`${styles.input} ${styles.location}`}
                 isSearchBar={true}
                 suggestions={suggestions}
+                className={styles.searchLocationInput}
                 inputType="text"
                 inputSize="large"
                 iconSrcRight="/icons/search.png"
@@ -203,25 +220,26 @@ const FeaturedListings = () => {
               />
             </div>
           )}
-          {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-            <div className={styles.searchButton}>
-              <Button
-                buttonChildren={"Search"}
-                className={styles.search}
-                buttonType="normal"
-                buttonSize="large"
-                name="Search Button"
-                type="submit"
-                ariaLabel="Search Button"
-                autoFocus={false}
-                disabled={isSubmitting}
-              />
-            </div>
-          )}
-        </Form>
-      </div>
+        </div>
+
+        {searchTermSuggestions === 0 && locationSuggestions === 0 && (
+          <div className={styles.searchButton}>
+            <Button
+              buttonChildren={"Search"}
+              className={styles.search}
+              buttonType="normal"
+              buttonSize="large"
+              name="Search Button"
+              type="submit"
+              ariaLabel="Search Button"
+              autoFocus={false}
+              disabled={isSubmitting}
+            />
+          </div>
+        )}
+      </Form>
     </div>
   );
 };
 
-export default FeaturedListings;
+export default PropertiesHeroSectionSearch;

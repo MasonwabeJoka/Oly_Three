@@ -11,10 +11,8 @@
     margin-bottom: rem(8);
   }
   .selectContainer {
-   
     position: relative;
     cursor: pointer;
-
     .select {
       display: flex;
       justify-content: center;
@@ -51,44 +49,19 @@
       height: 100%;
       border-radius: rem(32);
       pointer-events: none;
-     
+
       .dropdownIcon {
       }
-    }
-
-    .selectCountContainer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: rem(80);
-      height: 100%;
-      border-radius: rem(32);
-      pointer-events: none;
- 
-      .selectCount {
-        border-radius: 50%;
-        width: rem(24);
-        height: rem(24);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: rem(12);
-        font-weight: 600;
-        color: $white-one;
-        background-color: $primary-hover;
+      .dropdownIconOpen {
+        transform: rotate("-180deg");
+        transition: all;
       }
     }
   }
 }
 
 .options {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-height: rem(600);
+  max-height: rem(400);
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
@@ -118,16 +91,6 @@
 
 .hideOptions {
   display: none;
-}
-
-.searchInputContainer {
-  .searchInput {
-    width: rem(493.44);
-    height: rem(52.64);
-    margin-top: rem(6) !important;
-    margin-bottom: rem(4) !important;
-    outline: none !important;
-  }
 }
 
 /*################################################################# */
@@ -179,6 +142,7 @@
 .large {
   width: rem(311);
   height: rem(56);
+  // background-color: yellow;
   @include larger-than(mobile) {
     width: rem(514);
     height: rem(56);

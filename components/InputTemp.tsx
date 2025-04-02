@@ -1,10 +1,10 @@
 "use client";
 import styles from "./Input.module.scss";
 import Image from "next/image";
-import { useState, forwardRef, Ref } from "react";
+import { useState, forwardRef, Ref, useEffect } from "react";
 import useSidebarStore from "@/store/useSidebarStore";
 import { UseFormRegisterReturn } from "react-hook-form";
-
+// TODO: For all the inputs where isSearchBar is true, make sure the suggestions don't overlap the element below them, i.e. remove the element when the search suggestions are displayed like in HeroSectionSearch.
 interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   isSearchBar?: boolean;
   suggestions?: string[];
@@ -83,6 +83,7 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
     event: React.AnimationEvent<HTMLInputElement>
   ) => void;
   onTransitionEnd?: (event: React.TransitionEvent<HTMLInputElement>) => void;
+  onSuggestionsChange?: (count: number) => void;
 }
 
 const INPUT_TYPE = {
@@ -180,6 +181,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onKeyUp,
       children,
       dashboard,
+      onSuggestionsChange,
       ...otherProps
     },
     ref
@@ -187,6 +189,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const [value, setValue] = useState(initialValue);
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
     const [revealedSuggestions, setRevealedSuggestions] = useState<string[]>([]);
+
+    useEffect(() => {
+      console.log('revealedSuggestions length:', revealedSuggestions.length);
+      onSuggestionsChange?.(revealedSuggestions.length);
+    }, [revealedSuggestions, onSuggestionsChange]);
 
     const handleInternalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const typedValue = e.target.value;
@@ -196,11 +203,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       if (typedValue.trim() === "") {
         setRevealedSuggestions([]);
       } else {
-        setRevealedSuggestions(
-          suggestions?.filter((suggestion) =>
-            suggestion.toLowerCase().startsWith(typedValue.toLowerCase())
-          ) || []
-        );
+        const filtered = suggestions?.filter((suggestion) =>
+          suggestion.toLowerCase().startsWith(typedValue.toLowerCase())
+        ) || [];
+        console.log('filtered suggestions:', filtered); // Add this line
+        setRevealedSuggestions(filtered);
       }
     };
 
@@ -369,4 +376,7 @@ export default Input;
         });
       }}
 />; */}
+
+
+
 
