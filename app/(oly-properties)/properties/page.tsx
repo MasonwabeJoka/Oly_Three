@@ -19,7 +19,11 @@ import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
 import MoreFromOly from "@/components/MoreFromOly";
-import PropertiesHeroSection from "@/components/PropertiesHeroSection";
+import PropertiesHeroSection from "./components/PropertiesHeroSection";
+import PropertyValuation from "./components/PropertyValuation";
+import PreQualification from "./components/PreQualification";
+import AgentFinder from "./components/AgentFinder";
+import Calculators from "./components/Calculators";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -88,40 +92,47 @@ const Home = () => {
         </div>
 
         <section className={styles.heroSection}>
-          <PropertiesHeroSection mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"/>
-        
+          <PropertiesHeroSection mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease" />
         </section>
-        <section className={styles.moreFromOly}>
-          <h2 className={styles.title}>More from Oly</h2>
-          <MoreFromOly />
-        </section>
+
         <section className={styles.aboveFoldAd}>
           <AboveFoldAd />
         </section>
-
-        <section className={styles.categories}>
-          <h2 className={styles.title}>Featured Categories</h2>
-          <FeaturedCategories />
+        <section className={styles.propertyValuation}>
+          <PropertyValuation />
         </section>
 
-        <section className={styles.features}>
-          <Features />
+        <section className={styles.preQualification}>
+          <PreQualification />
         </section>
+
+        <section className={styles.agentFinder}>
+          <AgentFinder />
+        </section>
+
+   
+
+      
 
         <section className={styles.featuredListings}>
-        <h2 className={styles.title}>Featured Listings</h2>
-          <FeaturedListings />
+          <h2 className={styles.title}>Featured Properties</h2>
+          <FeaturedListings category="property" />
         </section>
-        <section className={styles.blog}>
-        <h2 className={styles.title}>Oly Articles</h2>
-          <Blogs />
-        </section>
-
+        
         <section className={styles.belowFoldAd}>
           <BelowFoldAd />
         </section>
+        <section className={styles.calculators}>
+          <Calculators />
+        </section>
+        <section className={styles.blog}>
+          <h2 className={styles.title}>Oly Articles</h2>
+          <Blogs />
+        </section>
+
+        
         <section className={styles.sponsoredArticles}>
-        <h2 className={styles.title}>Sponsored Articles</h2>
+          <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
       </div>

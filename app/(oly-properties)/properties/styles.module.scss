@@ -3,12 +3,11 @@
 @use "@/utils/breakpoints" as *;
 @import "layout.module.scss";
 
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+ 
   .main {
     position: relative;
     display: flex;
@@ -16,7 +15,7 @@
     align-items: center;
     transition: margin-left 0.5s;
     overflow-x: hidden;
-    width: 100vw;
+    width: 100vw !important;
     @include larger-than(mobile) {
       // width: rem(1440);
     }
@@ -54,7 +53,6 @@
       font-weight: 600;
       color: $black-four;
       margin-bottom: rem(48);
-     
     }
     .moreFromOly {
       width: 100%;
@@ -65,7 +63,20 @@
     .aboveFoldAd {
       width: 100%;
       margin-top: rem(32);
-      margin-bottom: rem(256);
+      margin-bottom: rem(96);
+    }
+
+    .propertyValuation,
+    .preQualification,
+    .agentFinder,
+    .calculators {
+      width: 100%;
+      margin-top: rem(32);
+      margin-bottom: rem(96);
+
+      @include larger-than(mobile) {
+        margin-bottom: rem(192);
+      }
     }
     .features {
       width: 95vw;
@@ -86,7 +97,7 @@
 
     .featuredListings {
       margin-bottom: rem(96);
-
+width: 100%;
       @include larger-than(mobile) {
         margin-bottom: rem(192);
       }
@@ -100,7 +111,6 @@
         width: 100%;
       }
     }
-
 
     .belowFoldAd {
       width: 100%;

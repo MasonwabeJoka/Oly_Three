@@ -13,8 +13,11 @@ import { useInView } from "react-intersection-observer";
 import { Ad } from "@/sanity/Types/Ad";
 import styles from "./ListingsCollage.module.scss";
 import Spinner from "./Spinner";
+import PropertyAdCard from "@/app/(oly-properties)/properties/components/cards/PropertyAdCard";
 
 type ListingsCollageProps = {
+  category: "all" | "property" | "vehicle" | "service" | "job";
+  images: string[][];
   isDeletable?: boolean;
   checkedColour?: string;
   hoverColour?: string;
@@ -29,6 +32,8 @@ type ListingsCollageProps = {
 };
 
 const ListingsCollage = ({
+  category,
+  images,
   isDeletable = false,
   checkedColour,
   hoverColour,
@@ -51,6 +56,8 @@ const ListingsCollage = ({
   const { ref, inView } = useInView({
     triggerOnce: false,
   });
+
+  
 
   useEffect(() => {
     setIsClient(true);
@@ -83,13 +90,10 @@ const ListingsCollage = ({
       if (adImages && adImages.length > 0) {
         const imageRefs = adImages.map((image) => image?._ref);
 
-  
-
         const imageFilesByIds = await getImageFilesById(imageRefs as string[]);
-      
+
         setImageFiles(imageFilesByIds);
       }
-
     };
 
     getImageIds();
@@ -108,7 +112,8 @@ const ListingsCollage = ({
     800: 2,
     639: 1,
   };
-
+ 
+  console.log({images});
   const cards = ads.map((ad, index) => {
     const adImages = Array.isArray(ad.images) ? ad.images : [];
 
@@ -124,32 +129,58 @@ const ListingsCollage = ({
         return matchingImage ? imageFile.image.url : undefined;
       })
       .filter((url): url is string => typeof url === "string");
-  
+   
     return (
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
-          <AdCard
-            ad={ad}
-            id={ad._id}
-            index={index}
-            cardType="box"
-            cardSize={cardSize}
-            images={urls}
-            title={ad.title}
-            price={ad.price}
-            aspectRatios={aspectRatios}
-            description={
-              Array.isArray(ad.description)
-                ? richTextLength(ad.description, 400)
-                : ad.description
-            }
-            isDeletable={isDeletable}
-            isDashboard={isDashboard}
-            isFeed={isSidebarOpen}
-            checkedColour={checkedColour}
-            hoverColour={hoverColour}
-            checkedHovered={checkedHovered}
-          />
+          {category === "all" && (
+            <AdCard
+              ad={ad}
+              id={ad._id}
+              index={index}
+              cardType="box"
+              cardSize={cardSize}
+              images={urls}
+              title={ad.title}
+              price={ad.price}
+              aspectRatios={aspectRatios}
+              description={
+                Array.isArray(ad.description)
+                  ? richTextLength(ad.description, 400)
+                  : ad.description
+              }
+              isDeletable={isDeletable}
+              isDashboard={isDashboard}
+              isFeed={isSidebarOpen}
+              checkedColour={checkedColour}
+              hoverColour={hoverColour}
+              checkedHovered={checkedHovered}
+            />
+          )}
+          {category === "property" && (
+            <PropertyAdCard
+              ad={ad}
+              id={ad._id}
+              index={index}
+              cardType="box"
+              cardSize={cardSize}
+              images={images[index]} 
+              title={ad.title}
+              price={ad.price}
+              aspectRatios={aspectRatios}
+              description={
+                Array.isArray(ad.description)
+                  ? richTextLength(ad.description, 400)
+                  : ad.description
+              }
+              isDeletable={isDeletable}
+              isDashboard={isDashboard}
+              isFeed={isSidebarOpen}
+              checkedColour={checkedColour}
+              hoverColour={hoverColour}
+              checkedHovered={checkedHovered}
+            />
+          )}
         </div>
       </Link>
     );
@@ -169,9 +200,7 @@ const ListingsCollage = ({
           {cards}
         </Masonry>
         <div ref={ref} className={styles.loading}>
-          {loading && hasMore ? (
-            <Spinner />
-          ) : null}
+          {loading && hasMore ? <Spinner /> : null}
         </div>
       </section>
     );
@@ -181,3 +210,4 @@ const ListingsCollage = ({
 };
 
 export default ListingsCollage;
+

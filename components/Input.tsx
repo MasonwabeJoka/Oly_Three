@@ -30,7 +30,7 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string;
   name: string;
   ariaLabel: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
   iconWidth?: number;
   iconHeight?: number;
   autoComplete?: "on" | "off";
@@ -161,8 +161,30 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       []
     );
     const inputRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
-    useOnClickOutside(inputRef as React.RefObject<HTMLElement>, () => setIsDropdownOpen(false));
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+        if (
+          !inputRef.current?.contains(event.target as Node) &&
+          !dropdownRef.current?.contains(event.target as Node)
+        ) {
+          setIsDropdownOpen(false);
+          setRevealedSuggestions([]);
+          if (isMultiSelect) {
+            setFilterValue("");
+          }
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchstart", handleClickOutside);
+      };
+    }, [isMultiSelect]);
 
     useEffect(() => {
       const useEscKey = (e: KeyboardEvent) => {
@@ -395,7 +417,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
 
-        {isSearchBar && revealedSuggestions.length > 0 && (
+        {!isMultiSelect && isSearchBar && revealedSuggestions.length > 0 && (
           <ul className={styles.searchSuggestions}>
             {revealedSuggestions.map((suggestion, index) => (
               <li
@@ -415,7 +437,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
 
         {isMultiSelect && isDropdownOpen && (
-          <div className={styles.multiSelectDropdown}>
+          <div className={styles.multiSelectDropdown} ref={dropdownRef}>
             <ul className={styles.searchSuggestions}>
               <li
                 className={sizeClass}
@@ -516,3 +538,5 @@ export default Input;
         });
       }}
 />; */}
+
+

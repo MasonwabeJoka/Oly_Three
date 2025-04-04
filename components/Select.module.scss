@@ -6,12 +6,12 @@
   flex-direction: column;
   align-items: center;
 
+  width: fit-content;
   .errorMessage {
     color: $danger;
     margin-bottom: rem(8);
   }
   .selectContainer {
-   
     position: relative;
     cursor: pointer;
 
@@ -51,8 +51,22 @@
       height: 100%;
       border-radius: rem(32);
       pointer-events: none;
-     
+
       .dropdownIcon {
+      }
+    }
+
+    .clearIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: rem(80);
+      height: 100%;
+      border-radius: rem(32);
+      .clearIcon {
       }
     }
 
@@ -67,7 +81,7 @@
       height: 100%;
       border-radius: rem(32);
       pointer-events: none;
- 
+
       .selectCount {
         border-radius: 50%;
         width: rem(24);
@@ -88,12 +102,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: rem(600);
+  max-height: rem(346);
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: rem(4);
-
+  // background-color: red !important;
   .option {
     display: flex;
     flex-direction: column;

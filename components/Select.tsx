@@ -7,7 +7,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "./Input";
 import Checkbox from "./Checkbox";
 import Button from "./Buttons";
-// Todo: Change colour on hover
+
 interface SelectProps {
   className?: string;
   selectSize:
@@ -30,11 +30,12 @@ interface SelectProps {
   initialValue?: string | string[];
   setterValue?: any;
   value?: any;
+  showSearchOptions?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur?: any;
   isMultiSelect?: boolean;
-  [key: string]: any;
   dashboard?: boolean;
+  [key: string]: any;
 }
 
 const SELECT_SIZE = {
@@ -78,17 +79,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
   (
     {
       value,
+      showSearchOptions = false,
       options,
       reactHookFormProps,
       error,
       selectSize,
       selectColourType = "normal",
       className,
-      legend,
       label,
       autoComplete,
       id,
-      initialValue,
+      initialValue = "",
       setterValue,
       name,
       ariaLabel,
@@ -104,13 +105,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     ref
   ) => {
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(
-      Array.isArray(initialValue)
-        ? initialValue
-        : initialValue
-          ? [initialValue]
-          : []
-    );
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
     const selectRef = useRef<HTMLDivElement>(null);
@@ -156,6 +151,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const filteredOptions = options.filter((option) =>
       getOptionLabel(option).toLowerCase().includes(searchValue.toLowerCase())
     );
+
     const handleSelectAll = (checked: boolean) => {
       const allOptionLabels = filteredOptions.map(getOptionLabel);
       const updatedOptions = checked
@@ -184,20 +180,26 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     };
 
     let sizeClass = "";
-
     if (isSidebarOpen) {
       sizeClass = SELECT_SIZE.feed[selectSize];
     } else {
-      if (dashboard) {
-        sizeClass = SELECT_SIZE.dashboard[selectSize];
-      } else {
-        sizeClass = SELECT_SIZE.regular[selectSize];
-      }
+      sizeClass = dashboard
+        ? SELECT_SIZE.dashboard[selectSize]
+        : SELECT_SIZE.regular[selectSize];
     }
 
     const selectClass = `${styles.select} ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
     } ${className}`;
+
+    const displayText =
+      selectedOptions.length > 0
+        ? selectedOptions.join(", ").length > 40
+          ? selectedOptions.join(", ").slice(0, 40) + "..."
+          : selectedOptions.join(", ")
+        : typeof initialValue === "string"
+          ? initialValue
+          : "Select an option";
 
     return (
       <div ref={selectRef}>
@@ -205,9 +207,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           {error && <p className={styles.errorMessage}>{error as string}</p>}
 
           <div
-            className=
-            {`${styles.selectContainer} ${selectClass}`}
-            onClick={() => setShowOptions(!showOptions)}
+            className={`${styles.selectContainer} ${selectClass}`}
+            onClick={() => setShowOptions(!showOptions)} // Removed reset logic
             {...(reactHookFormProps ?? {})}
           >
             <div
@@ -216,9 +217,27 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 backgroundColor: showOptions ? "#ffffff" : "#f3f7fa",
               }}
             >
-              {isMultiSelect && selectedOptions.length > 0 && (
+              {isMultiSelect && showOptions && selectedOptions.length > 0 && (
                 <div className={styles.selectCountContainer}>
-                  <div className={styles.selectCount}>{selectedOptions.length}</div>
+                  <div className={styles.selectCount}>
+                    {selectedOptions.length}
+                  </div>
+                </div>
+              )}
+
+              {isMultiSelect && selectedOptions.length > 0 && !showOptions && (
+                <div className={styles.clearIconContainer}>
+                  <Icon
+                    className={styles.clearIcon}
+                    src="/icons/X.png"
+                    alt="clear"
+                    width={16}
+                    height={16}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearSelections();
+                    }}
+                  />
                 </div>
               )}
               <p
@@ -226,42 +245,28 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                   color: selectedOptions.length === 0 ? "#67787c" : "#434b4d",
                 }}
               >
-                {selectedOptions}
+                {displayText}
               </p>
             </div>
 
-            <span className={styles.dropdownIconContainer} ref={selectRef}>
-            {selectedOptions.length > 0 && !showOptions ? (
-                <Icon
-                  className={styles.dropdownIcon}
-                  src="/icons/X.png"
-                  alt="clear"
-                  width={20}
-                  height={20}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    clearSelections();
-                  }}
-                />
-              ) : (
-                <Icon
-                  className={`${styles.dropdownIconOpen} ${styles.dropdownIcon}`}
-                  src="/icons/chevron-down.png"
-                  alt="chevron"
-                  width={28}
-                  height={28}
-                />
-              )}
+            <span className={styles.dropdownIconContainer}>
+              <Icon
+                className={`${styles.dropdownIconOpen} ${styles.dropdownIcon}`}
+                src="/icons/chevron-down.png"
+                alt="chevron"
+                width={28}
+                height={28}
+              />
             </span>
           </div>
         </div>
 
         {showOptions && (
           <div
-            className={`${styles.searchInputContainer}  ${styles.options}`}
+            className={`${styles.searchInputContainer} ${styles.options}`}
             ref={searchInputRef}
           >
-            {isMultiSelect && (
+            {isMultiSelect && showSearchOptions && (
               <Input
                 className={`${styles.searchInput} ${styles.option}`}
                 isSearchBar={false}
@@ -346,7 +351,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 );
               })}
 
-              {isMultiSelect && (
+              {/* {isMultiSelect && (
                 <Button
                   className={styles.selectButton}
                   buttonChildren="Select"
@@ -359,7 +364,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                   disabled={false}
                   onClick={handleSelectButtonClick}
                 />
-              )}
+              )} */}
             </ul>
           </div>
         )}
@@ -368,20 +373,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
   }
 );
 
-Select.displayName = "Select"; // Set displayName for better debugging
+Select.displayName = "Select";
 
 export default Select;
 
-{
-  /* <Select
-    options={[]}
-    initialValue="Select your province"
-    selectSize="large"
-    label="Provinces"
-    id="provinces"
-    name="provinces"
-    ariaLabel="Provinces"
-    autoFocus={false}
-    required={false}
-/>; */
-}

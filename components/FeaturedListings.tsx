@@ -13,6 +13,7 @@ import { z } from "zod";
 import Link from "next/link";
 import Select from "./Select";
 import Form from "next/form";
+import multipleImages from "@/data/multipleImages";
 
 // Server action (ideally in a separate server file)
 async function searchAction(formData: FormData) {
@@ -39,8 +40,11 @@ async function searchAction(formData: FormData) {
 }
 
 type FormValues = z.infer<typeof searchFormSchema>;
+type FeaturedListingsProps = {
+  category: "all" | "property" | "vehicle" | "service" | "job";
+};
 
-const FeaturedListings = () => {
+const FeaturedListings = ({ category }: FeaturedListingsProps) => {
   const Title = useTitleStore((state) => state.Title);
   const [searchTermClicked, setSearchTermClicked] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
@@ -57,6 +61,7 @@ const FeaturedListings = () => {
     resolver: zodResolver(searchFormSchema),
   });
 
+  const tempImages = (() => multipleImages.map(item => item.images))();
   // Handle form submission with client-side validation and server action
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
@@ -102,6 +107,8 @@ const FeaturedListings = () => {
           />
         </div>
         <ListingsCollage
+          category={category}
+          images={tempImages}
           isDeletable={false}
           isDashboard={false}
           cardSize="standard"
@@ -157,6 +164,7 @@ const FeaturedListings = () => {
               name="searchTerm" // Required for FormData
               ariaLabel="Search Term"
               autoComplete="off"
+              autoFocus={false}
               required
               {...register("searchTerm")}
               onChange={(e) =>

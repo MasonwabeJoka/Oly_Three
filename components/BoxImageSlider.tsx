@@ -102,15 +102,15 @@ const ImageSlider = ({
         <div
           className={styles.buttonContainer}
           style={{
-            // display: slideConfig.isBeginning ? "none" : "flex",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            // marginRight: "18.5rem",
             marginRight: "16rem",
           }}
           onClick={(e) => e.preventDefault()}
         >
+          <div className={styles.buttonWrapper}>
+
           <div
             className={`${styles.button} ${styles.leftButton}`}
             onClick={(e) => {
@@ -118,12 +118,12 @@ const ImageSlider = ({
               swiper?.slidePrev();
             }}
             style={{
-              // ...activeStyles,
               display: slideConfig.isBeginning ? "none" : "flex",
-              // marginRight: "16rem",
+              
             }}
           >
             <NavButtonLeft size="small" />
+          </div>
           </div>
         </div>
         <div
