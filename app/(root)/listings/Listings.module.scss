@@ -1,15 +1,15 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 95vw;
 
-  .sidebar {
-    width: rem(1000);
-  }
+ 
+  
   .main {
     display: flex;
     flex-direction: column;
@@ -20,90 +20,12 @@
       z-index: 12;
       pointer-events: none;
       width: 100vw;
+      
       .modal {
         display: flex;
         flex-direction: column;
         align-items: center;
         pointer-events: auto;
-      }
-    }
-
-    .formInput {
-    }
-    .searchContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .search {
-        border: none;
-        .categories {
-          margin-top: rem(128);
-          margin-bottom: rem(32);
-        }
-        .breadcrumbs {
-          margin-bottom: rem(4);
-        }
-
-        @mixin suggestion-width($width) {
-          width: calc(#{$width} * 0.96);
-        }
-        .errorMessage {
-          color: $danger;
-          margin-bottom: rem(4);
-        }
-
-        .searchTerm {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-bottom: rem(12);
-
-          .searchTermBreadcrumbs {
-            // margin-top: rem(32);
-          }
-          .searchTermInputContainer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: rem(32);
-
-            .searchTermInput {
-              // width: rem(954);
-            }
-          }
-        }
-        .location {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          .locationBreadcrumbs {
-          }
-          .locationInputContainer {
-            margin-bottom: rem(20);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .locationInput {
-              width: rem(514);
-            }
-
-            .locationInput .suggestion {
-              @include suggestion-width(rem(514));
-            }
-          }
-        }
-
-        .categories {
-          margin-top: rem(128);
-          margin-bottom: rem(32);
-        }
-      }
-      .formInput {
-      }
-
-      .searchButton {
-        margin-bottom: rem(48);
       }
     }
 
@@ -117,7 +39,7 @@
       position: sticky;
       top: 0;
       z-index: 5;
-      pointer-events: none; /* Make the div click-through */
+      pointer-events: none;
     }
 
     .listingsContainer {
@@ -131,6 +53,7 @@
         width: 100%;
         z-index: 10;
       }
+      
       .options {
         position: relative;
         background-color: $white-four;
@@ -170,6 +93,7 @@
       .hideOptions {
         display: none;
       }
+      
       .getSticky {
         position: -webkit-sticky;
         position: sticky;

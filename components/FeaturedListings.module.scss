@@ -16,8 +16,13 @@
     margin-bottom: rem(56);
     width: 100%;
 
-    .selectContainer {
+    .controlContainer {
       margin-bottom: rem(56);
+
+      .control {
+        margin-bottom: rem(20);
+  
+      }
     }
   }
 

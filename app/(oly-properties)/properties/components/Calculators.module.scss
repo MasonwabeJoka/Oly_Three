@@ -6,9 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   width: 100%;
   padding: rem(64) rem(16);
-  background-color: $white-three;
+  background-color: $white-four;
   border-radius: rem(40);
   margin: rem(40) 0;
 
@@ -16,92 +17,58 @@
     padding: rem(80) rem(40);
   }
 
-  .header {
-    text-align: center;
-    max-width: rem(800);
-    margin-bottom: rem(48);
 
-    .title {
-      font-size: $h2;
-      font-weight: 600;
-      color: $black-four;
-      margin-bottom: rem(16);
 
-      @include larger-than(mobile) {
-        font-size: $h1;
-      }
-    }
-
-    .description {
-      font-size: $body;
-      line-height: 1.6;
-      color: $black-four;
-    }
-  }
-
-  .calculatorsGrid {
-    display: grid;
-    grid-template-columns: 1fr;
+  .calculators {
+    display: flex;;
     gap: rem(32);
     width: 100%;
     max-width: rem(1200);
 
     @include larger-than(mobile) {
-      grid-template-columns: repeat(3, 1fr);
+     
     }
 
-    .calculatorCard {
+    .calculator{
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       padding: rem(32);
+      width: rem(336);
+      height: rem(420);
       background-color: $white-one;
-      border-radius: rem(20);
-      box-shadow: $shadow-one;
+      border-radius: rem(32);
+      box-shadow: $shadow-six;
+      cursor: pointer;
+     background-color:$warning-hover;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
 
       &:hover {
         transform: translateY(-5px);
-        box-shadow: $shadow-three;
+        // box-shadow: $shadow-three;
       }
 
-      .calculatorIcon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: rem(80);
-        height: rem(80);
-        background-color: $primary;
-        border-radius: 50%;
-        margin-bottom: rem(24);
-
-        .iconPlaceholder {
-          font-size: $h2;
-          font-weight: 600;
-          color: $black-four;
-        }
-      }
-
+     
       .calculatorTitle {
-        font-size: $h3;
+        font-size: $h2 !important;
+        font-size: rem(40) !important;
         font-weight: 600;
-        color: $black-four;
-        margin-bottom: rem(16);
+        color: $white-four;
+        line-height: 1.3;
+        line-height: 1.2;
+        margin-bottom: rem(32);
         text-align: center;
       }
 
       .calculatorDescription {
         font-size: $body;
-        line-height: 1.6;
-        color: $black-four;
-        margin-bottom: rem(24);
+        color: $white-four;
         text-align: center;
-        flex-grow: 1;
+      
       }
 
-      .calculatorButton {
-        width: 100%;
-      }
+     
     }
   }
 }

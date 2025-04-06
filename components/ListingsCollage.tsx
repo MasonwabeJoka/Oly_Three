@@ -113,7 +113,7 @@ const ListingsCollage = ({
     639: 1,
   };
  
-  console.log({images});
+
   const cards = ads.map((ad, index) => {
     const adImages = Array.isArray(ad.images) ? ad.images : [];
 
@@ -140,7 +140,8 @@ const ListingsCollage = ({
               index={index}
               cardType="box"
               cardSize={cardSize}
-              images={urls}
+              // images={urls}
+              images={images[index]} 
               title={ad.title}
               price={ad.price}
               aspectRatios={aspectRatios}

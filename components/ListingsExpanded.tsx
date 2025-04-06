@@ -12,8 +12,12 @@ import { PortableTextBlock } from "sanity";
 import { richTextLength } from "@/lib/richTextLength";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useFetchAdStore } from "@/store/useFetchStore";
-
+import { useInView } from "react-intersection-observer";
+import { ImageFile } from "@/sanity/Types/ImageFile";
+import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
 type ListingsExpandedProps = {
+  category: "all" | "property" | "vehicle" | "service" | "job";
+  images: string[][];
   isDeletable: boolean;
   checkedColour?: string;
   hoverColour?: string;
@@ -21,8 +25,14 @@ type ListingsExpandedProps = {
   isDashboard: boolean;
   isFeed?: boolean;
   avatars: string[];
+  limit: number;
+  page?: number;
+  sortOrder: "asc" | "desc";
+  sortBy: string;
 };
 const ListingsExpanded = ({
+  category,
+  images,
   isDeletable = false,
   isDashboard,
   isFeed,
@@ -30,17 +40,74 @@ const ListingsExpanded = ({
   hoverColour,
   checkedHovered,
   avatars,
+  limit,
+  page = 1,
+  sortOrder,
+  sortBy,
 }: ListingsExpandedProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const { adsData, fetchAds, imageUrls } = useFetchAdStore();
+  const { ads, fetchAds, imageUrls, hasMore } = useFetchAdStore();
+  const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
+  const [pageNumber, setPageNumber] = useState(page);
+  const [adImages, setAdImages] = useState<SanityImage[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+  });
 
   useEffect(() => {
-    fetchAds(); // Fetch ads when the component mounts
-  }, [fetchAds]);
+    setIsClient(true);
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await fetchAds({
+        limit: limit,
+        page: pageNumber,
+        offset: 0,
+        sortBy: sortBy,
+        sortOrder: sortOrder,
+      }); // Fetch ads with parameters
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [pageNumber, fetchAds]);
+
+  useEffect(() => {
+    if (inView && hasMore) {
+      setPageNumber((prevPage) => prevPage + 1);
+    }
+  }, [inView, hasMore]);
+
+  useEffect(() => {
+    const getImageIds = async () => {
+      if (adImages && adImages.length > 0) {
+        const imageRefs = adImages.map((image) => image?._ref);
+
+        const imageFilesByIds = await getImageFilesById(imageRefs as string[]);
+
+        setImageFiles(imageFilesByIds);
+      }
+    };
+
+    getImageIds();
+  }, [adImages]);
+
+  useEffect(() => {
+    if (ads && Array.isArray(ads)) {
+      const adImagesArray = ads.flatMap((ad) => ad.images);
+      setAdImages(adImagesArray);
+    }
+  }, [ads]);
 
   return (
     <div className={styles.listingsContainer}>
-      {adsData?.map((ad, index) => {
+      {ads?.map((ad, index) => {
         // Filter out undefined values from aspectRatios
         const aspectRatios = ad.images
           ?.map((image) => image.aspectRatio)
@@ -55,7 +122,8 @@ const ListingsExpanded = ({
                 index={index}
                 id={ad?._id}
                 cardType="expanded"
-                images={imageUrls}
+                // images={imageUrls}
+                images={images[index]} 
                 aspectRatios={aspectRatios}
                 title={ad?.title}
                 price={ad?.price}

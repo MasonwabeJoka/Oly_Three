@@ -14,8 +14,6 @@ import ListingsSearchForm from "./components/ListingsSearchForm";
 import { useListingsStore } from "@/store/listingsStore";
 import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
-
-  // TODO:Put breadcrumbs above results instead of above search inputs.
 const Listings = () => {
   const {
     expanded,
@@ -240,7 +238,7 @@ const Listings = () => {
         ></div>
 
         <div className={styles.listingsContainer}>
-          <div ref={sortingContainerRef} className={styles.sortingContainer} id="sortingButtons">
+          <div ref={sortingContainerRef} className={styles.sortingContainer}>
             <Tabs
               tabs={[
                 "Order",
@@ -261,7 +259,7 @@ const Listings = () => {
             />
 
             {sortOptions ? (
-              <ul className={styles.options}>
+              <ul className={sortOptions ? styles.options : styles.hideOptions}>
                 {SortData.map((option) => (
                   <li
                     key={option.id}

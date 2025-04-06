@@ -103,6 +103,7 @@ const ExpandedImageSlider = ({
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
+  
 
   return (
     <div className={styles.container}>
@@ -185,22 +186,26 @@ const ExpandedImageSlider = ({
         slidesPerView={1}
       >
         {urls?.map((url, index) => (
+          
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{
+                position: "relative",
                 height: "19rem",
                 width: `calc(19rem * ${aspectRatios && aspectRatios[index]})`,
                 // width: "1rem",
                 borderRadius: "1.5rem",
               }}
             >
-              {/* <Image
+              
+              <Image
                 className={styles.image}
                 src={url}
                 fill
                 alt="Ad Image"
+                style={{ objectFit: "cover" }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              /> */}
+              />
             </div>
           </SwiperSlide>
         ))}
@@ -210,3 +215,6 @@ const ExpandedImageSlider = ({
 };
 
 export default ExpandedImageSlider;
+
+
+

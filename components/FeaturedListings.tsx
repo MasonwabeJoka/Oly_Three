@@ -61,7 +61,7 @@ const FeaturedListings = ({ category }: FeaturedListingsProps) => {
     resolver: zodResolver(searchFormSchema),
   });
 
-  const tempImages = (() => multipleImages.map(item => item.images))();
+  const tempImages = (() => multipleImages.map((item) => item.images))();
   // Handle form submission with client-side validation and server action
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
@@ -85,150 +85,150 @@ const FeaturedListings = ({ category }: FeaturedListingsProps) => {
   };
 
   return (
-    <div className={styles.listingsSection}>
-      <div className={styles.collage}>
-        <div className={styles.selectContainer}>
-          <Select
-            options={[
-              "All Categories",
-              "Properties",
-              "Vehicles",
-              "Jobs",
-              "Services",
-            ]}
-            initialValue="All Categories"
-            selectSize="large"
-            label="Categories"
-            id="categories"
-            name="categories"
-            ariaLabel="categories"
-            autoFocus={false}
-            required={true}
-          />
-        </div>
-        <ListingsCollage
-          category={category}
-          images={tempImages}
-          isDeletable={false}
-          isDashboard={false}
-          cardSize="standard"
-          limit={4}
-          page={1}
-          sortBy="postedOn"
-          sortOrder="desc"
-        />
-      </div>
-
-      <div className={styles.buttonsAndSearch}>
-        <Link href="/listings" className={styles.buttons}>
-          <Button
-            className={styles.button}
-            buttonChildren={"View all listings"}
-            buttonType="primary"
-            buttonSize="large"
-            name="View All Listings Button"
-            type="button"
-            ariaLabel="View All Listings Button"
-            autoFocus={false}
-            disabled={false}
-          />
-        </Link>
-
-        {/* Use next/form's Form component */}
-        <Form
-          action={searchAction} // Native server action for non-JS fallback
-          onSubmit={handleSubmit(onSubmit)} // React Hook Form's enhanced submission
-          className={styles.searchFields}
-          noValidate
-        >
-          <div
-            className={styles.searchTermContainer}
-            onClick={() => setSearchTermClicked(true)}
-          >
-            <p className={styles.errorMessage}>
-              {errors.searchTerm?.message || serverErrors.searchTerm}
-            </p>
-            <Input
-              className={`${styles.input} ${styles.searchTerm}`}
-              isSearchBar={true}
-              suggestions={suggestions}
-              inputType="text"
-              inputSize="large"
-              iconSrcRight="/icons/search.png"
-              iconPosition="right"
-              iconWidth={32}
-              iconHeight={32}
-              label="Search"
-              placeholder="What are you looking for?"
-              id="searchTerm"
-              name="searchTerm" // Required for FormData
-              ariaLabel="Search Term"
-              autoComplete="off"
-              autoFocus={false}
-              required
-              {...register("searchTerm")}
-              onChange={(e) =>
-                setValue("searchTerm", e.target.value, {
-                  shouldDirty: true,
-                  shouldValidate: true,
-                })
-              }
-              onSuggestionsChange={(count) => setSearchTermSuggestions(count)}
-            />
+    <>
+      {category === "property" && (
+        <div className={styles.listingsSection}>
+          <div className={styles.collage}>
+            <>
+              <div className={styles.controlContainer}>
+                <div className={styles.control}>
+                  <Select
+                    isMultiSelect={true}
+                    className={styles.propertyTypeSelect}
+                    options={[
+                      "House",
+                      "Apartment",
+                      "Townhouse",
+                      "Vacant Land",
+                      "Development",
+                      "Commercial Property",
+                      "Industrial Property",
+                      "Agricultural Property",
+                      "Other Property",
+                    ]}
+                    initialValue="House / Apartment / Development"
+                    selectSize="large"
+                    label="Property Type"
+                    id="propertyType"
+                    name="propertyType"
+                    ariaLabel="Property Type Selector"
+                    autoFocus={false}
+                    required={false}
+                  />
+                </div>
+                <div className={styles.control}>
+                  <Input
+                    isSearchBar={true}
+                    isMultiSelect={true}
+                    suggestions={suggestions}
+                    className={styles.searchLocationInput}
+                    inputType="text"
+                    inputSize="large"
+                    iconSrcRight="/icons/search.png"
+                    iconPosition="right"
+                    iconWidth={32}
+                    iconHeight={32}
+                    label="Location"
+                    placeholder="Search by city, province, township..."
+                    id="locationSearch"
+                    name="locationSearch"
+                    ariaLabel="Location"
+                    autoFocus={false}
+                    autoComplete="off"
+                    required
+                    onSuggestionsChange={(count) =>
+                      setLocationSuggestions(count)
+                    }
+                  />
+                </div>
+              </div>
+              <ListingsCollage
+                category={category}
+                images={tempImages}
+                isDeletable={false}
+                isDashboard={false}
+                cardSize="standard"
+                limit={4}
+                page={1}
+                sortBy="postedOn"
+                sortOrder="desc"
+              />
+            </>
           </div>
-
-          {searchTermSuggestions === 0 && (
-            <div className={styles.locationContainer}>
-              <p className={styles.errorMessage}>
-                {errors.locationSearch?.message || serverErrors.locationSearch}
-              </p>
-              <Input
-                className={`${styles.input} ${styles.location}`}
-                isSearchBar={true}
-                suggestions={suggestions}
-                inputType="text"
-                inputSize="large"
-                iconSrcRight="/icons/search.png"
-                iconPosition="right"
-                iconWidth={32}
-                iconHeight={32}
-                label="Location"
-                placeholder="Search by city, province, township..."
-                id="locationSearch"
-                name="locationSearch" // Required for FormData
-                ariaLabel="Location"
-                autoFocus={false}
-                autoComplete="off"
-                required
-                {...register("locationSearch")}
-                onChange={(e) =>
-                  setValue("locationSearch", e.target.value, {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
-                }
-                onSuggestionsChange={(count) => setLocationSuggestions(count)}
-              />
-            </div>
-          )}
-          {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-            <div className={styles.searchButton}>
+          <div className={styles.buttonsAndSearch}>
+            <Link href="/listings" className={styles.buttons}>
               <Button
-                buttonChildren={"Search"}
-                className={styles.search}
-                buttonType="normal"
+                className={styles.button}
+                buttonChildren={"View All Properties"}
+                buttonType="primary"
                 buttonSize="large"
-                name="Search Button"
-                type="submit"
-                ariaLabel="Search Button"
+                name="View All Listings Button"
+                type="button"
+                ariaLabel="View All Listings Button"
                 autoFocus={false}
-                disabled={isSubmitting}
+                disabled={false}
               />
-            </div>
-          )}
-        </Form>
-      </div>
-    </div>
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {category === "all" && (
+        <div className={styles.listingsSection}>
+          <div className={styles.collage}>
+            <>
+              <div className={styles.controlContainer}>
+                <div className={styles.control}>
+                  <Select
+                    options={[
+                      "All Categories",
+                      "Properties",
+                      "Vehicles",
+                      "Jobs",
+                      "Services",
+                    ]}
+                    initialValue="All Categories"
+                    selectSize="large"
+                    label="Categories"
+                    id="categories"
+                    name="categories"
+                    ariaLabel="categories"
+                    autoFocus={false}
+                    required={true}
+                  />
+                </div>
+              </div>
+              <ListingsCollage
+                category={category}
+                images={tempImages}
+                isDeletable={false}
+                isDashboard={false}
+                cardSize="standard"
+                limit={4}
+                page={1}
+                sortBy="postedOn"
+                sortOrder="desc"
+              />
+            </>
+          </div>
+          <div className={styles.buttonsAndSearch}>
+            <Link href="/listings" className={styles.buttons}>
+              <Button
+                className={styles.button}
+                buttonChildren={"View all listings"}
+                buttonType="primary"
+                buttonSize="large"
+                name="View All Listings Button"
+                type="button"
+                ariaLabel="View All Listings Button"
+                autoFocus={false}
+                disabled={false}
+              />
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

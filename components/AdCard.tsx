@@ -22,7 +22,7 @@ type Props = {
   id?: Ad["_id"];
   images?: string[];
   title?: Ad["title"];
-  description?: string | PortableTextBlock[]|null;
+  description?: string | PortableTextBlock[] | null;
   postAge?: Ad["postedOn"];
   price?: Ad["price"];
   cardSize?:
@@ -54,7 +54,6 @@ const CARD_SIZE = {
     standard: `${styles.standardFeed}`,
     small: `${styles.smallFeed}`,
   },
-
   dashboard: {
     large: `${styles.largeDashboard}`,
     standard: `${styles.standardDashboard}`,
@@ -88,15 +87,32 @@ const AdCard: React.FC<Props> = ({
 }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isHeartClicked, setIsHeartClicked] = useState(false);
+  const [isHeartHovered, setIsHeartHovered] = useState(false);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
 
   const descriptionString = description && description[0].children[0].text;
+
+  // Reset isCardHovered 2 seconds after mouse leave, not during hover
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!isCardHovered && !isHeartClicked && !isHeartHovered) {
+      timer = setTimeout(() => {
+        // No action needed here, just keeping the structure
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [isCardHovered, isHeartClicked, isHeartHovered]);
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsHeartClicked(!isHeartClicked);
+  };
 
   const PreventLinkClick = ({ children }: any) => {
     const handleClick = (event: any) => {
       event.stopPropagation();
     };
-
     return <div onClick={handleClick}>{children}</div>;
   };
 
@@ -115,8 +131,12 @@ const AdCard: React.FC<Props> = ({
           hasLikeButton={true}
           className={styles.image}
           aspectRatios={aspectRatios}
+          isHeartClicked={isHeartClicked}
+          isHeartHovered={isHeartHovered}
+          isCardHovered={isCardHovered}
+          onHeartClick={handleHeartClick}
+          onHeartHover={(hovered) => setIsHeartHovered(hovered)}
         />
-
         {isDeletable && (
           <div
             className={styles.checkboxContainer}
@@ -171,7 +191,6 @@ const AdCard: React.FC<Props> = ({
           >
             <div className={styles.titleDescription}>
               <p className={styles.title}>{`${title?.slice(0, 96)}`}</p>
-
               <p className={styles.description}>{descriptionString}</p>
             </div>
             <h3 className={styles.price}>
@@ -194,7 +213,7 @@ const AdCard: React.FC<Props> = ({
       <article
         className={`${cardSize ? sizeClass : ""} ${styles.boxCard} `}
         onMouseEnter={() => setIsCardHovered(true)}
-        onMouseLeave={() => setIsCardHovered(false)}
+        onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
         style={{ paddingBottom: isCardHovered ? "0" : "6rem" }}
       >
         <ImageContainer />
@@ -236,7 +255,6 @@ const AdCard: React.FC<Props> = ({
             </PreventLinkClick>
           </div>
         )}
-
         <div className={styles.detailsWrapper}>
           <Avatar
             className={styles.avatar}
@@ -244,7 +262,6 @@ const AdCard: React.FC<Props> = ({
             avatar={avatar}
             isOnline={false}
           />
-
           <div className={styles.detailsText}>
             <div className={styles.titleWrapper}>
               <h3
@@ -259,7 +276,6 @@ const AdCard: React.FC<Props> = ({
                     : title
                   : ""}
               </h3>
-
               <div className={styles.location}>
                 <p className={styles.locationText}>
                   {suburb && suburb}, {city && city}
@@ -290,7 +306,7 @@ const AdCard: React.FC<Props> = ({
       <article
         className={styles.expandedCard}
         onMouseEnter={() => setIsCardHovered(true)}
-        onMouseLeave={() => setIsCardHovered(false)}
+        onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
       >
         <div className={styles.expandedCardWrapper}>
           <ExpandedImageContainer />
@@ -301,19 +317,11 @@ const AdCard: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    // staggard delay animation
-    // when the index changes set isVisible to true after the delay.
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, index * 75);
-
     return () => clearTimeout(timer);
   }, [index]);
-
-  const animateCardStyle: React.CSSProperties = {
-    visibility: "visible",
-    animation: "fadeIn 5s ease-in-out",
-  };
 
   return (
     <div>
