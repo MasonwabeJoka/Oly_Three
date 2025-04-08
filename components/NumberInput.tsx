@@ -10,6 +10,7 @@ import styles from "./NumberInput.module.scss";
 import useSidebarStore from "@/store/useSidebarStore";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Image from "next/image";
+import { formatNumberWithSpaces } from "@/utils/formatterFunctions/Formatter"; // Import your formatter
 
 const INPUT_SIZE = {
   regular: {
@@ -65,7 +66,7 @@ interface NumberInputProps {
   inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
   dashboard?: boolean;
   autoFocus?: boolean;
-  required: boolean;
+  required?: boolean; // Made optional to match usage
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   [key: string]: any;
@@ -96,16 +97,18 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   ) => {
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
 
-    const [internalValue, setInternalValue] = useState<number | undefined>(
-      value
+    const [internalValue, setInternalValue] = useState<number | undefined>(value);
+    const [displayValue, setDisplayValue] = useState<string>(
+      value && value !== 0 ? formatNumberWithSpaces(value) : ""
     );
 
-    // Keep internal value in sync with the value prop
+    // Sync internal value with prop changes
     useEffect(() => {
       setInternalValue(value);
+      setDisplayValue(value && value !== 0 ? formatNumberWithSpaces(value) : "");
     }, [value]);
 
-    // Debounce the change propagation to the parent component
+    // Debounce the change propagation to the parent
     useEffect(() => {
       const handler = setTimeout(() => {
         if (
@@ -113,10 +116,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           !isNaN(internalValue) &&
           internalValue !== value
         ) {
-          // Make sure to propagate a number
           onChange?.({
             target: {
-              value: internalValue, // Passing the numeric value
+              value: internalValue.toString(), // Raw number as string
             },
           } as unknown as ChangeEvent<HTMLInputElement>);
         }
@@ -127,80 +129,83 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       };
     }, [internalValue, debounceTime, onChange, value]);
 
-    // Handle internal changes, ensure numeric values are processed
+    // Handle typing with space formatting
     const handleInternalChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+      const rawInput = e.target.value.replace(/\s/g, ""); // Remove spaces for processing
 
       // Allow empty input
-      if (value === "") {
+      if (rawInput === "") {
         setInternalValue(undefined);
-        onChange?.(e);
+        setDisplayValue("");
+        onChange?.({ ...e, target: { ...e.target, value: "" } });
         return;
       }
-      // Parse to a float
-      const numericValue = parseFloat(value);
 
-      if (!isNaN(numericValue)) {
-        setInternalValue(numericValue);
-        onChange?.(e);
-      }
+      // Ensure only numeric input
+      const numericValue = parseFloat(rawInput);
+      if (isNaN(numericValue)) return; // Ignore non-numeric input
+
+      // Enforce min/max constraints
+      if (min !== undefined && numericValue < min) return;
+      if (max !== undefined && numericValue > max) return;
+
+      setInternalValue(numericValue);
+      setDisplayValue(formatNumberWithSpaces(numericValue));
+      onChange?.({ ...e, target: { ...e.target, value: numericValue.toString() } });
     };
 
+    // Handle arrow clicks with formatting
     const handleArrowClick = (direction: "up" | "down") => {
-      let newValue = internalValue || 0;
-      
+      let newValue = internalValue ?? 0; // Default to 0 if undefined
+
       if (direction === "up") {
         newValue += step || 1;
       } else {
         newValue -= step || 1;
       }
 
-      // Handle min/max constraints
-      if (
-        (min !== undefined && newValue < min) ||
-        (max !== undefined && newValue > max)
-      ) {
-        return;
-      }
+      // Enforce min/max constraints
+      if (min !== undefined && newValue < min) return;
+      if (max !== undefined && newValue > max) return;
 
       setInternalValue(newValue);
-      // Propagate the number change
+      setDisplayValue(newValue ? formatNumberWithSpaces(newValue) : "");
       const event = {
         target: {
-          value: newValue,
+          value: newValue.toString(),
         },
       } as unknown as ChangeEvent<HTMLInputElement>;
-
       onChange?.(event);
     };
 
     const sizeClass = isSidebarOpen
       ? INPUT_SIZE.feed[inputSize]
       : dashboard
-        ? INPUT_SIZE.dashboard[inputSize]
-        : INPUT_SIZE.regular[inputSize];
+      ? INPUT_SIZE.dashboard[inputSize]
+      : INPUT_SIZE.regular[inputSize];
 
-    const inputClass = `${styles.input} ${sizeClass} ${inputColourType ? INPUT_COLOUR_TYPE[inputColourType] : ""} ${className}`;
+    const inputClass = `${styles.input} ${sizeClass} ${
+      inputColourType ? INPUT_COLOUR_TYPE[inputColourType] : ""
+    } ${className || ""}`;
 
     return (
       <div className={styles.container}>
-        {error && <p className={styles.errorMessage}>{error as string}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
 
         <div className={styles.wrapper}>
           <input
-            type="number"
+            type="text" // Changed to text for formatting
+            inputMode="numeric" // Numeric keypad on mobile
             name={reactHookFormProps?.name}
-            value={internalValue !== undefined ? internalValue : ""}
+            value={displayValue} // Show formatted value with spaces
             onChange={handleInternalChange}
             id={id}
-            min={min}
-            max={max}
-            step={step}
-            autoFocus={autoFocus}
-            required={required}
             placeholder={placeholder}
             className={inputClass}
+            autoFocus={autoFocus}
+            required={required}
             ref={ref}
+            aria-label={placeholder || "Numeric input"} // Accessibility
             {...reactHookFormProps}
             {...restProps}
           />

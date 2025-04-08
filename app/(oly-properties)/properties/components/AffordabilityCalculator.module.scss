@@ -1,0 +1,46 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+.container {
+
+
+.calculator {
+  display: flex;
+  gap: rem(112);
+  .inputSection {
+    
+    .control {
+      margin-bottom: rem(20);
+    }
+  }
+
+  .resultSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: rem(514);
+    height: rem(384);
+
+    .title {
+      font-size: $body !important;
+      // font-weight: 600;
+      
+    }
+
+    .resultValue {
+      font-size: $h3;
+      font-weight: 600;
+      margin-bottom: rem(48);
+    }
+
+    .note {
+      font-size: rem(12);
+      color: $black-four;
+      // margin-bottom: rem(16);
+    }
+  }
+  }
+
+}

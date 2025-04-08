@@ -1,0 +1,63 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+    
+    // margin-top: rem(48);
+    .content {
+   
+
+        .title {
+            margin-bottom: rem(8);
+          }
+
+          .icons {
+            display: flex;
+            gap: rem(24);
+
+            .iconContainer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // border-radius: 50%;
+                cursor: pointer;
+              
+               
+                
+              }
+              .facebook {
+                .icon {
+                    
+                }
+            }
+            .x {
+                .icon {
+                    width: rem(14);
+                    height: rem(14);
+                    margin-top: rem(2);
+                }
+            }
+            .instagram {
+                .icon {
+                    margin-top: rem(2);
+                }
+            }
+            .linkedin {
+                .icon {
+        
+                }
+            }
+            .email {
+                .icon {
+                    margin-top: rem(3);
+                }
+            }
+          }
+         
+    }
+
+  
+   
+  
+  }

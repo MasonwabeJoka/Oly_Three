@@ -1,23 +1,19 @@
 "use client";
 import styles from "./AdCard.module.scss";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Icon from "@/components/Icon";
 import Avatar from "@/components/Avatars";
-import Checkbox from "./Checkbox";
+import Checkbox from "../Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
-import AdSkeleton from "./skeletons/AdSkeleton";
+import AdSkeleton from "../skeletons/AdSkeleton";
 import useSidebarStore from "@/store/useSidebarStore";
 import { Ad } from "@/sanity/Types/Ad";
-import Link from "next/link";
-import BoxImageSlider from "./BoxImageSlider";
-import ExpandedImageSlider from "./ExpandedImageSlider";
+import BoxImageSlider from "../BoxImageSlider";
+import ExpandedImageSlider from "../ExpandedImageSlider";
 import { PortableTextBlock } from "sanity";
 
 type Props = {
   ad: Ad | null;
   index: number;
-  slug?: Ad["slug"];
   cardType: "expanded" | "box";
   id?: Ad["_id"];
   images?: string[];

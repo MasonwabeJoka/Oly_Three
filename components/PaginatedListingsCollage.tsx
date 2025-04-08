@@ -1,6 +1,6 @@
 import styles from "./PaginatedListingsCollage.module.scss";
 import { useEffect, useState } from "react";
-import AdCard from "@/components/AdCard";
+import AdCard from "@/components/cards/AdCard";
 import Masonry from "react-masonry-css";
 import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";

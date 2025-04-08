@@ -10,6 +10,7 @@ import { Pagination } from "swiper/modules";
 import Icon from "./Icon";
 import NavButtonRight from "./navButtonRight";
 import NavButtonLeft from "./navButtonLeft";
+import { normalizeImageSrc } from '@/utils/imageUtils';
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   urls?: string[];
@@ -249,7 +250,7 @@ const ImageSlider = ({
             >
               <Image
                 className={styles.image}
-                src={url}
+                src={normalizeImageSrc(url)}
                 fill
                 alt="Ad Image"
                 style={{
@@ -268,3 +269,5 @@ const ImageSlider = ({
 };
 
 export default ImageSlider;
+
+

@@ -3,13 +3,17 @@ import useIsMobileStore from "@/store/useMobileStore";
 import styles from "./HomeButton.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-const HomeButton = () => {
+
+interface HomeButtonProps {
+  path?: string;
+}
+const HomeButton = ({ path="/" }: HomeButtonProps) => {
     const isMobile = useIsMobileStore((state) => state.isMobile);
 
   return (
     <div className={styles.container}>
       {" "}
-      <Link href="/" className={styles.logo}>
+      <Link href={path} className={styles.logo}>
         <Image
           src="/logo.png"
           alt="Logo"

@@ -83,6 +83,46 @@ export function formatLargeNumber(value: number, locale: string = 'en-ZA'): stri
     return (value / 1000000) + 'M';
 }
 
+export function formatNumberWithCommas(value: number, locale: string = 'en-ZA'): string {
+    
+    const numberString = new Intl.NumberFormat(locale, {
+        useGrouping: true,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(value);
+    
+    return numberString;
+}
+
+export function formatNumberWithSpaces(value: number, options: FormatOptions = {}): string {
+    const { locale = 'en-ZA' } = options;
+    
+    // Convert number to string without separators
+    const numberString = Math.abs(value).toString();
+    
+    // Split into integer and decimal parts if any
+    const parts = numberString.split('.');
+    let integerPart = parts[0];
+    const decimalPart = parts[1] ? '.' + parts[1] : '';
+    
+    // Add spaces every 3 digits from right to left
+    let formattedInteger = '';
+    for (let i = integerPart.length - 1, count = 0; i >= 0; i--) {
+        if (count > 0 && count % 3 === 0) {
+            formattedInteger = ' ' + formattedInteger;
+        }
+        formattedInteger = integerPart[i] + formattedInteger;
+        count++;
+    }
+    
+    // Add back the sign if negative
+    const sign = value < 0 ? '-' : '';
+    
+    // Use Intl.NumberFormat for locale-specific decimal handling if needed
+    const finalNumber = sign + formattedInteger + decimalPart;
+    
+    return finalNumber;
+}
 export function formatList(items: string[], locale: string = 'en-ZA'): string {
     return new Intl.ListFormat(locale, { style: 'long', type: 'conjunction' }).format(items);
 }

@@ -5,7 +5,7 @@ import { urlFor } from "@/lib/client";
 import { fetchAds } from "@/sanity/actions/fetchAds";
 import { Ad } from "@/sanity/Types/Ad";
 import { fetchListings } from "@/sanity/sanity_utils/tempActions";
-import AdCard from "./AdCard";
+import AdCard from "./cards/AdCard";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "sanity";
@@ -59,8 +59,6 @@ const ListingsExpanded = ({
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +121,7 @@ const ListingsExpanded = ({
                 id={ad?._id}
                 cardType="expanded"
                 // images={imageUrls}
-                images={images[index]} 
+                images={images[index]}
                 aspectRatios={aspectRatios}
                 title={ad?.title}
                 price={ad?.price}

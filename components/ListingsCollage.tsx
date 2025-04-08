@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdCard from "@/components/AdCard";
+import AdCard from "@/components/cards/AdCard";
 import Masonry from "react-masonry-css";
 import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
@@ -57,8 +57,6 @@ const ListingsCollage = ({
     triggerOnce: false,
   });
 
-  
-
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -112,7 +110,6 @@ const ListingsCollage = ({
     800: 2,
     639: 1,
   };
- 
 
   const cards = ads.map((ad, index) => {
     const adImages = Array.isArray(ad.images) ? ad.images : [];
@@ -129,33 +126,51 @@ const ListingsCollage = ({
         return matchingImage ? imageFile.image.url : undefined;
       })
       .filter((url): url is string => typeof url === "string");
-   
+
     return (
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
           {category === "all" && (
+            // <AdCard
+            //   ad={ad}
+            //   id={ad._id}
+            //   index={index}
+            //   cardType="box"
+            //   cardSize={cardSize}
+            //   images={images[index]}
+            //   title={ad.title}
+            //   price={ad.price}
+            //   aspectRatios={aspectRatios}
+            //   description={
+            //     Array.isArray(ad.description)
+            //       ? richTextLength(ad.description, 400)
+            //       : ad.description
+            //   }
+            //   isDeletable={isDeletable}
+            //   isDashboard={isDashboard}
+            //   isFeed={isSidebarOpen}
+            //   checkedColour={checkedColour}
+            //   hoverColour={hoverColour}
+            //   checkedHovered={checkedHovered}
+            // />
             <AdCard
-              ad={ad}
-              id={ad._id}
-              index={index}
+              ad={{
+                _id: "123",
+                images: ['/listing_images/landscape/1.jpg'],
+                title: "Sample Ad",
+                description: 'This is a sample ad description.',
+                price: 1000,
+                postedOn: "2023-01-01",
+                avatar: "avatar.jpg",
+                suburb: "Downtown",
+                city: "Metropolis",
+              }}
+              index={0}
               cardType="box"
-              cardSize={cardSize}
-              // images={urls}
-              images={images[index]} 
-              title={ad.title}
-              price={ad.price}
-              aspectRatios={aspectRatios}
-              description={
-                Array.isArray(ad.description)
-                  ? richTextLength(ad.description, 400)
-                  : ad.description
-              }
-              isDeletable={isDeletable}
-              isDashboard={isDashboard}
-              isFeed={isSidebarOpen}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
+              cardSize="standard"
+              isFeed={true}
+              isDashboard={false}
+              isDeletable={true}
             />
           )}
           {category === "property" && (
@@ -165,7 +180,7 @@ const ListingsCollage = ({
               index={index}
               cardType="box"
               cardSize={cardSize}
-              images={images[index]} 
+              images={images[index]}
               title={ad.title}
               price={ad.price}
               aspectRatios={aspectRatios}
@@ -211,4 +226,3 @@ const ListingsCollage = ({
 };
 
 export default ListingsCollage;
-
