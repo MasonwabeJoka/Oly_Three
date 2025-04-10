@@ -1,74 +1,117 @@
-// components/AdCard/AdCard.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AdCard.module.scss";
-import AdSkeleton from "../skeletons/AdSkeleton";
 import useSidebarStore from "@/store/useSidebarStore";
-import AdImageContainer from "./AdImageContainer";
-import BoxDetails from "./BoxDetails";
-import ExpandedDetails from "./ExpandedDetails";
-import Checkbox from "../Checkbox";
-import { Ad, CardSize, CardType } from "./AdCardTypes";
+import { Ad } from "@/sanity/Types/Ad";
+import AdSkeleton from "../skeletons/AdSkeleton";
+import { BoxCard } from "../BoxCard";
+import { ExpandedCard } from "../ExpandedCard";
 
-interface Props {
+type Props = {
+  category: "all" | "property" | "vehicle" | "service" | "job";
   ad: Ad | null;
   index: number;
-  cardType: CardType;
-  cardSize?: CardSize;
+  cardType: "expanded" | "box";
+  id?: Ad["_id"];
+  images?: string[];
+  title?: Ad["title"];
+  description?: string | PortableTextBlock[] | null;
+  postAge?: Ad["postedOn"];
+  price?: Ad["price"];
+  cardSize?:
+    | keyof typeof CARD_SIZE.regular
+    | keyof typeof CARD_SIZE.feed
+    | keyof typeof CARD_SIZE.dashboard
+    | keyof typeof CARD_SIZE.property;
+  aspectRatios?: number[];
+  width?: number;
+  height?: number;
   isFeed: boolean;
   isDashboard: boolean;
   isDeletable: boolean;
   checkedColour?: string;
   hoverColour?: string;
   checkedHovered?: string;
-  aspectRatios?: number[];
-}
+  avatar?: string;
+  suburb?: string;
+  city?: string;
+};
 
 const CARD_SIZE = {
   regular: {
-    large: styles.large,
-    standard: styles.standard,
-    small: styles.small,
+    large: `${styles.large}`,
+    standard: `${styles.standard}`,
+    small: `${styles.small}`,
   },
   feed: {
-    large: styles.largeFeed,
-    standard: styles.standardFeed,
-    small: styles.smallFeed,
+    large: `${styles.largeFeed}`,
+    standard: `${styles.standardFeed}`,
+    small: `${styles.smallFeed}`,
   },
   dashboard: {
-    large: styles.largeDashboard,
-    standard: styles.standardDashboard,
-    small: styles.smallDashboard,
+    large: `${styles.largeDashboard}`,
+    standard: `${styles.standardDashboard}`,
+    small: `${styles.smallDashboard}`,
   },
-};
-
-const PreventLinkClick: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const handleClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-  };
-  return <div onClick={handleClick}>{children}</div>;
+  property: {
+    large: `${styles.largeProperty}`,
+    standard: `${styles.standardProperty}`,
+    small: `${styles.smallProperty}`,
+  },
 };
 
 const AdCard: React.FC<Props> = ({
+  category,
   ad,
+  id,
   index,
+  aspectRatios,
+  width,
+  height,
   cardType,
+  images,
+  title,
+  description,
+  postAge,
+  price,
   cardSize = "standard",
   isFeed,
   isDashboard,
-  isDeletable,
+  isDeletable = false,
   checkedColour,
   hoverColour,
   checkedHovered,
-  aspectRatios,
+  avatar,
+  city,
+  suburb,
 }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isHeartHovered, setIsHeartHovered] = useState(false);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!isCardHovered && !isHeartClicked && !isHeartHovered) {
+      timer = setTimeout(() => {}, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [isCardHovered, isHeartClicked, isHeartHovered]);
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsHeartClicked(!isHeartClicked);
+  };
+
+  let sizeClass = "";
+  sizeClass = isSidebarOpen
+    ? CARD_SIZE.feed[cardSize]
+    : isDashboard
+    ? CARD_SIZE.dashboard[cardSize]
+    : category === "property"
+    ? CARD_SIZE.property[cardSize]
+    : CARD_SIZE.regular[cardSize];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -77,90 +120,57 @@ const AdCard: React.FC<Props> = ({
     return () => clearTimeout(timer);
   }, [index]);
 
-  const handleHeartClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsHeartClicked((prev) => !prev);
-  };
-
-  const handleHeartHover = (hovered: boolean) => {
-    setIsHeartHovered(hovered);
-  };
-
-  if (!isVisible || !ad) {
-    return <AdSkeleton orientation="portrait" cardSize={cardSize} />;
-  }
-
-  const sizeClass = isSidebarOpen
-    ? CARD_SIZE.feed[cardSize]
-    : isDashboard
-      ? CARD_SIZE.dashboard[cardSize]
-      : CARD_SIZE.regular[cardSize];
-
-  if (cardType === "box") {
-    return (
-      <article
-        className={`${sizeClass} ${styles.boxCard}`}
-        onMouseEnter={() => setIsCardHovered(true)}
-        onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
-      >
-        <div className={styles.imageContainer}>
-          <AdImageContainer
-            images={ad.images}
-            cardType={cardType}
-            aspectRatios={aspectRatios}
-            isHeartClicked={isHeartClicked}
-            isHeartHovered={isHeartHovered}
-            isCardHovered={isCardHovered}
-            onHeartClick={handleHeartClick}
-            onHeartHover={handleHeartHover}
-          />
-          {isDeletable && (
-            <div className={styles.checkboxContainer}>
-              <PreventLinkClick>
-                <Checkbox
-                  className={styles.checkbox}
-                  id={ad._id}
-                  label=""
-                  isFeed={isFeed}
-                  checkedColour={checkedColour}
-                  hoverColour={hoverColour}
-                  checkedHovered={checkedHovered}
-                />
-              </PreventLinkClick>
-            </div>
-          )}
-        </div>
-        <BoxDetails ad={ad} isCardHovered={isCardHovered} />
-      </article>
-    );
-  }
-
   return (
-    <article className={styles.expandedCard}>
-      <div className={styles.expandedCardWrapper}>
-        <div className={styles.centerImageWrapper}>
-          <div className={styles.imageContainer}>
-            <AdImageContainer
-              images={ad.images}
-              cardType={cardType}
-              aspectRatios={aspectRatios}
-              isHeartClicked={isHeartClicked}
-              isHeartHovered={isHeartHovered}
-              onHeartClick={handleHeartClick}
-              onHeartHover={handleHeartHover}
-            />
-          </div>
-        </div>
-        <ExpandedDetails
-          ad={ad}
+    <div>
+      {!isVisible || !ad ? (
+        <AdSkeleton orientation="portrait" cardSize={cardSize || "standard"} />
+      ) : cardType === "box" ? (
+        <BoxCard
+          category={category}
+          sizeClass={sizeClass}
+          images={images}
+          aspectRatios={aspectRatios}
+          isCardHovered={isCardHovered}
+          isHeartClicked={isHeartClicked}
+          isHeartHovered={isHeartHovered}
           isDeletable={isDeletable}
+          id={id}
           isFeed={isFeed}
           checkedColour={checkedColour}
           hoverColour={hoverColour}
           checkedHovered={checkedHovered}
+          title={title}
+          description={description}
+          price={price}
+          onHeartClick={handleHeartClick}
+          onHeartHover={(hovered) => setIsHeartHovered(hovered)}
+          setIsCardHovered={setIsCardHovered}
         />
-      </div>
-    </article>
+      ) : cardType === "expanded" ? (
+        <ExpandedCard
+          category={category}
+          images={images}
+          aspectRatios={aspectRatios}
+          isCardHovered={isCardHovered}
+          isHeartClicked={isHeartClicked}
+          isHeartHovered={isHeartHovered}
+          isDeletable={isDeletable}
+          id={id}
+          isFeed={isFeed}
+          checkedColour={checkedColour}
+          hoverColour={hoverColour}
+          checkedHovered={checkedHovered}
+          avatar={avatar}
+          title={title}
+          description={description}
+          suburb={suburb}
+          city={city}
+          price={price}
+          postAge={postAge}
+          setIsCardHovered={setIsCardHovered}
+        />
+      ) : null}
+    </div>
   );
 };
 

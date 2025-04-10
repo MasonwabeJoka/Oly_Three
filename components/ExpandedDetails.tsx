@@ -1,39 +1,49 @@
-// components/AdCard/ExpandedDetails.tsx
 import React from "react";
+import styles from "./ExpandedDetails.module.scss";
 import Avatar from "@/components/Avatars";
-import Checkbox from "../Checkbox";
+import Checkbox from "./Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
-import styles from "./AdCard.module.scss";
-import { Ad } from "./AdCardTypes";
+import { PortableTextBlock } from "sanity";
 
-interface Props {
-  ad: Ad;
+type ExpandedDetailsProps = {
   isDeletable: boolean;
+  id?: string;
   isFeed: boolean;
   checkedColour?: string;
   hoverColour?: string;
   checkedHovered?: string;
-}
+  avatar?: string;
+  title?: string;
+  description?: string | PortableTextBlock[] | null;
+  suburb?: string;
+  city?: string;
+  price?: number;
+  postAge?: string;
+};
 
-const PreventLinkClick: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const handleClick = (event: React.MouseEvent) => {
+const PreventLinkClick = ({ children }: any) => {
+  const handleClick = (event: any) => {
     event.stopPropagation();
   };
   return <div onClick={handleClick}>{children}</div>;
 };
 
-const ExpandedDetails: React.FC<Props> = ({
-  ad,
+export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   isDeletable,
+  id,
   isFeed,
   checkedColour,
   hoverColour,
   checkedHovered,
+  avatar,
+  title,
+  description,
+  suburb,
+  city,
+  price,
+  postAge,
 }) => {
-//   const descriptionString = ad.description?.[0]?.children?.[0]?.text || "";
-  const descriptionString = "abc defg hijklmnopqrstuvwxyz";
+  const descriptionString = description && description[0]?.children[0]?.text;
 
   return (
     <div className={styles.details}>
@@ -42,12 +52,12 @@ const ExpandedDetails: React.FC<Props> = ({
           <PreventLinkClick>
             <Checkbox
               className={styles.checkbox}
-              id={ad._id}
+              id={id || ""}
               label=""
               isFeed={isFeed}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
+              checkedColour={checkedColour || ""}
+              hoverColour={hoverColour || ""}
+              checkedHovered={checkedHovered || ""}
             />
           </PreventLinkClick>
         </div>
@@ -56,7 +66,7 @@ const ExpandedDetails: React.FC<Props> = ({
         <Avatar
           className={styles.avatar}
           avatarSize="regular"
-          avatar={ad.avatar}
+          avatar={avatar}
           isOnline={false}
         />
         <div className={styles.detailsText}>
@@ -64,14 +74,18 @@ const ExpandedDetails: React.FC<Props> = ({
             <h3
               className={styles.title}
               style={{
-                fontSize: ad.title.length > 48 ? "20px" : "24px",
+                fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
               }}
             >
-              {ad.title.length > 42 ? `${ad.title.slice(0, 42)}...` : ad.title}
+              {title
+                ? title.length > 42
+                  ? `${title.slice(0, 42)}...`
+                  : title
+                : ""}
             </h3>
             <div className={styles.location}>
               <p className={styles.locationText}>
-                {ad.suburb && `${ad.suburb}, `}{ad.city}
+                {suburb && suburb}, {city && city}
               </p>
             </div>
           </div>
@@ -80,11 +94,11 @@ const ExpandedDetails: React.FC<Props> = ({
           </div>
           <div className={styles.cardBottom}>
             <h2 className={styles.price}>
-              {ad.price ? Formatter.formatLargeNumber(ad.price) : ""}
+              {price ? Formatter.formatLargeNumber(price) : ""}
             </h2>
             <div className={styles.postMetrics}>
               <div className={styles.postAge}>
-                {ad.postedOn ? Formatter.formatRelativeTime(ad.postedOn) : ""}
+                {postAge ? Formatter.formatRelativeTime(postAge) : ""}
               </div>
             </div>
           </div>
@@ -93,5 +107,3 @@ const ExpandedDetails: React.FC<Props> = ({
     </div>
   );
 };
-
-export default ExpandedDetails;

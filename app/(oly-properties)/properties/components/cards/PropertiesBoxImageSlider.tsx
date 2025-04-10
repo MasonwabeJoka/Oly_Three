@@ -13,7 +13,6 @@ import NavButtonLeft from "./navButtonLeft";
 import { normalizeImageSrc } from '@/utils/imageUtils';
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
-  category: "all" | "property" | "vehicle" | "service" | "job";
   urls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
@@ -25,7 +24,6 @@ interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ImageSlider = ({
-  category,
   urls,
   hasLikeButton = false,
   aspectRatios,
@@ -151,11 +149,6 @@ const ImageSlider = ({
     }
   };
 
-  const swiperStyles = {
-    width: category === "property" ? "24.21875rem" : "19.375rem",
-    // minHeight: category === "property" ? "15.55rem" : "19.375rem"
-  };
-
   const getImageSrc = () => {
     if (isHeartClicked) return "/icons/heart-clicked.svg";
     if (isHeartHovered || (isCardHovered && !navInteractionOccurred))
@@ -169,21 +162,6 @@ const ImageSlider = ({
   };
 
   const heartSize = isHeartHovered ? 64 : 52;
-
-  const swiperSlideHeight = (index: number) => {
-    if(category === 'property') {
-      return "13.623046875rem";
-    } else {
-      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`
-    }
-  }
-  const swiperSlideWidth = (index: number) => {
-    if(category === 'property') {
-      return "24.21875rem";
-    } else {
-      return "19.375rem";
-    }
-  }
 
   return (
     <div className={styles.container}>
@@ -206,12 +184,12 @@ const ImageSlider = ({
           </div>
         )}
         <div
-          className={styles.navButtonContainer}
+          className={styles.buttonContainer}
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: category === "property" ? "21rem" : "16rem",
+            marginRight: "16rem",
           }}
           onClick={(e) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
@@ -231,12 +209,12 @@ const ImageSlider = ({
           </div>
         </div>
         <div
-          className={styles.navButtonContainer}
+          className={styles.buttonContainer}
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: category === "property" ? "21rem" : "16rem",
+            marginLeft: "16rem",
           }}
           onClick={(e) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
@@ -260,17 +238,14 @@ const ImageSlider = ({
         spaceBetween={50}
         slidesPerView={1}
         autoHeight
-        style={swiperStyles}
       >
         {urls?.map((url, index) => (
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{
-                position: "relative",
-                height: swiperSlideHeight(index),
-                width: swiperSlideWidth(index),
-                borderRadius: "2rem",
-                backgroundColor: "#F5F5F5",
+                height: `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`,
+                width: "19.375rem",
+                borderRadius: "1.5rem",
               }}
             >
               <Image
@@ -282,7 +257,6 @@ const ImageSlider = ({
                   verticalAlign: "top",
                   minHeight: 248,
                   objectFit: "cover",
-                  // borderRadius: "0 0 3rem 3rem",
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
@@ -295,8 +269,5 @@ const ImageSlider = ({
 };
 
 export default ImageSlider;
-
-
-
 
 

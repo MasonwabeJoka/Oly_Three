@@ -1,0 +1,85 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.details {
+    display: flex;
+
+    flex-direction: column;
+    width: rem(570);
+    height: rem(250);
+    border-radius: 0 rem(32) rem(32) 0;
+
+    .checkboxContainer {
+      align-self: flex-end;
+      margin-right: rem(24);
+      margin-top: rem(8);
+      margin-bottom: rem(-16);
+    }
+
+    .detailsWrapper {
+      display: flex;
+      margin: rem(24) rem(24) rem(16) rem(16);
+      width: rem(530);
+      height: 100%;
+
+      .avatar {
+        margin-right: rem(16);
+      }
+
+      .detailsText {
+        display: flex;
+        flex-direction: column;
+        .titleWrapper {
+          margin-top: rem(-6);
+          .title {
+            margin-bottom: rem(-4);
+          }
+
+          .location {
+            display: flex;
+            align-items: center;
+
+            .locationText {
+              padding-bottom: rem(1);
+              font-size: rem(14);
+            }
+          }
+        }
+
+        .descriptionContainer {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          .description {
+            width: rem(463);
+            overflow: hidden;
+            margin-top: rem(8);
+            padding-bottom: rem(8);
+            align-self: center;
+          }
+        }
+        .cardBottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: auto;
+          width: 100%;
+          height: rem(24);
+
+          .price {
+          }
+
+          .postMetrics {
+            .postAge {
+              // margin-bottom: rem(-4);
+              margin-right: rem(32);
+              font-size: rem(14);
+            }
+
+            .viewCount {
+            }
+          }
+        }
+      }
+    }
+  }

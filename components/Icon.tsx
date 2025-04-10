@@ -1,4 +1,3 @@
-// import missing_image from '@/public/missing_image.jpg'
 import Image from "next/image";
 interface IconProps {
   className?: string;
@@ -9,27 +8,26 @@ interface IconProps {
   boxShadow?: string;
   onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
 }
-const Icon = ({ 
-  className = "", 
-  src, 
-  alt, 
-  width = 20, 
+const Icon = ({
+  className = "",
+  src,
+  alt,
+  width = 20,
   height = 20,
   boxShadow = "none",
-  onClick 
+  onClick,
 }: IconProps) => {
   return (
-    <Image 
+    <Image
       className={className}
-      src={src} 
-      alt={alt} 
-      width={width} 
+      src={src}
+      alt={alt}
+      width={width}
       height={height}
-      style={{ boxShadow: boxShadow }}
+      style={{ objectFit: "contain", boxShadow: boxShadow }}
       onClick={onClick}
     />
   );
 };
 
 export default Icon;
-

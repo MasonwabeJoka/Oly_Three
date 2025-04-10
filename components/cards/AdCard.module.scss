@@ -11,7 +11,7 @@
   cursor: pointer;
   box-shadow: $shadow-six;
   margin-top: rem(-8);
-  // padding-bottom: rem(96);
+ 
   .imageContainer {
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     z-index: 1;
     border-radius: rem(0) rem(0) rem(32) rem(32);
     padding: 0 rem(8) rem(8) rem(8);
-
+    overflow: hidden;
     .titleDescription {
       display: flex;
       flex-direction: column;
@@ -139,7 +139,20 @@
     min-height: rem(248);
   }
 }
-.smallDashboard {
+.smallProperty {
+}
+.largeDashboard {
+  @include larger-than(mobile) {
+  }
+}
+.standardProperty {
+  @include larger-than(mobile) {
+    
+    width: rem(387.5);
+    height: rem(313.96875);
+  }
+}
+.smallProperty {
 }
 
 /*//////////////////////////////////////////////////////////////////////////////*/

@@ -13,7 +13,6 @@ import { useInView } from "react-intersection-observer";
 import { Ad } from "@/sanity/Types/Ad";
 import styles from "./ListingsCollage.module.scss";
 import Spinner from "./Spinner";
-import PropertyAdCard from "@/app/(oly-properties)/properties/components/cards/PropertyAdCard";
 
 type ListingsCollageProps = {
   category: "all" | "property" | "vehicle" | "service" | "job";
@@ -74,8 +73,8 @@ const ListingsCollage = ({
       setLoading(false);
     };
 
-    fetchData();
-  }, [pageNumber, fetchAds]);
+    if (isClient) fetchData();
+  }, [pageNumber, fetchAds, isClient]);
 
   useEffect(() => {
     if (inView && hasMore) {
@@ -104,6 +103,10 @@ const ListingsCollage = ({
     }
   }, [ads]);
 
+  if (!isClient) {
+    return null;
+  }
+
   const breakpointColumnsObj = {
     default: 4,
     2500: isSidebarOpen || isDashboard ? 4 : 5,
@@ -131,50 +134,33 @@ const ListingsCollage = ({
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
           {category === "all" && (
-            // <AdCard
-            //   ad={ad}
-            //   id={ad._id}
-            //   index={index}
-            //   cardType="box"
-            //   cardSize={cardSize}
-            //   images={images[index]}
-            //   title={ad.title}
-            //   price={ad.price}
-            //   aspectRatios={aspectRatios}
-            //   description={
-            //     Array.isArray(ad.description)
-            //       ? richTextLength(ad.description, 400)
-            //       : ad.description
-            //   }
-            //   isDeletable={isDeletable}
-            //   isDashboard={isDashboard}
-            //   isFeed={isSidebarOpen}
-            //   checkedColour={checkedColour}
-            //   hoverColour={hoverColour}
-            //   checkedHovered={checkedHovered}
-            // />
             <AdCard
-              ad={{
-                _id: "123",
-                images: ['/listing_images/landscape/1.jpg'],
-                title: "Sample Ad",
-                description: 'This is a sample ad description.',
-                price: 1000,
-                postedOn: "2023-01-01",
-                avatar: "avatar.jpg",
-                suburb: "Downtown",
-                city: "Metropolis",
-              }}
-              index={0}
+              category={category}
+              ad={ad}
+              id={ad._id}
+              index={index}
               cardType="box"
-              cardSize="standard"
-              isFeed={true}
-              isDashboard={false}
-              isDeletable={true}
+              cardSize={cardSize}
+              images={images[index]}
+              title={ad.title}
+              price={ad.price}
+              aspectRatios={aspectRatios}
+              description={
+                Array.isArray(ad.description)
+                  ? richTextLength(ad.description, 400)
+                  : ad.description
+              }
+              isDeletable={isDeletable}
+              isDashboard={isDashboard}
+              isFeed={isSidebarOpen}
+              checkedColour={checkedColour}
+              hoverColour={hoverColour}
+              checkedHovered={checkedHovered}
             />
           )}
           {category === "property" && (
-            <PropertyAdCard
+            <AdCard
+              category={category}
               ad={ad}
               id={ad._id}
               index={index}
@@ -202,27 +188,44 @@ const ListingsCollage = ({
     );
   });
 
-  if (isClient) {
-    return (
-      <section className={styles.container}>
-        <Masonry
-          className={styles.listingsContainer}
-          breakpointCols={breakpointColumnsObj}
-          columnClassName={styles.listingsContainerColumns}
-          style={{
-            maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
-          }}
-        >
-          {cards}
-        </Masonry>
-        <div ref={ref} className={styles.loading}>
-          {loading && hasMore ? <Spinner /> : null}
-        </div>
-      </section>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <>
+      {category === "all" && (
+        <section className={styles.container}>
+          <Masonry
+            className={styles.listingsContainer}
+            breakpointCols={breakpointColumnsObj}
+            columnClassName={styles.listingsContainerColumns}
+            style={{
+              maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
+            }}
+          >
+            {cards}
+          </Masonry>
+          <div ref={ref} className={styles.loading}>
+            {loading && hasMore ? <Spinner /> : null}
+          </div>
+        </section>
+      )}
+
+      {category === "property" && (
+        <section className={styles.container}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              columnGap: '20px' 
+            }}
+          >
+            {cards}
+          </div>
+          <div ref={ref} className={styles.loading}>
+            {loading && hasMore ? <Spinner /> : null}
+          </div>
+        </section>
+      )}
+    </>
+  );
 };
 
 export default ListingsCollage;

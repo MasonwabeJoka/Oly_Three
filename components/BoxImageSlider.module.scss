@@ -32,7 +32,7 @@
       }
     }
 
-    .buttonContainer {
+    .navButtonContainer {
       
       position: absolute;
       top: 50%;
@@ -97,7 +97,7 @@
     position: relative;
     top: 0;
     left: 0;
-    width: rem(310);
+    // width: rem(310);
     min-height: rem(248);
     border-radius: rem(32) rem(32) rem(0) rem(0);
     object-fit: cover;
