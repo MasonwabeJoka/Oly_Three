@@ -8,8 +8,7 @@
   bottom: rem(0);
   font-size: rem(13);
   letter-spacing: rem(1.1);
-  line-height: 2 !important;
- 
+  line-height: 1.5 !important;
   background-color: $grey-one;
   color: rgb(233, 252, 255);
   color: $black-four;
@@ -18,7 +17,7 @@
   z-index: 1;
   border-radius: rem(0) rem(0) rem(32) rem(32);
   padding: 0 rem(8) rem(8) rem(8);
-
+  // background: green;
   .titleDescription {
     display: flex;
     flex-direction: column;
@@ -29,7 +28,6 @@
       padding: rem(8) rem(0) rem(4) rem(20);
       line-height: 1.2;
       text-transform: uppercase;
-      background-color: red;
     }
   }
   .price {
@@ -46,14 +44,14 @@
   .titlePrice {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center !important;
     width: 100%;
-    padding: 0 rem(16);
-
+    padding: 0 rem(20);
+    margin-top: rem(16);
     .title {
       text-transform: uppercase;
-      height: rem(24);
-    
+      width: 75%;
+      font-size: rem(16);
     }
     .price {
       width: fit-content;
@@ -62,17 +60,24 @@
     }
   }
 
+  .locationContainer {
+    display: flex;
+    gap: rem(8);
+    width: 100%;
+    padding: 0 rem(20);
+    font-size: rem(12);
+    margin-bottom: rem(4);
+  }
   .featuresWithIcons {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 rem(16);
+    padding: 0 rem(20);
     margin-top: auto;
-    margin-bottom: rem(12);
+    margin-bottom: rem(24);
     .feature {
       display: flex;
-      // background-color: yellowgreen;
       gap: rem(8);
 
       p {

@@ -11,8 +11,8 @@
     border: none;
 
     .categories {
-      margin-top: rem(128);
-      margin-bottom: rem(32);
+      margin-top: rem(72);
+      margin-bottom: rem(20);
     }
 
     .breadcrumbs {
@@ -38,7 +38,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: rem(32);
+        margin-bottom: rem(20);
 
         .searchTermInput {
           // width: rem(954);
@@ -72,6 +72,6 @@
   }
 
   .searchButton {
-    margin-bottom: rem(48);
+    margin-bottom: rem(20);
   }
 }

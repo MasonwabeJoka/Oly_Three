@@ -1,6 +1,5 @@
 import styles from "./ClassifiedLink.module.scss";
 import Image from "next/image";
-import Avatar from "../Avatars";
 
 interface RecommendedArticleProps {
   text: string;

@@ -11,7 +11,7 @@ type DetailsProps = {
   description?: string | PortableTextBlock[] | null;
   price?: number;
 };
-
+// change the colour of property card icons to $black-four
 export const BoxCardDetails: React.FC<DetailsProps> = ({
   category,
   isCardHovered,
@@ -59,19 +59,28 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
   ) : category === "property" ? (
     <div
       className={styles.details}
-      style={{ display: "flex", flexDirection: "column" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: category === "property" ? "132px" : "96px",
+      }}
     >
       <div className={styles.titlePrice}>
         <p className={styles.title}>
           {title
-            ? title.length > 64
-              ? `${title.slice(0, 64)}...`
+            ? title.length > 44
+              ? `${title.slice(0, 44)}...`
               : title
             : ""}
         </p>
         <p className={styles.price}>
           {price ? Formatter.formatLargeNumber(price) : ""}
         </p>
+      </div>
+
+      <div className={styles.locationContainer}>
+        <div className={styles.city}>Sunnyside</div>
+        <div className={styles.suburb}>PTA</div>
       </div>
       <div className={styles.featuresWithIcons}>
         <div className={`${styles.feature} ${styles.beds}`}>
@@ -81,7 +90,9 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
             width={16}
             height={16}
           />
-          <p>Beds</p>
+          <p>
+            <span style={{ marginRight: "0.2rem" }}>3</span>Beds
+          </p>
         </div>
         <div className={`${styles.feature} ${styles.bathrooms}`}>
           <Icon
@@ -90,7 +101,9 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
             width={16}
             height={16}
           />
-          <p>Bathrooms</p>
+          <p>
+            <span style={{ marginRight: "0.2rem" }}>2</span>Bathrooms
+          </p>
         </div>
         <div className={`${styles.feature} ${styles.landSize}`}>
           <Icon
@@ -99,7 +112,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
             width={16}
             height={11}
           />
-          <p>Land Size</p>
+          <p>100m²</p>
         </div>
       </div>
     </div>

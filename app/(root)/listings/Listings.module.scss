@@ -15,19 +15,19 @@
     flex-direction: column;
     align-items: center;
 
-    .modalContainer {
-      position: absolute;
-      z-index: 12;
-      pointer-events: none;
+    .nav {
+      display: flex;
+      justify-content: center;
       width: 100vw;
-      
-      .modal {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        pointer-events: auto;
+
+      @include larger-than(mobile) {
       }
     }
+
+    .listingsSearchForm {
+      margin-bottom: rem(24);
+    }
+
 
     .filters {
       position: relative;

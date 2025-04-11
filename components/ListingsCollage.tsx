@@ -167,6 +167,7 @@ const ListingsCollage = ({
               cardType="box"
               cardSize={cardSize}
               images={images[index]}
+              // title='Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.'
               title={ad.title}
               price={ad.price}
               aspectRatios={aspectRatios}

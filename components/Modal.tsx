@@ -9,11 +9,7 @@ type Props = {
   modalContent: JSX.Element; // JSX element to render inside the modal
 };
 
-const Modal = ({
-  showModal,
-  setShowModal,
-  modalContent,
-}: Props) => {
+const Modal = ({ showModal, setShowModal, modalContent }: Props) => {
   // Close modal function
   const handleClose = () => {
     setShowModal(false);
@@ -40,21 +36,12 @@ const Modal = ({
   return (
     <>
       {showModal && (
-        <div
-          className={styles.modalOverlay}
-          onClick={handleClose}
-        >
-             <div className={styles.exitButtonContainer}>
-        <div className={styles.exitButton}>
-          <Icon
-            src="/icons/x.png"
-            alt="exit Icon"
-            width={20}
-            height={20}
-          />
-        </div>
-        
-      </div>
+        <div className={styles.modalOverlay} onClick={handleClose}>
+          <div className={styles.exitButtonContainer}>
+            <div className={styles.exitButton}>
+              <Icon src="/icons/x.png" alt="exit Icon" width={20} height={20} />
+            </div>
+          </div>
           <div
             className={styles.modalContent}
             onClick={handleModalContentClick}

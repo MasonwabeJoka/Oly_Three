@@ -31,13 +31,14 @@ export default function ListingsSearchForm({ onSubmit }: ListingsSearchFormProps
       <fieldset className={styles.search}>
         <div className={styles.categories}>
           <Select
-            options={["All Categories", "Properties", "Vehicles", "Jobs", "Services"]}
-            initialValue="All Categories"
+            options={["All Appliances", "Domestic Appliances", "Small Appliances", "Oven Hobs & Cookers", "Fridge Freezers", "Washing Machines", "Miscellaneous Appliances", "Health & Beauty Appliances", "Tumble Dryers", "Dishwashers", "Vacuum Cleaners", "Integrated Appliances"]}
+            initialValue="All Appliances"
             selectSize="large"
-            label="Provinces"
-            id="provinces"
-            name="provinces"
-            ariaLabel="Provinces"
+            label="Categories"
+            id="categories"
+            name="categories"
+            ariaLabel="Categories"
+            autoFocus={false}
             required={true}
           />
         </div>

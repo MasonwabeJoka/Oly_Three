@@ -14,6 +14,7 @@ type Props = {
   cardType: "expanded" | "box";
   id?: Ad["_id"];
   images?: string[];
+  // title?: string;
   title?: Ad["title"];
   description?: string | PortableTextBlock[] | null;
   postAge?: Ad["postedOn"];

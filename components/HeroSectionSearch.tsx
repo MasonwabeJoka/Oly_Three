@@ -11,6 +11,7 @@ import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import Image from "next/image";
 import Form from "next/form";
+import { useModalStore } from "@/store/modalStore";
 
 // Server action (ideally in a separate server file)
 async function searchAction(formData: FormData) {
@@ -42,6 +43,12 @@ const HeroSectionSearch = () => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+  const showCategoriesModal = useModalStore(
+    (state) => state.showCategoriesModal
+  );
+  const setShowCategoriesModal = useModalStore(
+    (state) => state.setShowCategoriesModal
+  );
 
   const {
     register,
@@ -104,17 +111,19 @@ const HeroSectionSearch = () => {
             />
           </Link>
 
+  
           <Button
-            buttonChildren={"See All Categories"}
-            className={styles.categoriesBtn}
-            buttonType="normal"
-            buttonSize="large"
-            name="Categories Button"
-            type="button"
-            ariaLabel="Categories Button"
-            autoFocus={false}
-            disabled={false}
-          />
+                buttonChildren={"See All Categories"}
+                className={styles.categoriesBtn}
+                buttonType="normal"
+                buttonSize="large"
+                name="Categories Button"
+                type="button"
+                ariaLabel="Categories Button"
+                autoFocus={false}
+                disabled={false}
+                onClick={() => setShowCategoriesModal(true)}
+              />
         </div>
 
         <div className={styles.searchFields}>
