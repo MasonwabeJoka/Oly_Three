@@ -19,7 +19,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(32);
+      border-radius: rem(40);
       background-color: $white-three;
       height: rem(56);
       box-shadow: $shadow-one;
@@ -36,7 +36,7 @@
 
     .input {
       height: rem(56);
-      border-radius: rem(32);
+      border-radius: rem(40);
       box-shadow: $shadow-two;
     }
 
@@ -49,7 +49,7 @@
       right: 0;
       width: rem(80);
       height: 100%;
-      border-radius: rem(32);
+      border-radius: rem(40);
       pointer-events: none;
 
       .dropdownIcon {
@@ -65,7 +65,7 @@
       left: 0;
       width: rem(80);
       height: 100%;
-      border-radius: rem(32);
+      border-radius: rem(40);
       .clearIcon {
       }
     }
@@ -79,7 +79,7 @@
       left: 0;
       width: rem(80);
       height: 100%;
-      border-radius: rem(32);
+      border-radius: rem(40);
       pointer-events: none;
 
       .selectCount {
@@ -113,7 +113,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: rem(32);
+    border-radius: rem(40);
     height: 94%;
     margin: rem(4) auto 0;
 
@@ -126,7 +126,7 @@
 }
 
 .options::-webkit-scrollbar-track {
-  border-radius: rem(32);
+  border-radius: rem(40);
   margin-block: rem(30);
 }
 

@@ -36,7 +36,7 @@
   position: relative !important;
   box-shadow: $shadow-two !important;
   border: none !important;
-  border-radius: 0 0 rem(32) rem(32);
+  border-radius: 0 0 rem(40) rem(40);
   overflow: auto !important;
 }
 
@@ -77,7 +77,7 @@
 
 .fr-toolbar {
   background-color: $white-two !important; /* Set toolbar background color to yellow */
-  border-radius: rem(32) rem(32) 0 0 !important; /* Optional: Add border radius if needed */
+  border-radius: rem(40) rem(40) 0 0 !important; /* Optional: Add border radius if needed */
 }
 
 .fr-logo {

@@ -149,7 +149,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
 
   const gridItemStyle = {
     position: "relative" as const,
-    borderRadius: "32px",
+    borderRadius: "2.5rem",
     width: "315px",
     height: "475px",
   };
@@ -255,7 +255,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{
                 objectFit: "cover",
-                borderRadius: "32px",
+                borderRadius: "2.5rem",
                 boxShadow:
                   "10px 10px 20px 0px rgba(169, 196, 203, 0.5), 5px 5px 10px 0px rgba(169, 196, 203, 0.25)",
               }}
@@ -349,7 +349,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       style={{
                         objectFit: "cover",
-                        borderRadius: "32px",
+                        borderRadius: "2.5rem",
                       }}
                     />
                     {remainingImages?.length === 1 &&
@@ -539,7 +539,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                          style={{ width: "202px", height: "54px", backgroundColor: "white" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"
@@ -568,7 +572,11 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                         }}
                       >
                         <Button
-                           style={{ width: "202px", height: "54px", backgroundColor: "white" }}
+                          style={{
+                            width: "202px",
+                            height: "54px",
+                            backgroundColor: "white",
+                          }}
                           buttonChildren={
                             images && images.length > 4
                               ? "Show All Images"

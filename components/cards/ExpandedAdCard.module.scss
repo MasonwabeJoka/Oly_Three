@@ -12,10 +12,10 @@
     position: relative;
     width: rem(348);
     height: rem(288);
-    border-radius: rem(32);
+    border-radius: rem(40);
 
     .image {
-      border-radius: rem(32);
+      border-radius: rem(40);
     }
 
     .likeIconContainer {
@@ -57,7 +57,7 @@
   .details {
     width: rem(570);
     height: rem(250);
-    border-radius: 0 rem(32) rem(32) 0;
+    border-radius: 0 rem(40) rem(40) 0;
     box-shadow:
       10px 10px 20px 0px rgba(169, 196, 203, 0.5),
       5px 5px 10px 0px rgba(169, 196, 203, 0.25);

@@ -105,14 +105,15 @@ const ListingsExpanded = ({
 
   return (
     <div className={styles.listingsContainer}>
-      {ads?.map((ad, index) => {
+      {images?.map((ad, index) => {
         // Filter out undefined values from aspectRatios
         const aspectRatios = ad.images
           ?.map((image) => image.aspectRatio)
           .filter((ratio): ratio is number => ratio !== undefined);
 
         return (
-          <Link href={`/listings/${ad?.slug}`} key={ad?._id}>
+          <Link href="/" key={index}>
+          {/* <Link href={`/listings/${ad?.slug}`} key={index}> */}
             <div className={styles.expandedCardContainer}>
               <AdCard
                 slug={ad?.slug}

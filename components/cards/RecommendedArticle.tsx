@@ -25,7 +25,7 @@ const RecommendedArticle = ({
           sizes="(max-width: 768px) 100vw, 50vw"
           style={{
             objectFit: "cover",
-            borderRadius: "32px",
+            borderRadius: "2.5rem",
           }}
         />
         <div className={styles.titleContainer}>
@@ -38,9 +38,7 @@ const RecommendedArticle = ({
                 avatarSize="tiny"
               />
             </div>
-            <div className={styles.authorName}>
-                {author}
-            </div>
+            <div className={styles.authorName}>{author}</div>
           </div>
         </div>
       </div>

@@ -117,7 +117,7 @@ const MyAdsCard = ({
               height: "270px",
               backgroundColor: "#f3f7fa",
               marginTop: "9px",
-              borderRadius: "2rem 0 0 2rem",
+              borderRadius: "2.5rem 0 0 2.5rem",
             }}
           >
             <Image

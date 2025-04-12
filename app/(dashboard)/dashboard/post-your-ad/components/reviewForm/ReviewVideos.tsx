@@ -31,7 +31,7 @@ const ReviewPhotos = () => {
         {galleryData.map((video: any, index: number) => {
           return (
             <SwiperSlide className={styles.videoContainer} key={index}>
-              <Image src={video.image} alt="image" width={248} height={186.4} style={{borderRadius: "2rem"}}/>
+              <Image src={video.image} alt="image" width={248} height={186.4} style={{borderRadius: "2.5rem"}}/>
             </SwiperSlide>
           );
         })}

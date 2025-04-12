@@ -8,7 +8,7 @@
   align-items: center;
   width: rem(740);
   height: rem(600);
-  border-radius: rem(32);
+  border-radius: rem(40);
   background-color: $white-four;
   // background-color: antiquewhite;
 
@@ -22,7 +22,6 @@
   .control {
     margin-bottom: rem(20);
   }
-
 
   .nameContainer {
     display: flex;
@@ -65,9 +64,7 @@
     }
   }
 
-  
   .uploadButtonContainer {
-   
     width: rem(640);
     margin-bottom: rem(48);
 
@@ -89,10 +86,8 @@
         cursor: pointer;
       }
     }
-
   }
 
   .submitButtonContainer {
-
   }
 }

@@ -10,19 +10,20 @@ import { useModalStore } from "@/store/modalStore";
 import Menu from "@/components/Menu";
 import Tabs from "@/components/Tabs";
 import { useFetchAdStore } from "@/store/useFetchStore";
-import ListingsSearchForm from "./components/ListingsSearchForm";
+import ListingsSearchForm from "../listings/components/ListingsSearchForm";
 import { useListingsStore } from "@/store/listingsStore";
 import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
 import Navbar from "@/components/layouts/Navbar";
 
-// TODO:Put breadcrumbs above results instead of above search inputs.
 const Listings = () => {
   const {
     expanded,
     sortOptions,
+    setSortOptions,
     priceOptions,
-    altWidth,
+    setPriceOptions,
+    altWidth = 988,
     optionsWidth,
     page,
     loading,
@@ -34,18 +35,19 @@ const Listings = () => {
     toggleExpanded,
     setAltWidth,
     setOptionsWidth,
-    setSortOptions,
-    setPriceOptions,
   } = useListingsStore();
 
   const { avatars, getAvatars } = useArticlesStore();
   const { showMenuModal, setShowMenuModal } = useModalStore();
   const { ads, fetchAds } = useFetchAdStore();
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const sortingContainerRef = useRef<HTMLDivElement>(null);
-  const observedDivRef = useRef<HTMLDivElement>(null);
 
   const tempImages = (() => multipleImages.map((item) => item.images))();
+
+  // Explicitly type refs as HTMLDivElement
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const listingsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -68,6 +70,35 @@ const Listings = () => {
     getAvatars();
   }, [getAvatars]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        !filtersRef.current ||
+        !tabsContainerRef.current ||
+        !listingsRef.current
+      )
+        return;
+
+      const filtersRect = filtersRef.current.getBoundingClientRect();
+      const sortingRect = tabsContainerRef.current.getBoundingClientRect();
+      const listingsRect = listingsRef.current.getBoundingClientRect();
+
+      // Check if listings top touches sortingContainer bottom
+      if (!expanded && listingsRect.top <= sortingRect.bottom) {
+        setOptionsWidth("81.6rem");
+        setAltWidth(1360);
+      }
+      // Check if listings is below filters bottom
+      if (listingsRect.top > filtersRect.bottom) {
+        setOptionsWidth("57.24rem");
+        setAltWidth(954);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [expanded, setOptionsWidth, setAltWidth]);
+
   const showFeed = () => {
     setSortOptions(false);
     setPriceOptions(false);
@@ -77,128 +108,6 @@ const Listings = () => {
     setSortOptions(false);
     setPriceOptions(false);
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(styles.makeDivSticky);
-          } else {
-            entry.target.classList.remove(styles.makeDivSticky);
-          }
-        });
-      },
-      {
-        threshold: 0.01,
-      }
-    );
-
-    const elementToObserve = document.querySelector("#blockingDiv");
-
-    if (elementToObserve) {
-      observer.observe(elementToObserve);
-    }
-
-    return () => {
-      if (elementToObserve) {
-        observer.unobserve(elementToObserve);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(styles.getSticky);
-          } else {
-            entry.target.classList.remove(styles.getSticky);
-          }
-        });
-      },
-      {
-        threshold: 0.01,
-      }
-    );
-
-    const elementToObserve = document.querySelector("#sortingButtons");
-
-    if (elementToObserve) {
-      observer.observe(elementToObserve);
-    }
-
-    return () => {
-      if (elementToObserve) {
-        observer.unobserve(elementToObserve);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(styles.hideListings);
-          } else {
-            entry.target.classList.remove(styles.hideListings);
-          }
-        });
-      },
-      {
-        threshold: 0.01,
-      }
-    );
-
-    const elementToObserve = document.querySelector("#sortingOptions");
-
-    if (elementToObserve) {
-      observer.observe(elementToObserve);
-    }
-
-    return () => {
-      if (elementToObserve) {
-        observer.unobserve(elementToObserve);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setAltWidth(954);
-            setOptionsWidth("57.24rem");
-          } else {
-            setAltWidth(1360);
-            setOptionsWidth("81.6rem");
-          }
-        });
-      },
-      {
-        rootMargin:
-          sortOptions || priceOptions
-            ? "-280px 0px 0px 0px"
-            : "0px 0px 0px 0px",
-        threshold: 0.01,
-      }
-    );
-
-    const elementToObserve = observedDivRef.current;
-
-    if (elementToObserve) {
-      observer.observe(elementToObserve);
-    }
-
-    return () => {
-      if (elementToObserve) {
-        observer.unobserve(elementToObserve);
-      }
-    };
-  }, [sortOptions, priceOptions]);
 
   const onSubmit = (data: any) => {
     console.log("Form Data:", data);
@@ -221,92 +130,74 @@ const Listings = () => {
           <ListingsSearchForm onSubmit={onSubmit} />
         </div>
 
-        <div className={styles.filters}>
-         
-            <Tabs
-              tabs={["Make", "Model", "Body Type", "More Filters+"]}
-              condition={!expanded}
-              width={954}
-              altWidth={988}
-              onClickHandlers={[undefined, undefined, undefined, undefined]}
-              dashboard={false}
-            />
-      
-        </div>
-        <div
-          style={{
-            backgroundColor: "#edf2f7",
-            width: "100vw",
-            height: "7.75rem",
-            borderRadius: "0 0 2rem 2rem",
-            pointerEvents: "none",
-          }}
-          id="blockingDiv"
-        ></div>
-
         <div className={styles.listingsContainer}>
-          <div
-            ref={sortingContainerRef}
-            className={styles.sortingContainer}
-            id="sortingButtons"
-          >
-            <Tabs
-              tabs={[
-                "Sort",
-                "Price Range",
-                "Show Feed/Show Map",
-                expanded ? "Collage View" : "Expanded View",
-              ]}
-              condition={!expanded}
-              width={954}
-              altWidth={altWidth}
-              onClickHandlers={[
-                toggleSortOptions,
-                togglePriceOptions,
-                showFeed,
-                toggleExpanded,
-              ]}
-              dashboard={false}
-            />
+          <div className={styles.tabsContainer} ref={tabsContainerRef}>
+            <div className={styles.filters} ref={filtersRef}>
+              <Tabs
+                tabs={["Make", "Model", "Body Type", "More Filters+"]}
+                condition={!expanded}
+                width={954}
+                altWidth={altWidth}
+                onClickHandlers={[undefined, undefined, undefined, undefined]}
+                dashboard={false}
+              />
+            </div>
+            <div className={styles.sortingContainer}>
+              <Tabs
+                tabs={[
+                  "Order",
+                  "Price Range",
+                  "Show Feed/Show Map",
+                  expanded ? "Collage View" : "Expanded View",
+                ]}
+                condition={!expanded}
+                width={954}
+                altWidth={altWidth}
+                onClickHandlers={[
+                  toggleSortOptions,
+                  togglePriceOptions,
+                  showFeed,
+                  toggleExpanded,
+                ]}
+                dashboard={false}
+              />
 
-            {sortOptions ? (
-              <ul className={styles.options}>
-                {SortData.map((option) => (
-                  <li
-                    key={option.id}
-                    className={styles.option}
-                    onClick={handleSelect}
-                    style={{ width: expanded ? "57.24rem" : optionsWidth }}
-                  >
-                    <span className={styles.optionText}>{option.result}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : priceOptions ? (
-              <ul className={styles.options}>
-                {PriceRanges.map((element) => (
-                  <li
-                    key={element.id}
-                    className={styles.option}
-                    style={{ width: expanded ? "57.24rem" : optionsWidth }}
-                  >
-                    <div style={{ display: "flex", gap: "56px" }}>
-                      <span>{element.result[0]}</span>
-                      <span>-</span>
-                      <span>{element.result[1]}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+              {sortOptions ? (
+                <ul
+                  className={sortOptions ? styles.options : styles.hideOptions}
+                >
+                  {SortData.map((option) => (
+                    <li
+                      key={option.id}
+                      className={styles.option}
+                      onClick={handleSelect}
+                      style={{ width: expanded ? "57.24rem" : optionsWidth }}
+                    >
+                      <span className={styles.optionText}>{option.result}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : priceOptions ? (
+                <ul className={styles.options}>
+                  {PriceRanges.map((element) => (
+                    <li
+                      key={element.id}
+                      className={styles.option}
+                      style={{ width: expanded ? "57.24rem" : optionsWidth }}
+                    >
+                      <div style={{ display: "flex", gap: "56px" }}>
+                        <span>{element.result[0]}</span>
+                        <span>-</span>
+                        <span>{element.result[1]}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
           </div>
 
-          <div
-            ref={observedDivRef}
-            style={{ height: "1px", visibility: "hidden" }}
-          ></div>
-
-          <div className={styles.listings}>
+          <div className={styles.listings} ref={listingsRef}>
             {expanded ? (
               <ListingsExpanded
                 category="all"

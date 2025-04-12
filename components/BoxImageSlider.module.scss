@@ -94,17 +94,17 @@
   }
 
   .swiper {
-    position: relative;
-    top: 0;
-    left: 0;
+    // position: relative;
+    // top: 0;
+    // left: 0;
     // width: rem(310);
-    min-height: rem(248);
-    border-radius: rem(32) rem(32) rem(0) rem(0);
-    object-fit: cover;
+    // min-height: rem(248);
+    // border-radius: rem(40) rem(40) rem(0) rem(0);
+    // object-fit: cover;
 
     .swiperSlide {
-      z-index: -1;
-      position: relative;
+      // z-index: -1;
+      // position: relative;
     }
   }
 }

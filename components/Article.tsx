@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import styles from "./Article.module.scss";
 import HomeButton from "./HomeButton";
@@ -12,8 +12,8 @@ import TempArticle from "./TempArticle";
 import ArticleCardBox from "./cards/ArticleCardBox";
 import RecommendedArticle from "./cards/RecommendedArticle";
 import CommentsSection from "./CommentsSection";
-  // Todo: onClick of .more in the topBar replace all top bar icons with share icons.
-  //Todo: Ad listen to this article button (check New York Times articles)
+// Todo: onClick of .more in the topBar replace all top bar icons with share icons.
+//Todo: Ad listen to this article button (check New York Times articles)
 
 const Article = () => {
   const boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
@@ -32,7 +32,7 @@ const Article = () => {
           sizes="(max-width: 768px) 100vw, 50vw"
           style={{
             objectFit: "cover",
-            borderRadius: "32px",
+            borderRadius: "2.5rem",
           }}
         />
         <section className={styles.topSection}>
@@ -146,7 +146,6 @@ const Article = () => {
             />
           </div>
           <div className={`${styles.more} ${styles.iconContainer}`}>
-          
             <Icon
               className={styles.icon}
               src="/icons/three-dots.png"

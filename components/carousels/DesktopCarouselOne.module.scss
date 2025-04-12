@@ -11,7 +11,7 @@
     height: rem(462);
     background-color: $white-three;
     box-shadow: $shadow-one;
-    border-radius: rem(32);
+    border-radius: rem(40);
 
     .slides {
       position: relative;
@@ -19,14 +19,14 @@
       flex-direction: column;
       width: 100%;
       height: rem(358);
-      border-radius: rem(32) rem(32) 0 0;
+      border-radius: rem(40) rem(40) 0 0;
       padding: 0;
       background-color: $white-four;
 
       .image {
         margin-left: 0;
         height: rem(358);
-        border-radius: rem(32) rem(32) 0 0;
+        border-radius: rem(40) rem(40) 0 0;
       }
 
       .slideDotsContainer {
@@ -51,7 +51,7 @@
               background-color: $grey-one;
               width: rem(88);
               height: rem(5);
-              border-radius: rem(32);
+              border-radius: rem(40);
               border: none;
               cursor: pointer;
             }

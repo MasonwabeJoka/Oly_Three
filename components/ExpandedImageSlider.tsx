@@ -135,7 +135,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: "18.5rem",
+            marginRight: "16rem",
           }}
           onClick={(e) => e.preventDefault()}
         >
@@ -148,7 +148,7 @@ const ExpandedImageSlider = ({
             style={{
               // ...activeStyles,
               display: slideConfig.isBeginning ? "none" : "flex",
-              // marginRight: "19rem",
+              // marginRight: "16rem",
             }}
           >
             <NavButtonLeft size="small" />
@@ -160,7 +160,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "18.5rem",
+            marginLeft: "16rem",
           }}
           onClick={(e) => e.preventDefault()}
         >
@@ -183,7 +183,9 @@ const ExpandedImageSlider = ({
         className={styles.swiper}
         onSwiper={(swiper) => setSwiper(swiper)}
         spaceBetween={60}
+        centeredSlides={true}
         slidesPerView={1}
+        modules={[Pagination]}
       >
         {urls?.map((url, index) => (
           
@@ -192,9 +194,9 @@ const ExpandedImageSlider = ({
               style={{
                 position: "relative",
                 height: "19rem",
-                width: `calc(19rem * ${aspectRatios && aspectRatios[index]})`,
+                width: `calc(19rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : "auto"})`,
                 // width: "1rem",
-                borderRadius: "1.5rem",
+                borderRadius: "2.5rem",
               }}
             >
               
@@ -203,7 +205,7 @@ const ExpandedImageSlider = ({
                 src={url}
                 fill
                 alt="Ad Image"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", borderRadius: "2.5rem", zIndex: "50" }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
@@ -215,6 +217,7 @@ const ExpandedImageSlider = ({
 };
 
 export default ExpandedImageSlider;
+
 
 
 

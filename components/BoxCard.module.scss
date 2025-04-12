@@ -6,12 +6,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-radius: rem(32);
+  border-radius: rem(40);
   background: $grey-one;
   cursor: pointer;
   box-shadow: $shadow-six;
   margin-top: rem(-8);
- 
+
   .imageContainer {
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@
     width: 100%;
     height: rem(96);
     z-index: 1;
-    border-radius: rem(0) rem(0) rem(32) rem(32);
+    border-radius: rem(0) rem(0) rem(40) rem(40);
     padding: 0 rem(8) rem(8) rem(8);
 
     .titleDescription {

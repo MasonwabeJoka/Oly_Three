@@ -6,12 +6,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-radius: rem(32);
+  border-radius: rem(40);
   background: $grey-one;
   cursor: pointer;
   box-shadow: $shadow-six;
   margin-top: rem(-8);
- 
+
   .imageContainer {
     display: flex;
     flex-direction: column;
@@ -147,7 +147,6 @@
 }
 .standardProperty {
   @include larger-than(mobile) {
-    
     width: rem(387.5);
     height: rem(349.96875);
   }
@@ -169,7 +168,7 @@
     justify-content: space-between;
     width: rem(918);
     height: rem(272);
-    border-radius: rem(32);
+    border-radius: rem(40);
     background-color: $white-two;
     box-shadow: $shadow-one;
 
@@ -185,9 +184,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: rem(32);
+        border-radius: rem(40);
         .image {
-          border-radius: rem(32);
+          border-radius: rem(40);
           box-shadow: $shadow-three;
         }
 

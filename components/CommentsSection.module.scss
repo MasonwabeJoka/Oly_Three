@@ -4,7 +4,7 @@
 
 .container {
   background-color: $white-two;
-  border-radius: rem(32);
+  border-radius: rem(40);
   padding: rem(32);
   // padding-bottom: rem(80);
   .title {
@@ -12,7 +12,7 @@
     width: fit-content;
     margin-right: rem(24);
     margin-bottom: rem(20);
-    font-size:$body !important;
+    font-size: $body !important;
     // font-weight: 500;
     // background-color:yellow;
 
@@ -22,13 +22,11 @@
   }
 
   .commentInputContainer {
-    margin-bottom: rem(48); 
+    margin-bottom: rem(48);
     .commentInput {
       min-height: rem(80) !important;
-  
     }
   }
-
 
   .comment {
     width: 80%;
@@ -39,21 +37,17 @@
     margin-left: rem(56);
     margin-top: rem(32);
     width: 80%;
-
-   
   }
   .replyTwo {
     margin-left: rem(128);
     margin-top: rem(32);
     width: 80%;
-   
   }
   .replyThree {
     margin-left: rem(128);
     margin-top: rem(32);
     border-radius: rem(16);
     width: 80%;
-   
   }
   .replyFour {
     margin-left: rem(128);

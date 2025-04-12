@@ -16,12 +16,12 @@
       position: relative;
       width: rem(348);
       height: rem(288);
-      border-radius: rem(32);
+      border-radius: rem(40);
       box-shadow: $shadow-one;
       background-color: $white-four;
 
       .image {
-        border-radius: rem(32);
+        border-radius: rem(40);
       }
 
       .likeIconContainer {
@@ -169,15 +169,15 @@
     margin-top: rem(-9);
     padding-bottom: rem(26);
     box-shadow: $shadow-one;
-    border-radius: 0 rem(32) rem(32) rem(32);
+    border-radius: 0 rem(40) rem(40) rem(40);
     z-index: -5;
 
     .analyticsItems {
       display: flex;
       align-items: center;
-      height: rem(32);
+      height: rem(40);
       width: 100%;
-      padding: 0 rem(32) rem(0) rem(80);
+      padding: 0 rem(40) rem(0) rem(80);
     }
     .whiteOne {
       background-color: $white-one;

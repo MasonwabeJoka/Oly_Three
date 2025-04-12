@@ -102,7 +102,7 @@ const Articles = () => {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 style={{
                   objectFit: "cover",
-                  borderRadius: "32px",
+                  borderRadius: "2.5rem",
                 }}
               />
               <section className={styles.bottomSection}>

@@ -39,7 +39,7 @@
         align-items: center;
 
         .primaryImage {
-          border-radius: rem(32);
+          border-radius: rem(40);
           box-shadow:
             10px 10px 20px 0px rgba(169, 196, 203, 0.5),
             5px 5px 10px 0px rgba(169, 196, 203, 0.25);
@@ -96,7 +96,7 @@
       }
 
       .image {
-        border-radius: rem(32);
+        border-radius: rem(40);
         box-shadow:
           10px 10px 20px 0px rgba(169, 196, 203, 0.5),
           5px 5px 10px 0px rgba(169, 196, 203, 0.25);
@@ -136,7 +136,6 @@
           top: 50%;
           transform: translate(-50%, -50%);
           z-index: 5;
-        
         }
       }
     }

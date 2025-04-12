@@ -16,7 +16,7 @@
     line-height: 1.5;
     border: none;
     outline: none;
-    border-radius: rem(32);
+    border-radius: rem(40);
     overflow: auto;
     resize: none; // can not be resized by user
     background: $white-one;
@@ -28,7 +28,7 @@
   }
 
   .textarea::-webkit-scrollbar-track {
-    border-radius: rem(32);
+    border-radius: rem(40);
     margin-block: rem(30);
   }
 

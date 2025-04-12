@@ -18,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    border-radius: rem(32);
+    border-radius: rem(40);
     margin-bottom: rem(-4);
 
     .errorMessage {
@@ -53,7 +53,7 @@
     }
 
     .input {
-      border-radius: rem(32);
+      border-radius: rem(40);
       background-color: $white-one;
       box-shadow: $shadow-two;
       color: $black-four;
@@ -75,10 +75,10 @@
   }
 
   .searchSuggestions {
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
-    width: 100%; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
     max-height: rem(400);
     cursor: pointer;
     overflow-y: auto;
@@ -91,7 +91,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border-radius: rem(32);
+      border-radius: rem(40);
       height: 94%;
       margin: rem(4) auto 0;
 

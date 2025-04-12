@@ -39,7 +39,7 @@ const ReviewPhotos = () => {
                   alt="image"
                   width={248}
                   height={186.4}
-                  style={{ borderRadius: "2rem" }}
+                  style={{ borderRadius: "2.5rem" }}
                 />
               </SwiperSlide>
             );

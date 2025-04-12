@@ -1,7 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.wrapper{
+.wrapper {
   padding: 0 rem(200);
 }
 .container {
@@ -143,7 +143,7 @@
         height: rem(800);
         position: relative;
 
-        border-radius: rem(32);
+        border-radius: rem(40);
         margin-bottom: rem(64);
 
         .image {

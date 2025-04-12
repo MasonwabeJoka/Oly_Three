@@ -14,6 +14,9 @@ import ListingsSearchForm from "./components/ListingsSearchForm";
 import { useListingsStore } from "@/store/listingsStore";
 import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
+import Navbar from "@/components/layouts/Navbar";
+
+// TODO:Put breadcrumbs above results instead of above search inputs.
 const Listings = () => {
   const {
     expanded,
@@ -42,7 +45,7 @@ const Listings = () => {
   const sortingContainerRef = useRef<HTMLDivElement>(null);
   const observedDivRef = useRef<HTMLDivElement>(null);
 
-  const tempImages = (() => multipleImages.map(item => item.images))();
+  const tempImages = (() => multipleImages.map((item) => item.images))();
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -204,6 +207,9 @@ const Listings = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
+        <nav className={styles.nav}>
+          <Navbar />
+        </nav>
         <div className={styles.modalContainer}>
           <Modal
             showModal={showMenuModal}
@@ -211,11 +217,12 @@ const Listings = () => {
             modalContent={<Menu />}
           />
         </div>
-
-        <ListingsSearchForm onSubmit={onSubmit} />
+        <div className={styles.listingsSearchForm}>
+          <ListingsSearchForm onSubmit={onSubmit} />
+        </div>
 
         <div className={styles.filters}>
-          <div ref={tabsRef}>
+         
             <Tabs
               tabs={["Make", "Model", "Body Type", "More Filters+"]}
               condition={!expanded}
@@ -224,24 +231,28 @@ const Listings = () => {
               onClickHandlers={[undefined, undefined, undefined, undefined]}
               dashboard={false}
             />
-          </div>
+      
         </div>
         <div
           style={{
             backgroundColor: "#edf2f7",
             width: "100vw",
             height: "7.75rem",
-            borderRadius: "0 0 2rem 2rem",
+            borderRadius: "0 0 2.5rem 2.5rem",
             pointerEvents: "none",
           }}
           id="blockingDiv"
         ></div>
 
         <div className={styles.listingsContainer}>
-          <div ref={sortingContainerRef} className={styles.sortingContainer}>
+          <div
+            ref={sortingContainerRef}
+            className={styles.sortingContainer}
+            id="sortingButtons"
+          >
             <Tabs
               tabs={[
-                "Order",
+                "Sort",
                 "Price Range",
                 "Show Feed/Show Map",
                 expanded ? "Collage View" : "Expanded View",
@@ -259,7 +270,7 @@ const Listings = () => {
             />
 
             {sortOptions ? (
-              <ul className={sortOptions ? styles.options : styles.hideOptions}>
+              <ul className={styles.options}>
                 {SortData.map((option) => (
                   <li
                     key={option.id}

@@ -50,6 +50,7 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
   postAge,
   setIsCardHovered,
 }) => {
+ 
   return (
     <article
       className={styles.expandedCard}
@@ -57,7 +58,16 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
       onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
     >
       <div className={styles.expandedCardWrapper}>
-        <ExpandedImageContainer images={images} aspectRatios={aspectRatios} />
+        <ExpandedImageContainer
+          images={images}
+          aspectRatios={aspectRatios}
+          isDeletable={isDeletable}
+          id={id}
+          isFeed={isFeed}
+          checkedColour={checkedColour}
+          hoverColour={hoverColour}
+          checkedHovered={checkedHovered}
+        />
         <ExpandedDetails
           isDeletable={isDeletable}
           id={id}

@@ -6,66 +6,64 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
- 
+
   .article {
     position: relative;
     display: flex;
     flex-direction: column;
     width: rem(280);
     height: rem(350);
-    border-radius: rem(32);
+    border-radius: rem(40);
     box-shadow: $shadow-one;
     .titleContainer {
-        position: relative;
-        top: 100%;
-        transform: translateY(-100%);
+      position: relative;
+      top: 100%;
+      transform: translateY(-100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-height: 70%;
+      min-height: 50%;
+      border-bottom-left-radius: rem(32);
+      border-bottom-right-radius: rem(32);
+      background: linear-gradient(
+        to top,
+        rgba($black-one, 0.6),
+        rgba($black-one, 0.3)
+      );
+
+      .title {
+        text-align: center;
+        padding: 0 rem(16);
+        margin-bottom: rem(16);
+        font-size: $h3;
+        font-weight: 450;
+        color: $white-two;
+        color: $primary;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .author {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        width: 100%;
-        max-height: 70%;
-        min-height: 50%;
-        border-bottom-left-radius: rem(32);
-        border-bottom-right-radius: rem(32);
-        background: linear-gradient(
-            to top,
-            rgba($black-one, .60),
-            rgba($black-one, 0.30)
-          );
+        margin-bottom: rem(16);
 
-        .title {
-            text-align: center; 
-            padding: 0 rem(16); 
-            margin-bottom: rem(16);
-            font-size: $h3;
-            font-weight: 450;
-            color: $white-two;
-            color: $primary;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        .authorAvatar {
+          margin-bottom: rem(8);
+
+          .avatar {
+            outline: rem(2) solid $primary !important;
+          }
         }
-
-        .author {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: rem(16);
-
-            .authorAvatar {
-                margin-bottom: rem(8);
-
-                .avatar {
-                  outline: rem(2) solid $primary !important;
-                }
-            }
-            .authorName {
-                font-size: 14px;
-                font-weight: 400;
-                color: $primary;
- 
-            }
+        .authorName {
+          font-size: 14px;
+          font-weight: 400;
+          color: $primary;
         }
+      }
     }
   }
 }

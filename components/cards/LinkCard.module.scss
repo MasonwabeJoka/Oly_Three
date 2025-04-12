@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-radius: rem(32);
+  border-radius: rem(40);
   cursor: pointer;
   box-shadow: $shadow-one;
   background-color: $grey-one;
@@ -18,7 +18,7 @@
 
   .imageContainer {
     height: rem(128);
-    border-radius: rem(32) rem(32) 0 0;
+    border-radius: rem(40) rem(40) 0 0;
     position: absolute;
 
     @include larger-than(mobile) {
@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 rem(32) rem(32);
+    border-radius: 0 0 rem(40) rem(40);
     margin-top: auto;
     background-color: $grey-one;
 
@@ -107,12 +107,12 @@
 }
 
 .largeImageContainer {
-  border-radius: rem(32) rem(32) 0 0;
+  border-radius: rem(40) rem(40) 0 0;
   height: rem(307);
 }
 .largeLabelContainer {
   height: rem(88);
-  border-radius: 0 0 rem(32) rem(32);
+  border-radius: 0 0 rem(40) rem(40);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,7 +124,7 @@
 
 .largeLabelContainerFeed {
   height: rem(88);
-  border-radius: 0 0 rem(32) rem(32);
+  border-radius: 0 0 rem(40) rem(40);
   display: flex;
   justify-content: center;
   align-items: center;

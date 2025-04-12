@@ -126,9 +126,7 @@ const Tabs: React.FC<TabsProps> = ({
         style={{
           display: "flex",
           flexWrap: "wrap",
-          // justifyContent: tabs.length < 4 ? "flex-start" : "center",
           justifyContent: "flex-start",
-
           width: condition
             ? `${altWidth && altWidth / 16}rem`
             : `${width / 16}rem`,

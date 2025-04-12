@@ -17,9 +17,9 @@ const PropertyValuation = () => {
         <div className={styles.textContent}>
           <h2 className={styles.title}>Property Valuation</h2>
           <p className={styles.description}>
-            Get a valuation of your property in minutes. Whether
-            you're looking to sell or rent, our advanced valuation tool provides
-            reliable estimates based on current market data.
+            Get a valuation of your property in minutes. Whether you're looking
+            to sell or rent, our advanced valuation tool provides reliable
+            estimates based on current market data.
           </p>
           <div className={styles.features}>
             <div className={styles.feature}>
@@ -75,7 +75,7 @@ const PropertyValuation = () => {
             alt="Property Valuation Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "32px" }}
+            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
           />
         </div>
       </div>

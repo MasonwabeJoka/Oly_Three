@@ -67,7 +67,7 @@ const LinkCardBox = ({ label, image, cardSize }: CardProps): JSX.Element => {
           backgroundRepeat: "no-repeat",
           width: "100%",
           height: "75%",
-          borderRadius: "2rem 2rem 0rem 0rem",
+          borderRadius: "2.5rem 2.5rem 0rem 0rem",
         }}
       ></div>
       <div

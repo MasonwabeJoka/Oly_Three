@@ -92,7 +92,7 @@ const AgentFinder = () => {
             alt="Property Valuation Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "32px" }}
+            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
           />
         </div>
       </div>

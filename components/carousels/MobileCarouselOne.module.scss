@@ -12,7 +12,7 @@
 
     width: fit-content;
     gap: rem(16);
-    border-radius: rem(32);
+    border-radius: rem(40);
 
     .slide {
       position: absolute;
@@ -20,20 +20,20 @@
       display: flex;
       flex-direction: column;
       width: rem(311);
-      border-radius: rem(32);
+      border-radius: rem(40);
       padding: 0;
       background-color: $white-four;
       z-index: 5;
       box-shadow: $shadow-one;
 
       .image {
-        border-radius: rem(32) rem(32) 0 0;
+        border-radius: rem(40) rem(40) 0 0;
       }
 
       .description {
         width: rem(311);
         height: rem(132);
-        border-radius: 0 0 rem(32) rem(32);
+        border-radius: 0 0 rem(40) rem(40);
         .slideTitle {
           height: rem(32);
           line-height: normal;
@@ -63,7 +63,7 @@
           background-color: $grey-one;
           width: rem(88);
           height: rem(5);
-          border-radius: rem(32);
+          border-radius: rem(40);
           border: none;
           cursor: pointer;
         }

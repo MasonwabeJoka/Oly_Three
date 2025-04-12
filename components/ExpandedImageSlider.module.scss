@@ -3,8 +3,8 @@
 @use "@/utils/breakpoints" as *;
 .container {
   position: relative;
-  border-radius: rem(32);
-  background-color: yellow;
+  border-radius: rem(40);
+  // background-color: yellow;
   .buttonsAndLike {
     position: absolute;
     z-index: 10;
@@ -33,9 +33,6 @@
       }
     }
     .buttonContainer {
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
       position: absolute;
       top: 50%;
       z-index: 20;
@@ -86,18 +83,20 @@
   }
 
   .swiper {
-    position: relative;
-    top: 0;
-    left: 0;
+    display: flex;
+    justify-content: center;
+
     width: rem(310);
     min-height: rem(248);
-    border-radius: rem(32);
-    object-fit: cover;
+    border-radius: rem(40);
+
     .swiperSlide {
       position: relative;
+      display: flex;
+      justify-content: center;
 
       .image {
-        object-fit: cover;
+        // object-fit: cover;
       }
     }
   }

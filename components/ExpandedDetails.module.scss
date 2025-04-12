@@ -3,11 +3,11 @@
 @use "@/utils/breakpoints" as *;
 .details {
     display: flex;
-
     flex-direction: column;
     width: rem(570);
     height: rem(250);
     border-radius: 0 rem(32) rem(32) 0;
+    
 
     .checkboxContainer {
       align-self: flex-end;

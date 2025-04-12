@@ -12,7 +12,7 @@
     position: relative;
     width: 95%;
     height: rem(640);
-    border-radius: rem(32);
+    border-radius: rem(40);
     margin-top: rem(32);
     box-shadow: $shadow-one;
 
@@ -80,7 +80,7 @@
         margin-bottom: rem(56);
 
         padding: rem(24);
-        border-radius: rem(32);
+        border-radius: rem(40);
 
         .leftSection {
           width: 50%;
@@ -130,10 +130,10 @@
 
   .topBar {
     display: flex;
-   justify-content: center;
+    justify-content: center;
     align-items: center;
     width: 95%;
-   padding: rem(72) 0;
+    padding: rem(72) 0;
 
     .icons {
       display: flex;
@@ -169,7 +169,7 @@
           background-color: $white-one;
           width: 90%;
           height: rem(56);
-          border-radius: rem(32);
+          border-radius: rem(40);
           box-shadow: $shadow-six;
           box-shadow: $shadow-one;
           cursor: pointer;

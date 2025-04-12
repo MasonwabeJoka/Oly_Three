@@ -269,7 +269,7 @@ const ImageSlider = ({
                 position: "relative",
                 height: swiperSlideHeight(index),
                 width: swiperSlideWidth(index),
-                borderRadius: "2rem",
+                borderRadius: "2.5rem",
                 backgroundColor: "#F5F5F5",
               }}
             >

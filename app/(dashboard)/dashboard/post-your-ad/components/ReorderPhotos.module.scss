@@ -2,7 +2,7 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .rect {
-  border-radius: rem(32);
+  border-radius: rem(40);
   gap: rem(8);
 }
 
@@ -60,7 +60,7 @@
     width: 95%;
     padding: rem(96) 0;
     margin-bottom: rem(64);
-    border-radius: rem(32);
+    border-radius: rem(40);
     background-color: $white-one;
     box-shadow: $shadow-two;
     background-color: yellow;
@@ -78,7 +78,7 @@
         height: rem(186.4);
         scroll-snap-align: start;
         transition: transform 0.3s ease-in-out;
-        border-radius: rem(32);
+        border-radius: rem(40);
         cursor: grab;
         &:active {
           cursor: grabbing;
@@ -101,7 +101,7 @@
         }
 
         .image {
-          border-radius: rem(32);
+          border-radius: rem(40);
           box-shadow: $shadow-one;
         }
       }
