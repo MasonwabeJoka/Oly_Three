@@ -103,7 +103,8 @@ const ExpandedImageSlider = ({
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-  
+
+  console.log({aspectRatios});
 
   return (
     <div className={styles.container}>
@@ -135,7 +136,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: "16rem",
+            marginRight: "20.5rem",
           }}
           onClick={(e) => e.preventDefault()}
         >
@@ -160,7 +161,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "16rem",
+            marginLeft: "20.5rem",
           }}
           onClick={(e) => e.preventDefault()}
         >
@@ -172,6 +173,7 @@ const ExpandedImageSlider = ({
             }}
             style={{
               // ...activeStyles,
+              // marginLeft: "16rem",
               display: slideConfig.isEnd ? "none" : "flex",
             }}
           >
@@ -193,8 +195,8 @@ const ExpandedImageSlider = ({
             <div
               style={{
                 position: "relative",
-                height: "19rem",
-                width: `calc(19rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : "auto"})`,
+                height: "16rem",
+                width: `calc(16rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : "auto"})`,
                 // width: "1rem",
                 borderRadius: "2.5rem",
               }}

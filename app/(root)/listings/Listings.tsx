@@ -1,20 +1,23 @@
-"use client";
-import { useEffect, useRef } from "react";
-import styles from "./Listings.module.scss";
-import { SortData, PriceRanges } from "@/data/DropdownData";
-import ListingsExpanded from "@/components/ListingsExpanded";
-import PaginatedListingsCollage from "@/components/PaginatedListingsCollage";
-import useArticlesStore from "@/store/articlesStore";
-import Modal from "@/components/Modal";
-import { useModalStore } from "@/store/modalStore";
-import Menu from "@/components/Menu";
-import Tabs from "@/components/Tabs";
-import { useFetchAdStore } from "@/store/useFetchStore";
-import ListingsSearchForm from "../listings/components/ListingsSearchForm";
-import { useListingsStore } from "@/store/listingsStore";
-import ListingsCollage from "@/components/ListingsCollage";
-import multipleImages from "@/data/multipleImages";
-import Navbar from "@/components/layouts/Navbar";
+
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import styles from './Listings.module.scss';
+import { SortData, PriceRanges } from '@/data/DropdownData';
+import ListingsExpanded from '@/components/ListingsExpanded';
+import ListingsCollage from '@/components/ListingsCollage';
+import useArticlesStore from '@/store/articlesStore';
+import Modal from '@/components/Modal';
+import { useModalStore } from '@/store/modalStore';
+import Menu from '@/components/Menu';
+import Tabs from '@/components/Tabs';
+import { useFetchAdStore } from '@/store/useFetchStore';
+import ListingsSearchForm from './../listings/components/ListingsSearchForm';
+import { useListingsStore } from '@/store/listingsStore';
+import multipleImages from '@/data/multipleImages';
+import Navbar from '@/components/layouts/Navbar';
+import Pagination from '@/components/Pagination';
+import { useSearchParams } from 'next/navigation'; // Use this instead of useRouter for query params
 
 const Listings = () => {
   const {
@@ -41,7 +44,8 @@ const Listings = () => {
   const { showMenuModal, setShowMenuModal } = useModalStore();
   const { ads, fetchAds } = useFetchAdStore();
 
-  const tempImages = (() => multipleImages.map((item) => item.images))();
+  const searchParams = useSearchParams(); // Use searchParams to get query params
+  const tempImages = multipleImages.map((item) => item.images);
 
   // Explicitly type refs as HTMLDivElement
   const filtersRef = useRef<HTMLDivElement>(null);
@@ -59,12 +63,12 @@ const Listings = () => {
         limit: 5,
         page: page,
         offset: 0,
-        sortOrder: "desc",
-        sortBy: "price",
+        sortOrder: 'desc',
+        sortBy: 'price',
       });
     }
     setLoading(false);
-  }, [isClient, page]);
+  }, [isClient, page, fetchAds, setLoading]);
 
   useEffect(() => {
     getAvatars();
@@ -83,20 +87,18 @@ const Listings = () => {
       const sortingRect = tabsContainerRef.current.getBoundingClientRect();
       const listingsRect = listingsRef.current.getBoundingClientRect();
 
-      // Check if listings top touches sortingContainer bottom
       if (!expanded && listingsRect.top <= sortingRect.bottom) {
-        setOptionsWidth("81.6rem");
+        setOptionsWidth('81.6rem');
         setAltWidth(1360);
       }
-      // Check if listings is below filters bottom
       if (listingsRect.top > filtersRect.bottom) {
-        setOptionsWidth("57.24rem");
+        setOptionsWidth('57.24rem');
         setAltWidth(954);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [expanded, setOptionsWidth, setAltWidth]);
 
   const showFeed = () => {
@@ -110,7 +112,7 @@ const Listings = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
+    console.log('Form Data:', data);
   };
 
   return (
@@ -134,7 +136,7 @@ const Listings = () => {
           <div className={styles.tabsContainer} ref={tabsContainerRef}>
             <div className={styles.filters} ref={filtersRef}>
               <Tabs
-                tabs={["Make", "Model", "Body Type", "More Filters+"]}
+                tabs={['Make', 'Model', 'Body Type', 'More Filters+']}
                 condition={!expanded}
                 width={954}
                 altWidth={altWidth}
@@ -145,10 +147,10 @@ const Listings = () => {
             <div className={styles.sortingContainer}>
               <Tabs
                 tabs={[
-                  "Order",
-                  "Price Range",
-                  "Show Feed/Show Map",
-                  expanded ? "Collage View" : "Expanded View",
+                  'Order',
+                  'Price Range',
+                  'Show Feed/Show Map',
+                  expanded ? 'Collage View' : 'Expanded View',
                 ]}
                 condition={!expanded}
                 width={954}
@@ -171,7 +173,7 @@ const Listings = () => {
                       key={option.id}
                       className={styles.option}
                       onClick={handleSelect}
-                      style={{ width: expanded ? "57.24rem" : optionsWidth }}
+                      style={{ width: expanded ? '57.24rem' : optionsWidth }}
                     >
                       <span className={styles.optionText}>{option.result}</span>
                     </li>
@@ -183,9 +185,9 @@ const Listings = () => {
                     <li
                       key={element.id}
                       className={styles.option}
-                      style={{ width: expanded ? "57.24rem" : optionsWidth }}
+                      style={{ width: expanded ? '57.24rem' : optionsWidth }}
                     >
-                      <div style={{ display: "flex", gap: "56px" }}>
+                      <div style={{ display: 'flex', gap: '56px' }}>
                         <span>{element.result[0]}</span>
                         <span>-</span>
                         <span>{element.result[1]}</span>
@@ -222,6 +224,9 @@ const Listings = () => {
                 sortOrder="desc"
               />
             )}
+          </div>
+          <div className={styles.pagination}>
+            <Pagination totalPages={10} />
           </div>
         </div>
       </div>

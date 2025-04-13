@@ -244,7 +244,7 @@ const ProfileSettings = () => {
                   "Snapchat",
                   "Other",
                 ]}
-                currentValue="Social Media Links"
+                initialValue="Social Media Links"
                 selectSize="large"
                 label="Provinces"
                 id="provinces"

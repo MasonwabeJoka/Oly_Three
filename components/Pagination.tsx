@@ -1,82 +1,131 @@
 // components/Pagination.tsx
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './Pagination.module.scss';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface PaginationProps {
-  currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
+  onPageChange?: (page: number) => void; // Callback to notify parent of page changes
 }
 
-const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}) => {
-  const maxPagesToShow = 5; // Maximum number of page buttons to show at once
-  const pages: (number | string)[] = [];
+const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Logic to determine which pages to show
-  let startPage = Math.max(1, currentPage - 2);
-  let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  // Adjust startPage if we're near the end
-  if (endPage - startPage + 1 < maxPagesToShow) {
-    startPage = Math.max(1, endPage - maxPagesToShow + 1);
-  }
+  useEffect(() => {
+    setIsMounted(true);
 
-  // Add page numbers and ellipsis
-  if (startPage > 1) {
-    pages.push(1);
-    if (startPage > 2) pages.push('...');
-  }
+    const pageFromParams = searchParams ? Number(searchParams.get('page')) || 1 : 1;
+    const validPage = Math.max(1, Math.min(pageFromParams, totalPages));
+    setCurrentPage(validPage);
 
-  for (let i = startPage; i <= endPage; i++) {
-    pages.push(i);
-  }
+    if (pageFromParams !== validPage) {
+      const params = new URLSearchParams(searchParams?.toString() || '');
+      params.set('page', validPage.toString());
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
 
-  if (endPage < totalPages) {
-    if (endPage < totalPages - 1) pages.push('...');
-    pages.push(totalPages);
+    // Notify parent of the initial page
+    if (onPageChange) {
+      onPageChange(validPage);
+    }
+  }, [searchParams, totalPages, router, pathname, onPageChange]);
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      if (page >= 1 && page <= totalPages && page !== currentPage) {
+        const params = new URLSearchParams(searchParams?.toString() || '');
+        params.set('page', page.toString());
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+        setCurrentPage(page);
+
+        // Notify parent of the page change
+        if (onPageChange) {
+          onPageChange(page);
+        }
+      }
+    },
+    [currentPage, totalPages, router, pathname, searchParams, onPageChange]
+  );
+
+  const renderPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    const maxVisiblePages = 5;
+    const ellipsis = '...';
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+
+      let start = Math.max(2, currentPage - 1);
+      let end = Math.min(totalPages - 1, currentPage + 1);
+
+      if (currentPage <= 3) {
+        start = 2;
+        end = 4;
+      } else if (currentPage >= totalPages - 2) {
+        start = totalPages - 3;
+        end = totalPages - 1;
+      }
+
+      if (start > 2) {
+        pages.push(ellipsis);
+      }
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (end < totalPages - 1) {
+        pages.push(ellipsis);
+      }
+
+      pages.push(totalPages);
+    }
+
+    return pages.map((page, index) => (
+      <button
+        key={`${page}-${index}`}
+        className={`${styles.pageButton} ${
+          page === currentPage ? styles.active : ''
+        } ${page === ellipsis ? styles.ellipsis : ''}`}
+        onClick={() => typeof page === 'number' && handlePageChange(page)}
+        disabled={page === ellipsis}
+      >
+        {page}
+      </button>
+    ));
+  };
+
+  if (!isMounted) {
+    return <div>Loading pagination...</div>;
   }
 
   return (
     <div className={styles.pagination}>
-      {/* Previous Button */}
       <button
-        className={styles.arrow}
-        onClick={() => onPageChange(currentPage - 1)}
+        className={styles.arrowButton}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        &lt;
+        {'<'}
       </button>
-
-      {/* Page Numbers */}
-      {pages.map((page, index) =>
-        typeof page === 'number' ? (
-          <button
-            key={index}
-            className={`${styles.pageButton} ${
-              page === currentPage ? styles.active : ''
-            }`}
-            onClick={() => onPageChange(page)}
-          >
-            {page === currentPage ? `Page ${page}` : page}
-          </button>
-        ) : (
-          <span key={index} className={styles.ellipsis}>
-            {page}
-          </span>
-        )
-      )}
-
-      {/* Next Button */}
+      {renderPageNumbers()}
       <button
-        className={styles.arrow}
-        onClick={() => onPageChange(currentPage + 1)}
+        className={styles.arrowButton}
+        onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        &gt;
+        {'>'}
       </button>
     </div>
   );

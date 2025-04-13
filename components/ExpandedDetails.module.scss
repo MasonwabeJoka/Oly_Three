@@ -2,37 +2,41 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .details {
+  display: flex;
+  flex-direction: column;
+  width: rem(570);
+  height: rem(250);
+  border-radius: 0 rem(32) rem(32) 0;
+
+  .checkboxContainer {
+    align-self: flex-end;
+    margin-right: rem(24);
+    margin-top: rem(8);
+    margin-bottom: rem(-16);
+  }
+
+  .infoSectionContainer {
     display: flex;
-    flex-direction: column;
-    width: rem(570);
-    height: rem(250);
-    border-radius: 0 rem(32) rem(32) 0;
-    
+    margin: rem(24) rem(24) rem(16) rem(16);
+    width: rem(530);
+    height: 100%;
 
-    .checkboxContainer {
-      align-self: flex-end;
-      margin-right: rem(24);
-      margin-top: rem(8);
-      margin-bottom: rem(-16);
-    }
-
-    .detailsWrapper {
+    .infoSection {
       display: flex;
-      margin: rem(24) rem(24) rem(16) rem(16);
-      width: rem(530);
-      height: 100%;
-
-      .avatar {
-        margin-right: rem(16);
-      }
-
-      .detailsText {
+      flex-direction: column;
+      .topSection {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        .avatar {
+          margin-right: rem(16);
+        }
         .titleWrapper {
           margin-top: rem(-6);
+         
           .title {
-            margin-bottom: rem(-4);
+            // margin-bottom: rem(0);
+            line-height: 1.2;
+            text-transform: uppercase;
           }
 
           .location {
@@ -40,46 +44,54 @@
             align-items: center;
 
             .locationText {
-              padding-bottom: rem(1);
-              font-size: rem(14);
+              // padding-bottom: rem(5);
+              font-size: rem(12);
             }
           }
         }
+      }
 
-        .descriptionContainer {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          .description {
-            width: rem(463);
-            overflow: hidden;
-            margin-top: rem(8);
-            padding-bottom: rem(8);
-            align-self: center;
-          }
+      .descriptionContainer {
+        display: flex;
+        height: 100%;
+        margin-left: rem(64);
+       
+        width: rem(400);
+        .description {
+          overflow: hidden;
+          margin-top: rem(8);
+          padding-bottom: rem(8);
+          // align-self: center;
         }
-        .cardBottom {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: auto;
-          width: 100%;
-          height: rem(24);
+      }
+      .cardBottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        margin-bottom: rem(8);
+        width: 100%;
+        height: rem(24);
+        margin-left: rem(64);
+        width: rem(400);
+        // background-color: yellowgreen;
 
-          .price {
+        .price {
+          font-size: $h4 !important;
+          font-weight: 600;
+        }
+
+        .postMetrics {
+          .postAge {
+            // margin-bottom: rem(-4);
+            margin-right: rem(32);
+            font-size: rem(12);
           }
 
-          .postMetrics {
-            .postAge {
-              // margin-bottom: rem(-4);
-              margin-right: rem(32);
-              font-size: rem(14);
-            }
-
-            .viewCount {
-            }
+          .viewCount {
           }
         }
       }
     }
   }
+}

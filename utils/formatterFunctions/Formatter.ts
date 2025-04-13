@@ -168,35 +168,29 @@ export function formatPrice(value: number, options?: PriceFormatOptions): string
     const fractionDigits = showCents ? 2 : 0;
 
     let formattedValue: string;
+    let baseValue = value;
+    let suffix = '';
 
-    if (value < 100000) {
-        formattedValue = new Intl.NumberFormat(locale, {
-            style: showCurrency ? 'currency' : 'decimal',
-            currency: currency,
-            useGrouping: useGrouping,
-            minimumFractionDigits: fractionDigits,
-            maximumFractionDigits: fractionDigits,
-        }).format(value);
-    } else {
-        let suffix = '';
-        let baseValue = value;
-
-        if (value >= 1000000 && formatMillions) {
-            baseValue = value / 1000000;
-            suffix = 'M';
-        } else if (value >= 1000 && formatThousands) {
-            baseValue = value / 1000;
-            suffix = 'K';
-        }
-
-        formattedValue = new Intl.NumberFormat(locale, {
-            useGrouping: useGrouping,
-            minimumFractionDigits: fractionDigits,
-            maximumFractionDigits: fractionDigits,
-        }).format(baseValue) + suffix;
+    if (value >= 1000000 && formatMillions) {
+        baseValue = value / 1000000;
+        suffix = 'M';
+    } else if (value >= 1000 && formatThousands) {
+        baseValue = value / 1000;
+        suffix = 'K';
     }
 
-    // Prepend "R" to the formatted value only if showCurrency is false
+    formattedValue = new Intl.NumberFormat(locale, {
+        style: showCurrency ? 'currency' : 'decimal',
+        currency: currency,
+        useGrouping: useGrouping,
+        minimumFractionDigits: fractionDigits,
+        maximumFractionDigits: fractionDigits,
+    }).format(baseValue);
+
+    // Append suffix after currency formatting
+    formattedValue = `${formattedValue}${suffix}`;
+
+    // Prepend "R" only if showCurrency is false
     return showCurrency ? formattedValue : `R${formattedValue}`;
 }
 

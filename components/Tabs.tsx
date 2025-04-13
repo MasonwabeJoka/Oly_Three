@@ -83,7 +83,7 @@ const Tabs: React.FC<TabsProps> = ({
                     <div
                       className={styles.count}
                       style={{
-                        backgroundColor: isActive === index ? "white" : "#ffffff",
+                        backgroundColor: isActive === index ? "white" : "#f3f7fa",
                       }}
                     >
                       <div

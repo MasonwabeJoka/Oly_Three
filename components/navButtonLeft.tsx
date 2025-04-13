@@ -5,15 +5,25 @@ import { useSwiper } from "swiper/react";
 
 type Props = {
   size: "large" | "standard" | "small";
+  onClick?: () => void;
+  disabled?: boolean;
+  autoFocus?: boolean;
+  className?: string;
 };
 
-const NavButtonLeft = ({ size }: Props) => {
+const NavButtonLeft = ({
+  size,
+  onClick,
+  autoFocus = false,
+  disabled = false,
+  className,
+}: Props) => {
   const swiper = useSwiper();
 
   return (
-    <div className={styles.leftArrowContainer} >
+    <div className={styles.leftArrowContainer}>
       <Button
-        className={styles.leftArrow}
+        className={`${className} ${styles.leftArrow}`}
         buttonChildren={
           <Image
             src="/icons/chevronLeft.png"
@@ -28,9 +38,9 @@ const NavButtonLeft = ({ size }: Props) => {
         name="left-arrow-btn"
         type="button"
         ariaLabel="Left Arrow Button"
-        autoFocus={false}
-        disabled={false}
-        onClick={() => swiper?.slidePrev()}
+        autoFocus={autoFocus}
+        disabled={disabled}
+        onClick={onClick ?? (() => swiper?.slidePrev())}
       />
     </div>
   );

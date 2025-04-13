@@ -5,6 +5,7 @@ import { urlFor } from "@/lib/client";
 import { fetchAds } from "@/sanity/actions/fetchAds";
 import { Ad } from "@/sanity/Types/Ad";
 import { fetchListings } from "@/sanity/sanity_utils/tempActions";
+import multipleImages from "@/data/multipleImages";
 import AdCard from "./cards/AdCard";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
@@ -52,6 +53,7 @@ const ListingsExpanded = ({
   const [adImages, setAdImages] = useState<SanityImage[]>([]);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [tempAspectRatios, setTempAspectRatios] = useState<number[][]>([]);
   const { ref, inView } = useInView({
     triggerOnce: false,
   });
@@ -103,9 +105,47 @@ const ListingsExpanded = ({
     }
   }, [ads]);
 
+  useEffect(() => {
+    fetchAspectRatios();
+  }, []);
+
+
+  const getTempAspectRatios = async () => {
+    const tempAspectRatios = await Promise.all(
+      multipleImages.map(async (item) => {
+        const aspectRatios = await Promise.all(
+          item.images.map(async (imageUrl) => {
+            try {
+              const img = new Image();
+              img.src = imageUrl;
+              await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+              });
+              return img.naturalWidth / img.naturalHeight;
+            } catch (error) {
+              console.error(`Failed to load image: ${imageUrl}`, error);
+              return 1; // Fallback aspect ratio (e.g., 1 for square)
+            }
+          })
+        );
+        return aspectRatios;
+      })
+    );
+    return tempAspectRatios;
+  };
+
+  const fetchAspectRatios = async () => {
+    const tempAspectRatios = await getTempAspectRatios();
+    console.log("Aspect Ratios:", tempAspectRatios);
+    setTempAspectRatios(tempAspectRatios);
+  };
+
+
+
   return (
     <div className={styles.listingsContainer}>
-      {images?.map((ad, index) => {
+      {ads?.map((ad, index) => {
         // Filter out undefined values from aspectRatios
         const aspectRatios = ad.images
           ?.map((image) => image.aspectRatio)
@@ -123,7 +163,7 @@ const ListingsExpanded = ({
                 cardType="expanded"
                 // images={imageUrls}
                 images={images[index]}
-                aspectRatios={aspectRatios}
+                aspectRatios={tempAspectRatios && tempAspectRatios[index]}
                 title={ad?.title}
                 price={ad?.price}
                 description={
@@ -137,6 +177,7 @@ const ListingsExpanded = ({
                 checkedColour={checkedColour}
                 hoverColour={hoverColour}
                 checkedHovered={checkedHovered}
+                postAge={ad?.postedOn}
               />
             </div>
           </Link>

@@ -62,45 +62,50 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
           </PreventLinkClick>
         </div>
       )}
-      <div className={styles.detailsWrapper}>
+      <div className={styles.infoSectionContainer}>
+        <div className={styles.infoSection}>
+          <div className={styles.topSection}>
+
         <Avatar
           className={styles.avatar}
           avatarSize="regular"
           avatar={avatar}
           isOnline={false}
         />
-        <div className={styles.detailsText}>
           <div className={styles.titleWrapper}>
-            <h3
+            <p
               className={styles.title}
-              style={{
-                fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
-              }}
+              // style={{
+              //   fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
+              // }}
             >
               {title
                 ? title.length > 42
                   ? `${title.slice(0, 42)}...`
                   : title
                 : ""}
-            </h3>
+            </p>
             <div className={styles.location}>
               <p className={styles.locationText}>
-                {suburb && suburb}, {city && city}
+                {/* {suburb && suburb}, {city && city} */}
+                Bryanston, JHB
               </p>
             </div>
+          </div>
           </div>
           <div className={styles.descriptionContainer}>
             <p className={styles.description}>{descriptionString}</p>
           </div>
           <div className={styles.cardBottom}>
-            <h2 className={styles.price}>
-              {price ? Formatter.formatLargeNumber(price) : ""}
-            </h2>
-            <div className={styles.postMetrics}>
+          <div className={styles.postMetrics}>
               <div className={styles.postAge}>
                 {postAge ? Formatter.formatRelativeTime(postAge) : ""}
               </div>
             </div>
+            <h2 className={styles.price}>
+              {price ? Formatter.formatPrice(price) : ""}
+            </h2>
+          
           </div>
         </div>
       </div>

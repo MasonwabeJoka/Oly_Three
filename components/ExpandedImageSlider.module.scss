@@ -51,9 +51,7 @@
         opacity: 0;
         width: rem(48);
         height: rem(48);
-        // background-color: blue;
         opacity: 1;
-        // margin-left: rem(32);
         pointer-events: visible;
       }
 
@@ -61,7 +59,6 @@
       }
 
       .rightButton {
-        // margin-right: rem(19)
       }
     }
 
@@ -86,15 +83,15 @@
     display: flex;
     justify-content: center;
 
-    width: rem(310);
-    min-height: rem(248);
+    width: rem(382.8);
+    min-height: rem(215.325);
     border-radius: rem(40);
 
     .swiperSlide {
       position: relative;
       display: flex;
       justify-content: center;
-
+      // background-color: #d5d4d4;
       .image {
         // object-fit: cover;
       }
