@@ -29,9 +29,11 @@
         align-items: center;
         .avatar {
           margin-right: rem(16);
+          width: rem(40) !important;
+          height: rem(40) !important;
         }
         .titleWrapper {
-          margin-top: rem(-6);
+         
          
           .title {
             // margin-bottom: rem(0);
@@ -54,8 +56,8 @@
       .descriptionContainer {
         display: flex;
         height: 100%;
-        margin-left: rem(64);
-       
+        margin-left: rem(56);
+      //  background-color: yellowgreen;
         width: rem(400);
         .description {
           overflow: hidden;
@@ -72,7 +74,7 @@
         margin-bottom: rem(8);
         width: 100%;
         height: rem(24);
-        margin-left: rem(64);
+        margin-left: rem(56);
         width: rem(400);
         // background-color: yellowgreen;
 
@@ -84,6 +86,7 @@
         .postMetrics {
           .postAge {
             // margin-bottom: rem(-4);
+          
             margin-right: rem(32);
             font-size: rem(12);
           }
