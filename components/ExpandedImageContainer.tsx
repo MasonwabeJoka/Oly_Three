@@ -4,24 +4,32 @@ import ExpandedImageSlider from "./ExpandedImageSlider";
 import Checkbox from "./Checkbox";
 type ExpandedImageContainerProps = {
   id?: string;
-  isDeletable: boolean;
   images?: string[];
   aspectRatios?: number[];
+  isHeartClicked: boolean;
+  isHeartHovered: boolean;
+  isCardHovered: boolean;
   isFeed: boolean;
   checkedColour?: string;
   hoverColour?: string;
   checkedHovered?: string;
+  onHeartClick: (e: React.MouseEvent) => void;
+  onHeartHover: (hovered: boolean) => void;
 };
 
 export const ExpandedImageContainer: React.FC<ExpandedImageContainerProps> = ({
   id,
-  isDeletable,
   isFeed,
   checkedColour,
   hoverColour,
   checkedHovered,
   images,
   aspectRatios,
+  isHeartClicked,
+  isHeartHovered,
+  isCardHovered,
+  onHeartClick,
+  onHeartHover,
 }) => {
   return (
     <div className={styles.centerImageWrapper}>
@@ -31,23 +39,13 @@ export const ExpandedImageContainer: React.FC<ExpandedImageContainerProps> = ({
           hasLikeButton={true}
           className={styles.image}
           aspectRatios={aspectRatios}
+          isHeartClicked={isHeartClicked}
+          isHeartHovered={isHeartHovered}
+          isCardHovered={isCardHovered}
+          onHeartClick={onHeartClick}
+          onHeartHover={onHeartHover}
         />
       </div>
-      {isDeletable && (
-        <div
-          className={styles.checkboxContainer}
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            margin: "1rem 1rem 0 0",
-            backgroundColor: "white",
-            borderRadius: "1rem",
-          }}
-        >
-      
-        </div>
-      )}
     </div>
   );
 };

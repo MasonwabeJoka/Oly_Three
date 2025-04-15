@@ -10,6 +10,7 @@ type DetailsProps = {
   title?: string;
   description?: string | PortableTextBlock[] | null;
   price?: number;
+  postAge?: string;
 };
 // change the colour of property card icons to $black-four
 export const BoxCardDetails: React.FC<DetailsProps> = ({
@@ -18,6 +19,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
   title,
   description,
   price,
+  postAge,
 }) => {
   const descriptionString = description && description[0]?.children[0]?.text;
 

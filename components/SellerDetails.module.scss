@@ -16,24 +16,31 @@
     box-sizing: border-box;
   }
 
-  .avatar {
-    margin-top: rem(56);
-  }
-
-  .details {
+  .profileSection {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: rem(32);
-    font-weight: 600;
-
-    .name {
+    .avatar {
+      margin-top: rem(56);
     }
 
-    .phoneNumber {
-    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: rem(16);
 
-    .email {
+      .name {
+        text-transform: uppercase;
+        font-size: $h4;
+      }
+
+      .phoneNumber {
+        font-size: rem(14);
+      }
+
+      .email {
+      }
     }
   }
 
@@ -42,20 +49,12 @@
     flex-direction: column;
     align-items: center;
     margin-top: rem(56);
-    .button {
-      width: rem(98);
-      height: rem(56);
-      box-shadow: $shadow-one;
-      background-color: $white-four;
 
-      @include larger-than(mobile) {
-        width: rem(206);
-        height: rem(56);
-      }
-    }
-
+.button {
+  margin-bottom: rem(12);
+}
     .chatButton {
-      margin-bottom: rem(12);
+      
     }
 
     .followButton {

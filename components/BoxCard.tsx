@@ -21,6 +21,7 @@ type BoxCardProps = {
   title?: string;
   description?: string | PortableTextBlock[] | null;
   price?: number;
+  postAge?: string;
   onHeartClick: (e: React.MouseEvent) => void;
   onHeartHover: (hovered: boolean) => void;
   setIsCardHovered: (value: boolean) => void;
@@ -43,6 +44,7 @@ export const BoxCard: React.FC<BoxCardProps> = ({
   title,
   description,
   price,
+  postAge,
   onHeartClick,
   onHeartHover,
   setIsCardHovered,
@@ -80,6 +82,7 @@ export const BoxCard: React.FC<BoxCardProps> = ({
             title={title}
             description={description}
             price={price}
+            postAge={postAge}
           />
         </article>
       )}
@@ -115,6 +118,7 @@ export const BoxCard: React.FC<BoxCardProps> = ({
             title={title}
             description={description}
             price={price}
+            postAge={postAge}
           />
         </article>
       )}

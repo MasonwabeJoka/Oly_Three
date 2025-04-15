@@ -19,6 +19,7 @@ type ExpandedDetailsProps = {
   city?: string;
   price?: number;
   postAge?: string;
+  isCardHovered: boolean;
 };
 
 const PreventLinkClick = ({ children }: any) => {
@@ -42,6 +43,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   city,
   price,
   postAge,
+  isCardHovered,
 }) => {
   const descriptionString = description && description[0]?.children[0]?.text;
 

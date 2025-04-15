@@ -143,6 +143,7 @@ const AdCard: React.FC<Props> = ({
           title={title}
           description={description}
           price={price}
+          postAge={postAge}
           onHeartClick={handleHeartClick}
           onHeartHover={(hovered) => setIsHeartHovered(hovered)}
           setIsCardHovered={setIsCardHovered}
@@ -168,6 +169,8 @@ const AdCard: React.FC<Props> = ({
           city={city}
           price={price}
           postAge={postAge}
+          onHeartClick={handleHeartClick}
+          onHeartHover={(hovered) => setIsHeartHovered(hovered)}
           setIsCardHovered={setIsCardHovered}
         />
       ) : null}

@@ -122,6 +122,7 @@ const Pagination: React.FC<PaginationProps> = ({
           className={`${styles.pageButton} ${
             page === currentPage ? styles.active : ""
           } ${page === ellipsis ? styles.ellipsis : ""}`}
+          fontSize={typeof page === "number" && page >= 1000 ? "12px" : "unset"}
           buttonChildren={page}
           buttonType="round"
           buttonSize="medium"

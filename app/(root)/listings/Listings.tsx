@@ -226,7 +226,7 @@ const Listings = () => {
             )}
           </div>
           <div className={styles.pagination}>
-            <Pagination totalPages={100} />
+            <Pagination totalPages={985} />
           </div>
         </div>
       </div>

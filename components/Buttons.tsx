@@ -22,6 +22,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   autoFocus: boolean;
   disabled?: boolean;
   inputDescription?: string;
+  fontSize?: string;
   form?: string;
   formAction?: string;
   formEncType?:
@@ -160,6 +161,7 @@ const Button = ({
   onBlur,
   autoFocus = false,
   disabled = false,
+  fontSize,
   ...otherProps
 }: ButtonProps): JSX.Element => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -211,6 +213,7 @@ const Button = ({
         aria-hidden={ariaHidden}
         autoFocus={autoFocus}
         disabled={disabled}
+        style={{fontSize: fontSize}}
         {...otherProps}
       >
         {buttonChildren}

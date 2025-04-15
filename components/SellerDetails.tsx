@@ -35,22 +35,24 @@ const SellerDetails = () => {
     <div className={styles.container}>
       {!report ? (
         <>
-          <Avatar
-            className={styles.avatar}
-            avatar="/profilePic.jpg"
-            isOnline={true}
-            avatarSize="large"
-          />
-          <div className={styles.details}>
-            <h3 className={styles.name}>Mandisa Msebenzi</h3>
-            <p className={styles.phoneNumber}>087 562 454 747</p>
-            <p className={styles.email}>Show Email</p>
+          <div className={styles.profileSection}>
+            <Avatar
+              className={styles.avatar}
+              avatar="/profilePic.jpg"
+              isOnline={true}
+              avatarSize="large"
+            />
+            <div className={styles.details}>
+              <p className={styles.name}>Mandisa Msebenzi</p>
+              <p className={styles.phoneNumber}>087 562 454 747</p>
+              {/* <p className={styles.email}>Show Email</p> */}
+            </div>
           </div>
           <div className={styles.buttons}>
             <Button
               className={`${styles.button} ${styles.chatButton}`}
               buttonChildren="Chat"
-              buttonType="normal"
+              buttonType="primary"
               buttonSize="small"
               name="chat_btn"
               type="button"
@@ -69,12 +71,23 @@ const SellerDetails = () => {
               autoFocus={false}
               disabled={false}
             />
+            <Button
+              className={`${styles.button} ${styles.storeButton}`}
+              buttonChildren="Store"
+              buttonType="normal"
+              buttonSize="small"
+              name="store_btn"
+              type="button"
+              ariaLabel="Store Button"
+              autoFocus={false}
+              disabled={false}
+            />
           </div>
 
           <div className={styles.socialMediaContainer}>
             {socialMediaLogos.map((app) => (
               <Button
-              key={app.id}
+                key={app.id}
                 className={styles.app}
                 buttonChildren={
                   <Image
@@ -95,13 +108,12 @@ const SellerDetails = () => {
             ))}
           </div>
           <div className={styles.bottom}>
-
-          <Link href="#">
-            <h4 className={styles.showAll}>Show All Ads</h4>
-          </Link>
-          <Link href="#">
-            <p className={styles.report}>!Report Ad</p>
-          </Link>
+            <Link href="#">
+              <h4 className={styles.showAll}>Show All Ads</h4>
+            </Link>
+            <Link href="#">
+              <p className={styles.report}>!Report Ad</p>
+            </Link>
           </div>
         </>
       ) : (

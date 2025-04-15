@@ -4,7 +4,6 @@ import { ExpandedImageContainer } from "./ExpandedImageContainer";
 import { ExpandedDetails } from "./ExpandedDetails";
 import { PortableTextBlock } from "sanity";
 
-
 type ExpandedCardProps = {
   category: "all" | "property" | "vehicle" | "service" | "job";
   images?: string[];
@@ -25,6 +24,8 @@ type ExpandedCardProps = {
   city?: string;
   price?: number;
   postAge?: string;
+  onHeartClick: (e: React.MouseEvent) => void;
+  onHeartHover: (hovered: boolean) => void;
   setIsCardHovered: (value: boolean) => void;
 };
 
@@ -48,9 +49,10 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
   city,
   price,
   postAge,
+  onHeartClick,
+  onHeartHover,
   setIsCardHovered,
 }) => {
- 
   return (
     <article
       className={styles.expandedCard}
@@ -61,12 +63,16 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
         <ExpandedImageContainer
           images={images}
           aspectRatios={aspectRatios}
-          isDeletable={isDeletable}
+          checkedHovered={checkedHovered}
+          isHeartClicked={isHeartClicked}
+          isHeartHovered={isHeartHovered}
+          isCardHovered={isCardHovered}
           id={id}
           isFeed={isFeed}
           checkedColour={checkedColour}
           hoverColour={hoverColour}
-          checkedHovered={checkedHovered}
+          onHeartClick={onHeartClick}
+          onHeartHover={onHeartHover}
         />
         <ExpandedDetails
           isDeletable={isDeletable}
@@ -82,6 +88,7 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
           city={city}
           price={price}
           postAge={postAge}
+          isCardHovered={isCardHovered}
         />
       </div>
     </article>

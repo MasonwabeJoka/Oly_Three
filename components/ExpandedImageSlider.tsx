@@ -6,41 +6,59 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type SwiperType from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
-import { cn } from "@/lib/utils";
-import { Backpack, ChevronLeft, ChevronRight } from "lucide-react";
 import Icon from "./Icon";
 import NavButtonLeft from "./navButtonLeft";
 import NavButtonRight from "./navButtonRight";
-import { MouseEvent } from "react";
+import { useLikeButton } from "./../hooks/useLikeButton";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   urls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
+  isHeartClicked: boolean;
+  isHeartHovered: boolean;
+  isCardHovered: boolean;
+  onHeartClick: (e: React.MouseEvent) => void;
+  onHeartHover: (hovered: boolean) => void;
 }
+
 const ExpandedImageSlider = ({
   urls,
   hasLikeButton = false,
   aspectRatios,
+  isHeartClicked,
+  isHeartHovered,
+  isCardHovered,
+  onHeartClick,
+  onHeartHover,
 }: ImageSliderProps) => {
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
-  const [activeIndex, setActiveIndex] = useState(0); // to show or hide navigation buttons based on the state
+  const [activeIndex, setActiveIndex] = useState(0);
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
-    // the last index if there are no urls (null) it defaults to 0.
     isEnd: activeIndex === (urls?.length ?? 0) - 1,
   });
-  const [isHeartHovered, setIsHeartHovered] = useState(false);
-  const [isHeartClicked, setIsHeartClicked] = useState(false);
-  const [showHeart, setShowHeart] = useState(false);
+
+  const {
+    showHeart,
+    showNav,
+    isLeftNavHovered,
+    isRightNavHovered,
+    heartVisibility,
+    heartSize,
+    getImageSrc,
+    setIsLeftNavHovered,
+    setIsRightNavHovered,
+    handleNavButtonClick,
+  } = useLikeButton({
+    isHeartClicked,
+    isHeartHovered,
+    isCardHovered,
+  });
 
   useEffect(() => {
-    // whenever we have a slideChange event we will update the slide state.
     swiper?.on("slideChange", ({ activeIndex }) => {
       setActiveIndex(activeIndex);
-      // we set the slide to keep tract of where we are.
-
       setSlideConfig({
         isBeginning: activeIndex === 0,
         isEnd: activeIndex === (urls?.length ?? 0) - 1,
@@ -48,108 +66,55 @@ const ExpandedImageSlider = ({
     });
   }, [swiper, urls]);
 
-  const handleIconClick = (e: any) => {
-    e.preventDefault();
-    setIsHeartClicked(!isHeartClicked);
-    setShowHeart(true);
-  };
-
-  const getImageSrc = () => {
-    if (isHeartClicked) return "/icons/heart-clicked.svg";
-    if (isHeartHovered) return "/icons/heart-hover.svg";
-    return "/icons/heart-hover.svg";
-  };
-
-  const activeStyles = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    top: "50%",
-    zIndex: "20",
-    transform: "translateY(-50%)",
-    aspectRatio: "1",
-    width: "2rem",
-    height: "2rem",
-    borderRadius: "50%",
-    backgroundColor: "red",
-
-    ":active": {
-      transform: "scale(0.97)",
-    },
-    ":hover": {
-      transform: "scale(1.05)",
-    },
-  };
-
-  const heartHovered = {
-    opacity: isHeartHovered || isHeartClicked ? 1 : 0,
-  };
-
-  const cardHover = {
-    opacity: showHeart ? 1 : 0,
-    transition: "opacity 0.5s ease",
-  };
-
-  const handleMouseEnter = () => {
-    setShowHeart(true);
-    setTimeout(() => setShowHeart(false), 2000); // Set showHeart to false after 2 seconds
-  };
-
-  const handleMouseLeave = () => {
-    setShowHeart(false);
-  };
-
-  const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  console.log({aspectRatios});
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!isCardHovered) {
+      timer = setTimeout(() => {
+        if (swiper && activeIndex !== 0) {
+          swiper.slideTo(0);
+        }
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [isCardHovered, swiper, activeIndex]);
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.buttonsAndLike}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div
-          className={styles.likeIconContainer}
-          onMouseEnter={() => setIsHeartHovered(true)}
-          onMouseLeave={() => setIsHeartHovered(false)}
-          onClick={handleIconClick}
-          style={{ ...cardHover, ...heartHovered }}
-        >
-          <Icon
-            className={styles.likeIcon}
-            src={getImageSrc()}
-            alt="Like Icon"
-            width={isHeartHovered ? 64 : 52}
-            height={isHeartHovered ? 64 : 52}
-          />
-        </div>
-
+      <div className={styles.buttonsAndLike}>
+        {hasLikeButton && (
+          <div
+            className={styles.likeIconContainer}
+            onMouseEnter={() => onHeartHover(true)}
+            onMouseLeave={() => onHeartHover(false)}
+            onClick={onHeartClick}
+            style={heartVisibility}
+          >
+            <Icon
+              className={styles.likeIcon}
+              src={getImageSrc()}
+              alt="Like Icon"
+              width={heartSize}
+              height={heartSize}
+            />
+          </div>
+        )}
         <div
           className={styles.buttonContainer}
           style={{
-            // display: slideConfig.isBeginning ? "none" : "flex",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             marginRight: "20.5rem",
           }}
           onClick={(e) => e.preventDefault()}
+          onMouseEnter={() => setIsLeftNavHovered(true)}
+          onMouseLeave={() => setIsLeftNavHovered(false)}
         >
           <div
             className={`${styles.button} ${styles.leftButton}`}
-            onClick={(e) => {
-              e.preventDefault();
-              swiper?.slidePrev();
-            }}
+            onClick={(e) => handleNavButtonClick(e, "prev", swiper)}
             style={{
-              // ...activeStyles,
-              display: slideConfig.isBeginning ? "none" : "flex",
-              // marginRight: "16rem",
+              display: slideConfig.isBeginning || !showNav ? "none" : "flex",
             }}
           >
             <NavButtonLeft size="small" />
@@ -164,17 +129,14 @@ const ExpandedImageSlider = ({
             marginLeft: "20.5rem",
           }}
           onClick={(e) => e.preventDefault()}
+          onMouseEnter={() => setIsRightNavHovered(true)}
+          onMouseLeave={() => setIsRightNavHovered(false)}
         >
           <div
             className={`${styles.button} ${styles.rightButton}`}
-            onClick={(e) => {
-              e.preventDefault();
-              swiper?.slideNext();
-            }}
+            onClick={(e) => handleNavButtonClick(e, "next", swiper)}
             style={{
-              // ...activeStyles,
-              // marginLeft: "16rem",
-              display: slideConfig.isEnd ? "none" : "flex",
+              display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}
           >
             <NavButtonRight size="small" />
@@ -184,24 +146,20 @@ const ExpandedImageSlider = ({
       <Swiper
         className={styles.swiper}
         onSwiper={(swiper) => setSwiper(swiper)}
-        spaceBetween={60}
+        spaceBetween={50}
         centeredSlides={true}
         slidesPerView={1}
-        modules={[Pagination]}
       >
         {urls?.map((url, index) => (
-          
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{
                 position: "relative",
                 height: "16rem",
                 width: `calc(16rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : "auto"})`,
-                // width: "1rem",
                 borderRadius: "2.5rem",
               }}
             >
-              
               <Image
                 className={styles.image}
                 src={url}
@@ -219,7 +177,3 @@ const ExpandedImageSlider = ({
 };
 
 export default ExpandedImageSlider;
-
-
-
-

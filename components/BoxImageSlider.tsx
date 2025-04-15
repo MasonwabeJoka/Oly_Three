@@ -6,11 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type SwiperType from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 import Icon from "./Icon";
 import NavButtonRight from "./navButtonRight";
 import NavButtonLeft from "./navButtonLeft";
 import { normalizeImageSrc } from '@/utils/imageUtils';
+import { useLikeButton } from "./../hooks/useLikeButton";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   category: "all" | "property" | "vehicle" | "service" | "job";
@@ -41,14 +41,24 @@ const ImageSlider = ({
     isBeginning: true,
     isEnd: activeIndex === (urls?.length ?? 0) - 1,
   });
-  const [showHeart, setShowHeart] = useState(false);
-  const [showNav, setShowNav] = useState(false);
-  const [isLeftNavHovered, setIsLeftNavHovered] = useState(false);
-  const [isRightNavHovered, setIsRightNavHovered] = useState(false);
-  const [navClickedRecently, setNavClickedRecently] = useState(false);
-  const [navInteractionOccurred, setNavInteractionOccurred] = useState(false);
 
-  // The purpose of this code is to monitor when a user swipes or navigates between images in the slider, and then update the component's state to reflect which image is currently showing. This helps the component know whether to show or hide the navigation buttons (like "previous" and "next" buttons).
+  const {
+    showHeart,
+    showNav,
+    isLeftNavHovered,
+    isRightNavHovered,
+    heartVisibility,
+    heartSize,
+    getImageSrc,
+    setIsLeftNavHovered,
+    setIsRightNavHovered,
+    handleNavButtonClick,
+  } = useLikeButton({
+    isHeartClicked,
+    isHeartHovered,
+    isCardHovered,
+  });
+
   useEffect(() => {
     swiper?.on("slideChange", ({ activeIndex }) => {
       setActiveIndex(activeIndex);
@@ -59,7 +69,6 @@ const ImageSlider = ({
     });
   }, [swiper, urls]);
 
-  // Reset slider to first slide after 2 seconds of not hovering card
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (!isCardHovered) {
@@ -72,118 +81,25 @@ const ImageSlider = ({
     return () => clearTimeout(timer);
   }, [isCardHovered, swiper, activeIndex]);
 
-  // Manage heart visibility
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    const isNavHovered = isLeftNavHovered || isRightNavHovered;
-
-    if (navClickedRecently || isNavHovered) {
-      setShowHeart(false); // Hide heart during nav click or hover
-      timer = setTimeout(() => {
-        setNavClickedRecently(false);
-        if (isHeartClicked && !isNavHovered) setShowHeart(true); // Reappear clicked heart
-      }, 500);
-    } else if (isHeartClicked) {
-      setShowHeart(true); // Keep clicked heart visible
-    } else if (isHeartHovered || (isCardHovered && !navInteractionOccurred)) {
-      setShowHeart(true); // Show hover heart only if no nav interaction
-      timer = setTimeout(() => {
-        setShowHeart(false); // Disappear after 2 seconds if not clicked
-      }, 2000);
-    } else {
-      setShowHeart(false); // Hide if no conditions met
-    }
-
-    // Reset nav interaction flag when card hover ends
-    if (!isCardHovered) {
-      setNavInteractionOccurred(false);
-    }
-
-    return () => clearTimeout(timer);
-  }, [
-    isCardHovered,
-    isHeartClicked,
-    isHeartHovered,
-    isLeftNavHovered,
-    isRightNavHovered,
-    navClickedRecently,
-    navInteractionOccurred,
-  ]);
-
-  // Manage navigation visibility
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (
-      isCardHovered ||
-      isLeftNavHovered ||
-      isRightNavHovered ||
-      isHeartClicked
-    ) {
-      setShowNav(true);
-    } else {
-      timer = setTimeout(() => {
-        setShowNav(false);
-      }, 2000);
-    }
-    return () => clearTimeout(timer);
-  }, [isCardHovered, isHeartClicked, isLeftNavHovered, isRightNavHovered]);
-
-  const handleNavButtonClick = (
-    e: React.MouseEvent,
-    direction: "prev" | "next"
-  ) => {
-    e.preventDefault();
-    if (direction === "prev") swiper?.slidePrev();
-    if (direction === "next") swiper?.slideNext();
-    setShowNav(true);
-    setShowHeart(false); // Hide heart on nav click
-    setNavClickedRecently(true); // Trigger nav click effect
-    setNavInteractionOccurred(true); // Mark nav interaction
-    if (
-      !isHeartClicked &&
-      !isHeartHovered &&
-      !isLeftNavHovered &&
-      !isRightNavHovered
-    ) {
-      setTimeout(() => {
-        setShowNav(false);
-      }, 2000);
-    }
-  };
-
   const swiperStyles = {
     width: category === "property" ? "24.21875rem" : "19.375rem",
-    // minHeight: category === "property" ? "15.55rem" : "19.375rem"
   };
-
-  const getImageSrc = () => {
-    if (isHeartClicked) return "/icons/heart-clicked.svg";
-    if (isHeartHovered || (isCardHovered && !navInteractionOccurred))
-      return "/icons/heart-hover.svg";
-    return "/icons/heart-hover.svg";
-  };
-
-  const heartVisibility = {
-    opacity: hasLikeButton && showHeart ? 1 : 0,
-    transition: "opacity 0.5s ease",
-  };
-
-  const heartSize = isHeartHovered ? 64 : 52;
 
   const swiperSlideHeight = (index: number) => {
-    if(category === 'property') {
+    if (category === "property") {
       return "13.623046875rem";
     } else {
-      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`
+      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
     }
-  }
+  };
+
   const swiperSlideWidth = (index: number) => {
-    if(category === 'property') {
+    if (category === "property") {
       return "24.21875rem";
     } else {
       return "19.375rem";
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -220,8 +136,7 @@ const ImageSlider = ({
           <div className={styles.buttonWrapper}>
             <div
               className={`${styles.button} ${styles.leftButton}`}
-              onClick={(e) => handleNavButtonClick(e, "prev")}
-             
+              onClick={(e) => handleNavButtonClick(e, "prev", swiper)}
               style={{
                 display: slideConfig.isBeginning || !showNav ? "none" : "flex",
               }}
@@ -244,7 +159,7 @@ const ImageSlider = ({
         >
           <div
             className={styles.button}
-            onClick={(e) => handleNavButtonClick(e, "next")}
+            onClick={(e) => handleNavButtonClick(e, "next", swiper)}
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}
@@ -282,7 +197,6 @@ const ImageSlider = ({
                   verticalAlign: "top",
                   minHeight: 248,
                   objectFit: "cover",
-                  // borderRadius: "0 0 3rem 3rem",
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
@@ -295,8 +209,3 @@ const ImageSlider = ({
 };
 
 export default ImageSlider;
-
-
-
-
-

@@ -115,6 +115,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setShowOptions(false)
     );
 
+    
     useEffect(() => {
       const useEscKey = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
