@@ -105,38 +105,38 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     flexDirection: "column",
     width: "fit-content",
     height: "fit-content",
-    // marginBottom: "16px",
+    marginBottom: "16px",
   };
 
   const containerStyle = {
     display: "flex",
-    gap: "20px",
+    gap: "12px",
     width:
       images?.length === 1
-        ? "756px"
+        ? "630px"
         : (images?.length === 2 && images[1].aspectRatio < 1) ||
             (images?.length === 3 &&
               images[1].aspectRatio > 1 &&
               images[2].aspectRatio < 1)
-          ? "1148.4px"
-          : "1552px",
+          ? "957px"
+          : "1284px",
 
-    height: "570px",
+    height: "475px",
     marginBottom: "4px",
   };
 
   const landscapeFirstImageStyle = {
     display: "flex",
-    flex: "0 0 756px",
+    flex: "0 0 630px",
     justifyContent: "center",
-    height: "570px",
+    height: "475px",
     position: "relative" as const,
   };
   const portraitFirstImageStyle = {
     display: "flex",
-    flex: "0 0 378px",
+    flex: "0 0 315px",
     justifyContent: "center",
-    height: "570px",
+    height: "475px",
     position: "relative" as const,
   };
 
@@ -144,14 +144,14 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)", // Two equal columns
     gridTemplateRows: "repeat(2, 1fr)", // Two equal rows
-    gap: "20px",
+    gap: "12px",
   };
 
   const gridItemStyle = {
     position: "relative" as const,
     borderRadius: "2.5rem",
-    width: "378px",
-    height: "570px",
+    width: "315px",
+    height: "475px",
   };
 
   const allImagesBtnStyle: React.CSSProperties = {
@@ -341,7 +341,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                       aspectRatio: isPortrait
                         ? `1/${1 / img.aspectRatio}`
                         : `${img.aspectRatio}/1`,
-                      height: isPortrait ? "570px" : "277.2px",
+                      height: isPortrait ? "475px" : "231px",
                       boxShadow:
                         "10px 10px 20px 0px rgba(169, 196, 203, 0.5), 5px 5px 10px 0px rgba(169, 196, 203, 0.25)",
                     }}

@@ -1,6 +1,6 @@
 import styles from "../styles.module.scss";
 import { Ad } from "@/sanity/Types/Ad";
-import GoodToKnow from "./ProductSpecifications";
+import GoodToKnow from "./ListingSpecifications";
 
 interface GoodToKnowSectionProps {
   ad: Ad | null;

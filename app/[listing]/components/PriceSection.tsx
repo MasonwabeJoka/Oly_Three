@@ -11,6 +11,7 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
             <p className={styles.priceLabel}>Current Price</p>
             <p className={styles.price}>
               {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`}
+              R 50000
             </p>
             <div className={styles.countDown}>
               <span className={styles.countDownPeriod}>1d</span>

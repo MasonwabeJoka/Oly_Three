@@ -1,57 +1,101 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.wrapper {
-  padding: 0 rem(200);
-}
+
 .container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  align-items: center;
+  width: rem(1552);
+
+
+  .topSection {
+    width: 100%;
+    margin-top: rem(64);
+    margin-bottom: rem(48);
+    // height: 100vh;
+
+    .topPrice {
+      margin-bottom: rem(8);
+
+      .price {
+        font-size: $h3;
+        font-weight: 600;
+      }
+    }
+
+    .topTitle {
+      font-size: $h4;
+      text-transform: uppercase;
+      line-height: normal;
+      width: 40%;
+      margin-bottom: rem(12);
+    }
+
+    .profileContainer {
+      display: flex;
+      align-items: center;
+      gap: rem(12);
+      .profileDetails {
+        font-size: rem(12);
+      }
+    }
+  }
 
   .listingContainer {
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 100%;
+
+    .listingImagesContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      // margin-bottom: rem(96);
+      height: 100vh;
+      // background-color: pink;
+    }
 
     .listingDetails {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: rem(96);
-      width: 100vw;
+      // background-color: red;
 
-      .topSection {
+      .mainSectionContainer {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-top: rem(88);
-        padding-bottom: rem(88);
-        width: 100vw;
-        background-color: $white-three;
+        // width: rem(1187);
+        width: 100%;
+        // margin-left: rem(364);
+        // background-color: navy;
 
         .sellerDetails {
-          margin-right: rem(92);
+          // position: relative;
+          // top: 50%;
+          // transform: translateY(-50%);
+          // left: rem(184);
+          // z-index: 1;
         }
-
         .details {
           display: flex;
           flex-direction: column;
           align-items: center;
-          width: rem(1098);
+         width: 100%;
+          padding: 0 rem(96);
+          // background-color: antiquewhite;
 
           .title {
             margin-bottom: rem(56);
             text-align: center;
             line-height: normal;
-            font-size: $h3;
+            font-size: $h4;
           }
 
-          .detailsContainer {
-            display: flex;
-            flex-direction: column;
-          }
           .priceSection {
             display: flex;
             flex-direction: column;
@@ -76,12 +120,13 @@
         }
       }
 
-      .moreInfoContainer {
+      .detailsContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: auto;
         min-height: rem(200);
+        margin-left: rem(364);
 
         .title {
           color: $danger;
@@ -123,11 +168,8 @@
         }
       }
 
-      .goodToKnowContainer {
-        background-color: $white-four;
-      }
-      .featuresContainer {
-        background-color: $white-three;
+      .similarListingsContainer {
+        background-color: red;
       }
     }
 

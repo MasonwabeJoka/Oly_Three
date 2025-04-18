@@ -2,31 +2,33 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-.featuresContainer {
+.detailsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: rem(918);
   min-height: rem(200);
-  background-color: $white-three;
-  .title {
+  // background-color: $white-three;
+  // background-color: aqua;
+ .title {
     color: $danger;
     font-weight: 600;
     margin-top: rem(64);
     margin-bottom: rem(24);
   }
-  .features {
+  .details {
     margin: 0 auto rem(96);
-    padding: rem(48) rem(432) 0;
+    // padding: rem(48) rem(432) 0;
     display: grid;
-    grid-template-columns: repeat(2, rem(544));
+    grid-template-columns: repeat(2, rem(400));
     gap: rem(16) rem(48);
-    .feature {
+    // background-color: red;
+    .detail {
       display: flex;
       align-items: flex-start;
       // margin-bottom: rem(16);
-      width: rem(544);
-      // background-color: red;
+      width: rem(400);
+      // background-color: green;
       .bulletContainer {
         .bullet {
           position: relative;

@@ -17,9 +17,10 @@ const MainSection = ({ ad, isAuction, onBuyNow }: MainSectionProps) => {
   return (
     <>
       <h1 className={styles.title}>
-        {ad?.title && ad?.title.length > 96
+        {/* {ad?.title && ad?.title.length > 96
           ? ad?.title.slice(0, 96)
-          : ad?.title}
+          : ad?.title} */}
+          Lorem ipsum dolor sit amet consectetur adipiscing elit.
       </h1>
       <div className={styles.priceSection}>
         <PriceSection ad={ad} isAuction={isAuction} />
