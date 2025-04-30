@@ -5,7 +5,7 @@ import { PortableTextBlock } from "sanity";
 import Icon from "./Icon";
 
 type DetailsProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   isCardHovered: boolean;
   title?: string;
   description?: string | PortableTextBlock[] | null;

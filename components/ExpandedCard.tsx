@@ -5,7 +5,7 @@ import { ExpandedDetails } from "./ExpandedDetails";
 import { PortableTextBlock } from "sanity";
 
 type ExpandedCardProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   images?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;

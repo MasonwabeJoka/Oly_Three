@@ -1,0 +1,74 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: 100vw;
+  .topContainer {
+    position: relative;
+    
+    .topBoxOne {
+      position: absolute;
+      top: rem(-120);
+      width: 100%;
+      height: rem(100);
+      z-index: 10;
+      background-color: red;
+      background-color: $white-four;
+    }
+    .topBoxTwo {
+      position: absolute;
+      top: rem(-60);
+      right: rem(16);
+      width: 99%;
+      height: rem(100);
+      border-radius: rem(120);
+      // background-color: yellow;
+      box-shadow: $shadow-three;
+      background-color: $white-four;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $white-one;
+padding-top: rem(144);
+padding-bottom: rem(144);
+    .adContainer {
+      display: flex;
+      flex-direction: column;
+       margin-bottom: rem(48);
+      cursor: pointer;
+
+      .imageContainer {
+        box-shadow: $shadow-three;
+      }
+    }
+  }
+
+  .bottomBoxOne {
+    position: relative;
+    top: rem(-50);
+    left: rem(2);
+    width: 99%;
+    height: rem(100);
+    border-radius: rem(120);
+    box-shadow: $shadow-three;
+    background-color: $white-four;
+   
+  }
+  .bottomBoxTwo {
+    position: relative;
+    top: rem(-100);
+    width: 100%;
+    height: rem(100);
+    z-index: 10;
+    background-color: $white-four;
+    // background-color: red;
+  }
+  .bottomContainer {
+  }
+}

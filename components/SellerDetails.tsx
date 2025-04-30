@@ -1,9 +1,7 @@
 "use client";
 import styles from "./SellerDetails.module.scss";
 import Button from "./Buttons";
-import ReportAd from "./ReportAd";
 import Avatar from "@/components/Avatars";
-import Link from "next/link";
 import Image from "next/image";
 
 const socialMediaLogos = [
@@ -30,10 +28,10 @@ const socialMediaLogos = [
 ];
 
 const SellerDetails = () => {
-  const report = false;
+ 
   return (
     <div className={styles.container}>
-      {!report ? (
+      
         <>
           <div className={styles.profileSection}>
             <Avatar
@@ -107,20 +105,9 @@ const SellerDetails = () => {
               />
             ))}
           </div>
-          <div className={styles.bottom}>
-            <Link href="#">
-              <h4 className={styles.showAll}>Show All Ads</h4>
-            </Link>
-            <Link href="#">
-              <p className={styles.report}>!Report Ad</p>
-            </Link>
-          </div>
+          
         </>
-      ) : (
-        <section className={styles.reportAdContainer}>
-          <ReportAd />
-        </section>
-      )}
+     
     </div>
   );
 };

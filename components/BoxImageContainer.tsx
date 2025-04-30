@@ -4,7 +4,7 @@ import BoxImageSlider from "./BoxImageSlider";
 import Checkbox from "./Checkbox";
 
 type BoxImageContainerProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   images?: string[];
   aspectRatios?: number[];
   isHeartClicked: boolean;

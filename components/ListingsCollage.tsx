@@ -15,7 +15,7 @@ import styles from "./ListingsCollage.module.scss";
 import Spinner from "./Spinner";
 
 type ListingsCollageProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   images: string[][];
   isDeletable?: boolean;
   checkedColour?: string;
@@ -213,9 +213,9 @@ const ListingsCollage = ({
         <section className={styles.container}>
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              columnGap: '20px' 
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              columnGap: "20px",
             }}
           >
             {cards}

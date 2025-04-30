@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   height: fit-content;
-  width:fit-content;
+  width: fit-content;
   cursor: pointer;
 
   .expandedCardWrapper {
@@ -33,7 +33,7 @@
         border-radius: rem(40);
         .image {
           border-radius: rem(40);
-          box-shadow: $shadow-three;
+          box-shadow: $shadow-eight;
         }
 
         .likeIconContainer {

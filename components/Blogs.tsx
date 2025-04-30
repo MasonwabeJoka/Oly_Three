@@ -1,3 +1,4 @@
+'use client'
 import styles from "./Blogs.module.scss";
 import ArticlesSlider from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
@@ -18,7 +19,7 @@ const Blogs = () => {
   const data: any = useArticlesStore((state) => state.data);
   const setData = useArticlesStore((state) => state.setData);
   const Title = useTitleStore((state) => state.Title);
-  console.log({ data });
+
   return (
     <div className={styles.blogSection}>
       <ArticlesSlider

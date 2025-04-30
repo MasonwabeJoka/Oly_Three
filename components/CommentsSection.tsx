@@ -19,6 +19,9 @@ const CommentsSection = () => {
         className={styles.commentInput}
         id="my-textarea"
         name="my-textarea"
+        maxHeight={240}
+        height ={50}
+        characterLimit={5}
         placeholder="Share your thoughts..."
         submitButtonText="Comment"
         size="large"

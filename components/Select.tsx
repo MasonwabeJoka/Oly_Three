@@ -6,8 +6,8 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "./Input";
 import Checkbox from "./Checkbox";
-import Button from "./Buttons";
 
+//Todo: Create an option to have Radio buttons instead of checkbox on the results, so that a user is only allowed to choose one option.
 interface SelectProps {
   className?: string;
   selectSize:

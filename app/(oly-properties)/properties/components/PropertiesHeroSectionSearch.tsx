@@ -120,7 +120,7 @@ const PropertiesHeroSectionSearch = () => {
                 "Agricultural Property",
                 "Other Property",
               ]}
-              initialValue="House / Apartment / Development"
+              initialValue={`House ${"\u00A0".repeat(3)}/${"\u00A0".repeat(3)} Apartment ${"\u00A0".repeat(3)}/ ${"\u00A0".repeat(3)}Development`}
               selectSize="large"
               label="Property Type"
               id="propertyType"
@@ -135,7 +135,7 @@ const PropertiesHeroSectionSearch = () => {
               isMultiSelect={true}
               className={styles.buyRentSelect}
               options={["For Sale", "To Let"]}
-              initialValue="For Sale / To Let"
+              initialValue={`For Sale ${"\u00A0".repeat(3)}/${"\u00A0".repeat(3)} To Let`}
               selectSize="large"
               label="Buy or Rent"
               id="buyRent"
@@ -188,8 +188,6 @@ const PropertiesHeroSectionSearch = () => {
         </div>
 
         <div className={styles.searchFields}>
-          
-
           {searchTermSuggestions === 0 && (
             <div className={styles.searchLocation}>
               <p className={styles.errorMessage}>

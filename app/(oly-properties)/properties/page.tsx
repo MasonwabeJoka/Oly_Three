@@ -1,75 +1,17 @@
-"use client";
-import { useState, useEffect } from "react";
 import Blogs from "@/components/Blogs";
 import styles from "./styles.module.scss";
-import FeaturedCategories from "@/components/FeaturedCategories";
-import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";
 import SponsoredArticles from "@/components/SponsoredArticles";
-// import HeroSection from "@/components/HeroSection";
-import useSidebarStore from "@/store/useSidebarStore";
-import { useRouter } from "next/navigation";
-import useIsMobileStore from "@/store/useMobileStore";
-import Modal from "@/components/Modal";
-import Categories from "@/components/Categories";
-import Menu from "@/components/Menu";
-import { useModalStore } from "@/store/modalStore";
-import { useResponsive } from "@/utils/useResponsive";
-import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
-import MoreFromOly from "@/components/MoreFromOly";
-import PropertiesHeroSection from "./components/PropertiesHeroSection";
-import PropertyValuation from "./components/PropertyValuation";
-import PreQualification from "./components/PreQualification";
-import AgentFinder from "./components/AgentFinder";
 import Calculators from "./components/Calculators";
+import HeroSection from "@/components/HeroSection";
+import ShowMenu from "@/components/ShowMenu";
+import ShowCategories from "@/components/ShowCategories";
+import ProductOffer from "@/components/ProductOffer";
+import ExternalAd from "@/components/ExternalAd";
 
 const Home = () => {
-  const showMenuModal = useModalStore((state) => state.showMenuModal);
-  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
-  const showCategoriesModal = useModalStore(
-    (state) => state.showCategoriesModal
-  );
-  const setShowCategoriesModal = useModalStore(
-    (state) => state.setShowCategoriesModal
-  );
-  const router = useRouter();
-  // const isMobile = useIsMobileStore((state) => state.isMobile);
-  const setIsMobile = useIsMobileStore((state) => state.setIsMobile);
-  const currentScreenSize = useIsMobileStore(
-    (state) => state.currentScreenSize
-  );
-  const setCurrentScreenSize = useIsMobileStore(
-    (state) => state.setCurrentScreenSize
-  );
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
-
-  const isDesktop = useResponsive("desktop", isSidebarOpen);
-  const isTablet = useResponsive("tablet", isSidebarOpen);
-  const isMobile = useResponsive("mobile", isSidebarOpen);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setCurrentScreenSize(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setIsMobile(currentScreenSize < 640);
-  }, [currentScreenSize]);
-
-  useEffect(() => {
-    isMobile ? setIsSidebarOpen(false) : setIsSidebarOpen(true);
-  }, [isMobile]);
-
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -77,50 +19,89 @@ const Home = () => {
           <Navbar />
         </nav>
         <div className={styles.modal}>
-          <Modal
-            showModal={showMenuModal}
-            setShowModal={setShowMenuModal}
-            modalContent={<Menu />}
-          />
+          <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <Modal
-            showModal={showCategoriesModal}
-            setShowModal={setShowCategoriesModal}
-            modalContent={<Categories />}
-          />
+          <ShowCategories />
         </div>
 
         <section className={styles.heroSection}>
-          <PropertiesHeroSection mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease" />
+          <HeroSection
+            category="property"
+            mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"
+          />
         </section>
 
         <section className={styles.aboveFoldAd}>
-          <AboveFoldAd />
+          <ExternalAd
+            adType="image"
+            path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
+          />
         </section>
         <section className={styles.propertyValuation}>
-          <PropertyValuation />
+          <ProductOffer
+            layout="textLeft"
+            path="/properties/valuation"
+            image="/houses/house9.jpg"
+            title="Property Valuation"
+            description=" Get a valuation of your property in minutes. Whether you're looking
+            to sell or rent, our advanced valuation tool provides reliable
+            estimates based on current market data."
+            cta="Go to Valuation"
+            features={[
+              { id: 1, feature: "Market-based valuations" },
+              { id: 2, feature: "Selling price recommendations" },
+              { id: 3, feature: "Rental income estimates" },
+            ]}
+            content={<Calculators />}
+          />
         </section>
 
         <section className={styles.preQualification}>
-          <PreQualification />
+          <ProductOffer
+            layout="textRight"
+            path="/properties/pre-qualification"
+            image="/houses/house12.jpg"
+            title="Oly Home Loan"
+            description="We handle your home loan application by
+            submitting it to all major banks on your behalf. Get pre-qualified
+            and understand your buying power with our streamlined, hassle-free
+            process — designed to boost your chances of approval."
+            cta="Get Pre-Qualified"
+            features={[
+              { id: 4, feature: "Free pre-qualification assessment" },
+              { id: 5, feature: "Submit to multiple banks simultaneously" },
+              { id: 6, feature: "Compare offers and rates side by side" },
+            ]}
+            content={<Calculators />}
+          />
         </section>
 
         <section className={styles.agentFinder}>
-          <AgentFinder />
+          <ProductOffer
+            layout="textLeft"
+            path="/properties/find-agent"
+            image="/agent/3.jpg"
+            title="Find Your Perfect Agent"
+            description="Connect with experienced real estate agents in your area who can
+            help you buy, sell, or rent property. Our database includes verified
+            professionals with proven track records."
+            cta="Find an Agent"
+            features={[]}
+            content={<Calculators />}
+          />
         </section>
-
-   
-
-      
 
         <section className={styles.featuredListings}>
           <h2 className={styles.title}>Featured Properties</h2>
           <FeaturedListings category="property" />
         </section>
-        
+
         <section className={styles.belowFoldAd}>
-          <BelowFoldAd />
+          <ExternalAd
+            adType="video"
+            path="//https://developers.google.com/youtube/player_parameters"
+          />
         </section>
         <section className={styles.calculators}>
           <Calculators />
@@ -130,7 +111,6 @@ const Home = () => {
           <Blogs />
         </section>
 
-        
         <section className={styles.sponsoredArticles}>
           <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />

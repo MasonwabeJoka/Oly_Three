@@ -1,178 +1,206 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
-@use "@/utils/breakpoints" as *; 
-.container  -webkit-scrollbar-track {
+@use "@/utils/breakpoints" as *;
+.container -webkit-scrollbar-track {
   margin-block: rem(80) !important;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  width: rem(1098);
+  align-items: center;
   height: 100vh;
 
-  .wrapper {
+  .recentChats {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(24);
+    margin-top: rem(96);
+    background-color: $white-three;
+    border-radius: rem(40);
+    padding: rem(32);
+    width: 100%;
+    width: rem(712);
 
-    .sideSection {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-left: rem(48);
-      width: rem(356);
-      margin-top: rem(96);
-
-      .searchBar {
-        margin-bottom: rem(24);
-        .search {
-          width: rem(356);
-        }
-      }
-
-      .recentChats {
-        margin-bottom: rem(24);
-        .chat {
-          display: flex;
-          align-items: center;
-          width: rem(356);
-          height: rem(88);
-          border-radius: rem(50);
-          margin-bottom: rem(8);
-          background-color: $white-three;
-          // box-shadow:
-          //   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
-          //   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-          box-shadow: $shadow-one;
-          cursor: pointer;
-
-          .avatarContainer {
-            margin: 0 rem(20) 0 rem(20);
-
-            .avatar {
-            }
-          }
-
-          .textContainer {
-            .name {
-              font-weight: bold;
-              color: #3c4446;
-            }
-            .message {
-            }
-          }
-
-          .timeContainer {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-left: auto;
-            margin-right: rem(12);
-
-            width: rem(56);
-            height: rem(56);
-
-            .time {
-              margin-bottom: rem(2);
-            }
-
-            .messageCount {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              color: $white-one;
-              background: $grey-four;
-              // width: rem(16);
-              // height: rem(16);
-              // border-radius: 50%;
-              font-size: rem(12);
-              // padding: rem(0) rem(2) rem(0) rem(2) !important;
-            }
-          }
-        }
-      }
-      .contactsLink {
-        font-weight: bold;
-      }
-
-      .contactsLink:hover {
-        color: $primary-hover;
+    .searchBar {
+      margin-bottom: rem(24);
+      width: 100%;
+      .search {
+        width: rem(648);
       }
     }
-    .mainSection {
-      width: rem(662);
-      height: 96vh;
-      margin-left: rem(32);
 
-      overflow: auto;
+    .chat {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: rem(88);
+      border-radius: rem(50);
+      margin-bottom: rem(20);
+      background-color: $white-two;
+      cursor: pointer;
+      // box-shadow: $shadow-one;
 
-      .mainSectionWrapper {
-        margin-top: rem(192);
-        .contactChatBubbleContainer {
+      .avatarContainer {
+        margin: 0 rem(16) 0 rem(20);
+
+        .avatar {
+        }
+      }
+
+      .textContainer {
+        .name {
+          font-weight: 500;
+        }
+        .message {
+          font-size: rem(16);
+        }
+      }
+
+      .timeContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: rem(8);
+        align-items: center;
+        margin-left: auto;
+        margin-right: rem(12);
+
+        width: rem(56);
+        height: rem(56);
+
+        .time {
+          margin-bottom: rem(2);
+        }
+
+        .messageCount {
           display: flex;
-          margin-bottom: rem(24);
+          justify-content: center;
+          align-items: center;
+          color: $white-one;
+          background: $grey-four;
+          // width: rem(16);
+          // height: rem(16);
+          // border-radius: 50%;
+          font-size: rem(12);
+          // padding: rem(0) rem(2) rem(0) rem(2) !important;
+        }
+      }
+    }
+
+    .chat:hover {
+      background-color: $white-one;
+    }
+  }
+  .contactsLink {
+    font-weight: bold;
+  }
+
+  .contactsLink:hover {
+    color: $primary-hover;
+  }
+
+  .mainSection {
+    width: rem(800);
+    height: 96vh;
+    margin-left: rem(32);
+
+    // overflow: auto;
+
+    .mainSectionWrapper {
+      margin-top: rem(96);
+     
+      .contactChatBubbleContainer {
+        display: flex;
+        margin-bottom: rem(24);
+        align-items: flex-start;
+
+        .exitButtonContainer {
+          position: fixed;
+          left: 95%;
+          top: 3%;
+          gap: rem(16);
+          cursor: pointer;
+          width: 100%;
+
+          z-index: 10;
+        }
+        .avatarContainer {
+          margin-right: rem(36);
+          .avatar {
+            margin-bottom: rem(8);
+          }
+          .contactTime {
+            font-size: rem(14);
+          }
+        }
+        .chatBubblesWrapper {
+          display: flex;
+          flex-direction: column;
           align-items: flex-start;
 
-          .avatarContainer {
-            margin-right: rem(36);
-          }
-          .chatBubblesWrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+          .bubbleWidthSetter {
+            display: inline-flex;
+            max-width: rem(456);
 
-            .bubbleWidthSetter {
-              display: inline-flex;
-              max-width: rem(456);
+            .contactChatBubble {
+              padding: rem(18) !important;
+              width: fit-content;
+              border-radius: 0 rem(40) rem(40) rem(40);
+              margin-bottom: rem(16);
+              background-color: $white-two;
 
-              .contactChatBubble {
-                padding: rem(18) !important;
-                width: fit-content;
-                border-radius: 0 rem(40) rem(40) rem(40);
-                margin-bottom: rem(8);
-                background-color: $white-two;
-                box-shadow:
-                  10px 10px 20px 0px rgba(169, 196, 203, 0.5),
-                  5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-                box-shadow: $shadow-one;
-              }
+              box-shadow: $shadow-one;
             }
           }
         }
+      }
 
-        .userChatBubbleContainer {
+      .userChatBubbleContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: rem(24);
+
+        .avatarContainer {
+          margin-right: rem(36);
+          .avatar {
+            margin-bottom: rem(8);
+          }
+          .contactTime {
+            font-size: rem(14);
+          }
+        }
+
+        .chatBubblesWrapper {
           display: flex;
-          justify-content: flex-end;
-          margin-bottom: rem(24);
+          flex-direction: column;
+          align-items: flex-end;
 
-          .chatBubblesWrapper {
-            display: flex;
+          .bubbleWidthSetter {
+            display: inline-flex;
             flex-direction: column;
             align-items: flex-end;
+            max-width: rem(456);
 
-            .bubbleWidthSetter {
-              display: inline-flex;
+            .userTime {
+              // margin-right: rem(48);
+              margin-bottom: rem(8);
+            }
+            .userChatBubble {
+              display: flex;
               flex-direction: column;
               align-items: flex-end;
-              max-width: rem(456);
+              padding: rem(18) !important;
+              border-radius: rem(40) 0 rem(40) rem(40);
+              margin-right: rem(32);
+              margin-bottom: rem(16);
+              background-color: $white-five;
+
+              box-shadow: $shadow-one;
 
               .userTime {
-                // margin-right: rem(48);
-                margin-bottom: rem(8);
-              }
-              .userChatBubble {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                padding: rem(18) !important;
-                border-radius: rem(40) 0 rem(40) rem(40);
-                margin-right: rem(32);
-                margin-bottom: rem(8);
-                background-color: $primary;
-                box-shadow:
-                  10px 10px 20px 0px rgba(169, 196, 203, 0.5),
-                  5px 5px 10px 0px rgba(169, 196, 203, 0.25);
-                box-shadow: $shadow-one;
+                font-size: rem(14);
               }
             }
           }

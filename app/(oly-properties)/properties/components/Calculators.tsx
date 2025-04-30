@@ -1,10 +1,9 @@
-import { useRouter } from "next/navigation";
+
 import styles from "./Calculators.module.scss";
 import Button from "@/components/Buttons";
 import Link from "next/link";
 
 const Calculators = () => {
-  const router = useRouter();
 
   const data = [
     {

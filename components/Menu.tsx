@@ -1,3 +1,4 @@
+"use client"
 import styles from "./Menu.module.scss";
 import { MenuData } from "@/data/MenuData";
 import Icon from "./Icon";

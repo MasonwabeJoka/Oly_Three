@@ -19,7 +19,15 @@ import { useCart } from "./payment/store/useCart";
 import MainSection from "./components/MainSection";
 import Features from "./components/ListingFeatures";
 import ads from "@/data/adsData";
-import Avatar from "@/components/Avatars";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ListingDetails from "./components/ListingDetails";
+import { listingDetails } from "@/data/listingDetails";
+import ListingsCollage from "@/components/ListingsCollage";
+import multipleImages from "@/data/multipleImages";
+import Link from "next/link";
+import ReportAd from "@/components/ReportAd";
+import ExitButton from "@/components/ExitButton";
 
 type ParamsProp = {
   params: {
@@ -38,74 +46,47 @@ const Listing = ({ params }: ParamsProp) => {
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
   const sellerDetailsRef = useRef<HTMLDivElement>(null);
   const similarAdsRef = useRef<HTMLDivElement>(null);
-  const [isCentered, setIsCentered] = useState(false);
-  const [isSimilarAdsVisible, setIsSimilarAdsVisible] = useState(false);
-
-  useEffect(() => {
-    const checkIfCentered = () => {
-      if (sellerDetailsRef.current) {
-        const rect = sellerDetailsRef.current.getBoundingClientRect();
-        const sellerDetailsMidpoint = rect.top + rect.height / 2;
-        const viewportMidpoint = window.innerHeight / 2;
-        // Allow a small tolerance (e.g., 5 pixels) to account for subpixel rendering
-        const tolerance = 5;
-        setIsCentered(Math.abs(sellerDetailsMidpoint - viewportMidpoint) <= tolerance);
-      }
-    };
-
-    // Check on mount and when scrolling
-    checkIfCentered();
-    window.addEventListener('scroll', checkIfCentered);
-    window.addEventListener('resize', checkIfCentered);
-
-    // Cleanup listeners
-    return () => {
-      window.removeEventListener('scroll', checkIfCentered);
-      window.removeEventListener('resize', checkIfCentered);
-    };
-  }, []);
-
-  useEffect(() => {
-    const checkIfSimilarAdsDivIsVisible = () => {
-      if (similarAdsRef.current) {
-        const similarAdsDiv = similarAdsRef.current.getBoundingClientRect();
-        const isVisible = similarAdsDiv.top >= 0 && similarAdsDiv.top <= window.innerHeight;
-        setIsSimilarAdsVisible(isVisible);
-      }
-    };
-
-    // Check on mount, scroll, and resize
-    checkIfSimilarAdsDivIsVisible();
-    window.addEventListener('scroll', checkIfSimilarAdsDivIsVisible);
-    window.addEventListener('resize', checkIfSimilarAdsDivIsVisible);
-
-    // Cleanup listeners
-    return () => {
-      window.removeEventListener('scroll', checkIfSimilarAdsDivIsVisible);
-      window.removeEventListener('resize', checkIfSimilarAdsDivIsVisible);
-    };
-  }, []);
-
+  const [report, setReport] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
     setIsSidebarOpen(false);
   }, []);
 
+  useEffect(() => {
+    if (sellerDetailsRef.current && similarAdsRef.current) {
+      gsap.registerPlugin(ScrollTrigger);
 
+      ScrollTrigger.create({
+        trigger: sellerDetailsRef.current,
+        start: "center center",
+        // end: `bottom bottom-=${sellerDetailsRef.current.clientHeight}`,
+        end: "bottom bottom",
+        pin: true,
+        anticipatePin: 1, // Smooths out the pinning start
+        pinType: "transform", // default is position: fixed, pinType: "transform" uses CSS transforms instead
+        pinSpacing: false,
+        markers: false,
+      });
+    }
 
-
+    // Cleanup: Kill all ScrollTrigger instances on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [sellerDetailsRef, similarAdsRef]);
   useEffect(() => {
     const getAd = async () => {
-      const fetchedAd = await fetchAd(listing); // Use the unwrapped listing
+      const fetchedAd = await fetchAd(listing);
       isClient && setAd(fetchedAd ? fetchedAd : null);
     };
 
     getAd();
   }, [isClient]);
+  const tempImages = multipleImages.map((item) => item.images);
 
   const aspectRatios = ad?.images.map((image: ImageType) => image.aspectRatio);
-
+  if (!isClient) return null;
   //Todo: When I click on an image in the Gallery open the modal and show that image in the modal
   //Todo: Add map to the modal
   //Todo: Add Map, Images, and Exit tabs in the modal
@@ -116,27 +97,7 @@ const Listing = ({ params }: ParamsProp) => {
   };
 
   return (
-    <div className={styles.container} style={{ backgroundColor: isCentered ? "red" : "transparent" }}>  
-      {/* <div className={styles.topSection}>
-      <div className={styles.topPrice}>
-          <p className={styles.price}>R 1200</p>
-        </div>
-        <p className={styles.topTitle}>Lorem ipsum dolor sit amet consectetur adipiscing elit.Lorem ipsum dolor sit amet .</p>
-
-      
-        <div className={styles.profileContainer}>
-          <Avatar
-            className={styles.avatar}
-            avatar="/profilePic.jpg"
-            isOnline={false}
-            avatarSize="regular"
-          />
-        <div className={styles.profileDetails}>
-          <p className={styles.name}>Mandisa Msebenzi</p>
-          <p className={styles.location}>Bryanston, JHB</p>
-        </div>
-        </div>
-      </div> */}
+    <div className={styles.container}>
       <div className={styles.listingContainer}>
         {!showImages ? (
           <>
@@ -150,29 +111,41 @@ const Listing = ({ params }: ParamsProp) => {
             </div>
             <>
               <section className={styles.listingDetails}>
-                <div
-                  // ref={mainSectionRef}
-                  className={styles.mainSectionContainer}
-                >
-                  <div
-                    ref={sellerDetailsRef}
-                    className={styles.sellerDetails}
-                    style={{
-                      position: isCentered ? "fixed" : "unset",
-                      top: isCentered && !isSimilarAdsVisible  ? "50%" : "auto",
-                      left: isCentered  && !isSimilarAdsVisible ? "184px" : "unset",
-                      transform: isCentered && !isSimilarAdsVisible  ? "translateY(-50%)" : "none",
-                    }}
-                  >
+                <div className={styles.mainSectionContainer}>
+                  <div ref={sellerDetailsRef} className={styles.sellerDetails}>
                     <SellerDetails />
-                  </div>
 
+                    <p
+                      className={styles.report}
+                      onClick={() => setReport(true)}
+                    >
+                      Report Ad
+                    </p>
+                  </div>
                   <div className={styles.details}>
-                    <MainSection
-                      ad={ad}
-                      isAuction={isAuction}
-                      onBuyNow={handleBuyNow}
-                    />
+                    {!report ? (
+                      <>
+                        <MainSection
+                          ad={ad}
+                          isAuction={isAuction}
+                          onBuyNow={handleBuyNow}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className={styles.exitButtonContainer}
+                          onClick={() => setReport(false)}
+                        >
+                          <ExitButton />
+                        </div>
+
+                        <div className={styles.reportAdContainer}>
+                          <ReportAd />
+                        </div>
+                      </>
+                    )}
+
                     <Modal
                       showModal={showPaymentModal}
                       setShowModal={setShowPaymentModal}
@@ -184,17 +157,32 @@ const Listing = ({ params }: ParamsProp) => {
                 <div
                   className={`${styles.productSpecsContainer} ${styles.detailsContainer}`}
                 >
-                  <ProductSpecifications ad={ads[0]} />
+                  <h4 className={styles.title}>Product Specifications</h4>
+
+                  <ListingDetails details={listingDetails} />
                 </div>
                 <div
                   className={`${styles.featuresContainer} ${styles.detailsContainer}`}
                 >
-                  <Features ad={ads[0]} />
+                  <h4 className={styles.title}>Features</h4>
+                  <ListingDetails details={listingDetails} />
                 </div>
-            <div ref={similarAdsRef} className={styles.similarAdsContainer}>
+                <div ref={similarAdsRef} className={styles.similarAdsContainer}>
+                  <h4 className={`${styles.title} ${styles.similarAdsTitle}`}>
+                    Sponsored
+                  </h4>
 
-                <SimilarAds />
-            </div>
+                  <ListingsCollage
+                    category="all"
+                    images={tempImages}
+                    isDeletable={false}
+                    isDashboard={false}
+                    limit={4}
+                    page={1}
+                    sortBy="postedOn"
+                    sortOrder="desc"
+                  />
+                </div>
                 <div style={{ height: "6rem" }}></div>
               </section>
             </>

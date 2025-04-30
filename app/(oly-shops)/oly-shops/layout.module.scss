@@ -1,0 +1,166 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import "@/app/globals.css";
+.html {
+  scroll-behavior: smooth;
+  height: 100%;
+  font-family:
+    var(--font-outfit),
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+.html::-webkit-scrollbar {
+  width: rem(12);
+  height: rem(12);
+}
+.html::-webkit-scrollbar-track {
+  background-color: transparent;
+  // margin-block: rem(80);
+}
+.html::-webkit-scrollbar-thumb {
+  background-color: $warning-hover;
+  height: rem(56);
+  border-radius: rem(4);
+}
+.html::-webkit-scrollbar-thumb:hover {
+  background-color: $warning-hover;
+}
+
+@supports (scrollbar-color: $warning-hover transparent) {
+  .html {
+    scrollbar-color: $warning-hover transparent;
+    scrollbar-width: auto;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: $white-four;
+  font-size: rem(16);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  color: $black-four;
+  leading-trim: both;
+  text-edge: cap;
+  font-feature-settings: "liga" off;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 0;
+  }
+  h1 {
+    font-size: $h1 !important;
+  }
+  h2 {
+    font-size: $h2 !important;
+  }
+  h3 {
+    font-size: $h3 !important;
+  }
+  h4 {
+    font-size: $h4 !important;
+    font-weight: normal;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+  a,
+  a:visited,
+  a:active {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .wrapper {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+  
+
+    .feed {
+      display: none;
+
+      @include larger-than(mobile) {
+        display: block;
+      }
+    }
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      .nav {
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        background-color: red;
+        @include larger-than(mobile) {
+        }
+      }
+    }
+    // Make sure the children fill up as much content as they can
+    .children {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0%;
+      // width: rem(1098);
+    }
+  }
+
+  footer {
+    margin-top: auto; /* push the footer to the bottom of the container */
+    
+  }
+}
+
+// :export {
+//   body: body;
+// }

@@ -4,13 +4,13 @@
 .radioButtonContainer {
   display: flex;
   align-items: center;
-
+ 
   .label {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    cursor: pointer !important;
     input[type="radio"] {
       display: none;
     }

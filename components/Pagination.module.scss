@@ -34,7 +34,8 @@
   }
 
   &.active {
-    background-color: $white-one !important;
+    background-color: $primary-hover !important;
+    color: $white-one;
   }
 
   &.ellipsis {

@@ -3,7 +3,11 @@ import styles from "./VideoAd.module.scss";
 import YouTubeVideo from "@/components/YouTubeVideo";
 import useIsMobileStore from "@/store/useMobileStore";
 
-const VideoAd = () => {
+type Props = {
+  path: string;
+}
+
+const VideoAd = ({path}: Props) => {
   const isMobile = useIsMobileStore((state) => state.isMobile);
 
   return (
@@ -15,7 +19,7 @@ const VideoAd = () => {
            width="311"
            height="175"
            playerVars={{
-             //https://developers.google.com/youtube/player_parameters
+             path,
              autoPlay: 1,
              loop: 1,
              controls: 1,
@@ -30,7 +34,7 @@ const VideoAd = () => {
           width="628"
           height="353.25"
           playerVars={{
-            //https://developers.google.com/youtube/player_parameters
+            path,
             autoPlay: 1,
             loop: 1,
             controls: 1,

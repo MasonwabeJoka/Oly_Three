@@ -35,7 +35,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
   if (initialSlideIndex === null) {
     return <div>Loading...</div>;
   }
-console.log("images")
+
   return (
     <div className={styles.adCarouselContainer} onClick={onClick}>
       <div className={styles.imagesContainer}>

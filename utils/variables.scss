@@ -1,6 +1,5 @@
 @use "./functions" as *;
 
-
 // Colours
 $white-one: #ffffff;
 $white-two: #f9fcfd;
@@ -14,8 +13,8 @@ $black-three: #1c2230;
 $black-four: #434b4d;
 
 $blue-one: #c9e5e8;
-$blue-one-complimentary:#e8ccc9; 
-$blue-one-complimentary-two:#f8dad7; 
+$blue-one-complimentary: #e8ccc9;
+$blue-one-complimentary-two: #f8dad7;
 
 $grey-one: #e4e6e7;
 $grey-two: #afb0b0;
@@ -72,11 +71,11 @@ $shadow-two:
   2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset,
   -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset;
 $shadow-three:
-  0px 1px 3px 0px rgba(180, 191, 203, 0.98),
-  0px 5px 5px 0px rgba(180, 191, 203, 0.85),
-  0px 11px 7px 0px rgba(180, 191, 203, 0.5),
-  0px 20px 8px 0px rgba(180, 191, 203, 0.15),
-  0px 30px 9px 0px rgba(180, 191, 203, 0.02);
+  -5px -5px 10px 0px #fff,
+  5px 5px 10px 0px rgba(170, 186, 204, 0.5),
+  2px 2px 4px 0px rgba(120, 145, 171, 0.25),
+  -2px -2px 4px 0px rgba(255, 255, 255, 0.5);
+
 $shadow-four:
   0px 1px 3px 0px rgba(207, 211, 211, 0.98),
   0px 5px 5px 0px rgba(207, 211, 211, 0.85),
@@ -93,11 +92,19 @@ $shadow-six:
   10px 10px 20px 0px rgba(169, 196, 203, 0.5),
   5px 5px 10px 0px rgba(169, 196, 203, 0.25);
 
-$shadow-seven:-10px -10px 20px #fff,
-10px 10px 20px rgba(169, 196, 203, 0.5),
-5px 5px 10px rgba(169, 196, 203, 0.25),
-0px 420px 168px 0px rgba(0, 0, 0, 0.01),
--5px -5px 10px rgba(255, 255, 255, 0.5);
+$shadow-seven:
+  -10px -10px 20px #fff,
+  10px 10px 20px rgba(169, 196, 203, 0.5),
+  5px 5px 10px rgba(169, 196, 203, 0.25),
+  0px 420px 168px 0px rgba(0, 0, 0, 0.01),
+  -5px -5px 10px rgba(255, 255, 255, 0.5);
+
+$shadow-eight:
+  0px 1px 3px 0px rgba(180, 191, 203, 0.98),
+  0px 5px 5px 0px rgba(180, 191, 203, 0.85),
+  0px 11px 7px 0px rgba(180, 191, 203, 0.5),
+  0px 20px 8px 0px rgba(180, 191, 203, 0.15),
+  0px 30px 9px 0px rgba(180, 191, 203, 0.02);
 
 // Transitions
 $transition-one: all 0.2s ease;

@@ -15,5 +15,9 @@
     flex-direction: column;
     margin-top: rem(72);
     cursor: pointer;
+
+    .imageContainer {
+      box-shadow: $shadow-three;
+    }
   }
 }

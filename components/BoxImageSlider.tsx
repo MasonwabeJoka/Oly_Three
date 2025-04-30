@@ -9,11 +9,11 @@ import "swiper/css/pagination";
 import Icon from "./Icon";
 import NavButtonRight from "./navButtonRight";
 import NavButtonLeft from "./navButtonLeft";
-import { normalizeImageSrc } from '@/utils/imageUtils';
+import { normalizeImageSrc } from "@/utils/imageUtils";
 import { useLikeButton } from "./../hooks/useLikeButton";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   urls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];

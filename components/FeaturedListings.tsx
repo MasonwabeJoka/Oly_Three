@@ -41,7 +41,14 @@ async function searchAction(formData: FormData) {
 
 type FormValues = z.infer<typeof searchFormSchema>;
 type FeaturedListingsProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category:
+    | "all"
+    | "property"
+    | "vehicles"
+    | "services"
+    | "jobs"
+    | "shops"
+    | "shops";
 };
 
 const FeaturedListings = ({ category }: FeaturedListingsProps) => {
@@ -86,6 +93,61 @@ const FeaturedListings = ({ category }: FeaturedListingsProps) => {
 
   return (
     <>
+      {category === "all" && (
+        <div className={styles.listingsSection}>
+          <div className={styles.collage}>
+            <>
+              <div className={styles.controlContainer}>
+                <div className={styles.control}>
+                  <Select
+                    options={[
+                      "All Categories",
+                      "Properties",
+                      "Vehicles",
+                      "Jobs",
+                      "Services",
+                    ]}
+                    initialValue="All Categories"
+                    selectSize="large"
+                    label="Categories"
+                    id="categories"
+                    name="categories"
+                    ariaLabel="categories"
+                    autoFocus={false}
+                    required={true}
+                  />
+                </div>
+              </div>
+              <ListingsCollage
+                category={category}
+                images={tempImages}
+                isDeletable={false}
+                isDashboard={false}
+                cardSize="standard"
+                limit={4}
+                page={1}
+                sortBy="postedOn"
+                sortOrder="desc"
+              />
+            </>
+          </div>
+          <div className={styles.buttonsAndSearch}>
+            <Link href="/listings" className={styles.buttons}>
+              <Button
+                className={styles.button}
+                buttonChildren={"View all listings"}
+                buttonType="primary"
+                buttonSize="large"
+                name="View All Listings Button"
+                type="button"
+                ariaLabel="View All Listings Button"
+                autoFocus={false}
+                disabled={false}
+              />
+            </Link>
+          </div>
+        </div>
+      )}
       {category === "property" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
@@ -172,29 +234,60 @@ const FeaturedListings = ({ category }: FeaturedListingsProps) => {
           </div>
         </div>
       )}
-
-      {category === "all" && (
+      {category === "shops" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
             <>
               <div className={styles.controlContainer}>
                 <div className={styles.control}>
                   <Select
+                    isMultiSelect={true}
+                    className={styles.shopsTypeSelect}
                     options={[
-                      "All Categories",
-                      "Properties",
-                      "Vehicles",
-                      "Jobs",
-                      "Services",
+                      "Solar Products",
+                      "Fashion",
+                      "Car Pars",
+                      "Tops",
+                      "Pets",
+                      "Furniture",
+                      "Electronics",
+                      "Solar Products",
+                      "Agricultural Products",
+                      "Other Products",
                     ]}
-                    initialValue="All Categories"
+                    initialValue="View All Categories"
                     selectSize="large"
-                    label="Categories"
-                    id="categories"
-                    name="categories"
-                    ariaLabel="categories"
+                    label="Property Type"
+                    id="propertyType"
+                    name="propertyType"
+                    ariaLabel="Property Type Selector"
                     autoFocus={false}
-                    required={true}
+                    required={false}
+                  />
+                </div>
+                <div className={styles.control}>
+                  <Input
+                    isSearchBar={true}
+                    isMultiSelect={true}
+                    suggestions={suggestions}
+                    className={styles.searchLocationInput}
+                    inputType="text"
+                    inputSize="large"
+                    iconSrcRight="/icons/search.png"
+                    iconPosition="right"
+                    iconWidth={32}
+                    iconHeight={32}
+                    label="Location"
+                    placeholder="Search by city, province, township..."
+                    id="locationSearch"
+                    name="locationSearch"
+                    ariaLabel="Location"
+                    autoFocus={false}
+                    autoComplete="off"
+                    required
+                    onSuggestionsChange={(count) =>
+                      setLocationSuggestions(count)
+                    }
                   />
                 </div>
               </div>
@@ -215,7 +308,7 @@ const FeaturedListings = ({ category }: FeaturedListingsProps) => {
             <Link href="/listings" className={styles.buttons}>
               <Button
                 className={styles.button}
-                buttonChildren={"View all listings"}
+                buttonChildren={"View All Properties"}
                 buttonType="primary"
                 buttonSize="large"
                 name="View All Listings Button"

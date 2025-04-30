@@ -3,14 +3,13 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: rem(40);
   background-color: $white-one;
   box-shadow: $shadow-two;
+  overflow: hidden;
 
-  // background-color: pink;
   .label {
     font-size: $body;
     color: $black-one;
@@ -24,25 +23,29 @@
     position: relative;
     width: 100%;
     border-radius: rem(40);
+    overflow: hidden;
 
     .textarea {
       width: 100%;
-      min-height: rem(56);
-      max-height: rem(240);
       padding: rem(32);
       font-size: $body;
       line-height: 1.5;
       color: $black-one;
       background-color: $white-one;
       border: none;
-      border-radius: rem(40);
       outline: none;
       resize: none;
       transition: height 0.2s ease;
       box-shadow: $shadow-two;
       scroll-behavior: smooth;
+      overflow: hidden;
+
+      &.atMaxHeight {
+        overflow: auto;
+      }
     }
   }
+
   .buttons {
     display: flex;
     justify-content: flex-end;
@@ -51,6 +54,7 @@
 
     .submitButton {
       height: rem(40);
+      margin-right: rem(16);
       margin-bottom: rem(8);
       background-color: $primary;
     }
@@ -60,7 +64,6 @@
     text-align: center;
   }
 
-  // Move scrollbar styles outside and target the textarea directly
   textarea::-webkit-scrollbar {
     width: rem(12);
     height: rem(12);
@@ -73,7 +76,6 @@
   textarea::-webkit-scrollbar-thumb {
     background-color: $warning-hover;
     height: rem(56);
-
     border-radius: rem(4);
   }
 
@@ -94,17 +96,18 @@
     top: 0;
     left: 0;
     width: 100%;
-    min-height: rem(56);
-    padding: rem(16);
+    min-height: rem(120); // Match textarea
+    padding: rem(32);
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: hidden;
     font-size: $body;
     line-height: 1.5;
+    box-sizing: border-box; // Ensure padding is included correctly
   }
 }
 
-// Size variants
+// Size variants (applied only if width prop is not set)
 .xxLarge {
   @include larger-than(mobile) {
     width: rem(1296);

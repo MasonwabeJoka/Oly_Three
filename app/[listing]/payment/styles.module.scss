@@ -11,20 +11,22 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: $white-one;
   pointer-events: none;
+
   .sellerDetails {
     position: relative;
-    top: 0;
+    top: 12;
     margin-right: rem(92);
   }
 
   .content {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: rem(1098);
     height: rem(1000);
     pointer-events: auto;
+   
   }
 }

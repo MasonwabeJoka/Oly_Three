@@ -17,7 +17,7 @@ import { useInView } from "react-intersection-observer";
 import { ImageFile } from "@/sanity/Types/ImageFile";
 import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
 type ListingsExpandedProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   images: string[][];
   isDeletable: boolean;
   checkedColour?: string;
@@ -109,7 +109,6 @@ const ListingsExpanded = ({
     fetchAspectRatios();
   }, []);
 
-
   const getTempAspectRatios = async () => {
     const tempAspectRatios = await Promise.all(
       multipleImages.map(async (item) => {
@@ -141,8 +140,6 @@ const ListingsExpanded = ({
     setTempAspectRatios(tempAspectRatios);
   };
 
-
-
   return (
     <div className={styles.listingsContainer}>
       {ads?.map((ad, index) => {
@@ -153,7 +150,7 @@ const ListingsExpanded = ({
 
         return (
           <Link href="/" key={index}>
-          {/* <Link href={`/listings/${ad?.slug}`} key={index}> */}
+            {/* <Link href={`/listings/${ad?.slug}`} key={index}> */}
             <div className={styles.expandedCardContainer}>
               <AdCard
                 slug={ad?.slug}

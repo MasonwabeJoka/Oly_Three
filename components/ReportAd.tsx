@@ -3,131 +3,103 @@ import Button from "./Buttons";
 import Input from "./Input";
 import TextArea from "@/components/TextArea";
 import { UIData } from "@/data/UIData";
+import RadioButton from "./RadioButton";
+import { useState } from "react";
+import Checkbox from "./Checkbox";
 
 const ReportAd = () => {
+  const [checked, setChecked] = useState(false);
   const { normal, icon, medium, radio } = UIData;
   return (
     <form name="reportForm" className={styles.container}>
       <div className={styles.violations}>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationOne"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationOne" className={styles.violationLabel}>
-          This ad is illegal or fraudulent
-        </label>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationTwo"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationTwo" className={styles.violationLabel}>
-          The post displays explicit or violent content
-        </label>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationThree"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationThree" className={styles.violationLabel}>
-          The ad is spam
-        </label>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationFour"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationFour" className={styles.violationLabel}>
-          The ad is in a wrong category
-        </label>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationFive"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationFive" className={styles.violationLabel}>
-          The ad is against posting rules
-        </label>
-        <Input
-          className={styles.violation}
-          inputType={radio}
-          inputSize=""
-          label=""
-          placeholder=""
-          id="violationSix"
-          name="violation"
-          ariaLabel="Violation radio button"
-          autoFocus={false}
-          required={true}
-        />
-        <label htmlFor="violationSix" className={styles.violationLabel}>
-          Other violations
-        </label>
+        <div className={`${styles.violation} ${styles.violationOne}`}>
+          <Checkbox
+            id="violationOne"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationOne" className={styles.violationLabel}>
+            This ad is illegal or fraudulent
+          </label>
+        </div>
+        <div className={`${styles.violation} ${styles.violationTwo}`}>
+          <Checkbox
+            id="violationTwo"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationTwo" className={styles.violationLabel}>
+            The post displays explicit or violent content
+          </label>
+        </div>
+        <div className={`${styles.violation} ${styles.violationThree}`}>
+          <Checkbox
+            id="violationThree"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationThree" className={styles.violationLabel}>
+            The ad is spam
+          </label>
+        </div>
+        <div className={`${styles.violation} ${styles.violationFour}`}>
+          <Checkbox
+            id="violationFour"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationFour" className={styles.violationLabel}>
+            The ad is in a wrong category
+          </label>
+        </div>
+        <div className={`${styles.violation} ${styles.violationFive}`}>
+          <Checkbox
+            id="violationFive"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationFive" className={styles.violationLabel}>
+            The ad is against posting rules
+          </label>
+        </div>
+        <div className={`${styles.violation} ${styles.violationSix}`}>
+          <Checkbox
+            id="violationSix"
+            className=""
+            checked={checked}
+            onChange={() => {}}
+          />
+          <label htmlFor="violationSix" className={styles.violationLabel}>
+            Other violations
+          </label>
+        </div>
       </div>
       <div className={styles.moreInfoContainer}>
-        <TextArea
-          className={styles.moreInfo}
-          placeholder="Please provide more information"
-          label="More Information"
-          id="more-info"
-          name="more-info"
-          rows={10}
-          cols={50}
-          required={true}
-        />
-        <div className={styles.exitBtn}>
-          <Button
-            buttonChildren="X"
-            buttonType={icon}
-            buttonSize=""
-            name="exit_btn"
-            type="button"
-            ariaLabel="Exit Button"
-            autoFocus={false}
-            disabled={false}
-          />
-        </div>
+      <TextArea
+        className={styles.moreInfo}
+        id="moreInfo"
+        name="moreInfo"
+        placeholder="Please provide more information."
+        size="large"
+        label="More Info"
+        required={true}
+        value=''
+        style={{minHeight: '24rem'}}
+        onChange={()=>{}}
+        error={''}
+      />
+
         <div className={styles.submitReportBtn}>
           <Button
             buttonChildren="Submit"
-            buttonType={normal}
-            buttonSize={medium}
+            buttonType='primary'
+            buttonSize='medium'
             name="submit_report_btn"
             type="button"
             ariaLabel="Submit Button"

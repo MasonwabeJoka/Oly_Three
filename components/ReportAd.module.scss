@@ -1,13 +1,21 @@
-@import '@/utils/variables.scss';
-@import '@/utils/functions.scss';
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
 
 .container {
   display: flex;
-  background-color: azure;
+  justify-content: space-between;
+// background-color: azure;
+  width: rem(980);
 
   .violations {
-    margin-right: rem(100);
+    width: 50%;
+    margin-top:rem(72);
     .violation {
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+      // margin-left: rem(24);
+      margin-bottom: rem(24);
     }
 
     .violationLabel {
@@ -18,20 +26,22 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border: solid black rem(1);
+    align-items: center;
+    width: 50%;
+    // margin-right: rem(24);
 
     .moreInfo {
       border: none;
       outline: none;
     }
     .exitBtn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
     }
     .submitReportBtn {
-      margin: 0 auto;
+      margin-top: rem(20);
     }
   }
 }

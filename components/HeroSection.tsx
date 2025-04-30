@@ -1,12 +1,15 @@
 import Image from "next/image";
 import styles from "./HeroSection.module.scss";
 import HeroSectionSearch from "./HeroSectionSearch";
+import ShopsHeroSectionSearch from "@/app/(oly-shops)/components/ShopsHeroSectionSearch";
+import PropertiesHeroSectionSearch from "@/app/(oly-properties)/properties/components/PropertiesHeroSectionSearch";
 
 interface HeroSectionProps {
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   mainTitle?: string;
 }
 
-const HeroSection = ({ mainTitle }: HeroSectionProps) => {
+const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
   return (
     <div className={styles.mainSection}>
       <div className={styles.star}>
@@ -21,7 +24,9 @@ const HeroSection = ({ mainTitle }: HeroSectionProps) => {
        {mainTitle}
       </h1>
       <div className={styles.heroSectionSearchContainer}>
-        <HeroSectionSearch />
+        {category === "all" && <HeroSectionSearch />}
+        {category === "property" && <PropertiesHeroSectionSearch />}
+        {category === "shops" && <ShopsHeroSectionSearch />}
       </div>
     </div>
   );

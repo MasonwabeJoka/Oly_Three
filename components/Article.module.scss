@@ -40,7 +40,7 @@
           align-items: center;
           cursor: pointer;
           gap: rem(4);
-          background-color: $white-one;
+          background-color: $white-three;
           padding: rem(4) rem(16);
           border-radius: rem(40);
           .copyArticleIcon {
@@ -59,7 +59,7 @@
             width: rem(32);
             height: rem(32);
             border-radius: 50%;
-            background-color: $white-one;
+            background-color: $white-three;
             cursor: pointer;
 
             img {
@@ -76,7 +76,7 @@
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background-color: white;
+          background-color: $white-three;
           cursor: pointer;
 
           // If you want to add hover effect

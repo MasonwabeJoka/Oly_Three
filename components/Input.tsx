@@ -203,7 +203,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         // Initialize revealed suggestions with all suggestions
         setRevealedSuggestions(suggestions || []);
       } else {
-        console.log("revealedSuggestions length:", revealedSuggestions.length);
         onSuggestionsChange?.(revealedSuggestions.length);
       }
     }, [
@@ -221,7 +220,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           suggestions?.filter((suggestion) =>
             suggestion.toLowerCase().startsWith(filter.toLowerCase())
           ) || [];
-        console.log("Filtered Suggestions:", filtered);
         setRevealedSuggestions(filtered);
       }
     };
@@ -245,7 +243,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             suggestions?.filter((suggestion) =>
               suggestion.toLowerCase().startsWith(typedValue.toLowerCase())
             ) || [];
-          console.log("SearchBar Filtered Suggestions:", filtered);
           setRevealedSuggestions(filtered);
         }
       } else if (isMultiSelect) {

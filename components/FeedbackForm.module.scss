@@ -82,8 +82,12 @@
         width: rem(48);
         height: rem(48);
         border-radius: 50%;
-        background-color: $grey-one;
+        background-color: $white-two;
         cursor: pointer;
+      }
+
+      .uploadButton:hover {
+        background-color: $white-one;
       }
     }
   }

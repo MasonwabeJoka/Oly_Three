@@ -21,11 +21,11 @@
         flex-direction: column;
 
         .profileName {
-          font-weight: 600;
+          font-weight: 500;
           font-size: $body;
 
           .fullName {
-            font-weight: 600;
+            font-weight: 500;
           }
 
           .username {
@@ -35,7 +35,7 @@
 
         .commentAge {
           font-weight: 300;
-          font-size: $body;
+          font-size: rem(14);
         }
       }
     }
@@ -44,7 +44,7 @@
   .comment {
     margin-bottom: rem(12);
     .replyTo {
-      font-weight: 550;
+      font-weight: 500;
     }
   }
   .reactions {

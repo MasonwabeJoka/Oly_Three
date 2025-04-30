@@ -34,7 +34,7 @@ export default async function Layout({
     <ClerkProvider>
       <html lang="en" className={`${outfit.className} ${styles.html}`}>
         <body className={styles.body}>
-          <QueryProvider>
+         
             <div className={styles.wrapper}>
               <div className={styles.keepSidebarInPlace} />
               <nav className={styles.nav}>
@@ -45,7 +45,7 @@ export default async function Layout({
                 <DashboardSidebar currentUser={currentUser!} />
                 {/* <DashboardSidebar currentUser={currentUser!} user={users} /> */}
               </aside>
-
+              
               <div className={styles.main}>
                 {children}
                 <Toaster
@@ -60,7 +60,7 @@ export default async function Layout({
                 />
               </div>
             </div>
-          </QueryProvider>
+         
         </body>
       </html>
     </ClerkProvider>

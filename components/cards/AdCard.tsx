@@ -8,7 +8,7 @@ import { BoxCard } from "../BoxCard";
 import { ExpandedCard } from "../ExpandedCard";
 
 type Props = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   ad: Ad | null;
   index: number;
   cardType: "expanded" | "box";
@@ -109,10 +109,10 @@ const AdCard: React.FC<Props> = ({
   sizeClass = isSidebarOpen
     ? CARD_SIZE.feed[cardSize]
     : isDashboard
-    ? CARD_SIZE.dashboard[cardSize]
-    : category === "property"
-    ? CARD_SIZE.property[cardSize]
-    : CARD_SIZE.regular[cardSize];
+      ? CARD_SIZE.dashboard[cardSize]
+      : category === "property"
+        ? CARD_SIZE.property[cardSize]
+        : CARD_SIZE.regular[cardSize];
 
   useEffect(() => {
     const timer = setTimeout(() => {

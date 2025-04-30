@@ -28,17 +28,7 @@
     cursor: pointer;
     width: 100%;
 
-    .exitButton {
-      // box-shadow: $shadow-one;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: rem(48);
-      height: rem(48);
-      border-radius: 50%;
-      background-color: $grey-one;
-      cursor: pointer;
-    }
+    z-index: 10;
   }
   .modalContent {
     display: flex;

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Blogs from "@/components/Blogs";
-import styles from "./styles.module.scss";
+import styles from "../../styles/styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";
@@ -19,6 +19,7 @@ import AboveFoldAd from "@/components/ads/AboveFoldAd";
 import BelowFoldAd from "@/components/ads/BelowFoldAd";
 import Navbar from "@/components/layouts/Navbar";
 import MoreFromOly from "@/components/MoreFromOly";
+import ExternalAd from "@/components/ExternalAd";
 
 const Home = () => {
   const showMenuModal = useModalStore((state) => state.showMenuModal);
@@ -29,41 +30,6 @@ const Home = () => {
   const setShowCategoriesModal = useModalStore(
     (state) => state.setShowCategoriesModal
   );
-  const router = useRouter();
-  // const isMobile = useIsMobileStore((state) => state.isMobile);
-  const setIsMobile = useIsMobileStore((state) => state.setIsMobile);
-  const currentScreenSize = useIsMobileStore(
-    (state) => state.currentScreenSize
-  );
-  const setCurrentScreenSize = useIsMobileStore(
-    (state) => state.setCurrentScreenSize
-  );
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
-
-  const isDesktop = useResponsive("desktop", isSidebarOpen);
-  const isTablet = useResponsive("tablet", isSidebarOpen);
-  const isMobile = useResponsive("mobile", isSidebarOpen);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setCurrentScreenSize(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setIsMobile(currentScreenSize < 640);
-  }, [currentScreenSize]);
-
-  useEffect(() => {
-    isMobile ? setIsSidebarOpen(false) : setIsSidebarOpen(true);
-  }, [isMobile]);
 
   return (
     <div className={styles.container}>
@@ -87,14 +53,23 @@ const Home = () => {
         </div>
 
         <section className={styles.heroSection}>
-          <HeroSection />
+          <HeroSection
+            category="all"
+            mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
+        modern marketplace. The future of classifieds."
+          />
         </section>
         <section className={styles.moreFromOly}>
           <h2 className={styles.title}>More from Oly</h2>
           <MoreFromOly />
         </section>
         <section className={styles.aboveFoldAd}>
-          <AboveFoldAd />
+          <section className={styles.aboveFoldAd}>
+            <ExternalAd
+              adType="image"
+              path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
+            />
+          </section>
         </section>
 
         <section className={styles.categories}>
@@ -107,19 +82,22 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
-        <h2 className={styles.title}>Featured Listings</h2>
+          <h2 className={styles.title}>Featured Listings</h2>
           <FeaturedListings />
         </section>
         <section className={styles.blog}>
-        <h2 className={styles.title}>Oly Articles</h2>
+          <h2 className={styles.title}>Oly Articles</h2>
           <Blogs />
         </section>
 
         <section className={styles.belowFoldAd}>
-          <BelowFoldAd />
+          <ExternalAd
+            adType="video"
+            path="//https://developers.google.com/youtube/player_parameters"
+          />
         </section>
         <section className={styles.sponsoredArticles}>
-        <h2 className={styles.title}>Sponsored Articles</h2>
+          <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
       </div>

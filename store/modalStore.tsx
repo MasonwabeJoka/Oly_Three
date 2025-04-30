@@ -1,7 +1,5 @@
 import { create } from "zustand";
 
-
-
 interface ModalState {
   showMenuModal: boolean;
   setShowMenuModal: (show: boolean) => void;
@@ -15,5 +13,3 @@ export const useModalStore = create<ModalState>((set) => ({
   showCategoriesModal: false,
   setShowCategoriesModal: (show) => set({ showCategoriesModal: show }),
 }));
-
-

@@ -6,7 +6,7 @@ import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import ShareCalculator from "./shareCalculator";
 import { formatNumberWithCommas } from "@/utils/formatterFunctions/Formatter";
-
+// Todo: when I hit the arrows of the interest rate number input the number should start at the current interest rate + 1, e.g. 11 + 1
 const AffordabilityCalculator = () => {
   const [grossIncome, setGrossIncome] = useState<number>(0);
   const [netIncome, setNetIncome] = useState<number>(0);

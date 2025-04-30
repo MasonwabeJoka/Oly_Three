@@ -4,7 +4,7 @@ import MobileCarouselOne from "@/components/carousels/MobileCarouselOne";
 import DesktopCarouselOne from "@/components/carousels/DesktopCarouselOne";
 import { slides } from "@/data/SlidesData";
 import useTitleStore from "@/store/titleStore";
-import FeaturesCarousel from "./carousels/FeaturesCarousel";
+import FeaturesCarousel from "./carousels/ProductOfferSlide";
 
 const Features = () => {
   const initialValue = Math.floor(Math.random() * slides.length);

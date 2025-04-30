@@ -5,7 +5,7 @@ import { BoxImageContainer } from "./BoxImageContainer";
 import { BoxCardDetails } from "./BoxCardDetails";
 
 type BoxCardProps = {
-  category: "all" | "property" | "vehicle" | "service" | "job";
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   sizeClass: string;
   images?: string[];
   aspectRatios?: number[];

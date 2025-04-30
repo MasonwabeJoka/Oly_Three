@@ -85,21 +85,6 @@ const Categories = () => {
             );
           })}
         </div>
-        <div className={styles.goBackButtonContainer}>
-          <Button
-            className={styles.goBackButton}
-            buttonChildren="Go Back"
-            buttonType="normal"
-            buttonSize="large"
-            name="go-back-btn"
-            type="button"
-            ariaLabel="Go Back Button"
-            autoFocus={false}
-            disabled={false}
-            ariaHidden={false}
-            onClick={() => setShowCategoriesModal(false)}
-          />
-        </div>
       </div>
     );
   } else {
@@ -165,29 +150,7 @@ const Categories = () => {
             );
           })}
         </div>
-        <div className={styles.goBackButtonContainer}>
-          <Button
-            className={styles.goBackButton}
-            buttonChildren={
-              <Icon
-                className={styles.goBackButton}
-                src="/icons/x 20x20.png"
-                width={20}
-                height={20}
-                alt="Exit Button"
-              />
-            }
-            buttonType="round"
-            buttonSize="large"
-            name="exit-button"
-            type="button"
-            ariaLabel="Exit Button"
-            autoFocus={false}
-            disabled={false}
-            ariaHidden={false}
-            onClick={() => setShowCategoriesModal(false)}
-          />
-        </div>
+        
       </div>
     );
   }

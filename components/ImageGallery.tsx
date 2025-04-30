@@ -171,8 +171,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     const patterns = remainingImages
       .map((img) => (img.aspectRatio >= 1 ? "L" : "P"))
       .join("");
-    console.log("Pattern:", patterns);
-    console.log("remainingImages:", remainingImages);
+    
     switch (patterns) {
       // Landscape-Portrait-Portrait-Landscape pattern
       case "LPPL":
