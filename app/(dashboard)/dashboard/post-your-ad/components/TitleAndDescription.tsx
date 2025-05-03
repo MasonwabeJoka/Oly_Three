@@ -4,26 +4,35 @@ import Input from "@/components/Input";
 import RichTextEditor from "@/components/richTextEditor/RichTextEditor";
 import { useFormContext } from "react-hook-form";
 import { FormWrapper } from "./FormWrapper";
+import { debounce } from "lodash";
 import type { FormDataSchema } from "../validations/formDataSchema";
 
 const TitleAndDescription = () => {
+  const formContext = useFormContext<FormDataSchema>();
+  if (!formContext) {
+    console.error("TitleAndDescription must be used within a FormProvider");
+    return null;
+  }
+
   const {
     register,
     formState: { errors },
     setValue,
     watch,
     trigger,
-  } = useFormContext<FormDataSchema>();
+  } = formContext;
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Debounce title changes
+  const handleTitleChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("titleAndDescription.title", e.target.value, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
     });
     trigger("titleAndDescription.title");
-  };
+  }, 300);
 
+  // Handle description changes without debouncing
   const handleDescriptionChange = (value: string) => {
     setValue("titleAndDescription.description", value, {
       shouldValidate: true,
@@ -36,6 +45,8 @@ const TitleAndDescription = () => {
   const title = watch("titleAndDescription.title") || "";
   const description = watch("titleAndDescription.description") || "";
 
+  const { onChange: titleOnChange, ...restTitleRegister } = register("titleAndDescription.title");
+
   return (
     <FormWrapper title="Ad Description">
       <div className={styles.container}>
@@ -47,7 +58,8 @@ const TitleAndDescription = () => {
             placeholder="Write a title for your ad."
             label="Write a title for your ad"
             id="titleAndDescription.title"
-            ariaLabel="Title Field"
+            ariaLabel="Ad title input field"
+            aria-describedby={errors.titleAndDescription?.title?.message ? "title-error" : undefined}
             autoFocus={false}
             autoComplete="off"
             iconPosition="right"
@@ -57,18 +69,19 @@ const TitleAndDescription = () => {
             required={true}
             value={title}
             error={errors.titleAndDescription?.title?.message}
-            {...register("titleAndDescription.title")}
-            // error={errors.titleAndDescription?.title?.message}
-            onChange={handleTitleChange}
+            {...restTitleRegister}
+            onChange={(e) => {
+              titleOnChange(e);
+              handleTitleChange(e);
+            }}
           />
         </div>
         <div className={styles.descriptionContainer}>
           <RichTextEditor
             name="titleAndDescription.description"
-            setValue={(value: string) => handleDescriptionChange(value)}
+            setValue={handleDescriptionChange}
             content={description}
             error={errors.titleAndDescription?.description?.message}
-            // error={errors.titleAndDescription?.description?.message}
           />
         </div>
       </div>

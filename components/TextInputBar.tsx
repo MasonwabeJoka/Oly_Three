@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./TextAreaComponent.module.scss";
+import styles from "./TextInputBar.module.scss";
 import React, { forwardRef, useState, useEffect, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Icon from "./Icon";
@@ -8,23 +8,23 @@ import Button from "./Buttons";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
+  hasSubmitButton?: boolean;
   placeholder?: string;
   value?: string;
   label?: string;
   id: string;
   name: string;
-  size?: "xxLarge" | "xLarge" | "large" | "medium";
+  dashboard?: boolean;
   submitButtonText?: string;
   submitButtonIcon?: string | React.ReactNode;
   style?: React.CSSProperties;
   required?: boolean;
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
-  maxWidth?: string | number;
-  minHeight?: string | number;
-  width?: string | number;
-  height?: string | number;
-  maxHeight?: string | number;
+  maxWidth?: number;
+  width?: number;
+  height?: number;
+  maxHeight?: number;
   characterLimit?: number;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onClick?: (event: React.MouseEvent<HTMLTextAreaElement, MouseEvent>) => void;
@@ -32,26 +32,43 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
+const SIZE = {
+  regular: {
+    xxLarge: `${styles.xxLarge}`,
+    xLarge: `${styles.xLarge}`,
+    large: `${styles.large}`,
+    medium: `${styles.medium}`,
+    "": "",
+  },
+  feed: {
+    xxLarge: `${styles.xxLargeFeed}`,
+    xLarge: `${styles.xLargeFeed}`,
+    large: `${styles.largeFeed}`,
+    medium: `${styles.mediumFeed}`,
+    "": "",
+  },
+  dashboard: {
+    xxLarge: `${styles.xxLargeDashboard}`,
+    xLarge: `${styles.xLargeDashboard}`,
+    large: `${styles.largeDashboard}`,
+    medium: `${styles.mediumDashboard}`,
+    "": "",
+  },
+};
+
+const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
-      className = "",
+      hasSubmitButton = false,
       placeholder = "",
       value = "",
       label,
       id,
       name,
-      size = "medium",
       submitButtonText = "Submit",
-      submitButtonIcon,
-      style,
       required = false,
       reactHookFormProps,
       error,
-      maxWidth,
-      minHeight,
-      width,
-      height,
       maxHeight,
       characterLimit,
       onChange,
@@ -66,16 +83,12 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
     const [isMaxHeight, setIsMaxHeight] = useState(false);
     const [charCountError, setCharCountError] = useState<string | null>(null);
     const mirrorDivRef = useRef<HTMLDivElement>(null);
+    const [isFocused, setIsFocused] = useState(false);
 
     useEffect(() => {
       if (mirrorDivRef.current) {
         const scrollHeight = mirrorDivRef.current.scrollHeight;
-        const maxHeightPx =
-          maxHeight !== undefined
-            ? typeof maxHeight === "number"
-              ? maxHeight
-              : parseFloat(maxHeight) || 240
-            : 240;
+        const maxHeightPx = maxHeight !== undefined ? maxHeight : 240;
 
         setTextareaHeight(`${Math.min(scrollHeight, maxHeightPx)}px`);
         setIsMaxHeight(scrollHeight > maxHeightPx);
@@ -87,7 +100,6 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
 
       if (characterLimit && newValue.length > characterLimit) {
         setCharCountError(`Character limit of ${characterLimit} reached`);
-        // Prevent adding more characters
         event.target.value = newValue.slice(0, characterLimit);
         setLocalValue(newValue.slice(0, characterLimit));
       } else {
@@ -98,97 +110,96 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
       onChange?.(event);
     };
 
-    const getSizeClass = () => {
-      return styles[size] || styles.medium;
-    };
+    const handleWrapperFocus = () => setIsFocused(true);
 
+    const handleWrapperBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+      const relatedTarget = event.relatedTarget as HTMLElement | null;
+      if (relatedTarget && event.currentTarget.contains(relatedTarget)) {
+        // focus moved within the wrapper → keep it focused
+        return;
+      }
+      setIsFocused(false);
+    };
     return (
       <>
         {error && <p className={styles.errorMessage}>{error}</p>}
         {charCountError && (
           <p className={styles.errorMessage}>{charCountError}</p>
         )}
-        <div
-          className={styles.container}
-          style={{
-            maxWidth: maxWidth
-              ? typeof maxWidth === "number"
-                ? `${maxWidth}px`
-                : maxWidth
-              : undefined,
-            width: width
-              ? typeof width === "number"
-                ? `${width}px`
-                : width
-              : undefined,
-          }}
-        >
+        <div className={styles.container}>
           {label && (
             <label className={styles.label} htmlFor={id}>
               {label}
             </label>
           )}
 
-          <div className={styles.textareaWrapper}>
+          <div
+            className={styles.textareaWrapper}
+            tabIndex={-1}
+            onFocus={handleWrapperFocus}
+            onBlur={handleWrapperBlur}
+          >
             <textarea
-              className={`${styles.textarea} ${width ? "" : getSizeClass()} ${className} ${
+              className={`${styles.textarea} ${
                 isMaxHeight ? styles.atMaxHeight : ""
               }`}
               id={id}
               name={name}
-              placeholder={placeholder}
+              placeholder={!isFocused ? placeholder : ''}
               value={value || localValue}
               required={required}
               onChange={handleChange}
               onClick={onClick}
               onFocus={onFocus}
               onBlur={onBlur}
-              style={{
-                ...style,
-                height: height
-                  ? typeof height === "number"
-                    ? `${height}px`
-                    : height
-                  : textareaHeight,
-                minHeight: minHeight
-                  ? typeof minHeight === "number"
-                    ? `${minHeight}px`
-                    : minHeight
-                  : "56px",
-                maxHeight: maxHeight
-                  ? typeof maxHeight === "number"
-                    ? `${maxHeight}px`
-                    : maxHeight
-                  : "240px",
-              }}
               ref={ref}
+              style={{
+                height: textareaHeight,
+                maxHeight: maxHeight ? `${maxHeight}px` : "240px",
+              }}
               {...reactHookFormProps}
             />
             <div
               ref={mirrorDivRef}
-              className={`${styles.mirrorDiv} ${width ? "" : getSizeClass()}`}
+              className={`${styles.mirrorDiv}`}
               aria-hidden="true"
             >
               {value || localValue || " "}
             </div>
-          </div>
-          {(value || localValue) && (
-            <div className={styles.buttons}>
-              <div className={styles.submitButtonContainer}>
-                <Button
-                  className={styles.submitButton}
-                  buttonChildren={submitButtonText}
-                  buttonType="normal"
-                  buttonSize="tiny"
-                  name="submit-btn"
-                  type="button"
-                  ariaLabel="Submit Button"
-                  autoFocus={false}
-                  disabled={false}
-                />
+            {(value || localValue  || isFocused) && (
+              <div className={styles.buttons}>
+                <div className={styles.leftButtons}>
+                  <Icon
+                    className={styles.imoji}
+                    src="/icons/smiley-fill.png"
+                    alt="imoji"
+                    width={40}
+                    height={40}
+                  />
+                  <Icon
+                    className={styles.upload}
+                    src="/icons/paperclip.png"
+                    alt="upload"
+                    width={30}
+                    height={30}
+                  />
+                </div>
+                <div className={styles.submitButtonContainer}>
+                  <Button
+                    className={styles.submitButton}
+                    buttonChildren={submitButtonText}
+                    buttonType="normal"
+                    buttonSize="tiny"
+                    name="submit-btn"
+                    type="button"
+                    ariaLabel="Submit Button"
+                    autoFocus={false}
+                    disabled={false}
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         {characterLimit && (
           <div className={styles.charCount}>
@@ -200,6 +211,6 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
   }
 );
 
-TextAreaComponent.displayName = "TextAreaComponent";
+TextInputBar.displayName = "TextInputBar";
 
-export default TextAreaComponent;
+export default TextInputBar;

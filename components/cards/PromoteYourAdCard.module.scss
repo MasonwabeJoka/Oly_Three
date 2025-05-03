@@ -12,15 +12,14 @@
   margin-left: rem(6) !important;
   margin-bottom: rem(-24) !important;
   background-color: $white-three;
-  // background-color: $white-four;
-  // box-shadow: $shadow-two;
+
 
   @include larger-than(mobile) {
     margin-bottom: unset !important;
     width: rem(900);
     min-height: rem(255);
     height: unset;
-    // box-shadow: $shadow-one;
+
   }
 
   .title {
@@ -49,7 +48,6 @@
       .setPromotionDurationContainer {
         margin-bottom: rem(20);
         .setPromotionDuration {
-          background-color: $white-one;
         }
       }
       .moreInfoButton {
@@ -70,11 +68,10 @@
       width: rem(72);
       height: rem(72);
       border-radius: 50%;
-      // background-color: $white-two;
-      // box-shadow: $shadow-one;
+ 
 
       .price {
-        font-weight: 600;
+        font-weight: 500;
         font-size: rem(24);
       }
     }

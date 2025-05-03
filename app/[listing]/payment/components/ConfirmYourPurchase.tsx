@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./ConfirmYourPurchase.module.scss";
-import Button from "@/components/Buttons";
 import { FormWrapper } from "./FormWrapper";
 
 // Todo: Create an Oly Secure Payment page, explain the payment process.
@@ -16,15 +15,14 @@ const ConfirmYourPurchase = () => {
         <h2 className={styles.paragraphTitle}>Funds Withdrawal</h2>
         <p>
           Your funds will be withdrawn from your account only after the seller
-          has accepted your offer to purchase. This process ensures your payment
-          is secured and will proceed once both parties confirm the
-          transaction."
+          has accepted your purchase, and the process will proceed once both
+          parties have confirmed the transaction.
         </p>
         <h2 className={styles.paragraphTitle}>Contacting the Seller</h2>
         <p>
-          If you have any questions for the seller or wish to confirm any
-          details about the item before proceeding, we encourage you to contact
-          the seller directly through our secure messaging system.
+          Should you have any questions for the seller or wish to confirm any
+          details about the item, we encourage you to contact them directly
+          through our secure messaging system.
         </p>
         <p
           className={styles.purchasingProcess}
@@ -46,32 +44,7 @@ const ConfirmYourPurchase = () => {
           </Link>
           .
         </p>
-        {/* <Button
-          className={styles.goToPaymentsBtn}
-          buttonChildren="Continue to Payments"
-          buttonType="primary"
-          buttonSize="medium"
-          name="go-to-payments-btn"
-          type="button"
-          ariaLabel="Go To Payments Button"
-          autoFocus={false}
-          disabled={false}
-          ariaHidden={false}
-          // onClick={goToPaymentsBtn}
-        /> */}
-        {/* <Button
-          className={styles.contactSellerBtn}
-          buttonChildren="Contact Seller"
-          buttonType="normal"
-          buttonSize="medium"
-          name="contact-seller-btn"
-          type="button"
-          ariaLabel="Contact Seller Button"
-          autoFocus={false}
-          disabled={false}
-          ariaHidden={false}
-          // onClick={contactSellerBtn}
-        /> */}
+    
       </div>
     </FormWrapper>
   );

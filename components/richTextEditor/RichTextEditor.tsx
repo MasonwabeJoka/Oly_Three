@@ -1,100 +1,79 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import styles from "./RichTextEditor.module.scss";
 import "./richTextEditorGlobalStyles.scss";
-import { useFormContext } from "react-hook-form";
-import dynamic from 'next/dynamic';
-
-// Import CSS files directly
+import FroalaEditor from "react-froala-wysiwyg";
 import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.min.css";
+import "froala-editor/css/froala_editor.pkgd.min.css";
+import "froala-editor/js/plugins/paragraph_format.min.js";
+import "froala-editor/js/plugins/paragraph_style.min.js";
+import "froala-editor/js/plugins/lists.min.js";
+import "froala-editor/js/plugins/emoticons.min.js";
+import "froala-editor/js/plugins/char_counter.min.js";
 
-// Dynamically import Froala with no SSR
-const FroalaEditor = dynamic(
-  async () => {
-    // Import plugins
-    await Promise.all([
-      import("froala-editor/js/plugins/paragraph_format.min.js"),
-      import("froala-editor/js/plugins/paragraph_style.min.js"),
-      import("froala-editor/js/plugins/lists.min.js"),
-      import("froala-editor/js/plugins/emoticons.min.js"),
-      import("froala-editor/js/plugins/char_counter.min.js"),
-    ]);
-    
-    const { default: FroalaEditorComponent } = await import("react-froala-wysiwyg");
-    return FroalaEditorComponent;
-  },
-  {
-    ssr: false,
-    loading: () => <p>Loading editor...</p>
-  }
-);
+interface RichTextEditorProps {
+  name: string;
+  setValue: (value: string) => void;
+  content: string;
+  error?: string;
+}
 
-const RichTextEditor = ({ name, setValue, content, error }) => {
-  const { register } = useFormContext();
-  const [isMounted, setIsMounted] = useState(false);
+const RichTextEditor = ({ name, setValue, content, error }: RichTextEditorProps) => {
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    register(name, { required: true });
-    setIsMounted(true);
-  }, [register, name]);
+    setIsClient(true);
+  }, []);
 
   const config = {
-    placeholderText: "Start typing your description...",
-    charCounterCount: true,
-    charCounterMax: 2000,
-    heightMin: 300,
-    heightMax: 500,
-    toolbarButtons: {
-      moreText: {
-        buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'paragraphFormat', 'paragraphStyle', 'textColor', 'backgroundColor'],
-        align: 'left',
-        buttonsVisible: 3
-      },
-      moreParagraph: {
-        buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'indent', 'outdent'],
-        align: 'left',
-        buttonsVisible: 3
-      },
-      moreRich: {
-        buttons: ['emoticons'],
-        align: 'left',
-        buttonsVisible: 3
-      }
-    },
+    heightMin: 240,
+    placeholderText: "Write a description for your ad.",
+    listAdvancedTypes: false,
+    toolbarButtons: [
+      "bold",
+      "italic",
+      "underline",
+      "strikeThrough",
+      "|",
+      "subscript",
+      "superscript",
+      "|",
+      "emoticons",
+      "|",
+      "formatOL",
+      "formatUL",
+      "spellChecker",
+      "|",
+      "undo",
+      "redo",
+    ],
     pluginsEnabled: [
       "paragraphFormat",
       "paragraphStyle",
       "lists",
       "emoticons",
+      "spellChecker",
       "charCounter",
       "pastePlain",
       "wordPaste",
     ],
+    charCounterCount: true,
     pastePlain: true,
     fontFamilyDefaultSelection: "Outfit",
   };
 
-  if (!isMounted) {
-    return <div className={styles.container}>Loading editor...</div>;
-  }
-
-  return (
+  return isClient ? (
     <div className={styles.container}>
-      {error?.message && <p className={styles.errorMessage}>{error.message}</p>}
+      {error && <p className={styles.errorMessage}>{error}</p>}
       <div id="editor" className={styles.editorContainer}>
         <FroalaEditor
           tag="textarea"
           config={config}
           model={content || ""}
-          onModelChange={(model) =>
-            setValue(name, model, { shouldValidate: true })
-          }
+          onModelChange={(model: string) => setValue(model)} // Pass only the content
         />
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default RichTextEditor;

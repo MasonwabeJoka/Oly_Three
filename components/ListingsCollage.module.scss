@@ -9,14 +9,13 @@
   .listingsContainer {
     display: flex;
     justify-content: center;
-    gap: rem(40);
-    width: 85%;
+    gap: rem(32);
+    width: 86%;
   }
 }
 .cardContainer {
-  
   .card {
     width: fit-content;
-    margin-bottom: rem(36) !important;
+    margin-bottom: rem(44) !important;
   }
 }

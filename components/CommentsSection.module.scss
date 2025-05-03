@@ -13,8 +13,7 @@
     margin-right: rem(24);
     margin-bottom: rem(20);
     font-size: $body !important;
-    // font-weight: 500;
-    // background-color:yellow;
+  
 
     .commentCount {
       margin-right: rem(8);
@@ -23,8 +22,12 @@
 
   .commentInputContainer {
     margin-bottom: rem(48);
+ 
+    // overflow: hidden;
     .commentInput {
       min-height: rem(80) !important;
+      // padding: rem(32) rem(96) rem(32) rem(32) !important;
+
     }
   }
 

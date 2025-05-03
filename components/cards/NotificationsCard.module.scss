@@ -10,7 +10,6 @@
   padding: rem(32);
   border-radius: rem(40);
   background-color: $white-two;
-  // box-shadow: $shadow-one;
   cursor: pointer;
 
   .deleteButton {
@@ -45,19 +44,20 @@
     .info {
       width: rem(460);
       .notificationType {
-        font-weight: 600;
+        
         margin-bottom: rem(20);
       }
       .message {
         margin-bottom: rem(20);
         .title {
           margin-bottom: rem(16);
+          font-weight: thin;
           .name {
-            font-weight: 600;
+            font-weight: 500;
           }
 
           .restOfTitle {
-            font-weight: 600;
+            font-weight: 500;
           }
         }
 

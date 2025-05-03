@@ -167,7 +167,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           onSubmit={() => {}}
           style={{
             padding: "2rem 4rem 2rem 4rem",
-            height: "15rem",
             textAlign: "left",
           }}
           {...register("message")}

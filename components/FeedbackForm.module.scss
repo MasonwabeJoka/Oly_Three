@@ -60,7 +60,8 @@
       color: $danger;
     }
     .message {
-      width: rem(640);
+      // width: rem(640) !important;
+    //  height: rem(240) !important;
     }
   }
 

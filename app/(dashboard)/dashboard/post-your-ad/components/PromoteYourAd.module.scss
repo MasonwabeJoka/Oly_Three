@@ -25,7 +25,6 @@
   }
 
   .cards {
-    // margin-bottom: rem(48);
     .cardContainer {
       margin-bottom: rem(48);
     }
@@ -40,8 +39,8 @@
     }
 
     .price {
-      font-weight: bold;
-      font-size: $h2;
+      font-weight: 500;
+      font-size: $h3;
     }
   }
 

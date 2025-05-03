@@ -53,7 +53,7 @@ const Location = () => {
           <div className={styles.select}>
             <Select
               options={locations[0].suburb}
-              currentValue="Select your suburb"
+              initialValue="Select your suburb"
               selectSize="large"
               label="Suburb"
               id="suburb"

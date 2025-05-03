@@ -21,9 +21,7 @@
     background-color: $warning-hover;
     min-height: rem(56);
     border-radius: rem(4);
-    margin-right: rem(
-      4
-    ); // Note: margin-right may not work as expected; consider border for spacing
+    margin-right: rem(4); // Note: margin-right may not work as expected; consider border for spacing
   }
 
   .recentChats::-webkit-scrollbar-thumb:hover {
@@ -146,7 +144,6 @@
     width: rem(800);
     margin-left: rem(32);
     z-index: 10;
-    
 
     .mainSectionWrapper {
       margin-top: rem(96);
@@ -156,6 +153,7 @@
         display: flex;
         margin-bottom: rem(24);
         align-items: flex-start;
+       
 
         .exitButtonContainer {
           position: fixed;
@@ -186,13 +184,17 @@
             max-width: rem(456);
 
             .contactChatBubble {
-              padding: rem(18) !important;
+              padding: rem(12) rem(24) rem(24) rem(24)!important;
               width: fit-content;
               border-radius: 0 rem(40) rem(40) rem(40);
               margin-bottom: rem(16);
               background-color: $white-two;
 
               box-shadow: $shadow-one;
+
+              .contactName {
+                margin-bottom: rem(8);
+              }
             }
           }
         }
@@ -231,17 +233,23 @@
             .userChatBubble {
               display: flex;
               flex-direction: column;
-              align-items: flex-end;
-              padding: rem(18) !important;
+              align-items: flex-start;
+              padding: rem(12) rem(24) rem(24) rem(24)!important;
               border-radius: rem(40) 0 rem(40) rem(40);
               margin-right: rem(32);
               margin-bottom: rem(16);
               background-color: $white-five;
+          
+
 
               box-shadow: $shadow-one;
 
               .userTime {
                 font-size: rem(14);
+              }
+
+              .userName {
+                margin-bottom: rem(8);
               }
             }
           }

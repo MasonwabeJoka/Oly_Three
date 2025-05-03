@@ -1,7 +1,7 @@
 import Comment from "./Comment";
 import styles from "./CommentsSection.module.scss";
 import TextArea from "./TextArea";
-import TextAreaComponent from "./TextAreaComponent";
+import TextAreaComponent from "./TextArea";
 import TextAreaTemp from "./TextAreaTemp";
 
 
@@ -20,8 +20,7 @@ const CommentsSection = () => {
         id="my-textarea"
         name="my-textarea"
         maxHeight={240}
-        height ={50}
-        characterLimit={5}
+        // characterLimit={500}
         placeholder="Share your thoughts..."
         submitButtonText="Comment"
         size="large"

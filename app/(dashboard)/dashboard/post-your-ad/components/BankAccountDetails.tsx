@@ -1,12 +1,12 @@
 import Input from "@/components/Input";
 import styles from "./BankAccountDetails.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import Spinner from "@/components/Spinner";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
 import type { FormDataSchema } from "../validations/formDataSchema";
+
 const fetchBanks = async () => {
   try {
     const response = await axios.get("/api/paystack/getBanksList", {
@@ -33,6 +33,11 @@ const BankAccountDetails = () => {
     trigger,
   } = useFormContext<FormDataSchema>();
 
+  const [banks, setBanks] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     field: CreateAccountKey
@@ -45,24 +50,25 @@ const BankAccountDetails = () => {
     trigger(`createAccount.${field}`);
   };
 
-  const {
-    data: banks,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["banks"],
-    queryFn: fetchBanks,
-    enabled: false,
-  });
-
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    const loadBanks = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchBanks();
+        setBanks(data);
+        setIsError(false);
+      } catch (error: any) {
+        setIsError(true);
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadBanks();
+  }, []);
 
   if (isLoading) return <Spinner />;
-  if (isError) return <div>Error fetching banks: {error.message}</div>;
+  if (isError) return <div>Error fetching banks: {errorMessage}</div>;
 
   const bankNames = banks?.map((bank: any) => bank.name);
 
@@ -89,7 +95,6 @@ const BankAccountDetails = () => {
             value={watch("createAccount.bankName") || ""}
             error={errors.createAccount?.bankName?.message as string}
             {...register("createAccount.bankName")}
-            // error={errors.bankAccount?.bankName?.message}
             onChange={(e) => handleInputChange(e, "bankName")}
           />
         </div>
@@ -112,7 +117,6 @@ const BankAccountDetails = () => {
             value={watch("createAccount.accountHolder") || ""}
             error={errors.createAccount?.accountHolder?.message as string}
             {...register("createAccount.accountHolder")}
-            // error={errors.bankAccount?.accountHolder?.message}
             onChange={(e) => handleInputChange(e, "accountHolder")}
           />
         </div>
@@ -135,7 +139,6 @@ const BankAccountDetails = () => {
             value={watch("createAccount.accountNumber") || ""}
             error={errors.createAccount?.accountNumber?.message as string}
             {...register("createAccount.accountNumber")}
-            // error={errors.createAccount?.accountNumber?.message}
             onChange={(e) => handleInputChange(e, "accountNumber")}
           />
         </div>

@@ -37,9 +37,9 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
     currentStepIndex === 0
       ? "Continue To Payment"
       : currentStepIndex === 1
-      ? "Confirm Item"
+        ? "Finish Payment"
       : currentStepIndex === 2
-      ? "Finish Payment"
+      ? "Okay"
       : "Proceed";
 
   const bottomButtonText =
@@ -47,7 +47,7 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
 
   const nextStep = () => {
     if (isLastStep) {
-      router.push("/dashboard/post-your-ad/home");
+      router.push("/");
       return;
     }
 
@@ -63,7 +63,7 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
         {children}
       </div>
       <nav className={styles.buttons}>
-        {!isLastStep && (
+    
           <Button
             className={styles.proceedButton}
             buttonChildren={topButtonText}
@@ -77,8 +77,9 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
             dashboard
             onClick={nextStep}
           />
-        )}
+      
 
+        {/* {!isLastStep &&  */}
         <Button
           className={styles.bottomButton}
           buttonChildren={bottomButtonText}
@@ -92,6 +93,7 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
           dashboard
           onClick={() => back()}
         />
+        {/* } */}
       </nav>
       <div className={styles.progressBar}>
         <FormProgressBar

@@ -6,6 +6,7 @@ import Image from "next/image";
 interface AvatarProps {
   className?: string;
   avatar: any;
+  imageAlt?: string;
   avatarSize: keyof typeof AVATAR_SIZE;
   isOnline?: boolean;
   outlineColour?: string;
@@ -21,6 +22,7 @@ const AVATAR_SIZE = {
 const Avatar: React.FC<AvatarProps> = ({
   className,
   avatar,
+  imageAlt = "Avatar",
   avatarSize = "regular",
   isOnline = false,
   outlineColour = "fff",
@@ -52,7 +54,7 @@ const Avatar: React.FC<AvatarProps> = ({
       {!hasError && avatar ? (
         <Image
           src={avatar}
-          alt="Avatar"
+          alt={imageAlt}
           fill={true}
           sizes="(max-width: 768px) 100vw"
           style={{ width: "100%", objectFit: "cover", borderRadius: "50%" }}

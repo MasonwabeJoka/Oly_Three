@@ -48,7 +48,7 @@
       margin-left: rem(32);
       margin-bottom: rem(20);
       .timeRange {
-        font-weight: 600;
+        font-weight: 500;
         margin-right: rem(4);
       }
 
@@ -59,9 +59,7 @@
         width: rem(32);
         height: rem(32);
         border-radius: 50%;
-        background-color: $grey-one;
         background-color: $white-two;
-        // box-shadow: $shadow-one;
         color: $black-one;
         font-weight: 500;
       }

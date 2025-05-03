@@ -6,6 +6,10 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
   },
 
+  experimental: {
+    optimizePackageImports: ["@phosphor-icons/react"],
+  },
+
   images: {
     remotePatterns: [
       {

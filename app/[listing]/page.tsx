@@ -14,7 +14,6 @@ import AdCarousel from "@/components/carousels/AdCarousel";
 import { Image as ImageType } from "@/sanity/Types/Ad";
 import usePaymentModalStore from "../(dashboard)/dashboard/post-your-ad/store/usePaymentModalStore";
 import ProductSpecifications from "./components/ListingSpecifications";
-import PaymentProcessing from "./payment/page";
 import { useCart } from "./payment/store/useCart";
 import MainSection from "./components/MainSection";
 import Features from "./components/ListingFeatures";
@@ -28,6 +27,7 @@ import multipleImages from "@/data/multipleImages";
 import Link from "next/link";
 import ReportAd from "@/components/ReportAd";
 import ExitButton from "@/components/ExitButton";
+import PaymentProcessing from "./payment/components/PaymentProcessing";
 
 type ParamsProp = {
   params: {

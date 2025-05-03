@@ -11,8 +11,9 @@ interface MainSectionProps {
   onBuyNow: () => void;
 }
 
-const MainSection = ({ ad, isAuction, onBuyNow }: MainSectionProps) => {
+const Main = ({ ad, isAuction, onBuyNow }: MainSectionProps) => {
   const [currentlyDisplayed, setCurrentlyDisplayed] = useState("MainSection");
+  const [isChat, setIsChat] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -43,5 +44,19 @@ const MainSection = ({ ad, isAuction, onBuyNow }: MainSectionProps) => {
     </div>
   );
 };
+
+const MainSection =  ({ ad, isAuction, onBuyNow }: MainSectionProps) => {
+  {
+    isChat ? (
+      <div>Chat</div>
+    ) : (
+      <Main ad={ad} isAuction={isAuction} onBuyNow={onBuyNow} />
+    );
+  }
+return  <>  
+    {<Main ad={ad} isAuction={isAuction} onBuyNow={onBuyNow} /> }
+  </>
+}
+
 
 export default MainSection;

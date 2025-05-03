@@ -21,14 +21,12 @@ type PaymentProcessingStore = {
 
 const steps: Step[] = [
   { id: 'step1', name: 'Confirm Purchase' },
-  { id: 'step2', name: 'Cart' },
-  { id: 'step3', name: 'Payment' },
-  { id: 'step4', name: 'Payment Confirmation' },
+  { id: 'step2', name: 'Payment' },
+  { id: 'step3', name: 'Payment Confirmation' },
 ];
 
 const getInitialStepIndex = () => {
   if (typeof window === 'undefined') return 0;
-  
   const stored = localStorage.getItem('PaymentProcessingStepIndex');
   return stored ? parseInt(stored, 10) : 0;
 };
