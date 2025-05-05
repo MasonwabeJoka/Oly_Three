@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 interface IconProps {
   className?: string;
   src: string;
@@ -7,7 +8,9 @@ interface IconProps {
   height?: number;
   boxShadow?: string;
   onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
+  isButton?: boolean;
 }
+
 const Icon = ({
   className = "",
   src,
@@ -16,6 +19,7 @@ const Icon = ({
   height = 20,
   boxShadow = "none",
   onClick,
+  isButton = false,
 }: IconProps) => {
   return (
     <Image
@@ -26,6 +30,15 @@ const Icon = ({
       height={height}
       style={{ objectFit: "contain", boxShadow: boxShadow }}
       onClick={onClick}
+      role={isButton ? "button" : undefined}
+      tabIndex={isButton ? 0 : undefined}
+      onKeyDown={isButton ? (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick?.(e as any);
+        }
+      } : undefined}
+      aria-label={isButton ? alt : undefined}
     />
   );
 };

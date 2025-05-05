@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import SellerDetails from "@/components/SellerDetails";
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import { Ad } from "@/sanity/Types/Ad";
 import { fetchAd } from "@/sanity/actions/singleAdActions";
 import useSidebarStore from "@/store/useSidebarStore";
@@ -9,22 +8,17 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./styles.module.scss";
 import ListingImages from "@/app/[listing]/components/ListingImages";
 import Modal from "@/components/Modal";
-import SimilarAds from "@/components/SimilarAds";
 import AdCarousel from "@/components/carousels/AdCarousel";
 import { Image as ImageType } from "@/sanity/Types/Ad";
 import usePaymentModalStore from "../(dashboard)/dashboard/post-your-ad/store/usePaymentModalStore";
-import ProductSpecifications from "./components/ListingSpecifications";
 import { useCart } from "./payment/store/useCart";
 import MainSection from "./components/MainSection";
-import Features from "./components/ListingFeatures";
-import ads from "@/data/adsData";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ListingDetails from "./components/ListingDetails";
 import { listingDetails } from "@/data/listingDetails";
 import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
-import Link from "next/link";
 import ReportAd from "@/components/ReportAd";
 import ExitButton from "@/components/ExitButton";
 import PaymentProcessing from "./payment/components/PaymentProcessing";
@@ -47,6 +41,7 @@ const Listing = ({ params }: ParamsProp) => {
   const sellerDetailsRef = useRef<HTMLDivElement>(null);
   const similarAdsRef = useRef<HTMLDivElement>(null);
   const [report, setReport] = useState(false);
+  
 
   useEffect(() => {
     setIsClient(true);

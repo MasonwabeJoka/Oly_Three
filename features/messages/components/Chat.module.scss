@@ -1,65 +1,40 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.chat {
-  display: flex;
-  align-items: center;
-  width: rem(356);
-  height: rem(88);
-  border-radius: rem(50);
 
-  background-color: $white-three;
-  box-shadow: $shadow-one;
-  cursor: pointer;
-
-  .avatarContainer {
-    margin: 0 rem(20) 0 rem(16);
-    border-radius: 50%;
-    border: $white-one solid rem(3);
-    .avatar {
-    }
-  }
-
-  .textContainer {
-    .name {
-      font-weight: bold;
-      color: #3c4446;
-    }
-    .message {
-    }
-  }
-
-  .timeContainer {
+.container {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: rem(12);
-    width: rem(56);
-    height: rem(56);
+    width: rem(800);
+    margin-left: rem(32);
+    z-index: 10;
 
-    .time {
-      font-size: rem(14);
+    .exitButtonContainer {
+      position: fixed;
+      left: 95%;
+      top: 3%;
+      gap: rem(16);
+      cursor: pointer;
+      width: 100%;
+      z-index: 500;
 
-      margin-bottom: rem(2);
+      &:focus {
+        outline: 2px solid $primary-hover;
+        outline-offset: 2px;
+      }
     }
 
-    .messageCount {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $white-one;
-      background: $grey-four;
-      width: rem(0);
-      height: rem(16);
-      border-radius: rem(8);
-      font-size: rem(12);
-      padding: rem(0) rem(11.2) rem(0) rem(11.2);
+    .mainSectionWrapper {
+      margin-top: rem(96);
+      margin-bottom: rem(360);
+      width: 100%;
     }
   }
-}
 
-.chat:hover {
-  background-color: $white-two;
-}
+  .bottomSection {
+    position: fixed;
+    bottom: rem(56);
+    
+  }

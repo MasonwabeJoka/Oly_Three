@@ -1,133 +1,84 @@
 import styles from "./Chat.module.scss";
-import Avatar from "@/components/Avatars";
-import { useRouter } from "next/navigation";
-import { useCallback, useState, useMemo } from "react";
-import axios from "axios";
-import { ChatType, Message, User } from "@prisma/client";
-import { format } from "date-fns";
-import { FullChatType } from "../lib/types";
-import useOtherUser from "../hooks/useOtherUser";
-// import { User } from "@prisma/client";
 
-type ChatProps = {
-  avatar: string | null;
-  avatarSize: "small" | "regular" | "large";
-  name: string;
-  messages: string[];
-  message: string;
-  createdAt: string;
-  isOnline: boolean;
-  selected?: boolean;
-  chat: FullChatType;
-};
+import useMessageStore, {
+  Message,
+  MessageContent,
+} from "../store/useMessageStore";
+import ExitButton from "@/components/ExitButton";
+import ChatBubble from "./ChatBubble";
+import TextInputBar from "@/components/TextInputBar";
 
-const Chat: React.FC<ChatProps> = ({
-  avatar,
-  avatarSize,
-  name,
-  messages,
-  message,
-  createdAt,
-  isOnline,
-  selected,
-  chat,
-}) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-  // to make sure that the current user is not listed among the contacts list in the list of chats.
-  // other users comes form the useOtherHook that we created.
-  // const otherUser = useOtherUser(chat);
-
-  // const session = useSession();
-
-  // const handleClick = useCallback(() => {
-  //   // on click send to this router 
-  //   router.push(`/chats/${chat.id}`);
-  // }, [chat.id, router]);
-
-  // // to fetch the last message sent in the conversation
-  // const lastMessage = useMemo(()=> {
-  //   const messages = chat.messages || []
-
-  //   return messages[messages.length - 1]
-  // }, [chat.messages])
-
-  // // to fetch the user email
-  // const userEmail = useMemo(()=> {
-  //   return session.data?.user?.email;
-  // }, [session.data?.user?.email])
-
-  // // to check whether the user has seen the message or not
-  // const hasSeen = useMemo(()=> {
-  //   // if there is no last message the user obviously has not seen the message, so false is return.
-  //   if(!lastMessage) {
-  //     return false;
-  //   }
-
-  //   // we declare the seen array
-  //   const seenArray = lastMessage.seen || []; // the empty array prevents the app from crashing in case there is no seenArray.
-
-  //   // if there is not userEmail we return false because we need the userEmail to be loaded in order to see if it is part of the userArray.
-  //   if(!userEmail) {
-  //     return false
-  //   }
-
-  //   // make sure to return the current user by filtering out all the other users who have seen the message.
-  //   // we use .length !== 0 to make sure a boolean is returned and that there is at least one user who has seen the message.
-  //   return seenArray.filter((user)=> user.email === userEmail).length !== 0
-
-  // }, [userEmail, lastMessage])
-
-  // // to identify the last message text
-  // const lastMessageText = useMemo(()=> {
-  //   // check if the last message is image
-  //   // If its an image we can not show any text to the user.
-  //   if(lastMessage?.image) {
-  //     return 'Sent an image'
-  //   }
-
-
-  //   // if there is a body it means there is text to display.
-  //   if(lastMessage?.body) {
-  //     return lastMessage.body
-  //   }
-
-  //   // if there is neither an image or text, it means the conversation has just started and there is not a single message sent yet.
-
-  //   return "Start chatting"
-  // }, [lastMessage])
-
+const Chat = () => {
+  const { messages, selectedChat, handleSendMessage, userMessages, setChats } =
+    useMessageStore();
+  const shouldShowAvatar = (
+    index: number,
+    msg: MessageContent,
+    allMessages: MessageContent[]
+  ): boolean => {
+    if (index === 0) return true;
+    const prevMsg = allMessages[index - 1];
+    return prevMsg.senderType !== msg.senderType;
+  };
   return (
-
-    // <div className={styles.chat} onClick={handleClick}>
-    <div className={styles.chat}>
-      <div className={styles.avatarContainer}>
-        <Avatar
-          className={styles.avatar}
-          // avatar={otherUser.image}
-          avatar={avatar}
-          avatarSize={avatarSize}
-        />
+    <div className={styles.container}>
+      <div
+        className={styles.exitButtonContainer}
+        onClick={() => setChats(false)}
+        onKeyDown={(e) => e.key === "Enter" && setChats(false)}
+        role="button"
+        tabIndex={0}
+        aria-label="Close chat"
+      >
+        <ExitButton />
       </div>
-      <div className={styles.textContainer}>
-        <p className={styles.name}>
-          {" "}
-          {chat.name && chat.name.length > 20
-            ? chat?.name?.slice(0, 20) + "..."
-            : chat?.name || name.length > 15
-              ? name.slice(0, 20) + "..."
-              : name}
-        </p>
-        <p className={styles.message}>
-          {message.length > 12 ? message.slice(0, 24) + "..." : message}{" "}
-        </p>
+      <div className={styles.mainSectionWrapper} aria-live="polite">
+        {messages
+          .filter((message: Message) => message.id === selectedChat?.id)
+          .map((message: Message) => {
+            const allMessages: MessageContent[] = [
+              ...message.messages,
+              ...userMessages,
+            ];
+            return (
+              <div key={message.name}>
+                {allMessages.map((msg: MessageContent, index: number) => (
+                  <ChatBubble
+                    key={`${msg.text}-${index}`}
+                    contactName={message.contactName}
+                    message={msg.text}
+                    profilePicture={
+                      msg.senderType === "contact"
+                        ? message.profilePicture
+                        : "/profilePic.jpg"
+                    }
+                    time={msg.time}
+                    isContact={msg.senderType === "contact"}
+                    showAvatar={shouldShowAvatar(index, msg, allMessages)}
+                  />
+                ))}
+              </div>
+            );
+          })}
       </div>
-      <div className={styles.timeContainer}>
-        <div className={styles.time}>{createdAt}</div>
-        <p className={styles.messageCount}>
-          {messages.length > 10 ? "9+" : messages.length}
-        </p>
+      <div className={styles.bottomSection}>
+        <div className={styles.typingArea}>
+          <div className={styles.textInputContainer}>
+            <TextInputBar
+              id="textInput"
+              name="textInput"
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                console.log(e.target.value)
+              }
+              onSubmit={(e: React.FormEvent<HTMLTextAreaElement>) =>
+                handleSendMessage(e.currentTarget.value)
+              }
+              className={styles.textInput}
+              placeholder="Type a message"
+              ariaLabel="Type and send a message"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

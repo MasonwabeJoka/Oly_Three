@@ -5,6 +5,7 @@ import React, { forwardRef, useState, useEffect, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Icon from "./Icon";
 import Button from "./Buttons";
+import Emojis from "./Emojis";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
@@ -12,6 +13,7 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
   value?: string;
   label?: string;
+  ariaLabel?: string;
   id: string;
   name: string;
   dashboard?: boolean;
@@ -30,6 +32,7 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onClick?: (event: React.MouseEvent<HTMLTextAreaElement, MouseEvent>) => void;
   onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 }
 
 const SIZE = {
@@ -59,13 +62,14 @@ const SIZE = {
 const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
-      hasSubmitButton = false,
+      hasSubmitButton = true,
       placeholder = "",
       value = "",
       label,
+      ariaLabel,
       id,
       name,
-      submitButtonText = "Submit",
+      submitButtonText = "Send",
       required = false,
       reactHookFormProps,
       error,
@@ -75,6 +79,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
       onClick,
       onFocus,
       onBlur,
+      onSubmit,
     },
     ref
   ) => {
@@ -84,6 +89,8 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
     const [charCountError, setCharCountError] = useState<string | null>(null);
     const mirrorDivRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
 
     useEffect(() => {
       if (mirrorDivRef.current) {
@@ -115,16 +122,44 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
     const handleWrapperBlur = (event: React.FocusEvent<HTMLDivElement>) => {
       const relatedTarget = event.relatedTarget as HTMLElement | null;
       if (relatedTarget && event.currentTarget.contains(relatedTarget)) {
-        // focus moved within the wrapper → keep it focused
         return;
       }
       setIsFocused(false);
     };
+
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    const handleSubmit = () => {
+      if (textareaRef.current && onSubmit) {
+        const event = new Event("submit", { bubbles: true }) as any;
+        Object.defineProperty(event, "target", { value: textareaRef.current });
+        Object.defineProperty(event, "currentTarget", { value: textareaRef.current });
+        onSubmit(event);
+      }
+    };
+
+    const handleIconKeyDown = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+      action: string
+    ) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        console.log(`${action} icon activated`);
+      }
+    };
+
     return (
       <>
-        {error && <p className={styles.errorMessage}>{error}</p>}
-        {charCountError && (
-          <p className={styles.errorMessage}>{charCountError}</p>
+        {(error || charCountError) && (
+          <p className={styles.errorMessage} id={`${id}-error`}>
+            {error || charCountError}
+          </p>
         )}
         <div className={styles.container}>
           {label && (
@@ -132,10 +167,8 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
               {label}
             </label>
           )}
-
           <div
             className={styles.textareaWrapper}
-            tabIndex={-1}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
           >
@@ -145,20 +178,33 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
               }`}
               id={id}
               name={name}
-              placeholder={!isFocused ? placeholder : ''}
+              placeholder={!isFocused ? placeholder : ""}
               value={value || localValue}
+              aria-label={ariaLabel}
               required={required}
               onChange={handleChange}
               onClick={onClick}
               onFocus={onFocus}
               onBlur={onBlur}
-              ref={ref}
+              onKeyDown={handleKeyDown}
+              ref={(node) => {
+                textareaRef.current = node;
+                if (typeof ref === "function") {
+                  ref(node);
+                } else if (ref) {
+                  ref.current = node;
+                }
+              }}
               style={{
                 height: textareaHeight,
                 maxHeight: maxHeight ? `${maxHeight}px` : "240px",
               }}
+              aria-describedby={(error || charCountError) ? `${id}-error` : undefined}
+              aria-label={placeholder || "Type a message"}
               {...reactHookFormProps}
             />
+
+          
             <div
               ref={mirrorDivRef}
               className={`${styles.mirrorDiv}`}
@@ -166,43 +212,65 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
             >
               {value || localValue || " "}
             </div>
-            {(value || localValue  || isFocused) && (
+
+              {isEmojiPickerOpen && <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />}
+            
+            {(value || localValue || isFocused) && (
               <div className={styles.buttons}>
                 <div className={styles.leftButtons}>
-                  <Icon
-                    className={styles.imoji}
-                    src="/icons/smiley-fill.png"
-                    alt="imoji"
-                    width={40}
-                    height={40}
-                  />
-                  <Icon
-                    className={styles.upload}
-                    src="/icons/paperclip.png"
-                    alt="upload"
-                    width={30}
-                    height={30}
-                  />
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => handleIconKeyDown(e, "Emoji")}
+                    onClick={() => setIsEmojiPickerOpen(true)}
+                    aria-label="Insert emoji"
+                  >
+                    <Icon
+                      className={styles.imoji}
+                      src="/icons/smiley-fill.png"
+                      alt="Emoji icon"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => handleIconKeyDown(e, "Upload")}
+                    onClick={() => console.log("Upload icon clicked")}
+                    aria-label="Upload file"
+                  >
+                    <Icon
+                      className={styles.upload}
+                      src="/icons/paperclip.png"
+                      alt="Upload icon"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
                 </div>
-                <div className={styles.submitButtonContainer}>
-                  <Button
-                    className={styles.submitButton}
-                    buttonChildren={submitButtonText}
-                    buttonType="normal"
-                    buttonSize="tiny"
-                    name="submit-btn"
-                    type="button"
-                    ariaLabel="Submit Button"
-                    autoFocus={false}
-                    disabled={false}
-                  />
-                </div>
+                {hasSubmitButton && (
+                  <div className={styles.submitButtonContainer}>
+                    <Button
+                      className={styles.submitButton}
+                      buttonChildren={submitButtonText}
+                      buttonType="normal"
+                      buttonSize="tiny"
+                      name="submit-btn"
+                      type="button"
+                      ariaLabel="Send message"
+                      autoFocus={false}
+                      disabled={false}
+                      onClick={handleSubmit}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
         {characterLimit && (
-          <div className={styles.charCount}>
+          <div className={styles.charCount} id={`${id}-char-count`}>
             {localValue.length}/{characterLimit}
           </div>
         )}

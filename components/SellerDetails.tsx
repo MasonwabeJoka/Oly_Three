@@ -3,6 +3,7 @@ import styles from "./SellerDetails.module.scss";
 import Button from "./Buttons";
 import Avatar from "@/components/Avatars";
 import Image from "next/image";
+import useMessageStore from "@/features/messages/store/useMessageStore";
 
 const socialMediaLogos = [
   {
@@ -28,7 +29,8 @@ const socialMediaLogos = [
 ];
 
 const SellerDetails = () => {
- 
+  const {setChats} = useMessageStore();
+
   return (
     <div className={styles.container}>
       
@@ -57,6 +59,7 @@ const SellerDetails = () => {
               ariaLabel="Chat Button"
               autoFocus={false}
               disabled={false}
+              onClick={() => setChats(true)}
             />
             <Button
               className={`${styles.button} ${styles.followButton}`}
@@ -71,12 +74,12 @@ const SellerDetails = () => {
             />
             <Button
               className={`${styles.button} ${styles.storeButton}`}
-              buttonChildren="Store"
+              buttonChildren="Shop"
               buttonType="normal"
               buttonSize="small"
-              name="store_btn"
+              name="shop_btn"
               type="button"
-              ariaLabel="Store Button"
+              ariaLabel="Shop Button"
               autoFocus={false}
               disabled={false}
             />

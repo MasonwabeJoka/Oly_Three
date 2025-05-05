@@ -1,5 +1,6 @@
 import Button from "@/components/Buttons";
 import styles from "./ButtonsContainer.module.scss";
+import useMessageStore from "@/features/messages/store/useMessageStore";
 type ButtonsContainerProps = {
   isAuction: boolean;
   placeBid?: () => void;
@@ -12,6 +13,8 @@ const ButtonsContainer = ({
   contactSeller,
   buyNow,
 }: ButtonsContainerProps) => {
+  const {setChats} = useMessageStore();
+
   return (
     <div className={styles.buttonsContainer}>
       {isAuction ? (
@@ -60,7 +63,7 @@ const ButtonsContainer = ({
               autoFocus={false}
               disabled={false}
               ariaHidden={false}
-              onClick={contactSeller}
+              onClick={() => setChats(true)}
             />
           </div>
         </>
