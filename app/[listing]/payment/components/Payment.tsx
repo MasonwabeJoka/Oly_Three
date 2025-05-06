@@ -1,8 +1,8 @@
-import { FormWrapper } from "./FormWrapper";
+import { PaymentFormWrapper } from "../PaymentFormWrapper";
 import styles from "./Payment.module.scss";
 const Payment = () => {
   return (
-    <FormWrapper title="Payment">
+    <PaymentFormWrapper title="Payment">
       <form>
         <label>
           Card Number:{" "}
@@ -16,7 +16,7 @@ const Payment = () => {
         </label>
         <button type="button">Submit Payment</button>
       </form>
-    </FormWrapper>
+    </PaymentFormWrapper>
   );
 };
 

@@ -21,7 +21,7 @@ import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
 import ReportAd from "@/components/ReportAd";
 import ExitButton from "@/components/ExitButton";
-import PaymentProcessing from "./payment/components/PaymentProcessing";
+import AuctionForm from "./auction/components/AuctionForm";
 
 type ParamsProp = {
   params: {
@@ -144,8 +144,13 @@ const Listing = ({ params }: ParamsProp) => {
                     <Modal
                       showModal={showPaymentModal}
                       setShowModal={setShowPaymentModal}
-                      modalContent={<PaymentProcessing />}
+                      modalContent={<AuctionForm />}
                     />
+                    {/* <Modal
+                      showModal={showPaymentModal}
+                      setShowModal={setShowPaymentModal}
+                      modalContent={<PaymentProcessing />}
+                    /> */}
                   </div>
                 </div>
 

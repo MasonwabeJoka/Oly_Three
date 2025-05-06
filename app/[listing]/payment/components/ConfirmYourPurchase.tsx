@@ -1,11 +1,11 @@
 import Link from "next/link";
 import styles from "./ConfirmYourPurchase.module.scss";
-import { FormWrapper } from "./FormWrapper";
+import { PaymentFormWrapper } from "../PaymentFormWrapper";
 
 // Todo: Create an Oly Secure Payment page, explain the payment process.
 const ConfirmYourPurchase = () => {
   return (
-    <FormWrapper title="Confirm Your Purchase">
+    <PaymentFormWrapper title="Confirm Your Purchase">
       <div className={styles.container}>
         <p>
           When you click the "Go To Payments" button, you confirm the
@@ -44,9 +44,8 @@ const ConfirmYourPurchase = () => {
           </Link>
           .
         </p>
-    
       </div>
-    </FormWrapper>
+    </PaymentFormWrapper>
   );
 };
 
