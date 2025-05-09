@@ -131,7 +131,7 @@ const ListingsCollage = ({
       .filter((url): url is string => typeof url === "string");
 
     return (
-      <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
+      <Link href={`listings/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
           {category === "all" && (
             <AdCard

@@ -11,8 +11,8 @@
     margin-top: rem(52);
     margin-bottom: rem(32);
     color: $danger;
-    font-size: $body;
-    font-weight: bold;
+    font-size: $h4;
+    font-weight: 500;
 
     @include larger-than(mobile) {
       font-size: $h4;

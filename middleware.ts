@@ -5,7 +5,7 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/nextjs/middleware for more information about configuring your middleware
 export default authMiddleware({
   // routes that are accessible without authentication.
-    publicRoutes: ['/', '/oly-feed','/listings', '/privacy-policy', '/terms-and-conditions','/help', '/api/webhook/clerk'],
+    publicRoutes: ['/', '/oly-feed','/listings', '/listings/:listing' , '/privacy-policy', '/terms-and-conditions','/help', '/api/webhook/clerk'],
     // publicRoutes: ['/test','/api/uploadthing','/dashboard/messages/contacts','/dashboard/settings/preferences','/dashboard/settings/account-verification','/dashboard/settings/profile-settings','/dashboard/settings/password-settings','/dashboard/settings','/dashboard/notifications','/dashboard/liked-ads','/dashboard/my-ads/promote-your-ads','/dashboard/my-ads','/dashboard','/dashboard/messages','/dashboard/post-your-ad/ad-description','/dashboard/post-your-ad/select-a-category','/dashboard/post-your-ad/home','/dashboard/post-your-ad/price','/dashboard/post-your-ad/location','/dashboard/post-your-ad/features','/dashboard/post-your-ad/other','/listing','/dashboard/post-your-ad/details','/listings','/dashboard/post-your-ad/upload-media/upload-photos','/dashboard/post-your-ad/upload-media/upload-videos', '/dashboard/post-your-ad/upload-media/upload-attachments','/dashboard/post-your-ad/upload-media','/dashboard/messages','/', '/oly-feed','/listings', '/privacy-policy', '/terms-and-conditions','/help', '/api/webhook/clerk'],
     
     // routes that the authentication middleware will completely ignore

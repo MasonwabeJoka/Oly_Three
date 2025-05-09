@@ -1,4 +1,4 @@
-import AuctionForm from "@/app/[listing]/auction/components/AuctionForm"
+import AuctionForm from "@/app/listings/[listing]/auction/components/AuctionForm"
 
 const Test = () => {
   return (

@@ -4,12 +4,12 @@
 .container {
   display: flex;
   justify-content: space-between;
-// background-color: azure;
+  align-items: center;
   width: rem(980);
 
   .violations {
     width: 50%;
-    margin-top:rem(72);
+    // margin-top:rem(72);
     .violation {
       display: flex;
       align-items: center;

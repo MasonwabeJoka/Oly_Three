@@ -9,7 +9,8 @@ import Checkbox from "./Checkbox";
 
 const ReportAd = () => {
   const [checked, setChecked] = useState(false);
-  const { normal, icon, medium, radio } = UIData;
+  
+  
   return (
     <form name="reportForm" className={styles.container}>
       <div className={styles.violations}>

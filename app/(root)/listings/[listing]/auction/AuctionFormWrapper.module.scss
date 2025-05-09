@@ -1,0 +1,61 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(311);
+  height: 100vh;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+
+  @include larger-than(mobile) {
+    width: rem(1098);
+    margin-left: rem(-48);
+  }
+
+  .titleContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(128);
+    margin-bottom: rem(64);
+    width: 100%;
+    .title {
+      color: $danger;
+      font-size: $h4;
+      font-weight: 500;
+    }
+  }
+
+  .children {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: rem(64);
+  }
+
+  .buttons {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+
+    margin-bottom: rem(48);
+    .proceedButton {
+      margin-bottom: rem(20);
+    }
+  }
+
+  .progressBar {
+    position: fixed;
+    bottom: 0;
+    z-index: 5;
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari */
+}

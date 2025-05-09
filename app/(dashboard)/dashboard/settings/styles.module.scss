@@ -12,9 +12,9 @@
   .title {
     margin-top: rem(56);
     margin-bottom: rem(32);
-    font-size: $body;
+    font-size: $h4;
     color: $danger;
-    font-weight: bold;
+    font-weight: 500;
     @include larger-than(mobile) {
       margin-top: rem(64);
       font-size: $h4;

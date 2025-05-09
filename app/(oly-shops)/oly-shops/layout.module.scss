@@ -76,10 +76,10 @@
     margin-top: 0;
   }
   h1 {
-    font-size: $h1 !important;
+    font-size: $h1;
   }
   h2 {
-    font-size: $h2 !important;
+    font-size: $h2;
   }
   h3 {
     font-size: $h3 !important;
@@ -123,7 +123,6 @@
     display: flex;
     min-height: 100vh;
     justify-content: center;
-  
 
     .feed {
       display: none;
@@ -157,7 +156,6 @@
 
   footer {
     margin-top: auto; /* push the footer to the bottom of the container */
-    
   }
 }
 
