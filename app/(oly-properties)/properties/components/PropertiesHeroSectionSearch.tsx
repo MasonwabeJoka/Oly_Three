@@ -40,9 +40,11 @@ async function searchAction(formData: FormData) {
 type FormValues = z.infer<typeof searchFormSchema>;
 
 const PropertiesHeroSectionSearch = () => {
-  const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
-  const [locationSuggestions, setLocationSuggestions] = useState(0);
+  const [priceRangeOptions, setPriceRangeOptions] = useState(0);
+  const [forSaleToLetOptions, setForSaleToLetOptions] = useState(0);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+  // New state to track open Select components
+  const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const {
     register,
@@ -82,10 +84,9 @@ const PropertiesHeroSectionSearch = () => {
         <Image src="/logo.png" alt="logo" width={120} height={120} />
       </div>
 
-      {/* Use next/form's Form component */}
       <Form
-        action={searchAction} // Native server action for non-JS fallback
-        onSubmit={handleSubmit(onSubmit)} // React Hook Form's enhanced submission
+        action={searchAction}
+        onSubmit={handleSubmit(onSubmit)}
         className={styles.buttonsAndSearch}
         id="buttonsAndSearch"
         noValidate
@@ -128,118 +129,144 @@ const PropertiesHeroSectionSearch = () => {
               ariaLabel="Property Type Selector"
               autoFocus={false}
               required={false}
+              onOptionsChange={(count: number) => setForSaleToLetOptions(count)}
+              onOpenChange={(isOpen) =>
+                setOpenSelect(isOpen ? "propertyType" : null)
+              }
             />
           </div>
-          <div className={styles.buyRentSelectContainer}>
-            <Select
-              isMultiSelect={true}
-              className={styles.buyRentSelect}
-              options={["For Sale", "To Let"]}
-              initialValue={`For Sale ${"\u00A0".repeat(3)}/${"\u00A0".repeat(3)} To Let`}
-              selectSize="large"
-              label="Buy or Rent"
-              id="buyRent"
-              name="buyRent"
-              ariaLabel="Buy or Rent Selector"
-              autoFocus={false}
-              required={false}
-            />
-          </div>
-          <div className={styles.priceRangeSelectContainer}>
-            <Select
-              isMultiSelect={true}
-              className={styles.priceRangeSelect}
-              options={[
-                "Less than R100 000",
-                `R100 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R200 000`,
-                `R200 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R300 000`,
-                `R300 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R400 000`,
-                `R400 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R500 000`,
-                `R500 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R600 000`,
-                `R600 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R700 000`,
-                `R700 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R800 000`,
-                `R800 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R900 000`,
-                `R900 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R1 000 000`,
-                `R1 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R2 000 000`,
-                `R2 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R3 000 000`,
-                `R3 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R4 000 000`,
-                `R4 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R5 000 000`,
-                `R5 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R6 000 000`,
-                `R6 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R7 000 000`,
-                `R7 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R8 000 000`,
-                `R8 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R9 000 000`,
-                `R9 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R10 000 000`,
-                `R10 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R12 000 000`,
-                `R12 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R14 000 000`,
-                `R14 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R16 000 000`,
-                `R16 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R20 000 000`,
-                "More than R20 000 000",
-              ]}
-              initialValue="Price Range"
-              selectSize="large"
-              label="Price Range"
-              id="priceRange"
-              name="PriceRange"
-              ariaLabel="Price Range Selector"
-              autoFocus={false}
-              required={false}
-            />
-          </div>
-        </div>
 
-        <div className={styles.searchFields}>
-          {searchTermSuggestions === 0 && (
-            <div className={styles.searchLocation}>
-              <p className={styles.errorMessage}>
-                {errors.locationSearch?.message || serverErrors.locationSearch}
-              </p>
-              <Input
-                isSearchBar={true}
+          {openSelect !== "propertyType" && (
+            <div className={styles.buyRentSelectContainer}>
+              <Select
                 isMultiSelect={true}
-                suggestions={suggestions}
-                className={styles.searchLocationInput}
-                inputType="text"
-                inputSize="large"
-                iconSrcRight="/icons/search.png"
-                iconPosition="right"
-                iconWidth={32}
-                iconHeight={32}
-                label="Location"
-                placeholder="Search by city, province, township..."
-                id="locationSearch"
-                name="locationSearch" // Required for FormData
-                ariaLabel="Location"
+                className={styles.buyRentSelect}
+                options={["For Sale", "To Let"]}
+                initialValue={`For Sale ${"\u00A0".repeat(3)}/${"\u00A0".repeat(3)} To Let`}
+                selectSize="large"
+                label="Buy or Rent"
+                id="buyRent"
+                name="buyRent"
+                ariaLabel="Buy or Rent Selector"
                 autoFocus={false}
-                autoComplete="off"
-                required
-                {...register("locationSearch")}
-                onChange={(e) =>
-                  setValue("locationSearch", e.target.value, {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
+                required={false}
+                onOptionsChange={(count: number) => setPriceRangeOptions(count)}
+                onOpenChange={(isOpen) =>
+                  setOpenSelect(isOpen ? "buyRent" : null)
                 }
-                onSuggestionsChange={(count) => setLocationSuggestions(count)}
               />
             </div>
           )}
+
+          {openSelect !== "propertyType" &&
+            openSelect !== "buyRent" &&
+            forSaleToLetOptions === 0 && (
+              <div className={styles.priceRangeSelectContainer}>
+                <Select
+                  isMultiSelect={false}
+                  className={styles.priceRangeSelect}
+                  options={[
+                    "Less than R 100 000",
+                    `R 100 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 200 000`,
+                    `R 200 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 300 000`,
+                    `R 300 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 400 000`,
+                    `R 400 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 500 000`,
+                    `R 500 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 600 000`,
+                    `R 600 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R 700 000`,
+                    `R 700 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R800 000`,
+                    `R 800 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R900 000`,
+                    `R 900 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R1 000 000`,
+                    `R 1 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R2 000 000`,
+                    `R 2 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R3 000 000`,
+                    `R 3 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R4 000 000`,
+                    `R 4 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R5 000 000`,
+                    `R 5 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R6 000 000`,
+                    `R 6 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R7 000 000`,
+                    `R 7 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R8 000 000`,
+                    `R 8 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R9 000 000`,
+                    `R 9 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R10 000 000`,
+                    `R 10 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R12 000 000`,
+                    `R 12 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R14 000 000`,
+                    `R 14 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R16 000 000`,
+                    `R 16 000 000${"\u00A0".repeat(7)}-${"\u00A0".repeat(7)}R20 000 000`,
+                    "More than R 20 000 000",
+                  ]}
+                  initialValue="Price Range"
+                  selectSize="large"
+                  label="Price Range"
+                  id="priceRange"
+                  name="PriceRange"
+                  ariaLabel="Price Range Selector"
+                  autoFocus={false}
+                  required={false}
+                  onOpenChange={(isOpen) =>
+                    setOpenSelect(isOpen ? "priceRange" : null)
+                  }
+                />
+              </div>
+            )}
         </div>
 
-        {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-          <div className={styles.searchButton}>
-            <Button
-              buttonChildren={"Search"}
-              className={styles.search}
-              buttonType="primary"
-              buttonSize="large"
-              name="Search Button"
-              type="submit"
-              ariaLabel="Search Button"
-              autoFocus={false}
-              disabled={isSubmitting}
-            />
-          </div>
-        )}
+        {openSelect !== "propertyType" &&
+          openSelect !== "buyRent" &&
+          openSelect !== "priceRange" &&
+          forSaleToLetOptions === 0 &&
+          priceRangeOptions === 0 && (
+            <div className={styles.searchFields}>
+              <div className={styles.searchLocation}>
+                <p className={styles.errorMessage}>
+                  {errors.locationSearch?.message || serverErrors.locationSearch}
+                </p>
+                <Input
+                  isSearchBar={true}
+                  isMultiSelect={true}
+                  suggestions={suggestions}
+                  className={styles.searchLocationInput}
+                  inputType="text"
+                  inputSize="large"
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  label="Location"
+                  placeholder="Search by city, province, township..."
+                  id="locationSearch"
+                  name="locationSearch"
+                  ariaLabel="Location"
+                  autoFocus={false}
+                  autoComplete="off"
+                  required
+                  {...register("locationSearch")}
+                  onChange={(e) =>
+                    setValue("locationSearch", e.target.value, {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    })
+                  }
+                />
+              </div>
+            </div>
+          )}
+
+        {openSelect !== "propertyType" &&
+          openSelect !== "buyRent" &&
+          openSelect !== "priceRange" &&
+          forSaleToLetOptions === 0 &&
+          priceRangeOptions === 0 && (
+            <div className={styles.searchButton}>
+              <Button
+                buttonChildren={"Search"}
+                className={styles.search}
+                buttonType="primary"
+                buttonSize="large"
+                name="Search Button"
+                type="submit"
+                ariaLabel="Search Button"
+                autoFocus={false}
+                disabled={isSubmitting}
+              />
+            </div>
+          )}
       </Form>
     </div>
   );
