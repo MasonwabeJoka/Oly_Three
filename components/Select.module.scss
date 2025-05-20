@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
   width: fit-content;
   .errorMessage {
@@ -16,23 +17,23 @@
     cursor: pointer;
 
     .select {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: rem(40);
-    background-color: $white-three;
-    height: rem(56);
-    box-shadow: $shadow-one;
-    text-align: center;
-    border: none;
-    outline: none;
-    appearance: none;
-    margin: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      background-color: $white-three;
+      height: rem(56);
+      box-shadow: $shadow-one;
+      text-align: center;
+      border: none;
+      outline: none;
+      appearance: none;
+      margin: 0 !important;
 
-    &:hover {
-      background-color: $white-one !important;
+      &:hover {
+        background-color: $white-one !important;
+      }
     }
-  }
     .input {
       height: rem(56);
       border-radius: rem(40);
@@ -98,19 +99,19 @@
 }
 
 .options {
-  position: absolute; 
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-height: rem(346);
   cursor: pointer;
-  overflow-y: auto; 
+  overflow-y: auto;
   overflow-x: hidden;
-  margin-top: rem(4);
-  z-index: 1000; 
-  border-radius: rem(8); 
-
-
+  margin-top: rem(4) !important;
+  z-index: 1000;
+  border-radius: rem(8);
+  border-radius: rem(40);
+ 
   .option {
     display: flex;
     justify-content: center;

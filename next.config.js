@@ -55,6 +55,7 @@ const nextConfig = {
         hostname: "utfs.io",
       },
     ],
+    
   },
 };
 

@@ -1,3 +1,4 @@
+@use "sass:map";
 /* 640px | 1024 | 1400 */
 $larger-than: (
   "mobile": "40em",
@@ -13,13 +14,13 @@ $smaller-than: (
 ) !default;
 
 @mixin larger-than($size) {
-  @media (min-width: map-get($larger-than, $size)) {
+  @media (min-width: map.get($larger-than, $size)) {
     @content;
   }
 }
 
 @mixin smaller-than($size) {
-  @media (max-width: map-get($smaller-than, $size)) {
+  @media (max-width: map.get($smaller-than, $size)) {
     @content;
   }
 }

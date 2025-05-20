@@ -1,7 +1,7 @@
 'use server'
 import { revalidatePath } from 'next/cache';
 import { groq } from 'next-sanity';
-import  createClient  from '@sanity/client';
+import { createClient } from '@sanity/client';
 import ClientConfig from "../config/client-config"
 
 const client = createClient(ClientConfig);

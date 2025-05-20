@@ -75,7 +75,7 @@ const Checkbox = ({
         className={className}
         onChange={handleCheckboxChange}
         checked={isCheckboxChecked}
-        disabled={true}
+        disabled={disabled ?? false}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
      

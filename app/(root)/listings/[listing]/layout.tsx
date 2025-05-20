@@ -1,5 +1,4 @@
 import styles from "./layout.module.scss";
-// import styles from "../../../styles/layout.module.scss";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -23,22 +22,18 @@ export default function ListingLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <html lang="en" className={`${outfit.className} ${styles.html}`}>
-    //   <body className={styles.body}>
-    //     <nav className={styles.nav}>
-    //       {/* <Navbar /> */}
-    //       <HomeButton />
-    //     </nav>
-    <>
-      <nav className={styles.nav}>
-        <HomeButton />
-      </nav>
-      <div className={styles.main}>{children}</div>
-    </>
-    //     <footer className={styles.footer}>
-    //       <Footer />
-    //     </footer>
-    //   </body>
-    // </html>
+    <ClerkProvider>
+      <html lang="en" className={`${outfit.className} ${styles.html}`}>
+        <body className={styles.body}>
+          <nav className={styles.nav}>
+            <HomeButton />
+          </nav>
+          <main className={styles.main}>{children}</main>
+          <footer className={styles.footer}>
+            <Footer />
+          </footer>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

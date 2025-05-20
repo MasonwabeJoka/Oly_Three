@@ -65,6 +65,7 @@ const PasswordSettings = () => {
           autoComplete="off"
           disabled={false}
           required={true}
+          dashboard
           {...register("oldPassword")}
         />
       </div>
@@ -83,6 +84,7 @@ const PasswordSettings = () => {
           autoComplete="off"
           disabled={false}
           required={true}
+          dashboard
           {...register("newPassword")}
         />
       </div>
@@ -102,6 +104,7 @@ const PasswordSettings = () => {
           autoComplete="off"
           disabled={false}
           required={true}
+          dashboard
           {...register("reenterPassword")}
         />
       </div>
@@ -118,6 +121,7 @@ const PasswordSettings = () => {
           ariaLabel="Change Password Button"
           autoFocus={false}
           disabled={false}
+          dashboard
         />
       </div>
 
@@ -133,6 +137,7 @@ const PasswordSettings = () => {
           autoFocus={false}
           disabled={false}
           onClick={handleBackClick}
+          dashboard
         />
       </div>
 

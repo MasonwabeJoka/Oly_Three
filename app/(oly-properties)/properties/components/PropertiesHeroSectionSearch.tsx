@@ -40,8 +40,13 @@ async function searchAction(formData: FormData) {
 type FormValues = z.infer<typeof searchFormSchema>;
 
 const PropertiesHeroSectionSearch = () => {
-  const [priceRangeOptions, setPriceRangeOptions] = useState(0);
+  const [propertyTypeOptions, setPropertyTypeOptions] = useState(0);
   const [forSaleToLetOptions, setForSaleToLetOptions] = useState(0);
+  const [priceRangeOptions, setPriceRangeOptions] = useState(0);
+  const [isPropertyTypeSelect, setIsPropertyTypeSelect] = useState(false);
+  const [isForSaleToLetSelect, setIsForSaleToLetSelect] = useState(false);
+  const [isPriceRangeSelect, setIsPriceRangeSelect] = useState(false);
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   // New state to track open Select components
   const [openSelect, setOpenSelect] = useState<string | null>(null);
@@ -129,18 +134,18 @@ const PropertiesHeroSectionSearch = () => {
               ariaLabel="Property Type Selector"
               autoFocus={false}
               required={false}
-              onOptionsChange={(count: number) => setForSaleToLetOptions(count)}
-              onOpenChange={(isOpen) =>
-                setOpenSelect(isOpen ? "propertyType" : null)
-              }
+              // onOptionsCountChange={(count) => setPropertyTypeOptions(count)}
+              onOpenChange={(isOpen) => {
+                setIsPropertyTypeSelect(isOpen);
+              }}
             />
           </div>
 
-          {openSelect !== "propertyType" && (
-            <div className={styles.buyRentSelectContainer}>
+          {!isPropertyTypeSelect && (
+            <div className={styles.forSaleToLetSelectContainer}>
               <Select
                 isMultiSelect={true}
-                className={styles.buyRentSelect}
+                className={styles.forSaleToLetSelect}
                 options={["For Sale", "To Let"]}
                 initialValue={`For Sale ${"\u00A0".repeat(3)}/${"\u00A0".repeat(3)} To Let`}
                 selectSize="large"
@@ -150,17 +155,16 @@ const PropertiesHeroSectionSearch = () => {
                 ariaLabel="Buy or Rent Selector"
                 autoFocus={false}
                 required={false}
-                onOptionsChange={(count: number) => setPriceRangeOptions(count)}
-                onOpenChange={(isOpen) =>
-                  setOpenSelect(isOpen ? "buyRent" : null)
-                }
+                // onOptionsCountChange={(count) => setForSaleToLetOptions(count)}
+                onOpenChange={(isOpen) => {
+                  setIsForSaleToLetSelect(isOpen);
+                }}
               />
             </div>
           )}
 
-          {openSelect !== "propertyType" &&
-            openSelect !== "buyRent" &&
-            forSaleToLetOptions === 0 && (
+          {isPropertyTypeSelect ||
+            (!isForSaleToLetSelect && (
               <div className={styles.priceRangeSelectContainer}>
                 <Select
                   isMultiSelect={false}
@@ -199,73 +203,68 @@ const PropertiesHeroSectionSearch = () => {
                   ariaLabel="Price Range Selector"
                   autoFocus={false}
                   required={false}
-                  onOpenChange={(isOpen) =>
-                    setOpenSelect(isOpen ? "priceRange" : null)
-                  }
+                  // onOptionsCountChange={(count) => setPriceRangeOptions(count)}
+                  onOpenChange={(isOpen) => {
+                    setIsPriceRangeSelect(isOpen);
+                  }}
                 />
               </div>
-            )}
+            ))}
         </div>
 
-        {openSelect !== "propertyType" &&
-          openSelect !== "buyRent" &&
-          openSelect !== "priceRange" &&
-          forSaleToLetOptions === 0 &&
-          priceRangeOptions === 0 && (
-            <div className={styles.searchFields}>
-              <div className={styles.searchLocation}>
-                <p className={styles.errorMessage}>
-                  {errors.locationSearch?.message || serverErrors.locationSearch}
-                </p>
-                <Input
-                  isSearchBar={true}
-                  isMultiSelect={true}
-                  suggestions={suggestions}
-                  className={styles.searchLocationInput}
-                  inputType="text"
-                  inputSize="large"
-                  iconSrcRight="/icons/search.png"
-                  iconPosition="right"
-                  iconWidth={32}
-                  iconHeight={32}
-                  label="Location"
-                  placeholder="Search by city, province, township..."
-                  id="locationSearch"
-                  name="locationSearch"
-                  ariaLabel="Location"
+        {!isPropertyTypeSelect &&
+          !isForSaleToLetSelect &&
+          !isPriceRangeSelect && (
+            <>
+              <div className={styles.searchFields}>
+                <div className={styles.searchLocation}>
+                  <p className={styles.errorMessage}>
+                    {errors.locationSearch?.message ||
+                      serverErrors.locationSearch}
+                  </p>
+                  <Input
+                    isSearchBar={true}
+                    isMultiSelect={true}
+                    suggestions={suggestions}
+                    className={styles.searchLocationInput}
+                    inputType="text"
+                    inputSize="large"
+                    iconSrcRight="/icons/search.png"
+                    iconPosition="right"
+                    iconWidth={32}
+                    iconHeight={32}
+                    label="Location"
+                    placeholder="Search by city, province, township..."
+                    id="locationSearch"
+                    name="locationSearch"
+                    ariaLabel="Location"
+                    autoFocus={false}
+                    autoComplete="off"
+                    required
+                    {...register("locationSearch")}
+                    onChange={(e) =>
+                      setValue("locationSearch", e.target.value, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <div className={styles.searchButton}>
+                <Button
+                  buttonChildren={"Search"}
+                  className={styles.search}
+                  buttonType="primary"
+                  buttonSize="large"
+                  name="Search Button"
+                  type="submit"
+                  ariaLabel="Search Button"
                   autoFocus={false}
-                  autoComplete="off"
-                  required
-                  {...register("locationSearch")}
-                  onChange={(e) =>
-                    setValue("locationSearch", e.target.value, {
-                      shouldDirty: true,
-                      shouldValidate: true,
-                    })
-                  }
+                  disabled={isSubmitting}
                 />
               </div>
-            </div>
-          )}
-
-        {openSelect !== "propertyType" &&
-          openSelect !== "buyRent" &&
-          openSelect !== "priceRange" &&
-          forSaleToLetOptions === 0 &&
-          priceRangeOptions === 0 && (
-            <div className={styles.searchButton}>
-              <Button
-                buttonChildren={"Search"}
-                className={styles.search}
-                buttonType="primary"
-                buttonSize="large"
-                name="Search Button"
-                type="submit"
-                ariaLabel="Search Button"
-                autoFocus={false}
-                disabled={isSubmitting}
-              />
-            </div>
+            </>
           )}
       </Form>
     </div>
