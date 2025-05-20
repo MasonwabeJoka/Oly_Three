@@ -4,6 +4,8 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: rem(64);
+ 
   .preferenceCategory {
     margin-left: rem(80);
     margin-bottom: rem(16);
@@ -18,7 +20,9 @@
     border-radius: rem(40);
     background-color: $white-three;
     box-shadow: $shadow-one;
-    padding-bottom: rem(32);
+    padding-top: rem(32);
+    padding-bottom: rem(64);
+  
 
     fieldset {
       margin-top: rem(32);
@@ -38,7 +42,8 @@
         .options {
           display: flex;
           flex-direction: column;
-          margin-right: rem(80);
+          width: 20%;
+        
           
           .option {
             margin-bottom: rem(8);

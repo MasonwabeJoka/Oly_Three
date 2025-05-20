@@ -7,7 +7,6 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "./Input";
 import Checkbox from "./Checkbox";
 
-//Todo: Create an option to have Radio buttons instead of checkbox on the results, so that a user is only allowed to choose one option.
 interface SelectProps {
   className?: string;
   selectSize:
@@ -16,15 +15,15 @@ interface SelectProps {
     | keyof typeof SELECT_SIZE.dashboard;
   selectColourType?: keyof typeof SELECT_COLOUR_TYPE;
   label: string;
-  options: string[] | { label: string; value: any }[];
+  options?: string[];
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   id: string;
   name: string;
   ariaLabel: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
   autoComplete?: "on" | "off";
-  required: boolean;
+  required?: boolean;
   selectDescription?: string;
   form?: string;
   initialValue?: string | string[];
@@ -35,7 +34,8 @@ interface SelectProps {
   onBlur?: any;
   isMultiSelect?: boolean;
   dashboard?: boolean;
-  [key: string]: any;
+  onOpenChange?: (isOpen: boolean) => void;
+  onOptionsCountChange?: (count: number) => void;
 }
 
 const SELECT_SIZE = {
@@ -80,12 +80,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     {
       value,
       showSearchOptions = false,
-      options,
+      options = [],
       reactHookFormProps,
       error,
       selectSize,
       selectColourType = "normal",
-      className,
+      className = "",
       label,
       autoComplete,
       id,
@@ -93,13 +93,14 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setterValue,
       name,
       ariaLabel,
-      required,
+      required = false,
       selectDescription,
       onChange,
       onBlur,
-      children,
       dashboard = false,
       isMultiSelect = false,
+      onOpenChange,
+      onOptionsCountChange,
       ...otherProps
     },
     ref
@@ -111,11 +112,33 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const selectRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
 
-    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () =>
-      setShowOptions(false)
-    );
+    // Notify parent whenever showOptions changes
+    useEffect(() => {
+      onOpenChange?.(showOptions);
+    }, [showOptions, onOpenChange]);
 
-    
+    // Notify parent of options count whenever options or searchValue changes
+    useEffect(() => {
+      const filteredOptions = options.filter((option) =>
+        option.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      onOptionsCountChange?.(filteredOptions.length);
+    }, [options, searchValue, onOptionsCountChange]);
+
+    useEffect(() => {
+      const handleWheel = (e: WheelEvent) => {
+        const optionsElement = selectRef.current?.querySelector(".options");
+        if (optionsElement && optionsElement.contains(e.target as Node)) {
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener("wheel", handleWheel, { passive: false });
+      return () => {
+        document.removeEventListener("wheel", handleWheel);
+      };
+    }, [showOptions]);
+
     useEffect(() => {
       const useEscKey = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -128,6 +151,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         document.removeEventListener("keydown", useEscKey);
       };
     }, []);
+
+    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => {
+      setShowOptions(false);
+    });
 
     const handleSingleSelect = (optionText: string) => {
       setSelectedOptions([optionText]);
@@ -176,10 +203,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       triggerChangeEvent([]);
     };
 
-    const handleSelectButtonClick = () => {
-      setShowOptions(false);
-    };
-
     let sizeClass = "";
     if (isSidebarOpen) {
       sizeClass = SELECT_SIZE.feed[selectSize];
@@ -209,7 +232,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
           <div
             className={`${styles.selectContainer} ${selectClass}`}
-            onClick={() => setShowOptions(!showOptions)} // Removed reset logic
+            onClick={() => {
+              setShowOptions((prev) => !prev);
+            }}
             {...(reactHookFormProps ?? {})}
           >
             <div
@@ -290,7 +315,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               />
             )}
 
-            <ul className={styles.options}>
+            <ul className={styles.optionsList}>
               {isMultiSelect && (
                 <li className={sizeClass} style={{ marginBottom: "0.5rem" }}>
                   <div
@@ -303,15 +328,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       )
                     }
                   >
-                    <Checkbox
-                      id="selectAllCheckbox"
-                      type="checkbox"
-                      checked={filteredOptions.every((option) =>
-                        selectedOptions.includes(getOptionLabel(option))
-                      )}
-                      onChange={(checked) => handleSelectAll(checked)}
-                    />
-                    <span>Select All</span>
+                    <div className={styles.checkboxContainer}>
+                      <Checkbox
+                        id="selectAllCheckbox"
+                        type="checkbox"
+                        checked={filteredOptions.every((option) =>
+                          selectedOptions.includes(getOptionLabel(option))
+                        )}
+                        onChange={(checked) => handleSelectAll(checked)}
+                      />
+                    </div>
+                    <span className={styles.optionText}>Select All</span>
                   </div>
                 </li>
               )}
@@ -337,35 +364,22 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       }
                     >
                       {isMultiSelect && (
-                        <Checkbox
-                          id={`checkbox-${index}`}
-                          type="checkbox"
-                          checked={selectedOptions.includes(label)}
-                          onChange={(checked) =>
-                            handleMultiSelect(label, checked)
-                          }
-                        />
+                        <div className={styles.checkboxContainer}>
+                          <Checkbox
+                            id={`checkbox-${index}`}
+                            type="checkbox"
+                            checked={selectedOptions.includes(label)}
+                            onChange={(checked) =>
+                              handleMultiSelect(label, checked)
+                            }
+                          />
+                        </div>
                       )}
                       <span className={styles.optionText}>{label}</span>
                     </div>
                   </li>
                 );
               })}
-
-              {/* {isMultiSelect && (
-                <Button
-                  className={styles.selectButton}
-                  buttonChildren="Select"
-                  buttonType="primary"
-                  buttonSize="large"
-                  name="select-btn"
-                  type="button"
-                  ariaLabel="Select Button"
-                  autoFocus={false}
-                  disabled={false}
-                  onClick={handleSelectButtonClick}
-                />
-              )} */}
             </ul>
           </div>
         )}
@@ -377,17 +391,3 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 Select.displayName = "Select";
 
 export default Select;
-
-{
-  /* <Select
-    options={[]}
-    initialValue="Select your province"
-    selectSize="large"
-    label="Provinces"
-    id="provinces"
-    name="provinces"
-    ariaLabel="Provinces"
-    autoFocus={false}
-    required={false}
-/>; */
-}

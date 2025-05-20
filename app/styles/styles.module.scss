@@ -1,14 +1,13 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-@import "./layout.module.scss";
-
+@use "./layout.module.scss";
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  min-height: 100vh;
   .main {
     position: relative;
     display: flex;
@@ -17,6 +16,7 @@
     transition: margin-left 0.5s;
     overflow-x: hidden;
     width: 100vw !important;
+    min-height: 100vh;
     @include larger-than(mobile) {
       // width: rem(1440);
     }
@@ -33,6 +33,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .heroSection,
+    .categories,
+    .features,
+    .featuredListings,
+    .blog,
+    .sponsoredArticles {
+      min-height: 200px; /* Placeholder height for sections */
     }
 
     .heroSection {
@@ -54,7 +63,6 @@
       font-weight: 600;
       color: $black-four;
       margin-bottom: rem(48);
-     
     }
     .moreFromOly {
       width: 100%;
@@ -101,7 +109,6 @@
         width: 100%;
       }
     }
-
 
     .belowFoldAd {
       width: 100%;

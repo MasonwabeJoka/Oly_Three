@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
   width: fit-content;
   .errorMessage {
@@ -33,7 +34,6 @@
         background-color: $white-one !important;
       }
     }
-
     .input {
       height: rem(56);
       border-radius: rem(40);
@@ -99,6 +99,7 @@
 }
 
 .options {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,18 +107,28 @@
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: rem(4);
-
+  margin-top: rem(4) !important;
+  z-index: 1000;
+  border-radius: rem(8);
+  border-radius: rem(40);
+ 
   .option {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: rem(40);
     height: rem(56);
     margin: rem(4) auto 0;
     background-color: $white-two;
-  box-shadow: $shadow-one;
+    box-shadow: $shadow-one;
+
+    .checkboxContainer {
+      position: absolute;
+      left: rem(48);
+    }
+
+    .optionText {
+    }
   }
 
   .option:hover {
