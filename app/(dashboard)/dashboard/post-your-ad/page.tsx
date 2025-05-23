@@ -26,9 +26,9 @@ import { auctionFAQs } from "@/data/auctionFAQs";
 import {type FormData} from "./store/useFormStore";
 
 
-type MediaAction = "photos" | "reorder" | "videos" | "attachments" | "none";
+type GoToMediaType = "photos" | "reorder" | "videos" | "attachments" | "none";
 const Dashboard = () => {
-  const { mediaAction } = useUploadMediaStore();
+  const { goToMediaType } = useUploadMediaStore();
   const { currentStepIndex, goTo, setCategory } = useFormStore();
   const { showFAQs, setShowFAQs } = useQAndAStore();
   
@@ -37,7 +37,7 @@ const Dashboard = () => {
     defaultValues: useFormStore((state) => state.formData),
   });
 
-  const stepComponents = [
+  const steps = [
     <SelectACategory key="0" goTo={goTo} setCategory={setCategory} />,
     <Details key="1" />,
     <Price key="2" />,
@@ -49,19 +49,19 @@ const Dashboard = () => {
     <Congratulations key="8" />,
     <ReviewAndSubmit key="9" />,
   ];
-  const getMediaComponent = (mediaAction: MediaAction) => {
-    const mediaComponents: Record<MediaAction, JSX.Element> = {
+  const getMediaComponent = (goToMediaType: GoToMediaType) => {
+    const mediaComponents: Record<GoToMediaType, JSX.Element> = {
       photos: <UploadPhotos />,
       reorder: <ReorderPhotos />,
       videos: <UploadVideos />,
       attachments: <UploadAttachments />,
-      none: stepComponents[5],
+      none: steps[5],
     };
-    return mediaComponents[mediaAction];
+    return mediaComponents[goToMediaType];
   };
 
   const renderStep = () => {
-    if (currentStepIndex === 5) return getMediaComponent(mediaAction);
+    if (currentStepIndex === 5) return getMediaComponent(goToMediaType);
     if (currentStepIndex === 2 && showFAQs)
       return (
         <Modal
@@ -70,7 +70,7 @@ const Dashboard = () => {
           modalContent={<FAQs faqs={auctionFAQs} />}
         />
       );
-    return stepComponents[currentStepIndex];
+    return steps[currentStepIndex];
   };
 
   return (

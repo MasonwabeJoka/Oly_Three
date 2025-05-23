@@ -8,6 +8,8 @@ import { FormWrapper } from "./FormWrapper";
 import Button from "@/components/Buttons";
 import useFAQStore from "../store/useFAQStore";
 import { priceValidations } from "../validations/multiStepFormValidations";
+import Modal from "@/components/Modal";
+import AuctionPeriod from "./AuctionPeriod";
 
 const Price = () => {
   const {
@@ -20,6 +22,11 @@ const Price = () => {
 
   const priceType = watch("price.pricingOption");
   const { setShowFAQs } = useFAQStore();
+  const [isPricingOptionsOpen, setIsPricingOptionsOpen] = useState(false);
+  const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
+  const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
+  const [showAuctionPeriod, setShowAuctionPeriod] = useState(false);
+  
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -42,7 +49,15 @@ const Price = () => {
   };
 
   return (
-    <FormWrapper title="Price">
+    <FormWrapper
+      title="Price"
+      selectOpen={
+        isPricingOptionsOpen ||
+        isAuctionDurationOpen ||
+        isAuctionStartTimeOpen ||
+        isAuctionDurationOpen
+      }
+    >
       <div className={styles.container}>
         <div className={styles.mainSection}>
           <div className={styles.controls}>
@@ -68,33 +83,36 @@ const Price = () => {
               dashboard
               {...register("price.pricingOption")}
               error={errors.price?.pricingOption?.message}
+              onOpenChange={(isOpen) => setIsPricingOptionsOpen(isOpen)}
             />
           </div>
 
-          {(priceType === "Fixed Price" || priceType === "Negotiable") && (
-            <div className={`${styles.controls} ${styles.priceContainer}`}>
-              <NumberInput
-                className={styles.price}
-                min={0}
-                max={9999999999}
-                step={1}
-                debounceTime={500}
-                id="price"
-                value={watch("price.amount") || 0}
-                inputSize="large"
-                placeholder="Price"
-                autoFocus={false}
-                required={true}
-                dashboard
-                error={errors.price?.amount?.message}
-                {...register("price.price", { valueAsNumber: true })}
-                // error={errors.price?.price?.message}
-                onChange={(e) => handlePriceChange(e, "amount")}
-              />
-            </div>
-          )}
+          {!isPricingOptionsOpen &&
+            (priceType === "Fixed Price" ||
+              priceType === "Negotiable Price") && (
+              <div className={`${styles.controls} ${styles.priceContainer}`}>
+                <NumberInput
+                  className={styles.price}
+                  min={0}
+                  max={9999999999}
+                  step={1}
+                  debounceTime={500}
+                  id="price"
+                  value={watch("price.amount") || 0}
+                  inputSize="large"
+                  placeholder="Price"
+                  autoFocus={false}
+                  required={true}
+                  dashboard
+                  error={errors.price?.amount?.message}
+                  {...register("price.price", { valueAsNumber: true })}
+                  // error={errors.price?.price?.message}
+                  onChange={(e) => handlePriceChange(e, "amount")}
+                />
+              </div>
+            )}
 
-          {priceType === "auction" && (
+          {!isPricingOptionsOpen && priceType === "Auction" && (
             <>
               <div className={`${styles.controls} ${styles.priceContainer}`}>
                 <NumberInput
@@ -116,98 +134,142 @@ const Price = () => {
                   onChange={(e) => handlePriceChange(e, "startingPrice")}
                 />
               </div>
-              <div className={`${styles.controls} ${styles.priceContainer}`}>
-                <NumberInput
-                  className={styles.price}
-                  min={0}
-                  max={9999999999}
-                  step={100}
-                  debounceTime={500}
-                  id="buyNowPrice"
-                  value={watch("price.buyNowPrice") || 0}
-                  inputSize="large"
-                  placeholder="Buy Now Price"
-                  autoFocus={false}
-                  required={true}
-                  dashboard
-                  error={errors.price?.buyNowPrice?.message}
-                  {...register("price.buyNowPrice", { valueAsNumber: true })}
-                  // error={errors.price?.buyNowPrice?.message}
-                  onChange={(e) => handlePriceChange(e, "buyNowPrice")}
-                />
-              </div>
 
-              <div className={`${styles.controls} ${styles.priceContainer}`}>
-                <Select
-                  className={styles.auctionDuration}
-                  options={[
-                    { label: "1 Day Auction", value: "1" },
-                    { label: "5 Days Auction", value: "5" },
-                    { label: "10 Days Auction", value: "10" },
-                    {
-                      label: "Set Custom Duration (Number of Days)",
-                      value: "custom",
-                    },
-                  ]}
-                  currentValue="Auction Duration"
-                  selectSize="large"
-                  selectPrompt="Auction Duration"
-                  label="Auction Duration"
-                  id="auctionDuration"
-                  ariaLabel="Auction Duration"
-                  autoFocus={false}
-                  autoComplete="off"
-                  disabled={false}
-                  required={true}
-                  dashboard
-                  error={errors.price?.auctionDuration?.message}
-                  {...register("price.auctionDuration")}
-                  // error={errors.price?.auctionDuration?.message}
-                />
-              </div>
-              <div className={`${styles.controls} ${styles.priceContainer}`}>
-                <Select
-                  className={styles.startTime}
-                  options={[
-                    { label: "Start Now", value: "now" },
-                    { label: "Start in 4 Hours", value: "4h" },
-                    { label: "Start in 24 Hours (1 day)", value: "24h" },
-                    { label: "Start in 48 Hours (2 days)", value: "48h" },
-                    { label: "Select Custom Date", value: "customDate" },
-                    { label: "Select Custom Time", value: "customTime" },
-                  ]}
-                  currentValue="Auction Start Time"
-                  selectSize="large"
-                  selectPrompt="Start Time"
-                  label="Auction Start Time"
-                  id="startTime"
-                  ariaLabel="Auction Start Time"
-                  autoFocus={false}
-                  autoComplete="off"
-                  disabled={false}
-                  required={true}
-                  dashboard
-                  error={errors.price?.startTime?.message}
-                  {...register("price.startTime")}
-                  // error={errors.price?.startTime?.message}
-                />
-              </div>
-              <div className={styles.faqs}>
-                <Button
-                  className={styles.proceedButton}
-                  buttonChildren="Auctions FAQs"
-                  buttonType="info"
-                  buttonSize="large"
-                  name="faq-btn"
-                  type="button"
-                  ariaLabel="Auctions FAQs"
-                  autoFocus={false}
-                  disabled={false}
-                  dashboard
-                  onClick={() => setShowFAQs(true)}
-                />
-              </div>
+              {!isPricingOptionsOpen && (
+                <div className={`${styles.controls} ${styles.priceContainer}`}>
+                  <NumberInput
+                    className={styles.price}
+                    min={0}
+                    max={9999999999}
+                    step={100}
+                    debounceTime={500}
+                    id="buyNowPrice"
+                    value={watch("price.buyNowPrice") || 0}
+                    inputSize="large"
+                    placeholder="Buy Now Price"
+                    autoFocus={false}
+                    required={true}
+                    dashboard
+                    error={errors.price?.buyNowPrice?.message}
+                    {...register("price.buyNowPrice", { valueAsNumber: true })}
+                    // error={errors.price?.buyNowPrice?.message}
+                    onChange={(e) => handlePriceChange(e, "buyNowPrice")}
+                  />
+                </div>
+              )}
+
+              {!isPricingOptionsOpen && (
+                <div
+                  className={`${styles.controls} ${styles.priceContainer} ${styles.startTimeContainer}`}
+                >
+                  <Select
+                    className={styles.startTime}
+                    options={[
+                      { label: "Start Now", value: "now" },
+                      { label: "1 hour from now", value: "1h" },
+                      { label: "6 hours from now", value: "6h" },
+                      { label: "12 hours from now", value: "12h" },
+                      { label: "24 hours from now", value: "24h" },
+                      {
+                        label: "Set your own start time",
+                        value: "customStartTime",
+                      },
+                    ]}
+                    initialValue="Auction Start Time"
+                    selectSize="large"
+                    selectPrompt="Start Time"
+                    label="Auction Start Time"
+                    id="startTime"
+                    ariaLabel="Auction Start Time"
+                    autoFocus={false}
+                    autoComplete="off"
+                    disabled={false}
+                    required={true}
+                    dashboard
+                    error={errors.price?.startTime?.message}
+                    {...register("price.startTime")}
+                    onOpenChange={(isOpen) => setIsAuctionStartTimeOpen(isOpen)}
+                    onChange={(e) => {
+                      if (e.target.value === "Set your own start time") {
+                        setShowAuctionPeriod(true);
+                        setValue("price.startTime", ""); // Reset to avoid invalid state
+                      }
+                    }}
+                  />
+                </div>
+              )}
+              {!isPricingOptionsOpen && !isAuctionStartTimeOpen && (
+                <div
+                  className={`${styles.controls} ${styles.priceContainer} ${styles.auctionDurationContainer}`}
+                >
+                  <Select
+                    className={styles.auctionDuration}
+                    options={[
+                      { label: "1 hour", value: "1h" },
+                      { label: "6 hours", value: "6h" },
+                      { label: "12 hours", value: "12h" },
+                      { label: "24 hours", value: "24h" },
+                      { label: "3 Days", value: "3d" },
+                      { label: "5 Days", value: "5d" },
+                      { label: "7 Days", value: "7d" },
+                      { label: "10 Days", value: "10d" },
+                      { label: "30 Days", value: "30d" },
+                      {
+                        label: "Set your own duration",
+                        value: "customDuration",
+                      },
+                    ]}
+                    initialValue="Auction Duration"
+                    selectSize="large"
+                    selectPrompt="Auction Duration"
+                    label="Auction Duration"
+                    id="auctionDuration"
+                    ariaLabel="Auction Duration"
+                    autoFocus={false}
+                    autoComplete="off"
+                    disabled={false}
+                    required={true}
+                    dashboard
+                    error={errors.price?.auctionDuration?.message}
+                    {...register("price.auctionDuration")}
+                    onOpenChange={(isOpen) => setIsAuctionDurationOpen(isOpen)}
+                    onChange={(e) => {
+                      if (e.target.value === "Set your own duration") {
+                        setShowAuctionPeriod(true);
+                        setValue("price.auctionDuration", ""); // Reset to avoid invalid state
+                      }
+                    }}
+                  />
+                </div>
+              )}
+
+              {!isPricingOptionsOpen &&
+                !isAuctionStartTimeOpen &&
+                !isAuctionDurationOpen && (
+                  <div className={styles.faqs}>
+                    <Button
+                      className={styles.proceedButton}
+                      buttonChildren="Auctions FAQs"
+                      buttonType="info"
+                      buttonSize="large"
+                      name="faq-btn"
+                      type="button"
+                      ariaLabel="Auctions FAQs"
+                      autoFocus={false}
+                      disabled={false}
+                      dashboard
+                      onClick={() => setShowFAQs(true)}
+                    />
+                  </div>
+                )}
             </>
+          )}
+          {showAuctionPeriod && (
+            <Modal
+              showModal={showAuctionPeriod}
+              setShowModal={setShowAuctionPeriod}
+              modalContent={<AuctionPeriod />}
+            />
           )}
         </div>
       </div>
@@ -216,4 +278,3 @@ const Price = () => {
 };
 
 export default Price;
-

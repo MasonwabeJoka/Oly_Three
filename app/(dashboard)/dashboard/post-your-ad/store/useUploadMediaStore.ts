@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 
-type MediaAction = 'photos' | 'reorder' | 'videos' | 'attachments' | 'none';
+type GoToMediaType = 'photos' | 'reorder' | 'videos' | 'attachments' | 'none';
 interface MediaStore {
-  mediaAction: MediaAction;
-  setMediaAction: (action: MediaAction) => void;
+  goToMediaType: GoToMediaType;
+  setMediaAction: (action: GoToMediaType) => void;
 }
 
  const useUploadMediaStore = create<MediaStore>((set) => ({
-  mediaAction: 'none',
-  setMediaAction: (action) => set({ mediaAction: action }),
+  goToMediaType: 'none',
+  setMediaAction: (action) => set({ goToMediaType: action }),
 }));
 
 // Definition of resetMediaStates

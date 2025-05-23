@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Buttons";
 import styles from "./FeedbackOptions.module.scss";
 import Modal from "./Modal";
 import FeedbackForm from "./FeedbackForm";
+import { useRouter } from "next/navigation";
 
 const FeedbackOptions = () => {
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [feedbackType, setFeedbackType] = useState("");
+  const [closeAllModals, setCloseAllModals] = useState(false);
+  const router = useRouter();
 
   const openModal = (type: string) => {
     setFeedbackType(type);
@@ -63,11 +66,15 @@ const FeedbackOptions = () => {
           disabled={false}
         />
       </div>
-      <Modal
-        showModal={showFeedbackModal}
-        setShowModal={setShowFeedbackModal}
-        modalContent={<FeedbackForm title={feedbackType} />}
-      />
+      {showFeedbackModal && (
+        <Modal
+          showModal={showFeedbackModal}
+          setShowModal={setShowFeedbackModal}
+          modalContent={<FeedbackForm title={feedbackType} />}
+          reload
+          closeAllModals={closeAllModals}
+        />
+      )}
     </div>
   );
 };

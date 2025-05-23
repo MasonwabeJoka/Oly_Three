@@ -1,4 +1,4 @@
-"use client";
+
 import Blogs from "@/components/Blogs";
 import styles from "../styles/styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";

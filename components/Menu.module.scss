@@ -1,9 +1,15 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
+.profile {
+  position:absolute;
+  top: rem(32);
+  left: rem(52);
+ 
+}
 .container {
   position: relative;
-  // top: rem(32);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +17,6 @@
   border-radius: rem(40);
   background-color: $white-four;
   pointer-events: auto;
-
   @include larger-than(mobile) {
     // top: rem(76);
   }
