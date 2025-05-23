@@ -25,9 +25,13 @@ const Modal = ({
 }: Props) => {
   const router = useRouter();
   // Close modal function
+
   const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Only close if the click is directly on the modalOverlay, not its children
-    if (e.target === e.currentTarget) {
+    // Only close if the click is directly on the modalOverlay, not its children except for the exit button container
+    if (
+      e.target === e.currentTarget ||
+      e.currentTarget.className.includes(styles.exitButtonContainer)
+    ) {
       setShowModal(false);
       if (path) {
         try {
@@ -43,7 +47,6 @@ const Modal = ({
       closeAllModals && setShowModal(false);
     }
   };
-  
 
   useEffect(() => {
     if (showModal) {
@@ -62,7 +65,7 @@ const Modal = ({
     <>
       {showModal && (
         <div className={styles.modalOverlay} onClick={handleClose}>
-          <div className={styles.exitButtonContainer}>
+          <div className={styles.exitButtonContainer}  onClick={handleClose}>
             <ExitButton />
           </div>
           <div className={styles.modalContent}>{modalContent}</div>

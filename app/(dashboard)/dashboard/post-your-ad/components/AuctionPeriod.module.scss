@@ -1,3 +1,77 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
+.container {
+  position: relative;
+  padding: rem(120) !important;
+  border-radius: rem(40);
+  background-color: $white-two;
+  box-shadow: $shadow-one;
+
+  .root {
+    // background-color: red;
+  }
+
+  .table {
+    // background-color: green;
+    width: rem(500);
+  }
+
+  .head {
+    // background-color: pink;
+  }
+
+  .body {
+    text-align: center;
+    // background-color: blue;
+    // display: flex;
+    // flex-direction: column;
+  }
+
+  .row {
+    height: rem(48);
+  }
+
+  .cell {
+    background-color: cadetblue;
+    width: rem(84) !important;
+    height: rem(48) !important;
+  }
+
+  .nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    background-color: blue;
+    width: rem(500);
+    // height: rem(50);
+  }
+
+  .navButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: rem(32);
+    height: rem(32);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .prevMonthButton {
+    // background-color: green;
+  }
+
+  .day {
+    background-color: pink;
+  }
+
+  .daySelected {
+    background-color: brown;
+    //  border-radius: 50%;
+    width: rem(48) !important;
+    height: rem(48) !important;
+  }
+}
