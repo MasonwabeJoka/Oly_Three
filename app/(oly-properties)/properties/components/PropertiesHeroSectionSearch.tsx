@@ -40,16 +40,11 @@ async function searchAction(formData: FormData) {
 type FormValues = z.infer<typeof searchFormSchema>;
 
 const PropertiesHeroSectionSearch = () => {
-  const [propertyTypeOptions, setPropertyTypeOptions] = useState(0);
-  const [forSaleToLetOptions, setForSaleToLetOptions] = useState(0);
-  const [priceRangeOptions, setPriceRangeOptions] = useState(0);
   const [isPropertyTypeSelect, setIsPropertyTypeSelect] = useState(false);
-  const [isForSaleToLetSelect, setIsForSaleToLetSelect] = useState(false);
+  const [isForSaleToLetOpen, setIsForSaleToLetOpen] = useState(false);
   const [isPriceRangeSelect, setIsPriceRangeSelect] = useState(false);
-  const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
-  // New state to track open Select components
-  const [openSelect, setOpenSelect] = useState<string | null>(null);
+
 
   const {
     register,
@@ -157,14 +152,14 @@ const PropertiesHeroSectionSearch = () => {
                 required={false}
                 // onOptionsCountChange={(count) => setForSaleToLetOptions(count)}
                 onOpenChange={(isOpen) => {
-                  setIsForSaleToLetSelect(isOpen);
+                  setIsForSaleToLetOpen(isOpen);
                 }}
               />
             </div>
           )}
 
           {isPropertyTypeSelect ||
-            (!isForSaleToLetSelect && (
+            (!isForSaleToLetOpen && (
               <div className={styles.priceRangeSelectContainer}>
                 <Select
                   isMultiSelect={false}
@@ -213,7 +208,7 @@ const PropertiesHeroSectionSearch = () => {
         </div>
 
         {!isPropertyTypeSelect &&
-          !isForSaleToLetSelect &&
+          !isForSaleToLetOpen &&
           !isPriceRangeSelect && (
             <>
               <div className={styles.searchFields}>

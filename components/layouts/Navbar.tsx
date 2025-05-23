@@ -53,40 +53,34 @@ const Navbar = () => {
           />
         </Link>
         <div className={styles.profileIconContainer}>
-          {isSignedIn ? (
-            <div className={`${styles.profile} ${styles.profileLoggedIn}`}>
-              <UserButtonCustom />
-            </div>
-          ) : (
-            <Button
-              className={styles.profile}
-              buttonChildren={
-                <div
-                  style={{
-                    height: "28px",
-                    display: "flex",
-                    alignItems: "center",
-                    marginTop: "8px",
-                  }}
-                >
-                  <Image
-                    src="/icons/menu.png"
-                    alt="Profile Icon"
-                    width={28}
-                    height={28}
-                  />
-                </div>
-              }
-              buttonType="icon"
-              buttonSize=""
-              name="profile-icon"
-              type="button"
-              ariaLabel="Profile Icon"
-              autoFocus={false}
-              disabled={false}
-              onClick={openModal}
-            />
-          )}
+          <Button
+            className={styles.profile}
+            buttonChildren={
+              <div
+                style={{
+                  height: "28px",
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "8px",
+                }}
+              >
+                <Image
+                  src="/icons/menu.png"
+                  alt="Profile Icon"
+                  width={28}
+                  height={28}
+                />
+              </div>
+            }
+            buttonType="icon"
+            buttonSize=""
+            name="profile-icon"
+            type="button"
+            ariaLabel="Profile Icon"
+            autoFocus={false}
+            disabled={false}
+            onClick={openModal}
+          />
         </div>
       </div>
     </div>

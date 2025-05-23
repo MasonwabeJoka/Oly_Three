@@ -1,7 +1,7 @@
-"use client";
+'use client';
 import ExitButton from "./ExitButton";
 import styles from "./Modal.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // Todo: Consider adding logo that takes you to home screen to modal
 type Props = {
@@ -10,40 +10,32 @@ type Props = {
   modalContent: JSX.Element; // JSX element to render inside the modal
   path?: string; // Optional path to redirect to when modal is closed
   reload?: boolean; // Optional boolean to reload the page when modal is closed
-  refresh?: boolean; // Optional boolean to refresh the page when modal is closed
-  closeAllModals?: boolean; // Optional boolean to close the current modal
 };
 
-const Modal = ({
-  showModal,
-  setShowModal,
-  modalContent,
-  path,
-  reload,
-  refresh,
-  closeAllModals,
-}: Props) => {
+const Modal = ({ showModal, setShowModal, modalContent, path, reload }: Props) => {
+  const [forceHide, setForceHide] = useState(false);
   const router = useRouter();
   // Close modal function
-  const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Only close if the click is directly on the modalOverlay, not its children
-    if (e.target === e.currentTarget) {
-      setShowModal(false);
-      if (path) {
-        try {
-          router.push(path);
-        } catch (error) {
-          console.error("Navigation error:", error);
-          // Fallback to direct navigation if router fails
-          window.location.href = path;
-        }
-      }
-      reload && window.location.reload();
-      refresh && router.refresh();
-      closeAllModals && setShowModal(false);
-    }
+const handleClose = () => {
+  if (reload) {
+    // Use React state to hide modal immediately
+    setForceHide(true);
+    // Update state to close current modal
+    setShowModal(false);
+    // Redirect if path is provided
+    path && router.push(path);
+    // Trigger full page reload
+    window.location.reload();
+  } else {
+    // Normal close behavior
+    setShowModal(false);
+    path && router.push(path);
+  }
+};
+  // Prevents modal from closing when clicking inside the modal
+  const handleModalContentClick = (e) => {
+    e.stopPropagation();
   };
-  
 
   useEffect(() => {
     if (showModal) {
@@ -61,11 +53,16 @@ const Modal = ({
   return (
     <>
       {showModal && (
-        <div className={styles.modalOverlay} onClick={handleClose}>
+         <div className={`${styles.modalOverlay} ${forceHide ? styles.forceHide : ''}`} onClick={handleClose}>
           <div className={styles.exitButtonContainer}>
             <ExitButton />
           </div>
-          <div className={styles.modalContent}>{modalContent}</div>
+          <div
+            className={styles.modalContent}
+            onClick={handleModalContentClick}
+          >
+            {modalContent}
+          </div>
         </div>
       )}
     </>

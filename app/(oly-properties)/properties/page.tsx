@@ -10,7 +10,7 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ProductOffer from "@/components/ProductOffer";
 import ExternalAd from "@/components/ExternalAd";
-
+// Todo: Fix cards arrow buttons don't appear when hovering the bottom of the card
 const Home = () => {
   return (
     <div className={styles.container}>

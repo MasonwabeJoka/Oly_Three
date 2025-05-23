@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styles from "./Menu.module.scss";
 import { MenuData } from "@/data/MenuData";
 import Icon from "./Icon";
@@ -12,15 +12,16 @@ import Button from "./Buttons";
 import { useModalStore } from "@/store/modalStore";
 import { useClerk } from "@clerk/clerk-react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { sign } from "crypto";
-
+import UserButtonCustom from "@/components/clerk/UserButtonCustom";
 const Menu = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const router = useRouter();
   const showMenuModal = useModalStore((state) => state.showMenuModal);
   const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
-
+  const { isSignedIn } = useUser();
   const { signOut } = useClerk();
 
   const handleSignOut = () => {
@@ -35,7 +36,6 @@ const Menu = () => {
     // minHeight: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "45.875rem",
     boxShadow: isMobile ? "none" : "none",
     // boxShadow: isMobile ? "none" : shadow,
-    
   };
 
   const menuStyles = {
@@ -55,9 +55,12 @@ const Menu = () => {
     fontSize: isMobile ? "0.875rem" : isSidebarOpen ? "1rem" : "1rem",
   };
 
-  // TODO: When notification is open and the user is logged out dynamically change the logout button to exit button, with an X icon.
+  // TODO: When Menu is open and the user is logged out, dynamically change the logout button to exit button, with an X icon.
   return (
     <MaxWidthWrapper className={styles.maxWidthWrapper}>
+      {/* <div className={styles.profile}>
+        {isSignedIn && <UserButtonCustom />}
+      </div> */}
       <div className={styles.container} style={containerStyles}>
         <ul className={styles.menuStyles} style={menuStyles}>
           {MenuData.map((menuItem: any) => {

@@ -23,6 +23,8 @@ const Details = () => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
   const [details, setDetails] = useState<DetailItem[]>([]);
+  const [isConditionsOpen, setIsConditionsOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   const {
     register,
@@ -45,9 +47,9 @@ const Details = () => {
 
   const updateDetailsInForm = (updatedDetails: DetailItem[]) => {
     setDetails(updatedDetails);
-    setValue("details.list", updatedDetails, { 
+    setValue("details.list", updatedDetails, {
       shouldValidate: true,
-      shouldDirty: true 
+      shouldDirty: true,
     });
   };
 
@@ -61,11 +63,11 @@ const Details = () => {
       const updatedDetails = [...details];
       updatedDetails[index] = {
         ...updatedDetails[index],
-        value: updatedValue.trim()
+        value: updatedValue.trim(),
       };
 
       updateDetailsInForm(updatedDetails);
-      
+
       const isValid = await trigger("details.list");
       if (isValid) {
         setEditIndex(null);
@@ -76,7 +78,7 @@ const Details = () => {
   const handleDeleteItem = async (index: number) => {
     const updatedDetails = details.filter((_, i) => i !== index);
     updateDetailsInForm(updatedDetails);
-    
+
     if (editIndex === index) {
       setEditIndex(null);
     }
@@ -84,8 +86,8 @@ const Details = () => {
     await trigger("details.list");
   };
 
-  const conditions = ConditionsData.map(detail => detail.condition);
-  const detailsTitles = DetailsData.map(detail => detail.detail);
+  const conditions = ConditionsData.map((detail) => detail.condition);
+  const detailsTitles = DetailsData.map((detail) => detail.detail);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -96,7 +98,13 @@ const Details = () => {
     await trigger(name as keyof FormDataSchema);
   };
 
-  const DetailsList = ({ details, editIndex }: { details: DetailItem[], editIndex: number | null }) => (
+  const DetailsList = ({
+    details,
+    editIndex,
+  }: {
+    details: DetailItem[];
+    editIndex: number | null;
+  }) => (
     <ul className={styles.details}>
       {details.map((detail, index) =>
         editIndex !== index ? (
@@ -136,8 +144,7 @@ const Details = () => {
               />
             </div>
             <p className={styles.detailText}>
-              <span style={{ fontWeight: "600" }}>{detail.selectDetail}:</span>
-              {" "}
+              <span style={{ fontWeight: "600" }}>{detail.selectDetail}:</span>{" "}
               <span>{detail.value}</span>
             </p>
           </li>
@@ -158,9 +165,10 @@ const Details = () => {
   );
 
   return (
-    <FormWrapper 
+    <FormWrapper
       title="Product Details"
       error={errors.details?.message as string}
+      selectOpen={isConditionsOpen || isDetailsOpen}
     >
       <div className={styles.container}>
         <div className={styles.form}>
@@ -177,51 +185,58 @@ const Details = () => {
                 ariaLabel="Conditions"
                 error={errors.details?.condition?.message as string}
                 {...register("details.condition")}
+                onOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
               />
             </div>
 
-            <div className={styles.selectDetailContainer}>
-              <Select
-                options={detailsTitles}
-                className={styles.selectDetail}
-                initialValue="Select a product detail"
-                selectSize="large"
-                selectColourType="normal"
-                label="Choose a detail"
-                id="choose-detail"
-                ariaLabel="Choose Detail Select"
-                autoComplete="off"
-                error={errors.details?.selectDetail?.message as string}
-                {...register("details.selectDetail")}
-              />
-            </div>
-
-            {DetailsData.map((detail) => (
-              matchFound && selectDetailValue === detail.detail && (
-                <SelectedDetail
-                  key={detail.id}
-                  id={detail.id}
-                  initialValue="See a list of details you can include"
-                  detail={detail.detail}
-                  description={detail.description}
-                  example={detail.example}
-                  isFieldDirty={!!dirtyFields.details?.selectDetail}
-                  register={register}
-                  setValue={setValue}
-                  errors={errors}
-                  handleChange={handleChange}
-                  selectDetailValue={selectDetailValue}
-                  details={details}
-                  setDetails={setDetails}
-                  watch={watch}
-                  setMatchFound={() => setMatchFound(false)}
+            {!isConditionsOpen && (
+              <div className={styles.selectDetailContainer}>
+                <Select
+                  options={detailsTitles}
+                  className={styles.selectDetail}
+                  initialValue="Select a product detail"
+                  selectSize="large"
+                  selectColourType="normal"
+                  label="Choose a detail"
+                  id="choose-detail"
+                  ariaLabel="Choose Detail Select"
+                  autoComplete="off"
+                  error={errors.details?.selectDetail?.message as string}
+                  {...register("details.selectDetail")}
+                  onOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
                 />
-              )
-            ))}
+              </div>
+            )}
+
+            {DetailsData.map(
+              (detail) =>
+                matchFound &&
+                selectDetailValue === detail.detail && (
+                  <SelectedDetail
+                    key={detail.id}
+                    id={detail.id}
+                    initialValue="See a list of details you can include"
+                    detail={detail.detail}
+                    description={detail.description}
+                    example={detail.example}
+                    isFieldDirty={!!dirtyFields.details?.selectDetail}
+                    register={register}
+                    setValue={setValue}
+                    errors={errors}
+                    handleChange={handleChange}
+                    selectDetailValue={selectDetailValue}
+                    details={details}
+                    setDetails={setDetails}
+                    watch={watch}
+                    setMatchFound={() => setMatchFound(false)}
+                  />
+                )
+            )}
 
             <DetailsList details={details} editIndex={editIndex} />
 
-            <div className={styles.addSpecificationsContainer}>
+            {!isConditionsOpen && !isDetailsOpen && (
+              <div className={styles.addSpecificationsContainer}>
               <Button
                 className={styles.addSpecifications}
                 buttonChildren="Add product specifications"
@@ -232,7 +247,7 @@ const Details = () => {
                 ariaLabel="Add Product Specification Button"
                 onClick={() => setShowSpecificationForm(!showSpecificationForm)}
               />
-            </div>
+            </div>)}
 
             {showSpecificationForm && (
               <>
@@ -266,6 +281,3 @@ const Details = () => {
 };
 
 export default Details;
-
-
-

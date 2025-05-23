@@ -66,17 +66,18 @@ type Step = {
 
 // Define all the steps of the form in order
 const steps: Step[] = [
-  { id: "step1", name: "Select a category", fields: ["selectACategory"] },
-  { id: "step2", name: "Details", fields: ["details.condition", "details.selectDetails"] },
-  { id: "step3", name: "Price", fields: ["price.pricingOption", "price.price"] },
-  { id: "step4", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
-  { id: "step5", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
-  { id: "step6", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
-  { id: "step7", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
-  { id: "step8", name: "Promote Your Ad", fields: [] },
-  { id: "step9", name: "Congratulations", fields: [] }, // No fields here, just a confirmation page
-  { id: "step10", name: "Review and Submit", fields: ["reviewYourAd"] },
+  { id: "step0", name: "Select a category", fields: ["selectACategory"] },
+  { id: "step1", name: "Details", fields: ["details.condition", "details.selectDetails"] },
+  { id: "step2", name: "Price", fields: ["price.pricingOption", "price.price"] },
+  { id: "step3", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
+  { id: "step4", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
+  { id: "step5", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
+  { id: "step6", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
+  { id: "step7", name: "Promote Your Ad", fields: [] },
+  { id: "step8", name: "Congratulations", fields: [] }, 
+  { id: "step9", name: "Review and Submit", fields: ["reviewYourAd"] },
 ];
+
 
 // Define the part of the store that holds and manages the form data
 type FormStore = {
@@ -115,7 +116,7 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   message: '',
   
   // Set the starting step from local storage (or 0 if nothing is saved)
-  currentStepIndex: typeof window !== "undefined" ? parseInt(localStorage.getItem('currentStepIndex') || '0', 10) : 0,
+  currentStepIndex: typeof window !== "undefined" ? parseInt(localStorage.getItem('currentStepIndex') || '0', 9) : 0,
   
   // Starting values for the form data (everything empty or false to begin with)
   formData: {

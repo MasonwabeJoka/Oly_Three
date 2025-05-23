@@ -15,7 +15,7 @@ interface SelectProps {
     | keyof typeof SELECT_SIZE.dashboard;
   selectColourType?: keyof typeof SELECT_COLOUR_TYPE;
   label: string;
-  options?: string[];
+  options?: (string | { label: string; value: any })[];
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   id: string;
@@ -120,8 +120,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     // Notify parent of options count whenever options or searchValue changes
     useEffect(() => {
       const filteredOptions = options.filter((option) =>
-        option.toLowerCase().includes(searchValue.toLowerCase())
+        getOptionLabel(option).toLowerCase().includes(searchValue.toLowerCase())
       );
+
       onOptionsCountChange?.(filteredOptions.length);
     }, [options, searchValue, onOptionsCountChange]);
 
@@ -364,7 +365,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       }
                     >
                       {isMultiSelect && (
-                        <div className={styles.checkboxContainer}>
+                        <div
+                          className={styles.checkboxContainer}
+                          onClick={(e) => e.stopPropagation()} 
+                        >
                           <Checkbox
                             id={`checkbox-${index}`}
                             type="checkbox"

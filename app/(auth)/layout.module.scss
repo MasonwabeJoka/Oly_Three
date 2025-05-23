@@ -2,7 +2,7 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 @import "../globals.css";
-.body {
+.container {
   overflow: hidden;
   background-color: $white-four;
 }

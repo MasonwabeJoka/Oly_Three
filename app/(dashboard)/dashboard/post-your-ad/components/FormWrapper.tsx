@@ -13,6 +13,7 @@ import styles from "./FormWrapper.module.scss";
 type FormWrapperProps = {
   title: string; // The title to show at the top of the form
   children: React.ReactNode; // The content inside the form (like input fields), passed from the parent component
+  selectOpen?: boolean; // Optional prop to hide buttons when select is open
 };
 
 // A custom hook to check if the component is running on the client side
@@ -45,7 +46,7 @@ const getButtonText = (
 };
 
 // The main FormWrapper component that ties everything together
-export const FormWrapper = ({ title, children }: FormWrapperProps) => {
+export const FormWrapper = ({ title, children, selectOpen = false }: FormWrapperProps) => {
   const router = useRouter(); // Tool for navigating to different pages
   const { isEditMode, setIsEditMode } = useEditStore(); // Get edit mode state and function to change it
   const { setMediaAction } = useUploadMediaStore(); // Function to reset media-related actions
@@ -124,10 +125,10 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>{title}</h2> {/* Show the form title */}
       </div>
-      <div className={styles.children} style={{ overflowY: "clip" }}>
+      <div className={styles.children} >
         {children} {/* Show the form fields for this step */}
       </div>
-      <nav className={styles.buttons}> {/* Navigation buttons */}
+      {!selectOpen && (<nav className={styles.buttons}> {/* Navigation buttons */}
         <Button
           className={styles.proceedButton} // Custom styling
           buttonChildren={topText} // Text like "Proceed" or "Publish My Listing"
@@ -142,7 +143,7 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
           onClick={nextStep} // Run the nextStep function when clicked
         />
 
-        {currentStepIndex > 0 && ( // Only show the back button if not on the first step
+        { currentStepIndex > 0 && ( // Only show the back button if not on the first step
           <Button
             className={styles.backButton} // Custom styling
             buttonChildren={bottomText} // Text like "Back" or "Publish Immediately"
@@ -157,7 +158,7 @@ export const FormWrapper = ({ title, children }: FormWrapperProps) => {
             onClick={previousStep} // Run the previousStep function when clicked
           />
         )}
-      </nav>
+      </nav>)}
       <div className={styles.progressBar}> {/* Progress bar section */}
         <FormProgressBar
           totalSteps={steps.length} // Total number of steps in the form

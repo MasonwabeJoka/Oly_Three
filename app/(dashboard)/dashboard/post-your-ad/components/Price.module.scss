@@ -2,10 +2,11 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+
 
   @include larger-than(mobile) {
     width: rem(1098);
@@ -27,11 +28,22 @@
   .mainSection {
     position: relative;
     margin-bottom: rem(20);
+    height: 100%;
+    margin-top: rem(80);
 
     .controls {
       margin-bottom: rem(20);
+    
+     
     }
     .priceContainer {
+     
     }
+
+    .startTimeContainer {
+       
+    }
+
+    
   }
 }

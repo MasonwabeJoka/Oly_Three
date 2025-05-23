@@ -2,11 +2,7 @@
 
 const nextConfig = {
   experimental: {
-    
     serverComponentsExternalPackages: ["mongoose"],
-  },
-
-  experimental: {
     optimizePackageImports: ["@phosphor-icons/react"],
   },
 
@@ -55,7 +51,7 @@ const nextConfig = {
         hostname: "utfs.io",
       },
     ],
-    
+    unoptimized: true,
   },
 };
 

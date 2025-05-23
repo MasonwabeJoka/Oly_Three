@@ -13,27 +13,47 @@
   z-index: 5; /* Ensures it's above other content */
   width: 100vw;
   height: 102vh;
-
   z-index: 100;
-  cursor: url("/icons/X.png"), auto;
+  cursor: url("/icons/X.png") 16 0, auto; /* Set hotspot (exact clicking point) to 16px from the left */
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $white-four;
 
-  .exitButtonContainer {
-    position: absolute;
-    left: 95%;
-    top:3%;
-    gap: rem(16);
-    cursor: pointer;
-    width: 100%;
+  .forceHide {
+    display: none !important;
+  }
 
-    z-index: 10;
+  &::-webkit-scrollbar {
+    cursor: auto !important;
+    // width: rem(16) !important;
   }
-  .modalContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: default;
+
+  &::-webkit-scrollbar-track {
+    cursor: auto !important;
   }
+
+  &::-webkit-scrollbar-thumb {
+    cursor: auto !important;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: auto !important;
+  }
+}
+
+.exitButtonContainer {
+  position: absolute;
+  left: 95%;
+  top: 3%;
+  gap: rem(16);
+  cursor: pointer;
+  width: 100%;
+
+  z-index: 10;
+}
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
 }
