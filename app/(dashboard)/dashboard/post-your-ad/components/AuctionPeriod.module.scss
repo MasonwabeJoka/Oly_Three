@@ -1,77 +1,125 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-
 .container {
-  position: relative;
-  padding: rem(120) !important;
-  border-radius: rem(40);
-  background-color: $white-two;
-  box-shadow: $shadow-one;
-
-  .root {
-    // background-color: red;
-  }
-
-  .table {
-    // background-color: green;
-    width: rem(500);
-  }
-
-  .head {
-    // background-color: pink;
-  }
-
-  .body {
-    text-align: center;
-    // background-color: blue;
-    // display: flex;
-    // flex-direction: column;
-  }
-
-  .row {
-    height: rem(48);
-  }
-
-  .cell {
-    background-color: cadetblue;
-    width: rem(84) !important;
-    height: rem(48) !important;
-  }
-
-  .nav {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+ margin-bottom: rem(200);
+ background-color: red;
+    
+  .wrapper {
+    position: relative;
     display: flex;
-    background-color: blue;
-    width: rem(500);
-    // height: rem(50);
-  }
-
-  .navButton {
-    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: red;
-    width: rem(32);
-    height: rem(32);
-    border-radius: 50%;
-    cursor: pointer;
+    border-radius: rem(40);
+    width: rem(696);
+    height: rem(500);
+    background-color: $white-two;
+    box-shadow: $shadow-one;
+
+
+    .root {
+
+      // margin-top: rem(48);
+    }
+
+    .table {
+      width: rem(600);
+  
+    }
+
+    .head {
+     
+    }
+
+    .monthContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(32);
+      font-size: $h4;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .daysOfWeek {
+      font-weight: 700;
+      color: $black-four;
+    }
+
+    .body {
+      text-align: center;
+    }
+
+    .row {
+      height: rem(54);
+    }
+
+    .cell {
+      // background-color: cadetblue;
+      width: rem(84) !important;
+      height: rem(48) !important;
+    }
+
+    .nav {
+      position: absolute;
+      bottom: rem(-80);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: flex-end;
+      gap: rem(16);
+      width: rem(560);
+    }
+
+    .navButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(48);
+      height: rem(48);
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: $white-one;
+      box-shadow: $shadow-one;
+    }
+
+    .prevMonthButton {
+    }
+
+    .day {
+      width: rem(40);
+      height: rem(40);
+      border-radius: 50%;
+    }
+
+    .daySelected {
+      background-color: $primary-hover;
+      width: rem(40);
+      height: rem(40);
+      color: white;
+    }
   }
 
-  .prevMonthButton {
-    // background-color: green;
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(116);
   }
 
-  .day {
-    background-color: pink;
+  .setStartTimeContainer {
+    margin-bottom: rem(20);
   }
 
-  .daySelected {
-    background-color: brown;
-    //  border-radius: 50%;
-    width: rem(48) !important;
-    height: rem(48) !important;
+  .auctionDurationContainer {
+    margin-bottom: rem(20);
+  }
+
+  .auctionStartButtonContainer {
+   
   }
 }

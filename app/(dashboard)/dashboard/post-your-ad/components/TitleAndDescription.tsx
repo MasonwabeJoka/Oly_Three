@@ -48,8 +48,9 @@ const TitleAndDescription = () => {
   const { onChange: titleOnChange, ...restTitleRegister } = register("titleAndDescription.title");
 
   return (
-    <FormWrapper title="Ad Description">
+    <FormWrapper>
       <div className={styles.container}>
+        <div className={styles.pageTitle}>Ad Description</div>
         <div className={styles.titleContainer}>
           <Input
             className={styles.title}

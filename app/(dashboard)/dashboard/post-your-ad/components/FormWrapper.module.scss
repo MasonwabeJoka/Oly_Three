@@ -12,18 +12,6 @@
     margin-left: rem(-48);
   }
 
-  .titleContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: rem(128);
-    margin-bottom: rem(64);
-    width: 100%;
-    .title {
-      color: $danger;
-      font-size: $h4;
-      font-weight: 500;
-    }
-  }
 
   .children {
     display: flex;

@@ -17,7 +17,7 @@
     font-size: $h4;
 
     @include larger-than(mobile) {
-      font-weight: 600;
+      font-weight: 500;
       font-size: rem(20);
       margin-top: rem(96);
       margin-bottom: rem(72);
@@ -38,7 +38,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: rem(48);
     .description {
       display: flex;
       flex-direction: column;
@@ -52,7 +51,7 @@
     }
   }
 
-  .proceedButtonContainer {
-    margin-bottom: rem(20);
-  }
+  // .proceedButtonContainer {
+  //   margin-bottom: rem(20);
+  // }
 }

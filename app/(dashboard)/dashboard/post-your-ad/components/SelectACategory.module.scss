@@ -10,7 +10,19 @@
   .titleContainer {
     display: flex;
     justify-content: center;
-    margin-bottom: rem(32);
+    margin-top: rem(240);
+    margin-bottom: rem(48);
+    width: 100%;
+    .title {
+      color: $danger;
+      font-size: $h4;
+      font-weight: 500;
+    }
+  }
+  .subcategoriesTitleContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: rem(48);
     width: 100%;
     .title {
       color: $danger;

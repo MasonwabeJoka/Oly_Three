@@ -166,11 +166,12 @@ const Details = () => {
 
   return (
     <FormWrapper
-      title="Product Details"
       error={errors.details?.message as string}
       selectOpen={isConditionsOpen || isDetailsOpen}
     >
       <div className={styles.container}>
+        <h2 className={styles.title}>Product Details</h2>
+
         <div className={styles.form}>
           <div className={styles.formElements}>
             <div className={styles.conditionsContainer}>
@@ -237,17 +238,20 @@ const Details = () => {
 
             {!isConditionsOpen && !isDetailsOpen && (
               <div className={styles.addSpecificationsContainer}>
-              <Button
-                className={styles.addSpecifications}
-                buttonChildren="Add product specifications"
-                buttonType="normal"
-                buttonSize="large"
-                name="addSpecification"
-                type="button"
-                ariaLabel="Add Product Specification Button"
-                onClick={() => setShowSpecificationForm(!showSpecificationForm)}
-              />
-            </div>)}
+                <Button
+                  className={styles.addSpecifications}
+                  buttonChildren="Add product specifications"
+                  buttonType="normal"
+                  buttonSize="large"
+                  name="addSpecification"
+                  type="button"
+                  ariaLabel="Add Product Specification Button"
+                  onClick={() =>
+                    setShowSpecificationForm(!showSpecificationForm)
+                  }
+                />
+              </div>
+            )}
 
             {showSpecificationForm && (
               <>

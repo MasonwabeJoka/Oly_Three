@@ -26,7 +26,6 @@ const Price = () => {
   const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
   const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
   const [showAuctionPeriod, setShowAuctionPeriod] = useState(false);
-  
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -50,7 +49,6 @@ const Price = () => {
 
   return (
     <FormWrapper
-      title="Price"
       selectOpen={
         isPricingOptionsOpen ||
         isAuctionDurationOpen ||
@@ -59,6 +57,12 @@ const Price = () => {
       }
     >
       <div className={styles.container}>
+        <h2
+          className={styles.title}
+          style={{ marginTop: priceType === "Auction" ? "4rem" : "" }}
+        >
+          Price
+        </h2>
         <div className={styles.mainSection}>
           <div className={styles.controls}>
             <Select

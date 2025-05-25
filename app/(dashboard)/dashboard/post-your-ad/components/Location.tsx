@@ -18,8 +18,9 @@ const Location = () => {
   } = useFormContext<FormDataSchema>();
 
   return (
-    <FormWrapper title="Location" selectOpen={isLocationOpen || isCityOpen || isSuburbOpen}>
+    <FormWrapper selectOpen={isLocationOpen || isCityOpen || isSuburbOpen}>
       <div className={styles.container}>
+        <h2 className={styles.title}>Location</h2>
         <div className={styles.selects}>
           <div className={styles.select}>
             <Select

@@ -47,8 +47,10 @@ const UploadMedia = () => {
   };
 
   return (
-    <FormWrapper title="Upload Media">
+    <FormWrapper>
       <div className={styles.container}>
+        <h2 className={styles.title}>Upload Media</h2>
+
         <div className={styles.uploadedPhotos}>
           <ImageUploadsSection uploadedFiles={uploadedImages} />
         </div>

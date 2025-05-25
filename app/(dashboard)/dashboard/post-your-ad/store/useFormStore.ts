@@ -116,7 +116,7 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   message: '',
   
   // Set the starting step from local storage (or 0 if nothing is saved)
-  currentStepIndex: typeof window !== "undefined" ? parseInt(localStorage.getItem('currentStepIndex') || '0', 9) : 0,
+  currentStepIndex: typeof window !== "undefined" ? parseInt(localStorage.getItem('currentStepIndex') || '0', 10) : 0,
   
   // Starting values for the form data (everything empty or false to begin with)
   formData: {

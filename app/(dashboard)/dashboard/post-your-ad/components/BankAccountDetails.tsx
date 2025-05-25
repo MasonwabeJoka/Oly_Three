@@ -73,8 +73,11 @@ const BankAccountDetails = () => {
   const bankNames = banks?.map((bank: any) => bank.name);
 
   return (
-    <FormWrapper title="Bank Account Details">
+    <FormWrapper>
       <div className={styles.container}>
+     
+          <h2 className={styles.title}>Bank Account Details</h2>
+      
         <div className={styles.bankNameContainer}>
           <Input
             className={styles.bankName}

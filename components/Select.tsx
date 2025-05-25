@@ -153,6 +153,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       };
     }, []);
 
+    
+
     useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => {
       setShowOptions(false);
     });

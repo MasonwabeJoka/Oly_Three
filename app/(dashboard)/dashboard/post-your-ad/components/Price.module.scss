@@ -13,23 +13,19 @@
   }
 
   .title {
-    margin-top: rem(52);
-    margin-bottom: rem(32);
+    margin-top: rem(240);
+    margin-bottom: rem(48);
     color: $danger;
     font-weight: 500;
     font-size: $h4;
 
-    @include larger-than(mobile) {
-      margin-top: rem(168);
-      margin-bottom: rem(48);
-    }
+  
   }
 
   .mainSection {
     position: relative;
     margin-bottom: rem(20);
     height: 100%;
-    margin-top: rem(80);
 
     .controls {
       margin-bottom: rem(20);
@@ -41,7 +37,10 @@
     }
 
     .startTimeContainer {
-       
+      height: fit-content;
+      
+       .startTime {
+       }
     }
 
     

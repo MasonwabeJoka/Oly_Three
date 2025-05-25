@@ -8,17 +8,27 @@
   overflow-y: auto;
   overflow-x: hidden;
   width: rem(311);
-  height: 40vh;
+
 
   @include larger-than(mobile) {
     width: rem(1098);
   }
 
+
+    .title {
+      margin-top: rem(240);
+      margin-bottom: rem(48);
+      color: $danger;
+      font-size: $h4;
+      font-weight: 500;
+    }
+  
+
   .form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: rem(80);
+  
     @include larger-than(mobile) {
     }
 

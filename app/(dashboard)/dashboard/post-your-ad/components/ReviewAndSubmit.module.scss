@@ -11,6 +11,17 @@
     width: rem(1098);
   }
 
+  .title {
+
+    margin-top: rem(48);
+    margin-bottom: rem(48);
+    color: $danger;
+    font-weight: 500;
+    font-size: $h4;
+
+ 
+  }
+
   .reviewSectionContainer {
     display: flex;
     flex-direction: column;

@@ -5,8 +5,9 @@ import { FormWrapper } from "./FormWrapper";
 import { promoteYourAdValidations } from "../validations/multiStepFormValidations";
 const PromoteYourAd = () => {
   return (
-    <FormWrapper title="Promote Your Ad">
+    <FormWrapper>
       <div className={styles.container}>
+        <h2 className={styles.title}>Promote Your Ad</h2>
         <div className={styles.cards}>
           {PromoteYourAdData.map((promotion, index) => {
             const { id, promotionChannel, title, promotionPrice, icon } =

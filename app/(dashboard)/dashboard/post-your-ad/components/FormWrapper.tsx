@@ -11,7 +11,6 @@ import styles from "./FormWrapper.module.scss";
 
 // Define the props (inputs) this component expects
 type FormWrapperProps = {
-  title: string; // The title to show at the top of the form
   children: React.ReactNode; // The content inside the form (like input fields), passed from the parent component
   selectOpen?: boolean; // Optional prop to hide buttons when select is open
 };
@@ -122,9 +121,7 @@ export const FormWrapper = ({ title, children, selectOpen = false }: FormWrapper
   // Render the form UI
   return (
     <div className={styles.container}> {/* Main container with styles */}
-      <div className={styles.titleContainer}>
-        <h2 className={styles.title}>{title}</h2> {/* Show the form title */}
-      </div>
+   
       <div className={styles.children} >
         {children} {/* Show the form fields for this step */}
       </div>

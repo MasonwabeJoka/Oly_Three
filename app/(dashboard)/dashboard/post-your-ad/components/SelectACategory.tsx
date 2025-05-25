@@ -28,24 +28,28 @@ const SelectACategory = ({
   const [showButtons, setShowButtons] = useState<boolean>(false);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
-  
-  const { 
-    setValue, 
+
+  const {
+    setValue,
     formState: { errors },
-    trigger 
+    trigger,
   } = useFormContext();
 
   const handleSubcategoryClick = async (subcategory: string) => {
     // Set both category and main category
-    const selectedCategory = categories.find(cat => cat.id === activeCategoryId);
-    
+    const selectedCategory = categories.find(
+      (cat) => cat.id === activeCategoryId
+    );
+
     if (selectedCategory) {
-      setValue("category.main", selectedCategory.category, { shouldValidate: true });
+      setValue("category.main", selectedCategory.category, {
+        shouldValidate: true,
+      });
       setValue("category.subcategory", subcategory, { shouldValidate: true });
-      
+
       // Trigger validation
       const isValid = await trigger(["category.main", "category.subcategory"]);
-      
+
       if (isValid) {
         setCategory(subcategory);
         goTo(1);
@@ -73,9 +77,11 @@ const SelectACategory = ({
 
   const handleCategoryClick = (id: number) => {
     setActiveCategoryId(id);
-    const selectedCategory = categories.find(cat => cat.id === id);
+    const selectedCategory = categories.find((cat) => cat.id === id);
     if (selectedCategory) {
-      setValue("category.main", selectedCategory.category, { shouldValidate: true });
+      setValue("category.main", selectedCategory.category, {
+        shouldValidate: true,
+      });
     }
   };
 
@@ -111,11 +117,11 @@ const SelectACategory = ({
 
   const SelectACategoryDesktop = () => {
     return (
-      <FormWrapper 
-        title="Select a category"
-        // error={errors.category?.main?.message || errors.category?.subcategory?.message}
-      >
+      <FormWrapper>
         <div className={styles.container}>
+          <div className={styles.titleContainer}>
+            <h2 className={styles.title}>Select a category</h2>
+          </div>
           <div className={styles.wrapper}>
             <Swiper
               className={styles.swipper}
@@ -147,7 +153,7 @@ const SelectACategory = ({
 
             {activeCategory && activeCategory?.subcategories.length > 0 && (
               <div className={styles.subcategories}>
-                <div className={styles.titleContainer}>
+                <div className={styles.subcategoriesTitleContainer}>
                   <h4 className={styles.title}>{activeCategory.category}</h4>
                 </div>
                 <div
@@ -229,7 +235,7 @@ const SelectACategory = ({
   };
   const SelectACategoryMobile = () => {
     return (
-      <FormWrapper 
+      <FormWrapper
         title="Select a category"
         // error={errors.category?.main?.message || errors.category?.subcategory?.message}
       >
@@ -246,7 +252,9 @@ const SelectACategory = ({
                     id={id}
                     name={subcategories[index]}
                     ariaLabel={subcategories[index]}
-                    onSubcategorySelect={(subcategory) => handleSubcategoryClick(subcategory)}
+                    onSubcategorySelect={(subcategory) =>
+                      handleSubcategoryClick(subcategory)
+                    }
                   />
                 </div>
               );
@@ -279,4 +287,3 @@ const SelectACategory = ({
 };
 
 export default SelectACategory;
-

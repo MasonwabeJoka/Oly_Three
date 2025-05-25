@@ -3,7 +3,7 @@ import { FormWrapper } from "./FormWrapper";
 
 const Congratulations = () => {
   return (
-    <FormWrapper title="">
+    <FormWrapper>
 
     <div className={styles.container}>
       <div className={styles.descriptionContainer}>
