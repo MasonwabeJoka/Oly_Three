@@ -10,6 +10,7 @@ interface AvatarProps {
   avatarSize: keyof typeof AVATAR_SIZE;
   isOnline?: boolean;
   outlineColour?: string;
+  isVerified?: boolean;
 }
 
 const AVATAR_SIZE = {
@@ -25,6 +26,7 @@ const Avatar: React.FC<AvatarProps> = ({
   imageAlt = "Avatar",
   avatarSize = "regular",
   isOnline = false,
+  isVerified = false,
   outlineColour = "fff",
 }) => {
   const [hasError, setHasError] = useState(false);
@@ -67,6 +69,17 @@ const Avatar: React.FC<AvatarProps> = ({
       )}
 
       {isOnline && <span className={styles.isOnline} />}
+      {isVerified && (
+        <div className={styles.isVerified}>
+          <Image
+            className={styles.isVerified}
+            src="/verified.png"
+            alt="Verified"
+            width={22}
+            height={22}
+          />
+        </div>
+      )}
     </div>
   );
 };

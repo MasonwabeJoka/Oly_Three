@@ -24,6 +24,15 @@
     }
   }
 }
+.isVerified {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: rem(22);
+  height: rem(22);
+  border-radius: 50%;
+ 
+}
 
 .large {
   position: relative;
@@ -67,7 +76,6 @@
     right: rem(-2);
     width: rem(10);
     height: rem(10);
-    
   }
 }
 .tiny {

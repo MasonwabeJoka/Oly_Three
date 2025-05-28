@@ -1,28 +1,39 @@
-"use client";
+import Button from "@/components/Buttons";
 import styles from "./styles.module.scss";
-import VerifyYourAccount from "./components/VerifyYourAccount";
-import SecurityQuestions from "./components/SecurityQuestions";
-import QrScanner from "./components/QrScanner";
-import IdPassport from "./components/IdPassport";
-import SelfieVerification from "./components/SelfieVerification";
-import MobileVerification from "./components/MobileVerification";
-import Finish from "./components/Finish";
-import useVerificationStore from "./store/useVerificationStore";
-
+import Link from "next/link";
 const AccountVerification = () => {
-  const { currentStepIndex, steps } = useVerificationStore();
   return (
-    <form className={styles.container}>
-      <div className={styles.form}>
-        {currentStepIndex === 0 && <VerifyYourAccount />}
-        {currentStepIndex === 1 && <QrScanner />}
-        {currentStepIndex === 2 && <IdPassport />}
-        {currentStepIndex === 3 && <SecurityQuestions />}
-        {currentStepIndex === 4 && <SelfieVerification />}
-        {currentStepIndex === 5 && <MobileVerification />}
-        {currentStepIndex === 6 && <Finish />}
-      </div>
-    </form>
+    <div className={styles.container}>
+      <h4 className={styles.title}>Account Verification</h4>
+      <Link href="/dashboard/settings/account-verification/individual" className={styles.individualAccount}>
+        <Button
+          className={styles.individualAccountButton}
+          buttonChildren="Verify Individual Account"
+          buttonType="primary"
+          buttonSize="large"
+          name="individual-account-btn"
+          type="button"
+          ariaLabel="Verify Individual Account"
+          autoFocus={false}
+          disabled={false}
+          dashboard
+        />
+      </Link>
+      <Link href="/dashboard/settings/account-verification/individual" className={styles.BusinessAccount}>
+        <Button
+          className={styles.BusinessAccountButton}
+          buttonChildren="Verify Business Account"
+          buttonType="normal"
+          buttonSize="large"
+          name="business-account-btn"
+          type="button"
+          ariaLabel="Verify Business Account"
+          autoFocus={false}
+          disabled={false}
+          dashboard
+        />
+      </Link>
+    </div>
   );
 };
 

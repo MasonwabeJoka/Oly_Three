@@ -99,6 +99,7 @@ const BankAccountDetails = () => {
             error={errors.createAccount?.bankName?.message as string}
             {...register("createAccount.bankName")}
             onChange={(e) => handleInputChange(e, "bankName")}
+            dashboard
           />
         </div>
         <div className={styles.accountHolderContainer}>
@@ -121,6 +122,7 @@ const BankAccountDetails = () => {
             error={errors.createAccount?.accountHolder?.message as string}
             {...register("createAccount.accountHolder")}
             onChange={(e) => handleInputChange(e, "accountHolder")}
+            dashboard
           />
         </div>
         <div className={styles.accountNumberContainer}>
@@ -143,6 +145,7 @@ const BankAccountDetails = () => {
             error={errors.createAccount?.accountNumber?.message as string}
             {...register("createAccount.accountNumber")}
             onChange={(e) => handleInputChange(e, "accountNumber")}
+            dashboard
           />
         </div>
       </div>

@@ -1,10 +1,15 @@
 "use client";
-import Dashboard from "@/components/Dashboard"; // Adjust path to your Dashboard component
-import { useFormStore } from "@/components/store/useFormStore";
-import { useEffect } from "react";
+import { useEffect, use } from "react";
+import useFormStore from "../store/useFormStore";
 
-export default function PostYourAdPage({ params }: { params: { step: string } }) {
-  const { setCurrentStepIndex, steps } = useFormStore();
+import { redirect } from "next/navigation";
+import Dashboard from "../components/Dashboard";
+
+export default function PostYourAdPage({ params: paramsPromise }: { params: Promise<{ step: string }> }) {
+  const { setCurrentStepIndex } = useFormStore();
+
+  // Unwrap params using React.use
+  const params = use(paramsPromise);
 
   useEffect(() => {
     // Map URL slug to step index
@@ -20,6 +25,10 @@ export default function PostYourAdPage({ params }: { params: { step: string } })
       "congratulations": 8,
       "review-submit": 9,
     };
+
+    if (!(params.step in stepMap)) {
+      redirect("/dashboard/post-your-ad/select-category");
+    }
     const stepIndex = stepMap[params.step] ?? 0; // Default to step 0 if invalid
     setCurrentStepIndex(stepIndex);
   }, [params.step, setCurrentStepIndex]);

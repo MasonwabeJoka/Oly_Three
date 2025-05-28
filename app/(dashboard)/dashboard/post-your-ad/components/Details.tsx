@@ -44,6 +44,12 @@ const Details = () => {
       setDetails(formDetails);
     }
   }, [formDetails]);
+  
+  useEffect(() => {
+  if (selectDetailValue) {
+    setMatchFound(true);
+  }
+}, [selectDetailValue]);
 
   const updateDetailsInForm = (updatedDetails: DetailItem[]) => {
     setDetails(updatedDetails);
@@ -120,10 +126,14 @@ const Details = () => {
                     height={18}
                   />
                 }
+                buttonSize="standard"
+                dashboard
                 buttonType="roundStandardFeed"
                 name="edit-btn"
                 type="button"
                 ariaLabel="Edit Button"
+                autoFocus={false}
+                disabled={false}
                 onClick={() => editDetail(index)}
               />
               <Button
@@ -136,11 +146,15 @@ const Details = () => {
                     height={24}
                   />
                 }
+                buttonSize="standard"
+                dashboard
                 buttonType="roundStandardFeed"
                 name="delete-btn"
                 type="button"
                 ariaLabel="Delete Button"
                 onClick={() => handleDeleteItem(index)}
+                autoFocus={false}
+                disabled={false}
               />
             </div>
             <p className={styles.detailText}>
@@ -184,6 +198,8 @@ const Details = () => {
                 label="Choose a condition"
                 id="conditions"
                 ariaLabel="Conditions"
+                dashboard
+                showLabelOnSelection
                 error={errors.details?.condition?.message as string}
                 {...register("details.condition")}
                 onOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
@@ -202,6 +218,8 @@ const Details = () => {
                   id="choose-detail"
                   ariaLabel="Choose Detail Select"
                   autoComplete="off"
+                  dashboard
+                  showLabelOnSelection
                   error={errors.details?.selectDetail?.message as string}
                   {...register("details.selectDetail")}
                   onOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
@@ -212,7 +230,9 @@ const Details = () => {
             {DetailsData.map(
               (detail) =>
                 matchFound &&
-                selectDetailValue === detail.detail && (
+                selectDetailValue === detail.detail &&
+                !isConditionsOpen &&
+                !isDetailsOpen && (
                   <SelectedDetail
                     key={detail.id}
                     id={detail.id}
@@ -230,6 +250,9 @@ const Details = () => {
                     setDetails={setDetails}
                     watch={watch}
                     setMatchFound={() => setMatchFound(false)}
+                    trigger={trigger}
+                    handleBlur={() => {}}
+                    handleSubmit={() => {}}
                   />
                 )
             )}
@@ -246,6 +269,9 @@ const Details = () => {
                   name="addSpecification"
                   type="button"
                   ariaLabel="Add Product Specification Button"
+                  autoFocus={false}
+                  disabled={false}
+                  dashboard
                   onClick={() =>
                     setShowSpecificationForm(!showSpecificationForm)
                   }
@@ -253,7 +279,7 @@ const Details = () => {
               </div>
             )}
 
-            {showSpecificationForm && (
+            {showSpecificationForm && !isConditionsOpen && !isDetailsOpen && (
               <>
                 <SelectedDetail
                   id="custom-spec"
@@ -268,11 +294,14 @@ const Details = () => {
                   setValue={setValue}
                   errors={errors}
                   handleChange={handleChange}
-                  selectDetailValue={selectDetailValue}
+                  selectDetailValue="Product Specifications"
                   details={details}
                   setDetails={setDetails}
                   watch={watch}
                   setMatchFound={() => setShowSpecificationForm(false)}
+                  trigger={trigger}
+                  handleBlur={() => {}}
+                  handleSubmit={() => {}}
                 />
                 <DetailsList details={details} editIndex={editIndex} />
               </>

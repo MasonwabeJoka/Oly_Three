@@ -97,7 +97,7 @@ const HeroSectionSearch = () => {
         noValidate
       >
         <div className={styles.buttons}>
-          <Link href="/dashboard/post-your-ad" className={styles.link}>
+          <Link href="/dashboard/post-your-ad/select-category" className={styles.link}>
             <Button
               buttonChildren={"Post Your Ad"}
               className={styles.postYourAdBtn}

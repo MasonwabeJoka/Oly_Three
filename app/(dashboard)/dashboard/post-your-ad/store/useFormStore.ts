@@ -102,6 +102,8 @@ type FormState = {
   setCurrentStepIndex: (index: number) => void; // Sets which step the user is on
 };
 
+
+
 // Function to save the current step number to the browser’s local storage
 // This keeps track of progress even if the page is refreshed
 const setStepInStorage = (index: number) => {

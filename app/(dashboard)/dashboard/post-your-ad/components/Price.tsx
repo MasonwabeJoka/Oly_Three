@@ -9,7 +9,7 @@ import Button from "@/components/Buttons";
 import useFAQStore from "../store/useFAQStore";
 import { priceValidations } from "../validations/multiStepFormValidations";
 import Modal from "@/components/Modal";
-import AuctionPeriod from "./AuctionPeriod";
+import AuctionStartTime from "./AuctionStartTime";
 
 const Price = () => {
   const {
@@ -25,7 +25,7 @@ const Price = () => {
   const [isPricingOptionsOpen, setIsPricingOptionsOpen] = useState(false);
   const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
   const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
-  const [showAuctionPeriod, setShowAuctionPeriod] = useState(false);
+  const [showAuctionStartTime, setShowAuctionStartTime] = useState(false);
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -195,7 +195,7 @@ const Price = () => {
                     onOpenChange={(isOpen) => setIsAuctionStartTimeOpen(isOpen)}
                     onChange={(e) => {
                       if (e.target.value === "Set your own start time") {
-                        setShowAuctionPeriod(true);
+                        setShowAuctionStartTime(true);
                         setValue("price.startTime", ""); // Reset to avoid invalid state
                       }
                     }}
@@ -239,7 +239,7 @@ const Price = () => {
                     onOpenChange={(isOpen) => setIsAuctionDurationOpen(isOpen)}
                     onChange={(e) => {
                       if (e.target.value === "Set your own duration") {
-                        setShowAuctionPeriod(true);
+                        setShowAuctionStartTime(true);
                         setValue("price.auctionDuration", ""); // Reset to avoid invalid state
                       }
                     }}
@@ -268,11 +268,11 @@ const Price = () => {
                 )}
             </>
           )}
-          {showAuctionPeriod && (
+          {showAuctionStartTime && (
             <Modal
-              showModal={showAuctionPeriod}
-              setShowModal={setShowAuctionPeriod}
-              modalContent={<AuctionPeriod />}
+              showModal={showAuctionStartTime}
+              setShowModal={setShowAuctionStartTime}
+              modalContent={<AuctionStartTime />}
             />
           )}
         </div>

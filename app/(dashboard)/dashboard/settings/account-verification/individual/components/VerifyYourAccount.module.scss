@@ -1,0 +1,62 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(600);
+
+
+.avatarContainer {
+    margin-top: rem(100);
+    margin-bottom: rem(48);
+  }
+
+  .title {
+        
+    margin-bottom: rem(32);
+    font-weight: 500;
+    font-size: $h4;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    p {
+      text-align: center;
+      margin-bottom: rem(16);
+    }
+
+    .benefits {
+      display: flex;
+      flex-direction: column;
+      gap: rem(16);
+      margin-bottom: rem(48);
+
+      .benefit {
+        display: flex;
+        align-items: center;
+        gap: rem(16);
+
+        .benefitIcon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: rem(32);
+          height: rem(32);
+          background-color: $primary;
+          border-radius: 50%;
+        }
+
+        p {
+          font-size: $body;
+          color: $black-four;
+        }
+      }
+    }
+  }
+}

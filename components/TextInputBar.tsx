@@ -128,12 +128,6 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
     };
 
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        handleSubmit();
-      }
-    };
 
     const handleSubmit = () => {
       if (textareaRef.current && onSubmit) {
@@ -171,6 +165,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
             className={styles.textareaWrapper}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
+            
           >
             <textarea
               className={`${styles.textarea} ${
@@ -186,7 +181,6 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
               onClick={onClick}
               onFocus={onFocus}
               onBlur={onBlur}
-              onKeyDown={handleKeyDown}
               ref={(node) => {
                 textareaRef.current = node;
                 if (typeof ref === "function") {

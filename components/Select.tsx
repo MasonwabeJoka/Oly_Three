@@ -153,8 +153,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       };
     }, []);
 
-    
-
     useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => {
       setShowOptions(false);
     });
@@ -219,8 +217,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
     } ${className}`;
 
-    const displayText =
-      selectedOptions.length > 0
+    const displayText = showOptions
+      ? typeof initialValue === "string"
+        ? initialValue
+        : "Select an option"
+      : selectedOptions.length > 0
         ? selectedOptions.join(", ").length > 40
           ? selectedOptions.join(", ").slice(0, 40) + "..."
           : selectedOptions.join(", ")
@@ -369,7 +370,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       {isMultiSelect && (
                         <div
                           className={styles.checkboxContainer}
-                          onClick={(e) => e.stopPropagation()} 
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Checkbox
                             id={`checkbox-${index}`}

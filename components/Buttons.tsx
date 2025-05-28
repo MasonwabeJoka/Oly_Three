@@ -159,6 +159,7 @@ const Button = ({
   dashboard,
   onClick,
   onBlur,
+  onKeyDown,
   autoFocus = false,
   disabled = false,
   fontSize,

@@ -7,6 +7,7 @@ import Button from "@/components/Buttons";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
+import TextArea from "@/components/TextArea";
 
 type FormValues = z.infer<typeof multiStepFormSchema>;
 type SelectedDetailProps = {
@@ -134,7 +135,7 @@ const SelectedDetail = ({
           </div>
 
           <div className={styles.selectedDetailInputContainer}>
-            <Input
+            {/* <Input
               className={styles.selectedDetailInput}
               inputType="text"
               initialValue=""
@@ -165,10 +166,45 @@ const SelectedDetail = ({
               iconHeight={32}
               required={true}
               autoComplete="off"
+              dashboard
               onChange={handleChange}
               onBlur={handleBlur}
               error={errors.detail?.message as string}
               {...register(selectDetailValue)}
+            /> */}
+            <TextArea
+              id="textInput"
+              name="textInput"
+              hasSubmitButton={false}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                console.log(e.target.value)
+              }
+              className={styles.textInput}
+              placeholder={
+                placeholder
+                  ? `${
+                      typeof placeholder === "string" && placeholder.length > 55
+                        ? placeholder.slice(0, 55) + "..."
+                        : placeholder
+                    }`
+                  : example
+                    ? `eg. ${
+                        typeof example === "string" && example.length > 55
+                          ? example.slice(0, 55) + "..."
+                          : example
+                      }`
+                    : ""
+              }
+              value=""
+              ariaLabel="Chosen Detail"
+              size="large"
+              dashboard
+              error=""
+              maxHeight={120}
+              onClick={() => {}}
+              onFocus={() => {}}
+              onBlur={() => {}}
+              onSubmit={() => {}}
             />
           </div>
 

@@ -8,10 +8,11 @@
   border-radius: rem(40);
   background-color: $white-one;
   box-shadow: $shadow-two;
+  // width: rem(648);
   overflow: hidden;
-
+  // box-shadow: $shadow-three !important;
   .label {
-    position:absolute;
+    position: absolute;
     left: rem(30000);
     font-size: $body;
     color: $black-one;
@@ -23,12 +24,18 @@
 
   .textareaWrapper {
     position: relative;
-    width: 100%;
     border-radius: rem(40);
     overflow: hidden;
 
     .textarea {
-      padding: rem(32);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      min-height: rem(120) !important;
+      padding: rem(14) rem(48);
+      margin-bottom: rem(48);
       font-size: $body;
       line-height: 1.5;
       color: $black-one;
@@ -40,8 +47,7 @@
       box-shadow: $shadow-two;
       scroll-behavior: smooth;
       overflow: hidden;
-     
-
+border-radius: rem(40);
       // Hide scrollbar by default
       &::-webkit-scrollbar {
         display: none; // Prevent scrollbar from showing before atMaxHeight
@@ -69,7 +75,6 @@
           border: rem(2) solid transparent; // For spacing
           filter: none !important; // Prevent browser-applied filters (e.g., darkening)
           opacity: 1 !important; // Prevent opacity changes
-          
         }
 
         &::-webkit-scrollbar-thumb:hover {
@@ -88,17 +93,26 @@
   }
 
   .buttons {
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
-    gap: rem(8);
 
     .submitButton {
       height: rem(40);
       margin-right: rem(16);
       margin-bottom: rem(8);
       background-color: $primary;
+      box-shadow: $shadow-one !important;
+      // filter: drop-shadow(0px 1px 3px rgba(180, 191, 203, 0.2))
+      // drop-shadow(0px 5px 5px rgba(180, 191, 203, 0.17))
+      // drop-shadow(0px 11px 7px rgba(180, 191, 203, 0.1))
+      // drop-shadow(0px 20px 8px rgba(180, 191, 203, 0.03))
+      // drop-shadow(0px 30px 9px rgba(180, 191, 203, 0));
     }
+
     .submitButton:hover {
       background-color: $primary-hover;
       color: $white-one;
@@ -115,7 +129,6 @@
     top: 0;
     left: 0;
     min-height: rem(120);
-    padding: rem(32);
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: hidden;
@@ -140,19 +153,31 @@
   }
 }
 
+.xLargeFeed {
+  width: rem(954);
+  height: rem(56);
+}
+
 .xLarge {
   @include larger-than(mobile) {
-    width: rem(1078);
+    width: rem(954);
+    height: rem(56);
   }
+}
+
+.xLargeFeed {
+  width: rem(793);
 }
 
 .large {
   width: rem(311);
 
   @include larger-than(mobile) {
-    width: rem(640);
-   
+    width: rem(514);
   }
+}
+.largeFeed {
+  width: rem(471);
 }
 
 .medium {
@@ -160,5 +185,34 @@
 
   @include larger-than(mobile) {
     width: rem(424);
+  }
+}
+
+.mediumFeed {
+  width: rem(310);
+}
+
+.xxLargeDashboard {
+  @include larger-than(mobile) {
+    width: rem(1002);
+  }
+}
+
+.xLargeDashboard {
+  @include larger-than(mobile) {
+  }
+}
+
+.largeDashboard {
+  @include larger-than(mobile) {
+    width: rem(471);
+  }
+}
+
+.mediumDashboard {
+  width: rem(240);
+
+  @include larger-than(mobile) {
+    width: rem(326);
   }
 }

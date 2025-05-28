@@ -1,10 +1,11 @@
 import Button from "@/components/Buttons";
-import styles from "./AuctionPeriod.module.scss";
-import { useState } from "react";
+import styles from "./AuctionStartTime.module.scss";
+import { useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import Select from "@/components/Select";
 
-const AuctionPeriod = () => {
+const AuctionStartTime = () => {
+  const selectRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<Date>();
   const today = new Date();
   const threeMonthsAhead = new Date(
@@ -12,6 +13,22 @@ const AuctionPeriod = () => {
     today.getMonth() + 3,
     0
   );
+  const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
+  const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
+
+  const onSelectOpen = () => {
+    selectRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+const onAuctionStartTimeOpen = (isOpen: boolean) => {
+  selectRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  setIsAuctionStartTimeOpen(isOpen);
+};
+const onAuctionDurationOpen = (isOpen: boolean) => {
+  selectRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  setIsAuctionDurationOpen(isOpen);
+};
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -47,7 +64,7 @@ const AuctionPeriod = () => {
         {/* <div>Auction Duration</div> */}
       </div>
       <div className={styles.controls}>
-        <div className={styles.setStartTimeContainer}>
+        <div ref={selectRef} className={styles.setStartTimeContainer}>
           <Select
             className={styles.setStartTime}
             options={[
@@ -75,7 +92,6 @@ const AuctionPeriod = () => {
               { label: "02:00", value: "2am" },
               { label: "03:00", value: "3am" },
               { label: "04:00", value: "4am" },
-              { label: "Set your own start time", value: "customStartTime" },
             ]}
             initialValue="Auction Start Time"
             selectSize="large"
@@ -88,58 +104,63 @@ const AuctionPeriod = () => {
             disabled={false}
             required={true}
             dashboard
-            // onOpenChange={(isOpen) => setIsAuctionStartTimeOpen(isOpen)}
+            onOpenChange={onAuctionStartTimeOpen}
           />
         </div>
-        <div className={styles.auctionDurationContainer}>
-          <Select
-            className={styles.auctionDuration}
-            options={[
-              { label: "1 hour", value: "1h" },
-              { label: "6 hours", value: "6h" },
-              { label: "12 hours", value: "12h" },
-              { label: "24 hours", value: "24h" },
-              { label: "3 Days", value: "3d" },
-              { label: "5 Days", value: "5d" },
-              { label: "7 Days", value: "7d" },
-              { label: "10 Days", value: "10d" },
-              { label: "30 Days", value: "30d" },
-              {
-                label: "Set your own duration",
-                value: "customDuration",
-              },
-            ]}
-            initialValue="Auction Duration"
-            selectSize="large"
-            selectPrompt="Auction Duration"
-            label="Auction Duration"
-            id="auctionDuration"
-            ariaLabel="Auction Duration"
-            autoFocus={false}
-            autoComplete="off"
-            disabled={false}
-            required={true}
-            dashboard
-          />
-        </div>
+        {!isAuctionStartTimeOpen && (
+          <div ref={selectRef} className={styles.auctionDurationContainer}>
+            <Select
+              className={styles.auctionDuration}
+              options={[
+                { label: "1 hour", value: "1h" },
+                { label: "6 hours", value: "6h" },
+                { label: "12 hours", value: "12h" },
+                { label: "24 hours", value: "24h" },
+                { label: "3 Days", value: "3d" },
+                { label: "5 Days", value: "5d" },
+                { label: "7 Days", value: "7d" },
+                { label: "10 Days", value: "10d" },
+                { label: "30 Days", value: "30d" },
+                {
+                  label: "Set your own duration",
+                  value: "customDuration",
+                },
+              ]}
+              initialValue="Auction Duration"
+              selectSize="large"
+              selectPrompt="Auction Duration"
+              label="Auction Duration"
+              id="auctionDuration"
+              ariaLabel="Auction Duration"
+              autoFocus={false}
+              autoComplete="off"
+              disabled={false}
+              required={true}
+              dashboard
+              onOpenChange={onAuctionDurationOpen}
+            />
+          </div>
+        )}
 
-        <div className={styles.auctionStartButtonContainer}>
-          <Button
-            className={styles.auctionStartButton}
-            buttonChildren="Accept"
-            buttonType="primary"
-            buttonSize="large"
-            name="auction-start-btn"
-            type="button"
-            ariaLabel="Auction Start Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard
-          />
-        </div>
+        {!isAuctionStartTimeOpen && !isAuctionDurationOpen && (
+          <div className={styles.auctionStartButtonContainer}>
+            <Button
+              className={styles.auctionStartButton}
+              buttonChildren="Accept"
+              buttonType="primary"
+              buttonSize="large"
+              name="auction-start-btn"
+              type="button"
+              ariaLabel="Auction Start Button"
+              autoFocus={false}
+              disabled={false}
+              dashboard
+            />
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default AuctionPeriod;
+export default AuctionStartTime;

@@ -1,16 +1,7 @@
 "use client";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  categoriesValidations,
-  detailsValidations,
-  priceValidations,
-  bankAccountValidations,
-  descriptionValidations,
-  uploadMediaValidations,
-  locationValidations,
-  promoteYourAdValidations,
-} from "./validations/multiStepFormValidations";
+import { formDataSchema } from "./validations/formDataSchema";
 import styles from "./styles.module.scss";
 import SelectACategory from "./components/SelectACategory";
 import Details from "./components/Details";
@@ -32,88 +23,60 @@ import Modal from "@/components/Modal";
 import useQAndAStore from "./store/useFAQStore";
 import FAQs from "@/components/Faqs";
 import { auctionFAQs } from "@/data/auctionFAQs";
+import {type FormData} from "./store/useFormStore";
 
 
-type FormValues = {
-  [key: string]: any; // Dynamic object structure for the different steps
-};
-
+type GoToMediaType = "photos" | "reorder" | "videos" | "attachments" | "none";
 const Dashboard = () => {
-  // Get media upload state from the media store
-  const { uploadPhotos, reorderPhotos, uploadVideos, uploadAttachments } =
-    useUploadMediaStore();
-  
-  // Define validation schemas for each step of the form
-  const validationSchemaSteps = [
-    categoriesValidations,
-    detailsValidations,
-    priceValidations,
-    bankAccountValidations,
-    descriptionValidations,
-    uploadMediaValidations,
-    locationValidations,
-    promoteYourAdValidations,
-  ];
-
-  // Get form state and actions from Zustand form store
+  const { goToMediaType } = useUploadMediaStore();
   const { currentStepIndex, goTo, setCategory } = useFormStore();
-
-  // Set up react-hook-form with Zod resolver and default form values from Zustand
-  const methods = useForm<FormValues>({
-    resolver: zodResolver(validationSchemaSteps[currentStepIndex]),
-    defaultValues: useFormStore((state) => state.formData),  // Updated to reflect formData structure
+  const { showFAQs, setShowFAQs } = useQAndAStore();
+  
+  const methods = useForm<FormData>({
+    resolver: zodResolver(formDataSchema),
+    defaultValues: useFormStore((state) => state.formData),
   });
 
-  // Get the state to control FAQs modal from Zustand store
-  const { showFAQs, setShowFAQs } = useQAndAStore();
+  const steps = [
+    <SelectACategory key="0" goTo={goTo} setCategory={setCategory} />,
+    <Details key="1" />,
+    <Price key="2" />,
+    <BankAccountDetails key="3" />,
+    <TitleAndDescription key="4" />,
+    <UploadMedia key="5" />, // Default for step 5, overridden by media states
+    <Location key="6" />,
+    <PromoteYourAd key="7" />,
+    <Congratulations key="8" />,
+    <ReviewAndSubmit key="9" />,
+  ];
+  const getMediaComponent = (goToMediaType: GoToMediaType) => {
+    const mediaComponents: Record<GoToMediaType, JSX.Element> = {
+      photos: <UploadPhotos />,
+      reorder: <ReorderPhotos />,
+      videos: <UploadVideos />,
+      attachments: <UploadAttachments />,
+      none: steps[5],
+    };
+    return mediaComponents[goToMediaType];
+  };
+
+  const renderStep = () => {
+    if (currentStepIndex === 5) return getMediaComponent(goToMediaType);
+    if (currentStepIndex === 2 && showFAQs)
+      return (
+        <Modal
+          showModal={showFAQs}
+          setShowModal={setShowFAQs}
+          modalContent={<FAQs faqs={auctionFAQs} />}
+        />
+      );
+    return steps[currentStepIndex];
+  };
 
   return (
     <FormProvider {...methods}>
       <form className={styles.container}>
-        
-        <div className={styles.form}>
-          {/* Render the correct form step based on currentStepIndex */}
-          {currentStepIndex === 0 && (
-            <SelectACategory goTo={goTo} setCategory={setCategory} />
-          )}
-
-          {currentStepIndex === 1 && <Details />}
-
-          {currentStepIndex === 2 && !showFAQs ? (
-            <Price />
-          ) : currentStepIndex === 2 && showFAQs ? (
-            <Modal
-              showModal={showFAQs}
-              setShowModal={setShowFAQs}
-              modalContent={<FAQs faqs={auctionFAQs} />}
-            />
-          ) : null}
-
-          {currentStepIndex === 3 && <BankAccountDetails />}
-
-          {currentStepIndex === 4 && <TitleAndDescription />}
-
-          {/* Conditional rendering based on media upload actions */}
-          {uploadPhotos ? (
-            <UploadPhotos />
-          ) : reorderPhotos ? (
-            <ReorderPhotos />
-          ) : uploadVideos ? (
-            <UploadVideos />
-          ) : uploadAttachments ? (
-            <UploadAttachments />
-          ) : (
-            currentStepIndex === 5 && <UploadMedia />
-          )}
-
-          {currentStepIndex === 6 && <Location />}
-
-          {currentStepIndex === 7 && <PromoteYourAd />}
-
-          {currentStepIndex === 8 && <Congratulations />}
-
-          {currentStepIndex === 9 && <ReviewAndSubmit />}
-        </div>
+        <div className={styles.form}>{renderStep()}</div>
       </form>
     </FormProvider>
   );
