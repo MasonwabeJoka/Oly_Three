@@ -3,7 +3,6 @@
 @use "@/utils/breakpoints" as *;
 @import "../../styles/layout.module.scss";
 
-
 .container {
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@
     transition: margin-left 0.5s;
     overflow-x: hidden;
     width: 100vw;
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       // width: rem(1440);
     }
 
@@ -26,7 +25,7 @@
       justify-content: center;
       width: 100vw;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
       }
     }
     .modal {
@@ -43,7 +42,7 @@
       margin-bottom: rem(96);
       margin-top: rem(24);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(112);
       }
     }
@@ -54,7 +53,6 @@
       font-weight: 600;
       color: $black-four;
       margin-bottom: rem(48);
-     
     }
     .moreFromOly {
       width: 100%;
@@ -71,7 +69,7 @@
       width: 95vw;
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -79,7 +77,7 @@
     .categories {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -87,7 +85,7 @@
     .featuredListings {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -95,25 +93,24 @@
     .blog {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
         width: 100%;
       }
     }
 
-
     .belowFoldAd {
       width: 100%;
       margin-top: rem(32);
       margin-bottom: rem(96);
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
     .sponsoredArticles {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
         width: 100%;
       }

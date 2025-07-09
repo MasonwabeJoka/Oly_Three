@@ -7,6 +7,7 @@ import Button from "@/components/Buttons";
 import { blogData } from "@/data/BlogData";
 import useTitleStore from "@/store/titleStore";
 import Link from "next/link";
+import SponsoredArticlesClient from "./SponsoredArticlesClient";
 
 const SponsoredArticles = () => {
   const title = useArticlesStore((state) => state.title);
@@ -38,21 +39,21 @@ const SponsoredArticles = () => {
     setData(blogData);
   }, [setData]);
 
-  return (
+    return (
     <div className={styles.sponsoredArticlesSection}>
       <div className={styles.articlesContainer}>
         <div className={styles.sponsoredBy}>
           <p>Sponsored by Taboola</p>
-          <div className={styles.taboolaIcon}> ICON</div>
+          <div className={styles.taboolaIcon}>ICON</div>
         </div>
-        <Articles
-          className={styles.Articles}
-          images={images.length ? images : data.images}
-          avatars={avatars.length ? avatars : ""}
+        <SponsoredArticlesClient
+          images={images}
+          avatars={avatars}
           author={author}
           title={title}
           description={description}
           data={data}
+          blogData={blogData}
         />
       </div>
       <div className={styles.buttons}>

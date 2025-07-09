@@ -1,6 +1,6 @@
 "use client";
 import styles from "./DashboardSidebar.module.scss";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import { DashboardSidebarData } from "@/data/DashboardSidebarData";
 import Icon from "./Icon";
@@ -21,7 +21,6 @@ interface CurrentUserTemp {
   name: string;
   messageIds: string[];
   updatedAt: string;
-
 }
 interface DashboardSidebarProps {
   // currentUser: User;

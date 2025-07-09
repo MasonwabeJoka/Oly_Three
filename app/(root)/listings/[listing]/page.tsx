@@ -7,6 +7,7 @@ type ParamsProp = {
 };
 
 const Page = ({ params }: ParamsProp) => {
+  
   return <Listing params={params} />;
 };
 

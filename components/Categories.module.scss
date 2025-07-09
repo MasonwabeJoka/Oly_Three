@@ -56,7 +56,7 @@
   .categoriesContainer {
     display: flex;
     flex-direction: column;
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       display: unset;
       width: rem(1440);
       columns: rem(200) 4;

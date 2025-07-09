@@ -11,7 +11,7 @@
   box-shadow: $shadow-one;
   background-color: $grey-one;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(229);
     height: rem(300);
   }
@@ -21,7 +21,7 @@
     border-radius: rem(40) rem(40) 0 0;
     position: absolute;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       height: rem(216);
     }
   }
@@ -50,7 +50,7 @@
     height: rem(56);
     padding: rem(8);
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       height: rem(84);
     }
   }
@@ -59,7 +59,7 @@
     font-size: $h4;
     padding: rem(8);
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       height: rem(72);
     }
   }
@@ -92,13 +92,13 @@
   width: rem(267);
   height: rem(295);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(306);
     height: rem(338);
   }
 }
 .standardDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(224);
     height: rem(256.2);
   }

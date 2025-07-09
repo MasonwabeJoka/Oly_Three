@@ -23,12 +23,12 @@
       z-index: 30;
       background-color: $white-four;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
       }
     }
 
     .listingsSearchForm {
-      position:relative;
+      position: relative;
       margin-top: rem(24);
       margin-bottom: rem(-32);
     }

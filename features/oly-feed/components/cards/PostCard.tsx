@@ -1,6 +1,6 @@
 import styles from "./PostCard.module.scss";
 import Image from "next/image";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 

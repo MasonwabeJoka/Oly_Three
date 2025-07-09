@@ -6,11 +6,12 @@ import Select from "@/components/Select";
 import UploadBox from "@/components/UploadBox";
 import Button from "@/components/Buttons";
 import Link from "next/link";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
+import Form from "next/form";
 
 // Todo: Add back button.
 type FormValues = z.infer<typeof profileSchema>;
@@ -146,7 +147,8 @@ const ProfileSettings = () => {
   };
 
   return (
-    <form
+    <Form
+      action="#"
       className={styles.container}
       onSubmit={handleSubmit(onSubmit, onError)}
       noValidate
@@ -229,7 +231,7 @@ const ProfileSettings = () => {
             {...register("phone")}
             dashboard
           />
-     <div className={styles.socialMediaLinks}>
+          <div className={styles.socialMediaLinks}>
             <div className={styles.selectContainer}>
               <Select
                 options={[
@@ -285,7 +287,6 @@ const ProfileSettings = () => {
                     )}
                     dashboard
                   />
-                  
                 </div>
                 <p className={styles.errorMessage}>
                   {errors.socialMediaUrl?.message}
@@ -351,8 +352,6 @@ const ProfileSettings = () => {
               dashboard
             />
           </Link>
-
-     
         </div>
       </div>
 
@@ -371,8 +370,7 @@ const ProfileSettings = () => {
           dashboard
         />
       </div>
-
-    </form>
+    </Form>
   );
 };
 

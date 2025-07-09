@@ -1,0 +1,50 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.sortingButtonsContainer {
+  position: fixed;
+  top: rem(124);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  z-index: 8;
+
+  @include only(largeDesktop) {
+    width: 100%;
+    top: rem(152);
+  }
+
+  .sortingButtons {
+    position: absolute;
+    display: flex;
+    border: none;
+    z-index: 7;
+    .sortingButton {
+      background-color: $white-three;
+    }
+
+    .selectAllBtn {
+      margin-right: rem(2);
+      border-radius: rem(40) 0 0 rem(40);
+    }
+    .deleteBtn {
+      margin-right: rem(2);
+    }
+  }
+}
+
+.fixedDiv {
+  position: fixed;
+  top: 0;
+  width: 55%;
+  height: rem(178);
+  background-color: $white-four;
+  z-index: 5;
+  pointer-events: none; /* Make the div click-through */
+}
+
+.listings {
+  position: absolute;
+  top: rem(254);
+}

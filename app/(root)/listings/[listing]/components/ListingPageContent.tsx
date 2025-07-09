@@ -1,10 +1,10 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import { Ad, Image as ImageType } from "@/sanity/Types/Ad";
 import styles from "./ListingPageContent.module.scss";
 import Modal from "@/components/Modal";
 import AdCarousel from "@/components/carousels/AdCarousel";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import { listingDetails } from "@/data/listingDetails";
 import ListingsCollage from "@/components/ListingsCollage";
 import multipleImages from "@/data/multipleImages";
@@ -16,6 +16,7 @@ import SellerDetailsContainer from "./SellerDetailsContainer";
 import AuctionForm from "../auction/components/AuctionForm";
 import PaymentProcessing from "../payment/components/PaymentProcessing";
 import ListingDetails from "./ListingDetails";
+import { usePathname } from "next/navigation";
 
 type ListingProps = {
   ad: Ad | null;
@@ -28,27 +29,12 @@ const ListingPageContent: React.FC<ListingProps> = ({ ad }) => {
   const { showAuctionModal, setShowAuctionModal } = useAuctionModalStore();
   const sellerDetailsRef = useRef<HTMLDivElement>(null);
   const similarAdsRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
-  useEffect(() => {
-    if (sellerDetailsRef.current && similarAdsRef.current) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      ScrollTrigger.create({
-        trigger: sellerDetailsRef.current,
-        start: "center center",
-        end: "bottom bottom",
-        pin: true,
-        anticipatePin: 1,
-        pinType: "transform",
-        pinSpacing: false,
-        markers: false,
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [sellerDetailsRef, similarAdsRef]);
+  // useEffect(() => {
+  //   // Scroll to top on route change
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // }, [pathname]);
 
   const tempImages = multipleImages.map((item) => item.images);
   const aspectRatios = ad?.images.map((image: ImageType) => image.aspectRatio);

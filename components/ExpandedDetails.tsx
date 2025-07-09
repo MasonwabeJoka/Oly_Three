@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ExpandedDetails.module.scss";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Checkbox from "./Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import { PortableTextBlock } from "sanity";
@@ -67,39 +67,38 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
       <div className={styles.infoSectionContainer}>
         <div className={styles.infoSection}>
           <div className={styles.topSection}>
-
-        <Avatar
-          className={styles.avatar}
-          avatarSize="regular"
-          avatar={avatar}
-          isOnline={false}
-        />
-          <div className={styles.titleWrapper}>
-            <p
-              className={styles.title}
-              // style={{
-              //   fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
-              // }}
-            >
-              {title
-                ? title.length > 42
-                  ? `${title.slice(0, 42)}...`
-                  : title
-                : ""}
-            </p>
-            <div className={styles.location}>
-              <p className={styles.locationText}>
-                {/* {suburb && suburb}, {city && city} */}
-                Bryanston, JHB
+            <Avatar
+              className={styles.avatar}
+              avatarSize="regular"
+              avatar={avatar}
+              isOnline={false}
+            />
+            <div className={styles.titleWrapper}>
+              <p
+                className={styles.title}
+                // style={{
+                //   fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
+                // }}
+              >
+                {title
+                  ? title.length > 42
+                    ? `${title.slice(0, 42)}...`
+                    : title
+                  : ""}
               </p>
+              <div className={styles.location}>
+                <p className={styles.locationText}>
+                  {/* {suburb && suburb}, {city && city} */}
+                  Bryanston, JHB
+                </p>
+              </div>
             </div>
-          </div>
           </div>
           <div className={styles.descriptionContainer}>
             <p className={styles.description}>{descriptionString}</p>
           </div>
           <div className={styles.cardBottom}>
-          <div className={styles.postMetrics}>
+            <div className={styles.postMetrics}>
               <div className={styles.postAge}>
                 {postAge ? Formatter.formatRelativeTime(postAge) : ""}
               </div>
@@ -107,7 +106,6 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
             <h2 className={styles.price}>
               {price ? Formatter.formatPrice(price) : ""}
             </h2>
-          
           </div>
         </div>
       </div>

@@ -1,12 +1,13 @@
 import styles from "./MyAdsCard.module.scss";
 import Button from "../Buttons";
 import Image from "next/image";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Pill from "@/components/Pill";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import { useRef, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import AdCard from "./AdCard";
 
 interface CardProps {
   id: number;

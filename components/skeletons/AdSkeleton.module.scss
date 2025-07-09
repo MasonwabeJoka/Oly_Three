@@ -33,11 +33,11 @@
 }
 
 .largeDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
   }
 }
 .standardDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(310);
     min-height: rem(413);
   }

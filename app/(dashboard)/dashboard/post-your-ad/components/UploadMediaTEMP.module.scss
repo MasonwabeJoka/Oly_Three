@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1098);
   }
 
@@ -18,7 +18,7 @@
     font-weight: 500;
     font-size: $h4;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       margin-top: rem(224);
       margin-bottom: rem(48);
     }

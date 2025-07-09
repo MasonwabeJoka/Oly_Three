@@ -294,7 +294,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         {showOptions && (
           <div
             className={`${styles.searchInputContainer} ${styles.options}`}
-            ref={searchInputRef}
+            style={{
+              marginTop:
+                dashboard && selectSize === "medium" ? "1rem" : "0.5rem",
+            }}
           >
             {isMultiSelect && showSearchOptions && (
               <Input
@@ -321,7 +324,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
             <ul className={styles.optionsList}>
               {isMultiSelect && (
-                <li className={sizeClass} style={{ marginBottom: "0.5rem" }}>
+                <li
+                  className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                >
                   <div
                     className={`${styles.option} ${styles.selectAll}`}
                     onClick={() =>
@@ -353,8 +358,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 return (
                   <li
                     key={index}
-                    className={sizeClass}
-                    style={{ marginBottom: "0.5rem" }}
+                    className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                   >
                     <div
                       className={styles.option}

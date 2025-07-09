@@ -8,6 +8,22 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  // background-color: green;
+
+  // @include only(tablet) {
+  //   background-color:burlywood;
+  // }
+
+  // @include only(smallDesktop) {
+  //   background-color: blue;
+  // }
+  // @include only(largeDesktop) {
+  //   background-color: pink;
+  // }
+  // @include only(extraLargeDesktop) {
+  //   background-color: yellow;
+  // }
+
   .main {
     position: relative;
     display: flex;
@@ -17,7 +33,8 @@
     overflow-x: hidden;
     width: 100vw !important;
     min-height: 100vh;
-    @include larger-than(mobile) {
+
+    @include only(largeDesktop) {
       // width: rem(1440);
     }
 
@@ -26,7 +43,7 @@
       justify-content: center;
       width: 100vw;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
       }
     }
     .modal {
@@ -52,7 +69,7 @@
       margin-bottom: rem(96);
       margin-top: rem(24);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(112);
       }
     }
@@ -79,7 +96,7 @@
       width: 95vw;
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -87,7 +104,7 @@
     .categories {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -96,7 +113,7 @@
       margin-bottom: rem(96);
       width: 100%;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
@@ -104,7 +121,7 @@
     .blog {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
         width: 100%;
       }
@@ -114,14 +131,14 @@
       width: 100%;
       margin-top: rem(32);
       margin-bottom: rem(96);
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
       }
     }
     .sponsoredArticles {
       margin-bottom: rem(96);
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-bottom: rem(192);
         width: 100%;
       }

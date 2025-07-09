@@ -3,10 +3,9 @@
 @use "@/utils/breakpoints" as *;
 
 .profile {
-  position:absolute;
+  position: absolute;
   top: rem(32);
   left: rem(52);
- 
 }
 .container {
   position: relative;
@@ -17,7 +16,7 @@
   border-radius: rem(40);
   background-color: $white-four;
   pointer-events: auto;
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     // top: rem(76);
   }
 

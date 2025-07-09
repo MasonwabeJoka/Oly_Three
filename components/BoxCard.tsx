@@ -1,8 +1,6 @@
-import React from "react";
-import { PortableTextBlock } from "sanity";
 import styles from "./BoxCard.module.scss";
-import { BoxImageContainer } from "./BoxImageContainer";
-import { BoxCardDetails } from "./BoxCardDetails";
+import type { PortableTextBlock } from "sanity";
+import  BoxCardClient from "./BoxCardClient";
 
 type BoxCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -27,7 +25,7 @@ type BoxCardProps = {
   setIsCardHovered: (value: boolean) => void;
 };
 
-export const BoxCard: React.FC<BoxCardProps> = ({
+const BoxCard: React.FC<BoxCardProps> = ({
   category,
   sizeClass,
   images,
@@ -52,76 +50,59 @@ export const BoxCard: React.FC<BoxCardProps> = ({
   return (
     <>
       {category === "all" && (
-        <article
-          className={`${sizeClass} ${styles.boxCard}`}
-          onMouseEnter={() => setIsCardHovered(true)}
-          onMouseLeave={() =>
-            setIsCardHovered(isHeartClicked || isHeartHovered)
-          }
-          style={{ paddingBottom: isCardHovered ? "0" : "6rem" }}
-        >
-          <BoxImageContainer
+        <article className={`${sizeClass} ${styles.boxCard}`}>
+          <BoxCardClient
             category={category}
+            sizeClass={sizeClass}
             images={images}
             aspectRatios={aspectRatios}
+            isCardHovered={isCardHovered}
             isHeartClicked={isHeartClicked}
             isHeartHovered={isHeartHovered}
-            isCardHovered={isCardHovered}
             isDeletable={isDeletable}
             id={id}
             isFeed={isFeed}
             checkedColour={checkedColour}
             hoverColour={hoverColour}
             checkedHovered={checkedHovered}
-            onHeartClick={onHeartClick}
-            onHeartHover={onHeartHover}
-          />
-          <BoxCardDetails
-            category={category}
-            isCardHovered={isCardHovered}
             title={title}
             description={description}
             price={price}
             postAge={postAge}
+            onHeartClick={onHeartClick}
+            onHeartHover={onHeartHover}
+            setIsCardHovered={setIsCardHovered}
           />
         </article>
       )}
-
       {category === "property" && (
-        <article
-          className={`${sizeClass} ${styles.boxCard}`}
-          onMouseEnter={() => setIsCardHovered(true)}
-          onMouseLeave={() =>
-            setIsCardHovered(isHeartClicked || isHeartHovered)
-          }
-          style={{ paddingBottom: isCardHovered ? "0" : "6rem" }}
-        >
-          <BoxImageContainer
+        <article className={`${sizeClass} ${styles.boxCard}`}>
+          <BoxCardClient
             category={category}
+            sizeClass={sizeClass}
             images={images}
             aspectRatios={aspectRatios}
+            isCardHovered={isCardHovered}
             isHeartClicked={isHeartClicked}
             isHeartHovered={isHeartHovered}
-            isCardHovered={isCardHovered}
             isDeletable={isDeletable}
             id={id}
             isFeed={isFeed}
             checkedColour={checkedColour}
             hoverColour={hoverColour}
             checkedHovered={checkedHovered}
-            onHeartClick={onHeartClick}
-            onHeartHover={onHeartHover}
-          />
-          <BoxCardDetails
-            category={category}
-            isCardHovered={isCardHovered}
             title={title}
             description={description}
             price={price}
             postAge={postAge}
+            onHeartClick={onHeartClick}
+            onHeartHover={onHeartHover}
+            setIsCardHovered={setIsCardHovered}
           />
         </article>
       )}
     </>
   );
 };
+
+export default BoxCard;

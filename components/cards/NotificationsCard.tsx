@@ -1,7 +1,7 @@
 "use client";
 import styles from "./NotificationsCard.module.scss";
 import Button from "@/components/Buttons";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Image from "next/image";
 import Checkbox from "@/components/Checkbox";
 import Link from "next/link";

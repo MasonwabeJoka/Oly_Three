@@ -1,37 +1,55 @@
-"use client";
-import { useEffect, use } from "react";
-import useFormStore from "../store/useFormStore";
+import styles from "./styles.module.scss";
+import BankAccountDetails from "../components/BankAccountDetails";
+import Congratulations from "../components/Congratulations";
+import Details from "../components/Details";
+import Location from "../components/Location";
+import PostYourAdClient from "../components/PostYourAdClient";
+import Price from "../components/Price";
+import PromoteYourAd from "../components/PromoteYourAd";
+import ReviewAndSubmit from "../components/ReviewAndSubmit";
+import SelectACategory from "../components/SelectACategory";
+import SelectNewCategory from "../components/SelectNewCategory";
+import TitleAndDescription from "../components/TitleAndDescription";
+import UploadMedia from "../components/UploadMedia";
 
-import { redirect } from "next/navigation";
-import Dashboard from "../components/Dashboard";
 
-export default function PostYourAdPage({ params: paramsPromise }: { params: Promise<{ step: string }> }) {
-  const { setCurrentStepIndex } = useFormStore();
+const PostYourAd = () => {
+  const steps = [
+    <SelectACategory key="0" />, 
+    <Details key="1" />,
+    <Price key="2" />,
+    <BankAccountDetails key="3" />,
+    <TitleAndDescription key="4" />,
+    <UploadMedia key="5" />,
+    <Location key="6" />,
+    <PromoteYourAd key="7" />,
+    <Congratulations key="8" />,
+    <ReviewAndSubmit key="9" />,
+    <SelectNewCategory key="10" />, // Add the new step
+  ];
 
-  // Unwrap params using React.use
-  const params = use(paramsPromise);
+  const initialFormData = {
+    category: { main: "", subcategory: "" },
+    details: { condition: "" },
+    price: { pricingOption: "", price: 0 },
+    createAccount: { bankName: "", accountHolder: "", accountNumber: "" },
+    titleAndDescription: { title: "", description: "" },
+    uploadMedia: {
+      uploadPhotos: false,
+      uploadVideos: false,
+      uploadAttachments: false,
+    },
+    location: { province: "", city: "", suburb: "", customLocation: "" },
+    promoteYourAd: { promotionDuration: "" },
+  };
 
-  useEffect(() => {
-    // Map URL slug to step index
-    const stepMap: { [key: string]: number } = {
-      "select-category": 0,
-      "details": 1,
-      "price": 2,
-      "bank-account": 3,
-      "title-description": 4,
-      "upload-media": 5,
-      "location": 6,
-      "promote-ad": 7,
-      "congratulations": 8,
-      "review-submit": 9,
-    };
+  return (
+    <div className={styles.container}>
+      <div className={styles.form}>
+        <PostYourAdClient initialFormData={initialFormData} steps={steps} />
+      </div>
+    </div>
+  );
+};
 
-    if (!(params.step in stepMap)) {
-      redirect("/dashboard/post-your-ad/select-category");
-    }
-    const stepIndex = stepMap[params.step] ?? 0; // Default to step 0 if invalid
-    setCurrentStepIndex(stepIndex);
-  }, [params.step, setCurrentStepIndex]);
-
-  return <Dashboard />;
-}
+export default PostYourAd;

@@ -46,7 +46,7 @@
     "components/cards/BoxAdCard.jsx",
     "./payload.config.ts",
     "app/(root)/Blog.tsx",
-    "components/Avatars.tsx",
+    "components/Avatar.tsx",
     "data/unsplash.jsx",
     "store/unsplashStore.tsx"
 , "app/Unsplash.jsx", "lib/unsplash.tsx", "app/Articles.tsx", "components/ui/DropdownResults.tsx", "app/listings/layout.tsx", "functions/page.ts", "functions/src/index.ts", "app/(root)/Blog.tsx", "components/Features.tsx", "components/Checkbox.tsx", "tailwind.config.js", "app/api/temp.js", "app/temp/page.jsx", "next.config.js"  ],

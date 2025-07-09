@@ -123,7 +123,7 @@ const Post = ({ userId }: { userId: string }) => {
           className={styles.makeAPostButton}
           buttonChildren="Make A Post"
           buttonType="normal"
-          buttonSize="largeDesktop"
+          buttonSize="extraLargeDesktop"
           name="make-a-btn"
           type="submit"
           ariaLabel="Make A Post Button"

@@ -12,7 +12,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { usePathname, useRouter } from "next/navigation";
 import { CommentValidation } from "@/lib/validations/post";
 import PostImage from "@/components/PostImage";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import { addCommentToPost } from "@/utils/serverActions/postActions";
 
 interface Props {

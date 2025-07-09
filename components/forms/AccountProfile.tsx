@@ -8,7 +8,7 @@ import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import Button from "@/components/Buttons";
 import * as z from "zod";
-import Avatar from "../Avatars";
+import Avatar from "../Avatar";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/utils/utils";
 import { useUploadThing } from "@/lib/uploadthing";
@@ -92,7 +92,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
     // }
   };
   return (
-    <form
+    <div
       className={styles.onboardingForm}
       onSubmit={(values) =>
         handleSubmit({
@@ -109,7 +109,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
             className={styles.avatar}
             avatar={newImage}
             imageAlt="Profile Picture"
-            avatarSize="largeDesktop"
+            avatarSize="extraLargeDesktop"
             priority
           />
         ) : (
@@ -117,7 +117,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
             className={styles.avatar}
             avatar="/missing_image.jpg"
             imageAlt="Profile Picture"
-            avatarSize="largeDesktop"
+            avatarSize="extraLargeDesktop"
             priority={false}
           />
         )}
@@ -141,7 +141,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
         <Input
           className={styles.firstName}
           inputType="text"
-          inputSize="largeDesktop"
+          inputSize="extraLargeDesktop"
           placeholder="First Name"
           label="First Name"
           id="first-name"
@@ -155,7 +155,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
         <Input
           className={styles.lastName}
           inputType="text"
-          inputSize="largeDesktop"
+          inputSize="extraLargeDesktop"
           placeholder="Last Name"
           label="Last Name"
           id="last-name"
@@ -169,7 +169,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
         <Input
           className={styles.username}
           inputType="text"
-          inputSize="largeDesktop"
+          inputSize="extraLargeDesktop"
           placeholder="Username"
           label="Username"
           id="username"
@@ -195,14 +195,14 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
         className={styles.submitButton}
         buttonChildren="Submit"
         buttonType="normal"
-        buttonSize="largeDesktop"
+        buttonSize="extraLargeDesktop"
         name="submit-btn"
         type="submit"
         ariaLabel="Submit Button"
         autoFocus={false}
         disabled={false}
       />
-    </form>
+    </div>
   );
 };
 

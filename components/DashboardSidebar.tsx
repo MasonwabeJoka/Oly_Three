@@ -1,6 +1,6 @@
 "use client";
 import styles from "./DashboardSidebar.module.scss";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import { MainMenuItem, LogoutMenuItem } from "./DashboardMenuItem";
 import Image from "next/image";
@@ -63,7 +63,9 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           avatar={currentUser?.image || "/profilePic.jpg"}
           avatarSize={isMobile ? "regular" : "large"}
         /> */}
-        {!isMobile && <p className={styles.name}>{user?.fullName || user?.username}</p>}
+        {!isMobile && (
+          <p className={styles.name}>{user?.fullName || user?.username}</p>
+        )}
       </div>
       <div>
         <ul className={styles.mainMenu} role="list">

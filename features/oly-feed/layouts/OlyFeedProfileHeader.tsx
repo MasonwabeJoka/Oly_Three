@@ -1,6 +1,6 @@
 import styles from "./OlyFeedProfileHeader.module.scss";
 import Button from "@/components/Buttons";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 
 interface Props {
   accountId: string;

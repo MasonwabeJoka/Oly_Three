@@ -1,4 +1,4 @@
-import Avatar from "./Avatars";
+import Avatar from "./Avatar";
 import styles from "./Comment.module.scss";
 // TODO: Add icons for reactions
 const Comments = () => {
@@ -11,7 +11,8 @@ const Comments = () => {
           </div>
           <div className={styles.profileNameContainer}>
             <div className={styles.profileName}>
-              <span className={styles.fullName}>John Doe</span> <span className={styles.username}>@johndoe</span>
+              <span className={styles.fullName}>John Doe</span>{" "}
+              <span className={styles.username}>@johndoe</span>
             </div>
             <div className={styles.commentAge}>
               <span>Aug 4</span>
@@ -20,9 +21,10 @@ const Comments = () => {
         </div>
       </div>
       <div className={styles.comment}>
-      <span className={styles.replyTo}>reply to @manseeker</span>: This is a sample comment. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit.
+        <span className={styles.replyTo}>reply to @manseeker</span>: This is a
+        sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        his is a sample comment. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit.
       </div>
       <div className={styles.reactions}>
         <div className={styles.wrapper}>

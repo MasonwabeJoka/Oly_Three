@@ -141,14 +141,14 @@
 
 .xLarge {
   width: rem(311);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(954);
   }
 }
 
 .xLarge .suggestion {
   @include suggestion-width(rem(311));
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     @include suggestion-width(rem(954));
     height: rem(56);
   }
@@ -172,8 +172,8 @@
 .large {
   width: rem(311);
 
-  @include larger-than(mobile) {
-    width: rem(514);
+  @include only(largeDesktop) {
+    width: rem(514) !important;
   }
 }
 
@@ -194,14 +194,14 @@
 .largeDashboard {
   width: rem(267);
   height: rem(56);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(471);
   }
 }
 
 .largeDashboard .suggestion {
   @include suggestion-width(rem(267));
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     @include suggestion-width(rem(471));
     height: rem(56);
   }
@@ -210,7 +210,7 @@
 .medium {
   width: rem(202);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(424);
   }
 }

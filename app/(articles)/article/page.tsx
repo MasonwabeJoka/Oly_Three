@@ -1,11 +1,27 @@
-import Article from '@/components/Article';
 
-const ArticlePage = () => {
+import { articles } from "@/data/articles";
+import { articleCategories } from "@/data/articlesCategories";
+import { socialMediaData } from "@/data/socialMediaData";
+import Article from "../components/Article";
+
+// export async function getServerSideProps() {
+//   return {
+//     props: {
+//       socialMediaData,
+//       articleCategories,
+//       articles,
+//     },
+//   };
+// }
+
+const Page = () => {
   return (
-    <div>
-      <Article/>
-    </div>
-  )
-}
+    <Article
+      socialMediaData={socialMediaData}
+      articleCategories={articleCategories}
+      articles={articles}
+    />
+  );
+};
 
-export default ArticlePage
+export default Page;

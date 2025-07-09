@@ -73,7 +73,7 @@
 }
 
 .xxLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1296);
     height: rem(56);
   }
@@ -93,7 +93,7 @@
 }
 
 .xxLargeDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1002);
     height: rem(56);
   }
@@ -104,7 +104,7 @@
 }
 
 .xLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1078);
     height: rem(56);
   }
@@ -124,7 +124,7 @@
 }
 
 .xLargeDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
   }
 }
 
@@ -135,7 +135,7 @@
 .large {
   width: rem(311);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(514);
   }
 }
@@ -155,14 +155,14 @@
 .largeDashboard {
   width: rem(267);
   height: rem(56);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(471);
   }
 }
 
 .largeDashboard .option {
   @include option-width(rem(267));
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     @include option-width(rem(471));
   }
 }
@@ -170,7 +170,7 @@
 .medium {
   width: rem(202);
   height: rem(56);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(424);
   }
 }
@@ -189,7 +189,7 @@
 }
 
 .mediumDashboard {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(326);
     height: rem(48);
   }

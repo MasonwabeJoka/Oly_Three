@@ -1,0 +1,16 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.notificationTypesTabs {
+  margin-bottom: rem(48);
+  @include only(largeDesktop) {
+    margin-bottom: rem(64);
+  }
+}
+
+.notificationOptionsTabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: rem(8);
+}

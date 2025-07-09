@@ -7,12 +7,12 @@ import IdPassport from "./components/IdPassport";
 import SelfieVerification from "./components/SelfieVerification";
 import MobileVerification from "./components/MobileVerification";
 import Finish from "./components/Finish";
-import useVerificationStore from "./store/useVerificationStore";
+import useVerificationStore from "../../store/useVerificationStore";
 
 const AccountVerification = () => {
   const { currentStepIndex, steps } = useVerificationStore();
   return (
-    <form className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.form}>
         {currentStepIndex === 0 && <VerifyYourAccount />}
         {currentStepIndex === 1 && <QrScanner />}
@@ -22,7 +22,7 @@ const AccountVerification = () => {
         {currentStepIndex === 5 && <MobileVerification />}
         {currentStepIndex === 6 && <Finish />}
       </div>
-    </form>
+    </div>
   );
 };
 

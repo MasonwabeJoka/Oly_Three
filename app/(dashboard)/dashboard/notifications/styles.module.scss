@@ -12,7 +12,7 @@
     font-weight: bold;
     color: $danger;
     margin-top: rem(56);
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       font-size: $h4;
       margin-top: rem(56);
       position: static;
@@ -23,21 +23,8 @@
   .tabsWrapper {
     margin-top: rem(112);
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       margin: unset;
-    }
-    .notificationTypesTabs {
-      margin-bottom: rem(48);
-      @include larger-than(mobile) {
-        margin-bottom: rem(64);
-      }
-    }
-
-    .notificationOptionsTabs {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-bottom: rem(8);
     }
   }
   .notificationsContainer {

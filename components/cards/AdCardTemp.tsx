@@ -1,7 +1,7 @@
 "use client";
 import styles from "./AdCard.module.scss";
 import { useEffect, useState } from "react";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Checkbox from "../Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import AdSkeleton from "../skeletons/AdSkeleton";

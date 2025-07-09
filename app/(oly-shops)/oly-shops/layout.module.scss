@@ -127,7 +127,7 @@
     .feed {
       display: none;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         display: block;
       }
     }
@@ -141,7 +141,7 @@
         justify-content: center;
         width: 100vw;
         background-color: red;
-        @include larger-than(mobile) {
+        @include only(largeDesktop) {
         }
       }
     }

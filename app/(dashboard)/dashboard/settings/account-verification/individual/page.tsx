@@ -1,18 +1,18 @@
 "use client";
 import styles from "./styles.module.scss";
-import VerifyYourAccount from "./components/VerifyYourAccount";
-import SecurityQuestions from "./components/SecurityQuestions";
-import QrScanner from "./components/QrScanner";
-import IdPassport from "./components/IdPassport";
-import SelfieVerification from "./components/SelfieVerification";
-import MobileVerification from "./components/MobileVerification";
-import Finish from "./components/Finish";
+
 import useVerificationStore from "./store/useVerificationStore";
+import VerifyYourAccount from "./../../components/AccountVerification"
+import QrScanner from "./../../components/QrScanner";
+import IdPassport from "./../../components/IdPassport";
+import SelfieVerification from "./../../components/SelfieVerification";
+import MobileVerification from "./../../components/MobileVerification";
+import Finish from "./../../components/Finish";
 
 const AccountVerification = () => {
   const { currentStepIndex, steps } = useVerificationStore();
   return (
-    <form className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.form}>
         {currentStepIndex === 0 && <VerifyYourAccount />}
         {currentStepIndex === 1 && <QrScanner />}
@@ -21,7 +21,7 @@ const AccountVerification = () => {
         {currentStepIndex === 4 && <MobileVerification />}
         {currentStepIndex === 5 && <Finish />}
       </div>
-    </form>
+    </div>
   );
 };
 

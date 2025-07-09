@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./ReviewPhotos.module.scss";
 import { MediaSectionWrapper } from "./MediaSectionWrapper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -68,3 +70,4 @@ const ReviewPhotos = () => {
 };
 
 export default ReviewPhotos;
+

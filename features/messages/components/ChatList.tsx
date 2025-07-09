@@ -1,11 +1,12 @@
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Input from "@/components/Input";
 import styles from "./ChatList.module.scss";
 import { Message } from "../store/useMessageStore";
 import useMessageStore from "../store/useMessageStore";
 
 const ChatList: React.FC = () => {
-  const { messages, setSelectedChat, setChats, setUserMessages } = useMessageStore();
+  const { messages, setSelectedChat, setChats, setUserMessages } =
+    useMessageStore();
 
   const handleChatClick = (message: Message): void => {
     setSelectedChat(message);
@@ -26,7 +27,6 @@ const ChatList: React.FC = () => {
     }
   };
   return (
-    
     <div className={styles.container}>
       <div className={styles.headerDiv} style={{ height: "96px" }}></div>
       <div className={styles.searchBar}>

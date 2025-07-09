@@ -18,7 +18,7 @@
       justify-content: center;
       width: 100vw;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
       }
     }
 

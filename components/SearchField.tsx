@@ -8,7 +8,7 @@ interface SearchFieldProps {
 }
 
 const SEARCH_FIELD_SIZE = {
-  largeDesktop: `${styles.largeDesktop}`,
+  extraLargeDesktop: `${styles.extraLargeDesktop}`,
   medium: `${styles.medium}`,
   small: `${styles.small}`,
 };

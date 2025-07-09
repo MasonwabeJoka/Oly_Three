@@ -7,6 +7,7 @@ import Select from '@/components/Select';
 import Button from '@/components/Buttons';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import styles from './ListingsSearchForm.module.scss'; // Updated import
+import Form from 'next/form';
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
@@ -22,7 +23,8 @@ export default function ListingsSearchForm({ onSubmit }: ListingsSearchFormProps
   const onError = (errors: any) => console.log('Form errors', errors);
 
   return (
-    <form
+    <Form
+      action="/search"
       id="Listings Search"
       className={styles.searchContainer}
       onSubmit={handleSubmit(onSubmit, onError)}
@@ -109,6 +111,6 @@ export default function ListingsSearchForm({ onSubmit }: ListingsSearchFormProps
           disabled={isSubmitting}
         />
       </div>
-    </form>
+    </Form>
   );
 }

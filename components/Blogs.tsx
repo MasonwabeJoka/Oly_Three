@@ -5,6 +5,7 @@ import useArticlesStore from "@/store/articlesStore";
 import Button from "@/components/Buttons";
 import useTitleStore from "@/store/titleStore";
 import Link from "next/link";
+import BlogsClient from "./BlogsClient";
 
 const Blogs = () => {
   const title: string[] = useArticlesStore((state) => state.title);
@@ -22,9 +23,9 @@ const Blogs = () => {
 
   return (
     <div className={styles.blogSection}>
-      <ArticlesSlider
-        images={images.length ? images : data[0].images}
-        avatars={avatars.length ? avatars : [""]}
+      <BlogsClient
+        images={images}
+        avatars={avatars}
         author={author}
         title={title}
         description={description}

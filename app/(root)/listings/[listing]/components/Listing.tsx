@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Ad } from "@/sanity/Types/Ad";
 import ListingPageContent from "./ListingPageContent";
 import useSidebarStore from "@/store/useSidebarStore";
+import { usePathname } from "next/navigation";
 
 
 type ListingProps = {
@@ -12,7 +13,8 @@ type ListingProps = {
 };
 
 const Listing: React.FC<ListingProps> = ({ params }) => {
-    const listing = React.use(params).listing;
+  const pathname = usePathname(); // Get the current pathname
+  const listing = React.use(params).listing;
   const [ad, setAd] = useState<Ad | null>(null);
   const [isClient, setIsClient] = useState(false);
   const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
@@ -30,6 +32,12 @@ const Listing: React.FC<ListingProps> = ({ params }) => {
 
     getAd();
   }, [listing]);
+
+  useEffect(() => {
+  if (isClient) {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+}, [pathname, isClient]);
 
   return isClient && <ListingPageContent ad={ad} />;
 };

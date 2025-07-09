@@ -10,7 +10,7 @@
   border-radius: rem(40);
   width: rem(48);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(342);
     height: 90vh;
     background-color: $grey-one;
@@ -27,7 +27,7 @@
     .avatar {
       margin-top: rem(48);
       margin-bottom: rem(8);
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         margin-top: rem(32);
       }
     }
@@ -47,7 +47,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: rem(24);
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       gap: rem(16);
       justify-content: flex-start;
       align-items: center;
@@ -71,7 +71,7 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       font-size: rem(16);
       justify-content: flex-start;
       align-items: center;

@@ -2,9 +2,7 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-@use "@/utils/variables" as *;
-@use "@/utils/functions" as *;
-@use "@/utils/breakpoints" as *;
+
 .container {
   position: absolute;
   top: 0;
@@ -16,6 +14,14 @@
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
+
+  .form {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  }
 
   .sellerDetails {
     position: relative;

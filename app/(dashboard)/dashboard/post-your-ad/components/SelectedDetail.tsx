@@ -85,7 +85,7 @@ const SelectedDetail = ({
     <>
       <div className={styles.form}>
         <div key={id} className={styles.selectedDetailContainer}>
-          <div className={styles.deleteButtonContainer} onClick={setMatchFound}>
+          <div className={styles.deleteButtonContainer} onClick={()=> close()}>
             <Icon
               className={styles.deleteButton}
               src={"/icons/x.svg"}
@@ -135,51 +135,11 @@ const SelectedDetail = ({
           </div>
 
           <div className={styles.selectedDetailInputContainer}>
-            {/* <Input
-              className={styles.selectedDetailInput}
-              inputType="text"
-              initialValue=""
-              inputColourType="normal"
-              inputSize="large"
-              label="Chosen Detail"
-              placeholder={
-                placeholder
-                  ? `${
-                      typeof placeholder === "string" && placeholder.length > 55
-                        ? placeholder.slice(0, 55) + "..."
-                        : placeholder
-                    }`
-                  : example
-                    ? `eg. ${
-                        typeof example === "string" && example.length > 55
-                          ? example.slice(0, 55) + "..."
-                          : example
-                      }`
-                    : ""
-              }
-              id="detail"
-              aria-label="Chosen Detail"
-              autoFocus={false}
-              iconSrcRight=""
-              iconPosition="right"
-              iconWidth={32}
-              iconHeight={32}
-              required={true}
-              autoComplete="off"
-              dashboard
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.detail?.message as string}
-              {...register(selectDetailValue)}
-            /> */}
             <TextArea
               id="textInput"
-              name="textInput"
+              name={selectDetailValue}
               hasSubmitButton={false}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                console.log(e.target.value)
-              }
-              className={styles.textInput}
+              size="large"
               placeholder={
                 placeholder
                   ? `${
@@ -195,28 +155,28 @@ const SelectedDetail = ({
                       }`
                     : ""
               }
-              value=""
+              value={inputValue}
               ariaLabel="Chosen Detail"
-              size="large"
               dashboard
-              error=""
+              error={errors[selectDetailValue]?.message as string}
               maxHeight={120}
-              onClick={() => {}}
-              onFocus={() => {}}
-              onBlur={() => {}}
-              onSubmit={() => {}}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                handleChange(e); // Call your custom handleChange
+              }}
+              onBlur={handleBlur}
+              {...register(selectDetailValue)} // Spread register props for React Hook Form
             />
           </div>
 
           <div className={styles.submitButtonContainer}>
             <Button
-              className={styles.proceedButton}
+              className={styles.submitButton}
               buttonChildren="Submit Detail"
               buttonType="normal"
               type="button"
               buttonSize="large"
-              name="proceed-btn"
-              aria-label="Proceed Button"
+              name="submit-detail-btn"
+              aria-label="Submit Detail Button"
               autoFocus={false}
               disabled={false}
               dashboard

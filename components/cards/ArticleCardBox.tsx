@@ -1,5 +1,5 @@
 import useArticlesStore from "@/store/articlesStore";
-import Avatar from "../Avatars";
+import Avatar from "../Avatar";
 import styles from "./ArticleCardBox.module.scss";
 import Image, { ImageLoaderProps } from "next/image";
 

@@ -121,7 +121,7 @@
   .feed {
     display: none;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       display: block;
     }
   }
