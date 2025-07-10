@@ -16,7 +16,10 @@ category: z.object({
   // Price section
   price: z.object({
     pricingOption: z.string().min(1, { message: "Pricing option is required" }),
-    price: z.number().positive({ message: "Price must be a positive number" }),
+    amount: z.number().positive({ message: "Price must be a positive number" }),
+    startingPrice: z.number().positive({ message: "Starting price must be a positive number" }).optional(),
+    buyNowPrice: z.number().positive({ message: "Buy Now price must be a positive number" }).optional(),
+    startTime: z.string().optional(),
   }),
   // Create Account section
   createAccount: z.object({
@@ -44,7 +47,7 @@ category: z.object({
   }),
   // Promote Your Ad section
   promoteYourAd: z.object({
-    promotionDuration: z.string().min(1, { message: "Promotion duration is required" }),
+    promotionDuration: z.string().optional(),
   }),
   // Optional review field
   reviewYourAd: z.string().optional(),

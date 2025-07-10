@@ -14,7 +14,7 @@ import Spinner from "./Spinner";
 import { ImageFile } from "@/sanity/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
 
-type ListingsCollageProps = {
+export type ListingsCollageProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   images: string[][];
   isDeletable: boolean;
@@ -128,7 +128,11 @@ const ListingsCollageClient = ({
       .filter((url): url is string => typeof url === "string");
 
     return (
-      <Link href={`listings/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
+      <Link
+        href={`listings/${ad.slug}`}
+        key={ad._id}
+        className={styles.cardContainer}
+      >
         <div className={styles.card}>
           {category === "all" && (
             <AdCard

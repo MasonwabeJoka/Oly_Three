@@ -2,7 +2,7 @@ import styles from "./BankAccountDetails.module.scss";
 import { FormWrapper } from "./FormWrapper";
 import BankAccountDetailsClient from "./BankAccountDetailsClient";
 
-const BankAccountDetails = () => {
+export default function BankAccountDetails() {
   return (
     <FormWrapper title="">
       <div className={styles.container}>
@@ -11,6 +11,4 @@ const BankAccountDetails = () => {
       </div>
     </FormWrapper>
   );
-};
-
-export default BankAccountDetails;
+}

@@ -1,3 +1,4 @@
+'use client'
 import styles from "./TransactionFeeModal.module.scss";
 import Button from "../Buttons";
 

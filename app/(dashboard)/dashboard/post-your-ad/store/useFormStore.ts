@@ -8,7 +8,10 @@ export type FormData = {
   details: { condition: string }; // Section for item details, like "New" or "Used"
   price: {
     pricingOption: string; // How the price is set (e.g., "Fixed" or "Negotiable")
-    price: number; // The actual price amount
+    amount: number; // The actual price amount
+    startingPrice?: number;
+    buyNowPrice?: number;
+    startTime?: string;
   };
   createAccount: {
     bankName: string; // Name of the bank for payment details
@@ -42,7 +45,10 @@ type FormDataFields =
   | "category.subcategory"
   | "details.condition"
   | "price.pricingOption"
-  | "price.price"
+  | "price.amount"
+  | "price.startingPrice"
+  | "price.buyNowPrice"
+  | "price.startTime"
   | "createAccount.bankName"
   | "createAccount.accountHolder"
   | "createAccount.accountNumber"
@@ -69,7 +75,7 @@ type Step = {
 const steps: Step[] = [
   { id: "step0", name: "Select a category", fields: ["category.main", "category.subcategory"] },
   { id: "step1", name: "Details", fields: ["details.condition"] },
-  { id: "step2", name: "Price", fields: ["price.pricingOption", "price.price"] },
+  { id: "step2", name: "Price", fields: ["price.pricingOption", "price.amount"] },
   { id: "step3", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
   { id: "step4", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
   { id: "step5", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
@@ -171,7 +177,7 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   formData: {
     category: { main: "", subcategory: "" },
     details: { condition: '' },
-    price: { pricingOption: '', price: 0 },
+    price: { pricingOption: '', amount: 0, startingPrice: undefined, buyNowPrice: undefined, startTime: undefined },
     createAccount: { bankName: '', accountHolder: '', accountNumber: '' },
     titleAndDescription: { title: '', description: '' },
     uploadMedia: { uploadPhotos: false, uploadVideos: false, uploadAttachments: false },
@@ -197,7 +203,7 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
     formData: {
       category: { main: "", subcategory: "" },
       details: { condition: "" },
-      price: { pricingOption: '', price: 0 },
+      price: { pricingOption: '', amount: 0, startingPrice: undefined, buyNowPrice: undefined, startTime: undefined },
       createAccount: { bankName: '', accountHolder: '', accountNumber: '' },
       titleAndDescription: { title: '', description: '' },
       uploadMedia: { uploadPhotos: false, uploadVideos: false, uploadAttachments: false },
@@ -214,11 +220,10 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
     // Clear any previous messages
     set({ message: '' });
 
-    // Validate all fields up to the current step
-   const fieldsToValidate = steps
-      .slice(0, currentStepIndex + 1)
-      .flatMap(step => step.fields)
-      .filter(field => field !== "location.customLocation" && field !== "reviewYourAd");
+    // Validate only the fields for the current step
+    const fieldsToValidate = steps[currentStepIndex].fields.filter(
+      field => field !== "location.customLocation" && field !== "reviewYourAd"
+    );
 
     if (fieldsToValidate.length > 0) {
       try {
@@ -344,7 +349,13 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
       subcategory: data.category?.childrenCategories?.[0]?.title || "",
     }, // Use the ad’s category or empty string
     details: { condition: data.condition || '' },
-    price: { pricingOption: data.pricingOption || '', price: data.price || 0 },
+    price: {
+      pricingOption: data.pricingOption || '',
+      amount: data.price || 0,
+      startingPrice: data.startingPrice,
+      buyNowPrice: data.buyNowPrice,
+      startTime: data.startTime,
+    },
     createAccount: {
       bankName: data.bankName || '',
       accountHolder: data.accountHolder || '',

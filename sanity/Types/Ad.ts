@@ -111,6 +111,11 @@ export const AdSchema = z.object({
   buyNowPrice: z.number().optional(),
   ending: z.date().optional(),
   associatedAuction: AuctionSchema.optional(),
+  // Add these for form compatibility
+  amount: z.number().optional(),
+  startTime: z.string().optional(),
+  images: z.array(ImageSchema).optional(),
+  promotionDuration: z.string().optional(),
 });
 
 // Automatically inferred TypeScript types

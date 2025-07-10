@@ -13,7 +13,7 @@ export const ProductOfferData = [
         [
             {
                 id: 1,
-                feature: "Market-based valuations"
+                feature: "Market-based valuation"
             }, 
             {
                 id: 2,

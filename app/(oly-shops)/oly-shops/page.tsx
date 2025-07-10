@@ -8,8 +8,11 @@ import HeroSection from "@/components/HeroSection";
 import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
+import { getCategories } from "@/sanity/actions/categoriesActions";
 
 const Home = () => {
+  const fetchedCategories = getCategories(); // Fetch categories from Sanity
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -17,7 +20,7 @@ const Home = () => {
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories />
+          <ShowCategories fetchedCategories={fetchedCategories} />
         </div>
 
         <section className={styles.heroSection}>

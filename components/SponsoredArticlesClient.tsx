@@ -4,17 +4,15 @@ import Articles from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
 import useTitleStore from "@/store/titleStore";
 import styles from "./SponsoredArticles.module.scss";
+import { blogData } from "@/data/BlogData";
 
-interface SponsoredArticlesProps {
-  images: string[];
-  avatars: string[];
-  author: string;
-  title: string[];
-  description: string;
-  data: any; // Consider replacing 'any' with a more specific type if possible
-  blogData: any; // Consider replacing 'any' with a more specific type if possible
-}
-const SponsoredArticlesClient = ({ images, avatars, author, title, description, data, blogData }: SponsoredArticlesProps) => {
+const SponsoredArticlesClient = () => {
+  const images = useArticlesStore((state) => state.images);
+  const avatars = useArticlesStore((state) => state.avatars);
+  const author = useArticlesStore((state) => state.author);
+  const title = useArticlesStore((state) => state.title);
+  const description = useArticlesStore((state) => state.description);
+  const data = useArticlesStore((state) => state.data);
   const getImages = useArticlesStore((state) => state.getImages);
   const getAvatars = useArticlesStore((state) => state.getAvatars);
   const setTitle = useArticlesStore((state) => state.setTitle);
@@ -33,18 +31,23 @@ const SponsoredArticlesClient = ({ images, avatars, author, title, description, 
   }, [setTitle]);
 
   useEffect(() => {
-    setData(blogData);
+    setData(
+      blogData.map((item) => ({
+        ...item,
+        images: [item.images],
+        avatars: [],
+      }))
+    );
   }, [setData]);
 
   return (
     <Articles
-      className={styles.articles}
-      images={images.length ? images : data.images}
-      avatars={avatars.length ? avatars : ""}
-      author={author}
-      title={title}
-      description={description}
-      data={data}
+      images={images && images.length ? images : data[0]?.images || []}
+      avatars={avatars && avatars.length ? avatars : data[0]?.avatars || []}
+      author={author || ""}
+      title={title || []}
+      description={description || ""}
+      data={data || []}
     />
   );
 };

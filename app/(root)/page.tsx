@@ -13,8 +13,10 @@ import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturesCarousel from "@/components/carousels/ProductOfferSlide";
 import ProductOfferSlide from "@/components/carousels/ProductOfferSlide";
+import { getCategories } from "@/sanity/actions/categoriesActions";
+const Home = async () => {
+  const fetchedCategories = await getCategories();
 
-const Home = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -25,7 +27,7 @@ const Home = () => {
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories />
+          <ShowCategories fetchedCategories={fetchedCategories} />
         </div>
 
         <section className={styles.heroSection}>

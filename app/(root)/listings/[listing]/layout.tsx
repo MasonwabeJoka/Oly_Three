@@ -27,9 +27,7 @@ export default function ListingLayout({
         <HomeButton />
       </nav>
       <main className={styles.main}>{children}</main>
-      <footer className={styles.footer}>
-        <Footer />
-      </footer>
+   
     </div>
   );
 }
