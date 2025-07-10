@@ -13,6 +13,7 @@ import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import EditModeForm from "@/components/forms/EditModeForm";
 import SelectedFeature from "@/components/forms/SelectedFeature";
 import { FormWrapper } from "./FormWrapper";
+import Form from "next/form";
 
 export type FeaturesProps = {};
 
@@ -60,10 +61,21 @@ const FeaturesClient = (props: FeaturesProps) => {
     });
   };
 
+  // Mock server action for demonstration
+  async function mockServerAction(formData: FormData): Promise<void> {
+    // Simulate server-side processing
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    // No return value needed
+  }
+
   return (
     <FormWrapper title="Product Features">
       <div className={styles.container}>
-        <div className={styles.form}>
+        <Form
+          className={styles.form}
+          action={mockServerAction}
+          onSubmit={handleSubmit(onSubmitDetail)}
+        >
           <div className={styles.formElements}>
             <div className={styles.selecteDetailContainer}>
               <Select
@@ -168,7 +180,7 @@ const FeaturesClient = (props: FeaturesProps) => {
               )}
             </ul>
           </div>
-        </div>
+        </Form>
       </div>
     </FormWrapper>
   );

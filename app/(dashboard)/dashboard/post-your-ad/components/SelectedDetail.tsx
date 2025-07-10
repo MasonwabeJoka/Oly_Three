@@ -8,6 +8,7 @@ import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
 import TextArea from "@/components/TextArea";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof multiStepFormSchema>;
 type SelectedDetailProps = {
@@ -33,6 +34,13 @@ type SelectedDetailProps = {
   watch: any;
   setMatchFound: any;
 };
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
 
 const SelectedDetail = ({
   id,
@@ -83,9 +91,13 @@ const SelectedDetail = ({
 
   return (
     <>
-      <div className={styles.form}>
+      <Form
+        className={styles.form}
+        action={mockServerAction}
+        // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
+      >
         <div key={id} className={styles.selectedDetailContainer}>
-          <div className={styles.deleteButtonContainer} onClick={()=> close()}>
+          <div className={styles.deleteButtonContainer} onClick={() => close()}>
             <Icon
               className={styles.deleteButton}
               src={"/icons/x.svg"}
@@ -94,7 +106,6 @@ const SelectedDetail = ({
               height={20}
             />
           </div>
-
           <div className={styles.selectedDetailDescriptionContainer}>
             <p className={styles.selectedDetailTitle}>{detail}</p>
             <p
@@ -109,14 +120,12 @@ const SelectedDetail = ({
             >
               {description}
             </p>
-
             {detail === "Define Your Own Detail" && (
               <p
                 className={styles.selectedDetailExample}
                 style={{ marginBottom: "1.25rem" }}
               >
                 eg. {"  "}
-                {"  "}
                 <strong>Warranty Information</strong>:{" "}
                 <span>Still under manufacturer warranty until June 2026.</span>
               </p>
@@ -127,13 +136,11 @@ const SelectedDetail = ({
                 style={{ marginBottom: "1.25rem" }}
               >
                 eg. {"  "}
-                {"  "}
                 <strong>{boldTextExample}</strong>:{" "}
                 <span>{normalTextExample}</span>
               </p>
             )}
           </div>
-
           <div className={styles.selectedDetailInputContainer}>
             <TextArea
               id="textInput"
@@ -167,24 +174,22 @@ const SelectedDetail = ({
               {...register(selectDetailValue)} // Spread register props for React Hook Form
             />
           </div>
-
           <div className={styles.submitButtonContainer}>
             <Button
               className={styles.submitButton}
               buttonChildren="Submit Detail"
               buttonType="normal"
-              type="button"
+              type="submit"
               buttonSize="large"
               name="submit-detail-btn"
               aria-label="Submit Detail Button"
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={clickHandler}
             />
           </div>
         </div>
-      </div>
+      </Form>
     </>
   );
 };

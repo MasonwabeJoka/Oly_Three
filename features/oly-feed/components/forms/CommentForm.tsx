@@ -14,11 +14,19 @@ import { CommentValidation } from "@/lib/validations/post";
 import PostImage from "@/components/PostImage";
 import Avatar from "@/components/Avatar";
 import { addCommentToPost } from "@/utils/serverActions/postActions";
+import Form from "next/form";
 
 interface Props {
   postId: string;
   currentUserImage: string;
   currentUserId: string;
+}
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
 }
 
 const CommentForm = ({ postId, currentUserImage, currentUserId }: Props) => {
@@ -83,15 +91,10 @@ const CommentForm = ({ postId, currentUserImage, currentUserId }: Props) => {
   return (
     <>
       <h3>Post Form</h3>
-      <form
+      <Form
         className={styles.onboardingForm}
-        onSubmit={(values) =>
-          handleSubmit({
-            postImage: "/bear.jpg",
-            postText: "dfaf",
-            accountId: "df",
-          })
-        }
+        action={mockServerAction}
+        // onSubmit={form.handleSubmit(handleSubmit)} // If you have a submit handler, add it here
       >
         <div>
           <Avatar
@@ -119,7 +122,6 @@ const CommentForm = ({ postId, currentUserImage, currentUserId }: Props) => {
               handleImageUpload(e)
             }
           />
-
           <Button
             className={styles.replyButton}
             buttonChildren="Reply"
@@ -132,7 +134,7 @@ const CommentForm = ({ postId, currentUserImage, currentUserId }: Props) => {
             disabled={false}
           />
         </div>
-      </form>
+      </Form>
     </>
   );
 };

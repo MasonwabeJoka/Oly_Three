@@ -14,6 +14,7 @@ import { featuresData } from "@/data/FeaturesData";
 import { detailsFormSchema } from "@/lib/validations/formValidations";
 import EditModeForm from "@/components/forms/EditModeForm";
 import SelectedDetail from "./SelectedDetail";
+import Form from "next/form";
 
 export type DetailsFormProps = {};
 
@@ -70,9 +71,20 @@ const DetailsFormClient = (props: DetailsFormProps) => {
     });
   };
 
+  // Mock server action for demonstration
+  async function mockServerAction(formData: FormData): Promise<void> {
+    // Simulate server-side processing
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    // No return value needed
+  }
+
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={submitDetails(onSubmitDetail)}>
+      <Form
+        className={styles.form}
+        action={mockServerAction}
+        onSubmit={submitDetails(onSubmitDetail)}
+      >
         <fieldset className={styles.titleContainer}>
           <legend className={styles.title}>Product Details</legend>
         </fieldset>
@@ -216,7 +228,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
             disabled={isSubmitting}
           />
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

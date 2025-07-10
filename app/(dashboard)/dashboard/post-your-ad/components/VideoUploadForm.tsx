@@ -9,14 +9,15 @@ import Button from "@/components/Buttons";
 import VideoPlayer from "@/components/VideoPlayer";
 import musicVideo from "@/videos/musicVideo.mp4.json";
 import Image from "next/image";
-import {screenshots} from "@/data/screenshots";
+import { screenshots } from "@/data/screenshots";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof feedbackFormSchema>;
 //TODO: Fix tittle missing when portrait video is uploaded.
 interface Props {
-  videoPath: string
+  videoPath: string;
 }
-const VideoUploadForm = ({videoPath}: Props) => {
+const VideoUploadForm = ({ videoPath }: Props) => {
   const onSubmit = (data: FormValues) => {
     console.log("Form Data:", data);
   };
@@ -53,17 +54,24 @@ const VideoUploadForm = ({videoPath}: Props) => {
     }
   };
 
+  // Mock server action for demonstration
+  async function mockServerAction(formData: FormData): Promise<void> {
+    // Simulate server-side processing
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    // No return value needed
+  }
+
   return (
-    <div
+    <Form
       className={styles.container}
-      // onSubmit={handleSubmit(onSubmit, onError)}
+      action={mockServerAction}
+      onSubmit={form.handleSubmit(onSubmit, onError)}
     >
       <h1 className={styles.title}>Video Details</h1>
       <div className={styles.videoContainer}>
         <div className={styles.video}>
           <VideoPlayer videoPath={videoPath} />
         </div>
-
         <div className={`${styles.thumbnailsContainer} ${styles.control}`}>
           <p className={styles.thumbnailTitle}>
             Choose or upload a thumbnail. If not, the current video frame will
@@ -80,7 +88,6 @@ const VideoUploadForm = ({videoPath}: Props) => {
                 />
               </div>
             ))}
-
             <div className={`${styles.thumbnail} ${styles.customThumbnail}`}>
               <Image src="/icons/plus.png" alt="plus" width={40} height={40} />
             </div>
@@ -91,7 +98,6 @@ const VideoUploadForm = ({videoPath}: Props) => {
         <div className={`${styles.videoTitleContainer} ${styles.control}`}>
           <p className={styles.errorMessage}>{errors.name?.message}</p>
           <Input
-            legend=""
             label="Name"
             className={styles.videoTitle}
             inputType="text"
@@ -111,7 +117,6 @@ const VideoUploadForm = ({videoPath}: Props) => {
             }}
           />
         </div>
-
         <div className={`${styles.descriptionContainer} ${styles.control}`}>
           <p className={styles.errorMessage}>{errors.message?.message}</p>
           <TextArea
@@ -132,7 +137,6 @@ const VideoUploadForm = ({videoPath}: Props) => {
           />
         </div>
       </div>
-
       <div className={`${styles.publishButtonContainer} ${styles.control}`}>
         <Button
           className={styles.publishButton}
@@ -146,7 +150,7 @@ const VideoUploadForm = ({videoPath}: Props) => {
           disabled={false}
         />
       </div>
-    </div>
+    </Form>
   );
 };
 
