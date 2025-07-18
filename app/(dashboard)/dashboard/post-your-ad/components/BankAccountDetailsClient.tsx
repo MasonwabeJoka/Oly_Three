@@ -3,7 +3,7 @@ import Input from "@/components/Input";
 import styles from "./BankAccountDetailsClient.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "@/components/Spinner";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { useFormContext } from "react-hook-form";
 import type { FormDataSchema } from "../validations/formDataSchema";
 
@@ -67,7 +67,7 @@ const BankAccountDetailsClient = () => {
     loadBanks();
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <div>Error fetching banks: {errorMessage}</div>;
 
   const bankNames = banks?.map((bank: any) => bank.name);

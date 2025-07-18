@@ -10,6 +10,7 @@ import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import ProductOffer from "../ProductOffer";
 import NavButtons from "../NavButtons";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ProductOfferSlideFrontendClient = ({ productData }) => {
   const [initialSlideIndex, setInitialSlideIndex] = useState(null);
@@ -25,7 +26,7 @@ const ProductOfferSlideFrontendClient = ({ productData }) => {
   };
 
   if (initialSlideIndex === null) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
   }
 
   return (

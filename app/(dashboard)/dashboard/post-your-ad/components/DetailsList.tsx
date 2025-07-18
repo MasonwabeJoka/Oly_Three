@@ -2,7 +2,7 @@
 import styles from "./DetailsList.module.scss";
 import Image from "next/image";
 import Button from "@/components/Buttons";
-import EditMode from "./EditMode";
+import DetailsEditMode from "./DetailsEditMode";
 import type { DetailItem } from "./Details";
 
 interface DetailsListProps {
@@ -32,7 +32,7 @@ const DetailsList = ({
   errors,
   watch,
 }: DetailsListProps) => (
-  <ul className={styles.details}>
+  <ul className={`${styles.details} ${details.length > 0 ? styles.open : ""}`}>
     {details.map((detail, index) =>
       editIndex !== index ? (
         <li key={index} className={styles.detail}>
@@ -43,8 +43,8 @@ const DetailsList = ({
                 <Image
                   src="/icons/pencil.png"
                   alt="edit-icon"
-                  width={18}
-                  height={18}
+                  width={16}
+                  height={16}
                 />
               }
               buttonSize="standard"
@@ -63,8 +63,8 @@ const DetailsList = ({
                 <Image
                   src="/icons/trash.png"
                   alt="delete-icon"
-                  width={24}
-                  height={24}
+                  width={18}
+                  height={18}
                 />
               }
               buttonSize="standard"
@@ -84,7 +84,7 @@ const DetailsList = ({
           </p>
         </li>
       ) : (
-        <EditMode
+        <DetailsEditMode
           key={index}
           editValue={editValue}
           setValue={setValue}

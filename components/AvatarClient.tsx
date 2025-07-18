@@ -9,6 +9,7 @@ interface AvatarClientProps {
   avatarSize: keyof typeof AVATAR_SIZE;
   isOnline: boolean;
   isVerified: boolean;
+  isBusiness?: boolean;
 }
 
 const AVATAR_SIZE = {
@@ -24,6 +25,7 @@ const AvatarClient = ({
   avatarSize,
   isOnline,
   isVerified,
+  isBusiness,
 }: AvatarClientProps) => {
   const [hasError, setHasError] = useState(false);
 
@@ -67,6 +69,17 @@ const AvatarClient = ({
           <Image
             className={styles.isVerified}
             src="/verified.png"
+            alt="Verified"
+            width={22}
+            height={22}
+          />
+        </div>
+      )}
+      {isVerified && isBusiness && (
+        <div className={styles.isVerified}>
+          <Image
+            className={styles.isVerified}
+            src="/business-verified.png"
             alt="Verified"
             width={22}
             height={22}

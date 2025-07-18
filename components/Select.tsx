@@ -215,7 +215,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
     const selectClass = `${styles.select} ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-    } ${className}`;
+    } ${className || ''}`;
 
     const displayText = showOptions
       ? typeof initialValue === "string"
@@ -230,7 +230,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           : "Select an option";
 
     return (
-      <div ref={selectRef}>
+      <div ref={selectRef} className={className || ''}>
         <div className={`${styles.selectMenu}`}>
           {error && <p className={styles.errorMessage}>{error as string}</p>}
 

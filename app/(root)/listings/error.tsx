@@ -24,7 +24,7 @@ export default function Error({
     if (document.referrer && new URL(document.referrer).pathname !== pathname) {
       router.back();
     } else {
-      router.push("/");
+      router.push("/[step]");
     }
   }, [router, pathname]);
 

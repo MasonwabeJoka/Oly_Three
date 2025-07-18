@@ -5,12 +5,13 @@ import MenuButton from "../MenuButton";
 
 const Navbar = () => {
   return (
-    <div className={styles.container}>
+    <header className={styles.container}>
       <Link href="/" className={styles.logo}>
         <Image src="/logo.png" alt="Logo" width={70.14} height={32} />
       </Link>
+
       <MenuButton />
-    </div>
+    </header>
   );
 };
 

@@ -144,6 +144,7 @@ const ListingsExpandedClient = (props: ListingsExpandedProps) => {
           <Link href="/" key={index}>
             <div className={styles.expandedCardContainer}>
               <AdCard
+                category={category}
                 slug={ad?.slug}
                 ad={ad}
                 index={index}

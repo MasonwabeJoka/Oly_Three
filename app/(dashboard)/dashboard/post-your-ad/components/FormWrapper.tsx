@@ -13,6 +13,7 @@ import styles from "./FormWrapper.module.scss";
 import Form from "next/form";
 import { postYourAdAction } from "@/utils/FormServerActions/postYourAdAction";
 import { slugMap } from "../store/useFormStore";
+import { usePathname } from "next/navigation";
 
 type FormWrapperProps = {
   title: string;
@@ -48,6 +49,7 @@ export const FormWrapper = ({
   selectOpen = false,
 }: FormWrapperProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const { isEditMode, setIsEditMode } = useEditStore();
   const { setMediaAction } = useUploadMediaStore();
   const {
@@ -61,6 +63,7 @@ export const FormWrapper = ({
     steps,
     setMessage,
     categoryPreviouslySelected,
+    setCurrentStepIndex,
   } = useFormStore();
   const { trigger, handleSubmit } = useFormContext<FormData>();
   const isClient = useIsClient();
@@ -72,25 +75,31 @@ export const FormWrapper = ({
     }
   }, [currentStepIndex]);
 
-  // Listens for browser back/forward navigation events to sync the form step with the URL path.
-  // Extracts the slug after /dashboard/post-your-ad/, matches it to a step index using slugMap,
-  // and navigates to that step if it differs from the current step. Cleans up the event listener on unmount.
+  // --- Step/URL sync logic ---
+  // URL is the single source of truth for the step index
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname;
-      const basePath = "/dashboard/post-your-ad/";
-      if (path.startsWith(basePath)) {
-        const slug = path.slice(basePath.length); // Extract slug after /dashboard/post-your-ad/
-        const slugEntry = slugMap.find((entry) => entry.slug === slug);
-        const stepIndex = slugEntry ? slugEntry.index : -1;
-        if (stepIndex !== -1 && stepIndex !== currentStepIndex) {
-          goTo(stepIndex);
-        }
+    const basePath = "/dashboard/post-your-ad/";
+    if (pathname.startsWith(basePath)) {
+      const slug = pathname.slice(basePath.length);
+      const slugEntry = slugMap.find((entry) => entry.slug === slug);
+      const stepIndex = slugEntry ? slugEntry.index : 0;
+      if (stepIndex !== currentStepIndex) {
+        console.log(
+          "[SYNC EFFECT] Setting step index from URL:",
+          stepIndex,
+          "(was:",
+          currentStepIndex,
+          ")"
+        );
+        setCurrentStepIndex(stepIndex);
+      } else {
+        console.log(
+          "[SYNC EFFECT] Step index and URL already in sync:",
+          stepIndex
+        );
       }
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [currentStepIndex, goTo, steps]);
+    }
+  }, [pathname, currentStepIndex, setCurrentStepIndex]);
 
   if (!isClient) return null;
 
@@ -116,25 +125,46 @@ export const FormWrapper = ({
     }
   };
 
+  // Navigation handlers: update the URL directly
   const handleNext = async (e: React.MouseEvent) => {
     e.preventDefault();
     await next(trigger, handleSubmit, onSubmit);
     setMediaAction("none");
+    // After validation, update the URL to the next step
+    const newIndex = currentStepIndex + 1;
+    if (newIndex < steps.length) {
+      const nextSlug = slugMap.find((entry) => entry.index === newIndex)?.slug;
+      if (nextSlug && `/dashboard/post-your-ad/${nextSlug}` !== pathname) {
+        console.log(
+          "[NAV] Proceeding to step:",
+          newIndex,
+          "URL:",
+          `/dashboard/post-your-ad/${nextSlug}`
+        );
+        router.push(`/dashboard/post-your-ad/${nextSlug}`);
+      } else {
+        console.log("[NAV] Already at correct URL for next step:", newIndex);
+      }
+    }
   };
 
   const handleBack = (e: React.MouseEvent) => {
     e.preventDefault();
-
-    // If going back would take us to step 0 (SelectACategory),
-    // go to step 10 (SelectNewCategory) instead
-    if (currentStepIndex === 1) {
-      goTo(10);
-      resetMediaStates();
-      return;
+    // If going back would take us to step 0 (SelectACategory), go to step 10 (SelectNewCategory) instead
+    let newIndex =
+      currentStepIndex === 1 ? 10 : Math.max(0, currentStepIndex - 1);
+    const prevSlug = slugMap.find((entry) => entry.index === newIndex)?.slug;
+    if (prevSlug && `/dashboard/post-your-ad/${prevSlug}` !== pathname) {
+      console.log(
+        "[NAV] Going back to step:",
+        newIndex,
+        "URL:",
+        `/dashboard/post-your-ad/${prevSlug}`
+      );
+      router.push(`/dashboard/post-your-ad/${prevSlug}`);
+    } else {
+      console.log("[NAV] Already at correct URL for previous step:", newIndex);
     }
-
-    const newIndex = Math.max(0, currentStepIndex - 1);
-    goTo(newIndex);
     resetMediaStates();
   };
 
@@ -149,15 +179,16 @@ export const FormWrapper = ({
     if (isEditMode) {
       setMediaAction("none");
       setIsEditMode(false);
-      goTo(9);
+      const editSlug = slugMap.find((entry) => entry.index === 9)?.slug;
+      if (editSlug) {
+        router.push(`/dashboard/post-your-ad/${editSlug}`);
+      }
       return;
     }
-
     if (isLastStep) {
       handleSubmit(onSubmit)();
       return;
     }
-
     handleNext(e);
   };
 

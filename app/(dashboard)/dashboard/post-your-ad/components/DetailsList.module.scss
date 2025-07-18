@@ -6,6 +6,13 @@
     flex-direction: column;
     align-items: center;
     width: rem(648);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    &.open {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .detail {
       display: flex;
@@ -15,8 +22,8 @@
 
       .detailButtons {
         display: flex;
-         gap: rem(8);
-        margin-right: rem(16);
+         gap: rem(16);
+        margin-right: rem(18);
         .detailButton {
           display: flex;
           justify-content: center;

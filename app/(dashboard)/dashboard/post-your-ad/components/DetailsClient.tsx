@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import SelectedDetail from "./SelectedDetail";
+import ProductSpecification from "./ProductSpecification";
 import { FormWrapper } from "./FormWrapper";
 import DetailsList from "./DetailsList";
 import SpecificationsList from "./SpecificationsList";
@@ -12,6 +13,11 @@ import Form from "next/form";
 
 export interface DetailItem {
   selectDetail: string;
+  value: string;
+}
+
+export interface SpecificationItem {
+  selectSpecification: string;
   value: string;
 }
 
@@ -38,8 +44,10 @@ const DetailsClient = ({
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
   const [details, setDetails] = useState<DetailItem[]>([]);
+  const [specifications, setSpecifications] = useState<SpecificationItem[]>([]);
   const [isConditionsOpen, setIsConditionsOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const {
     register,
@@ -61,6 +69,8 @@ const DetailsClient = ({
   useEffect(() => {
     if (selectDetailValue) {
       setMatchFound(true);
+      // Close specification form when a new detail is selected
+      setShowSpecificationForm(false);
     }
   }, [selectDetailValue]);
 
@@ -77,7 +87,10 @@ const DetailsClient = ({
     setEditValue(details[index].value);
   };
 
-  const updateDetail = (index: number, updatedValue: string) => {
+  const updateDetail = async (
+    index: number,
+    updatedValue: string
+  ): Promise<void> => {
     if (updatedValue.trim()) {
       const updatedDetails = [...details];
       updatedDetails[index] = {
@@ -87,15 +100,14 @@ const DetailsClient = ({
 
       updateDetailsInForm(updatedDetails);
 
-      trigger("details.list").then((isValid: boolean) => {
-        if (isValid) {
-          setEditIndex(null);
-        }
-      });
+      const isValid = await trigger("details.list");
+      if (isValid) {
+        setEditIndex(null);
+      }
     }
   };
 
-  const handleDeleteItem = (index: number) => {
+  const handleDeleteItem = async (index: number): Promise<void> => {
     const updatedDetails = details.filter((_, i) => i !== index);
     updateDetailsInForm(updatedDetails);
 
@@ -103,7 +115,7 @@ const DetailsClient = ({
       setEditIndex(null);
     }
 
-    trigger("details.list");
+    await trigger("details.list");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,6 +127,48 @@ const DetailsClient = ({
     trigger(name);
   };
 
+  const editSpecification = (index: number) => {
+    setEditIndex(index);
+    setEditValue(specifications[index].value);
+  };
+
+  const updateSpecification = (index: number, updatedValue: string) => {
+    if (updatedValue.trim()) {
+      const updatedSpecifications = [...specifications];
+      updatedSpecifications[index] = {
+        ...updatedSpecifications[index],
+        value: updatedValue.trim(),
+      };
+
+      setSpecifications(updatedSpecifications);
+      setValue("specifications.list", updatedSpecifications, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+
+      trigger("specifications.list").then((isValid: boolean) => {
+        if (isValid) {
+          setEditIndex(null);
+        }
+      });
+    }
+  };
+
+  const handleDeleteSpecification = (index: number) => {
+    const updatedSpecifications = specifications.filter((_, i) => i !== index);
+    setSpecifications(updatedSpecifications);
+    setValue("specifications.list", updatedSpecifications, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    if (editIndex === index) {
+      setEditIndex(null);
+    }
+
+    trigger("specifications.list");
+  };
+
   return (
     <FormWrapper
       error={errors.details?.message as string}
@@ -123,11 +177,7 @@ const DetailsClient = ({
       <div className={styles.container}>
         <h2 className={styles.title}>Product Details</h2>
 
-        <Form
-          className={styles.form}
-          action={mockServerAction}
-          // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
-        >
+        <div className={styles.form}>
           <div className={styles.formElements}>
             <div className={styles.conditionsContainer}>
               <Select
@@ -140,7 +190,6 @@ const DetailsClient = ({
                 id="conditions"
                 ariaLabel="Conditions"
                 dashboard
-                showLabelOnSelection
                 error={errors.details?.condition?.message as string}
                 {...register("details.condition")}
                 onOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
@@ -160,7 +209,6 @@ const DetailsClient = ({
                   ariaLabel="Choose Detail Select"
                   autoComplete="off"
                   dashboard
-                  showLabelOnSelection
                   error={errors.details?.selectDetail?.message as string}
                   {...register("details.selectDetail")}
                   onOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
@@ -198,19 +246,23 @@ const DetailsClient = ({
                 )
             )}
             {!isConditionsOpen && !isDetailsOpen && (
-              <DetailsList
-                details={details}
-                editIndex={editIndex}
-                editDetail={editDetail}
-                handleDeleteItem={handleDeleteItem}
-                editValue={editValue}
-                setValue={setValue}
-                updateDetail={updateDetail}
-                cancelEdit={() => setEditIndex(null)}
-                register={register}
-                errors={errors}
-                watch={watch}
-              />
+              <div className={styles.detailsListContainer}>
+
+
+                <DetailsList
+                  details={details}
+                  editIndex={editIndex}
+                  editDetail={editDetail}
+                  handleDeleteItem={handleDeleteItem}
+                  editValue={editValue}
+                  setValue={setValue}
+                  updateDetail={updateDetail}
+                  cancelEdit={() => setEditIndex(null)}
+                  register={register}
+                  errors={errors}
+                  watch={watch}
+                />
+              </div>
             )}
 
             {!isConditionsOpen && !isDetailsOpen && (
@@ -226,54 +278,69 @@ const DetailsClient = ({
                   autoFocus={false}
                   disabled={false}
                   dashboard
-                  onClick={() =>
-                    setShowSpecificationForm(!showSpecificationForm)
-                  }
+                  onClick={() => {
+                    setIsAnimating(true);
+                    // Close any open SelectedDetail UI first
+                    setMatchFound(false);
+                    setValue("details.selectDetail", "");
+
+                    // Add a small delay for smooth transition
+                    setTimeout(() => {
+                      setShowSpecificationForm(!showSpecificationForm);
+                      setIsAnimating(false);
+                    }, 150);
+                  }}
                 />
               </div>
             )}
 
             {showSpecificationForm && !isConditionsOpen && !isDetailsOpen && (
               <>
-                <SelectedDetail
+                <ProductSpecification
                   id="custom-spec"
-                  initialValue="Select a product detail to add"
-                  detail="Product Specifications"
-                  description="Provide details such as dimensions, weight, or any other relevant technical specifications."
+                  initialValue="Select a product specification to add"
+                  specification="Product Specifications"
+                  description="Provide details such as dimensions, weight, or any other relevant technical specifications. Add a colon after labels to make them bold."
                   boldTextExample="Screen size"
                   normalTextExample="6.1 inches"
                   placeholder="Add product specification"
-                  isFieldDirty={!!dirtyFields.details?.selectDetail}
+                  isFieldDirty={
+                    !!dirtyFields.specifications?.selectSpecification
+                  }
                   register={register}
                   setValue={setValue}
                   errors={errors}
                   handleChange={handleChange}
-                  selectDetailValue="Product Specifications"
-                  details={details}
-                  setDetails={setDetails}
+                  selectSpecificationValue="Product Specifications"
+                  specifications={specifications}
+                  setSpecifications={setSpecifications}
                   watch={watch}
-                  setMatchFound={() => setShowSpecificationForm(false)}
+                  setShowSpecificationForm={setShowSpecificationForm}
                   trigger={trigger}
                   handleBlur={() => {}}
                   handleSubmit={() => {}}
                 />
-                <SpecificationsList
-                  details={details}
-                  editIndex={editIndex}
-                  editDetail={editDetail}
-                  handleDeleteItem={handleDeleteItem}
-                  editValue={editValue}
-                  setValue={setValue}
-                  updateDetail={updateDetail}
-                  cancelEdit={() => setEditIndex(null)}
-                  register={register}
-                  errors={errors}
-                  watch={watch}
-                />
               </>
             )}
+            { !isConditionsOpen && !isDetailsOpen && (
+              <div className={styles.productSpecificationContainer}>
+              <SpecificationsList
+                specifications={specifications}
+                editIndex={editIndex}
+                editSpecification={editSpecification}
+                handleDeleteSpecification={handleDeleteSpecification}
+                editValue={editValue}
+                setValue={setValue}
+                updateSpecification={updateSpecification}
+                cancelEdit={() => setEditIndex(null)}
+                register={register}
+                errors={errors}
+                watch={watch}
+              />
+              </div>
+            )}
           </div>
-        </Form>
+        </div>
       </div>
     </FormWrapper>
   );

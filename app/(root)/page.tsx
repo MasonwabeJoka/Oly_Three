@@ -20,9 +20,9 @@ const Home = async () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <nav className={styles.nav}>
+        {/* <nav className={styles.nav}>
           <Navbar />
-        </nav>
+        </nav> */}
         <div className={styles.modal}>
           <ShowMenu />
         </div>

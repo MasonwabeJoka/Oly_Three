@@ -65,14 +65,14 @@ const Checkbox = ({
     <div
       className={`${isFeedOpen ? styles.feedOpen : ""} ${
         styles.checkboxContainer
-      }`}
+      } ${className || ''}`}
     >
       <input
         ref={inputRef}
         type={type}
         id={id}
         name={name}
-        className={className}
+        className={`${styles.checkboxInput} ${className || ''}`}
         onChange={handleCheckboxChange}
         checked={isCheckboxChecked}
         disabled={disabled ?? false}

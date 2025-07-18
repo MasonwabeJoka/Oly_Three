@@ -8,8 +8,9 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
+  width: rem(1080);
   background-color: $white-four;
+
 
   .message {
     font-size: $h4;

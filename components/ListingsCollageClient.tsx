@@ -10,7 +10,7 @@ import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import styles from "./ListingsCollage.module.scss";
-import Spinner from "./Spinner";
+import LoadingSpinner from "./LoadingSpinner";
 import { ImageFile } from "@/sanity/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
 
@@ -204,7 +204,7 @@ const ListingsCollageClient = ({
             {cards}
           </Masonry>
           <div ref={ref} className={styles.loading}>
-            {loading && hasMore ? <Spinner /> : null}
+            {loading && hasMore ? <LoadingSpinner /> : null}
           </div>
         </>
       )}
@@ -220,7 +220,7 @@ const ListingsCollageClient = ({
             {cards}
           </div>
           <div ref={ref} className={styles.loading}>
-            {loading && hasMore ? <Spinner /> : null}
+            {loading && hasMore ? <LoadingSpinner /> : null}
           </div>
         </>
       )}

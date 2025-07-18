@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import styles from "./styles.module.scss";
 import { SignIn, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 
@@ -5,7 +6,7 @@ const Page = ({ searchParams }: { searchParams: { redirectUrl?: string } }) => {
   return (
     <div className={styles.container}>
       <ClerkLoading>
-        <div>Loading...</div>
+        <LoadingSpinner />
       </ClerkLoading>
       <ClerkLoaded>
         <SignIn

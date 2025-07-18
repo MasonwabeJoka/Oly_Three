@@ -7,10 +7,28 @@ import useMessageStore, {
 import ExitButton from "@/components/ExitButton";
 import ChatBubble from "./ChatBubble";
 import TextInputBar from "@/components/TextInputBar";
+import { useEffect } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Chat = () => {
-  const { messages, selectedChat, handleSendMessage, userMessages, setChats } =
-    useMessageStore();
+  const { 
+    messages, 
+    selectedChat, 
+    handleSendMessage, 
+    userMessages, 
+    setChats,
+    isLoading,
+    isInitialized,
+    initializeMessages
+  } = useMessageStore();
+  
+  // Initialize messages on component mount
+  useEffect(() => {
+    if (!isInitialized) {
+      initializeMessages();
+    }
+  }, [isInitialized, initializeMessages]);
+  
   const shouldShowAvatar = (
     index: number,
     msg: MessageContent,
@@ -33,33 +51,37 @@ const Chat = () => {
         <ExitButton />
       </div>
       <div className={styles.mainSectionWrapper} aria-live="polite">
-        {messages
-          .filter((message: Message) => message.id === selectedChat?.id)
-          .map((message: Message) => {
-            const allMessages: MessageContent[] = [
-              ...message.messages,
-              ...userMessages,
-            ];
-            return (
-              <div key={message.name}>
-                {allMessages.map((msg: MessageContent, index: number) => (
-                  <ChatBubble
-                    key={`${msg.text}-${index}`}
-                    contactName={message.contactName}
-                    message={msg.text}
-                    profilePicture={
-                      msg.senderType === "contact"
-                        ? message.profilePicture
-                        : "/profilePic.jpg"
-                    }
-                    time={msg.time}
-                    isContact={msg.senderType === "contact"}
-                    showAvatar={shouldShowAvatar(index, msg, allMessages)}
-                  />
-                ))}
-              </div>
-            );
-          })}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          messages
+            .filter((message: Message) => message.id === selectedChat?.id)
+            .map((message: Message) => {
+              const allMessages: MessageContent[] = [
+                ...message.messages,
+                ...userMessages,
+              ];
+              return (
+                <div key={message.name}>
+                  {allMessages.map((msg: MessageContent, index: number) => (
+                    <ChatBubble
+                      key={`${msg.text}-${index}`}
+                      contactName={message.contactName}
+                      message={msg.text}
+                      profilePicture={
+                        msg.senderType === "contact"
+                          ? message.profilePicture
+                          : "/profilePic.jpg"
+                      }
+                      time={msg.time}
+                      isContact={msg.senderType === "contact"}
+                      showAvatar={shouldShowAvatar(index, msg, allMessages)}
+                    />
+                  ))}
+                </div>
+              );
+            })
+        )}
       </div>
       <div className={styles.bottomSection}>
         <div className={styles.typingArea}>
@@ -76,6 +98,7 @@ const Chat = () => {
               className={styles.textInput}
               placeholder="Type a message"
               ariaLabel="Type and send a message"
+              disabled={isLoading}
             />
           </div>
         </div>

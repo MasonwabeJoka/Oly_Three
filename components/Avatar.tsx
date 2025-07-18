@@ -9,6 +9,8 @@ interface AvatarProps {
   isOnline?: boolean;
   outlineColour?: string;
   isVerified?: boolean;
+  isBusiness?: boolean;
+  onClick?: () => void;
 }
 
 const AVATAR_SIZE = {
@@ -25,12 +27,15 @@ const Avatar = ({
   avatarSize = "regular",
   isOnline = false,
   isVerified = false,
+  isBusiness = false,
   outlineColour = "fff",
+  onClick,
 }: AvatarProps) => {
   return (
     <div
-      className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className} ${styles.avatarsContainer}`}
+      className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className || ''} ${styles.avatarsContainer}`}
       style={{ outline: `0.25rem solid ${outlineColour}` }}
+      onClick={onClick}
     >
       <AvatarClient
         avatar={avatar}
@@ -38,6 +43,7 @@ const Avatar = ({
         avatarSize={avatarSize}
         isOnline={isOnline}
         isVerified={isVerified}
+        isBusiness={isBusiness}
       />
     </div>
   );

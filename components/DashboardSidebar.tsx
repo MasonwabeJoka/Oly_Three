@@ -50,23 +50,23 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         </Link>
       )}
 
-      <div className={styles.profile}>
+      <Link href="/dashboard/settings/profile-settings" className={styles.profile}>
         {user?.hasImage && (
           <Avatar
             className={styles.avatar}
-            avatar={user?.imageUrl || "/profilePic.jpg"}
+            avatar={user?.imageUrl || ""}
             avatarSize={isMobile ? "regular" : "large"}
           />
         )}
         {/* <Avatar
           className={styles.avatar}
-          avatar={currentUser?.image || "/profilePic.jpg"}
+          avatar={currentUser?.image || ""}
           avatarSize={isMobile ? "regular" : "large"}
         /> */}
         {!isMobile && (
           <p className={styles.name}>{user?.fullName || user?.username}</p>
         )}
-      </div>
+      </Link>
       <div>
         <ul className={styles.mainMenu} role="list">
           {data.slice(0, -1).map((menuItem) => {

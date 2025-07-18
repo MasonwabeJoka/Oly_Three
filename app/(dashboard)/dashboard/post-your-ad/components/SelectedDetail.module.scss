@@ -1,15 +1,22 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.form {
+.container {
+  
   padding: rem(50);
-
-  .selectedDetailContainer {
-    position: relative;
+.selectedDetailContainer {
+  position: relative;
     padding: rem(16) rem(32);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    &.open {
+        opacity: 1;
+        transform: translateY(0);
+    }
     background-color: $white-two;
     border-radius: rem(40) rem(40) rem(44) rem(44);
     width: rem(544);

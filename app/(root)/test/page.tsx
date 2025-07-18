@@ -1,11 +1,11 @@
-import AuctionForm from "@/app/listings/[listing]/auction/components/AuctionForm"
-
-const Test = () => {
-  return (
-    <>
-    <AuctionForm />
-    </>
-  )
+// Helper to simulate a delay
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export default Test
+export default async function TestPage() {
+  // Simulate a 2 second delay
+  await wait(2000);
+
+  return <div>Test page loaded!</div>;
+}

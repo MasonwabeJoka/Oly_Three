@@ -5,9 +5,10 @@ interface Styles {
   colour: string;
   textColour?: string;
   boxShadow?: string;
+  shadow?: boolean;
 }
 
-const Pill = ({ child, colour, textColour = "#434b4d", boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
+const Pill = ({ child, colour, shadow, textColour = "#434b4d", boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
 0px 5px 5px 0px rgba(180, 191, 203, 0.17),
 0px 11px 7px 0px rgba(180, 191, 203, 0.1),
 0px 20px 8px 0px rgba(180, 191, 203, 0.03),
@@ -20,7 +21,7 @@ const Pill = ({ child, colour, textColour = "#434b4d", boxShadow = `0px 1px 3px 
         backgroundColor: colour,
         cursor: "pointer",
         color: textColour,
-        boxShadow: boxShadow,
+        boxShadow: shadow ? boxShadow : "none",
       }}
     >
       {child}

@@ -7,6 +7,7 @@ import { FormWrapper } from "./FormWrapper";
 import { debounce } from "lodash";
 import type { FormDataSchema } from "../validations/formDataSchema";
 import Form from "next/form";
+import Button from "@/components/Buttons";
 
 // Mock server action for demonstration
 async function mockServerAction(formData: FormData): Promise<void> {
@@ -63,9 +64,9 @@ const TitleAndDescription = () => {
   return (
     <FormWrapper title="">
       <div className={styles.container}>
-        <Form
+        <div
           className={styles.form}
-          action={mockServerAction}
+         
           // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
         >
           <div className={styles.pageTitle}>Ad Description</div>
@@ -120,7 +121,7 @@ const TitleAndDescription = () => {
               disabled={false}
             />
           </div>
-        </Form>
+        </div>
       </div>
     </FormWrapper>
   );

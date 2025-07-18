@@ -34,7 +34,7 @@ const Settings = () => {
         </Link>
 
         <Link
-          href="/dashboard/settings/account-verification"
+          href="/dashboard/settings/account-verification/"
           className={styles.card}
         >
           <LinkCard

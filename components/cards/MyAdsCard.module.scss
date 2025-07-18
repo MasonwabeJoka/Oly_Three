@@ -2,9 +2,10 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .adCard {
-  position: relative;
+  // position: relative;
+  // width: rem(900);
   max-height: rem(616);
-
+// background-color: pink;
   .adCardMainSection {
     display: flex;
     align-items: center;

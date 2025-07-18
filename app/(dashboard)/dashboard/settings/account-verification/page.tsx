@@ -1,7 +1,5 @@
-import AccountVerification from "../components/AccountVerification";
+import VerificationSteps from "./main-components/VerificationSteps";
 
-const Page = () => {
-  return <AccountVerification />;
-};
-
-export default Page;
+export default function Home() {
+  return <VerificationSteps />;
+}

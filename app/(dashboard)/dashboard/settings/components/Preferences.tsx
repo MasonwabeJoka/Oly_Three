@@ -5,6 +5,8 @@ import { preferencesData } from "@/data/PreferencesData";
 import PreferencesCard from "@/components/cards/PreferencesCard";
 import { Preference, PreferenceCategory } from "../preferences/types";
 import Form from "next/form";
+import Link from "next/link";
+import Button from "@/components/Buttons";
 
 const Preferences = () => {
   // Initialize state with preferencesData
@@ -53,6 +55,37 @@ const Preferences = () => {
           }
         />
       ))}
+      <div className={styles.buttonsContainer}>
+        <Button
+          className={styles.acceptPreferences}
+          buttonChildren="Accept Preferences"
+          buttonType="primary"
+          buttonSize="large"
+          name="accept-preferences-btn"
+          type="submit"
+          ariaLabel="Accept Preferences"
+          autoFocus={false}
+          disabled={false}
+          onClick={() => {}}
+          dashboard
+        />
+
+        <Link href="/dashboard/settings">
+          <Button
+            className={styles.backButton}
+            buttonChildren="Back"
+            buttonType="normal"
+            buttonSize="large"
+            name="back-btn"
+            type="button"
+            ariaLabel="Back"
+            autoFocus={false}
+            disabled={false}
+            onClick={() => {}}
+            dashboard
+          />
+        </Link>
+      </div>
     </Form>
   );
 };

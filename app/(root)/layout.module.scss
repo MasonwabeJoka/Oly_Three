@@ -96,6 +96,12 @@
   ul {
     list-style-type: none;
   }
+
+  li {
+  list-style-position: outside;
+  padding-left: 0;
+  margin-left: 0;
+}
   a,
   a:visited,
   a:active {

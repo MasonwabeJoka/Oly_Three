@@ -262,8 +262,6 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
       }
     } else { // If it's not the last step, move to the next one
       const newIndex = currentStepIndex + 1; // Increase the step number
-      setStepInStorage(newIndex); // Save the new step to local storage
-      updateUrlWithStep(newIndex); // Update URL
       set({
         currentStepIndex: newIndex, // Update the step number
         isFirstStep: newIndex === 0, // Check if it's the first step
@@ -276,12 +274,10 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Function to go back to the previous step
   back: () => set((state) => {
     const newIndex = Math.max(0, state.currentStepIndex - 1); // Decrease step number, but not below 0
-    setStepInStorage(newIndex); // Save the new step
-    updateUrlWithStep(newIndex);// Update URL
     return {
       currentStepIndex: newIndex, // Update the step number
       isFirstStep: newIndex === 0, // Check if it’s the first step
-      isLastStep: newIndex === steps.length - 1, // Check if it’s the last step
+      isLastStep: newIndex === state.steps.length - 1, // Check if it’s the last step
     };
   }),
 
@@ -309,8 +305,6 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
       }
     }
 
-    setStepInStorage(index); // Save the new step
-    updateUrlWithStep(index); // Update URL
     set({
       currentStepIndex: index, // Set the step number
       isFirstStep: index === 0, // Check if it’s the first step

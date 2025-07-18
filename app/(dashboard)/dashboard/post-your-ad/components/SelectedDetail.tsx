@@ -65,15 +65,16 @@ const SelectedDetail = ({
   watch,
   setMatchFound,
 }: SelectedDetailProps) => {
-  const inputValue = watch(selectDetailValue);
+  const inputValue = watch(`details.${selectDetailValue}`) || "";
 
   const close = () => {
     setMatchFound(false);
   };
 
   const clickHandler = async () => {
+    const fieldName = `details.${selectDetailValue}`;
     // Trigger validation
-    const isValid = await trigger(selectDetailValue, {
+    const isValid = await trigger(fieldName, {
       shouldFocus: true,
     });
 
@@ -84,113 +85,116 @@ const SelectedDetail = ({
         { selectDetail: selectDetailValue, value: inputValue },
       ]);
 
-      // Reset selectDetail field
-      setValue("selectDetail", "");
+      // Reset the field
+      setValue(fieldName, "");
+      setValue("details.selectDetail", "");
+      
+      // Close the SelectedDetail UI to show DetailsList/SpecificationsList
+      setMatchFound(false);
     }
   };
 
   return (
-    <>
-      <Form
-        className={styles.form}
-        action={mockServerAction}
-        // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
+    <div className={styles.container}>
+      
+      <div
+        key={id}
+        className={`${styles.selectedDetailContainer} ${styles.open}`}
       >
-        <div key={id} className={styles.selectedDetailContainer}>
-          <div className={styles.deleteButtonContainer} onClick={() => close()}>
-            <Icon
-              className={styles.deleteButton}
-              src={"/icons/x.svg"}
-              alt="delete"
-              width={20}
-              height={20}
-            />
-          </div>
-          <div className={styles.selectedDetailDescriptionContainer}>
-            <p className={styles.selectedDetailTitle}>{detail}</p>
-            <p
-              className={styles.selectedDetailDescription}
-              style={{
-                marginBottom: placeholder
-                  ? 0
-                  : detail === "Define Your Own Detail"
-                    ? "0.5rem"
-                    : "1.25rem",
-              }}
-            >
-              {description}
-            </p>
-            {detail === "Define Your Own Detail" && (
-              <p
-                className={styles.selectedDetailExample}
-                style={{ marginBottom: "1.25rem" }}
-              >
-                eg. {"  "}
-                <strong>Warranty Information</strong>:{" "}
-                <span>Still under manufacturer warranty until June 2026.</span>
-              </p>
-            )}
-            {placeholder && (
-              <p
-                className={styles.selectedDetailExample}
-                style={{ marginBottom: "1.25rem" }}
-              >
-                eg. {"  "}
-                <strong>{boldTextExample}</strong>:{" "}
-                <span>{normalTextExample}</span>
-              </p>
-            )}
-          </div>
-          <div className={styles.selectedDetailInputContainer}>
-            <TextArea
-              id="textInput"
-              name={selectDetailValue}
-              hasSubmitButton={false}
-              size="large"
-              placeholder={
-                placeholder
-                  ? `${
-                      typeof placeholder === "string" && placeholder.length > 55
-                        ? placeholder.slice(0, 55) + "..."
-                        : placeholder
-                    }`
-                  : example
-                    ? `eg. ${
-                        typeof example === "string" && example.length > 55
-                          ? example.slice(0, 55) + "..."
-                          : example
-                      }`
-                    : ""
-              }
-              value={inputValue}
-              ariaLabel="Chosen Detail"
-              dashboard
-              error={errors[selectDetailValue]?.message as string}
-              maxHeight={120}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                handleChange(e); // Call your custom handleChange
-              }}
-              onBlur={handleBlur}
-              {...register(selectDetailValue)} // Spread register props for React Hook Form
-            />
-          </div>
-          <div className={styles.submitButtonContainer}>
-            <Button
-              className={styles.submitButton}
-              buttonChildren="Submit Detail"
-              buttonType="normal"
-              type="submit"
-              buttonSize="large"
-              name="submit-detail-btn"
-              aria-label="Submit Detail Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-            />
-          </div>
+        <div className={styles.deleteButtonContainer} onClick={() => close()}>
+          <Icon
+            className={styles.deleteButton}
+            src={"/icons/x.svg"}
+            alt="delete"
+            width={20}
+            height={20}
+          />
         </div>
-      </Form>
-    </>
+        <div className={styles.selectedDetailDescriptionContainer}>
+          <p className={styles.selectedDetailTitle}>{detail}</p>
+          <p
+            className={styles.selectedDetailDescription}
+            style={{
+              marginBottom: placeholder
+                ? 0
+                : detail === "Define Your Own Detail"
+                  ? "0.5rem"
+                  : "1.25rem",
+            }}
+          >
+            {description}
+          </p>
+          {detail === "Define Your Own Detail" && (
+            <p
+              className={styles.selectedDetailExample}
+              style={{ marginBottom: "1.25rem" }}
+            >
+              eg. {"  "}
+              <strong>Warranty Information</strong>:{" "}
+              <span>Still under manufacturer warranty until June 2026.</span>
+            </p>
+          )}
+          {placeholder && (
+            <p
+              className={styles.selectedDetailExample}
+              style={{ marginBottom: "1.25rem" }}
+            >
+              eg. {"  "}
+              <strong>{boldTextExample}</strong>:{" "}
+              <span>{normalTextExample}</span>
+            </p>
+          )}
+        </div>
+        <div className={styles.selectedDetailInputContainer}>
+          <TextArea
+            id="textInput"
+            name={`details.${selectDetailValue}`}
+            hasSubmitButton={false}
+            size="large"
+            placeholder={
+              placeholder
+                ? `${
+                    typeof placeholder === "string" && placeholder.length > 55
+                      ? placeholder.slice(0, 55) + "..."
+                      : placeholder
+                  }`
+                : example
+                  ? `eg. ${
+                      typeof example === "string" && example.length > 55
+                        ? example.slice(0, 55) + "..."
+                        : example
+                    }`
+                  : ""
+            }
+            value={inputValue}
+            ariaLabel="Chosen Detail"
+            dashboard
+            error={errors?.details?.[selectDetailValue]?.message as string}
+            maxHeight={120}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              handleChange(e); 
+            }}
+            onBlur={handleBlur}
+            {...register(`details.${selectDetailValue}`)} 
+          />
+        </div>
+        <div className={styles.submitButtonContainer}>
+          <Button
+            className={styles.submitButton}
+            buttonChildren="Submit Detail"
+            buttonType="normal"
+            type="button" 
+            buttonSize="large"
+            name="submit-detail-btn"
+            aria-label="Submit Detail Button"
+            autoFocus={false}
+            disabled={false}
+            dashboard
+            onClick={clickHandler} 
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

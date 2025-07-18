@@ -1,22 +1,18 @@
-import styles from "./QrScanner.module.scss";
-import  VerificationFormWrapper from "./VerificationFormWrapper";
-import { QRCodeSVG } from "qrcode.react";
+import VerificationFormWrapper from "./VerificationFormWrapper";
 
-const QrScanner = () => {
-  return (
-    <VerificationFormWrapper title="QR Scanner">
-      <div className={styles.container}>
-        <p className={styles.description}>
-          Open your phone's camera to scan the QR code below. You will be
-          redirected to a secure verification page — follow the instructions on
-          your phone to proceed.
-        </p>
-        <div className={styles.qrCodeContainer}>
-          <QRCodeSVG value="https://www.google.com" />
-        </div>
-      </div>
-    </VerificationFormWrapper>
-  );
-};
+const QrScanner = () => (
+  <VerificationFormWrapper title="QR Code Scanner">
+    <div style={{ textAlign: "center", marginTop: 40 }}>
+      <h2>QR Code Scanner</h2>
+      <p>
+        This feature is coming soon. For now, you can proceed to the next step.
+      </p>
+      <p>
+        In the future, this step will allow you to scan QR codes for
+        verification purposes.
+      </p>
+    </div>
+  </VerificationFormWrapper>
+);
 
 export default QrScanner;

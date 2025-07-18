@@ -12,6 +12,7 @@ import "swiper/scss/pagination";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
   images: Ad["images"];
@@ -33,7 +34,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
   };
 
   if (initialSlideIndex === null) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
   }
 
   return (

@@ -67,6 +67,7 @@ const SIZE = {
 const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
+      className,
       hasSubmitButton = true,
       size = "large",
       placeholder = "",
@@ -179,7 +180,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             {error || charCountError}
           </p>
         )}
-        <div className={`${styles.container} ${sizeClass}`}  >
+        <div className={`${styles.container} ${sizeClass} ${className || ''}`}  >
           {label && (
             <label className={styles.label} htmlFor={id}>
               {label}

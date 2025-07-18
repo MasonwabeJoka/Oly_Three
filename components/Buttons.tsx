@@ -206,7 +206,7 @@ const Button = ({
       <button
         className={`${styles.button} ${
           BUTTON_TYPE[buttonType] || ""
-        } ${sizeClass} ${className}`}
+        } ${sizeClass} ${className || ''}`}
         type={type}
         onClick={onClick}
         onBlur={onBlur}

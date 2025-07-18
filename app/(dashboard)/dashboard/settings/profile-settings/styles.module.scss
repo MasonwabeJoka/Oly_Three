@@ -27,7 +27,7 @@
     margin-bottom: rem(48);
 
     .errorMessage {
-      color: $danger;
+      color: $danger !important;
       margin-bottom: rem(8);
     }
     .controls {
@@ -41,7 +41,7 @@
       }
 
       .phoneNumber {
-        margin-bottom: rem(48);
+        // margin-bottom: rem(48);
       }
 
       .changePasswordButton {
@@ -70,11 +70,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: rem(48);
       }
     }
   }
 
   .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: rem(240);
+
+    .updateProfileSettings {
+      margin-bottom: rem(20);
+    }
+
+    .backButton {
+    }
   }
 }

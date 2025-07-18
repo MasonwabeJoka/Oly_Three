@@ -28,27 +28,16 @@ type VerificationData = {
 type VerificationStore = {
   message: string; // Feedback message (e.g., errors or success)
   currentStepIndex: number; // Current step index
-  isFirstStep: boolean; // Whether the current step is the first step
-  isLastStep: boolean; // Whether the current step is the last step
   verificationData: VerificationData; // Collected verification data
   steps: Step[]; // Array of steps
+  userType: null | 'individual' | 'business';
+  setUserType: (type: 'individual' | 'business' | null) => void;
+  clearUserTypeData: () => void; // Clear user type specific data
   setMessage: (message: string) => void; // Set feedback message
   updateVerificationData: (data: Partial<VerificationData>) => void; // Update verification data
   resetVerificationData: () => void; // Reset data to initial state
-  next: () => void; // Move to next step
-  back: () => void; // Move to previous step
-  goTo: (index: number) => void; // Renamed from setCurrentStepIndex
+  setCurrentStepIndex: (index: number) => void; // Set the current step index (used by effect)
 };
-
-const steps: Step[] = [
-  { id: 'step1', name: 'Verify Your Account' },
-  { id: 'step2', name: 'QR Code Scanning' },
-  { id: 'step3', name: 'ID or Passport Information' },
-  { id: 'step5', name: 'Security Questions' },
-  { id: 'step5', name: 'Selfie Verification' },
-  { id: 'step6', name: 'Mobile Number Verification' },
-  { id: 'step7', name: 'Finish' },
-];
 
 const initialVerificationData: VerificationData = {
   qrData: '',
@@ -58,19 +47,46 @@ const initialVerificationData: VerificationData = {
   mobile: { number: '', code: '' },
 };
 
-const initialStepIndex =
-  typeof window !== 'undefined'
-    ? parseInt(localStorage.getItem('verificationStepIndex') || '0', 10)
-    : 0;
-localStorage.setItem('verificationStepIndex', '1');
 const useVerificationStore = create<VerificationStore>((set, get) => ({
   // Initial state
   message: '',
-  currentStepIndex: initialStepIndex,
-  isFirstStep: initialStepIndex === 0,
-  isLastStep: initialStepIndex === steps.length - 1,
+  currentStepIndex: 0,
   verificationData: initialVerificationData,
-  steps,
+  steps: [], // Will be set dynamically based on userType
+  userType: null,
+
+  setUserType: (type) => {
+    const newSteps = type === 'business'
+      ? [
+          { id: 'business-intro', name: 'Business Introduction' },
+          { id: 'business-details', name: 'Business Details' },
+          { id: 'rep-id', name: 'Representative ID' },
+          { id: 'rep-selfie', name: 'Representative Selfie' },
+          { id: 'rep-mobile', name: 'Representative Mobile' },
+          { id: 'business-finish', name: 'Business Finish' },
+        ]
+      : type === 'individual'
+        ? [
+            { id: 'individual-intro', name: 'Individual Introduction' },
+            { id: 'individual-id', name: 'ID/Passport' },
+            { id: 'individual-selfie', name: 'Selfie Verification' },
+            { id: 'individual-mobile', name: 'Mobile Verification' },
+            { id: 'individual-finish', name: 'Individual Finish' },
+          ]
+        : [];
+    set({
+      userType: type,
+      steps: newSteps,
+    });
+  },
+
+  // Clear user type specific data when switching types
+  clearUserTypeData: () => set({
+    verificationData: initialVerificationData,
+    currentStepIndex: 0,
+    message: '',
+    steps: [],
+  }),
 
   // Set feedback message
   setMessage: (message) => set({ message }),
@@ -85,55 +101,8 @@ const useVerificationStore = create<VerificationStore>((set, get) => ({
   resetVerificationData: () =>
     set({ verificationData: initialVerificationData }),
 
-  // Move to the next step
-  next: () => {
-    const { currentStepIndex, steps } = get();
-    if (currentStepIndex < steps.length - 1) {
-      const newIndex = currentStepIndex + 1;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('verificationStepIndex', newIndex.toString());
-      }
-      set({
-        currentStepIndex: newIndex,
-        isFirstStep: newIndex === 0,
-        isLastStep: newIndex === steps.length - 1,
-        message: '',
-      });
-    }
-  },
-  
-  // Move to the previous step
-  back: () => {
-    const { currentStepIndex, steps } = get();
-    if (currentStepIndex > 0) {
-      const newIndex = currentStepIndex - 1;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('verificationStepIndex', newIndex.toString());
-      }
-      set({
-        currentStepIndex: newIndex,
-        isFirstStep: newIndex === 0,
-        isLastStep: newIndex === steps.length - 1,
-        message: '',
-      });
-    }
-  },
-
-  // Go to a specific step by index (renamed from setCurrentStepIndex)
-  goTo: (index) => {
-    const { steps } = get();
-    if (index >= 0 && index < steps.length) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('verificationStepIndex', index.toString());
-      }
-      set({
-        currentStepIndex: index,
-        isFirstStep: index === 0,
-        isLastStep: index === steps.length - 1,
-        message: '',
-      });
-    }
-  },
+  // Set the current step index (used by effect in AccountVerification)
+  setCurrentStepIndex: (index) => set({ currentStepIndex: index }),
 }));
 
 export default useVerificationStore;

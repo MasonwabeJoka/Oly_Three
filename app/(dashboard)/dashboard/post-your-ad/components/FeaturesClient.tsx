@@ -154,8 +154,8 @@ const FeaturesClient = (props: FeaturesProps) => {
                             <Image
                               src="/icons/trash.png"
                               alt="delete-icon"
-                              width={24}
-                              height={24}
+                              width={18}
+                              height={18}
                             />
                           }
                           buttonType="roundStandardFeed"

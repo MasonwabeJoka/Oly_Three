@@ -9,29 +9,45 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import { useModalStore } from "@/store/modalStore";
-import { searchAction } from "./../utils/FormServerActions/heroSectionSearchAction";
+import { useRouter, useSearchParams } from "next/navigation";
+
+interface HeroSectionSearchClientProps {
+  searchParams?: {
+    searchTerm?: string;
+    locationSearch?: string;
+  };
+}
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const HeroSectionSearchClient = () => {
+const HeroSectionSearchClient = ({ searchParams = {} }: HeroSectionSearchClientProps) => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
-  const setShowCategoriesModal = useModalStore(
-    (state) => state.setShowCategoriesModal
-  );
+  const setShowCategoriesModal = useModalStore((state) => state.setShowCategoriesModal);
+  const router = useRouter();
+  const searchParamsHook = useSearchParams();
 
   const {
     register,
     handleSubmit,
-    setValue,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(searchFormSchema),
+    defaultValues: {
+      searchTerm: searchParams.searchTerm || "",
+      locationSearch: searchParams.locationSearch || "",
+    },
   });
 
   const onSubmit = async (data: FormValues) => {
+    const params = new URLSearchParams(searchParamsHook.toString());
+    params.set("searchTerm", data.searchTerm);
+    params.set("locationSearch", data.locationSearch);
+    router.push(`/?${params.toString()}`);
+
     const formData = new FormData();
     formData.append("searchTerm", data.searchTerm);
     formData.append("locationSearch", data.locationSearch);
@@ -46,8 +62,8 @@ const HeroSectionSearchClient = () => {
         }
       });
     } else {
-      console.log("Form submitted successfully:", data);
       setServerErrors({});
+      reset();
     }
   };
 
@@ -67,7 +83,7 @@ const HeroSectionSearchClient = () => {
           onClick={() => setShowCategoriesModal(true)}
         />
       </div>
-      <div className={styles.searchFields}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.searchFields}>
         <div className={styles.searchTerm}>
           <p className={styles.errorMessage}>
             {errors.searchTerm?.message || serverErrors.searchTerm}
@@ -85,28 +101,19 @@ const HeroSectionSearchClient = () => {
             label="Search"
             placeholder="What are you looking for?"
             id="searchTerm"
-            name="searchTerm"
+            error={errors.searchTerm?.message}
             ariaLabel="Search Term"
             autoComplete="off"
             required
             {...register("searchTerm")}
-            onChange={(e) =>
-              setValue("searchTerm", e.target.value, {
-                shouldDirty: true,
-                shouldValidate: true,
-              })
-            }
-            onSuggestionsChange={(count) => setSearchTermSuggestions(count)}
+            onSuggestionsChange={(value) => setSearchTermSuggestions(value)}
           />
         </div>
         {searchTermSuggestions === 0 && (
           <div className={styles.searchLocation}>
-            {errors && errors.locationSearch && (
-              <p className={styles.errorMessage}>
-                {errors.locationSearch?.message || serverErrors.locationSearch}
-              </p>
-            )}
-
+            <p className={styles.errorMessage}>
+              {errors.locationSearch?.message || serverErrors.locationSearch}
+            </p>
             <Input
               isSearchBar={true}
               suggestions={suggestions}
@@ -121,38 +128,31 @@ const HeroSectionSearchClient = () => {
               placeholder="Search by city, province, township..."
               id="locationSearch"
               name="locationSearch"
+              error={errors.locationSearch?.message}
               ariaLabel="Location"
-              autoFocus={false}
               autoComplete="off"
               required
               {...register("locationSearch")}
-              onChange={(e) =>
-                setValue("locationSearch", e.target.value, {
-                  shouldDirty: true,
-                  shouldValidate: true,
-                })
-              }
               onSuggestionsChange={(count) => setLocationSuggestions(count)}
             />
           </div>
         )}
-      </div>
-      {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-        <div className={styles.searchButton}>
-          <Button
-            buttonChildren="Search"
-            className={styles.search}
-            buttonType="normal"
-            buttonSize="large"
-            name="Search Button"
-            type="submit"
-            ariaLabel="Search Button"
-            autoFocus={false}
-            disabled={isSubmitting}
-            onClick={handleSubmit(onSubmit)}
-          />
-        </div>
-      )}
+        {searchTermSuggestions === 0 && locationSuggestions === 0 && (
+          <div className={styles.searchButton}>
+            <Button
+              buttonChildren="Search"
+              className={styles.search}
+              buttonType="normal"
+              buttonSize="large"
+              name="Search Button"
+              type="submit"
+              ariaLabel="Search Button"
+              autoFocus={false}
+              disabled={isSubmitting}
+            />
+          </div>
+        )}
+      </form>
     </>
   );
 };
