@@ -3,15 +3,18 @@ import AdSkeleton from "../skeletons/AdSkeleton";
 import AdCardClient from "./AdCardClient";
 import type { PortableTextBlock } from "sanity";
 
+
+
 type Props = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   ad: any | null;
   index: number;
   cardType: "expanded" | "box";
-  id?: string;
+  id?: string | number;
   images?: string[];
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   postAge?: string;
   price?: number;
   cardSize?: "large" | "standard" | "small";
@@ -40,13 +43,14 @@ const AdCard: React.FC<Props> = ({
   cardType,
   images,
   title,
-  description,
+  description = 230,
+  descriptionLength,
   postAge,
   price,
   cardSize = "standard",
   isFeed,
   isDashboard,
-  isDeletable = false,
+  isDeletable,
   checkedColour,
   hoverColour,
   checkedHovered,
@@ -71,6 +75,7 @@ const AdCard: React.FC<Props> = ({
           images={images}
           title={title}
           description={description}
+          descriptionLength={descriptionLength}
           postAge={postAge}
           price={price}
           cardSize={cardSize}

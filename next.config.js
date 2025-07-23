@@ -4,6 +4,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["mongoose"],
     optimizePackageImports: ["@phosphor-icons/react"],
+    serverActions: true,
   },
 
   images: {

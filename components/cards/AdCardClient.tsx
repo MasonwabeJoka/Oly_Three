@@ -5,6 +5,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 
 import ExpandedCard  from "../ExpandedCard";
 import BoxCard from "../BoxCard";
+import type { PortableTextBlock } from "sanity";
 
 type Props = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -14,7 +15,8 @@ type Props = {
   id?: string;
   images?: string[];
   title?: string;
-  description?: string | any[] | null;
+  description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   postAge?: string;
   price?: number;
   cardSize?: "large" | "standard" | "small";
@@ -67,6 +69,7 @@ const AdCardClient: React.FC<Props> = ({
   images,
   title,
   description,
+  descriptionLength,
   postAge,
   price,
   cardSize = "standard",
@@ -132,6 +135,7 @@ const AdCardClient: React.FC<Props> = ({
       checkedHovered={checkedHovered}
       title={title}
       description={description}
+      descriptionLength={descriptionLength}
       price={price}
       postAge={postAge}
       onHeartClick={handleHeartClick}
@@ -155,6 +159,7 @@ const AdCardClient: React.FC<Props> = ({
       avatar={avatar}
       title={title}
       description={description}
+      descriptionLength={descriptionLength}
       suburb={suburb}
       city={city}
       price={price}

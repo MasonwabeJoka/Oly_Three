@@ -89,34 +89,35 @@ const NotificationsCard = ({
       </section>
       {showButtons && (
         <section
-          className={styles.buttonsSection}
           onMouseEnter={() => setShowButtons(true)}
           onMouseLeave={() => setShowButtons(false)}
         >
+          <ul className={styles.buttonsSection}></ul>
           {buttons?.map((button: string, index: number) =>
             buttonLinks ? (
-              <Link
-                href={buttonLinks[index]}
+              <li
+                key={index}
                 className={`${styles.buttonContainer} ${
                   buttons[0] === button && styles.firstButtonContainer
                 }`}
-                key={index}
               >
-                <Button
-                  className={`${styles.button} ${
-                    buttons[0] === button && styles.firstButton
-                  }`}
-                  buttonChildren={button}
-                  buttonType="normal"
-                  buttonSize="medium"
-                  name="take-action"
-                  type="button"
-                  ariaLabel="Take Action Button"
-                  autoFocus={false}
-                  disabled={false}
-                  dashboard
-                />
-              </Link>
+                <Link href={buttonLinks[index]}>
+                  <Button
+                    className={`${styles.button} ${
+                      buttons[0] === button && styles.firstButton
+                    }`}
+                    buttonChildren={button}
+                    buttonType="normal"
+                    buttonSize="medium"
+                    name="take-action"
+                    type="button"
+                    ariaLabel="Take Action Button"
+                    autoFocus={false}
+                    disabled={false}
+                    dashboard
+                  />
+                </Link>
+              </li>
             ) : null
           )}
         </section>

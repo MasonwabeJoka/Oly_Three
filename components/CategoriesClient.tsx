@@ -48,12 +48,12 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
         }}
         onClick={() => setShowCategoriesModal(false)}
       >
-        <div className={styles.categoriesContainer}>
+        <ul className={styles.categoriesContainer}>
           {fetchedCategories.map((categoryItem, index) => {
             const { id, category, subcategories } = categoryItem;
 
             return (
-              <div
+              <li
                 className={styles.mobileSubcategoriesContainer}
                 key={id}
                 onClick={handleCategoriesContainerClick}
@@ -65,10 +65,10 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
                   name={subcategories[index]}
                   ariaLabel={subcategories[index]}
                 />
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     );
   } else {
@@ -94,43 +94,41 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
             const visibleCount = visibleSubcategories[categoryId] || 8;
 
             return (
-              <>
-                <div key={categoryId} className={styles.categoriesSection}>
-                  <h4 className={styles.category}>{title}</h4>
-                  {subcategories
-                    .slice(0, visibleCount)
-                    .map((subcategory: string) => (
-                      <div
-                        key={subcategory}
-                        className={styles.subcategoryContainer}
-                      >
-                        <Link href="/">
-                          {isSidebarOpen ? (
-                            <p className={styles.subcategory}>
-                              {subcategory.length > 20
-                                ? `${subcategory.slice(0, 54)}`
-                                : subcategory}
-                            </p>
-                          ) : (
-                            <p className={styles.subcategory}>
-                              {subcategory.length > 20
-                                ? `${subcategory.slice(0, 60)}`
-                                : subcategory}
-                            </p>
-                          )}
-                        </Link>
-                      </div>
-                    ))}
-                  {subcategories.length > visibleCount && (
-                    <p
-                      className={styles.more}
-                      onClick={() => handleShowMore(categoryId)}
+              <div key={categoryId} className={styles.categoriesSection}>
+                <h4 className={styles.category}>{title}</h4>
+                {subcategories
+                  .slice(0, visibleCount)
+                  .map((subcategory: string) => (
+                    <div
+                      key={subcategory}
+                      className={styles.subcategoryContainer}
                     >
-                      Show More...
-                    </p>
-                  )}
-                </div>
-              </>
+                      <Link href="/">
+                        {isSidebarOpen ? (
+                          <p className={styles.subcategory}>
+                            {subcategory.length > 20
+                              ? `${subcategory.slice(0, 54)}`
+                              : subcategory}
+                          </p>
+                        ) : (
+                          <p className={styles.subcategory}>
+                            {subcategory.length > 20
+                              ? `${subcategory.slice(0, 60)}`
+                              : subcategory}
+                          </p>
+                        )}
+                      </Link>
+                    </div>
+                  ))}
+                {subcategories.length > visibleCount && (
+                  <p
+                    className={styles.more}
+                    onClick={() => handleShowMore(categoryId)}
+                  >
+                    Show More...
+                  </p>
+                )}
+              </div>
             );
           })}
         </div>

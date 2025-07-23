@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Listings.module.scss";
-import ListingsExpanded from "@/components/ListingsExpanded";
-import ListingsCollage from "@/components/ListingsCollage";
 import useArticlesStore from "@/store/articlesStore";
 import Modal from "@/components/Modal";
 import { useModalStore } from "@/store/modalStore";
@@ -15,14 +13,30 @@ import { useListingsStore } from "@/store/listingsStore";
 import Navbar from "@/components/layouts/Navbar";
 import Pagination from "@/components/Pagination";
 import { useSearchParams } from "next/navigation";
+import Listings from "@/components/Listings";
+import TopNotification from "@/components/TopNotification";
+import ListingsExpanded from "@/components/ListingsExpanded";
+import ListingsCollage from "@/components/ListingsCollage";
+
+interface ListingsClientProps {
+  searchTerm: string;
+  locationSearch: string;
+  sortData: { id: number; result: string }[];
+  priceRanges: { id: number; result: string[] }[];
+  multipleImages: { id: number; images: string[] }[];
+  articles: { id: number; title: string; image: string; category: string }[];
+  articleCategories: string[];
+}
 
 export default function ListingsClient({
+  searchTerm,
+  locationSearch,
   sortData,
   priceRanges,
   multipleImages,
   articles,
   articleCategories,
-}) {
+}: ListingsClientProps) {
   const {
     expanded,
     sortOptions,
@@ -46,8 +60,8 @@ export default function ListingsClient({
   const { avatars, getAvatars } = useArticlesStore();
   const { showMenuModal, setShowMenuModal } = useModalStore();
   const { ads, fetchAds } = useFetchAdStore();
+  const [showResultsNotification, setShowResultsNotification] = useState(true);
 
-  const searchParams = useSearchParams();
   const tempImages = multipleImages.map((item) => item.images);
 
   // Explicitly type refs as HTMLDivElement
@@ -114,16 +128,9 @@ export default function ListingsClient({
     setPriceOptions(false);
   };
 
-  const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <nav className={styles.nav}>
-          <Navbar />
-        </nav>
         <div className={styles.modalContainer}>
           <Modal
             showModal={showMenuModal}
@@ -131,13 +138,11 @@ export default function ListingsClient({
             modalContent={<Menu />}
           />
         </div>
-        <div className={styles.listingsSearchForm}>
-          <ListingsSearchForm onSubmit={onSubmit} />
-        </div>
 
         <div className={styles.listingsContainer}>
           <div className={styles.tabsContainer} ref={tabsContainerRef}>
             <div className={styles.filters} ref={filtersRef}>
+          
               <Tabs
                 tabs={["Make", "Model", "Body Type", "More Filters+"]}
                 condition={!expanded}
@@ -201,7 +206,15 @@ export default function ListingsClient({
               ) : null}
             </div>
           </div>
-
+{/* 
+          <div className={styles.listings} ref={listingsRef}>
+            <Listings
+              expanded={expanded}
+              tempImages={tempImages}
+              avatars={avatars}
+              
+            />
+          </div> */}
           <div className={styles.listings} ref={listingsRef}>
             {expanded ? (
               <ListingsExpanded
@@ -228,9 +241,7 @@ export default function ListingsClient({
               />
             )}
           </div>
-          <div className={styles.pagination}>
-            <Pagination totalPages={985} />
-          </div>
+         
         </div>
       </div>
     </div>

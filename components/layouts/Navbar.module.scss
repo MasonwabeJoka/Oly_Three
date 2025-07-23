@@ -10,7 +10,7 @@
     align-items: center;
     z-index: 12;
     transition: transform 0.5s ease-in-out;
-    pointer-events: none; /* Make the div click-through */
+    // pointer-events: none; /* Make the div click-through */
     width: 95vw;
   
     @include only(largeDesktop) {

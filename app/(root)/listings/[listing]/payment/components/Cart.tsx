@@ -26,13 +26,16 @@ const Cart = () => {
         {isClient && items.length > 0 ? (
           <>
             <div className={styles.ItemsCount}>Items: {itemCount}</div>
-            <div className={styles.items}>
+            <ul className={styles.items}>
               <ScrollArea>
+                <li key={item.ad._id}>
+
                 {items.map((item) => (
-                  <CartItem key={item.ad._id} ad={item.ad} />
+                  <CartItem  ad={item.ad} />
                 ))}
+                </li>
               </ScrollArea>
-            </div>
+            </ul>
             <div className={styles.transactionSummaryContainer}>
               <h2>TransactionSummary</h2>
               <div className={styles.transactionFeeContainer}>

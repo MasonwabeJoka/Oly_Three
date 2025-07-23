@@ -147,13 +147,13 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
       </section>
       <section className={styles.wrapper}>
         <aside className={styles.leftSideBar}>
-          <div className={styles.categories}>
+          <ul className={styles.categories}>
             {articleCategories.map((category, index) => (
-              <div key={index} className={styles.category}>
+              <li key={index} className={styles.category}>
                 {category.name}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </aside>
         <main className={styles.main}>
           <div className={styles.article}>
@@ -163,18 +163,18 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
         <aside className={styles.rightSideBar}>
           <div className={styles.articleRecommendations}>
             <h2 className={styles.title}>Recommended</h2>
-            <div className={styles.articles}>
+            <ul className={styles.articles}>
               {articles.map((article, index) => (
-                <div key={index} className={styles.article}>
+                <li key={index} className={styles.article}>
                   <RecommendedArticle
                     image={article.coverImage}
                     title={article.title}
                     author={article.author.name}
                     avatar={article.author.avatar}
                   />
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </aside>
       </section>
@@ -200,7 +200,7 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
             </div>
             <div>Copy Link</div>
           </div>
-          <div className={styles.socialMediaLinks}>
+          <ul className={styles.socialMediaLinks}>
             {socialMediaData.slice(0, 3).map((socialMedia, index) => (
               <div key={index} className={styles.icon}>
                 <Icon
@@ -211,7 +211,7 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
                 />
               </div>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
       <section className={styles.commentsSection}>

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import useArticlesStore from "@/store/articlesStore";
 import MyAdsCard from "@/components/cards/MyAdsCard";
 import styles from "./styles.module.scss";
+import { images } from "@/data/galleryImages";
 
 const MyAds = ({ listingsData }) => {
   const avatars = useArticlesStore((state) => state.avatars);
@@ -20,7 +21,7 @@ const MyAds = ({ listingsData }) => {
             <MyAdsCard
               id={listing.id}
               key={listing.id}
-              images={listing.images}
+              images={images}
               userName={listing.userName}
               title={listing.title}
               price={listing.price}

@@ -20,9 +20,9 @@ const FAQs: React.FC<{ faqs: Props[] }> = ({ faqs }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wrapper}>
+      <ul className={styles.wrapper}>
         {faqs.map((faq: Props, index: number) => (
-          <div
+          <li
             key={index}
             className={styles.questionAndAnswer}
             onMouseEnter={() => toggleFaq(index)}
@@ -34,9 +34,9 @@ const FAQs: React.FC<{ faqs: Props[] }> = ({ faqs }) => {
             {openFaqIndex === index && (
               <div className={styles.answer}>{faq.answer}</div>
             )}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

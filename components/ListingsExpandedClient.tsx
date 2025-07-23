@@ -1,5 +1,5 @@
 "use client";
-import styles from "./ListingsExpanded.module.scss";
+import styles from "./ListingsExpandedClient.module.scss";
 import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/client";
 import Link from "next/link";
@@ -33,7 +33,7 @@ const ListingsExpandedClient = (props: ListingsExpandedProps) => {
   const {
     category,
     images,
-    isDeletable = false,
+    isDeletable,
     isDashboard,
     isFeed,
     checkedColour,
@@ -133,7 +133,7 @@ const ListingsExpandedClient = (props: ListingsExpandedProps) => {
   };
 
   return (
-    <div className={styles.listingsContainer}>
+    <ul className={styles.listingsContainer}>
       {ads?.map((ad: Ad, index: number) => {
         const aspectRatios = (ad.images || [])
           .map((image: SanityImage) => image.aspectRatio)
@@ -141,37 +141,39 @@ const ListingsExpandedClient = (props: ListingsExpandedProps) => {
             (ratio: number | undefined): ratio is number => ratio !== undefined
           );
         return (
-          <Link href="/" key={index}>
-            <div className={styles.expandedCardContainer}>
-              <AdCard
-                category={category}
-                slug={ad?.slug}
-                ad={ad}
-                index={index}
-                id={ad?._id}
-                cardType="expanded"
-                images={images[index]}
-                aspectRatios={tempAspectRatios && tempAspectRatios[index]}
-                title={ad?.title}
-                price={ad?.price}
-                description={
-                  Array.isArray(ad.description)
-                    ? richTextLength(ad.description, 400)
-                    : ad.description
-                }
-                isDeletable={isDeletable}
-                isDashboard={isDashboard}
-                isFeed={isSidebarOpen}
-                checkedColour={checkedColour}
-                hoverColour={hoverColour}
-                checkedHovered={checkedHovered}
-                postAge={ad?.postedOn}
-              />
-            </div>
-          </Link>
+          <li key={ad._id}>
+            <Link href="/">
+              <div className={styles.expandedCardContainer}>
+                <AdCard
+                  category={category}
+                  slug={ad?.slug}
+                  ad={ad}
+                  index={index}
+                  id={ad?._id}
+                  cardType="expanded"
+                  images={images[index]}
+                  aspectRatios={tempAspectRatios && tempAspectRatios[index]}
+                  title={ad?.title}
+                  price={ad?.price}
+                  description={
+                    Array.isArray(ad.description)
+                      ? richTextLength(ad.description, 400)
+                      : ad.description
+                  }
+                  isDeletable={isDeletable}
+                  isDashboard={isDashboard}
+                  isFeed={isSidebarOpen}
+                  checkedColour={checkedColour}
+                  hoverColour={hoverColour}
+                  checkedHovered={checkedHovered}
+                  postAge={ad?.postedOn}
+                />
+              </div>
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

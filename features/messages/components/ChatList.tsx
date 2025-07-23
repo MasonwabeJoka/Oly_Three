@@ -61,12 +61,12 @@ const ChatList: React.FC = () => {
           required={false}
         />
       </div>
-      <div className={styles.chats} role="list" aria-label="Recent chats">
+      <ul className={styles.chats} role="list" aria-label="Recent chats">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
           messages.map((message: Message) => (
-            <div
+            <li
               className={styles.chat}
               key={message.id}
               onClick={() => handleChatClickLocal(message)}
@@ -120,10 +120,10 @@ const ChatList: React.FC = () => {
                     : message.messages.length}
                 </p>
               </div>
-            </div>
+            </li>
           ))
         )}
-      </div>
+      </ul>
     </div>
   );
 };

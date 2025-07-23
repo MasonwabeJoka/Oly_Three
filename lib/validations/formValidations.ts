@@ -12,6 +12,7 @@ export const searchFormSchema = z.object({
       .min(1, "Location field cannot be empty.")
       .min(3, "Location must be at least 3 characters long.")
       .refine((val) => val.trim().length > 0, "Location cannot be only spaces."),
+    categories: z.string().optional(), 
   });
 
 export const feedbackFormSchema = z.object({

@@ -57,28 +57,28 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
             const isActiveItem = pathname === link;
             const postYourAd = menu === "Post Your Ad";
             return (
-              <Link
-                href={link}
-                className={styles.menu}
-                key={id}
-                onClick={() => setIsActive(isActiveItem ? id : null)}
-              >
-                <Icon
-                  className={styles.icon}
-                  src={isActiveItem ? active_icon : icon}
-                  alt="Edit Icon"
-                  width={40}
-                  height={40}
-                />
-                {!isMobile && (
-                  <h4
-                    className={styles.menuText}
-                    style={{ color: isActiveItem ? "#ff3c14" : "#434b4d" }}
-                  >
-                    {menu}
-                  </h4>
-                )}
-              </Link>
+              <li className={styles.menu} key={id}>
+                <Link
+                  href={link}
+                  onClick={() => setIsActive(isActiveItem ? id : null)}
+                >
+                  <Icon
+                    className={styles.icon}
+                    src={isActiveItem ? active_icon : icon}
+                    alt="Edit Icon"
+                    width={40}
+                    height={40}
+                  />
+                  {!isMobile && (
+                    <h4
+                      className={styles.menuText}
+                      style={{ color: isActiveItem ? "#ff3c14" : "#434b4d" }}
+                    >
+                      {menu}
+                    </h4>
+                  )}
+                </Link>
+              </li>
             );
           })}
         </div>

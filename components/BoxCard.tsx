@@ -18,6 +18,7 @@ type BoxCardProps = {
   checkedHovered?: string;
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   price?: number;
   postAge?: string;
   onHeartClick: (e: React.MouseEvent) => void;
@@ -41,6 +42,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
   checkedHovered,
   title,
   description,
+  descriptionLength,
   price,
   postAge,
   onHeartClick,
@@ -67,6 +69,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
             checkedHovered={checkedHovered}
             title={title}
             description={description}
+            descriptionLength={descriptionLength}
             price={price}
             postAge={postAge}
             onHeartClick={onHeartClick}
@@ -93,6 +96,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
             checkedHovered={checkedHovered}
             title={title}
             description={description}
+            descriptionLength={descriptionLength}
             price={price}
             postAge={postAge}
             onHeartClick={onHeartClick}

@@ -1,71 +1,45 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { useActionState } from "react"; // For state/errors
+import { useFormStatus } from "react-dom"; // Correct import for pending status
 import styles from "./HeroSectionClient.module.scss";
 import Button from "./Buttons";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import { useModalStore } from "@/store/modalStore";
-import { useRouter, useSearchParams } from "next/navigation";
 
-interface HeroSectionSearchClientProps {
-  searchParams?: {
-    searchTerm?: string;
-    locationSearch?: string;
-  };
-}
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const HeroSectionSearchClient = ({ searchParams = {} }: HeroSectionSearchClientProps) => {
+interface Props {
+  searchTerm: string;
+  locationSearch: string;
+}
+
+const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
-  const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   const setShowCategoriesModal = useModalStore((state) => state.setShowCategoriesModal);
-  const router = useRouter();
-  const searchParamsHook = useSearchParams();
+
 
   const {
-    register,
     handleSubmit,
-    setError,
     reset,
     formState: { errors, isSubmitting },
+    control,
   } = useForm<FormValues>({
     resolver: zodResolver(searchFormSchema),
-    defaultValues: {
-      searchTerm: searchParams.searchTerm || "",
-      locationSearch: searchParams.locationSearch || "",
-    },
+    defaultValues: { searchTerm, locationSearch },
   });
 
-  const onSubmit = async (data: FormValues) => {
-    const params = new URLSearchParams(searchParamsHook.toString());
-    params.set("searchTerm", data.searchTerm);
-    params.set("locationSearch", data.locationSearch);
-    router.push(`/?${params.toString()}`);
 
-    const formData = new FormData();
-    formData.append("searchTerm", data.searchTerm);
-    formData.append("locationSearch", data.locationSearch);
 
-    const result = await searchAction(formData);
-    if (!result.success && result.errors) {
-      result.errors.forEach((err) => {
-        const field = err.path?.[0];
-        if (field) {
-          setError(field as keyof FormValues, { message: err.message });
-          setServerErrors((prev) => ({ ...prev, [field]: err.message }));
-        }
-      });
-    } else {
-      setServerErrors({});
-      reset();
-    }
-  };
+  // Get pending state from parent <Form>; fallback to isSubmitting if unavailable
+  const { pending } = useFormStatus() || { pending: isSubmitting };
 
   return (
     <>
@@ -83,57 +57,68 @@ const HeroSectionSearchClient = ({ searchParams = {} }: HeroSectionSearchClientP
           onClick={() => setShowCategoriesModal(true)}
         />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.searchFields}>
+    
+      <div className={styles.searchFields}>
+        {/* Display server errors from useActionState */}
+        {errors && <p className={styles.errorMessage}>{errors?.message}</p>}
+
         <div className={styles.searchTerm}>
-          <p className={styles.errorMessage}>
-            {errors.searchTerm?.message || serverErrors.searchTerm}
-          </p>
-          <Input
-            className={styles.searchTermInput}
-            isSearchBar={true}
-            suggestions={suggestions}
-            inputType="text"
-            inputSize="large"
-            iconSrcRight="/icons/search.png"
-            iconPosition="right"
-            iconWidth={32}
-            iconHeight={32}
-            label="Search"
-            placeholder="What are you looking for?"
-            id="searchTerm"
-            error={errors.searchTerm?.message}
-            ariaLabel="Search Term"
-            autoComplete="off"
-            required
-            {...register("searchTerm")}
-            onSuggestionsChange={(value) => setSearchTermSuggestions(value)}
+          <p className={styles.errorMessage}>{errors.searchTerm?.message}</p>
+          <Controller
+            name="searchTerm"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                className={styles.searchTermInput}
+                isSearchBar={true}
+                suggestions={suggestions}
+                inputType="text"
+                inputSize="large"
+                iconSrcRight="/icons/search.png"
+                iconPosition="right"
+                iconWidth={32}
+                iconHeight={32}
+                label="Search"
+                placeholder="What are you looking for?"
+                id="searchTerm"
+                error={errors.searchTerm?.message}
+                ariaLabel="Search Term"
+                autoComplete="off"
+                required = {false}
+                onSuggestionsChange={(value) => setSearchTermSuggestions(value)}
+              />
+            )}
           />
         </div>
         {searchTermSuggestions === 0 && (
           <div className={styles.searchLocation}>
-            <p className={styles.errorMessage}>
-              {errors.locationSearch?.message || serverErrors.locationSearch}
-            </p>
-            <Input
-              isSearchBar={true}
-              suggestions={suggestions}
-              className={styles.searchLocationInput}
-              inputType="text"
-              inputSize="large"
-              iconSrcRight="/icons/search.png"
-              iconPosition="right"
-              iconWidth={32}
-              iconHeight={32}
-              label="Location"
-              placeholder="Search by city, province, township..."
-              id="locationSearch"
+            <p className={styles.errorMessage}>{errors.locationSearch?.message}</p>
+            <Controller
               name="locationSearch"
-              error={errors.locationSearch?.message}
-              ariaLabel="Location"
-              autoComplete="off"
-              required
-              {...register("locationSearch")}
-              onSuggestionsChange={(count) => setLocationSuggestions(count)}
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  isSearchBar={true}
+                  suggestions={suggestions}
+                  className={styles.searchLocationInput}
+                  inputType="text"
+                  inputSize="large"
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  label="Location"
+                  placeholder="Search by city, province, township..."
+                  id="locationSearch"
+                  error={errors.locationSearch?.message}
+                  ariaLabel="Location"
+                  autoComplete="off"
+                  required
+                  onSuggestionsChange={(count) => setLocationSuggestions(count)}
+                />
+              )}
             />
           </div>
         )}
@@ -148,11 +133,11 @@ const HeroSectionSearchClient = ({ searchParams = {} }: HeroSectionSearchClientP
               type="submit"
               ariaLabel="Search Button"
               autoFocus={false}
-              disabled={isSubmitting}
+              disabled={pending} // Disables during submission
             />
           </div>
         )}
-      </form>
+      </div>
     </>
   );
 };

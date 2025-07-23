@@ -15,6 +15,7 @@ type ExpandedDetailsProps = {
   avatar?: string;
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   suburb?: string;
   city?: string;
   price?: number;
@@ -26,7 +27,11 @@ const PreventLinkClick = ({ children }: any) => {
   const handleClick = (event: any) => {
     event.stopPropagation();
   };
-  return <div onClick={handleClick}>{children}</div>;
+  return (
+    <div className={styles.childrenContainer} onClick={handleClick}>
+      {children}
+    </div>
+  );
 };
 
 export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
@@ -39,6 +44,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   avatar,
   title,
   description,
+  descriptionLength,
   suburb,
   city,
   price,
@@ -74,15 +80,10 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
               isOnline={false}
             />
             <div className={styles.titleWrapper}>
-              <p
-                className={styles.title}
-                // style={{
-                //   fontSize: title ? (title.length > 48 ? "20px" : "24px") : "",
-                // }}
-              >
+              <p className={styles.title}>
                 {title
                   ? title.length > 42
-                    ? `${title.slice(0, 42)}...`
+                    ? `${title.slice(0, 44)}`
                     : title
                   : ""}
               </p>
@@ -95,7 +96,13 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
             </div>
           </div>
           <div className={styles.descriptionContainer}>
-            <p className={styles.description}>{descriptionString}</p>
+            <p className={styles.description}>
+              {descriptionLength
+                ? descriptionString.length > descriptionLength
+                  ? `${descriptionString.slice(0, descriptionLength)}...`
+                  : descriptionString
+                : ""}
+            </p>
           </div>
           <div className={styles.cardBottom}>
             <div className={styles.postMetrics}>

@@ -3,6 +3,7 @@ import styles from "./FeaturedCategories.module.scss";
 import Button from "@/components/Buttons";
 import { useModalStore } from "@/store/modalStore";
 import LinkCard from "@/components/cards/LinkCard";
+import Link from "next/link";
 
 export type FeaturedCategoriesClientProps = {
   categories: Array<{ _id: string; title: string; image: string }>;
@@ -17,16 +18,19 @@ const FeaturedCategoriesClient = ({
 
   return (
     <div className={styles.categoriesSection}>
-      <div className={styles.categoriesContainer}>
-        {categories.slice(0, 12).map((category) => (
-          <LinkCard
-            key={category._id}
-            label={category.title}
-            cardSize="large"
-            image={category.image}
-          />
-        ))}
-      </div>
+      <ul className={styles.categoriesContainer}>
+        {categories.slice(0, 12).map((category) => {
+          const { _id: id, title, image } = category;
+          return (
+            <li key={id}>
+              {/* <Link href={`/listings/${category.title}`}> */}
+              <Link href={`/listings/?category=${title.toLocaleLowerCase()}`}>
+                <LinkCard label={title} cardSize="large" image={image} />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
       <Button
         className={styles.button}
         buttonChildren="More Categories..."

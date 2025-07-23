@@ -86,25 +86,25 @@ const SellerDetails = () => {
 
         <div className={styles.socialMediaContainer}>
           {socialMediaLogos.map((app) => (
-            <Button
-              key={app.id}
-              className={styles.app}
-              buttonChildren={
-                <Image
-                  src={app.icon}
-                  alt={`${app.app} Icon`}
-                  width={16}
-                  height={16}
-                />
-              }
-              buttonType="icon"
-              buttonSize=""
-              name={`${app.app.toLowerCase()}_icon`}
-              type="button"
-              ariaLabel={`${app.app} Icon`}
-              autoFocus={false}
-              disabled={false}
-            />
+            <li key={app.id} className={styles.app}>
+              <Button
+                buttonChildren={
+                  <Image
+                    src={app.icon}
+                    alt={`${app.app} Icon`}
+                    width={16}
+                    height={16}
+                  />
+                }
+                buttonType="icon"
+                buttonSize=""
+                name={`${app.app.toLowerCase()}_icon`}
+                type="button"
+                ariaLabel={`${app.app} Icon`}
+                autoFocus={false}
+                disabled={false}
+              />
+            </li>
           ))}
         </div>
       </>

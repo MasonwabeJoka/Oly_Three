@@ -18,6 +18,7 @@ type ExpandedCardProps = {
   avatar?: string;
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   suburb?: string;
   city?: string;
   price?: number;
@@ -43,6 +44,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
   avatar,
   title,
   description,
+  descriptionLength,
   suburb,
   city,
   price,
@@ -69,6 +71,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
         avatar={avatar}
         title={title}
         description={description}
+        descriptionLength={descriptionLength}
         suburb={suburb}
         city={city}
         price={price}

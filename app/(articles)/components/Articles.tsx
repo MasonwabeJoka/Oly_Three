@@ -135,25 +135,27 @@ const Articles = ({ articles, articleCategories }) => {
       </section>
       <section className={styles.wrapper}>
         <aside className={styles.leftSideBar}>
-          <div className={styles.categories}>
+          <ul className={styles.categories}>
             {articleCategories.map((category, index) => (
-              <div key={index} className={styles.category}>
+              <li key={index} className={styles.category}>
                 {category.name}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </aside>
-        <main className={styles.main}>
-          {articles.map((article: any, index: number) => (
-            <div className={styles.article} key={article.id}>
-              <RecommendedArticle
-                image={article.coverImage}
-                title={article.title}
-                author={article.author.name}
-                avatar={article.author.avatar}
-              />
-            </div>
-          ))}
+        <main>
+          <ul className={styles.articlesContainer}>
+            {articles.map((article: any, index: number) => (
+              <li className={styles.article} key={article.id}>
+                <RecommendedArticle
+                  image={article.coverImage}
+                  title={article.title}
+                  author={article.author.name}
+                  avatar={article.author.avatar}
+                />
+              </li>
+            ))}
+          </ul>
         </main>
       </section>
       <section className={styles.bottomSection}>

@@ -1,3 +1,4 @@
+// Select.tsx (updated component)
 import styles from "./Select.module.scss";
 import { useState, forwardRef, useRef, useEffect } from "react";
 import Icon from "@/components/Icon";
@@ -106,7 +107,23 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     ref
   ) => {
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(
+      Array.isArray(initialValue)
+        ? initialValue
+        : typeof initialValue === "string"
+        ? [initialValue]
+        : []
+    );
+    const controlled = value !== undefined;
+    const selected = controlled
+      ? isMultiSelect
+        ? Array.isArray(value)
+          ? value
+          : []
+        : typeof value === "string"
+        ? [value]
+        : []
+      : selectedOptions;
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
     const selectRef = useRef<HTMLDivElement>(null);
@@ -158,16 +175,21 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     });
 
     const handleSingleSelect = (optionText: string) => {
-      setSelectedOptions([optionText]);
+      const newSelected = [optionText];
+      if (!controlled) {
+        setSelectedOptions(newSelected);
+      }
+      triggerChangeEvent(newSelected);
       setShowOptions(false);
-      triggerChangeEvent([optionText]);
     };
 
     const handleMultiSelect = (optionText: string, checked: boolean) => {
       const updatedOptions = checked
-        ? [...selectedOptions, optionText]
-        : selectedOptions.filter((item) => item !== optionText);
-      setSelectedOptions(updatedOptions);
+        ? [...selected, optionText]
+        : selected.filter((item) => item !== optionText);
+      if (!controlled) {
+        setSelectedOptions(updatedOptions);
+      }
       triggerChangeEvent(updatedOptions);
     };
 
@@ -184,24 +206,30 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const handleSelectAll = (checked: boolean) => {
       const allOptionLabels = filteredOptions.map(getOptionLabel);
       const updatedOptions = checked
-        ? [...new Set([...selectedOptions, ...allOptionLabels])]
-        : selectedOptions.filter((item) => !allOptionLabels.includes(item));
-      setSelectedOptions(updatedOptions);
+        ? [...new Set([...selected, ...allOptionLabels])]
+        : selected.filter((item) => !allOptionLabels.includes(item));
+      if (!controlled) {
+        setSelectedOptions(updatedOptions);
+      }
       triggerChangeEvent(updatedOptions);
     };
 
     const triggerChangeEvent = (values: string[]) => {
       if (onChange) {
+        const changeValue = isMultiSelect ? values : values[0] ?? "";
         onChange({
-          target: { value: isMultiSelect ? values : values[0], name } as any,
+          target: { value: changeValue, name } as any,
         } as React.ChangeEvent<HTMLSelectElement>);
       }
     };
 
     const clearSelections = () => {
-      setSelectedOptions([]);
+      const newSelected: string[] = [];
+      if (!controlled) {
+        setSelectedOptions(newSelected);
+      }
       setSearchValue("");
-      triggerChangeEvent([]);
+      triggerChangeEvent(newSelected);
     };
 
     let sizeClass = "";
@@ -215,22 +243,22 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
     const selectClass = `${styles.select} ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-    } ${className || ''}`;
+    } ${className || ""}`;
 
     const displayText = showOptions
       ? typeof initialValue === "string"
         ? initialValue
         : "Select an option"
-      : selectedOptions.length > 0
-        ? selectedOptions.join(", ").length > 40
-          ? selectedOptions.join(", ").slice(0, 40) + "..."
-          : selectedOptions.join(", ")
-        : typeof initialValue === "string"
-          ? initialValue
-          : "Select an option";
+      : selected.length > 0
+      ? selected.join(", ").length > 40
+        ? selected.join(", ").slice(0, 40) + "..."
+        : selected.join(", ")
+      : typeof initialValue === "string"
+      ? initialValue
+      : "Select an option";
 
     return (
-      <div ref={selectRef} className={className || ''}>
+      <div ref={selectRef} className={className || ""}>
         <div className={`${styles.selectMenu}`}>
           {error && <p className={styles.errorMessage}>{error as string}</p>}
 
@@ -247,15 +275,15 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 backgroundColor: showOptions ? "#ffffff" : "#f3f7fa",
               }}
             >
-              {isMultiSelect && showOptions && selectedOptions.length > 0 && (
+              {isMultiSelect && showOptions && selected.length > 0 && (
                 <div className={styles.selectCountContainer}>
                   <div className={styles.selectCount}>
-                    {selectedOptions.length}
+                    {selected.length}
                   </div>
                 </div>
               )}
 
-              {isMultiSelect && selectedOptions.length > 0 && !showOptions && (
+              {isMultiSelect && selected.length > 0 && !showOptions && (
                 <div className={styles.clearIconContainer}>
                   <Icon
                     className={styles.clearIcon}
@@ -272,7 +300,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               )}
               <p
                 style={{
-                  color: selectedOptions.length === 0 ? "#67787c" : "#434b4d",
+                  color: selected.length === 0 ? "#67787c" : "#434b4d",
                 }}
               >
                 {displayText}
@@ -332,7 +360,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     onClick={() =>
                       handleSelectAll(
                         !filteredOptions.every((option) =>
-                          selectedOptions.includes(getOptionLabel(option))
+                          selected.includes(getOptionLabel(option))
                         )
                       )
                     }
@@ -342,7 +370,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                         id="selectAllCheckbox"
                         type="checkbox"
                         checked={filteredOptions.every((option) =>
-                          selectedOptions.includes(getOptionLabel(option))
+                          selected.includes(getOptionLabel(option))
                         )}
                         onChange={(checked) => handleSelectAll(checked)}
                       />
@@ -366,7 +394,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                         isMultiSelect
                           ? handleMultiSelect(
                               label,
-                              !selectedOptions.includes(label)
+                              !selected.includes(label)
                             )
                           : handleSingleSelect(label)
                       }
@@ -379,7 +407,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                           <Checkbox
                             id={`checkbox-${index}`}
                             type="checkbox"
-                            checked={selectedOptions.includes(label)}
+                            checked={selected.includes(label)}
                             onChange={(checked) =>
                               handleMultiSelect(label, checked)
                             }

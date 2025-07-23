@@ -31,9 +31,9 @@ const handleSubcategoryClick = async (subcategory: string) => {
 
   return (
     <>
-      <div className={styles.mobileSubcategoriesContainer}>
+      <ul className={styles.mobileSubcategoriesContainer}>
         {categories.map((categoryItem) => (
-          <div key={categoryItem.id}>
+          <li key={categoryItem.id}>
             <MobileSubcategories
               options={categoryItem.subcategories}
               category={categoryItem.category}
@@ -44,9 +44,9 @@ const handleSubcategoryClick = async (subcategory: string) => {
                 handleSubcategoryClick(subcategory)
               }
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
       <div className={styles.goBackButtonContainer}>
         <Button
           className={styles.goBackButton}

@@ -50,7 +50,7 @@ const Chat = () => {
       >
         <ExitButton />
       </div>
-      <div className={styles.mainSectionWrapper} aria-live="polite">
+      <ul className={styles.mainSectionWrapper} aria-live="polite">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
@@ -62,7 +62,7 @@ const Chat = () => {
                 ...userMessages,
               ];
               return (
-                <div key={message.name}>
+                <li key={message.name}>
                   {allMessages.map((msg: MessageContent, index: number) => (
                     <ChatBubble
                       key={`${msg.text}-${index}`}
@@ -78,11 +78,11 @@ const Chat = () => {
                       showAvatar={shouldShowAvatar(index, msg, allMessages)}
                     />
                   ))}
-                </div>
+                </li>
               );
             })
         )}
-      </div>
+      </ul>
       <div className={styles.bottomSection}>
         <div className={styles.typingArea}>
           <div className={styles.textInputContainer}>

@@ -88,9 +88,9 @@ const BidHistory = () => {
   ];
 
   return (
-    <div className={styles.container}>
+    <ul className={styles.container}>
       {bids.map((bid, index) => (
-        <div
+        <li
           key={bid.id}
           className={`${styles.bid} ${index === 0 ? styles.firstBid : ""}`}
         >
@@ -110,9 +110,9 @@ const BidHistory = () => {
           </div>
           <div className={styles.bidAmount}>{bid.amount}</div>
           <p className={styles.time}>{bid.time}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

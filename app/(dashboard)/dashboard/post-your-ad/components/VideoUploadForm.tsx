@@ -77,21 +77,21 @@ const VideoUploadForm = ({ videoPath }: Props) => {
             Choose or upload a thumbnail. If not, the current video frame will
             be used
           </p>
-          <div className={styles.thumbnails}>
+          <ul className={styles.thumbnails}>
             {screenshots?.map((screenshot) => (
-              <div key={screenshot.id} className={styles.thumbnail}>
+              <li key={screenshot.id} className={styles.thumbnail}>
                 <Image
                   src={screenshot.url}
                   alt="screenshot"
                   width={208}
                   height={117}
                 />
-              </div>
+              </li>
             ))}
             <div className={`${styles.thumbnail} ${styles.customThumbnail}`}>
               <Image src="/icons/plus.png" alt="plus" width={40} height={40} />
             </div>
-          </div>
+          </ul>
         </div>
       </div>
       <div className={styles.detailsContainer}>

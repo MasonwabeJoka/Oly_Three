@@ -52,7 +52,7 @@ const TabsClient: React.FC<TabsProps> = ({
   const TabsMobile = () => {
     return (
       <>
-        <div
+        <ul
           className={styles.tabs}
           style={{
             display: "flex",
@@ -66,7 +66,7 @@ const TabsClient: React.FC<TabsProps> = ({
             const count = typeof tab === "object" ? tab.count : null;
             return (
               <>
-                <div
+                <li
                   className={`${styles.tab} ${isActive === index ? styles.active : ""}`}
                   key={index}
                   onClick={(event) => {
@@ -93,7 +93,7 @@ const TabsClient: React.FC<TabsProps> = ({
                       </div>
                     </div>
                   )}
-                </div>
+                </li>
 
                 <ul
                   className={
@@ -112,14 +112,14 @@ const TabsClient: React.FC<TabsProps> = ({
               </>
             );
           })}
-        </div>
+        </ul>
       </>
     );
   };
 
   const TabsDesktop = () => {
     return (
-      <div
+      <ul
         className={styles.tabs}
         style={{
           display: "flex",
@@ -134,7 +134,7 @@ const TabsClient: React.FC<TabsProps> = ({
           const title = typeof tab === "object" ? tab.title : tab;
           const count = typeof tab === "object" ? tab.count : null;
           return (
-            <div
+            <li
               className={`${styles.tab} ${isActive === index ? styles.active : ""}`}
               style={{
                 flexBasis: condition
@@ -166,10 +166,10 @@ const TabsClient: React.FC<TabsProps> = ({
                   </div>
                 </div>
               )}
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     );
   };
 

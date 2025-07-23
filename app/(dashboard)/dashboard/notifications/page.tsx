@@ -10,13 +10,13 @@ const Page = () => {
       <div className={styles.tabsWrapper}>
         <Notifications/>
       </div>
-      <div className={styles.notificationsContainer}>
+      <ul className={styles.notificationsContainer}>
         <div className={styles.timeRangeContainer}>
           <p className={styles.timeRange}>Today</p>
           <div className={styles.count}>5</div>
         </div>
         {NotificationsData.map((notification) => (
-          <div className={styles.notificationCard} key={notification.id}>
+          <li className={styles.notificationCard} key={notification.id}>
             <NotificationsCard
               key={notification.id}
               isOnline={notification.isOnline}
@@ -31,9 +31,9 @@ const Page = () => {
               buttons={notification.buttons}
               buttonLinks={notification.buttonLinks}
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

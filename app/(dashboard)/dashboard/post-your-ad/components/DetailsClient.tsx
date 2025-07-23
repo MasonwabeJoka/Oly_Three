@@ -215,40 +215,40 @@ const DetailsClient = ({
                 />
               </div>
             )}
-
-            {detailsData.map(
-              (detail) =>
-                matchFound &&
-                selectDetailValue === detail.detail &&
-                !isConditionsOpen &&
-                !isDetailsOpen && (
-                  <SelectedDetail
-                    key={detail.id}
-                    id={detail.id}
-                    initialValue="See a list of details you can include"
-                    detail={detail.detail}
-                    description={detail.description}
-                    example={detail.example}
-                    isFieldDirty={!!dirtyFields.details?.selectDetail}
-                    register={register}
-                    setValue={setValue}
-                    errors={errors}
-                    handleChange={handleChange}
-                    selectDetailValue={selectDetailValue}
-                    details={details}
-                    setDetails={setDetails}
-                    watch={watch}
-                    setMatchFound={() => setMatchFound(false)}
-                    trigger={trigger}
-                    handleBlur={() => {}}
-                    handleSubmit={() => {}}
-                  />
-                )
-            )}
+            <ul>
+              {detailsData.map(
+                (detail) =>
+                  matchFound &&
+                  selectDetailValue === detail.detail &&
+                  !isConditionsOpen &&
+                  !isDetailsOpen && (
+                    <li key={detail.id} className={styles.detail}>
+                      <SelectedDetail
+                        id={detail.id}
+                        initialValue="See a list of details you can include"
+                        detail={detail.detail}
+                        description={detail.description}
+                        example={detail.example}
+                        isFieldDirty={!!dirtyFields.details?.selectDetail}
+                        register={register}
+                        setValue={setValue}
+                        errors={errors}
+                        handleChange={handleChange}
+                        selectDetailValue={selectDetailValue}
+                        details={details}
+                        setDetails={setDetails}
+                        watch={watch}
+                        setMatchFound={() => setMatchFound(false)}
+                        trigger={trigger}
+                        handleBlur={() => {}}
+                        handleSubmit={() => {}}
+                      />
+                    </li>
+                  )
+              )}
+            </ul>
             {!isConditionsOpen && !isDetailsOpen && (
               <div className={styles.detailsListContainer}>
-
-
                 <DetailsList
                   details={details}
                   editIndex={editIndex}
@@ -322,21 +322,21 @@ const DetailsClient = ({
                 />
               </>
             )}
-            { !isConditionsOpen && !isDetailsOpen && (
+            {!isConditionsOpen && !isDetailsOpen && (
               <div className={styles.productSpecificationContainer}>
-              <SpecificationsList
-                specifications={specifications}
-                editIndex={editIndex}
-                editSpecification={editSpecification}
-                handleDeleteSpecification={handleDeleteSpecification}
-                editValue={editValue}
-                setValue={setValue}
-                updateSpecification={updateSpecification}
-                cancelEdit={() => setEditIndex(null)}
-                register={register}
-                errors={errors}
-                watch={watch}
-              />
+                <SpecificationsList
+                  specifications={specifications}
+                  editIndex={editIndex}
+                  editSpecification={editSpecification}
+                  handleDeleteSpecification={handleDeleteSpecification}
+                  editValue={editValue}
+                  setValue={setValue}
+                  updateSpecification={updateSpecification}
+                  cancelEdit={() => setEditIndex(null)}
+                  register={register}
+                  errors={errors}
+                  watch={watch}
+                />
               </div>
             )}
           </div>

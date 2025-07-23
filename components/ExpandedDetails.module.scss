@@ -2,17 +2,22 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .details {
+  display: relative;
   display: flex;
   flex-direction: column;
-  width: rem(570);
+  width: rem(530);
   height: rem(250);
   border-radius: 0 rem(32) rem(32) 0;
+  background-color:$grey-one;
+
+  .childrenContainer {
+    
+  }
 
   .checkboxContainer {
-    align-self: flex-end;
-    margin-right: rem(24);
-    margin-top: rem(8);
-    margin-bottom: rem(-16);
+   position: relative;
+    top: rem(20);
+    left: rem(488);
   }
 
   .infoSectionContainer {
@@ -33,12 +38,11 @@
           height: rem(40) !important;
         }
         .titleWrapper {
-         
-         
           .title {
-            // margin-bottom: rem(0);
+           
             line-height: 1.2;
             text-transform: uppercase;
+            font-weight: 500;
           }
 
           .location {
@@ -57,7 +61,7 @@
         display: flex;
         height: 100%;
         margin-left: rem(56);
-      //  background-color: yellowgreen;
+        //  background-color: yellowgreen;
         width: rem(416);
         .description {
           overflow: hidden;
@@ -75,8 +79,7 @@
         width: 100%;
         height: rem(24);
         margin-left: rem(56);
-        width: rem(416);
-        // background-color: yellowgreen;
+        width: rem(400);
 
         .price {
           font-size: $h4 !important;
@@ -86,7 +89,7 @@
         .postMetrics {
           .postAge {
             // margin-bottom: rem(-4);
-          
+
             margin-right: rem(32);
             font-size: rem(12);
           }

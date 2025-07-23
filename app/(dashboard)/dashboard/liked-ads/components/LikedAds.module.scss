@@ -45,6 +45,11 @@
 }
 
 .listings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   top: rem(254);
+  width: rem(1080);
+
 }

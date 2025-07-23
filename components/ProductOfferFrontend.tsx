@@ -34,10 +34,10 @@ const ProductOffer = ({
           <div className={styles.textContent}>
             <h2 className={styles.title}>{title}</h2>
             <p className={styles.description}>{description}</p>
-            <div className={styles.features}>
+            <ul className={styles.features}>
               {features.map((feature) => {
                 return (
-                  <div
+                  <li
                     className={styles.feature}
                     key={`textRight ${feature.id}`}
                   >
@@ -50,10 +50,10 @@ const ProductOffer = ({
                       />
                     </div>
                     {feature && <p>{feature.feature}</p>}
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
 
             <Button
               type="button"
@@ -93,10 +93,10 @@ const ProductOffer = ({
             <h2 className={styles.title}>{title}</h2>
             <p className={styles.description}>{description}</p>
             <div className={styles.features}>
-              <div className={styles.features}>
+              <ul className={styles.features}>
                 {features.map((feature) => {
                   return (
-                    <div
+                    <li
                       className={styles.feature}
                       key={`textRight ${feature.id}`}
                     >
@@ -109,10 +109,10 @@ const ProductOffer = ({
                         />
                       </div>
                       {feature && <p>{feature.feature}</p>}
-                    </div>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
 
             <Button

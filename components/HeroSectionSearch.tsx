@@ -3,8 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSectionSearchClient from "./HeroSectionSearchClient";
 import Button from "./Buttons";
+import Form from "next/form";
+import { searchAction } from "@/utils/FormServerActions/heroSectionSearchAction";
+import { SearchParam } from "sanity/router";
 
-const HeroSectionSearch = ({ searchParams }: { searchParams: { searchTerm?: string; locationSearch?: string } }) => {
+const HeroSectionSearch = async({
+  searchParams,
+}: {
+  searchParams: Promise<{ searchTerm: string; locationSearch: string }>;
+}) => {
+  const searchTerm = (await searchParams)?.searchTerm;
+  const locationSearch = (await searchParams)?.locationSearch;
+
   return (
     <div className={styles.container}>
       <p className={`${styles.text} ${styles.mobile}`}>Mobile</p>
@@ -20,9 +30,17 @@ const HeroSectionSearch = ({ searchParams }: { searchParams: { searchTerm?: stri
           sizes="(max-width: 768px) 80px, (max-width: 1024px) 100px, 120px"
         />
       </div>
-      <div className={styles.buttonsAndSearch}>
+      <Form
+        action="/listings"
+        scroll={false}
+        className={styles.buttonsAndSearch}
+      >
+        
         <div className={styles.buttons}>
-          <Link href="/dashboard/post-your-ad/select-category" className={styles.link}>
+          <Link
+            href="/dashboard/post-your-ad/select-category"
+            className={styles.link}
+          >
             <Button
               buttonChildren="Post Your Ad"
               className={styles.postYourAdBtn}
@@ -35,12 +53,11 @@ const HeroSectionSearch = ({ searchParams }: { searchParams: { searchTerm?: stri
               disabled={false}
             />
           </Link>
-          <HeroSectionSearchClient searchParams={searchParams} />
+          <HeroSectionSearchClient searchTerm={searchTerm} locationSearch={locationSearch} />
         </div>
-      </div>
+      </Form>
     </div>
   );
 };
 
 export default HeroSectionSearch;
-

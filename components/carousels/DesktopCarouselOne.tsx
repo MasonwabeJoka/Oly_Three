@@ -82,10 +82,10 @@ const DesktopCarouselOne = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.slidesContainer}>
+      <ul className={styles.slidesContainer}>
         {data.map((slide, index) => {
           return (
-            <div
+            <li
               className={styles.slides}
               ref={(element) =>
                 (slides.current[index] = element as HTMLDivElement)
@@ -100,10 +100,10 @@ const DesktopCarouselOne = ({
                 height={358}
               />
               <div className={styles.slideDotsContainer}>
-                <div className={styles.slideDots}>
+                <ul className={styles.slideDots}>
                   {data.map((slide, index) => {
                     return (
-                      <div
+                      <li
                         className={styles.dotsContainer}
                         onClick={() => setSlideIndex(index)}
                         key={index}
@@ -118,19 +118,19 @@ const DesktopCarouselOne = ({
                           autoFocus={false}
                           disabled={false}
                         ></button>
-                      </div>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               </div>
-            </div>
+            </li>
           );
         })}
 
-        <div className={styles.descriptionContainer}>
+        <ul className={styles.descriptionContainer}>
           {data.map((value, index) => {
             return (
-              <div
+              <li
                 className={styles.description}
                 key={index}
                 ref={(element) =>
@@ -138,7 +138,7 @@ const DesktopCarouselOne = ({
                 }
               >
                 <h2 className={styles.slideTitle}>{value.slideTitle}</h2>
-              </div>
+              </li>
             );
           })}
 
@@ -182,8 +182,8 @@ const DesktopCarouselOne = ({
               onClick={() => prevNext(1)}
             />
           </div>
-        </div>
-      </div>
+        </ul>
+      </ul>
     </div>
   );
 };

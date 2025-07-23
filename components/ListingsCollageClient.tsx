@@ -9,7 +9,7 @@ import { useFetchAdStore } from "@/store/useFetchStore";
 import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
-import styles from "./ListingsCollage.module.scss";
+import styles from "./ListingsCollageClient.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
 import { ImageFile } from "@/sanity/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
@@ -107,12 +107,12 @@ const ListingsCollageClient = ({
 
   const breakpointColumnsObj = {
     default: 4,
-    2500: isSidebarOpen || isDashboard ? 4 : 5,
+    2500: isSidebarOpen || isDashboard ? 3 : 5,
     800: 2,
     639: 1,
   };
 
-  const cards = ads.map((ad, index) => {
+  const cards = ads?.map((ad, index) => {
     const adImages = Array.isArray(ad.images) ? ad.images : [];
     const aspectRatios = adImages
       .map((image) => image.aspectRatio)
@@ -129,7 +129,8 @@ const ListingsCollageClient = ({
 
     return (
       <Link
-        href={`listings/${ad.slug}`}
+        href="/"
+        // href={`listings/${ad.slug}`}
         key={ad._id}
         className={styles.cardContainer}
       >
@@ -201,7 +202,7 @@ const ListingsCollageClient = ({
               maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
             }}
           >
-            {cards}
+            {cards || []}
           </Masonry>
           <div ref={ref} className={styles.loading}>
             {loading && hasMore ? <LoadingSpinner /> : null}
@@ -217,7 +218,7 @@ const ListingsCollageClient = ({
               columnGap: "20px",
             }}
           >
-            {cards}
+            {cards || []}
           </div>
           <div ref={ref} className={styles.loading}>
             {loading && hasMore ? <LoadingSpinner /> : null}
