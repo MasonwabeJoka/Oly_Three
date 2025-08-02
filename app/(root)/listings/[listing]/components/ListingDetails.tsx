@@ -1,4 +1,4 @@
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./ListingDetails.module.scss";
 import { listingDetails } from "@/data/listingDetails";
 type Detail = {

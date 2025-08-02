@@ -83,6 +83,84 @@
       appearance: none;
     }
 
+    .largeInput {
+      width: rem(311);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(smallDesktop) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(tablet) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(extraLargeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+    }
+    .mediumInput {
+      width: rem(202);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(424);
+        height: rem(56);
+      }
+      @include only(smallDesktop) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(tablet) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(extraLargeDesktop) {
+        width: rem(424);
+        height: rem(56);
+      }
+    }
+
+    .largeDashboardInput {
+      width: rem(267);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(471);
+      }
+      @include only(smallDesktop) {
+        width: rem(424);
+      }
+      @include only(tablet) {
+        width: rem(424);
+      }
+    }
+
+    .mediumDashboardInput {
+        width: rem(240);
+  height: rem(48);
+  @include only(largeDesktop) {
+    width: rem(326);
+    height: rem(56);
+  }
+  @include only(smallDesktop) {
+    width: rem(293);
+    height: rem(56);
+  }
+  @include only(tablet) {
+    width: rem(293);
+    height: rem(56);
+  }
+    }
+
     .input:focus {
       background-color: $white-one;
     }
@@ -104,14 +182,51 @@
     margin-top: rem(8);
     z-index: 1;
   }
-  .suggestion {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: rem(40);
-    height: 94%;
-    margin: rem(4) auto 0;
-    background-color: $white-two;
+
+  .suggestionContainer {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+    .suggestion {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      height: 94%;
+      margin: rem(4) auto 0;
+      background-color: $white-two;
+    }
+  }
+
+  .suggestionContainerDashboard {
+    @include only(largeDesktop) {
+      width: rem(471);
+    }
+    @include only(smallDesktop) {
+      width: rem(424);
+    }
+    @include only(tablet) {
+      width: rem(424);
+    }
   }
 
   .selectAll {
@@ -137,112 +252,6 @@
 
 @mixin suggestion-width($width) {
   width: calc(#{$width} * 0.96);
-}
-
-.xLarge {
-  width: rem(311);
-  @include only(largeDesktop) {
-    width: rem(954);
-  }
-}
-
-.xLarge .suggestion {
-  @include suggestion-width(rem(311));
-  @include only(largeDesktop) {
-    @include suggestion-width(rem(954));
-    height: rem(56);
-  }
-}
-
-.xLargeFeed {
-  width: rem(793);
-}
-
-.xLargeFeed .suggestion {
-  @include suggestion-width(rem(793));
-  height: rem(56);
-}
-
-.xLargeDashboard {
-}
-
-.xLargeDashboard .suggestion {
-}
-
-.large {
-  width: rem(311);
-
-  @include only(largeDesktop) {
-    width: rem(514) !important;
-  }
-}
-
-.large .suggestion {
-  @include suggestion-width(rem(514));
-  height: rem(56);
-}
-
-.largeFeed {
-  width: rem(471);
-}
-
-.largeFeed .suggestion {
-  @include suggestion-width(rem(471));
-  height: rem(56);
-}
-
-.largeDashboard {
-  width: rem(267);
-  height: rem(56);
-  @include only(largeDesktop) {
-    width: rem(471);
-  }
-}
-
-.largeDashboard .suggestion {
-  @include suggestion-width(rem(267));
-  @include only(largeDesktop) {
-    @include suggestion-width(rem(471));
-    height: rem(56);
-  }
-}
-
-.medium {
-  width: rem(202);
-
-  @include only(largeDesktop) {
-    width: rem(424);
-  }
-}
-
-.medium .suggestion {
-  @include suggestion-width(rem(424));
-}
-
-.mediumFeed {
-  width: rem(310);
-  height: rem(48);
-}
-
-.mediumFeed .suggestion {
-  @include suggestion-width(rem(310));
-}
-
-.mediumDashboard {
-}
-
-.mediumDashboard .suggestion {
-}
-
-.primary {
-}
-
-.primary:hover {
-}
-
-.primary:active {
-}
-.primary:disabled {
 }
 
 .primary:focus {

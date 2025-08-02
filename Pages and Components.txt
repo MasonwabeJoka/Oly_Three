@@ -1,0 +1,22 @@
+Pages
+1. Homepage (root)
+2. Properties
+3. Shops
+4. Auto
+5. Hiring
+6. Services
+7. Articles
+8. Dashboard
+9. Login
+10. Signup
+11. Profile
+12. Settings
+13. Help
+14. About
+15. Contact
+16. Terms
+17. Privacy
+18. Cookies
+19. Advertise
+20. Press
+21. Jobs

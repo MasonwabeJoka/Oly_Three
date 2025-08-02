@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Ad } from '@/sanity/Types/Ad';
+import { Ad } from '@/sanityTemp/Types/Ad';
 
 export const submit = async (data: Ad) => {
     const [message, setMessage] = useState("");

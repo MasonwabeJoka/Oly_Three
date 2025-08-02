@@ -10,10 +10,7 @@ import Checkbox from "./Checkbox";
 
 interface SelectProps {
   className?: string;
-  selectSize:
-    | keyof typeof SELECT_SIZE.regular
-    | keyof typeof SELECT_SIZE.feed
-    | keyof typeof SELECT_SIZE.dashboard;
+  selectSize: "xxLarge" | "xLarge" | "large" | "medium";
   selectColourType?: keyof typeof SELECT_COLOUR_TYPE;
   label: string;
   options?: (string | { label: string; value: any })[];
@@ -39,29 +36,6 @@ interface SelectProps {
   onOptionsCountChange?: (count: number) => void;
 }
 
-const SELECT_SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
-};
 
 const SELECT_COLOUR_TYPE = {
   primary: `${styles.primary}`,
@@ -111,8 +85,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       Array.isArray(initialValue)
         ? initialValue
         : typeof initialValue === "string"
-        ? [initialValue]
-        : []
+          ? [initialValue]
+          : []
     );
     const controlled = value !== undefined;
     const selected = controlled
@@ -121,8 +95,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           ? value
           : []
         : typeof value === "string"
-        ? [value]
-        : []
+          ? [value]
+          : []
       : selectedOptions;
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
@@ -216,7 +190,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
     const triggerChangeEvent = (values: string[]) => {
       if (onChange) {
-        const changeValue = isMultiSelect ? values : values[0] ?? "";
+        const changeValue = isMultiSelect ? values : (values[0] ?? "");
         onChange({
           target: { value: changeValue, name } as any,
         } as React.ChangeEvent<HTMLSelectElement>);
@@ -232,16 +206,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       triggerChangeEvent(newSelected);
     };
 
-    let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = SELECT_SIZE.feed[selectSize];
-    } else {
-      sizeClass = dashboard
-        ? SELECT_SIZE.dashboard[selectSize]
-        : SELECT_SIZE.regular[selectSize];
-    }
+ 
 
-    const selectClass = `${styles.select} ${sizeClass} ${
+    const selectClass = `${
+      !dashboard ? styles.select : styles.dashboardSelect
+    } ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
     } ${className || ""}`;
 
@@ -250,12 +219,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         ? initialValue
         : "Select an option"
       : selected.length > 0
-      ? selected.join(", ").length > 40
-        ? selected.join(", ").slice(0, 40) + "..."
-        : selected.join(", ")
-      : typeof initialValue === "string"
-      ? initialValue
-      : "Select an option";
+        ? selected.join(", ").length > 40
+          ? selected.join(", ").slice(0, 40) + "..."
+          : selected.join(", ")
+        : typeof initialValue === "string"
+          ? initialValue
+          : "Select an option";
 
     return (
       <div ref={selectRef} className={className || ""}>
@@ -277,9 +246,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             >
               {isMultiSelect && showOptions && selected.length > 0 && (
                 <div className={styles.selectCountContainer}>
-                  <div className={styles.selectCount}>
-                    {selected.length}
-                  </div>
+                  <div className={styles.selectCount}>{selected.length}</div>
                 </div>
               )}
 
@@ -353,7 +320,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             <ul className={styles.optionsList}>
               {isMultiSelect && (
                 <li
-                  className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                  className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                 >
                   <div
                     className={`${styles.option} ${styles.selectAll}`}
@@ -386,16 +353,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 return (
                   <li
                     key={index}
-                    className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                    className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                   >
                     <div
                       className={styles.option}
                       onClick={() =>
                         isMultiSelect
-                          ? handleMultiSelect(
-                              label,
-                              !selected.includes(label)
-                            )
+                          ? handleMultiSelect(label, !selected.includes(label))
                           : handleSingleSelect(label)
                       }
                     >

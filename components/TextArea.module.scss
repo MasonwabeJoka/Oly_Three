@@ -8,9 +8,8 @@
   border-radius: rem(40);
   background-color: $white-one;
   box-shadow: $shadow-two;
-  // width: rem(648);
   overflow: hidden;
-  // box-shadow: $shadow-three !important;
+
   .label {
     position: absolute;
     left: rem(30000);
@@ -48,6 +47,30 @@
       scroll-behavior: smooth;
       overflow: hidden;
       border-radius: rem(40);
+
+      width: rem(311);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(smallDesktop) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(tablet) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(extraLargeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+      
       // Hide scrollbar by default
       &::-webkit-scrollbar {
         display: none; // Prevent scrollbar from showing before atMaxHeight

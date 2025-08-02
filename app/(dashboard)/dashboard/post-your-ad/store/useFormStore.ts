@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Ad } from '@/sanity/Types/Ad';
+import { Ad } from '@/sanityTemp/Types/Ad';
 import { FieldName, SubmitHandler } from 'react-hook-form';
 
 // Define the shape of the form data (what information the user will fill out)

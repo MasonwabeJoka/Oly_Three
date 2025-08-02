@@ -84,7 +84,7 @@ const SellerDetails = () => {
           />
         </div>
 
-        <div className={styles.socialMediaContainer}>
+        <ul className={styles.socialMediaContainer}>
           {socialMediaLogos.map((app) => (
             <li key={app.id} className={styles.app}>
               <Button
@@ -106,7 +106,7 @@ const SellerDetails = () => {
               />
             </li>
           ))}
-        </div>
+        </ul>
       </>
     </div>
   );

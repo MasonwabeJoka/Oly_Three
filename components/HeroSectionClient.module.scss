@@ -4,7 +4,6 @@
 
 .categoriesBtnContainer {
   margin-bottom: rem(8) !important;
-  
 }
 
 .searchFields {
@@ -23,12 +22,11 @@
     flex-direction: column;
     align-items: center;
 
-margin-bottom: rem(20);
+    margin-bottom: rem(20);
     .searchLocationInput {
-      
     }
     .errorMessage {
-     height:0 !important;
+      height: 0 !important;
     }
   }
 

@@ -7,11 +7,11 @@ import { richTextLength } from "@/lib/richTextLength";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useFetchAdStore } from "@/store/useFetchStore";
 import { useInView } from "react-intersection-observer";
-import { ImageFile } from "@/sanity/Types/ImageFile";
-import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
+import { ImageFile } from "@/sanityTemp/Types/ImageFile";
+import { getImageFilesById } from "@/sanityTemp/actions/getImageFilesById";
 import AdCard from "./cards/AdCard";
 import multipleImages from "@/data/multipleImages";
-import { Ad, SanityImage } from "@/sanity/Types/Ad";
+import { Ad, SanityImage } from "@/sanityTemp/Types/Ad";
 
 export type ListingsExpandedProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";

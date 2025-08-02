@@ -19,6 +19,20 @@
       rgba($black-one, 0.6),
       rgba($black-one, 0.3)
     );
+
+    @include only(largeDesktop) {
+      
+    }
+
+    @include only(smallDesktop) {
+     height: rem(400);
+    }
+
+    @include only(tablet) {
+     height: rem(400);
+    }
+
+  
     .textContainer {
       position: relative;
       display: flex;

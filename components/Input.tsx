@@ -14,10 +14,7 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   inputType: keyof typeof INPUT_TYPE;
   accept?: string;
   error?: string;
-  inputSize:
-    | keyof typeof INPUT_SIZE.regular
-    | keyof typeof INPUT_SIZE.feed
-    | keyof typeof INPUT_SIZE.dashboard;
+  inputSize: "xxLarge" | "xLarge" | "large" | "medium";
   inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
   iconPosition?: "left" | "right" | "leftRight";
   iconSrcLeft?: string;
@@ -70,30 +67,6 @@ const INPUT_TYPE = {
   time: `${styles.time}`,
   url: `${styles.url}`,
   week: `${styles.week}`,
-};
-
-const INPUT_SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
 };
 
 const INPUT_COLOUR_TYPE = {
@@ -160,6 +133,24 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [internalValue, setInternalValue] = useState(value);
+
+    let sizeClass = "";
+    switch (inputSize) {
+      case "medium":
+        sizeClass = !dashboard
+          ? styles.mediumInput
+          : styles.mediumDashboardInput;
+        break;
+      case "xLarge":
+        sizeClass = !dashboard
+          ? styles.xLargeInput
+          : styles.xLargeDashboardInput;
+        break;
+      default:
+        sizeClass = !dashboard
+          ? styles.largeInput
+          : styles.largeDashboardInput;
+    }
 
     // Sync internalValue with value prop
     useEffect(() => {
@@ -302,20 +293,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       setIsDropdownOpen(false);
     };
 
-    let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = INPUT_SIZE.feed[inputSize];
-    } else {
-      if (dashboard) {
-        sizeClass = INPUT_SIZE.dashboard[inputSize];
-      } else {
-        sizeClass = INPUT_SIZE.regular[inputSize];
-      }
-    }
-
-    const inputClass = `${styles.input} ${
+    const inputClass = `${styles.input} ${sizeClass} ${
       INPUT_TYPE[inputType] || ""
-    } ${sizeClass} ${INPUT_COLOUR_TYPE[inputColourType] || ""} ${className || ""}`;
+    } ${INPUT_COLOUR_TYPE[inputColourType] || ""} ${className || ""}`;
 
     return (
       <div className={`${styles.container} ${className || ""}`} ref={inputRef}>
@@ -449,7 +429,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   if (e.key === "Enter") handleSuggestionClick(suggestion);
                 }}
                 tabIndex={0}
-                className={sizeClass}
+                className={
+                  !dashboard
+                    ? styles.suggestionContainer
+                    : styles.suggestionContainerDashboard
+                }
                 style={{ marginBottom: "0.5rem" }}
               >
                 <div className={styles.suggestion}>
@@ -462,7 +446,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {isMultiSelect && isDropdownOpen && (
           <div className={styles.multiSelectDropdown} ref={dropdownRef}>
             <ul className={styles.searchSuggestions}>
-              <li className={sizeClass} style={{ marginBottom: "0.5rem" }}>
+              <li
+                className={
+                  !dashboard
+                    ? styles.suggestionContainer
+                    : styles.suggestionContainerDashboard
+                }
+                style={{ marginBottom: "0.5rem" }}
+              >
                 <div
                   className={`${styles.suggestion} ${styles.selectAll}`}
                   onClick={() =>
@@ -487,7 +478,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {revealedSuggestions.map((suggestion, index) => (
                 <li
                   key={index}
-                  className={sizeClass}
+                  className={
+                    !dashboard
+                      ? styles.suggestionContainer
+                      : styles.suggestionContainerDashboard
+                  }
                   style={{ marginBottom: "0.5rem", cursor: "pointer" }}
                 >
                   <div

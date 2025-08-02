@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { getUser } from '@/sanity/actions/getUser';
+import { getUser } from '@/sanityTemp/actions/getUser';
 
 export const useCurrentUser = () => {
   const mutation = useMutation({

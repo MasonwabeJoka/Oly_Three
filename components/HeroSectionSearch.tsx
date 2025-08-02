@@ -7,7 +7,7 @@ import Form from "next/form";
 import { searchAction } from "@/utils/FormServerActions/heroSectionSearchAction";
 import { SearchParam } from "sanity/router";
 
-const HeroSectionSearch = async({
+const HeroSectionSearch = async ({
   searchParams,
 }: {
   searchParams: Promise<{ searchTerm: string; locationSearch: string }>;
@@ -20,42 +20,48 @@ const HeroSectionSearch = async({
       <p className={`${styles.text} ${styles.mobile}`}>Mobile</p>
       <p className={`${styles.text} ${styles.tablet}`}>Tablet</p>
       <p className={`${styles.text} ${styles.smallDesktop}`}>Small Desktop</p>
-      <p className={`${styles.text} ${styles.largeDesktop}`}>Large Desktop</p>
-      <div className={styles.logo}>
-        <Image
-          src="/logo.png"
-          alt="logo"
-          width={120}
-          height={120}
-          sizes="(max-width: 768px) 80px, (max-width: 1024px) 100px, 120px"
-        />
-      </div>
-      <Form
-        action="/listings"
-        scroll={false}
-        className={styles.buttonsAndSearch}
-      >
-        
-        <div className={styles.buttons}>
-          <Link
-            href="/dashboard/post-your-ad/select-category"
-            className={styles.link}
+      {/* <p className={`${styles.text} ${styles.largeDesktop}`}>Large Desktop</p> */}
+      <div className={styles.formContainer}>
+        <div className={styles.formWrapper}>
+          <Form
+            action="/listings"
+            scroll={false}
+            className={styles.buttonsAndSearch}
           >
-            <Button
-              buttonChildren="Post Your Ad"
-              className={styles.postYourAdBtn}
-              buttonType="primary"
-              buttonSize="large"
-              name="Post Your Ad Button"
-              type="button"
-              ariaLabel="Post Your Ad Button"
-              autoFocus={false}
-              disabled={false}
-            />
-          </Link>
-          <HeroSectionSearchClient searchTerm={searchTerm} locationSearch={locationSearch} />
+            <div className={styles.logo}>
+              <Image
+                src="/logo.png"
+                alt="logo"
+                width={120}
+                height={120}
+                sizes="(max-width: 768px) 80px, (max-width: 1024px) 100px, 120px"
+              />
+            </div>
+            <div className={styles.buttons}>
+              <Link
+                href="/dashboard/post-your-ad/select-category"
+                className={styles.link}
+              >
+                <Button
+                  buttonChildren="Post Your Ad"
+                  className={styles.postYourAdBtn}
+                  buttonType="primary"
+                  buttonSize="large"
+                  name="Post Your Ad Button"
+                  type="button"
+                  ariaLabel="Post Your Ad Button"
+                  autoFocus={false}
+                  disabled={false}
+                />
+              </Link>
+              <HeroSectionSearchClient
+                searchTerm={searchTerm}
+                locationSearch={locationSearch}
+              />
+            </div>
+          </Form>
         </div>
-      </Form>
+      </div>
     </div>
   );
 };

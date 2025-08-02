@@ -40,6 +40,60 @@
       appearance: none;
       margin: 0 !important;
 
+      width: rem(311);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(smallDesktop) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(tablet) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(extraLargeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      &:hover {
+        background-color: $white-one !important;
+      }
+    }
+    .dashboardSelect {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      background-color: $white-three;
+      height: rem(56);
+      box-shadow: $shadow-one;
+      text-align: center;
+      border: none;
+      outline: none;
+      appearance: none;
+      margin: 0 !important;
+
+      width: rem(267);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(471);
+      }
+      @include only(smallDesktop) {
+        width: rem(424);
+      }
+      @include only(tablet) {
+        width: rem(424);
+      }
+
       &:hover {
         background-color: $white-one !important;
       }
@@ -185,136 +239,46 @@
   }
 }
 
-/*################################################################# */
+
 
 @mixin option-width($width) {
   width: calc(#{$width} * 0.96);
 }
 
-.xxLarge {
+.select .option {
+  @include option-width(rem(311));
+
   @include only(largeDesktop) {
-    width: rem(1296);
-    height: rem(56);
+    @include option-width(rem(514));
+  }
+
+  @include only(smallDesktop) {
+    @include option-width(rem(462));
+  }
+
+  @include only(tablet) {
+    @include option-width(rem(514));
+  }
+
+  @include only(extraLargeDesktop) {
+    @include option-width(rem(514));
   }
 }
 
-.xxLarge .option {
-  @include option-width(rem(1296));
-}
+.dashboardSelect .option {
+  @include option-width(rem(267));
 
-.xLargeFeed {
-  width: rem(954);
-  height: rem(56);
-}
-
-.xLargeFeed .option {
-  @include option-width(rem(954));
-}
-
-.xLarge {
   @include only(largeDesktop) {
-    width: rem(954);
-    height: rem(56);
+    @include option-width(rem(471));
   }
-}
 
-.xLarge .option {
-  @include option-width(rem(954));
-}
-
-.xLargeFeed {
-  width: rem(793);
-  height: rem(56);
-}
-
-.xLargeFeed .option {
-  @include option-width(rem(793));
-}
-
-.large {
-  width: rem(311);
-  height: rem(56);
-  @include only(largeDesktop) {
-    width: rem(514);
-    height: rem(56);
+  @include only(smallDesktop) {
+    @include option-width(rem(424));
   }
-}
 
-.large .option {
-  @include option-width(rem(514));
-}
-
-.largeFeed {
-  width: rem(471);
-}
-
-.largeFeed .option {
-  @include option-width(rem(471));
-}
-
-.medium {
-  width: rem(202);
-  height: rem(56);
-  @include only(largeDesktop) {
-    width: rem(424);
+  @include only(tablet) {
+    @include option-width(rem(424));
   }
-}
-
-.medium .option {
-  @include option-width(rem(424));
-}
-
-.mediumFeed {
-  width: rem(310);
-  height: rem(48);
-}
-
-.mediumFeed .option {
-  @include option-width(rem(310));
-}
-
-.xxLargeDashboard {
-  @include only(largeDesktop) {
-    width: rem(1002);
-    height: rem(56);
-  }
-}
-
-.xxLargeDashboard .option {
-  @include option-width(rem(1002));
-}
-
-.xLargeDashboard {
-  @include only(largeDesktop) {
-  }
-}
-
-// .xLargeDashboard .option {
-//   @include option-width(rem(1002));
-// }
-
-.largeDashboard {
-  @include only(largeDesktop) {
-    width: rem(471);
-    height: rem(56);
-  }
-}
-
-.largeDashboard .option {
-  @include option-width(rem(471));
-}
-
-.mediumDashboard {
-  width: rem(240);
-  height: rem(48);
-  @include only(largeDesktop) {
-    width: rem(326);
-    height: rem(48);
-  }
-}
-
-.mediumDashboard .option {
-  @include option-width(rem(326));
 }
 
 .primary {

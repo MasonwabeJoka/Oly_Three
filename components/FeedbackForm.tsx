@@ -165,6 +165,7 @@ const FeedbackForm = ({ title }: { title: string }) => {
           size="large"
           required={true}
           onSubmit={() => {}}
+          hasSubmitButton={false}
           style={{
             padding: "2rem 4rem 2rem 4rem",
             textAlign: "left",

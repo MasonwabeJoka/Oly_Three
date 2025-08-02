@@ -9,12 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonChildren: any;
   dashboard?: boolean;
   buttonType: keyof typeof BUTTON_TYPE;
-  buttonSize:
-    | keyof typeof BUTTON_SIZE.regular
-    | keyof typeof BUTTON_SIZE.feed
-    | keyof typeof BUTTON_SIZE.dashboard
-    | keyof typeof ROUND_BUTTON_SIZE.regular
-    | keyof typeof ROUND_BUTTON_SIZE.feed;
+  buttonSize:'large' | "medium" | "small"| "tiny";
   name: string;
   type: "button" | "submit" | "reset";
   ariaLabel?: string;
@@ -99,53 +94,8 @@ const BUTTON_TYPE = {
   bidBuy: `${styles.bidBuy}`,
 };
 
-const BUTTON_SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    standard: `${styles.standard}`,
-    medium: `${styles.medium}`,
-    small: `${styles.small}`,
-    tiny: `${styles.tiny}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    standard: `${styles.standardFeed}`,
-    medium: `${styles.mediumFeed}`,
-    small: `${styles.smallFeed}`,
-    tiny: `${styles.tinyFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    standard: `${styles.standardFeed}`,
-    medium: `${styles.mediumDashboard}`,
-    small: `${styles.smallFeed}`,
-    tiny: `${styles.tinyFeed}`,
-    "": "",
-  },
-};
 
-const ROUND_BUTTON_SIZE = {
-  regular: {
-    large: `${styles.roundLarge}`,
-    standard: `${styles.roundStandard}`,
-    small: `${styles.roundSmall}`,
-    "": "",
-  },
-  feed: {
-    large: `${styles.roundLarge}`,
-    standard: `${styles.roundStandard}`,
-    small: `${styles.roundSmall}`,
-    "": "",
-  },
-};
+
 
 
 const Button = ({
@@ -165,48 +115,47 @@ const Button = ({
   fontSize,
   ...otherProps
 }: ButtonProps): JSX.Element => {
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+
+
 
   let sizeClass = "";
-  if (buttonType === "round") {
-   
     switch (buttonSize) {
-      case "large":
-        sizeClass = isSidebarOpen ? styles.roundLargeFeed : styles.roundLarge;
-        break;
-      case "standard":
-        // 'standard' size is assumed to be valid only for round buttons
-        sizeClass = isSidebarOpen
-          ? styles.roundStandardFeed
-          : styles.roundStandard;
+      case "medium":
+        sizeClass = !dashboard ? styles.mediumButton : styles.mediumDashboardButton;
         break;
       case "small":
-        sizeClass = isSidebarOpen ? styles.roundSmallFeed : styles.roundSmall;
+        sizeClass = !dashboard ? styles.smallButton : styles.smallDashboardButton;
         break;
-      // ... include any other 'round' specific sizes
+      case "tiny":
+        sizeClass = !dashboard ? styles.tinyButton : styles.tinyDashboardButton;
+        break;
       default:
-        // For any non-specific round sizes, we default to regular button sizes
-        sizeClass = isSidebarOpen
-          ? BUTTON_SIZE.feed[buttonSize]
-          : BUTTON_SIZE.regular[buttonSize];
+        sizeClass = !dashboard ? styles.largeButton : styles.largeDashboardButton;
     }
-  } else {
-    // Non-round buttons
-    sizeClass = isSidebarOpen
-      ? BUTTON_SIZE.feed[buttonSize]
-      : dashboard 
-      ? BUTTON_SIZE.dashboard[buttonSize]
-      : BUTTON_SIZE.regular[buttonSize];
+ 
+let roundButtonSize = "";
+if(buttonType === "round") {
+    switch (buttonSize) {
+      case "large":
+       roundButtonSize = styles.roundLarge;
+        break;
+      case "medium":
+        roundButtonSize = styles.roundMedium;
+        break;
+      case "small":
+        roundButtonSize = styles.roundSmall;
+        break;
+      default:
+        roundButtonSize = styles.roundStandard;
+    }
   }
-
-// const round = buttonType === "round" ? styles.round : null
-
   return (
     <>
       <button
-        className={`${styles.button} ${
+        className={`${roundButtonSize} ${sizeClass} ${
+          !dashboard ? styles.button : styles.dashboardButton} ${
           BUTTON_TYPE[buttonType] || ""
-        } ${sizeClass} ${className || ''}`}
+        } ${className || ""}`}
         type={type}
         onClick={onClick}
         onBlur={onBlur}
@@ -214,7 +163,7 @@ const Button = ({
         aria-hidden={ariaHidden}
         autoFocus={autoFocus}
         disabled={disabled}
-        style={{fontSize: fontSize}}
+        style={{ fontSize: fontSize }}
         {...otherProps}
       >
         {buttonChildren}

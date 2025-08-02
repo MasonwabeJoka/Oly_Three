@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import  createClient  from '@sanity/client';
 import { z } from 'zod';
-import { fetchProducts } from '@/sanity/actions/fetchProducts';
+import { fetchProducts } from '@/sanityTemp/actions/fetchProducts';
 
 // Initialize Sanity client
 const client = createClient({

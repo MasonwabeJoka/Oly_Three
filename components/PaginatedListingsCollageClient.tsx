@@ -7,8 +7,8 @@ import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
 import { richTextLength } from "@/lib/richTextLength";
 import { useFetchAdStorePaginated } from "@/store/useFetchStore";
-import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
-import { ImageFile } from "@/sanity/Types/ImageFile";
+import { getImageFilesById } from "@/sanityTemp/actions/getImageFilesById";
+import { ImageFile } from "@/sanityTemp/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
 import Image from "next/image";
 

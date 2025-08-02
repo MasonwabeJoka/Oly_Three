@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import {
   PartialAd,
   PartialAdSchema,
-} from "@/sanity/Types/PartialSchemas/AdPartial";
-import { fetchAds } from "@/sanity/actions/fetchAds";
-import { FetchAdsParams } from "@/sanity/actions/fetchAds";
+} from "@/sanityTemp/Types/PartialSchemas/AdPartial";
+import { fetchAds } from "@/sanityTemp/actions/fetchAds";
+import { FetchAdsParams } from "@/sanityTemp/actions/fetchAds";
 
 interface FetchAdStore {
   ads: PartialAd[];

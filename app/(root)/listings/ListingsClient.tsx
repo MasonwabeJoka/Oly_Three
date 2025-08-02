@@ -142,7 +142,6 @@ export default function ListingsClient({
         <div className={styles.listingsContainer}>
           <div className={styles.tabsContainer} ref={tabsContainerRef}>
             <div className={styles.filters} ref={filtersRef}>
-          
               <Tabs
                 tabs={["Make", "Model", "Body Type", "More Filters+"]}
                 condition={!expanded}
@@ -152,12 +151,12 @@ export default function ListingsClient({
                 dashboard={false}
               />
             </div>
-            <div className={styles.sortingContainer}>
+            <div className={styles.resultsToolbarContainer}>
               <Tabs
                 tabs={[
                   "Order",
                   "Price Range",
-                  "Show Feed/Show Map",
+                  "Show Map",
                   expanded ? "Collage View" : "Expanded View",
                 ]}
                 condition={!expanded}
@@ -206,7 +205,7 @@ export default function ListingsClient({
               ) : null}
             </div>
           </div>
-{/* 
+          {/* 
           <div className={styles.listings} ref={listingsRef}>
             <Listings
               expanded={expanded}
@@ -241,7 +240,6 @@ export default function ListingsClient({
               />
             )}
           </div>
-         
         </div>
       </div>
     </div>

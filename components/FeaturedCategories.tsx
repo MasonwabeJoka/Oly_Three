@@ -1,6 +1,6 @@
 import styles from "./FeaturedCategories.module.scss";
 import LinkCard from "@/components/cards/LinkCard";
-import { getTopCategories } from "@/sanity/actions/topCategoriesActions";
+import { getTopCategories } from "@/sanityTemp/actions/topCategoriesActions";
 import { FeaturedCategoriesData } from "@/data/featuredCategoriesData";
 import FeaturedCategoriesClient, {
   FeaturedCategoriesClientProps,

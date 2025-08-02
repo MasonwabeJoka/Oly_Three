@@ -1,6 +1,6 @@
 
 import Feed from "@/components/Feed";
-import styles from "../styles/layout.module.scss";
+import styles from "../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import "@uploadthing/react/styles.css";

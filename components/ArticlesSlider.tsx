@@ -40,7 +40,21 @@ const ArticleSlider: React.FC<Props> = ({
 
   return (
     <div className={styles.articleSection}>
-      <Swiper className={styles.swipper} spaceBetween={160} slidesPerView={6}>
+      <Swiper className={styles.swiper}    slidesPerView={1}
+        spaceBetween={20}breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 24,
+          },
+          1199: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+          1439: {
+            slidesPerView: 6,
+            spaceBetween: 24,
+          },
+        }}>
         {data.map((article: any, index: number) => {
           return (
             <SwiperSlide className={styles.article} key={article.id}>

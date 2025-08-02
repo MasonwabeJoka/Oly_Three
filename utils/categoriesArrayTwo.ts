@@ -1,4 +1,4 @@
-import { Category } from "@/sanity/Types/Category"; // Importing Category type from the specified path
+import { Category } from "@/sanityTemp/Types/Category"; // Importing Category type from the specified path
 interface CategoryObject {
     [key: string]: any;
 }

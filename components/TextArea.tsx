@@ -6,14 +6,10 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import Icon from "./Icon";
 import Button from "./Buttons";
 import Emojis from "./Emojis";
-import useSidebarStore from "@/store/useSidebarStore";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
-  size:
-    | keyof typeof SIZE.regular
-    | keyof typeof SIZE.feed
-    | keyof typeof SIZE.dashboard;
+  size:"xxLarge" | "xLarge" | "large" | "medium";
   hasSubmitButton?: boolean;
   placeholder?: string;
   value?: string;
@@ -40,29 +36,7 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onSubmit?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 }
 
-const SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
-};
+
 
 const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   (
@@ -99,7 +73,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
     const [isFocused, setIsFocused] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
-    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
+   
  
 
     useEffect(() => {
@@ -129,14 +103,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
     const handleWrapperFocus = () => setIsFocused(true);
 
-       let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = SIZE.feed[size];
-    } else {
-      sizeClass = dashboard
-        ? SIZE.dashboard[size]
-        : SIZE.regular[size];
-    }
+   
 
     const handleWrapperBlur = (event: React.FocusEvent<HTMLDivElement>) => {
       const relatedTarget = event.relatedTarget as HTMLElement | null;
@@ -180,7 +147,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             {error || charCountError}
           </p>
         )}
-        <div className={`${styles.container} ${sizeClass} ${className || ''}`}  >
+        <div className={`${styles.container} ${className || ''}`}  >
           {label && (
             <label className={styles.label} htmlFor={id}>
               {label}

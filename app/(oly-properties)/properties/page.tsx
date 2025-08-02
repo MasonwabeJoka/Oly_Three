@@ -8,7 +8,7 @@ import Calculators from "./components/Calculators";
 import HeroSection from "@/components/HeroSection";
 import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
-import ProductOffer from "@/components/ProductOffer";
+import FeaturedServices from "@/components/FeaturedServices";
 import ExternalAd from "@/components/ExternalAd";
 // Todo: Fix cards arrow buttons don't appear when hovering the bottom of the card
 const Home = () => {
@@ -39,7 +39,7 @@ const Home = () => {
           />
         </section>
         <section className={styles.propertyValuation}>
-          <ProductOffer
+          <FeaturedServices
             layout="textLeft"
             path="/properties/valuation"
             image="/houses/house9.jpg"
@@ -58,7 +58,7 @@ const Home = () => {
         </section>
 
         <section className={styles.preQualification}>
-          <ProductOffer
+          <FeaturedServices
             layout="textRight"
             path="/properties/pre-qualification"
             image="/houses/house12.jpg"
@@ -78,7 +78,7 @@ const Home = () => {
         </section>
 
         <section className={styles.agentFinder}>
-          <ProductOffer
+          <FeaturedServices
             layout="textLeft"
             path="/properties/find-agent"
             image="/agent/3.jpg"

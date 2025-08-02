@@ -1,0 +1,170 @@
+import Image from "next/image";
+import styles from "./FeaturedServicesFrontend.module.scss";
+import Button from "@/components/Buttons";
+import useFeatureInfo from "@/store/featuresInfo";
+
+type Props = {
+  layout: "textLeft" | "textRight";
+  path: string;
+  image: string;
+  title: string;
+  description: string;
+  cta: string;
+  features: {
+    id: number;
+    feature: string;
+  }[];
+};
+
+const FeaturedServices = ({
+  layout,
+  path,
+  image,
+  title,
+  description,
+  cta,
+  features,
+}: Props) => {
+  return (
+    <>
+      {layout === "textLeft" && (
+        <TextLeft
+          layout={layout}
+          path={path}
+          image={image}
+          title={title}
+          description={description}
+          cta={cta}
+          features={features}
+        />
+      )}
+
+      {layout === "textRight" && (
+        <TextRight
+          layout={layout}
+          path={path}
+          image={image}
+          title={title}
+          description={description}
+          cta={cta}
+          features={features}
+        />
+      )}
+    </>
+  );
+};
+
+export default FeaturedServices;
+
+export const TextLeft = ({
+  image,
+  title,
+  description,
+  cta,
+  features,
+}: Props) => {
+  const { setIsMoreInfo } = useFeatureInfo();
+  return (
+    <div className={styles.container}>
+      <div className={styles.textContent}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.description}>{description}</p>
+        <ul className={styles.features}>
+          {features.map((feature) => {
+            return (
+              <li className={styles.feature} key={`textRight ${feature.id}`}>
+                <div className={styles.featureIcon}>
+                  <Image
+                    src="/icons/check-circle.svg"
+                    alt="Check"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                {feature && <p>{feature.feature}</p>}
+              </li>
+            );
+          })}
+        </ul>
+
+        <Button
+          type="button"
+          name="ctaButton"
+          buttonType="primary"
+          buttonSize="small"
+          buttonChildren={cta}
+          autoFocus={false}
+          className={styles.ctaButton}
+          onClick={() => setIsMoreInfo(true)}
+        />
+      </div>
+      <div className={styles.imageContainer}>
+        <Image
+          src={image}
+          alt="Illustration"
+          fill
+          className={styles.image}
+          style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const TextRight = ({
+  image,
+  title,
+  description,
+  cta,
+  features,
+}: Props) => {
+  const { setIsMoreInfo } = useFeatureInfo();
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.imageContainer}>
+        <Image
+          src={image}
+          alt="Illustration"
+          fill
+          className={styles.image}
+          style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+        />
+      </div>
+      <div className={styles.textContent}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.description}>{description}</p>
+        <div className={styles.features}>
+          <ul className={styles.features}>
+            {features.map((feature) => {
+              return (
+                <li className={styles.feature} key={`textRight ${feature.id}`}>
+                  <div className={styles.featureIcon}>
+                    <Image
+                      src="/icons/check-circle.svg"
+                      alt="Check"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                  {feature && <p>{feature.feature}</p>}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <Button
+          type="button"
+          name="ctaButton"
+          buttonType="primary"
+          buttonSize="small"
+          buttonChildren={cta}
+          autoFocus={false}
+          className={styles.ctaButton}
+          onClick={() => setIsMoreInfo(true)}
+        />
+      </div>
+    </div>
+  );
+};

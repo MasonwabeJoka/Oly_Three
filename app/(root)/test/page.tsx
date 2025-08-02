@@ -1,11 +1,9 @@
-// Helper to simulate a delay
-function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import { client } from "@/sanity/lib/client";
+import { olyHomepageQuery } from "@/sanity/lib/crud/pages/oly-homepage/data";
 
-export default async function TestPage() {
-  // Simulate a 2 second delay
-  await wait(2000);
+const Test = async () => {
+  
+  return <div></div>;
+};
 
-  return <div>Test page loaded!</div>;
-}
+export default Test;

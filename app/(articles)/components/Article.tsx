@@ -159,6 +159,45 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
           <div className={styles.article}>
             <TempArticle />
           </div>
+          <div className={styles.commentsSection}>
+            <CommentsSection />
+          </div>
+          <div className={styles.articleBottom}>
+            <div className={styles.articleAuthor}>
+              <div className={styles.authorAvatar}>
+                <Avatar avatar="/profilePic.jpg" avatarSize="small" />
+              </div>
+              <div className={styles.authorName}>
+                <p>John Doe</p>
+              </div>
+            </div>
+            <div className={styles.shareArticleBottom}>
+              <div className={styles.copyArticle}>
+                <div className={styles.copyArticleIcon}>
+                  <Icon
+                    className=""
+                    src="/icons/copy.png"
+                    alt="Copy Icon"
+                    width={15}
+                    height={15}
+                  />
+                </div>
+                <div>Copy Link</div>
+              </div>
+              <ul className={styles.socialMediaLinks}>
+                {socialMediaData.slice(0, 3).map((socialMedia, index) => (
+                  <div key={index} className={styles.icon}>
+                    <Icon
+                      src={socialMedia.icon}
+                      alt={`${socialMedia.name} Icon`}
+                      width={12}
+                      height={12}
+                    />
+                  </div>
+                ))}
+              </ul>
+            </div>
+          </div>
         </main>
         <aside className={styles.rightSideBar}>
           <div className={styles.articleRecommendations}>
@@ -177,45 +216,6 @@ const Article = ({ socialMediaData, articleCategories, articles }) => {
             </ul>
           </div>
         </aside>
-      </section>
-      <section className={styles.articleBottom}>
-        <div className={styles.articleAuthor}>
-          <div className={styles.authorAvatar}>
-            <Avatar avatar="/profilePic.jpg" avatarSize="small" />
-          </div>
-          <div className={styles.authorName}>
-            <p>John Doe</p>
-          </div>
-        </div>
-        <div className={styles.shareArticleBottom}>
-          <div className={styles.copyArticle}>
-            <div className={styles.copyArticleIcon}>
-              <Icon
-                className=""
-                src="/icons/copy.png"
-                alt="Copy Icon"
-                width={15}
-                height={15}
-              />
-            </div>
-            <div>Copy Link</div>
-          </div>
-          <ul className={styles.socialMediaLinks}>
-            {socialMediaData.slice(0, 3).map((socialMedia, index) => (
-              <div key={index} className={styles.icon}>
-                <Icon
-                  src={socialMedia.icon}
-                  alt={`${socialMedia.name} Icon`}
-                  width={12}
-                  height={12}
-                />
-              </div>
-            ))}
-          </ul>
-        </div>
-      </section>
-      <section className={styles.commentsSection}>
-        <CommentsSection />
       </section>
     </div>
   );

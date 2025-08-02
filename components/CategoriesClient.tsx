@@ -1,13 +1,11 @@
 "use client";
-import styles from "./Categories.module.scss";
+import styles from "./CategoriesClient.module.scss";
 import Link from "next/link";
 import { useResponsive } from "@/store/useResponsive";
 import MobileSubcategories from "@/components/MobileSubcategories";
-import Button from "./Buttons";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useModalStore } from "@/store/modalStore";
 import { useState } from "react";
-import Icon from "./Icon";
 
 export type CategoriesProps = {
   fetchedCategories: any[];
@@ -27,11 +25,14 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
     e.stopPropagation();
   };
 
-  const handleShowMore = (categoryId: string) => {
-    setVisibleSubcategories((prev) => ({
-      ...prev,
-      [categoryId]: (prev[categoryId] || 8) + 8,
-    }));
+  const handleToggleSubcategories = (categoryId: string, currentCount: number, totalCount: number) => {
+    setVisibleSubcategories((prev) => {
+      if (currentCount === totalCount) {
+        return { ...prev, [categoryId]: 8 };
+      }
+      const nextCount = (prev[categoryId] || 8) + 8;
+      return { ...prev, [categoryId]: nextCount >= totalCount ? totalCount : nextCount };
+    });
   };
 
   if (isMobile) {
@@ -75,12 +76,6 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
     return (
       <div
         className={styles.container}
-        style={{
-          // width: isSidebarOpen ? "62.625rem" : "100dvw",
-          height: isSidebarOpen ? "62.625rem" : "100dvh",
-          paddingTop: "3rem",
-          paddingLeft: "2rem",
-        }}
         onClick={() => setShowCategoriesModal(false)}
       >
         <div
@@ -90,7 +85,6 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
           {fetchedCategories.map((categoryItem) => {
             const { _id, title, subcategories } = categoryItem;
             const categoryId = _id;
-
             const visibleCount = visibleSubcategories[categoryId] || 8;
 
             return (
@@ -120,13 +114,15 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
                       </Link>
                     </div>
                   ))}
-                {subcategories.length > visibleCount && (
-                  <p
-                    className={styles.more}
-                    onClick={() => handleShowMore(categoryId)}
-                  >
-                    Show More...
-                  </p>
+                {subcategories.length > 8 && (
+                  <div className={styles.showMoreContainer}>
+                    <p
+                      className={styles.more}
+                      onClick={() => handleToggleSubcategories(categoryId, visibleCount, subcategories.length)}
+                    >
+                      {visibleCount === subcategories.length ? "Show Less..." : "Show More..."}
+                    </p>
+                  </div>
                 )}
               </div>
             );

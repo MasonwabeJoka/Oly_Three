@@ -16,8 +16,19 @@
   border-radius: rem(40);
   background-color: $white-four;
   pointer-events: auto;
+
+  // background-color: palevioletred;
   @include only(largeDesktop) {
-    // top: rem(76);
+    width: rem(888);
+    height: 80vh;
+  }
+  @include only(smallDesktop) {
+     width: rem(888);
+    height: 80vh;
+  }
+  @include only(tablet) {
+     width: rem(888);
+    height: 80vh;
   }
 
   .menuStyles {

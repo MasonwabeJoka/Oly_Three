@@ -1,7 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./ListingImages.module.scss";
 import Gallery from "@/components/Gallery";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import ImageGallery from "@/components/ImageGallery";
 import { imagesData } from "@/data/galleryImages";
 
@@ -24,7 +24,6 @@ const ListingImages = ({
   aspectRatios,
   onClick,
 }: ListingImagesProps) => {
-  
   return (
     <div className={styles.listingImages}>
       <div className={styles.galleryContainer}>
@@ -37,7 +36,6 @@ const ListingImages = ({
           />
         </div>
         <div className={styles.gallery}>
-
           <ImageGallery
             id={id ? id : ""}
             // images={images ? images : []}

@@ -1,4 +1,4 @@
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./PriceSection.module.scss";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
@@ -29,7 +29,7 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
               {/* {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`} */}
               {/* {ad?.price &&
                 Formatter.formatPrice(ad?.price, { showCents: false })} */}
-                 R 50000
+              R 50000
             </p>
           </>
         )}

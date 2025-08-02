@@ -1,6 +1,6 @@
 // app/create-sanity-user/route.ts
 
-import sanityClient from "@/sanity/sanityClient";
+import sanityClient from "@/sanityTemp/sanityClient";
 import { currentUser } from "@clerk/nextjs";
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";

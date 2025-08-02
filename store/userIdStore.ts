@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import { getUser } from '@/sanity/actions/getUser';
+import { getUser } from '@/sanityTemp/actions/getUser';
 
 interface UserState {
   userId: string | null;

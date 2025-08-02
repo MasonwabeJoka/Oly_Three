@@ -6,12 +6,12 @@ import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
 import { richTextLength } from "@/lib/richTextLength";
 import { useFetchAdStore } from "@/store/useFetchStore";
-import { getImageFilesById } from "@/sanity/actions/getImageFilesById";
+import { getImageFilesById } from "@/sanityTemp/actions/getImageFilesById";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import styles from "./ListingsCollageClient.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
-import { ImageFile } from "@/sanity/Types/ImageFile";
+import { ImageFile } from "@/sanityTemp/Types/ImageFile";
 import { Image as SanityImage } from "sanity";
 
 export type ListingsCollageProps = {
@@ -22,7 +22,6 @@ export type ListingsCollageProps = {
   hoverColour?: string;
   checkedHovered?: string;
   isDashboard: boolean;
-  isFeed?: boolean;
   cardSize?: "standard" | "small" | "large";
   limit: number;
   page: number;
@@ -38,7 +37,6 @@ const ListingsCollageClient = ({
   hoverColour,
   checkedHovered,
   isDashboard,
-  isFeed,
   cardSize,
   limit,
   page,
@@ -107,9 +105,11 @@ const ListingsCollageClient = ({
 
   const breakpointColumnsObj = {
     default: 4,
-    2500: isSidebarOpen || isDashboard ? 3 : 5,
-    800: 2,
-    639: 1,
+    2500: isDashboard ? 3 : 5,
+    1650: 4,
+    1280: 3,
+    960: 2,
+    650: 1,
   };
 
   const cards = ads?.map((ad, index) => {
@@ -129,8 +129,8 @@ const ListingsCollageClient = ({
 
     return (
       <Link
-        href="/"
-        // href={`listings/${ad.slug}`}
+        // href="/"
+        href={`listings/${ad.slug}`}
         key={ad._id}
         className={styles.cardContainer}
       >
@@ -199,7 +199,7 @@ const ListingsCollageClient = ({
             breakpointCols={breakpointColumnsObj}
             columnClassName={styles.listingsContainerColumns}
             style={{
-              maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
+              maxWidth: isDashboard ? "59.625rem" : "95vw",
             }}
           >
             {cards || []}

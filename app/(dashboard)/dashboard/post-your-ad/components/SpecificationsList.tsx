@@ -47,7 +47,7 @@ const SpecificationsList = ({
                   height={16}
                 />
               }
-              buttonSize="standard"
+              buttonSize="medium"
               dashboard
               buttonType="roundStandardFeed"
               name="edit-btn"
@@ -67,7 +67,7 @@ const SpecificationsList = ({
                   height={18}
                 />
               }
-              buttonSize="standard"
+              buttonSize="medium"
               dashboard
               buttonType="roundStandardFeed"
               name="delete-btn"

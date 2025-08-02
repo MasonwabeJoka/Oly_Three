@@ -6,7 +6,7 @@ import Checkbox from "../Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import AdSkeleton from "../skeletons/AdSkeleton";
 import useSidebarStore from "@/store/useSidebarStore";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import BoxImageSlider from "../BoxImageSlider";
 import ExpandedImageSlider from "../ExpandedImageSlider";
 import { PortableTextBlock } from "sanity";

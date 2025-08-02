@@ -23,7 +23,7 @@ const FeaturedCategoriesClient = ({
           const { _id: id, title, image } = category;
           return (
             <li key={id}>
-              {/* <Link href={`/listings/${category.title}`}> */}
+          
               <Link href={`/listings/?category=${title.toLocaleLowerCase()}`}>
                 <LinkCard label={title} cardSize="large" image={image} />
               </Link>

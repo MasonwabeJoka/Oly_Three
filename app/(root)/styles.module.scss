@@ -16,6 +16,7 @@
     transition: margin-left 0.5s;
     overflow-x: hidden;
     width: 100vw !important;
+
     @include only(largeDesktop) {
       // width: rem(1440);
     }
@@ -55,10 +56,14 @@
       margin-bottom: rem(48);
     }
     .moreFromOly {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
       margin-top: rem(32);
       margin-bottom: rem(112);
       gap: rem(20);
+     
     }
     .aboveFoldAd {
       width: 100%;

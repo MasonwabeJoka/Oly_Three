@@ -9,7 +9,7 @@ import { useResponsive } from "@/utils/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { User } from "@/sanity/Types/User";
+import { User } from "@/sanityTemp/Types/User";
 
 interface CurrentUserTemp {
   conversationIds: string[];

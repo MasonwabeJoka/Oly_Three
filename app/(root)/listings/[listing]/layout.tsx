@@ -23,9 +23,7 @@ export default function ListingLayout({
 }) {
   return (
     <div className={styles.body}>
-      <nav className={styles.nav}>
-        <HomeButton />
-      </nav>
+      
       <main className={styles.main}>{children}</main>
    
     </div>

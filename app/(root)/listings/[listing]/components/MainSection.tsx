@@ -1,5 +1,5 @@
 import styles from "./MainSection.module.scss";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import ListingOverview from "./ListingsOverview";
 import ExitButton from "@/components/ExitButton";
 import ReportAd from "@/components/ReportAd";
@@ -13,7 +13,7 @@ interface Props {
 
 const MainSection = ({ ad }: Props) => {
   const { report, setReport } = useReportStore();
-  
+
   return (
     <div className={styles.container}>
       {!report ? (

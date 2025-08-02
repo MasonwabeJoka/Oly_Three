@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import ListingPageContent from "./ListingPageContent";
 import useSidebarStore from "@/store/useSidebarStore";
 import { usePathname } from "next/navigation";

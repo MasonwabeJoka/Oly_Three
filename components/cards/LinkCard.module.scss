@@ -12,8 +12,15 @@
   background-color: $grey-one;
 
   @include only(largeDesktop) {
-    width: rem(229);
-    height: rem(300);
+   width: rem(306);
+  height: rem(338);
+  }
+  @include only(smallDesktop) {
+    width: rem(306);
+  height: rem(338);
+  }
+  @include only(tablet) {
+
   }
 
   .imageContainer {
@@ -36,6 +43,9 @@
     margin-top: auto;
     background-color: $grey-one;
 
+     height: rem(88);
+ 
+ 
     .label {
       color: $black-four;
       letter-spacing: 1.15px !important;
@@ -46,98 +56,9 @@
       padding: 0 rem(20);
     }
   }
-  .standardLabelContainerFeed {
-    height: rem(56);
-    padding: rem(8);
-
-    @include only(largeDesktop) {
-      height: rem(84);
-    }
-  }
-  .standardLabelContainer {
-    height: rem(56);
-    font-size: $h4;
-    padding: rem(8);
-
-    @include only(largeDesktop) {
-      height: rem(72);
-    }
-  }
-}
-
-.large {
-  width: rem(306);
-  height: rem(338);
-}
-
-.standard {
-  width: rem(228);
-  height: rem(236);
-}
-
-.small {
-}
-
-.largeFeed {
-  width: rem(229);
-  height: rem(262);
-}
-.standardFeed {
-}
-
-.smallFeed {
-}
-
-.largeDashboard {
-  width: rem(267);
-  height: rem(295);
-
-  @include only(largeDesktop) {
-    width: rem(306);
-    height: rem(338);
-  }
-}
-.standardDashboard {
-  @include only(largeDesktop) {
-    width: rem(224);
-    height: rem(256.2);
-  }
-}
-.smallDashboard {
-}
-
-.largeImageContainer {
-  border-radius: rem(40) rem(40) 0 0;
-  height: rem(307);
-}
-.largeLabelContainer {
-  height: rem(88);
-  border-radius: 0 0 rem(40) rem(40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .label {
-    font-size: $h3;
-  }
-}
-
-.largeLabelContainerFeed {
-  height: rem(88);
-  border-radius: 0 0 rem(40) rem(40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .label {
-    font-size: $h3;
-  }
 }
 
 .cardContainer:hover {
   transform: scale(1.04);
 }
-.cardContainer:hover .labelContainer {
-  // background-color: $white-three;
-  // color: $white-two;
-}
+

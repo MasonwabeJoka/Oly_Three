@@ -92,7 +92,7 @@ const EnterBidAmount = ({
             dashboard
           />
           <Button
-            className={styles.submitButton}
+            className={styles.buyNowButton}
             buttonChildren="Buy Now"
             buttonType="normal"
             buttonSize="large"

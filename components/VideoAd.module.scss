@@ -11,6 +11,10 @@
     width: rem(628);
     height: rem(353.25);
   }
+  @include only(smallDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
 
   .titleContainer {
     display: flex;

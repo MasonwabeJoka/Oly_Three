@@ -47,7 +47,7 @@ const DetailsList = ({
                   height={16}
                 />
               }
-              buttonSize="standard"
+              buttonSize="medium"
               dashboard
               buttonType="roundStandardFeed"
               name="edit-btn"

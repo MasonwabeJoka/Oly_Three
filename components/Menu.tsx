@@ -10,7 +10,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import Button from "./Buttons";
 import { useModalStore } from "@/store/modalStore";
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/nextjs";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import { sign } from "crypto";
@@ -57,11 +57,9 @@ const Menu = () => {
 
   // TODO: When Menu is open and the user is logged out, dynamically change the logout button to exit button, with an X icon.
   return (
-    <MaxWidthWrapper className={styles.maxWidthWrapper}>
-      {/* <div className={styles.profile}>
-        {isSignedIn && <UserButtonCustom />}
-      </div> */}
-      <div className={styles.container} style={containerStyles}>
+    <>
+      
+      <div className={styles.container} >
         <ul className={styles.menuStyles} style={menuStyles}>
           {MenuData.map((menuItem: any) => {
             const { id, icon, text, path } = menuItem;
@@ -141,7 +139,7 @@ const Menu = () => {
           </div>
         )}
       </div>
-    </MaxWidthWrapper>
+    </>
   );
 };
 

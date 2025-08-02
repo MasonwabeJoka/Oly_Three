@@ -1,6 +1,6 @@
 import styles from "./AdCarousel.module.scss";
 import Image from "next/image";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { featuresData } from "@/data/FeaturesData";
 import { Keyboard, Autoplay } from "swiper/modules";
@@ -34,7 +34,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
   };
 
   if (initialSlideIndex === null) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -64,10 +64,10 @@ const AdCarousel = ({ images, onClick }: Props) => {
                   className={styles.imageContainer}
                   style={{
                     maxHeight: "85vh",
-                    width: '100%',
+                    width: "100%",
                     maxWidth: `calc(85vh * ${image.aspectRatio})`,
                     cursor: "auto",
-                    position: 'relative'
+                    position: "relative",
                   }}
                   onClick={(event) => event.stopPropagation()}
                 >

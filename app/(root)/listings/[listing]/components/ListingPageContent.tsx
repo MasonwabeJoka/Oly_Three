@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { Ad, Image as ImageType } from "@/sanity/Types/Ad";
+import { Ad, Image as ImageType } from "@/sanityTemp/Types/Ad";
 import styles from "./ListingPageContent.module.scss";
 import Modal from "@/components/Modal";
 import AdCarousel from "@/components/carousels/AdCarousel";
