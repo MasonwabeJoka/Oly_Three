@@ -3,7 +3,7 @@ import styles from "./Payment.module.scss";
 const Payment = () => {
   return (
     <PaymentFormWrapper title="Payment">
-      <form>
+      <div>
         <label>
           Card Number:{" "}
           <input type="text" value="4111 1111 1111 1111" readOnly />
@@ -15,7 +15,7 @@ const Payment = () => {
           CVC: <input type="text" value="123" readOnly />
         </label>
         <button type="button">Submit Payment</button>
-      </form>
+      </div>
     </PaymentFormWrapper>
   );
 };

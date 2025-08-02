@@ -19,8 +19,8 @@ const DashboardSidebarData = () => {
     icon: '/icons/dashboard-sidebar/post-your-ad.png',
     active_icon: '/icons/dashboard-sidebar/post-your-ad-hovered.png',
     label: 'Post Your Ad',
-    link: '/dashboard/post-your-ad',
-    active: pathname === "/dashboard/post-your-ad",
+    link: '/dashboard/post-your-ad/select-category',
+    active: pathname === "/dashboard/post-your-ad/select-category",
     onClick: () => {}
 },
 {

@@ -2,7 +2,7 @@ import styles from "./UserButtonCustom.module.scss";
 import { useModalStore } from "@/store/modalStore";
 import { useUser } from "@clerk/nextjs";
 import Icon from "@/components/Icon";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Image from "next/image";
 import Button from "../Buttons";
 

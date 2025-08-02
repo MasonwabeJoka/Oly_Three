@@ -1,6 +1,6 @@
 import styles from "./ListingsOverview.module.scss";
 import { useState, useEffect } from "react";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import { PortableText } from "@portabletext/react";
 import PriceSection from "./PriceSection";
 import ButtonsContainer from "./ButtonsContainer";

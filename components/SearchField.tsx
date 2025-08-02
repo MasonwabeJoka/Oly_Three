@@ -1,5 +1,6 @@
 import styles from "./SearchField.module.scss";
 import Input from "./Input";
+import Form from "next/form";
 interface SearchFieldProps {
   placeholder: string;
   require: boolean;
@@ -8,10 +9,17 @@ interface SearchFieldProps {
 }
 
 const SEARCH_FIELD_SIZE = {
-  largeDesktop: `${styles.largeDesktop}`,
+  extraLargeDesktop: `${styles.extraLargeDesktop}`,
   medium: `${styles.medium}`,
   small: `${styles.small}`,
 };
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
 
 const SearchField = ({
   searchFieldSize,
@@ -20,11 +28,12 @@ const SearchField = ({
   autoComplete,
 }: SearchFieldProps) => {
   return (
-    <form
+    <Form
       className={styles.searchForm}
       autoComplete={autoComplete}
       name=""
       target="self"
+      action={mockServerAction}
     >
       <div className={styles.searchFieldContainer}>
         <input
@@ -36,10 +45,9 @@ const SearchField = ({
           placeholder={placeholder}
           required={require}
         />
-
         <div className={styles.iconContainer}>Search Icon</div>
       </div>
-    </form>
+    </Form>
   );
 };
 

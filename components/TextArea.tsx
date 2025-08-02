@@ -5,17 +5,18 @@ import React, { forwardRef, useState, useEffect, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Icon from "./Icon";
 import Button from "./Buttons";
-import useSidebarStore from "@/store/useSidebarStore";
+import Emojis from "./Emojis";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
+  size:"xxLarge" | "xLarge" | "large" | "medium";
   hasSubmitButton?: boolean;
   placeholder?: string;
   value?: string;
   label?: string;
+  ariaLabel?: string;
   id: string;
   name: string;
-  size?: keyof typeof SIZE.regular | keyof typeof SIZE.feed;
   dashboard?: boolean;
   submitButtonText?: string;
   submitButtonIcon?: string | React.ReactNode;
@@ -32,70 +33,48 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onClick?: (event: React.MouseEvent<HTMLTextAreaElement, MouseEvent>) => void;
   onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 }
 
-const SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
-};
 
-const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
+
+const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
-      className = "",
-      hasSubmitButton = false,
+      className,
+      hasSubmitButton = true,
+      size = "large",
       placeholder = "",
       value = "",
       label,
+      ariaLabel,
       id,
       name,
-      size = "large",
-      // variant = "regular", // Default to regular variant
-      submitButtonText = "Submit",
-      submitButtonIcon,
-      style,
+      dashboard,
+      submitButtonText = "Send",
       required = false,
       reactHookFormProps,
       error,
-      maxWidth,
-      width,
-      height = 240,
       maxHeight,
       characterLimit,
       onChange,
       onClick,
       onFocus,
       onBlur,
-      dashboard,
+      onSubmit,
     },
     ref
   ) => {
-    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
     const [textareaHeight, setTextareaHeight] = useState("auto");
     const [localValue, setLocalValue] = useState(value);
     const [isMaxHeight, setIsMaxHeight] = useState(false);
     const [charCountError, setCharCountError] = useState<string | null>(null);
     const mirrorDivRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+   
+ 
 
     useEffect(() => {
       if (mirrorDivRef.current) {
@@ -122,103 +101,131 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
       onChange?.(event);
     };
 
-    let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = SIZE.feed[size];
-    } else {
-      if (dashboard) {
-        sizeClass = SIZE.dashboard[size];
-      } else {
-        sizeClass = SIZE.regular[size];
-      }
-    }
-
     const handleWrapperFocus = () => setIsFocused(true);
+
+   
 
     const handleWrapperBlur = (event: React.FocusEvent<HTMLDivElement>) => {
       const relatedTarget = event.relatedTarget as HTMLElement | null;
       if (relatedTarget && event.currentTarget.contains(relatedTarget)) {
-        // focus moved within the wrapper → keep it focused
         return;
       }
       setIsFocused(false);
     };
 
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    const handleSubmit = () => {
+      if (textareaRef.current && onSubmit) {
+        const event = new Event("submit", { bubbles: true }) as any;
+        Object.defineProperty(event, "target", { value: textareaRef.current });
+        Object.defineProperty(event, "currentTarget", { value: textareaRef.current });
+        onSubmit(event);
+      }
+    };
+
+    const handleIconKeyDown = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+      action: string
+    ) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        console.log(`${action} icon activated`);
+      }
+    };
+
     return (
       <>
-        {error && <p className={styles.errorMessage}>{error}</p>}
-        {charCountError && (
-          <p className={styles.errorMessage}>{charCountError}</p>
+        {(error || charCountError) && (
+          <p className={styles.errorMessage} id={`${id}-error`}>
+            {error || charCountError}
+          </p>
         )}
-        <div
-          className={styles.container}
-          style={{
-            maxWidth: maxWidth ? `${maxWidth}px` : undefined,
-            width: width ? `${width}px` : undefined,
-          }}
-        >
+        <div className={`${styles.container} ${className || ''}`}  >
           {label && (
             <label className={styles.label} htmlFor={id}>
               {label}
             </label>
           )}
-
           <div
             className={styles.textareaWrapper}
-            tabIndex={-1}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
+            style={{height: textareaHeight}}
           >
             <textarea
-              className={`${styles.textarea} ${sizeClass} ${className} ${
+              className={`${styles.textarea} ${
                 isMaxHeight ? styles.atMaxHeight : ""
               }`}
               id={id}
               name={name}
-              placeholder={!isFocused ? placeholder : ''}
+              placeholder={!isFocused ? placeholder : ""}
               value={value || localValue}
+              aria-label={ariaLabel}
               required={required}
               onChange={handleChange}
               onClick={onClick}
               onFocus={onFocus}
               onBlur={onBlur}
-              ref={ref}
-              {...reactHookFormProps}
+              ref={(node) => {
+                textareaRef.current = node;
+                if (typeof ref === "function") {
+                  ref(node);
+                } else if (ref) {
+                  ref.current = node;
+                }
+              }}
               style={{
-                ...style,
-                height: height ? `${height}px` : textareaHeight,
-                minHeight: "56px",
+                height: textareaHeight,
                 maxHeight: maxHeight ? `${maxHeight}px` : "240px",
               }}
+              aria-describedby={(error || charCountError) ? `${id}-error` : undefined}
+              aria-label={placeholder || "Type a message"}
+              {...reactHookFormProps}
             />
+
+          
             <div
               ref={mirrorDivRef}
-              className={`${styles.mirrorDiv} ${sizeClass}`}
+              className={`${styles.mirrorDiv}`}
               aria-hidden="true"
             >
               {value || localValue || " "}
             </div>
-          </div>
-          {((value || localValue) || isFocused) && hasSubmitButton && (
-            <div className={styles.buttons}>
-              <div className={styles.submitButtonContainer}>
-                <Button
-                  className={styles.submitButton}
-                  buttonChildren={submitButtonText}
-                  buttonType="normal"
-                  buttonSize="tiny"
-                  name="submit-btn"
-                  type="button"
-                  ariaLabel="Submit Button"
-                  autoFocus={false}
-                  disabled={false}
-                />
+
+              {isEmojiPickerOpen && <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />}
+            
+            {(value || localValue || isFocused) && (
+              <div className={styles.buttons}>
+              
+                {hasSubmitButton && (
+                  <div className={styles.submitButtonContainer}>
+                    <Button
+                      className={styles.submitButton}
+                      buttonChildren={submitButtonText}
+                      buttonType="normal"
+                      buttonSize="tiny"
+                      name="submit-btn"
+                      type="button"
+                      ariaLabel="Send message"
+                      autoFocus={false}
+                      disabled={false}
+                      onClick={handleSubmit}
+                    />
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         {characterLimit && (
-          <div className={styles.charCount}>
+          <div className={styles.charCount} id={`${id}-char-count`}>
             {localValue.length}/{characterLimit}
           </div>
         )}
@@ -227,6 +234,6 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, Props>(
   }
 );
 
-TextAreaComponent.displayName = "TextAreaComponent";
+TextArea.displayName = "TextArea";
 
-export default TextAreaComponent;
+export default TextArea;

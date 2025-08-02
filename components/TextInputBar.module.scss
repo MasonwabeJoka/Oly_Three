@@ -99,16 +99,16 @@
     align-items: center;
     width: 100%;
 
-
     .leftButtons {
       display: flex;
       align-items: center;
       margin-top: rem(-5);
       margin-left: rem(16);
-      .imoji,.upload {
+      .imoji,
+      .upload {
         margin-right: rem(8);
         cursor: pointer;
-     
+
         filter: drop-shadow(0px 1px 3px rgba(180, 191, 203, 0.2))
           drop-shadow(0px 5px 5px rgba(180, 191, 203, 0.17))
           drop-shadow(0px 11px 7px rgba(180, 191, 203, 0.1))
@@ -117,7 +117,6 @@
       }
 
       .upload {
-       
       }
     }
 
@@ -128,10 +127,10 @@
       background-color: $primary;
       box-shadow: none !important;
       filter: drop-shadow(0px 1px 3px rgba(180, 191, 203, 0.2))
-      drop-shadow(0px 5px 5px rgba(180, 191, 203, 0.17))
-      drop-shadow(0px 11px 7px rgba(180, 191, 203, 0.1))
-      drop-shadow(0px 20px 8px rgba(180, 191, 203, 0.03))
-      drop-shadow(0px 30px 9px rgba(180, 191, 203, 0));
+        drop-shadow(0px 5px 5px rgba(180, 191, 203, 0.17))
+        drop-shadow(0px 11px 7px rgba(180, 191, 203, 0.1))
+        drop-shadow(0px 20px 8px rgba(180, 191, 203, 0.03))
+        drop-shadow(0px 30px 9px rgba(180, 191, 203, 0));
     }
 
     .submitButton:hover {
@@ -169,13 +168,13 @@
 
 // Size variants
 .xxLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1296);
   }
 }
 
 .xLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1078);
   }
 }
@@ -183,7 +182,7 @@
 .large {
   width: rem(311);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(640);
   }
 }
@@ -191,7 +190,7 @@
 .medium {
   width: rem(202);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(424);
   }
 }

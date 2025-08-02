@@ -3,12 +3,20 @@ import styles from "./EnterBidAmount.module.scss";
 import NumberInput from "@/components/NumberInput";
 import Button from "@/components/Buttons";
 import BidHistory from "./BidHistory";
+import Form from "next/form";
 
 interface BidInputProps {
   currentBid: number;
   buyNowPrice: number;
   onSubmit: (amount: number) => void;
   error: string;
+}
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
 }
 
 const EnterBidAmount = ({
@@ -43,7 +51,11 @@ const EnterBidAmount = ({
       <div className={styles.historyContainer}>
         <BidHistory />
       </div>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <Form
+        className={styles.form}
+        action={mockServerAction}
+        onSubmit={handleSubmit}
+      >
         {error && <p className={styles.error}>{error}</p>}
         <div className={styles.inputContainer}>
           <NumberInput
@@ -63,7 +75,7 @@ const EnterBidAmount = ({
               if (parseFloat(bid) < currentBid + 100) {
                 setBid(`${currentBid + 100}`);
               }
-            }}  
+            }}
           />
         </div>
         <div className={styles.buttonsContainer}>
@@ -80,7 +92,7 @@ const EnterBidAmount = ({
             dashboard
           />
           <Button
-            className={styles.submitButton}
+            className={styles.buyNowButton}
             buttonChildren="Buy Now"
             buttonType="normal"
             buttonSize="large"
@@ -92,7 +104,7 @@ const EnterBidAmount = ({
             dashboard
           />
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

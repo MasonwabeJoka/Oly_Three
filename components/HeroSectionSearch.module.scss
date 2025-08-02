@@ -4,86 +4,116 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 50vw;
   height: 93vh;
   border-radius: rem(150) rem(150) rem(150) rem(150);
-  background-color: $primary;
-  background-color: #c9e5e8;
 
-  .logo {
-    margin-top: rem(104);
-    margin-bottom: rem(48);
+  .text {
+    display: none;
   }
-  .buttonsAndSearch {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: rem(48);
 
-    .buttons {
+  @include only(largeDesktop) {
+    background-color: #c9e5e8;
+  }
+  @include only(smallDesktop) {
+    width: 95vw !important;
+    height: 93vh;
+    background-color: #c9e5e8;
+  }
+
+  @include only(tablet) {
+    width: 95vw;
+    height: 112vh;
+    background-color: #c9e5e8;
+  }
+
+  .formContainer {
+    width: 100%;
+    height: 100%;
+
+    @include only(smallDesktop) {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .formWrapper {
       display: flex;
       flex-direction: column;
-      margin-bottom: rem(64);
+      margin-top: rem(120);
+      align-items: center;
 
-      .link {
+      @include only(largeDesktop) {
       }
-
-      .postYourAdBtn {
-        margin-bottom: rem(20);
-        background-color: $danger-hover;
-        color: $white-one;
-      }
-
-      .postYourAdBtn:hover {
-        background-color: #f83710;
-      }
-
-      .categoriesBtn {
-        background-color: $white-two;
-        box-shadow: none;
-      }
-
-      .categoriesBtn:hover {
-        background-color: $white-one;
+      @include only(smallDesktop) {
+        margin-right: rem(144);
       }
     }
 
-    .searchFields {
-      margin-bottom: rem(30);
-      .searchTerm {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: rem(20);
+    .logo {
+      margin-top: rem(48);
+      margin-bottom: rem(48);
 
-        .searchTermInput {
-        }
+      @include only(largeDesktop) {
+        width: rem(120);
+        height: "auto";
       }
-      .searchLocation {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-       
-        .searchLocationInput {
-          // margin-bottom: rem(10);
-        }
+      @include only(smallDesktop) {
+        width: rem(120);
+        height: "auto";
       }
-
-      .errorMessage {
-        color: $danger;
-        margin-bottom: rem(8);
+      @include only(tablet) {
+        position: relative;
+        top: rem(-330);
+        width: rem(100);
+        height: "auto";
+      }
+      @include only(extraLargeDesktop) {
+        width: rem(120);
+        height: "auto";
       }
     }
-    .searchButton {
-      .search {
-        background-color: $white-two;
-        box-shadow: none;
+    .buttonsAndSearch {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @include only(largeDesktop) {
+      }
+      @include only(smallDesktop) {
+      }
+      @include only(tablet) {
+        margin-top: rem(230);
       }
 
-      .search:hover {
-        background-color: $white-one;
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: rem(64);
+
+        .link {
+        }
+
+        .postYourAdBtn {
+          margin-bottom: rem(20);
+          background-color: $danger-hover;
+          color: $white-one;
+        }
+
+        .postYourAdBtn:hover {
+          background-color: #f83710;
+        }
+
+        .categoriesBtn {
+          background-color: $white-two;
+          box-shadow: none;
+        }
+
+        .categoriesBtn:hover {
+          background-color: $white-one;
+        }
       }
     }
   }

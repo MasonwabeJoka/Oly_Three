@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createAd } from '@/sanity/actions/createAd';
+import { createAd } from '@/sanityTemp/actions/createAd';
 
 export async function POST(req: NextRequest) {
   try {

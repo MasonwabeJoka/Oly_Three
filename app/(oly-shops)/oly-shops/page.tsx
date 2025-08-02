@@ -1,4 +1,3 @@
-
 import Blogs from "@/components/Blogs";
 import styles from "./styles.module.scss";
 import FeaturedListings from "@/components/FeaturedListings";
@@ -8,8 +7,11 @@ import HeroSection from "@/components/HeroSection";
 import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
+import { getCategories } from "@/sanityTemp/actions/categoriesActions";
 
 const Home = () => {
+  const fetchedCategories = getCategories(); // Fetch categories from Sanity
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -17,7 +19,7 @@ const Home = () => {
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories />
+          <ShowCategories fetchedCategories={fetchedCategories} />
         </div>
 
         <section className={styles.heroSection}>
@@ -28,12 +30,12 @@ const Home = () => {
         </section>
 
         <section className={styles.aboveFoldAd}>
-        <section className={styles.aboveFoldAd}>
-          <ExternalAd
-            adType="image"
-            path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
-          />
-        </section>
+          <section className={styles.aboveFoldAd}>
+            <ExternalAd
+              adType="image"
+              path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
+            />
+          </section>
         </section>
 
         <section className={styles.featuredListings}>

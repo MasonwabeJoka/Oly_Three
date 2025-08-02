@@ -5,17 +5,22 @@ import Select from "@/components/Select";
 import { locations } from "@/data/LocationData";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
-import  { FormDataSchema}  from "../validations/formDataSchema";
+import { FormDataSchema } from "../validations/formDataSchema";
+import { useState } from "react";
 
 const Location = () => {
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [isCityOpen, setIsCityOpen] = useState(false);
+  const [isSuburbOpen, setIsSuburbOpen] = useState(false);
   const {
     register,
     formState: { errors },
   } = useFormContext<FormDataSchema>();
 
   return (
-    <FormWrapper title="Location">
+    <FormWrapper selectOpen={isLocationOpen || isCityOpen || isSuburbOpen}>
       <div className={styles.container}>
+        <h2 className={styles.title}>Location</h2>
         <div className={styles.selects}>
           <div className={styles.select}>
             <Select
@@ -30,68 +35,72 @@ const Location = () => {
               required={false}
               multiple={false}
               dashboard
-              error={errors.location?.province?.message }
+              error={errors.location?.province?.message}
               {...register("location.province")}
+              onOpenChange={(isOpen) => setIsLocationOpen(isOpen)}
             />
           </div>
-          <div className={styles.select}>
-            <Select
-              options={locations[0].city}
-              initialValue="Select your city"
-              selectSize="large"
-              label="City"
-              id="city"
-              ariaLabel="City"
-              disabled={false}
-              autoFocus={false}
-              required={false}
-              dashboard
-              error={errors.location?.city?.message}
-              {...register("location.city")}
-            />
-          </div>
-          <div className={styles.select}>
-            <Select
-              options={locations[0].suburb}
-              initialValue="Select your suburb"
-              selectSize="large"
-              label="Suburb"
-              id="suburb"
-              ariaLabel="Suburb"
-              disabled={false}
-              autoFocus={false}
-              required={false}
-              dashboard
-              error={errors.location?.suburb?.message}
-              {...register("location.suburb")}
-            />
-          </div>
-          <div className={styles.select}>
-            <Input
-              className={styles.suburb}
-              inputType="text"
-              inputSize="large"
-              placeholder="You can add more here"
-              label="Custom Location"
-              id="customLocation"
-              ariaLabel="Custom Location Field"
-              autoFocus={false}
-              autoComplete="on"
-              disabled={false}
-              required={true}
-              dashboard
-              error={errors.location?.customLocation?.message}
-              {...register("location.customLocation")}
-            />
-          </div>
+          {!isLocationOpen && (
+            <div className={styles.select}>
+              <Select
+                options={locations[0].city}
+                initialValue="Select your city"
+                selectSize="large"
+                label="City"
+                id="city"
+                ariaLabel="City"
+                disabled={false}
+                autoFocus={false}
+                required={false}
+                dashboard
+                error={errors.location?.city?.message}
+                {...register("location.city")}
+                onOpenChange={(isOpen) => setIsCityOpen(isOpen)}
+              />
+            </div>
+          )}
+          {!isLocationOpen && !isCityOpen && (
+            <div className={styles.select}>
+              <Select
+                options={locations[0].suburb}
+                initialValue="Select your suburb"
+                selectSize="large"
+                label="Suburb"
+                id="suburb"
+                ariaLabel="Suburb"
+                disabled={false}
+                autoFocus={false}
+                required={false}
+                dashboard
+                error={errors.location?.suburb?.message}
+                {...register("location.suburb")}
+                onOpenChange={(isOpen) => setIsSuburbOpen(isOpen)}
+              />
+            </div>
+          )}
+          {!isLocationOpen && !isCityOpen && !isSuburbOpen && (
+            <div className={styles.select}>
+              <Input
+                className={styles.addMore}
+                inputType="text"
+                inputSize="large"
+                placeholder="You can add more here"
+                label="Custom Location"
+                id="customLocation"
+                ariaLabel="Custom Location Field"
+                autoFocus={false}
+                autoComplete="on"
+                disabled={false}
+                required={true}
+                dashboard
+                error={errors.location?.customLocation?.message}
+                {...register("location.customLocation")}
+              />
+            </div>
+          )}
         </div>
       </div>
     </FormWrapper>
   );
 };
 export default Location;
-
-
-
-
-

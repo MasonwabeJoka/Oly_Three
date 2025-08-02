@@ -31,6 +31,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
+  const [isDurationSelectOpen, setIsDurationSelectOpen] = useState(false);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedDuration = e.target.value;
@@ -109,6 +110,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
+              onOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
             />
           </div>
 
@@ -186,21 +188,24 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
+              onOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
             />
           </div>
 
-          <Button
-            className={styles.moreInfoButton}
-            buttonChildren="More Info"
-            buttonType="normal"
-            buttonSize="medium"
-            name="more-info-btn"
-            type="button"
-            ariaLabel="More Info Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard={isDashboard}
-          />
+          {!isDurationSelectOpen && (
+            <Button
+              className={styles.moreInfoButton}
+              buttonChildren="More Info"
+              buttonType="normal"
+              buttonSize="medium"
+              name="more-info-btn"
+              type="button"
+              ariaLabel="More Info Button"
+              autoFocus={false}
+              disabled={false}
+              dashboard={isDashboard}
+            />
+          )}
         </div>
 
         <div className={styles.priceContainer}>
@@ -213,5 +218,3 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
 };
 
 export default PromoteYourAdCard;
-
-

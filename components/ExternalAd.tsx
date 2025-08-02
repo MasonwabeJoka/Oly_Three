@@ -8,6 +8,7 @@ type Props = {
 };
 
 const ExternalAd = ({ adType, path }: Props) => {
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>

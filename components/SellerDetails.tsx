@@ -1,7 +1,7 @@
 "use client";
 import styles from "./SellerDetails.module.scss";
 import Button from "./Buttons";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Image from "next/image";
 import useMessageStore from "@/features/messages/store/useMessageStore";
 
@@ -29,67 +29,65 @@ const socialMediaLogos = [
 ];
 
 const SellerDetails = () => {
-  const {setChats} = useMessageStore();
+  const { setChats } = useMessageStore();
 
   return (
     <div className={styles.container}>
-      
-        <>
-          <div className={styles.profileSection}>
-            <Avatar
-              className={styles.avatar}
-              avatar="/profilePic.jpg"
-              isOnline={true}
-              avatarSize="large"
-            />
-            <div className={styles.details}>
-              <p className={styles.name}>Mandisa Msebenzi</p>
-              <p className={styles.phoneNumber}>087 562 454 747</p>
-              {/* <p className={styles.email}>Show Email</p> */}
-            </div>
+      <>
+        <div className={styles.profileSection}>
+          <Avatar
+            className={styles.avatar}
+            avatar="/profilePic.jpg"
+            isOnline={true}
+            avatarSize="large"
+          />
+          <div className={styles.details}>
+            <p className={styles.name}>Mandisa Msebenzi</p>
+            <p className={styles.phoneNumber}>087 562 454 747</p>
+            {/* <p className={styles.email}>Show Email</p> */}
           </div>
-          <div className={styles.buttons}>
-            <Button
-              className={`${styles.button} ${styles.chatButton}`}
-              buttonChildren="Chat"
-              buttonType="primary"
-              buttonSize="small"
-              name="chat_btn"
-              type="button"
-              ariaLabel="Chat Button"
-              autoFocus={false}
-              disabled={false}
-              onClick={() => setChats(true)}
-            />
-            <Button
-              className={`${styles.button} ${styles.followButton}`}
-              buttonChildren="Follow"
-              buttonType="normal"
-              buttonSize="small"
-              name="follow_btn"
-              type="button"
-              ariaLabel="Follow Button"
-              autoFocus={false}
-              disabled={false}
-            />
-            <Button
-              className={`${styles.button} ${styles.storeButton}`}
-              buttonChildren="Shop"
-              buttonType="normal"
-              buttonSize="small"
-              name="shop_btn"
-              type="button"
-              ariaLabel="Shop Button"
-              autoFocus={false}
-              disabled={false}
-            />
-          </div>
+        </div>
+        <div className={styles.buttons}>
+          <Button
+            className={`${styles.button} ${styles.chatButton}`}
+            buttonChildren="Chat"
+            buttonType="primary"
+            buttonSize="small"
+            name="chat_btn"
+            type="button"
+            ariaLabel="Chat Button"
+            autoFocus={false}
+            disabled={false}
+            onClick={() => setChats(true)}
+          />
+          <Button
+            className={`${styles.button} ${styles.followButton}`}
+            buttonChildren="Follow"
+            buttonType="normal"
+            buttonSize="small"
+            name="follow_btn"
+            type="button"
+            ariaLabel="Follow Button"
+            autoFocus={false}
+            disabled={false}
+          />
+          <Button
+            className={`${styles.button} ${styles.storeButton}`}
+            buttonChildren="Shop"
+            buttonType="normal"
+            buttonSize="small"
+            name="shop_btn"
+            type="button"
+            ariaLabel="Shop Button"
+            autoFocus={false}
+            disabled={false}
+          />
+        </div>
 
-          <div className={styles.socialMediaContainer}>
-            {socialMediaLogos.map((app) => (
+        <ul className={styles.socialMediaContainer}>
+          {socialMediaLogos.map((app) => (
+            <li key={app.id} className={styles.app}>
               <Button
-                key={app.id}
-                className={styles.app}
                 buttonChildren={
                   <Image
                     src={app.icon}
@@ -106,11 +104,10 @@ const SellerDetails = () => {
                 autoFocus={false}
                 disabled={false}
               />
-            ))}
-          </div>
-          
-        </>
-     
+            </li>
+          ))}
+        </ul>
+      </>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./UserCard.module.scss";
 import Button from "@/components/Buttons";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -21,7 +21,7 @@ const UserCard = ({ id, name, username, image, personType }: Props) => {
           className="avatar"
           avatar={image}
           imageAlt="logo"
-          avatarSize="largeDesktop"
+          avatarSize="extraLargeDesktop"
           priority
         />
       </div>

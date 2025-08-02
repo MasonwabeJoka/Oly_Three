@@ -9,10 +9,18 @@ import Button from "@/components/Buttons";
 import { detailsFormSchema } from "@/lib/validations/formValidations";
 import Icon from "@/components/Icon";
 import SelectedDetail from "./SelectedDetail";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof detailsFormSchema>;
 
-const EditModeForm = ({initialValue}) => {
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
+
+const EditModeForm = ({ initialValue }) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(detailsFormSchema),
   });
@@ -23,7 +31,11 @@ const EditModeForm = ({initialValue}) => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      className={styles.container}
+      action={mockServerAction}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className={styles.editMode}>
         <TextArea
           className={styles.editDetail}
@@ -60,7 +72,7 @@ const EditModeForm = ({initialValue}) => {
           />
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 

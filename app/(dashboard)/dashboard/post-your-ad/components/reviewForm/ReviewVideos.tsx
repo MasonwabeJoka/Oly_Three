@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./ReviewVideos.module.scss";
 import { MediaSectionWrapper } from "./MediaSectionWrapper";
 import { Swiper, SwiperSlide } from "swiper/react";

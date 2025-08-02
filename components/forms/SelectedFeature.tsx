@@ -7,6 +7,7 @@ import Input from "@/components/Input";
 import Button from "@/components/Buttons";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import styles from "./SelectedFeature.module.scss";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof multiStepFormSchema>;
 type SelectedDetailProps = {
@@ -23,6 +24,13 @@ type SelectedDetailProps = {
   errors: any; // Ensure this matches the type expected from useForm()
 };
 
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
+
 const SelectedFeature = ({
   id,
   detail,
@@ -36,7 +44,7 @@ const SelectedFeature = ({
   handleSubmit,
   ...data
 }: SelectedDetailProps) => {
-  const { reset,control, formState, trigger } = useFormContext();
+  const { reset, control, formState, trigger } = useFormContext();
 
   const enterDetail = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const detail = (e.target as HTMLInputElement).value.trim();
@@ -50,7 +58,7 @@ const SelectedFeature = ({
 
   const clickHandler = async () => {
     // trigger to validate detail field
-    await trigger('feature', {
+    await trigger("feature", {
       // focus on first field with error
       shouldFocus: true,
     });
@@ -58,13 +66,17 @@ const SelectedFeature = ({
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
-    reset()
+    reset();
     // Perform any additional actions on submit
   };
 
   return (
     <>
-      <div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Form
+        className={styles.form}
+        action={mockServerAction}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div key={id} className={styles.selectedDetailContainer}>
           <p className={styles.selectedDetailTitle}>{detail}</p>
           <p className={styles.selectedDetailDescription}>{description}</p>
@@ -102,19 +114,17 @@ const SelectedFeature = ({
               className={styles.proceedButton}
               buttonChildren="Submit Detail"
               buttonType="normal"
-              type="button"
+              type="submit"
               buttonSize="large"
               name="proceed-btn"
               aria-label="Proceed Button"
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={clickHandler}
             />
           </div>
         </div>
-      </div>
-
+      </Form>
     </>
   );
 };

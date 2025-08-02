@@ -1,0 +1,329 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1440);
+
+  .header {
+    position: relative;
+    width: 95%;
+    height: rem(640);
+    border-radius: rem(40);
+    margin-top: rem(32);
+    box-shadow: $shadow-one;
+
+    .topSection {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      z-index: 50;
+      margin-top: rem(32);
+      .homeButton {
+        margin-left: rem(56);
+        width: fit-content;
+      }
+
+      .shareArticle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-right: rem(56);
+
+        .copyArticle {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          gap: rem(4);
+          background-color: $white-three;
+          padding: rem(4) rem(16);
+          border-radius: rem(40);
+          .copyArticleIcon {
+          }
+        }
+        .socialMediaLinks {
+          position: relative;
+          display: flex;
+          width: fit-content;
+          gap: rem(12);
+
+          .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: rem(32);
+            height: rem(32);
+            border-radius: 50%;
+            background-color: $white-three;
+            cursor: pointer;
+
+            img {
+              width: rem(12);
+              height: rem(12);
+            }
+          }
+        }
+
+        .more {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: $white-three;
+          cursor: pointer;
+
+          // If you want to add hover effect
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+          }
+        }
+      }
+    }
+
+    .bottomSection {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding-left: rem(56);
+      padding-top: rem(56);
+      color: $white-one;
+      background: linear-gradient(
+        to top,
+        rgba($black-one, 1),
+        rgba($black-one, 0)
+      );
+      // backdrop-filter: blur(8px);
+      border-bottom-left-radius: rem(32);
+      border-bottom-right-radius: rem(32);
+
+      .categoryPill {
+        margin-left: rem(24);
+        // margin-bottom: rem(8);
+        color: $black-four;
+        box-shadow: none !important;
+      }
+
+      .articleDetails {
+        display: flex;
+        margin-bottom: rem(56);
+
+        padding: rem(24);
+        border-radius: rem(40);
+
+        .leftSection {
+          width: 50%;
+          .articleTitle {
+            font-size: $h2;
+            font-weight: 600;
+            // margin-bottom: rem(4);
+            line-height: 1.2;
+            p {
+              // text-shadow: 2px 2px 4px rgba(180, 191, 203, 0.3);
+            }
+          }
+
+          .articleExcerpt {
+            margin-bottom: rem(12);
+            p {
+            }
+          }
+
+          .articleMetadata {
+            display: flex;
+            gap: rem(56);
+            font-size: rem(14);
+            font-weight: 300;
+          }
+        }
+
+        .rightSection {
+          margin-left: auto;
+          margin-right: rem(56);
+          .articleAuthor {
+            display: flex;
+            align-items: center;
+            gap: rem(12);
+            cursor: pointer;
+
+            .authorAvatar {
+            }
+
+            .authorName {
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .topBar {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    height: rem(96);
+
+    .icons {
+      display: flex;
+      gap: rem(20);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: rem(24);
+      .iconContainer {
+        cursor: pointer;
+        .icon {
+          // box-shadow: $shadow-one;
+        }
+      }
+    }
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: inherit;
+
+    .leftSideBar {
+      width: 20%;
+      padding: rem(12);
+      .categories {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: rem(16);
+        .category {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $white-three;
+          width: 90%;
+          height: rem(56);
+          border-radius: rem(40);
+          box-shadow: $shadow-six;
+          box-shadow: $shadow-one;
+          cursor: pointer;
+        }
+
+        .category:hover {
+          background-color: $white-two;
+        }
+      }
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%;
+        .commentsSection {
+            // width: 50%;
+            // height: rem(200);
+          }
+          .articleBottom {
+            display: flex;
+            justify-content: space-between;
+            // width: 50%;
+            height: fit-content;
+
+            margin-bottom: rem(64);
+
+            .articleAuthor {
+              display: flex;
+              align-items: center;
+              gap: rem(12);
+              margin-left: rem(56);
+              cursor: pointer;
+
+              .authorAvatar {
+              }
+
+              .authorName {
+              }
+            }
+
+            .shareArticleBottom {
+              display: flex;
+              gap: rem(12);
+              margin-right: rem(56);
+
+              .copyArticle {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                gap: rem(4);
+                background-color: $white-one;
+                padding: rem(4) rem(16);
+                border-radius: rem(40);
+                .copyArticleIcon {
+                }
+              }
+              .socialMediaLinks {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                gap: rem(12);
+
+                .icon {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: rem(32);
+                  height: rem(32);
+                  border-radius: 50%;
+                  background-color: $white-one;
+                  cursor: pointer;
+
+                  img {
+                    width: rem(12);
+                    height: rem(12);
+                  }
+                }
+              }
+              .more {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: rem(32);
+                height: rem(32);
+                border-radius: 50%;
+                background-color: $white-one;
+                cursor: pointer;
+
+                img {
+                  width: rem(12);
+                  height: rem(12);
+                }
+              }
+            }
+          }
+    }
+
+    .rightSideBar {
+      width: 20%;
+
+      .articleRecommendations {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        .title {
+          font-size: $h3 !important;
+          font-weight: 600;
+          margin: 0 auto;
+          margin-bottom: rem(20);
+        }
+
+        .articles {
+          display: flex;
+          flex-direction: column;
+          gap: rem(20);
+        
+        }
+      }
+    }
+  }
+}

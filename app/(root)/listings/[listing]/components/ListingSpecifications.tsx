@@ -1,4 +1,4 @@
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./ListingDetails.module.scss";
 import { listingDetails } from "@/data/listingDetails";
 
@@ -9,9 +9,8 @@ const ProductSpecifications = ({ ad }: { ad: Ad }) => {
       <div className={styles.details}>
         {listingDetails.map((detail, index) => (
           <div className={styles.detail} key={detail.id}>
-          
-              <div className={styles.bullet}></div>
-            
+            <div className={styles.bullet}></div>
+
             <div className={styles.infoItemContainer}>
               <p>{detail.text}</p>
             </div>

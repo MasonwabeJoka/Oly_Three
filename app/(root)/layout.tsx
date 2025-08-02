@@ -1,11 +1,12 @@
 
 import Feed from "@/components/Feed";
-import styles from "../styles/layout.module.scss";
+import styles from "../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
+import Navbar from "@/components/layouts/Navbar";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
@@ -37,9 +38,9 @@ export default function RootLayout({
                 <Feed />
               </aside>
               <div className={styles.main}>
-                {/* <nav className={styles.nav}>
+                <nav className={styles.nav}>
                   <Navbar />
-                </nav> */}
+                </nav>
                 <main className={styles.children}>
                   {children}
                   <Toaster

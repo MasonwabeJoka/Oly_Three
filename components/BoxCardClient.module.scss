@@ -1,0 +1,96 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: rem(0);
+  font-size: rem(13);
+  letter-spacing: rem(1.1);
+  line-height: 2 !important;
+  text-transform: uppercase;
+  background-color: $grey-one;
+  color: rgb(233, 252, 255);
+  color: $black-four;
+  width: 100%;
+  height: rem(96);
+  z-index: 1;
+  border-radius: rem(0) rem(0) rem(40) rem(40);
+  padding: 0 rem(8) rem(8) rem(8);
+
+  .titleDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+    .title {
+      padding: rem(8) rem(0) rem(4) rem(20);
+      line-height: 1.2;
+    }
+  }
+  .price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: rem(16);
+    text-align: center;
+    height: 100%;
+  }
+}
+
+.imageContainerHovered {
+  box-sizing: $shadow-one;
+  transform: scale(1.04);
+
+  .image {
+    margin-bottom: rem(8);
+  }
+}
+
+.detailsHovered {
+  position: static;
+  display: block;
+  color: $black-four;
+  background: $grey-one;
+  height: 100%;
+
+  .titleDescription {
+    width: 100%;
+    margin-bottom: rem(-12);
+
+    .title {
+      padding: rem(32) rem(20) rem(4);
+      font-size: rem(16);
+      margin-bottom: rem(8);
+      line-height: 1.5;
+      font-weight: bold;
+      text-align: center;
+    }
+    .description {
+      padding: rem(4) rem(20) rem(0) rem(20);
+      font-size: rem(16);
+      text-transform: none;
+      text-align: center;
+    }
+  }
+  .price {
+    font-size: $h2;
+    margin-bottom: rem(8);
+  }
+}

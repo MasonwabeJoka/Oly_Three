@@ -20,6 +20,8 @@ interface MessageState {
   selectedChat: Message | null;
   userMessages: MessageContent[];
   messages: Message[];
+  isLoading: boolean;
+  isInitialized: boolean;
   setChats: (value: boolean) => void;
   setSelectedChat: (chat: Message | null) => void;
   setUserMessages: (messages: MessageContent[]) => void;
@@ -27,19 +29,67 @@ interface MessageState {
   handleChatClick: (message: Message) => void;
   handleSendMessage: (text: string) => void;
   resetLocalStorage: () => void;
+  initializeMessages: () => void;
 }
+
+// Helper function to safely access localStorage
+const safeLocalStorage = {
+  getItem: (key: string): string | null => {
+    try {
+      if (typeof window !== 'undefined') {
+        return localStorage.getItem(key);
+      }
+      return null;
+    } catch (error) {
+      console.error(`Error reading from localStorage with key "${key}":`, error);
+      return null;
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(key, value);
+      }
+    } catch (error) {
+      console.error(`Error writing to localStorage with key "${key}":`, error);
+    }
+  },
+  removeItem: (key: string): void => {
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(key);
+      }
+    } catch (error) {
+      console.error(`Error removing from localStorage with key "${key}":`, error);
+    }
+  },
+};
 
 const useMessageStore = create<MessageState>((set, get) => ({
   chats: false,
   selectedChat: null,
   userMessages: [],
-  messages: (() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('messages');
-      return saved ? JSON.parse(saved) : initialMessages;
-    }
-    return initialMessages;
-  })(),
+  messages: [], // Start with empty array, will be populated by initializeMessages
+  isLoading: false,
+  isInitialized: false,
+
+  initializeMessages: () => {
+    if (get().isInitialized) return;
+    
+    set({ isLoading: true });
+    
+    // Simulate loading delay to show spinner (optional)
+    setTimeout(() => {
+      const saved = safeLocalStorage.getItem('messages');
+      const loadedMessages = saved ? JSON.parse(saved) : initialMessages;
+      
+      set({ 
+        messages: loadedMessages, 
+        isLoading: false, 
+        isInitialized: true 
+      });
+    }, 300); // Small delay to show loading state
+  },
 
   setChats: (value) => set({ chats: value }),
 
@@ -49,7 +99,7 @@ const useMessageStore = create<MessageState>((set, get) => ({
 
   setMessages: (messages) => {
     set({ messages });
-    localStorage.setItem('messages', JSON.stringify(messages));
+    safeLocalStorage.setItem('messages', JSON.stringify(messages));
   },
 
   handleChatClick: (message) => {
@@ -57,10 +107,15 @@ const useMessageStore = create<MessageState>((set, get) => ({
       selectedChat: message,
       chats: true,
     });
-    const savedUserMessages = localStorage.getItem(`userMessages_${message.id}`);
-    set({
-      userMessages: savedUserMessages ? JSON.parse(savedUserMessages) : [],
-    });
+    const savedUserMessages = safeLocalStorage.getItem(`userMessages_${message.id}`);
+    try {
+      set({
+        userMessages: savedUserMessages ? JSON.parse(savedUserMessages) : [],
+      });
+    } catch (error) {
+      console.error('Error parsing user messages:', error);
+      set({ userMessages: [] });
+    }
   },
 
   handleSendMessage: (text) => {
@@ -73,31 +128,33 @@ const useMessageStore = create<MessageState>((set, get) => ({
       };
       const updatedUserMessages = [...userMessages, newMessage];
       set({ userMessages: updatedUserMessages });
-      localStorage.setItem(`userMessages_${selectedChat.id}`, JSON.stringify(updatedUserMessages));
+      safeLocalStorage.setItem(`userMessages_${selectedChat.id}`, JSON.stringify(updatedUserMessages));
 
-      set({
-        messages: messages.map((msg) =>
-          msg.id === selectedChat.id
-            ? {
-                ...msg,
-                messages: [...msg.messages, newMessage],
-                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              }
-            : msg
-        ),
-      });
+      const updatedMessages = messages.map((msg) =>
+        msg.id === selectedChat.id
+          ? {
+              ...msg,
+              messages: [...msg.messages, newMessage],
+              createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            }
+          : msg
+      );
+      
+      set({ messages: updatedMessages });
+      safeLocalStorage.setItem('messages', JSON.stringify(updatedMessages));
     }
   },
 
   resetLocalStorage: () => {
-    localStorage.removeItem('messages');
+    safeLocalStorage.removeItem('messages');
     const { messages } = get();
-    messages.forEach((msg) => localStorage.removeItem(`userMessages_${msg.id}`));
+    messages.forEach((msg) => safeLocalStorage.removeItem(`userMessages_${msg.id}`));
     set({
       messages: initialMessages,
       userMessages: [],
       selectedChat: null,
       chats: false,
+      isInitialized: false,
     });
   },
 }));

@@ -58,7 +58,7 @@
 }
 
 .xxLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1296);
     height: rem(56);
   }
@@ -70,7 +70,7 @@
 }
 
 .xLarge {
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1078);
     min-height: rem(56);
   }
@@ -85,7 +85,7 @@
   width: rem(311);
   min-height: rem(56);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(514);
     min-height: rem(56);
   }
@@ -100,7 +100,7 @@
 .medium {
   width: rem(202);
   min-height: rem(56);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(424);
     min-height: rem(56);
   }

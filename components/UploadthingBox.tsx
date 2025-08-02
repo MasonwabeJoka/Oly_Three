@@ -9,6 +9,7 @@ import Icon from "./Icon";
 import { Loader2, Loader2Icon, XCircle } from "lucide-react";
 import Button from "./Buttons";
 import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface Props {
   mediaType: "photo" | "video" | "attachment";
@@ -86,7 +87,7 @@ const UploadBox = ({
               if (uploadProgress) return `${progress}%`;
               if (ready) return `Upload ${mediaType}`
 
-              return "Loading...";
+              return <LoadingSpinner/>;
             },
             allowedContent() {
               return `${mediaType === "photo" ? "Please ensure your files are images and under 16MB in size." : "Attach any additional documents here. Only PDF files are accepted."}`;
@@ -143,7 +144,7 @@ const UploadBox = ({
               if (ready) return `Upload ${mediaType}`
               if (uploadProgress) return `${progress}%`;
 
-              return "Loading...";
+              return <LoadingSpinner/>
             },
 
         

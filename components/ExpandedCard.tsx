@@ -1,8 +1,6 @@
-import React from "react";
 import styles from "./ExpandedCard.module.scss";
-import { ExpandedImageContainer } from "./ExpandedImageContainer";
-import { ExpandedDetails } from "./ExpandedDetails";
-import { PortableTextBlock } from "sanity";
+import type { PortableTextBlock } from "sanity";
+import ExpandedCardClient from "./ExpandedCardClient";
 
 type ExpandedCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -20,6 +18,7 @@ type ExpandedCardProps = {
   avatar?: string;
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   suburb?: string;
   city?: string;
   price?: number;
@@ -29,7 +28,7 @@ type ExpandedCardProps = {
   setIsCardHovered: (value: boolean) => void;
 };
 
-export const ExpandedCard: React.FC<ExpandedCardProps> = ({
+const ExpandedCard: React.FC<ExpandedCardProps> = ({
   category,
   images,
   aspectRatios,
@@ -45,6 +44,7 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
   avatar,
   title,
   description,
+  descriptionLength,
   suburb,
   city,
   price,
@@ -54,43 +54,34 @@ export const ExpandedCard: React.FC<ExpandedCardProps> = ({
   setIsCardHovered,
 }) => {
   return (
-    <article
-      className={styles.expandedCard}
-      onMouseEnter={() => setIsCardHovered(true)}
-      onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
-    >
-      <div className={styles.expandedCardWrapper}>
-        <ExpandedImageContainer
-          images={images}
-          aspectRatios={aspectRatios}
-          checkedHovered={checkedHovered}
-          isHeartClicked={isHeartClicked}
-          isHeartHovered={isHeartHovered}
-          isCardHovered={isCardHovered}
-          id={id}
-          isFeed={isFeed}
-          checkedColour={checkedColour}
-          hoverColour={hoverColour}
-          onHeartClick={onHeartClick}
-          onHeartHover={onHeartHover}
-        />
-        <ExpandedDetails
-          isDeletable={isDeletable}
-          id={id}
-          isFeed={isFeed}
-          checkedColour={checkedColour}
-          hoverColour={hoverColour}
-          checkedHovered={checkedHovered}
-          avatar={avatar}
-          title={title}
-          description={description}
-          suburb={suburb}
-          city={city}
-          price={price}
-          postAge={postAge}
-          isCardHovered={isCardHovered}
-        />
-      </div>
+    <article className={styles.expandedCard}>
+      <ExpandedCardClient
+        category={category}
+        images={images}
+        aspectRatios={aspectRatios}
+        isCardHovered={isCardHovered}
+        isHeartClicked={isHeartClicked}
+        isHeartHovered={isHeartHovered}
+        isDeletable={isDeletable}
+        id={id}
+        isFeed={isFeed}
+        checkedColour={checkedColour}
+        hoverColour={hoverColour}
+        checkedHovered={checkedHovered}
+        avatar={avatar}
+        title={title}
+        description={description}
+        descriptionLength={descriptionLength}
+        suburb={suburb}
+        city={city}
+        price={price}
+        postAge={postAge}
+        onHeartClick={onHeartClick}
+        onHeartHover={onHeartHover}
+        setIsCardHovered={setIsCardHovered}
+      />
     </article>
   );
 };
+
+export default ExpandedCard;

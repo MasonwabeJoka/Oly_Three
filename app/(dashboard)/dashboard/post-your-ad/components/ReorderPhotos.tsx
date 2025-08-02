@@ -67,10 +67,10 @@ const ReorderPhotos = () => {
           </div>
         </div>
         <div className={styles.uploadedPhotosContainer}>
-          <div className={styles.uploadedPhotos}>
+          <ul className={styles.uploadedPhotos}>
             {uploadedImages.map((photo: any, index: number) => {
               return (
-                <div className={styles.photoContainer} key={index}>
+                <li className={styles.photoContainer} key={index}>
                   <div className={styles.deleteButtonContainer}>
                     <Icon
                       className={styles.deleteButton}
@@ -87,10 +87,10 @@ const ReorderPhotos = () => {
                     width={248}
                     height={186.4}
                   />
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
           <div>
             <Button
               className={styles.proceedButton}

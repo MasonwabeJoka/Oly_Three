@@ -1,6 +1,6 @@
 import styles from "./AdCarousel.module.scss";
 import Image from "next/image";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { featuresData } from "@/data/FeaturesData";
 import { Keyboard, Autoplay } from "swiper/modules";
@@ -12,6 +12,7 @@ import "swiper/scss/pagination";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
   images: Ad["images"];
@@ -33,7 +34,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
   };
 
   if (initialSlideIndex === null) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -63,10 +64,10 @@ const AdCarousel = ({ images, onClick }: Props) => {
                   className={styles.imageContainer}
                   style={{
                     maxHeight: "85vh",
-                    width: '100%',
+                    width: "100%",
                     maxWidth: `calc(85vh * ${image.aspectRatio})`,
                     cursor: "auto",
-                    position: 'relative'
+                    position: "relative",
                   }}
                   onClick={(event) => event.stopPropagation()}
                 >

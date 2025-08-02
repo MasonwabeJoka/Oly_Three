@@ -47,8 +47,9 @@ const EditMode = ({
         size="large"
         label="Edit Detail"
         required={true}
-        value={updatedDetail} // Controlled value
-        onChange={handleChange} // Handle input changes
+        hasSubmitButton={false}
+        value={updatedDetail} 
+        onChange={handleChange}
         {...register("editDetail")}
         error={errors.editDetail?.message as string}
       />

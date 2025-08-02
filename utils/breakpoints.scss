@@ -1,25 +1,69 @@
-/* 640px | 1024 | 1400 */
-$larger-than: (
-  "mobile": "40em",
-  "tablet": "64em",
-  "desktop": "87.5em",
+@use "sass:map";
+
+$breakpoints: (
+  "mobile": (
+    min: 20em,    // 320px
+    max: 47.9375em, // 767px
+  ),
+  "tablet": (
+    min: 48em,    // 768px
+    max: 74.9375em, // 1199px
+  ),
+  "smallDesktop": (
+    min: 75em,    // 1200px
+    max: 89.9375em, // 1439px
+  ),
+  "largeDesktop": (
+    min: 90em,  // 1440px
+    max: 121.9375em, // 1951px
+  ),
+  "extraLargeDesktop": (
+    min: 122em,   // 1952px
+    max: null     // No max for extraLargeDesktop
+  ),
 ) !default;
 
-/* 639px | 1023 | 1399 */
-$smaller-than: (
-  "mobile": "39.9375em",
-  "tablet": "63.9375em",
-  "desktop": "87.4375em",
-) !default;
-
+// min-width
 @mixin larger-than($size) {
-  @media (min-width: map-get($larger-than, $size)) {
+  $min: map.get(map.get($breakpoints, $size), min);
+  @media (min-width: #{$min}) {
     @content;
   }
 }
 
+// max-width
 @mixin smaller-than($size) {
-  @media (max-width: map-get($smaller-than, $size)) {
+  $max: map.get(map.get($breakpoints, $size), max);
+  @media (max-width: #{$max}) {
     @content;
+  }
+}
+
+// between two breakpoints
+@mixin between($from, $to) {
+  $min: map.get(map.get($breakpoints, $from), min);
+  $max: map.get(map.get($breakpoints, $to), max);
+  @media (min-width: #{$min}) and (max-width: #{$max}) {
+    @content;
+  }
+}
+
+// only — for a single named breakpoint range
+@mixin only($size) {
+  @if not map.has-key($breakpoints, $size) {
+    @error "Breakpoint `#{$size}` does not exist in `$breakpoints` map.";
+  }
+
+  $min: map.get(map.get($breakpoints, $size), min);
+  $max: map.get(map.get($breakpoints, $size), max);
+
+  @if $max != null {
+    @media (min-width: #{$min}) and (max-width: #{$max}) {
+      @content;
+    }
+  } @else {
+    @media (min-width: #{$min}) {
+      @content;
+    }
   }
 }

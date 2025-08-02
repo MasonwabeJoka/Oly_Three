@@ -13,7 +13,7 @@
   border-radius: rem(40);
   margin: rem(40) 0;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     padding: rem(80) rem(40);
   }
 
@@ -23,7 +23,7 @@
     width: 100%;
     max-width: rem(1200);
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
     }
 
     .calculator {

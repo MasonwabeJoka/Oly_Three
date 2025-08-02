@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import type { GalleryImage } from "@/data/galleryImages";
 import Icon from "@/components/Icon";
 import Button from "@/components/Buttons";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 
 interface ImageGalleryProps {
   id: Ad["_id"];
@@ -171,7 +171,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
     const patterns = remainingImages
       .map((img) => (img.aspectRatio >= 1 ? "L" : "P"))
       .join("");
-    
+
     switch (patterns) {
       // Landscape-Portrait-Portrait-Landscape pattern
       case "LPPL":

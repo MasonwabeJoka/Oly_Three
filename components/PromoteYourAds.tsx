@@ -8,13 +8,13 @@ const PromoteYourAd = () => {
   return (
     <div className={styles.container}>
       <h4 className={styles.title}>Promote Your Ads</h4>
-      <div className={styles.cards}>
+      <ul className={styles.cards}>
         {PromoteYourAdData[1].map((promotion) => {
           const { id, promotionChannel, title, promotionPrice, icon } =
             promotion;
 
           return (
-            <div className={styles.cardContainer} key={id}>
+            <li className={styles.cardContainer} key={id}>
               <PromoteYourAdCard
                 id={id}
                 title={title}
@@ -22,10 +22,10 @@ const PromoteYourAd = () => {
                 alt={promotionChannel}
                 price={promotionPrice}
               />
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
       <div className={styles.promotionTotal}>
         <h4 className={styles.promotion}>Promotions</h4>
         <span className={styles.price}>R115</span>

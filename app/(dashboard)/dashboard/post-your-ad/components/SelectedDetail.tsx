@@ -7,6 +7,8 @@ import Button from "@/components/Buttons";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
+import TextArea from "@/components/TextArea";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof multiStepFormSchema>;
 type SelectedDetailProps = {
@@ -33,6 +35,13 @@ type SelectedDetailProps = {
   setMatchFound: any;
 };
 
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
+
 const SelectedDetail = ({
   id,
   detail,
@@ -56,15 +65,16 @@ const SelectedDetail = ({
   watch,
   setMatchFound,
 }: SelectedDetailProps) => {
-  const inputValue = watch(selectDetailValue);
+  const inputValue = watch(`details.${selectDetailValue}`) || "";
 
   const close = () => {
     setMatchFound(false);
   };
 
   const clickHandler = async () => {
+    const fieldName = `details.${selectDetailValue}`;
     // Trigger validation
-    const isValid = await trigger(selectDetailValue, {
+    const isValid = await trigger(fieldName, {
       shouldFocus: true,
     });
 
@@ -75,121 +85,116 @@ const SelectedDetail = ({
         { selectDetail: selectDetailValue, value: inputValue },
       ]);
 
-      // Reset selectDetail field
-      setValue("selectDetail", "");
+      // Reset the field
+      setValue(fieldName, "");
+      setValue("details.selectDetail", "");
+      
+      // Close the SelectedDetail UI to show DetailsList/SpecificationsList
+      setMatchFound(false);
     }
   };
 
   return (
-    <>
-      <div className={styles.form}>
-        <div key={id} className={styles.selectedDetailContainer}>
-          <div className={styles.deleteButtonContainer} onClick={setMatchFound}>
-            <Icon
-              className={styles.deleteButton}
-              src={"/icons/x.svg"}
-              alt="delete"
-              width={20}
-              height={20}
-            />
-          </div>
-
-          <div className={styles.selectedDetailDescriptionContainer}>
-            <p className={styles.selectedDetailTitle}>{detail}</p>
+    <div className={styles.container}>
+      
+      <div
+        key={id}
+        className={`${styles.selectedDetailContainer} ${styles.open}`}
+      >
+        <div className={styles.deleteButtonContainer} onClick={() => close()}>
+          <Icon
+            className={styles.deleteButton}
+            src={"/icons/x.svg"}
+            alt="delete"
+            width={20}
+            height={20}
+          />
+        </div>
+        <div className={styles.selectedDetailDescriptionContainer}>
+          <p className={styles.selectedDetailTitle}>{detail}</p>
+          <p
+            className={styles.selectedDetailDescription}
+            style={{
+              marginBottom: placeholder
+                ? 0
+                : detail === "Define Your Own Detail"
+                  ? "0.5rem"
+                  : "1.25rem",
+            }}
+          >
+            {description}
+          </p>
+          {detail === "Define Your Own Detail" && (
             <p
-              className={styles.selectedDetailDescription}
-              style={{
-                marginBottom: placeholder
-                  ? 0
-                  : detail === "Define Your Own Detail"
-                    ? "0.5rem"
-                    : "1.25rem",
-              }}
+              className={styles.selectedDetailExample}
+              style={{ marginBottom: "1.25rem" }}
             >
-              {description}
+              eg. {"  "}
+              <strong>Warranty Information</strong>:{" "}
+              <span>Still under manufacturer warranty until June 2026.</span>
             </p>
-
-            {detail === "Define Your Own Detail" && (
-              <p
-                className={styles.selectedDetailExample}
-                style={{ marginBottom: "1.25rem" }}
-              >
-                eg. {"  "}
-                {"  "}
-                <strong>Warranty Information</strong>:{" "}
-                <span>Still under manufacturer warranty until June 2026.</span>
-              </p>
-            )}
-            {placeholder && (
-              <p
-                className={styles.selectedDetailExample}
-                style={{ marginBottom: "1.25rem" }}
-              >
-                eg. {"  "}
-                {"  "}
-                <strong>{boldTextExample}</strong>:{" "}
-                <span>{normalTextExample}</span>
-              </p>
-            )}
-          </div>
-
-          <div className={styles.selectedDetailInputContainer}>
-            <Input
-              className={styles.selectedDetailInput}
-              inputType="text"
-              initialValue=""
-              inputColourType="normal"
-              inputSize="large"
-              label="Chosen Detail"
-              placeholder={
-                placeholder
-                  ? `${
-                      typeof placeholder === "string" && placeholder.length > 55
-                        ? placeholder.slice(0, 55) + "..."
-                        : placeholder
+          )}
+          {placeholder && (
+            <p
+              className={styles.selectedDetailExample}
+              style={{ marginBottom: "1.25rem" }}
+            >
+              eg. {"  "}
+              <strong>{boldTextExample}</strong>:{" "}
+              <span>{normalTextExample}</span>
+            </p>
+          )}
+        </div>
+        <div className={styles.selectedDetailInputContainer}>
+          <TextArea
+            id="textInput"
+            name={`details.${selectDetailValue}`}
+            hasSubmitButton={false}
+            size="large"
+            placeholder={
+              placeholder
+                ? `${
+                    typeof placeholder === "string" && placeholder.length > 55
+                      ? placeholder.slice(0, 55) + "..."
+                      : placeholder
+                  }`
+                : example
+                  ? `eg. ${
+                      typeof example === "string" && example.length > 55
+                        ? example.slice(0, 55) + "..."
+                        : example
                     }`
-                  : example
-                    ? `eg. ${
-                        typeof example === "string" && example.length > 55
-                          ? example.slice(0, 55) + "..."
-                          : example
-                      }`
-                    : ""
-              }
-              id="detail"
-              aria-label="Chosen Detail"
-              autoFocus={false}
-              iconSrcRight=""
-              iconPosition="right"
-              iconWidth={32}
-              iconHeight={32}
-              required={true}
-              autoComplete="off"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.detail?.message as string}
-              {...register(selectDetailValue)}
-            />
-          </div>
-
-          <div className={styles.submitButtonContainer}>
-            <Button
-              className={styles.proceedButton}
-              buttonChildren="Submit Detail"
-              buttonType="normal"
-              type="button"
-              buttonSize="large"
-              name="proceed-btn"
-              aria-label="Proceed Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-              onClick={clickHandler}
-            />
-          </div>
+                  : ""
+            }
+            value={inputValue}
+            ariaLabel="Chosen Detail"
+            dashboard
+            error={errors?.details?.[selectDetailValue]?.message as string}
+            maxHeight={120}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              handleChange(e); 
+            }}
+            onBlur={handleBlur}
+            {...register(`details.${selectDetailValue}`)} 
+          />
+        </div>
+        <div className={styles.submitButtonContainer}>
+          <Button
+            className={styles.submitButton}
+            buttonChildren="Submit Detail"
+            buttonType="normal"
+            type="button" 
+            buttonSize="large"
+            name="submit-detail-btn"
+            aria-label="Submit Detail Button"
+            autoFocus={false}
+            disabled={false}
+            dashboard
+            onClick={clickHandler} 
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

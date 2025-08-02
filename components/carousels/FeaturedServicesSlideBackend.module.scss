@@ -1,0 +1,36 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64vw;
+  // height: 70vh;
+  min-height: 70vh;
+  max-height: 120vh;
+
+  background-color: $grey-one;
+  border-radius: rem(40);
+  box-shadow: $shadow-one;
+
+  .SlideDataContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: rem(120);
+    width: rem(1200);
+    height: 80%;
+    overflow-y: auto;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    padding-top: rem(64);
+    padding-right: rem(64);
+    height: 20%;
+    .button {
+    }
+  }
+}

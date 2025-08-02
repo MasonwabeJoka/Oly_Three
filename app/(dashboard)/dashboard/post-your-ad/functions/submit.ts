@@ -1,6 +1,5 @@
-import {useState} from 'react'
-import { Ad } from '@/sanity/Types/Ad';
-
+import { useState } from 'react'
+import { Ad } from '@/sanityTemp/Types/Ad';
 
 export const submit = async (data: Ad) => {
     const [message, setMessage] = useState("");
@@ -24,4 +23,4 @@ export const submit = async (data: Ad) => {
       console.error("Error creating ad:", error);
       setMessage("Error creating ad");
     }
-  };
+};

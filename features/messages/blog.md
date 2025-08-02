@@ -22,7 +22,7 @@ Code the frontend
 Let’s get started!
 
 1. Setting up a firebase project
-To start, make the folder we’ll run this project inside. I’ll name the project “chat-firebase-next”.
+   To start, make the folder we’ll run this project inside. I’ll name the project “chat-firebase-next”.
 
 mkdir chat-firebase-next
 cd chat-firebase-next
@@ -52,14 +52,14 @@ On that note, let’s setup an Express JS server in our functions folder.
 
 We’ll start with two empty functions for when a Firebase user is created and destroyed. Add the following code to functions/src/index.js:
 
-import * as functions from "firebase-functions";
+import \* as functions from "firebase-functions";
 
 exports.createChatEngineUser = functions.auth.user().onCreate((user) => {
-  console.log("create", user);
+console.log("create", user);
 });
 
 exports.deleteChatEngineUser = functions.auth.user().onDelete((user) => {
-  console.log("delete", user);
+console.log("delete", user);
 });
 You may need to change the first line to the following - depending on your firebase version:
 
@@ -76,7 +76,7 @@ firebase-cloud-functions
 We have functions that trigger whenever a user is created or destroyed. Now, let’s use Rest APIs to connect our Firebase users to Chat Engine!
 
 2. Connect Firebase to Chat Engine
-Chat Engine lets us host chatrooms on their platform, and provides tools to build chat UIs. We’ll be syncing our userbase to chat engine using their rest APIs.
+   Chat Engine lets us host chatrooms on their platform, and provides tools to build chat UIs. We’ll be syncing our userbase to chat engine using their rest APIs.
 
 Here is the documentation on Chat Engine’s APIs: https://rest.chatengine.io
 
@@ -86,31 +86,31 @@ To start, go to https://chatengine.io, create an account, and set up a new Proje
 
 Now, let’s add the code to functions/src/index.js and be sure to replace XXX and YYY with your Private Key and Project ID, respectively.
 
-import * as functions from "firebase-functions";
+import \* as functions from "firebase-functions";
 
 const axios = require("axios");
 
 exports.createChatEngineUser = functions.auth.user().onCreate((user) => {
-  axios.post(
-    "https://api.chatengine.io/users/",
-    {
-      username: user.email,
-      secret: user.uid,
-      email: user.email,
-      first_name: user.displayName,
-    },
-    { headers: { "Private-Key": "XXX" } }
-  );
+axios.post(
+"https://api.chatengine.io/users/",
+{
+username: user.email,
+secret: user.uid,
+email: user.email,
+first_name: user.displayName,
+},
+{ headers: { "Private-Key": "XXX" } }
+);
 });
 
 exports.deleteChatEngineUser = functions.auth.user().onDelete((user) => {
-  axios.delete("https://api.chatengine.io/users/me/", {
-    headers: {
-      "Project-ID": "YYY",
-      "User-Name": user.email,
-      "User-Secret": user.uid,
-    },
-  });
+axios.delete("https://api.chatengine.io/users/me/", {
+headers: {
+"Project-ID": "YYY",
+"User-Name": user.email,
+"User-Secret": user.uid,
+},
+});
 });
 Clearly we need the axios dependency to make API calls to Chat Engine. So let’s install it now:
 
@@ -122,21 +122,21 @@ Run firebase deploy again to push the new code into production:
 firebase deploy
 If you’re using TypeScript, you may need to modify the rules in .eslintrc.js like I did below. (Skip if you’re using JavaScript)
 
-  rules: {
-    // prettier-ignore
-    "quotes": ["error", "double"],
-    "import/no-unresolved": 0,
-    // prettier-ignore
-    "indent": ["off", "always"],
-    "object-curly-spacing": ["off", "always"],
-    "@typescript-eslint/no-var-requires": ["off", "always"],
-  }
+rules: {
+// prettier-ignore
+"quotes": ["error", "double"],
+"import/no-unresolved": 0,
+// prettier-ignore
+"indent": ["off", "always"],
+"object-curly-spacing": ["off", "always"],
+"@typescript-eslint/no-var-requires": ["off", "always"],
+}
 Our backend is complete! Now users have access to Chat Engine when they sign up and their account goes away is they delete their data!
 
 Let’s setup a frontend and connect it to Firebase and Chat Engine!
 
 3. Set up the Frontend
-At the top level of our project, we’ll run the command below to make a NextJS project.
+   At the top level of our project, we’ll run the command below to make a NextJS project.
 
 npx create-next-app@latest --ts
 Be sure to name the project “frontend” and select the following options:
@@ -145,7 +145,7 @@ Be sure to name the project “frontend” and select the following options:
 ✔ Would you like to use ESLint with this project? … No
 ✔ Would you like to use `src/` directory with this project? … No
 ✔ Would you like to use experimental `app/` directory with this project? › No
-✔ What import alias would you like configured? … @/*
+✔ What import alias would you like configured? … @/\*
 I highly recommend TypeScript with Chat Engine, you’ll see why soon :)
 
 Now you should have a frontend/ folder right next to functions/.
@@ -164,8 +164,8 @@ basic-next-frontend
 For the final push, let’s add all the code we need to our frontend!
 
 4. Coding the Frontend
-Adding Firebase
-To start, we’ll need firebase in our Next JS project. Install the dependency.
+   Adding Firebase
+   To start, we’ll need firebase in our Next JS project. Install the dependency.
 
 npm install firebase
 To link the Firebase project in NextJS, we’ll need to add some environment variables. Create a .env file and replace with your values:
@@ -186,21 +186,21 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 Finally, disable StrictMode in next.config.js to allow web-socket connections.
 
-/** @type {import('next').NextConfig} */
+/\*_ @type {import('next').NextConfig} _/
 const nextConfig = {
-  reactStrictMode: false,
+reactStrictMode: false,
 };
 
 module.exports = nextConfig;
@@ -217,24 +217,24 @@ import { auth } from "@/firebase";
 import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 
 export default function AuthPage() {
-  const onClick = () => {
-    signInWithRedirect(auth, new GoogleAuthProvider());
-  };
+const onClick = () => {
+signInWithRedirect(auth, new GoogleAuthProvider());
+};
 
-  return (
-    <div className="page">
-      <div className="logo">👋 💬 🤖 </div>
-      <div className="text">Welcome to ChatRCE</div>
-      <div className="text" style={{ paddingBottom: "16px" }}>
-        Log in with your account to continue
-      </div>
-      <button className="button" onClick={onClick}>
-        Log In
-      </button> <button className="button" onClick={onClick}>
-        Sign Up
-      </button>
-    </div>
-  );
+return (
+<div className="page">
+<div className="logo">👋 💬 🤖 </div>
+<div className="text">Welcome to ChatRCE</div>
+<div className="text" style={{ paddingBottom: "16px" }}>
+Log in with your account to continue
+</div>
+<button className="button" onClick={onClick}>
+Log In
+</button> <button className="button" onClick={onClick}>
+Sign Up
+</button>
+</div>
+);
 }
 Next, let’s create a chats page (pages/ChatsPage.tsx). We’ll need to install react-chat-engine-pretty to connect our user to a Chat Engine UI.
 
@@ -245,36 +245,37 @@ import { auth } from "@/firebase";
 import { signOut, User } from "firebase/auth";
 import { PrettyChatWindow } from "react-chat-engine-pretty";
 interface ChatProps {
-  user: User;
+user: User;
 }
 
 export default function Page(props: ChatProps) {
-  return (
-    <div style={{ height: "100vh" }}>
-      <button
-        style={{ position: "absolute", top: "0px", left: "0px" }}
-        onClick={() => signOut(auth)}
-      >
-        Sign Out
-      </button>
-      <PrettyChatWindow
-        projectId={process.env.NEXT_PUBLIC_CHAT_ENGINE_PROJECT_ID || ""}
-        username={props.user.email || ""}
-        secret={props.user.uid}
-        style={{ height: "100%" }}
-      />
-    </div>
-  );
+return (
+<div style={{ height: "100vh" }}>
+<button
+style={{ position: "absolute", top: "0px", left: "0px" }}
+onClick={() => signOut(auth)} >
+Sign Out
+</button>
+<PrettyChatWindow
+projectId={process.env.NEXT_PUBLIC_CHAT_ENGINE_PROJECT_ID || ""}
+username={props.user.email || ""}
+secret={props.user.uid}
+style={{ height: "100%" }}
+/>
+</div>
+);
 }
 Next, add a loading page (pages/Loading.tsx) with the following code:
 
+import LoadingSpinner from "@/components/LoadingSpinner";
+
 export default function Loading() {
-  return (
-    <div className="page">
-      <div className="logo">☝️</div>
-      <div className="text">Loading your info...</div>
-    </div>
-  );
+return (
+<div className="page">
+<div className="logo">☝️</div>
+<div className="text">Loading your info...</div>
+</div>
+);
 }
 Finally, modify the pages/index.tsx file to load the pages based on auth state:
 
@@ -287,16 +288,16 @@ import { auth } from "@/firebase";
 import { User } from "firebase/auth";
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>();
-  auth.onAuthStateChanged((user) => setUser(user));
+const [user, setUser] = useState<User | null>();
+auth.onAuthStateChanged((user) => setUser(user));
 
-  if (user === undefined) {
-    return <Loading />;
-  } else if (user === null) {
-    return <AuthPage />;
-  } else {
-    return <ChatPage user={user} />;
-  }
+if (user === undefined) {
+return <Loading />;
+} else if (user === null) {
+return <AuthPage />;
+} else {
+return <ChatPage user={user} />;
+}
 }
 And we’re done!
 

@@ -7,7 +7,11 @@
   padding: 0;
   margin: rem(100) auto;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+  @include only(smallDesktop) {
     width: rem(628);
     height: rem(353.25);
   }

@@ -1,7 +1,7 @@
 import styles from "./ExpandedAdCard.module.scss";
 import Button from "../Buttons";
 import Image from "next/image";
-import Avatar from "../Avatars";
+import Avatar from "../Avatar";
 
 interface CardProps {
   images: string;

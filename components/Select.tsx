@@ -1,3 +1,4 @@
+// Select.tsx (updated component)
 import styles from "./Select.module.scss";
 import { useState, forwardRef, useRef, useEffect } from "react";
 import Icon from "@/components/Icon";
@@ -7,24 +8,20 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "./Input";
 import Checkbox from "./Checkbox";
 
-//Todo: Create an option to have Radio buttons instead of checkbox on the results, so that a user is only allowed to choose one option.
 interface SelectProps {
   className?: string;
-  selectSize:
-    | keyof typeof SELECT_SIZE.regular
-    | keyof typeof SELECT_SIZE.feed
-    | keyof typeof SELECT_SIZE.dashboard;
+  selectSize: "xxLarge" | "xLarge" | "large" | "medium";
   selectColourType?: keyof typeof SELECT_COLOUR_TYPE;
   label: string;
-  options: string[] | { label: string; value: any }[];
+  options?: (string | { label: string; value: any })[];
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   id: string;
   name: string;
   ariaLabel: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
   autoComplete?: "on" | "off";
-  required: boolean;
+  required?: boolean;
   selectDescription?: string;
   form?: string;
   initialValue?: string | string[];
@@ -35,32 +32,10 @@ interface SelectProps {
   onBlur?: any;
   isMultiSelect?: boolean;
   dashboard?: boolean;
-  [key: string]: any;
+  onOpenChange?: (isOpen: boolean) => void;
+  onOptionsCountChange?: (count: number) => void;
 }
 
-const SELECT_SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
-};
 
 const SELECT_COLOUR_TYPE = {
   primary: `${styles.primary}`,
@@ -80,12 +55,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     {
       value,
       showSearchOptions = false,
-      options,
+      options = [],
       reactHookFormProps,
       error,
       selectSize,
       selectColourType = "normal",
-      className,
+      className = "",
       label,
       autoComplete,
       id,
@@ -93,29 +68,69 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setterValue,
       name,
       ariaLabel,
-      required,
+      required = false,
       selectDescription,
       onChange,
       onBlur,
-      children,
       dashboard = false,
       isMultiSelect = false,
+      onOpenChange,
+      onOptionsCountChange,
       ...otherProps
     },
     ref
   ) => {
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>(
+      Array.isArray(initialValue)
+        ? initialValue
+        : typeof initialValue === "string"
+          ? [initialValue]
+          : []
+    );
+    const controlled = value !== undefined;
+    const selected = controlled
+      ? isMultiSelect
+        ? Array.isArray(value)
+          ? value
+          : []
+        : typeof value === "string"
+          ? [value]
+          : []
+      : selectedOptions;
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState("");
     const selectRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
 
-    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () =>
-      setShowOptions(false)
-    );
+    // Notify parent whenever showOptions changes
+    useEffect(() => {
+      onOpenChange?.(showOptions);
+    }, [showOptions, onOpenChange]);
 
-    
+    // Notify parent of options count whenever options or searchValue changes
+    useEffect(() => {
+      const filteredOptions = options.filter((option) =>
+        getOptionLabel(option).toLowerCase().includes(searchValue.toLowerCase())
+      );
+
+      onOptionsCountChange?.(filteredOptions.length);
+    }, [options, searchValue, onOptionsCountChange]);
+
+    useEffect(() => {
+      const handleWheel = (e: WheelEvent) => {
+        const optionsElement = selectRef.current?.querySelector(".options");
+        if (optionsElement && optionsElement.contains(e.target as Node)) {
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener("wheel", handleWheel, { passive: false });
+      return () => {
+        document.removeEventListener("wheel", handleWheel);
+      };
+    }, [showOptions]);
+
     useEffect(() => {
       const useEscKey = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -129,17 +144,26 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       };
     }, []);
 
-    const handleSingleSelect = (optionText: string) => {
-      setSelectedOptions([optionText]);
+    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => {
       setShowOptions(false);
-      triggerChangeEvent([optionText]);
+    });
+
+    const handleSingleSelect = (optionText: string) => {
+      const newSelected = [optionText];
+      if (!controlled) {
+        setSelectedOptions(newSelected);
+      }
+      triggerChangeEvent(newSelected);
+      setShowOptions(false);
     };
 
     const handleMultiSelect = (optionText: string, checked: boolean) => {
       const updatedOptions = checked
-        ? [...selectedOptions, optionText]
-        : selectedOptions.filter((item) => item !== optionText);
-      setSelectedOptions(updatedOptions);
+        ? [...selected, optionText]
+        : selected.filter((item) => item !== optionText);
+      if (!controlled) {
+        setSelectedOptions(updatedOptions);
+      }
       triggerChangeEvent(updatedOptions);
     };
 
@@ -156,60 +180,62 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const handleSelectAll = (checked: boolean) => {
       const allOptionLabels = filteredOptions.map(getOptionLabel);
       const updatedOptions = checked
-        ? [...new Set([...selectedOptions, ...allOptionLabels])]
-        : selectedOptions.filter((item) => !allOptionLabels.includes(item));
-      setSelectedOptions(updatedOptions);
+        ? [...new Set([...selected, ...allOptionLabels])]
+        : selected.filter((item) => !allOptionLabels.includes(item));
+      if (!controlled) {
+        setSelectedOptions(updatedOptions);
+      }
       triggerChangeEvent(updatedOptions);
     };
 
     const triggerChangeEvent = (values: string[]) => {
       if (onChange) {
+        const changeValue = isMultiSelect ? values : (values[0] ?? "");
         onChange({
-          target: { value: isMultiSelect ? values : values[0], name } as any,
+          target: { value: changeValue, name } as any,
         } as React.ChangeEvent<HTMLSelectElement>);
       }
     };
 
     const clearSelections = () => {
-      setSelectedOptions([]);
+      const newSelected: string[] = [];
+      if (!controlled) {
+        setSelectedOptions(newSelected);
+      }
       setSearchValue("");
-      triggerChangeEvent([]);
+      triggerChangeEvent(newSelected);
     };
 
-    const handleSelectButtonClick = () => {
-      setShowOptions(false);
-    };
+ 
 
-    let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = SELECT_SIZE.feed[selectSize];
-    } else {
-      sizeClass = dashboard
-        ? SELECT_SIZE.dashboard[selectSize]
-        : SELECT_SIZE.regular[selectSize];
-    }
-
-    const selectClass = `${styles.select} ${sizeClass} ${
+    const selectClass = `${
+      !dashboard ? styles.select : styles.dashboardSelect
+    } ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-    } ${className}`;
+    } ${className || ""}`;
 
-    const displayText =
-      selectedOptions.length > 0
-        ? selectedOptions.join(", ").length > 40
-          ? selectedOptions.join(", ").slice(0, 40) + "..."
-          : selectedOptions.join(", ")
+    const displayText = showOptions
+      ? typeof initialValue === "string"
+        ? initialValue
+        : "Select an option"
+      : selected.length > 0
+        ? selected.join(", ").length > 40
+          ? selected.join(", ").slice(0, 40) + "..."
+          : selected.join(", ")
         : typeof initialValue === "string"
           ? initialValue
           : "Select an option";
 
     return (
-      <div ref={selectRef}>
+      <div ref={selectRef} className={className || ""}>
         <div className={`${styles.selectMenu}`}>
           {error && <p className={styles.errorMessage}>{error as string}</p>}
 
           <div
             className={`${styles.selectContainer} ${selectClass}`}
-            onClick={() => setShowOptions(!showOptions)} // Removed reset logic
+            onClick={() => {
+              setShowOptions((prev) => !prev);
+            }}
             {...(reactHookFormProps ?? {})}
           >
             <div
@@ -218,15 +244,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 backgroundColor: showOptions ? "#ffffff" : "#f3f7fa",
               }}
             >
-              {isMultiSelect && showOptions && selectedOptions.length > 0 && (
+              {isMultiSelect && showOptions && selected.length > 0 && (
                 <div className={styles.selectCountContainer}>
-                  <div className={styles.selectCount}>
-                    {selectedOptions.length}
-                  </div>
+                  <div className={styles.selectCount}>{selected.length}</div>
                 </div>
               )}
 
-              {isMultiSelect && selectedOptions.length > 0 && !showOptions && (
+              {isMultiSelect && selected.length > 0 && !showOptions && (
                 <div className={styles.clearIconContainer}>
                   <Icon
                     className={styles.clearIcon}
@@ -243,7 +267,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               )}
               <p
                 style={{
-                  color: selectedOptions.length === 0 ? "#67787c" : "#434b4d",
+                  color: selected.length === 0 ? "#67787c" : "#434b4d",
                 }}
               >
                 {displayText}
@@ -265,7 +289,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         {showOptions && (
           <div
             className={`${styles.searchInputContainer} ${styles.options}`}
-            ref={searchInputRef}
+            style={{
+              marginTop:
+                dashboard && selectSize === "medium" ? "1rem" : "0.5rem",
+            }}
           >
             {isMultiSelect && showSearchOptions && (
               <Input
@@ -290,28 +317,32 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               />
             )}
 
-            <ul className={styles.options}>
+            <ul className={styles.optionsList}>
               {isMultiSelect && (
-                <li className={sizeClass} style={{ marginBottom: "0.5rem" }}>
+                <li
+                  className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                >
                   <div
                     className={`${styles.option} ${styles.selectAll}`}
                     onClick={() =>
                       handleSelectAll(
                         !filteredOptions.every((option) =>
-                          selectedOptions.includes(getOptionLabel(option))
+                          selected.includes(getOptionLabel(option))
                         )
                       )
                     }
                   >
-                    <Checkbox
-                      id="selectAllCheckbox"
-                      type="checkbox"
-                      checked={filteredOptions.every((option) =>
-                        selectedOptions.includes(getOptionLabel(option))
-                      )}
-                      onChange={(checked) => handleSelectAll(checked)}
-                    />
-                    <span>Select All</span>
+                    <div className={styles.checkboxContainer}>
+                      <Checkbox
+                        id="selectAllCheckbox"
+                        type="checkbox"
+                        checked={filteredOptions.every((option) =>
+                          selected.includes(getOptionLabel(option))
+                        )}
+                        onChange={(checked) => handleSelectAll(checked)}
+                      />
+                    </div>
+                    <span className={styles.optionText}>Select All</span>
                   </div>
                 </li>
               )}
@@ -322,50 +353,36 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 return (
                   <li
                     key={index}
-                    className={sizeClass}
-                    style={{ marginBottom: "0.5rem" }}
+                    className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                   >
                     <div
                       className={styles.option}
                       onClick={() =>
                         isMultiSelect
-                          ? handleMultiSelect(
-                              label,
-                              !selectedOptions.includes(label)
-                            )
+                          ? handleMultiSelect(label, !selected.includes(label))
                           : handleSingleSelect(label)
                       }
                     >
                       {isMultiSelect && (
-                        <Checkbox
-                          id={`checkbox-${index}`}
-                          type="checkbox"
-                          checked={selectedOptions.includes(label)}
-                          onChange={(checked) =>
-                            handleMultiSelect(label, checked)
-                          }
-                        />
+                        <div
+                          className={styles.checkboxContainer}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Checkbox
+                            id={`checkbox-${index}`}
+                            type="checkbox"
+                            checked={selected.includes(label)}
+                            onChange={(checked) =>
+                              handleMultiSelect(label, checked)
+                            }
+                          />
+                        </div>
                       )}
                       <span className={styles.optionText}>{label}</span>
                     </div>
                   </li>
                 );
               })}
-
-              {/* {isMultiSelect && (
-                <Button
-                  className={styles.selectButton}
-                  buttonChildren="Select"
-                  buttonType="primary"
-                  buttonSize="large"
-                  name="select-btn"
-                  type="button"
-                  ariaLabel="Select Button"
-                  autoFocus={false}
-                  disabled={false}
-                  onClick={handleSelectButtonClick}
-                />
-              )} */}
             </ul>
           </div>
         )}
@@ -377,17 +394,3 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 Select.displayName = "Select";
 
 export default Select;
-
-{
-  /* <Select
-    options={[]}
-    initialValue="Select your province"
-    selectSize="large"
-    label="Provinces"
-    id="provinces"
-    name="provinces"
-    ariaLabel="Provinces"
-    autoFocus={false}
-    required={false}
-/>; */
-}

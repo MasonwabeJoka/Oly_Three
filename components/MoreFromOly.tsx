@@ -6,13 +6,19 @@ import Link from "next/link";
 const MoreFromOly = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.classifieds}>
+      <ul className={styles.classifieds}>
         {classifieds.map((classified) => (
-          <Link href={classified.link} key={classified.id} target="_blank" rel="noopener noreferrer">
-            <ClassifiedLink text={classified.text} image={classified.image} />
-          </Link>
+          <li key={classified.id}>
+            <Link
+              href={classified.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ClassifiedLink text={classified.text} image={classified.image} />
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

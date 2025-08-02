@@ -1,16 +1,34 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: rem(360);
+  @include only(largeDesktop) {
+    width: rem(1098);
+  }
 
   .titleContainer {
     display: flex;
     justify-content: center;
-    margin-bottom: rem(32);
+    margin-top: rem(240);
+    margin-bottom: rem(48);
+    width: 100%;
+
+    .title {
+      color: $danger;
+      font-size: $h4;
+      font-weight: 500;
+    }
+  }
+
+  .subcategoriesTitleContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: rem(48);
     width: 100%;
     .title {
       color: $danger;
@@ -19,41 +37,67 @@
     }
   }
 
-  @include larger-than(mobile) {
-    width: rem(1098);
-  }
-  @include larger-than(desktop) {
-    width: rem(1098);
-  }
-
-  .mobileSubcategoriesContainer {
-    margin-bottom: rem(20);
-
-    .mobileSubcategories {
-      background-color: $grey-one;
-    }
-  }
-
   .wrapper {
-    margin-right: rem(96);
     width: 100%;
+    margin-right: rem(96);
 
     .swipper {
       width: rem(1440);
       margin-left: rem(48);
-    }
-  }
+      display: none;
 
-  .subcategories {
-    height: auto;
-    padding-bottom: rem(16);
-  }
-  .navButtons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: rem(1098);
-    padding-right: rem(72);
-    margin-bottom: rem(16);
+      @include only(largeDesktop) {
+        display: block;
+      }
+    }
+
+    .subcategories {
+      height: auto;
+      padding-bottom: rem(16);
+      display: none;
+
+      @include only(largeDesktop) {
+        display: block;
+      }
+
+      .subcategoriesWrapper {
+        margin-left: rem(48);
+        width: 150%;
+      }
+    }
+
+    .mobileSubcategoriesContainer {
+      display: block;
+      margin-bottom: rem(20);
+
+      .mobileSubcategories {
+        background-color: $grey-one;
+      }
+
+      @include only(largeDesktop) {
+        display: none;
+      }
+    }
+
+    .navButtons {
+      display: none;
+      justify-content: flex-end;
+      align-items: center;
+      width: rem(1098);
+      padding-right: rem(72);
+      margin-bottom: rem(16);
+
+      @include only(largeDesktop) {
+        display: flex;
+      }
+    }
+
+    .goBackButtonContainer {
+      display: block;
+
+      @include only(largeDesktop) {
+        display: none;
+      }
+    }
   }
 }

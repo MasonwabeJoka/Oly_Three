@@ -50,7 +50,7 @@
 
   scroll-behavior: smooth;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: 100vw;
   }
 
@@ -114,34 +114,21 @@
     height: auto;
   }
 
+
+
   .nav {
-    position: fixed ;
+    position: fixed;
     top: rem(4);
     left: rem(38);
     z-index: 100;
     transition: transform 0.5s ease-in-out;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       top: rem(8);
     }
   }
 
   footer {
     margin-top: auto; /* push the footer to the bottom of the container */
-  }
-}
-
-// :export {
-//   body: body;
-// }
-.nav {
-  position: fixed ;
-  top: rem(4);
-  left: rem(38);
-  z-index: 100;
-  transition: transform 0.5s ease-in-out;
-
-  @include larger-than(mobile) {
-    top: rem(8);
   }
 }

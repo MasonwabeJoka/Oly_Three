@@ -3,14 +3,14 @@ import Button from "@/components/Buttons";
 import Image from "next/image";
 import { useSwiper } from "swiper/react";
 type Props = {
-  size?: "large" | "standard" | "small";
+  size?: "large" | "medium" | "small";
   onClick?: () => void;
   disabled?: boolean;
   autoFocus?: boolean;
   className?: string;
 };
 const NavButtons = ({
-  size = "standard",
+  size = "medium",
   onClick,
   autoFocus = false,
   disabled = false,

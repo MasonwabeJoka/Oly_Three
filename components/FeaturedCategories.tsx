@@ -1,62 +1,21 @@
-"use client";
 import styles from "./FeaturedCategories.module.scss";
-import { useEffect, useState } from "react";
 import LinkCard from "@/components/cards/LinkCard";
-import Button from "@/components/Buttons";
-import { useModalStore } from "@/store/modalStore";
-import { getTopCategories } from "@/sanity/actions/topCategoriesActions";
+import { getTopCategories } from "@/sanityTemp/actions/topCategoriesActions";
 import { FeaturedCategoriesData } from "@/data/featuredCategoriesData";
-import { Category } from "@/sanity/Types/Category";
+import FeaturedCategoriesClient, {
+  FeaturedCategoriesClientProps,
+} from "./FeaturedCategoriesClient";
 
-const FeaturedCategories = () => {
-  const [fetchedCategories, setFetchedCategories] = useState<any>([]);
-  const setShowCategoriesModal = useModalStore(
-    (state) => state.setShowCategoriesModal
+const FeaturedCategories = async () => {
+  const fetchedCategories = await Promise.all(
+    FeaturedCategoriesData.map(async (category) => {
+      return await getTopCategories(category.fetch);
+    })
   );
+  const categories: FeaturedCategoriesClientProps["categories"] =
+    fetchedCategories.flat();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const fetchedCategories = await Promise.all(
-        FeaturedCategoriesData.map(async (category: any) => {
-          return await getTopCategories(category.fetch);
-        })
-      );
-
-      setFetchedCategories(fetchedCategories.flat());
-    };
-
-    fetchCategories();
-  }, []);
-
-  return (
-    <div className={styles.categoriesSection}>
-      <div className={styles.categoriesContainer}>
-        {fetchedCategories.slice(0, 12).map((category: Category) => {
-          return (
-            <LinkCard
-              key={category._id}
-              label={category.title}
-              cardSize="large"
-              image={category.image}
-            />
-          );
-        })}
-      </div>
-
-      <Button
-        className={styles.button}
-        buttonChildren={"More Categories..."}
-        buttonSize="large"
-        buttonType="normal"
-        name="More Categories Button"
-        type="button"
-        ariaLabel="More Categories Button"
-        autoFocus={false}
-        disabled={false}
-        onClick={() => setShowCategoriesModal(true)}
-      />
-    </div>
-  );
+  return <FeaturedCategoriesClient categories={categories} />;
 };
 
 export default FeaturedCategories;

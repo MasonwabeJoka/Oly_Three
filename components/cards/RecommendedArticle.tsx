@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./RecommendedArticle.module.scss";
-import Avatar from "../Avatars";
+import Avatar from "../Avatar";
 import Link from "next/link";
 
 interface RecommendedArticleProps {

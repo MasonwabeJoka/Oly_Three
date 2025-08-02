@@ -1,4 +1,4 @@
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./CartItem.module.scss";
 import Image from "next/image";
 import { ImageIcon, X } from "lucide-react";

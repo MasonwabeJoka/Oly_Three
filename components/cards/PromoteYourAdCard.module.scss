@@ -13,13 +13,11 @@
   margin-bottom: rem(-24) !important;
   background-color: $white-three;
 
-
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     margin-bottom: unset !important;
     width: rem(900);
     min-height: rem(255);
     height: unset;
-
   }
 
   .title {
@@ -68,7 +66,6 @@
       width: rem(72);
       height: rem(72);
       border-radius: 50%;
- 
 
       .price {
         font-weight: 500;

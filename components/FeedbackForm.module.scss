@@ -10,7 +10,6 @@
   height: rem(600);
   border-radius: rem(40);
   background-color: $white-four;
-  // background-color: antiquewhite;
 
   .title {
     margin-bottom: rem(20);
@@ -32,7 +31,8 @@
       color: $danger;
     }
     .name {
-      width: rem(640);
+    
+      
     }
   }
 
@@ -46,7 +46,6 @@
       color: $danger;
     }
     .email {
-      width: rem(640);
     }
   }
 
@@ -66,7 +65,7 @@
   }
 
   .uploadButtonContainer {
-    width: rem(640);
+    width: rem(514);
     margin-bottom: rem(48);
 
     .uploadButtonWrapper {

@@ -4,7 +4,7 @@ import Button from "@/components/Buttons";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Icon from "./Icon";
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import { useFetchAdStore } from "@/store/useFetchStore";
 
 type ImageGroup = {
@@ -18,7 +18,7 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
   const [isHeartHovered, setIsHeartHovered] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
-  
+
   let totalImages = images;
   if (aspectRatios) {
     if (
@@ -37,8 +37,6 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
       totalImages = totalImages?.slice(0, 3);
     }
   }
-
-
 
   const handleIconClick = () => {
     setIsHeartClicked(!isHeartClicked);
@@ -208,7 +206,6 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
 
       let display = "flex";
       if (images?.length === 5 && aspectRatios[1] > 1) {
-     
         if (images?.length === 5 && aspectRatios[2] < 1) {
           display = "none";
         }
@@ -252,9 +249,9 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
       let display = "flex";
       if (images?.length === 5 && aspectRatios[4] < 1) {
         if (
-          numberOfPortraitImages >1 &&
-          (aspectRatios[1] < 1 &&
-          aspectRatios[2] < 1)
+          numberOfPortraitImages > 1 &&
+          aspectRatios[1] < 1 &&
+          aspectRatios[2] < 1
         ) {
           display = "none";
         }
@@ -350,9 +347,9 @@ const Gallery = ({ images, onClick, aspectRatios }: ImageGroup) => {
       }
       if (images?.length === 5 && aspectRatios[4] < 1) {
         if (
-          numberOfPortraitImages >1 &&
-          (aspectRatios[1] > 1 &&
-          aspectRatios[2] > 1)
+          numberOfPortraitImages > 1 &&
+          aspectRatios[1] > 1 &&
+          aspectRatios[2] > 1
         ) {
           display = "none";
         }

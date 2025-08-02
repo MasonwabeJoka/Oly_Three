@@ -6,7 +6,7 @@
   height: rem(16);
   background-color: $white-two;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1098);
   }
 }
@@ -16,4 +16,3 @@
   background-color: $primary-hover;
   transition: width 0.3s ease-in-out;
 }
-

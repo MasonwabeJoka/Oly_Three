@@ -1,5 +1,5 @@
 import  createClient  from '@sanity/client';
-import ClientConfig from '@/sanity/config/client-config';
+import ClientConfig from '@/sanityTemp/config/client-config';
 import { NextRequest, NextResponse } from 'next/server';
 import { currentUser } from '@clerk/nextjs'
 

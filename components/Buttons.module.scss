@@ -4,7 +4,6 @@
 .button {
   background-color: $normal;
   border: none;
-  // color: $black-four;
   color: #67787c;
   border-radius: rem(40);
   outline: none;
@@ -12,198 +11,209 @@
   cursor: pointer;
 }
 
-.xLarge {
-  width: rem(954);
-  height: rem(56);
-}
-
-.xLargeFeed {
-  width: rem(793);
-  height: rem(56);
-}
-
-.large {
+.largeButton {
   width: rem(311);
   height: rem(56);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
+    width: rem(514);
+    height: rem(56);
+  }
+
+  @include only(smallDesktop) {
+    width: rem(462);
+    height: rem(56);
+  }
+
+  @include only(tablet) {
+    width: rem(462);
+    height: rem(56);
+  }
+
+  @include only(extraLargeDesktop) {
     width: rem(514);
     height: rem(56);
   }
 }
-
-.largeFeed {
-  width: rem(471);
-  height: rem(56);
-}
-
-.medium {
+.mediumButton {
   width: rem(202);
   height: rem(56);
-  @include larger-than(mobile) {
+
+  @include only(largeDesktop) {
+    width: rem(424);
+    height: rem(56);
+  }
+  @include only(smallDesktop) {
+    width: rem(381);
+    height: rem(56);
+  }
+  @include only(tablet) {
+    width: rem(381);
+    height: rem(56);
+  }
+  @include only(extraLargeDesktop) {
     width: rem(424);
     height: rem(56);
   }
 }
-
-.mediumFeed {
-  width: rem(310);
-  height: rem(48);
-}
-
-.small {
+.smallButton {
   width: rem(96);
   height: rem(52);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(176);
     height: rem(52);
   }
-}
 
-.smallFeed {
-  width: rem(149);
-  height: rem(48);
-}
+  @include only(smallDesktop) {
+    width: rem(158);
+    height: rem(52);
+  }
 
-.tiny {
+  @include only(tablet) {
+    width: rem(158);
+    height: rem(56);
+  }
+
+  @include only(extraLargeDesktop) {
+    width: rem(176);
+    height: rem(56);
+  }
+}
+.tinyButton {
   width: rem(45);
   height: rem(32);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(97);
     height: rem(56);
   }
-}
-
-.tinyFeed {
-  width: rem(69);
-  height: rem(48);
-}
-
-.xxLargeDashboard {
-  @include larger-than(mobile) {
-    width: rem(1002);
+  @include only(smallDesktop) {
+    width: rem(87);
     height: rem(56);
   }
 }
-
-.xLargeDashboard {
-  @include larger-than(mobile) {
-  }
-}
-
-.largeDashboard {
+.largeDashboardButton {
   width: rem(267);
   height: rem(56);
-  @include larger-than(mobile) {
+
+  @include only(largeDesktop) {
     width: rem(471);
   }
+  @include only(smallDesktop) {
+    width: rem(424);
+  }
+  @include only(tablet) {
+    width: rem(424);
+  }
 }
-
-.mediumDashboard {
+.mediumDashboardButton {
   width: rem(240);
   height: rem(48);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(326);
     height: rem(56);
   }
+  @include only(smallDesktop) {
+    width: rem(293);
+    height: rem(56);
+  }
+  @include only(tablet) {
+    width: rem(293);
+    height: rem(56);
+  }
 }
-
-.smallDashboard {
-  width: rem(149);
-  height: rem(48);
+.smallDashboardButton {
+  @include only(largeDesktop) {
+    width: rem(149);
+    height: rem(48);
+  }
+  @include only(smallDesktop) {
+    width: rem(134);
+    height: rem(48);
+  }
+  @include only(tablet) {
+    width: rem(134);
+    height: rem(48);
+  }
 }
+.tinyDashboardButton {
+  @include only(largeDesktop) {
+    width: rem(69);
+    height: rem(48);
+  }
 
-.tinyDashboard {
-  width: rem(69);
-  height: rem(48);
+  @include only(smallDesktop) {
+    width: rem(62);
+    height: rem(48);
+  }
+
+  @include only(tablet) {
+    width: rem(62);
+    height: rem(48);
+  }
+
+  @include only(extraLargeDesktop) {
+    width: rem(69);
+    height: rem(48);
+  }
 }
 
 .round {
-  border-radius: 50%;
-  background-color: $white-one;
+  border-radius: 100%;
 }
 
-.roundLarge {
+.roundMedium {
+  width: rem(36);
+  height: rem(36);
+
+  @include only(largeDesktop) {
+    width: rem(48);
+    height: rem(48);
+  }
+  @include only(smallDesktop) {
+    width: rem(48);
+    height: rem(48);
+  }
+  @include only(tablet) {
+    width: rem(48);
+    height: rem(48);
+  }
+}
+
+.roundLargeDashboard {
   width: rem(32);
   height: rem(32);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(48);
     height: rem(48);
   }
-}
-.roundLargeFeed {
-  width: rem(40);
-  height: rem(40);
-}
-
-.roundStandard {
-  width: rem(36);
-  height: rem(36);
-
-  @include larger-than(mobile) {
+  @include only(smallDesktop) {
     width: rem(48);
     height: rem(48);
   }
-}
-.roundStandardFeed {
-  width: rem(36);
-  height: rem(36);
-
-  @include larger-than(mobile) {
+  @include only(tablet) {
     width: rem(48);
     height: rem(48);
   }
-}
-
-.round:hover {
-  // border: rem(3) solid $primary-hover;
-  // transition: background-color 0.3s ease-in-out;
-}
-
-.round:focus-visible {
-  // outline-offset: rem(4);
-  // outline-style: solid;
-  // outline-width: rem(2);
 }
 
 .roundSmall {
   width: rem(32);
   height: rem(32);
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(40);
     height: rem(40);
   }
-}
-
-.roundSmall:hover {
-  // border: rem(3) solid $primary-hover;
-  // transition: background-color 0.3s ease-in-out;
-}
-
-.roundSmall:focus-visible {
-  // outline-offset: rem(4);
-  // outline-style: solid;
-  // outline-color: $primary-hover;
-  // outline-width: rem(2);
-}
-
-.roundSmallFeed {
-  width: rem(20);
-  height: rem(20);
-  @include larger-than(mobile) {
-    width: rem(32);
-    height: rem(32);
+  @include only(smallDesktop) {
+    width: rem(40);
+    height: rem(40);
   }
-}
-.roundSmallFeed:hover {
-  // border: rem(3) solid $primary-hover;
-  // transition: background-color 0.3s ease-in-out;
-}
-
-.roundSmallFeed:focus-visible {
+  @include only(tablet) {
+    width: rem(40);
+    height: rem(40);
+  }
 }
 
 .filter {
@@ -222,13 +232,6 @@
   color: $white-one;
 }
 
-.primary:focus-visible {
-  // outline-offset: rem(4);
-  // outline-style: solid;
-  // outline-color: $primary;
-  // outline-width: rem(4);
-}
-
 .primary:active {
   background-color: $primary-hover;
   color: $white-one;
@@ -236,6 +239,7 @@
 }
 .primary:disabled {
   background-color: $primary-disabled;
+  color: $grey-four;
 }
 
 .normal {
@@ -245,13 +249,6 @@
 .normal:hover {
   background-color: $normal-hover;
   transition: background-color 0.3s ease-in-out;
-}
-
-.normal:focus-visible {
-  // outline-offset: rem(4);
-  // outline-style: solid;
-  // outline-color: $normal;
-  // outline-width: rem(4);
 }
 
 .normal:active {
@@ -312,6 +309,7 @@
 
 .danger {
   background-color: $danger;
+  color: $white-one;
 }
 
 .danger:hover {

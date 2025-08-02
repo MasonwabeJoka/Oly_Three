@@ -7,8 +7,16 @@
   align-items: center;
   justify-content: center;
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(1098);
+  }
+
+  .title {
+    margin-top: rem(48);
+    margin-bottom: rem(48);
+    color: $danger;
+    font-weight: 500;
+    font-size: $h4;
   }
 
   .reviewSectionContainer {

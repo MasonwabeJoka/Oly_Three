@@ -1,4 +1,4 @@
-import { Ad } from '@/sanity/Types/Ad'
+import { Ad } from '@/sanityTemp/Types/Ad'
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
 

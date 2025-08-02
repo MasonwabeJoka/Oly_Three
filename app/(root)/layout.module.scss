@@ -96,6 +96,12 @@
   ul {
     list-style-type: none;
   }
+
+  li {
+  list-style-position: outside;
+  padding-left: 0;
+  margin-left: 0;
+}
   a,
   a:visited,
   a:active {
@@ -123,12 +129,11 @@
     display: flex;
     min-height: 100vh;
     justify-content: center;
-  
 
     .feed {
       display: none;
 
-      @include larger-than(mobile) {
+      @include only(largeDesktop) {
         display: block;
       }
     }
@@ -142,7 +147,7 @@
         justify-content: center;
         width: 100vw;
         background-color: red;
-        @include larger-than(mobile) {
+        @include only(largeDesktop) {
         }
       }
     }
@@ -157,7 +162,6 @@
 
   footer {
     margin-top: auto; /* push the footer to the bottom of the container */
-    
   }
 }
 

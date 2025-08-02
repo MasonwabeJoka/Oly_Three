@@ -1,6 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .categoriesSection {
   display: flex;
   flex-direction: column;
@@ -13,17 +14,14 @@
     flex-wrap: wrap;
     margin-bottom: rem(136);
     gap: rem(16);
-   
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       width: rem(954);
       gap: rem(200);
-      
     }
     @include larger-than(tablet) {
       width: rem(1248);
       gap: rem(32);
-      
     }
   }
 
@@ -33,8 +31,6 @@
   .categories {
     width: 90%;
     position: absolute;
-    // left: 0;
-    // top: 0;
     z-index: 1;
   }
 }

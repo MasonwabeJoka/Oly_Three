@@ -14,9 +14,7 @@ const ConfirmYourPurchase = () => {
         </p>
         <h2 className={styles.paragraphTitle}>Funds Withdrawal</h2>
         <p>
-          Your funds will be withdrawn from your account only after the seller
-          has accepted your purchase, and the process will proceed once both
-          parties have confirmed the transaction.
+         Your funds will be withdrawn from your account only after the seller has accepted your purchase. The transaction will then proceed.
         </p>
         <h2 className={styles.paragraphTitle}>Contacting the Seller</h2>
         <p>

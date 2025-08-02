@@ -3,5 +3,13 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "workbench.colorCustomizations": {},
   "pieces.cloudCapabilities": "Blended",
-  "pieces.telemetry": true
+  "pieces.telemetry": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".yoyo": true
+  }
 }

@@ -41,23 +41,24 @@ const ShareCalculator = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <p className={styles.title}>Share this calculator</p>
-        <div className={styles.icons}>
+        <ul className={styles.icons}>
           {shareData.map((data) => (
-            <Link
+            <li
               key={data.id}
-              href={data.url}
               className={`${styles.iconContainer} ${styles[data.id]}`}
             >
-              <Image
-                src={data.icon}
-                alt={`${data.name} Icon`}
-                width={16}
-                height={16}
-                className={styles.icon}
-              />
-            </Link>
+              <Link href={data.url}>
+                <Image
+                  src={data.icon}
+                  alt={`${data.name} Icon`}
+                  width={16}
+                  height={16}
+                  className={styles.icon}
+                />
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

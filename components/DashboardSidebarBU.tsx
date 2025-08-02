@@ -1,6 +1,6 @@
 "use client";
 import styles from "./DashboardSidebar.module.scss";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import { DashboardSidebarData } from "@/data/DashboardSidebarData";
 import Icon from "./Icon";
@@ -9,7 +9,7 @@ import { useResponsive } from "@/utils/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { User } from "@/sanity/Types/User";
+import { User } from "@/sanityTemp/Types/User";
 
 interface CurrentUserTemp {
   conversationIds: string[];
@@ -21,7 +21,6 @@ interface CurrentUserTemp {
   name: string;
   messageIds: string[];
   updatedAt: string;
-
 }
 interface DashboardSidebarProps {
   // currentUser: User;
@@ -58,28 +57,28 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
             const isActiveItem = pathname === link;
             const postYourAd = menu === "Post Your Ad";
             return (
-              <Link
-                href={link}
-                className={styles.menu}
-                key={id}
-                onClick={() => setIsActive(isActiveItem ? id : null)}
-              >
-                <Icon
-                  className={styles.icon}
-                  src={isActiveItem ? active_icon : icon}
-                  alt="Edit Icon"
-                  width={40}
-                  height={40}
-                />
-                {!isMobile && (
-                  <h4
-                    className={styles.menuText}
-                    style={{ color: isActiveItem ? "#ff3c14" : "#434b4d" }}
-                  >
-                    {menu}
-                  </h4>
-                )}
-              </Link>
+              <li className={styles.menu} key={id}>
+                <Link
+                  href={link}
+                  onClick={() => setIsActive(isActiveItem ? id : null)}
+                >
+                  <Icon
+                    className={styles.icon}
+                    src={isActiveItem ? active_icon : icon}
+                    alt="Edit Icon"
+                    width={40}
+                    height={40}
+                  />
+                  {!isMobile && (
+                    <h4
+                      className={styles.menuText}
+                      style={{ color: isActiveItem ? "#ff3c14" : "#434b4d" }}
+                    >
+                      {menu}
+                    </h4>
+                  )}
+                </Link>
+              </li>
             );
           })}
         </div>

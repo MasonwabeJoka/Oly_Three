@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 import Input from "@/components/Input";
 import Contact from "@/features/messages/components/Contact";
 import Link from "next/link";
-import { User } from "@/sanity/Types/User";
+import { User } from "@/sanityTemp/Types/User";
 import { users } from "@/app/temp/tempForMessages";
 import { currentUser } from "@/app/temp/tempForMessages";
 
@@ -29,9 +29,9 @@ const Contacts = () => {
           required={true}
         />
       </div>
-      <div className={styles.contacts}>
+      <ul className={styles.contacts}>
         {users.map((user) => (
-          <div key={user.id} className={styles.contact}>
+          <li key={user.id} className={styles.contact}>
             <Contact
               name={user.name}
               avatar={user.image}
@@ -39,9 +39,9 @@ const Contacts = () => {
               isOnline
               user={user}
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
       <Link href="/dashboard/messages">
         <h4 className={styles.backToChatLink}>Back to chat</h4>
       </Link>

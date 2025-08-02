@@ -1,31 +1,36 @@
-import styles from "./Pill.module.scss";
+import { useState } from 'react';
+import styles from './Pill.module.scss';
 
-interface Styles {
-  child: string;
+// Assuming these props are passed to your component
+interface Props {
   colour: string;
-  textColour?: string;
-  boxShadow?: string;
+  textColour: string;
+  shadow: boolean;
+  boxShadow: string;
+  child: React.ReactNode;
+  hoverColour?: string; // Optional hover background color
+  hoverTextColour?: string; // Optional hover text color
 }
 
-const Pill = ({ child, colour, textColour = "#434b4d", boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
-0px 5px 5px 0px rgba(180, 191, 203, 0.17),
-0px 11px 7px 0px rgba(180, 191, 203, 0.1),
-0px 20px 8px 0px rgba(180, 191, 203, 0.03),
-0px 30px 9px 0px rgba(180, 191, 203, 0)`}: Styles) => {
+const MyComponent = ({ colour, textColour, shadow, boxShadow, child, hoverColour = '#14d6ff', hoverTextColour = '#ffffff' }: Props) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
       className={styles.container}
       style={{
-        backgroundColor: colour,
-        cursor: "pointer",
-        color: textColour,
-        boxShadow: boxShadow,
+        backgroundColor: isHovered ? hoverColour : colour,
+        cursor: 'pointer',
+        color: isHovered ? hoverTextColour : textColour,
+        boxShadow: shadow ? boxShadow : 'none',
+        padding: '0.4rem 1rem',
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {child}
     </div>
   );
 };
 
-export default Pill;
+export default MyComponent;

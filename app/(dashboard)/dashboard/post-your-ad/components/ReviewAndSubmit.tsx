@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import styles from "./ReviewAndSubmit.module.scss";
 import ReviewAttachments from "./reviewForm/ReviewAttachments";
@@ -11,11 +12,12 @@ import ReviewTitleAndDescription from "./reviewForm/ReviewTitleAndDescription";
 import ReviewVideos from "./reviewForm/ReviewVideos";
 import { FormWrapper } from "./FormWrapper";
 
-const SubmitForm = () => {
+const ReviewAndSubmit = () => {
   // https://chatgpt.com/share/45cb30a0-a739-4224-bea5-82b0c352dd28
   return (
-    <FormWrapper title="Review Your Listing">
+    <FormWrapper title="">
       <div className={styles.container}>
+        <h2 className={styles.title}>Review Your Listing</h2>
         <div className={styles.reviewSectionContainer}>
           <div className={styles.reviewSection}>
             <div className={styles.section}>
@@ -59,4 +61,5 @@ const SubmitForm = () => {
   );
 };
 
-export default SubmitForm;
+export default ReviewAndSubmit;
+

@@ -1,10 +1,8 @@
-
 import styles from "./Calculators.module.scss";
 import Button from "@/components/Buttons";
 import Link from "next/link";
 
 const Calculators = () => {
-
   const data = [
     {
       title: "Affordability Calculator",
@@ -27,16 +25,20 @@ const Calculators = () => {
   ];
   return (
     <div className={styles.container}>
-      <div className={styles.calculators}>
+      <ul className={styles.calculators}>
         {data.map((item, index) => {
           return (
-            <Link href={item.link} className={styles.calculator} key={index}>
-              <h3 className={styles.calculatorTitle}>{item.title}</h3>
-              <p className={styles.calculatorDescription}>{item.description}</p>
-            </Link>
+            <li className={styles.calculator} key={index}>
+              <Link href={item.link}>
+                <h3 className={styles.calculatorTitle}>{item.title}</h3>
+                <p className={styles.calculatorDescription}>
+                  {item.description}
+                </p>
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -11,24 +11,19 @@ interface HeroSectionProps {
 
 const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
   return (
-    <div className={styles.mainSection}>
+    <>
       <div className={styles.star}>
-        <Image
-        src="/brandNew.svg"
-        height={100}
-        width={100}
-        alt="star"
-        />
+        <Image src="/brandNew.svg" height={100} width={100} alt="star" />
       </div>
-      <h1 className={styles.mainTitle}>
-       {mainTitle}
-      </h1>
-      <div className={styles.heroSectionSearchContainer}>
-        {category === "all" && <HeroSectionSearch />}
-        {category === "property" && <PropertiesHeroSectionSearch />}
-        {category === "shops" && <ShopsHeroSectionSearch />}
+      <div className={styles.mainSection}>
+        <h1 className={styles.mainTitle}>{mainTitle}</h1>
+        <div className={styles.heroSectionSearchContainer}>
+          {category === "all" && <HeroSectionSearch />}
+          {category === "property" && <PropertiesHeroSectionSearch />}
+          {category === "shops" && <ShopsHeroSectionSearch />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

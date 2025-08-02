@@ -1,14 +1,17 @@
 import { create } from 'zustand';
-import { Ad } from '@/sanity/Types/Ad';
+import { Ad } from '@/sanityTemp/Types/Ad';
 import { FieldName, SubmitHandler } from 'react-hook-form';
 
 // Define the shape of the form data (what information the user will fill out)
 export type FormData = {
-  selectACategory?: string; // Optional field for choosing a category (e.g., "Electronics")
+  category: { main: string; subcategory: string }; // Field for choosing a category (e.g., "Electronics")
   details: { condition: string }; // Section for item details, like "New" or "Used"
   price: {
     pricingOption: string; // How the price is set (e.g., "Fixed" or "Negotiable")
-    price: number; // The actual price amount
+    amount: number; // The actual price amount
+    startingPrice?: number;
+    buyNowPrice?: number;
+    startTime?: string;
   };
   createAccount: {
     bankName: string; // Name of the bank for payment details
@@ -34,14 +37,18 @@ export type FormData = {
   reviewYourAd?: string; // Optional field for reviewing the ad before submission
 };
 
+
 // List of all possible field names in the form, written as strings
 // Used to identify which fields belong to each step
 type FormDataFields =
-  | "selectACategory"
+  | "category.main"
+  | "category.subcategory"
   | "details.condition"
-  | "details.selectDetails"
   | "price.pricingOption"
-  | "price.price"
+  | "price.amount"
+  | "price.startingPrice"
+  | "price.buyNowPrice"
+  | "price.startTime"
   | "createAccount.bankName"
   | "createAccount.accountHolder"
   | "createAccount.accountNumber"
@@ -66,23 +73,38 @@ type Step = {
 
 // Define all the steps of the form in order
 const steps: Step[] = [
-  { id: "step1", name: "Select a category", fields: ["selectACategory"] },
-  { id: "step2", name: "Details", fields: ["details.condition", "details.selectDetails"] },
-  { id: "step3", name: "Price", fields: ["price.pricingOption", "price.price"] },
-  { id: "step4", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
-  { id: "step5", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
-  { id: "step6", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
-  { id: "step7", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
-  { id: "step8", name: "Promote Your Ad", fields: [] },
-  { id: "step9", name: "Congratulations", fields: [] }, // No fields here, just a confirmation page
-  { id: "step10", name: "Review and Submit", fields: ["reviewYourAd"] },
+  { id: "step0", name: "Select a category", fields: ["category.main", "category.subcategory"] },
+  { id: "step1", name: "Details", fields: ["details.condition"] },
+  { id: "step2", name: "Price", fields: ["price.pricingOption", "price.amount"] },
+  { id: "step3", name: "Create Account", fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] },
+  { id: "step4", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
+  { id: "step5", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
+  { id: "step6", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
+  { id: "step7", name: "Promote Your Ad", fields: ["promoteYourAd.promotionDuration"] },
+  { id: "step8", name: "Congratulations", fields: [] },
+  { id: "step9", name: "Review and Submit", fields: [] },
+  { id: "step10", name: "Select New Category", fields: [] }, // Add the new step
+];
+
+export const slugMap: { index: number; slug: string }[] = [
+  { index: 0, slug: "select-a-category" },
+  { index: 1, slug: "details" },
+  { index: 2, slug: "price" },
+  { index: 3, slug: "create-account" },
+  { index: 4, slug: "title-and-description" },
+  { index: 5, slug: "upload-media" },
+  { index: 6, slug: "location" },
+  { index: 7, slug: "promote-your-ad" },
+  { index: 8, slug: "congratulations" },
+  { index: 9, slug: "review-and-submit" },
+  { index: 10, slug: "select-new-category" },
 ];
 
 // Define the part of the store that holds and manages the form data
 type FormStore = {
-  formData: FormData; // The current data entered by the user
-  updateFormData: (formData: Partial<FormData>) => void; // Function to update some or all of the form data
-  resetFormData: () => void; // Function to clear the form back to its starting state
+  formData: FormData;
+  updateFormData: (formData: Partial<FormData>) => void;
+  resetFormData: () => void;
 };
 
 // Define the part of the store that controls the form’s steps and navigation
@@ -92,13 +114,15 @@ type FormState = {
   steps: Step[]; // The list of steps defined above
   isFirstStep: boolean; // True if the user is on the first step
   isLastStep: boolean; // True if the user is on the last step
+  categoryPreviouslySelected: boolean; // True if a category has been selected before
   setMessage: (message: string) => void; // Function to set or change the message
   next: (trigger: any, handleSubmit: any, onSubmit: SubmitHandler<FormData>) => Promise<void>; // Moves to the next step or submits the form
   back: () => void; // Goes back to the previous step
-  goTo: (index: number) => void; // Jumps to a specific step by its index
-  setCategory: (category: string) => void; // Sets the category field in the form
+  goTo: (index: number, trigger?: any) => Promise<void>; // Jumps to a specific step by its index
+  setCategory: (main: string, subcategory: string) => void; // Sets the category field in the form
   transformAdData: (data: Ad) => Partial<FormData>; // Converts existing ad data into form data
   setCurrentStepIndex: (index: number) => void; // Sets which step the user is on
+  setCategoryPreviouslySelected: (selected: boolean) => void; // Sets whether category was previously selected
 };
 
 // Function to save the current step number to the browser’s local storage
@@ -109,18 +133,51 @@ const setStepInStorage = (index: number) => {
   }
 };
 
+// Function to update the URL with the step's slug
+
+const updateUrlWithStep = (index: number) => {
+  if (typeof window !== "undefined") {
+    const slugEntry = slugMap.find(entry => entry.index === index);
+    const slug = slugEntry ? slugEntry.slug : "select-a-category";// Default to first step
+    const newUrl = `/dashboard/post-your-ad/${slug}`;
+    const stepId = steps[index]?.id || steps[0].id;// Fallback to first step ID if index is invalid
+    window.history.pushState({ step: stepId }, "", newUrl);
+  }
+};
+
 // Create the Zustand store to manage the form’s state
 const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Start with an empty message
   message: '',
+
+    // Function to update the message shown to the user
+  setMessage: (message) => set({ message }),
   
-  // Set the starting step from local storage (or 0 if nothing is saved)
-  currentStepIndex: typeof window !== "undefined" ? parseInt(localStorage.getItem('currentStepIndex') || '0', 10) : 0,
+// Initialize currentStepIndex from URL path or localStorage
+
+  currentStepIndex: (() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const basePath = "/dashboard/post-your-ad/";
+      if (path.startsWith(basePath)) {
+        const slug = path.slice(basePath.length); // Extract slug after /dashboard/post-your-ad/
+        const slugEntry = slugMap.find(entry => entry.slug === slug);
+        const stepIndex = slugEntry ? slugEntry.index : -1;
+        if (stepIndex !== -1) return stepIndex;
+      }
+      const storedIndex = parseInt(localStorage.getItem('currentStepIndex') || '0', 10);
+      return storedIndex;
+    }
+    return 0;
+  })(), //currentStepIndex needs a starting value when the store is created.
+
   
+
   // Starting values for the form data (everything empty or false to begin with)
   formData: {
+    category: { main: "", subcategory: "" },
     details: { condition: '' },
-    price: { pricingOption: '', price: 0 },
+    price: { pricingOption: '', amount: 0, startingPrice: undefined, buyNowPrice: undefined, startTime: undefined },
     createAccount: { bankName: '', accountHolder: '', accountNumber: '' },
     titleAndDescription: { title: '', description: '' },
     uploadMedia: { uploadPhotos: false, uploadVideos: false, uploadAttachments: false },
@@ -131,12 +188,10 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Use the steps array we defined earlier
   steps,
 
-  // Function to update the message shown to the user
-  setMessage: (message) => set({ message }),
-
   // Start with these as false (updated later when moving between steps)
   isFirstStep: false,
   isLastStep: false,
+  categoryPreviouslySelected: false,
 
   // Function to update parts of the form data as the user fills it out
   updateFormData: (newData) => set((state) => ({
@@ -146,35 +201,40 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Function to reset the form data back to its starting values
   resetFormData: () => set({
     formData: {
-      details: { condition: '' },
-      price: { pricingOption: '', price: 0 },
+      category: { main: "", subcategory: "" },
+      details: { condition: "" },
+      price: { pricingOption: '', amount: 0, startingPrice: undefined, buyNowPrice: undefined, startTime: undefined },
       createAccount: { bankName: '', accountHolder: '', accountNumber: '' },
       titleAndDescription: { title: '', description: '' },
       uploadMedia: { uploadPhotos: false, uploadVideos: false, uploadAttachments: false },
       location: { province: '', city: '', suburb: '', customLocation: '' },
       promoteYourAd: { promotionDuration: '' },
-    }
+    },
+    categoryPreviouslySelected: false, // Reset category selection flag
   }),
 
   // Function to move to the next step or submit the form if it’s the last step
   next: async (trigger, handleSubmit, onSubmit) => {
-    const { currentStepIndex, steps } = get(); // Get the current step number and steps list
-    const currentStep = steps[currentStepIndex]; // Get details of the current step
+    const { currentStepIndex, steps } = get();
     
     // Clear any previous messages
     set({ message: '' });
-    
-    // Check if this step has fields to fill out
-    if (currentStep.fields.length > 0) {
+
+    // Validate only the fields for the current step
+    const fieldsToValidate = steps[currentStepIndex].fields.filter(
+      field => field !== "location.customLocation" && field !== "reviewYourAd"
+    );
+
+    if (fieldsToValidate.length > 0) {
       try {
-        // Validate the fields (from React Hook Form)
-        const isValid = await trigger(currentStep.fields, {
-          shouldFocus: true  // Focus on first invalid field
-        });
-        
-        if (!isValid) { // If something's wrong (e.g., missing data)
-          set({ message: "Please correct all highlighted errors before continuing." }); // Show an error
-          return; // Stop here
+        const isValid = await trigger(fieldsToValidate, { shouldFocus: true });
+        if (!isValid) {
+          const { errors } = await trigger(fieldsToValidate, { shouldFocus: false });
+          const errorMessages = Object.entries(errors || {})
+            .map(([field, error]) => `${field}: ${error.message}`)
+            .join("; ");
+          set({ message: `Please correct the following errors: ${errorMessages || "Invalid fields"}` });
+          return; // Stop navigation if validation fails
         }
       } catch (error) {
         set({ message: "Validation error occurred. Please check your inputs." });
@@ -185,7 +245,16 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
     // If this is the last step, submit the form
     if (currentStepIndex === steps.length - 1) {
       try {
-        await handleSubmit(onSubmit)(); // Submit the form data (from React Hook Form)
+        const isValid = await trigger(); // Validate all fields
+        if (!isValid) {
+          const { errors } = await trigger([], { shouldFocus: false });
+          const errorMessages = Object.entries(errors || {})
+            .map(([field, error]) => `${field}: ${error.message}`)
+            .join("; ");
+          set({ message: `Please correct the following errors: ${errorMessages || "Invalid form data"}` });
+          return; // Stop submission if validation fails
+        }
+        await handleSubmit(onSubmit)();
       } catch (error) { // If submission fails
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
         set({ message: `Submission failed: ${errorMessage}` }); // Show what went wrong
@@ -193,11 +262,11 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
       }
     } else { // If it's not the last step, move to the next one
       const newIndex = currentStepIndex + 1; // Increase the step number
-      setStepInStorage(newIndex); // Save the new step to local storage
       set({
         currentStepIndex: newIndex, // Update the step number
         isFirstStep: newIndex === 0, // Check if it's the first step
         isLastStep: newIndex === steps.length - 1, // Check if it's the last step
+        message: '',
       });
     }
   },
@@ -205,28 +274,56 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Function to go back to the previous step
   back: () => set((state) => {
     const newIndex = Math.max(0, state.currentStepIndex - 1); // Decrease step number, but not below 0
-    setStepInStorage(newIndex); // Save the new step
     return {
       currentStepIndex: newIndex, // Update the step number
       isFirstStep: newIndex === 0, // Check if it’s the first step
-      isLastStep: newIndex === steps.length - 1, // Check if it’s the last step
+      isLastStep: newIndex === state.steps.length - 1, // Check if it’s the last step
     };
   }),
 
   // Function to jump to a specific step by its number
-  goTo: (index) => set(() => {
-    setStepInStorage(index); // Save the new step
-    return {
+  goTo: async (index, trigger) => {
+    const { steps } = get();
+    
+    // Validate all fields up to the target step
+    if (trigger) {
+      const fieldsToValidate = steps
+        .slice(0, index + 1)
+        .flatMap(step => step.fields)
+        .filter(field => field !== "location.customLocation" && field !== "reviewYourAd");
+      
+      if (fieldsToValidate.length > 0) {
+        const isValid = await trigger(fieldsToValidate, { shouldFocus: true });
+        if (!isValid) {
+          const { errors } = await trigger(fieldsToValidate, { shouldFocus: false });
+          const errorMessages = Object.entries(errors || {})
+            .map(([field, error]) => `${field}: ${error.message}`)
+            .join("; ");
+          set({ message: `Please correct the following errors: ${errorMessages || "Invalid fields"}` });
+          return; // Stop navigation if validation fails
+        }
+      }
+    }
+
+    set({
       currentStepIndex: index, // Set the step number
       isFirstStep: index === 0, // Check if it’s the first step
       isLastStep: index === steps.length - 1, // Check if it’s the last step
-    };
-  }),
+      message: '',
+    });
+  },
 
   // Function to set the category field in the form data
-  setCategory: (category) => set((state) => ({
-    formData: { ...state.formData, selectACategory: category }, // Update just the category
+  setCategory: (main: string, subcategory: string) => set((state) => ({
+    formData: {
+      ...state.formData,
+      category: { main, subcategory },
+    },
+    categoryPreviouslySelected: true, // Mark category as previously selected
   })),
+
+  // Function to set whether category was previously selected
+  setCategoryPreviouslySelected: (selected: boolean) => set({ categoryPreviouslySelected: selected }),
 
   // Function to manually set the current step number
   setCurrentStepIndex: (index) => {
@@ -241,9 +338,18 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Function to take existing ad data (from Sanity) and turn it into form data
   // Useful for pre-filling the form with saved information
   transformAdData: (data: Ad): Partial<FormData> => ({
-    selectACategory: data.category || '', // Use the ad’s category or empty string
+    category: {
+      main: data.category?.title || data.category?.mainCategory || "",
+      subcategory: data.category?.childrenCategories?.[0]?.title || "",
+    }, // Use the ad’s category or empty string
     details: { condition: data.condition || '' },
-    price: { pricingOption: data.pricingOption || '', price: data.price || 0 },
+    price: {
+      pricingOption: data.pricingOption || '',
+      amount: data.price || 0,
+      startingPrice: data.startingPrice,
+      buyNowPrice: data.buyNowPrice,
+      startTime: data.startTime,
+    },
     createAccount: {
       bankName: data.bankName || '',
       accountHolder: data.accountHolder || '',
@@ -272,4 +378,3 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
 
 // Export the store so it can be used in other parts of the app
 export default useFormStore;
-

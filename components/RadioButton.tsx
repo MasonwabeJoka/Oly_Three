@@ -1,44 +1,40 @@
-import React from "react";
 import styles from "./RadioButton.module.scss";
 
-type RadioButtonProps = {
-  id: string;
+interface RadioButtonProps {
   name: string;
-  value: string;
+  options: { value: string; label: string }[];
+  selectedValue: string;
+  onChange: (value: string) => void;
   className?: string;
-  label: string;
-  checked: boolean;
-  minWidth: number; // in rems
-  buttonType?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  customRadioButton?: (option: { value: string; label: string }) => JSX.Element; // Added customRadioButton prop
+}
 
 const RadioButton = ({
-  id,
   name,
-  value,
-  className,
-  label,
-  checked,
+  options,
+  selectedValue,
   onChange,
-  minWidth, // in rems
-}: RadioButtonProps): JSX.Element => {
+  className = "",
+  customRadioButton,
+}: RadioButtonProps) => {
   return (
-    <div className={styles.radioButtonContainer}>
-      <label className={styles.label} htmlFor={id} style={{ minWidth: `${minWidth}rem` }}>
-        {label}
-        <input
-          type="radio"
-          id={id}
-          name={name}
-          checked={checked}
-          value={value}
-          className={className || ""}
-          onChange={onChange}
-          aria-label={label}
-        />
-        <span></span>
-      </label>
+    <div className={`${styles.radioGroup} ${className}`}>
+      {options.map((option) => (
+        customRadioButton ? (
+          <div key={option.value}>{customRadioButton(option)}</div>
+        ) : (
+          <label key={option.value} className={styles.radioOption}>
+            <input
+              type="radio"
+              name={name}
+              value={option.value}
+              checked={selectedValue === option.value}
+              onChange={() => onChange(option.value)}
+            />
+            <span>{option.label}</span>
+          </label>
+        )
+      ))}
     </div>
   );
 };

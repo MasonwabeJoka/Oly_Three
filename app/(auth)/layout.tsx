@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={outfit.className}>
-        <body className={styles.body}>
+        <body className={styles.container}>
           {children}
         </body>
       </html>

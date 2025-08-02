@@ -54,10 +54,10 @@ const MobileCarouselOne = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.slidesContainer}>
+      <ul className={styles.slidesContainer}>
         {data.map((slide, index) => {
           return (
-            <div
+            <li
               className={styles.slide}
               ref={(element) =>
                 (slides.current[index] = element as HTMLDivElement)
@@ -75,15 +75,15 @@ const MobileCarouselOne = ({
               <div className={styles.description}>
                 <h3 className={styles.slideTitle}>{slide.slideTitle}</h3>
               </div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
       <div className={styles.slideDotsContainer}>
-          <div className={styles.slideDots}>
+          <ul className={styles.slideDots}>
             {data.map((slide, index) => {
               return (
-                <div
+                <li
                   className={styles.dotsContainer}
                   onClick={() => setSlideIndex(index)}
                   key={index}
@@ -98,10 +98,10 @@ const MobileCarouselOne = ({
                     autoFocus={false}
                     disabled={false}
                   ></button>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
     </div>
   );

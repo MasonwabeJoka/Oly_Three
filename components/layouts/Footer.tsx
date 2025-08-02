@@ -1,50 +1,19 @@
-"use client";
-import Input from "@/components/Input";
 import styles from "./Footer.module.scss";
 import Button from "@/components/Buttons";
-import FeedbackForm from "@/components/FeedbackForm";
-import { usePathname } from "next/navigation";
 import Icon from "@/components/Icon";
 import Link from "next/link";
-import { useState } from "react";
-import Modal from "../Modal";
-import FeedbackOptions from "../FeedbackOptions";
+import FooterClient from "./FooterClient";
+
+
 
 const Footer = () => {
-  const pathname = usePathname();
-  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
-
-  const openModal = () => {
-    setShowFeedbackModal(true);
-  };
   return (
-    <footer
-      className={
-        pathname === "/listing" ? styles.listingContainer : styles.container
-      }
-    >
+    <footer className={styles.container}>
       <div
-        className={pathname === "/listing" ? styles.listingMain : styles.main}
+        className={styles.main}
       >
         <div className={styles.newsLetter}>
-          <Button
-            className={styles.feedbackButton}
-            buttonChildren="Please give us your feedback"
-            buttonType="primary"
-            buttonSize="large"
-            name="feedback-btn"
-            type="button"
-            ariaLabel="Open Feedback Form"
-            onClick={openModal}
-            autoFocus={false}
-            disabled={false}
-          />
-          <Modal
-            showModal={showFeedbackModal}
-            setShowModal={setShowFeedbackModal}
-            modalContent={<FeedbackOptions />}
-          />
-    
+          <FooterClient />
         </div>
         <div className={styles.socials}>
           <Link

@@ -5,15 +5,16 @@ import { FormWrapper } from "./FormWrapper";
 import { promoteYourAdValidations } from "../validations/multiStepFormValidations";
 const PromoteYourAd = () => {
   return (
-    <FormWrapper title="Promote Your Ad">
+    <>
       <div className={styles.container}>
-        <div className={styles.cards}>
+        <h2 className={styles.title}>Promote Your Ad</h2>
+        <ul className={styles.cards}>
           {PromoteYourAdData.map((promotion, index) => {
             const { id, promotionChannel, title, promotionPrice, icon } =
               promotion[index];
 
             return (
-              <div className={styles.cardContainer} key={id}>
+              <li className={styles.cardContainer} key={id}>
                 <PromoteYourAdCard
                   id={id}
                   title={title}
@@ -21,16 +22,16 @@ const PromoteYourAd = () => {
                   alt={promotionChannel}
                   price={promotionPrice}
                 />
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
         <div className={styles.promotionTotal}>
           <h4 className={styles.promotion}>Promotions</h4>
           <span className={styles.price}>R115</span>
         </div>
       </div>
-    </FormWrapper>
+    </>
   );
 };
 

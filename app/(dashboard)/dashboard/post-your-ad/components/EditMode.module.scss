@@ -7,22 +7,21 @@
   margin-bottom: rem(16);
 
   .editDetail {
-    width: rem(514);
-    height: rem(40);
-    text-align: start;
-    color: $black-one;
+
+ 
+  
   }
 
   .editButton {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     width: rem(40);
     height: rem(40);
     border-radius: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-30%);
     z-index: 10;
 
     cursor: pointer;

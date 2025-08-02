@@ -1,94 +1,43 @@
-"use client";
+'use client'
 import styles from "./Navbar.module.scss";
-import { useEffect, useState } from "react";
-import { useModalStore } from "@/store/modalStore";
 import Link from "next/link";
-import Button from "@/components/Buttons";
-import useSidebarStore from "@/store/useSidebarStore";
-import { UserButton, SignInButton } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
-import UserButtonCustom from "@/components/clerk/UserButtonCustom";
 import Image from "next/image";
-import useIsMobileStore from "@/store/useMobileStore";
-
+import MenuButton from "../MenuButton";
+import { useState, useEffect } from 'react';
+import { usePathname } from "next/navigation";
 const Navbar = () => {
-  const [hidden, setHidden] = useState(false);
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen);
-  const { user, isSignedIn, isLoaded } = useUser();
-  const showMenuModal = useModalStore((state) => state.showMenuModal);
+  const pathname = usePathname(); // Get the current route
+  const isHomePage = pathname === '/'; // Check if the current page is the homepage
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
+useEffect(() => {
+    // Only add scroll listener if on the homepage
+    if (isHomePage) {
+      const handleScroll = () => {
+        // Check if the user has scrolled more than 200px
+        if (window.scrollY > 200) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      };
 
-  const isMobile = useIsMobileStore((state) => state.isMobile);
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
 
-  const openOlyFeed = () => {
-    setIsSidebarOpen(true);
-  };
-
-  const openModal = () => {
-    setShowMenuModal(true);
-  };
-
+      // Clean up the event listener on component unmount or route change
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [isHomePage]); // Re-run effect if the pathname changes
   return (
-    <div
-      className={`${styles.container}   ${
-        isSidebarOpen ? styles.withFeedSize : styles.size
-      }`}
-    >
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Link href="/" className={styles.logo} onClick={openOlyFeed}>
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={isMobile ? 61.372 : 70.14}
-            height={isMobile ? 28 : 32}
-          />
-        </Link>
-        <div className={styles.profileIconContainer}>
-          {isSignedIn ? (
-            <div className={`${styles.profile} ${styles.profileLoggedIn}`}>
-              <UserButtonCustom />
-            </div>
-          ) : (
-            <Button
-              className={styles.profile}
-              buttonChildren={
-                <div
-                  style={{
-                    height: "28px",
-                    display: "flex",
-                    alignItems: "center",
-                    marginTop: "8px",
-                  }}
-                >
-                  <Image
-                    src="/icons/menu.png"
-                    alt="Profile Icon"
-                    width={28}
-                    height={28}
-                  />
-                </div>
-              }
-              buttonType="icon"
-              buttonSize=""
-              name="profile-icon"
-              type="button"
-              ariaLabel="Profile Icon"
-              autoFocus={false}
-              disabled={false}
-              onClick={openModal}
-            />
-          )}
-        </div>
-      </div>
+    <div className={styles.container}>
+      <Link href="/" className={`${styles.logo} ${isScrolled ? styles.visible : styles.hidden}`}>
+        <Image src="/logo.png" alt="Logo" width={70.14} height={32} />
+      </Link>
+
+      <MenuButton />
     </div>
   );
 };

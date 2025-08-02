@@ -1,13 +1,13 @@
 "use client";
 import styles from "./DashboardSidebar.module.scss";
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import { MainMenuItem, LogoutMenuItem } from "./DashboardMenuItem";
 import Image from "next/image";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
-import { User } from "@/sanity/Types/User";
+import { User } from "@/sanityTemp/Types/User";
 import { useUser } from "@clerk/nextjs";
 import DashboardSidebarData from "@/data/DashboardSidebarData";
 
@@ -50,21 +50,26 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         </Link>
       )}
 
-      <div className={styles.profile}>
+      <Link
+        href="/dashboard/settings/profile-settings"
+        className={styles.profile}
+      >
         {user?.hasImage && (
           <Avatar
             className={styles.avatar}
-            avatar={user?.imageUrl || "/profilePic.jpg"}
+            avatar={user?.imageUrl || ""}
             avatarSize={isMobile ? "regular" : "large"}
           />
         )}
         {/* <Avatar
           className={styles.avatar}
-          avatar={currentUser?.image || "/profilePic.jpg"}
+          avatar={currentUser?.image || ""}
           avatarSize={isMobile ? "regular" : "large"}
         /> */}
-        {!isMobile && <p className={styles.name}>{user?.fullName || user?.username}</p>}
-      </div>
+        {!isMobile && (
+          <p className={styles.name}>{user?.fullName || user?.username}</p>
+        )}
+      </Link>
       <div>
         <ul className={styles.mainMenu} role="list">
           {data.slice(0, -1).map((menuItem) => {

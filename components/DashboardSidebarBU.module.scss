@@ -11,7 +11,7 @@
   // box-shadow: $shadow-one;
   width: rem(48);
 
-  @include larger-than(mobile) {
+  @include only(largeDesktop) {
     width: rem(342);
     height: 90vh;
     background-color: $grey-one;
@@ -48,7 +48,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: rem(24);
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       gap: rem(16);
       justify-content: flex-start;
       align-items: center;
@@ -72,7 +72,7 @@
     display: flex;
     justify-content: center;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       font-size: rem(16);
       justify-content: flex-start;
       align-items: center;

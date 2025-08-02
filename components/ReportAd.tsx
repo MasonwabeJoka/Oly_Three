@@ -6,13 +6,24 @@ import { UIData } from "@/data/UIData";
 import RadioButton from "./RadioButton";
 import { useState } from "react";
 import Checkbox from "./Checkbox";
+import Form from "next/form";
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
 
 const ReportAd = () => {
   const [checked, setChecked] = useState(false);
-  
-  
+
   return (
-    <form name="reportForm" className={styles.container}>
+    <Form
+      name="reportForm"
+      className={styles.container}
+      action={mockServerAction}
+    >
       <div className={styles.violations}>
         <div className={`${styles.violation} ${styles.violationOne}`}>
           <Checkbox
@@ -82,34 +93,33 @@ const ReportAd = () => {
         </div>
       </div>
       <div className={styles.moreInfoContainer}>
-      <TextArea
-        className={styles.moreInfo}
-        id="moreInfo"
-        name="moreInfo"
-        placeholder="Please provide more information."
-        size="large"
-        label="More Info"
-        required={true}
-        value=''
-        style={{minHeight: '24rem'}}
-        onChange={()=>{}}
-        error={''}
-      />
-
+        <TextArea
+          className={styles.moreInfo}
+          id="moreInfo"
+          name="moreInfo"
+          placeholder="Please provide more information."
+          size="large"
+          label="More Info"
+          required={true}
+          value=""
+          style={{ minHeight: "24rem" }}
+          onChange={() => {}}
+          error={""}
+        />
         <div className={styles.submitReportBtn}>
           <Button
             buttonChildren="Submit"
-            buttonType='primary'
-            buttonSize='medium'
+            buttonType="primary"
+            buttonSize="medium"
             name="submit_report_btn"
-            type="button"
+            type="submit"
             ariaLabel="Submit Button"
             autoFocus={false}
             disabled={false}
           />
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 

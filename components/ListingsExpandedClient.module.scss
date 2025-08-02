@@ -1,0 +1,11 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.listingsContainer {
+ 
+
+  .expandedCardContainer {
+    margin-bottom: rem(96);
+  }
+ 
+}

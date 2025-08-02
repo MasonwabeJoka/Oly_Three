@@ -1,4 +1,4 @@
-import { Ad } from "@/sanity/Types/Ad";
+import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./ListingDetails.module.scss";
 import { listingDetails } from "@/data/listingDetails";
 type Detail = {
@@ -9,9 +9,9 @@ type Detail = {
 const ListingDetails = ({ details }: { details: Detail[] }) => {
   return (
     <div className={styles.detailsContainer}>
-      <div className={styles.details}>
+      <ul className={styles.details}>
         {details.map((detail) => (
-          <div className={styles.detail} key={detail.id}>
+          <li className={styles.detail} key={detail.id}>
             <div className={styles.bulletContainer}>
               <div className={styles.bullet}></div>
             </div>
@@ -19,9 +19,9 @@ const ListingDetails = ({ details }: { details: Detail[] }) => {
             <div className={styles.textContainer}>
               <p>{detail.text.slice(0, 128)}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

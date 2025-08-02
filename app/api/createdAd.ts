@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createAd } from '@/sanity/actions/createAd';
+import { createAd } from '@/sanityTemp/actions/createAd';
 
 export default async function createdAd(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

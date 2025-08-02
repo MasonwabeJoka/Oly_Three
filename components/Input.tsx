@@ -3,10 +3,8 @@ import styles from "./Input.module.scss";
 import Image from "next/image";
 import { useState, forwardRef, Ref, useEffect, useRef } from "react";
 import useSidebarStore from "@/store/useSidebarStore";
-import { UseFormRegisterReturn } from "react-hook-form";
 import Button from "./Buttons";
 import Checkbox from "./Checkbox";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
 interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   isSearchBar?: boolean;
@@ -15,12 +13,8 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   inputType: keyof typeof INPUT_TYPE;
   accept?: string;
-  reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
-  inputSize:
-    | keyof typeof INPUT_SIZE.regular
-    | keyof typeof INPUT_SIZE.feed
-    | keyof typeof INPUT_SIZE.dashboard;
+  inputSize: "xxLarge" | "xLarge" | "large" | "medium";
   inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
   iconPosition?: "left" | "right" | "leftRight";
   iconSrcLeft?: string;
@@ -35,11 +29,10 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   iconHeight?: number;
   autoComplete?: "on" | "off";
   readonly?: boolean;
-  required: boolean;
+  required?: boolean;
   inputDescription?: string;
   form?: string;
-  initialValue?: any;
-  setterValue?: any;
+  initialValue?: string;
   value?: string;
   dashboard?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -47,6 +40,8 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onSuggestionsChange?: (count: number) => void;
+  selectedItems?: string[];
+  onSelectedItemsChange?: (selectedItems: string[]) => void;
 }
 
 const INPUT_TYPE = {
@@ -74,30 +69,6 @@ const INPUT_TYPE = {
   week: `${styles.week}`,
 };
 
-const INPUT_SIZE = {
-  regular: {
-    xxLarge: `${styles.xxLarge}`,
-    xLarge: `${styles.xLarge}`,
-    large: `${styles.large}`,
-    medium: `${styles.medium}`,
-    "": "",
-  },
-  feed: {
-    xxLarge: `${styles.xxLargeFeed}`,
-    xLarge: `${styles.xLargeFeed}`,
-    large: `${styles.largeFeed}`,
-    medium: `${styles.mediumFeed}`,
-    "": "",
-  },
-  dashboard: {
-    xxLarge: `${styles.xxLargeDashboard}`,
-    xLarge: `${styles.xLargeDashboard}`,
-    large: `${styles.largeDashboard}`,
-    medium: `${styles.mediumDashboard}`,
-    "": "",
-  },
-};
-
 const INPUT_COLOUR_TYPE = {
   primary: `${styles.primary}`,
   normal: `${styles.normal}`,
@@ -120,7 +91,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       inputType,
       accept,
-      reactHookFormProps,
       error,
       inputSize,
       inputColourType = "normal",
@@ -137,31 +107,62 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       iconHeight,
       autoComplete = "off",
       readonly,
-      required,
+      required = false,
       inputDescription,
       form,
       initialValue = "",
+      value = "",
+      dashboard,
       onChange,
       onKeyUp,
       onFocus,
       onBlur,
-      children,
-      dashboard,
       onSuggestionsChange,
+      selectedItems = [],
+      onSelectedItemsChange,
       ...otherProps
     },
     ref
   ) => {
-    const [value, setValue] = useState(initialValue);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
-    const [filterValue, setFilterValue] = useState(""); // State to store the filter value
+    const [filterValue, setFilterValue] = useState("");
     const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
     const [revealedSuggestions, setRevealedSuggestions] = useState<string[]>(
       []
     );
     const inputRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [internalValue, setInternalValue] = useState(value);
+
+    let sizeClass = "";
+    switch (inputSize) {
+      case "medium":
+        sizeClass = !dashboard
+          ? styles.mediumInput
+          : styles.mediumDashboardInput;
+        break;
+      case "xLarge":
+        sizeClass = !dashboard
+          ? styles.xLargeInput
+          : styles.xLargeDashboardInput;
+        break;
+      default:
+        sizeClass = !dashboard
+          ? styles.largeInput
+          : styles.largeDashboardInput;
+    }
+
+    // Sync internalValue with value prop
+    useEffect(() => {
+      setInternalValue(value);
+    }, [value]);
+
+    // Sync filterValue with value for multi-select
+    useEffect(() => {
+      if (isMultiSelect && value) {
+        setFilterValue(value);
+      }
+    }, [value, isMultiSelect]);
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent | TouchEvent) => {
@@ -198,9 +199,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         document.removeEventListener("keydown", useEscKey);
       };
     }, []);
+
     useEffect(() => {
       if (isMultiSelect) {
-        // Initialize revealed suggestions with all suggestions
         setRevealedSuggestions(suggestions || []);
       } else {
         onSuggestionsChange?.(revealedSuggestions.length);
@@ -226,41 +227,28 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleInternalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const typedValue = e.target.value;
-      setValue(typedValue);
-      setFilterValue(typedValue); // Update the filter value
+      setInternalValue(typedValue);
       if (onChange) onChange(e);
 
-      // Ensure the dropdown is open while typing
       if (isMultiSelect && !isDropdownOpen) {
         setIsDropdownOpen(true);
       }
 
-      if (isSearchBar) {
-        if (typedValue.trim() === "") {
-          setRevealedSuggestions([]);
-        } else {
-          const filtered =
-            suggestions?.filter((suggestion) =>
-              suggestion.toLowerCase().startsWith(typedValue.toLowerCase())
-            ) || [];
-          setRevealedSuggestions(filtered);
-        }
-      } else if (isMultiSelect) {
+      if (isSearchBar || isMultiSelect) {
         applyFilter(typedValue);
       }
     };
 
     const handleSuggestionClick = (suggestion: string) => {
-      setValue(suggestion);
-      setFilterValue(""); // Clear filter on single selection
-      setRevealedSuggestions([]);
-      setIsDropdownOpen(false);
+      setInternalValue(suggestion);
       if (onChange) {
         const syntheticEvent = {
           target: { value: suggestion },
         } as unknown as React.ChangeEvent<HTMLInputElement>;
         onChange(syntheticEvent);
       }
+      setIsDropdownOpen(false);
+      setRevealedSuggestions([]);
     };
 
     const handleMultiSelectChange = (suggestion: string, checked: boolean) => {
@@ -270,10 +258,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       } else {
         updatedItems = selectedItems.filter((item) => item !== suggestion);
       }
-      setSelectedItems(updatedItems);
-      // Replace the typed text with the selected items by clearing the input value
-      setValue("");
-      // Preserve the filter to maintain the filtered suggestions
+      onSelectedItemsChange?.(updatedItems);
       applyFilter(filterValue);
     };
 
@@ -289,85 +274,82 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           (item) => !revealedSuggestions.includes(item)
         );
       }
-      setSelectedItems(updatedItems);
-      setValue("");
+      onSelectedItemsChange?.(updatedItems);
       applyFilter(filterValue);
     };
 
-    const handleSelectButtonClick = () => {
-      setIsDropdownOpen(false); // Close the dropdown when the Select button is clicked
-    };
-
     const clearInputAndSuggestions = () => {
-      setValue("");
-      setFilterValue(""); // Clear the filter value
-      setRevealedSuggestions(suggestions || []);
-      setSelectedItems([]);
+      setInternalValue("");
+      if (onChange) {
+        const syntheticEvent = {
+          target: { value: "" },
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+        onChange(syntheticEvent);
+      }
+      setRevealedSuggestions([]); // Close suggestions immediately
+      if (typeof onSelectedItemsChange === "function") {
+        onSelectedItemsChange([]);
+      }
       setIsDropdownOpen(false);
     };
 
-    let sizeClass = "";
-    if (isSidebarOpen) {
-      sizeClass = INPUT_SIZE.feed[inputSize];
-    } else {
-      if (dashboard) {
-        sizeClass = INPUT_SIZE.dashboard[inputSize];
-      } else {
-        sizeClass = INPUT_SIZE.regular[inputSize];
-      }
-    }
-
-    const inputClass = `${styles.input} ${
+    const inputClass = `${styles.input} ${sizeClass} ${
       INPUT_TYPE[inputType] || ""
-    } ${sizeClass} ${INPUT_COLOUR_TYPE[inputColourType] || ""} ${className}`;
+    } ${INPUT_COLOUR_TYPE[inputColourType] || ""} ${className || ""}`;
 
     return (
-      <div className={styles.container} ref={inputRef}>
-        {children}
-
+      <div className={`${styles.container} ${className || ""}`} ref={inputRef}>
         {label && (
           <label className={styles.label} htmlFor={id}>
             {label}
           </label>
         )}
         <div className={styles.inputContainer}>
-          {error && <p className={styles.errorMessage}>{error as string}</p>}
-          {iconPosition === "left" && iconSrcLeft && (
-            <Image
-              src={iconSrcLeft}
-              alt={`${ariaLabel} Icon Left`}
-              width={iconWidth}
-              height={iconHeight}
-            />
+          {error && (
+            <p id={`${id}-error`} className={styles.errorMessage}>
+              {error}
+            </p>
           )}
+          {iconPosition === "left" &&
+            iconSrcLeft &&
+            (value || selectedItems.length > 0) && (
+              <Image
+                src={iconSrcLeft}
+                alt={`${ariaLabel} Icon Left`}
+                width={iconWidth}
+                height={iconHeight}
+              />
+            )}
           <input
             className={inputClass}
-            {...(reactHookFormProps ?? {})}
+            aria-invalid={error ? "true" : "false"}
+            aria-errormessage={error ? `${id}-error` : undefined}
             {...otherProps}
             type={inputType}
-            placeholder={
-              selectedItems.length > 0 ? selectedItems.join(", ") : placeholder
-            }
+            placeholder={placeholder}
             id={id}
             name={name}
             accept={accept}
-            value={value}
+            value={internalValue}
             onChange={handleInternalChange}
             onKeyUp={onKeyUp}
             onFocus={(e) => {
               if (isMultiSelect) setIsDropdownOpen(true);
               if (onFocus) onFocus(e);
             }}
+            onBlur={onBlur}
             ref={ref}
             autoFocus={autoFocus}
             autoComplete={autoComplete}
             readOnly={readonly}
-            required={required}
+            required={required === true} // Only apply required if explicitly true
             form={form}
           />
           {iconPosition && (
             <>
-              {iconPosition === "right" || iconPosition === "leftRight" ? (
+              {iconPosition === "right" ||
+              (iconPosition === "leftRight" &&
+                (internalValue || selectedItems.length > 0)) ? (
                 <div
                   className={styles.rightIconContainer}
                   onClick={clearInputAndSuggestions}
@@ -376,19 +358,27 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     <Image
                       className={styles.rightIcon}
                       src={
-                        value || selectedItems.length > 0
+                        internalValue || selectedItems.length > 0
                           ? "/icons/X.png"
                           : iconSrcRight || "/icons/search.png"
                       }
-                      alt={`${ariaLabel} Icon}`}
+                      alt={`${ariaLabel} Icon`}
                       width={iconWidth}
                       height={iconHeight}
                     />
-                  ) : value || selectedItems.length > 0 ? (
+                  ) : internalValue || selectedItems.length > 0 ? (
                     <Image
                       className={styles.rightIcon}
                       src={"/icons/X.png"}
-                      alt={`${ariaLabel} Icon}`}
+                      alt={`${ariaLabel} Icon`}
+                      width={iconWidth}
+                      height={iconHeight}
+                    />
+                  ) : iconPosition === "right" && isSearchBar ? (
+                    <Image
+                      className={styles.rightIcon}
+                      src={"/icons/search.png"}
+                      alt={`${ariaLabel} Icon`}
                       width={iconWidth}
                       height={iconHeight}
                     />
@@ -407,23 +397,44 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </>
           )}
         </div>
-
+        {selectedItems.length > 0 && (
+          <div className={styles.selectedTags}>
+            {selectedItems.map((item) => (
+              <span key={item} className={styles.tag}>
+                {item}
+                <button
+                  onClick={() => handleMultiSelectChange(item, false)}
+                  aria-label={`Remove ${item}`}
+                >
+                  x
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
         {inputDescription && (
           <p id={`${id}-description`} className={styles.description}>
             {inputDescription}
           </p>
         )}
-
         {!isMultiSelect && isSearchBar && revealedSuggestions.length > 0 && (
-          <ul className={styles.searchSuggestions}>
+          <ul role="listbox" className={styles.searchSuggestions}>
             {revealedSuggestions.map((suggestion, index) => (
               <li
                 key={index}
+                role="option"
+                aria-selected={value === suggestion}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className={sizeClass}
-                style={{
-                  marginBottom: "0.5rem",
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSuggestionClick(suggestion);
                 }}
+                tabIndex={0}
+                className={
+                  !dashboard
+                    ? styles.suggestionContainer
+                    : styles.suggestionContainerDashboard
+                }
+                style={{ marginBottom: "0.5rem" }}
               >
                 <div className={styles.suggestion}>
                   <span>{suggestion}</span>
@@ -432,12 +443,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ))}
           </ul>
         )}
-
         {isMultiSelect && isDropdownOpen && (
           <div className={styles.multiSelectDropdown} ref={dropdownRef}>
             <ul className={styles.searchSuggestions}>
               <li
-                className={sizeClass}
+                className={
+                  !dashboard
+                    ? styles.suggestionContainer
+                    : styles.suggestionContainerDashboard
+                }
                 style={{ marginBottom: "0.5rem" }}
               >
                 <div
@@ -464,7 +478,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {revealedSuggestions.map((suggestion, index) => (
                 <li
                   key={index}
-                  className={sizeClass}
+                  className={
+                    !dashboard
+                      ? styles.suggestionContainer
+                      : styles.suggestionContainerDashboard
+                  }
                   style={{ marginBottom: "0.5rem", cursor: "pointer" }}
                 >
                   <div
@@ -480,7 +498,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                       id={`checkbox-${index}`}
                       type="checkbox"
                       checked={selectedItems.includes(suggestion)}
-                      onChange={(checked, _suggestion) =>
+                      onChange={(checked) =>
                         handleMultiSelectChange(suggestion, checked)
                       }
                     />
@@ -488,18 +506,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   </div>
                 </li>
               ))}
-              <Button
-                className={styles.selectButton}
-                buttonChildren="Select"
-                buttonType="primary"
-                buttonSize="large"
-                name="select-btn"
-                type="button"
-                ariaLabel="Select Button"
-                autoFocus={false}
-                disabled={false}
-                onClick={handleSelectButtonClick}
-              />
             </ul>
           </div>
         )}
@@ -511,29 +517,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 export default Input;
-
-{/* <Input
-      className={styles.accountName}
-      isSearchBar={false}
-      inputType="text"
-      inputSize="large"
-      iconSrcRight="/icons/search.png"
-      iconPosition="right"
-      iconWidth={32}
-      iconHeight={32}
-      label="Account Name"
-      id="searchTerm"
-      placeholder="Enter account holder's name"
-      ariaLabel="Account Name"
-      autoComplete="off"
-      required
-      {...register("searchTerm")}
-      onChange={(e) => {
-        setValue("searchTerm", e.target.value, {
-          shouldDirty: true,
-          shouldTouch: true,
-        });
-      }}
-/>; */}
-
-

@@ -1,3 +1,4 @@
+'use client'
 import styles from "./NotificationsModal.module.scss";
 import Modal from "@/components/Modal.tsx";
 import Menu from "@/components/Menu";

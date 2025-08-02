@@ -9,6 +9,7 @@ type DetailsProps = {
   isCardHovered: boolean;
   title?: string;
   description?: string | PortableTextBlock[] | null;
+  descriptionLength?: number;
   price?: number;
   postAge?: string;
 };
@@ -18,6 +19,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
   isCardHovered,
   title,
   description,
+  descriptionLength = 230,
   price,
   postAge,
 }) => {

@@ -12,6 +12,7 @@ export const searchFormSchema = z.object({
       .min(1, "Location field cannot be empty.")
       .min(3, "Location must be at least 3 characters long.")
       .refine((val) => val.trim().length > 0, "Location cannot be only spaces."),
+    categories: z.string().optional(), 
   });
 
 export const feedbackFormSchema = z.object({
@@ -36,40 +37,22 @@ export const passwordSchema = z.object({
   path: ["reenterPassword"], // Set the path of the error
 });
 
+
 export const profileSchema = z.object({
-  name: z.string()
-    .min(2, { message: "Name must be at least 2 characters long" })
-    .max(50, { message: "Name must be at most 50 characters long" })
-    .regex(/^[a-zA-Z\s'-]+$/, { message: "Name can only contain letters, spaces, apostrophes, and hyphens" }),
-  
-  lastName: z.string()
-    .min(2, { message: "Last Name must be at least 2 characters long" })
-    .max(50, { message: "Last Name must be at most 50 characters long" })
-    .regex(/^[a-zA-Z\s'-]+$/, { message: "Last Name can only contain letters, spaces, apostrophes, and hyphens" }),
-  
-  email: z.string()
-    .email({ message: "Must be a valid email address" }),
-  
-  phone: z.string()
+  avatarFile: z.instanceof(File).optional(),
+  name: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  phone: z
+    .string()
     .min(10, { message: "Phone number must be at least 10 digits long" })
     .max(15, { message: "Phone number must be at most 15 digits long" })
-    .regex(/^[0-9]+$/, { message: "Phone number can only contain digits" }),
-  
-  password: z.string()
-    .min(8, { message: "Password must be at least 8 characters long" })
-    .refine((password) => {
-      const hasUppercase = /[A-Z]/.test(password);
-      const hasLowercase = /[a-z]/.test(password);
-      const hasNumber = /[0-9]/.test(password);
-      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-      return hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
-    }, { message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character" }),
-  
-  socialMediaUrl: z.string()
-    .url({ message: "Must be a valid URL" })
+    .regex(/^[0-9]+$/, { message: "Phone number can only contain digits" })
     .optional()
+    .or(z.literal("")),
+  socialMediaName: z.string().optional().or(z.literal("")),
+  socialMediaUrl: z.string().url({ message: "Please enter a valid URL" }).optional().or(z.literal("")),
 });
-
 
 
 

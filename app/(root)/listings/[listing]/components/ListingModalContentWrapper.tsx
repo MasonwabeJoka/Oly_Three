@@ -8,10 +8,12 @@ const ListingModalContentWrapper = ({
 }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.sellerDetails}>
-        <SellerDetails />
+      <div className={styles.form}>
+        <div className={styles.sellerDetails}>
+          <SellerDetails />
+        </div>
+        <div className={styles.content}>{children}</div>
       </div>
-      <div className={styles.content}>{children}</div>
     </div>
   );
 };

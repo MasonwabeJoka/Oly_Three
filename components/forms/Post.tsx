@@ -14,6 +14,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { PostValidation } from "@/lib/validations/post";
 import PostImage from "@/components/PostImage";
 import { createPost } from "@/utils/serverActions/postActions";
+import Form from "next/form";
+
+// Mock server action for demonstration
+async function mockServerAction(formData: FormData): Promise<void> {
+  // Simulate server-side processing
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  // No return value needed
+}
 
 const Post = ({ userId }: { userId: string }) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -78,15 +86,10 @@ const Post = ({ userId }: { userId: string }) => {
   return (
     <>
       <h3>Post Form</h3>
-      <form
+      <Form
         className={styles.onboardingForm}
-        onSubmit={(values) =>
-          handleSubmit({
-            postImage: "/bear.jpg",
-            postText: "dfaf",
-            accountId: "df",
-          })
-        }
+        action={mockServerAction}
+        // onSubmit={form.handleSubmit(handleSubmit)} // If you have a submit handler, add it here
       >
         <div>
           <PostImage image={newImage} />
@@ -123,14 +126,14 @@ const Post = ({ userId }: { userId: string }) => {
           className={styles.makeAPostButton}
           buttonChildren="Make A Post"
           buttonType="normal"
-          buttonSize="largeDesktop"
+          buttonSize="extraLargeDesktop"
           name="make-a-btn"
           type="submit"
           ariaLabel="Make A Post Button"
           autoFocus={false}
           disabled={false}
         />
-      </form>
+      </Form>
     </>
   );
 };

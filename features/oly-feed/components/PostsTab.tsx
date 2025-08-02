@@ -23,33 +23,34 @@ const PostsTab = async ({ currentUserId, accountId, accountType }: Props) => {
 
   if (!postsResults) redirect("/");
   return (
-    <section>
+    <ul>
       {postsResults.posts.map((post: any) => {
         return (
-          <PostCard
-            key={post._id}
-            id={post._id}
-            currentUserId={currentUserId}
-            parentId={post.parentId}
-            image={post.image}
-            text={post.text}
-            author={
-              accountType === "User"
-                ? {
-                    name: postsResults.name,
-                    image: postsResults.image,
-                    id: postsResults.id,
-                  }
-                : { name: post.name, image: post.image, id: post.id }
-            }
-            groups={post.groups}
-            createdAt={post.createAt}
-            comments={post.children}
-            isComment={true}
-          />
+          <li className={styles.post} key={post._id}>
+            <PostCard
+              id={post._id}
+              currentUserId={currentUserId}
+              parentId={post.parentId}
+              image={post.image}
+              text={post.text}
+              author={
+                accountType === "User"
+                  ? {
+                      name: postsResults.name,
+                      image: postsResults.image,
+                      id: postsResults.id,
+                    }
+                  : { name: post.name, image: post.image, id: post.id }
+              }
+              groups={post.groups}
+              createdAt={post.createAt}
+              comments={post.children}
+              isComment={true}
+            />
+          </li>
         );
       })}
-    </section>
+    </ul>
   );
 };
 

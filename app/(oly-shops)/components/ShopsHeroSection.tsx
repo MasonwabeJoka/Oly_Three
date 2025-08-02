@@ -21,7 +21,6 @@ const ShopsHeroSection = ({ mainTitle }: HeroSectionProps) => {
        {mainTitle}
       </h1>
       <div className={styles.heroSectionSearchContainer}>
-        <ShopsHeroSectionSearch />
       </div>
     </div>
   );

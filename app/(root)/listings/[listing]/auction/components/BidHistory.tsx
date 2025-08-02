@@ -1,4 +1,4 @@
-import Avatar from "@/components/Avatars";
+import Avatar from "@/components/Avatar";
 import styles from "./BidHistory.module.scss";
 import { format } from "date-fns";
 
@@ -88,11 +88,11 @@ const BidHistory = () => {
   ];
 
   return (
-    <div className={styles.container}>
+    <ul className={styles.container}>
       {bids.map((bid, index) => (
-        <div
+        <li
           key={bid.id}
-          className={`${styles.bid} ${index === 0 ? styles.firstBid : ''}`}
+          className={`${styles.bid} ${index === 0 ? styles.firstBid : ""}`}
         >
           <div className={styles.bidder}>
             <div className={styles.avatarContainer}>
@@ -110,9 +110,9 @@ const BidHistory = () => {
           </div>
           <div className={styles.bidAmount}>{bid.amount}</div>
           <p className={styles.time}>{bid.time}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

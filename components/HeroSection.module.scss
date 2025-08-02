@@ -1,43 +1,108 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+.star {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+
+  @include only(smallDesktop) {
+    display: block;
+  }
+  @include only(largeDesktop) {
+    display: block;
+  }
+  @include only(tablet) {
+    display: block;
+  }
+}
+
 .mainSection {
+  position: relative;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
   width: 96vw;
   height: 95vh;
-  border-radius: rem(100) rem(150) rem(150) rem(100);
-  gap: rem(100);
+  border-radius: rem(150);
+  gap: rem(24);
+  background-color: #c9e5e8;
+  @include only(largeDesktop) {
+    justify-content: space-between;
+    gap: rem(96);
+    background-color: $white-four;
+  }
 
+  @include only(smallDesktop) {
+    justify-content: space-between;
+    // margin-right: rem(12) !important;
+  }
 
-  .star {
+  @include only(tablet) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: rem(16) !important;
+    height: 114vh;
+  }
+
+  @include only(extraLargeDesktop) {
+  }
+
+  .logo {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 500;
-    height: 500;
+    top: 0;
+    right: 50%;
   }
 
   .mainTitle {
     width: rem(640) !important;
-    margin-top: rem(64);
-    margin-bottom: rem(96);
     font-size: $h1 !important;
     font-weight: 600;
     line-height: 1;
     text-align: center;
     color: $black-four;
+    z-index: 1;
 
-    @include larger-than(mobile) {
+    @include only(largeDesktop) {
       width: rem(740);
       margin-top: rem(96);
-      font-size: 64px;
+      margin-left: rem(112);
+      font-size: rem(64);
       line-height: 1.2;
+    }
+
+    @include only(smallDesktop) {
+      margin-top: rem(100);
+      width: rem(500) !important;
+      margin-left: rem(80);
+      font-size: rem(44) !important;
+    }
+    @include only(tablet) {
+      position: absolute;
+      top: rem(190);
+      width: rem(500) !important;
+      font-size: rem(44) !important;
     }
   }
 
   .heroSectionSearchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: rem(8);
+
+    @include only(smallDesktop) {
+      position: absolute;
+      right: 0;
+      justify-self: right !important;
+    }
+
+    @include only(tablet) {
+      position: absolute;
+      right: 0;
+      justify-self: right !important;
+    }
   }
 }
