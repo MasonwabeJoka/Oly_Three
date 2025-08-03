@@ -1,25 +1,26 @@
 @use "sass:map";
+@use "@/utils/variables" as *;
 
 $breakpoints: (
   "mobile": (
-    min: 20em,    // 320px
-    max: 47.9375em, // 767px
+    min: $min-mobile,    
+    max: $max-mobile, 
   ),
   "tablet": (
-    min: 48em,    // 768px
-    max: 74.9375em, // 1199px
+    min: $min-tablet,    
+    max: $max-tablet, 
   ),
   "smallDesktop": (
-    min: 75em,    // 1200px
-    max: 89.9375em, // 1439px
+    min: $min-small-desktop,    
+    max: $max-small-desktop, 
   ),
   "largeDesktop": (
-    min: 90em,  // 1440px
-    max: 121.9375em, // 1951px
+    min: $min-large-desktop,  
+    max: $max-large-desktop, 
   ),
   "extraLargeDesktop": (
-    min: 122em,   // 1952px
-    max: null     // No max for extraLargeDesktop
+    min: $min-extra-large-desktop,   
+    max: $max-extra-large-desktop,    
   ),
 ) !default;
 

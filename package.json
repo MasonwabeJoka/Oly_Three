@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev --turbo",
     "lint": "next lint",
-    "serve": "node server.js"
+    "serve": "node server.js",
+    "extract-variables": "node ./extract-variables.js",
+    "build": "npm run extract-variables && next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.25.5",
@@ -150,7 +152,8 @@
     "postcss": "^8.4.33",
     "postcss-loader": "^7.3.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "sass": "^1.69.0",
+    "sass": "^1.89.2",
+    "sass-extract": "^3.0.0",
     "sass-loader": "^13.3.0",
     "scss": "^0.2.4",
     "style-loader": "^4.0.0",
@@ -164,5 +167,9 @@
   "overrides": {
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+  },
+  "resolutions": {
+    "sass": "^1.69.5"
   }
 }
+

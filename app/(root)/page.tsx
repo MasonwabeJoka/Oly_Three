@@ -11,6 +11,7 @@ import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
 import { getCategories } from "@/sanityTemp/actions/categoriesActions";
 import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
+import { variables } from "./../../utils/typescript-variables/variables";
 const Home = async () => {
   const fetchedCategories = await getCategories();
   const olyHomepage = await getOlyHomepage();
@@ -27,7 +28,10 @@ const Home = async () => {
   } = olyHomepage;
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{ backgroundColor: variables.whiteFour}}
+    >
       <div className={styles.main}>
         <div className={styles.modal}>
           <ShowMenu />
@@ -88,18 +92,18 @@ const Home = async () => {
         )} */}
 
         {/* {bottomAdSection.isEnabled === true && ( */}
-          <section className={styles.belowFoldAd}>
-            <ExternalAd
-              adType="video"
-              path="//https://developers.google.com/youtube/player_parameters"
-            />
-          </section>
+        <section className={styles.belowFoldAd}>
+          <ExternalAd
+            adType="video"
+            path="//https://developers.google.com/youtube/player_parameters"
+          />
+        </section>
         {/* )} */}
         {/* {sponsoredArticlesSection.isEnabled === true && ( */}
-          <section className={styles.sponsoredArticles}>
-            <h2 className={styles.title}>Sponsored Articles</h2>
-            <SponsoredArticles />
-          </section>
+        <section className={styles.sponsoredArticles}>
+          <h2 className={styles.title}>Sponsored Articles</h2>
+          <SponsoredArticles />
+        </section>
         {/* )} */}
       </div>
     </div>

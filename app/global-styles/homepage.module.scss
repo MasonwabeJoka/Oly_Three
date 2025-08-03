@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  // background-color: green;
+  // background-color: $white-four;
 
   @include only(largeDesktop) {
     // background-color: pink;

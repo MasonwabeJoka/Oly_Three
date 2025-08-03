@@ -83,90 +83,90 @@
       appearance: none;
     }
 
-    .largeInput {
-      width: rem(311);
-      height: rem(56);
-
-      @include only(largeDesktop) {
-        width: rem(514);
-        height: rem(56);
-      }
-
-      @include only(smallDesktop) {
-        width: rem(462);
-        height: rem(56);
-      }
-
-      @include only(tablet) {
-        width: rem(462);
-        height: rem(56);
-      }
-
-      @include only(extraLargeDesktop) {
-        width: rem(514);
-        height: rem(56);
-      }
-    }
-    .mediumInput {
-      width: rem(202);
-      height: rem(56);
-
-      @include only(largeDesktop) {
-        width: rem(424);
-        height: rem(56);
-      }
-      @include only(smallDesktop) {
-        width: rem(381);
-        height: rem(56);
-      }
-      @include only(tablet) {
-        width: rem(381);
-        height: rem(56);
-      }
-      @include only(extraLargeDesktop) {
-        width: rem(424);
-        height: rem(56);
-      }
-    }
-
-    .largeDashboardInput {
-      width: rem(267);
-      height: rem(56);
-
-      @include only(largeDesktop) {
-        width: rem(471);
-      }
-      @include only(smallDesktop) {
-        width: rem(424);
-      }
-      @include only(tablet) {
-        width: rem(424);
-      }
-    }
-
-    .mediumDashboardInput {
-        width: rem(240);
-  height: rem(48);
-  @include only(largeDesktop) {
-    width: rem(326);
-    height: rem(56);
-  }
-  @include only(smallDesktop) {
-    width: rem(293);
-    height: rem(56);
-  }
-  @include only(tablet) {
-    width: rem(293);
-    height: rem(56);
-  }
-    }
-
     .input:focus {
       background-color: $white-one;
     }
 
     .error {
       color: $danger;
+    }
+
+  }
+  .largeInput {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+  .mediumInput {
+    width: rem(202);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(424) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(424);
+      height: rem(56);
+    }
+  }
+
+  .largeDashboardInput {
+    width: rem(267);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(471);
+    }
+    @include only(smallDesktop) {
+      width: rem(424);
+    }
+    @include only(tablet) {
+      width: rem(424);
+    }
+  }
+
+  .mediumDashboardInput {
+    width: rem(240);
+    height: rem(48);
+    @include only(largeDesktop) {
+      width: rem(326);
+      height: rem(56);
+    }
+    @include only(smallDesktop) {
+      width: rem(293);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(293);
+      height: rem(56);
     }
   }
 
@@ -184,28 +184,7 @@
   }
 
   .suggestionContainer {
-    width: rem(311);
-    height: rem(56);
 
-    @include only(largeDesktop) {
-      width: rem(514);
-      height: rem(56);
-    }
-
-    @include only(smallDesktop) {
-      width: rem(462);
-      height: rem(56);
-    }
-
-    @include only(tablet) {
-      width: rem(514);
-      height: rem(56);
-    }
-
-    @include only(extraLargeDesktop) {
-      width: rem(514);
-      height: rem(56);
-    }
     .suggestion {
       display: flex;
       justify-content: center;
@@ -217,17 +196,7 @@
     }
   }
 
-  .suggestionContainerDashboard {
-    @include only(largeDesktop) {
-      width: rem(471);
-    }
-    @include only(smallDesktop) {
-      width: rem(424);
-    }
-    @include only(tablet) {
-      width: rem(424);
-    }
-  }
+ 
 
   .selectAll {
     background-color: $grey-one;
@@ -254,16 +223,10 @@
   width: calc(#{$width} * 0.96);
 }
 
+
+
 .primary:focus {
   outline: $primary-hover;
-}
-
-.normal {
-}
-
-.normal:hover {
-}
-.normal:active {
 }
 
 .normal:focus {
@@ -273,87 +236,9 @@
   outline-width: rem(2);
 }
 
-.outline {
-}
-
-.outline:hover {
-}
-.outline:active {
-}
-
-
-.outline:focus {
-}
-
-.success {
-}
-
-.success:hover {
-}
-.success:active {
-}
-.success:disabled {
-}
-
-.success:focus {
-}
-
-.warning {
-}
-
-.warning:hover {
-}
-.warning:active {
-}
-.warning:disabled {
-}
-
-.warning:focus {
-}
-
-.danger {
-  // outline-offset: rem(1);
-  outline-style: solid;
-  outline-color: $danger;
-  outline-width: rem(2);
-}
-
-.danger:hover {
-}
-.danger:active {
-}
-.danger:disabled {
-}
-
-.danger:focus {
-}
-
-.info {
-}
-
-.info:hover {
-}
-.info:active {
-}
-.info:disabled {
-}
-
-.info:focus {
-}
-
 .linkBtn {
   background-color: transparent;
   box-shadow: none;
-}
-
-.linkBtn:hover {
-}
-.linkBtn:active {
-}
-.linkBtn:disabled {
-}
-
-.linkBtn:focus {
 }
 
 .icon {

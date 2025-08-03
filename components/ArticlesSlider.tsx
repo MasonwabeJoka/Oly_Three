@@ -44,15 +44,15 @@ const ArticleSlider: React.FC<Props> = ({
         spaceBetween={20}breakpoints={{
           640: {
             slidesPerView: 2,
-            spaceBetween: 24,
+            spaceBetween: 32,
           },
           1199: {
             slidesPerView: 4,
-            spaceBetween: 24,
+            spaceBetween: 32,
           },
           1439: {
             slidesPerView: 6,
-            spaceBetween: 24,
+            spaceBetween: 32,
           },
         }}>
         {data.map((article: any, index: number) => {

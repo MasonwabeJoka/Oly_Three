@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 .container {
   position: relative;
-
+ width: rem(310);
   .buttonsAndLike {
     position: absolute;
     z-index: 10;

@@ -40,6 +40,35 @@
       appearance: none;
       margin: 0 !important;
 
+      // width: rem(311);
+      // height: rem(56);
+
+      // @include only(largeDesktop) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      // @include only(smallDesktop) {
+      //   width: rem(462);
+      //   height: rem(56);
+      // }
+
+      // @include only(tablet) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      // @include only(extraLargeDesktop) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      &:hover {
+        background-color: $white-one !important;
+      }
+    }
+
+    .largeSelect {
       width: rem(311);
       height: rem(56);
 
@@ -54,7 +83,7 @@
       }
 
       @include only(tablet) {
-        width: rem(514);
+        width: rem(462);
         height: rem(56);
       }
 
@@ -62,9 +91,58 @@
         width: rem(514);
         height: rem(56);
       }
+    }
+    .mediumSelect {
+      width: rem(202);
+      height: rem(56);
 
-      &:hover {
-        background-color: $white-one !important;
+      @include only(largeDesktop) {
+        width: rem(424) !important;
+        height: rem(56) !important;
+      }
+      @include only(smallDesktop) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(tablet) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(extraLargeDesktop) {
+        width: rem(424);
+        height: rem(56);
+      }
+    }
+
+    .largeDashboardSelect {
+      width: rem(267);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(471);
+      }
+      @include only(smallDesktop) {
+        width: rem(424);
+      }
+      @include only(tablet) {
+        width: rem(424);
+      }
+    }
+
+    .mediumDashboardInput {
+      width: rem(240);
+      height: rem(48);
+      @include only(largeDesktop) {
+        width: rem(326);
+        height: rem(56);
+      }
+      @include only(smallDesktop) {
+        width: rem(293);
+        height: rem(56);
+      }
+      @include only(tablet) {
+        width: rem(293);
+        height: rem(56);
       }
     }
     .dashboardSelect {
@@ -239,47 +317,80 @@
   }
 }
 
-
-
 @mixin option-width($width) {
   width: calc(#{$width} * 0.96);
 }
 
-.select .option {
-  @include option-width(rem(311));
+// .largeSelect .option {
+//   @include option-width(rem(311));
 
-  @include only(largeDesktop) {
-    @include option-width(rem(514));
-  }
+//   @include only(largeDesktop) {
+//     @include option-width(rem(514));
+//   }
 
-  @include only(smallDesktop) {
-    @include option-width(rem(462));
-  }
+//   @include only(smallDesktop) {
+//     @include option-width(rem(462));
+//   }
 
-  @include only(tablet) {
-    @include option-width(rem(514));
-  }
+//   @include only(tablet) {
+//     @include option-width(rem(514));
+//   }
 
-  @include only(extraLargeDesktop) {
-    @include option-width(rem(514));
-  }
-}
+//   @include only(extraLargeDesktop) {
+//     @include option-width(rem(514));
+//   }
+// }
 
-.dashboardSelect .option {
-  @include option-width(rem(267));
+// .largeDashboardSelect .option {
+//   @include option-width(rem(267));
 
-  @include only(largeDesktop) {
-    @include option-width(rem(471));
-  }
+//   @include only(largeDesktop) {
+//     @include option-width(rem(471));
+//   }
 
-  @include only(smallDesktop) {
-    @include option-width(rem(424));
-  }
+//   @include only(smallDesktop) {
+//     @include option-width(rem(424));
+//   }
 
-  @include only(tablet) {
-    @include option-width(rem(424));
-  }
-}
+//   @include only(tablet) {
+//     @include option-width(rem(424));
+//   }
+// }
+// .mediumSelect .option {
+//   @include option-width(rem(311));
+
+//   @include only(largeDesktop) {
+//     @include option-width(rem(381));
+//   }
+
+//   @include only(smallDesktop) {
+//     @include option-width(rem(381));
+//   }
+
+//   @include only(tablet) {
+//     @include option-width(rem(381));
+//   }
+
+//   @include only(extraLargeDesktop) {
+//     @include option-width(rem(424));
+//   }
+// }
+
+// .mediumDashboardSelect .option {
+//   @include option-width(rem(240));
+
+//   @include only(largeDesktop) {
+//     @include option-width(rem(326));
+//   }
+
+//   @include only(smallDesktop) {
+//     @include option-width(rem(293));
+//   }
+
+//   @include only(tablet) {
+//     @include option-width(rem(293));
+//   }
+// }
 
 .primary {
   background-color: $primary;

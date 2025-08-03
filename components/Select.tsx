@@ -36,7 +36,6 @@ interface SelectProps {
   onOptionsCountChange?: (count: number) => void;
 }
 
-
 const SELECT_COLOUR_TYPE = {
   primary: `${styles.primary}`,
   normal: `${styles.normal}`,
@@ -102,6 +101,22 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const [searchValue, setSearchValue] = useState("");
     const selectRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+    let sizeClass = "";
+    switch (selectSize) {
+      case "medium":
+        sizeClass = !dashboard
+          ? styles.mediumSelect
+          : styles.mediumDashboardSelect;
+        break;
+      case "xLarge":
+        sizeClass = !dashboard
+          ? styles.xLargeSelect
+          : styles.xLargeDashboardSelect;
+        break;
+      default:
+        sizeClass = !dashboard ? styles.largeSelect : styles.largeDashboardSelect;
+    }
 
     // Notify parent whenever showOptions changes
     useEffect(() => {
@@ -206,11 +221,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       triggerChangeEvent(newSelected);
     };
 
- 
-
     const selectClass = `${
       !dashboard ? styles.select : styles.dashboardSelect
-    } ${
+    } ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
     } ${className || ""}`;
 
@@ -320,7 +333,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             <ul className={styles.optionsList}>
               {isMultiSelect && (
                 <li
-                  className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                  className={sizeClass}
                 >
                   <div
                     className={`${styles.option} ${styles.selectAll}`}

@@ -1,5 +1,5 @@
 "use client";
-import styles from "./FeaturedCategories.module.scss";
+import styles from "./FeaturedCategoriesClient.module.scss";
 import Button from "@/components/Buttons";
 import { useModalStore } from "@/store/modalStore";
 import LinkCard from "@/components/cards/LinkCard";

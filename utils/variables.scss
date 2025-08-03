@@ -1,5 +1,7 @@
 @use "./functions" as *;
 
+// Run  npm run extract-variables
+
 // Colours
 $white-one: #ffffff;
 $white-two: #f9fcfd;
@@ -55,6 +57,23 @@ $h1: rem(48);
 $h2: rem(32);
 $h3: rem(24);
 $h4: rem(18);
+
+// Breakpoints
+$min-mobile: 20em; // 320px
+$max-mobile: 47.9375em; // 767px
+
+$min-tablet: 48em; // 768px
+$max-tablet: 74.9375em; // 1199px
+
+$min-small-desktop: 75em; // 1200px
+$max-small-desktop: 89.9375em; // 1439px
+
+$min-large-desktop: 90em; // 1440px
+$max-large-desktop: 121.9375em; // 1951px
+
+$min-extra-large-desktop: 122em; // 1952px
+$max-extra-large-desktop: null; // No max for extra-large-desktop
+
 
 // Shadows
 

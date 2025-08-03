@@ -7,7 +7,6 @@ import Link from "next/link";
 import { richTextLength } from "@/lib/richTextLength";
 import { useFetchAdStore } from "@/store/useFetchStore";
 import { getImageFilesById } from "@/sanityTemp/actions/getImageFilesById";
-import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import styles from "./ListingsCollageClient.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
@@ -129,7 +128,6 @@ const ListingsCollageClient = ({
 
     return (
       <Link
-        // href="/"
         href={`listings/${ad.slug}`}
         key={ad._id}
         className={styles.cardContainer}

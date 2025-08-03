@@ -8,10 +8,9 @@ type State = {
 };
 
 const initialState = () => ({
-  // before accessing the window object check if it is defined.
-  // If the data type is not undefined then use window.innerWidth
+
   currentScreenSize: typeof window !== "undefined" ? window.innerWidth : 0,
-  isMobile: typeof window !== "undefined" ? window.innerWidth < 640 : false,
+  isMobile: typeof window !== "undefined" ? window.innerWidth < 768 : false,
 });
 
 const useIsMobileStore = create<State>((set) => ({

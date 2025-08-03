@@ -430,9 +430,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 }}
                 tabIndex={0}
                 className={
-                  !dashboard
-                    ? styles.suggestionContainer
-                    : styles.suggestionContainerDashboard
+                  `${styles.suggestionContainer} ${sizeClass}`
                 }
                 style={{ marginBottom: "0.5rem" }}
               >

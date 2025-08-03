@@ -12,15 +12,16 @@
   background-color: $grey-one;
 
   @include only(largeDesktop) {
-   width: rem(306);
-  height: rem(338);
+    width: rem(306);
+    height: rem(338);
   }
   @include only(smallDesktop) {
     width: rem(306);
-  height: rem(338);
+    height: rem(338);
   }
   @include only(tablet) {
-
+    width: rem(306);
+    height: rem(338);
   }
 
   .imageContainer {
@@ -43,9 +44,8 @@
     margin-top: auto;
     background-color: $grey-one;
 
-     height: rem(88);
- 
- 
+    height: rem(88);
+
     .label {
       color: $black-four;
       letter-spacing: 1.15px !important;
@@ -61,4 +61,3 @@
 .cardContainer:hover {
   transform: scale(1.04);
 }
-
