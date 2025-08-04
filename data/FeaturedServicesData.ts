@@ -67,5 +67,31 @@ export const FeaturedServicesData = [
 
         ],
 
-    }
+    },
+    {
+        id: 4,
+        layout: "textRight",
+        path: "/properties/pre-qualification",
+        image: "/houses/house12.jpg",
+        title: "Oly Home Loan",
+        description: "We handle your home loan application by submitting it to all major banks on your behalf. Get pre-qualified and understand your buying power with our streamlined, hassle-free process — designed to boost your chances of approval.",
+        cta: "Get Pre-Qualified",
+        features: 
+        [
+            {
+                id: 1,
+                feature: "Free pre-qualification assessment"
+            }, 
+            {
+                id: 2,
+                feature: "Submit to multiple banks simultaneously",
+            }, 
+            {
+                id: 3,
+                feature: "Compare offers and rates side by side"
+            }
+
+        ],
+
+    },
 ]

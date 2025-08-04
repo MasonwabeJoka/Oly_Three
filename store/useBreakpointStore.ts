@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { variables } from "./utils/typescript-variables/variables";
+import { variables } from "./../utils/typescript-variables/variables";
 
 type State = {
   currentScreenSize: number;

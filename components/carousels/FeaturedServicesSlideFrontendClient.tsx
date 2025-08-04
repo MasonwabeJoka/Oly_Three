@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 import styles from "./FeaturedServicesSlideFrontendClient.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Autoplay } from "swiper/modules";
+import { Keyboard, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
+import 'swiper/css/effect-fade';
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import FeaturedServices from "../FeaturedServices";
@@ -35,16 +36,20 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
       centeredSlides={true}
       slidesPerView={1}
       spaceBetween={30}
+      effect={"fade"}
+      fadeEffect={{
+        crossFade: true,
+      }}
       loop={true}
       keyboard={{
         enabled: true,
       }}
       autoplay={{
         delay: 8000,
-        disableOnInteraction: false,
+        disableOnInteraction: true,
       }}
       onSlideChange={handleSlideChange}
-      modules={[Keyboard, Autoplay]}
+      modules={[Keyboard, Autoplay, EffectFade]}
       className={styles.swiper}
     >
       {productData.map((product, index) => (
