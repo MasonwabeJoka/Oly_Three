@@ -11,7 +11,7 @@ export const seoMetadata = defineType({
       name: 'pageId',
       title: 'Page or Listing Reference',
       type: 'reference',
-      to: [{ type: 'page' }, { type: 'ad' }],
+      to: [{ type: 'page' }, { type: 'listing' }],
       description: 'Reference to the page or listing this metadata applies to.',
       validation: (Rule) => Rule.required(),
     }),

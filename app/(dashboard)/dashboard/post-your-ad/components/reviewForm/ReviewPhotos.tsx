@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
 import Image from "next/image";
-import { galleryData } from "@/data/GalleryData";
+import { imagesData} from "@/data/galleryImages";
 import { SectionWrapper } from "./SectionWrapper";
 import Button from "@/components/Buttons";
 import useEditStore from "../../store/useEditStore";
@@ -33,16 +33,20 @@ const ReviewPhotos = () => {
           spaceBetween={-45}
           slidesPerView={"auto"}
         >
-          {galleryData.map((photo: any, index: number) => {
+          {imagesData.map((photo: any, index: number) => {
             return (
               <SwiperSlide className={styles.photoContainer} key={index}>
-                <Image
-                  src={photo.image}
-                  alt="image"
-                  width={248}
-                  height={186.4}
-                  style={{ borderRadius: "2.5rem" }}
-                />
+              {
+                photo.url && (
+                  <Image
+                    src={photo.url}
+                    alt="image"
+                    width={248}
+                    height={186.4}
+                    style={{ borderRadius: "2.5rem" }}
+                  />
+                )
+              }
               </SwiperSlide>
             );
           })}

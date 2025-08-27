@@ -41,7 +41,7 @@ export const moderationLog = defineType({
       title: 'Content Type',
       type: 'string',
       options: {
-        list: ['ad', 'review', 'message', 'comment', 'userProfile'],
+        list: ['listing', 'review', 'message', 'comment', 'userProfile'],
         layout: 'dropdown',
       },
       description: 'The type of content moderated. Helps categorize the action.',
@@ -51,7 +51,7 @@ export const moderationLog = defineType({
       title: 'Content Reference',
       type: 'reference',
       to: [
-        { type: 'ad' },
+        { type: 'listing' },
         { type: 'review' },
         { type: 'message' },
         { type: 'moderationComment' },

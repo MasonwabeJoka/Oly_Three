@@ -7,97 +7,94 @@
   flex-direction: column;
   justify-content: center;
   width: rem(360);
+  height: 100vh;
   @include only(largeDesktop) {
     width: rem(1098);
   }
-
-  .titleContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: rem(240);
-    margin-bottom: rem(48);
-    width: 100%;
-
-    .title {
-      color: $danger;
-      font-size: $h4;
-      font-weight: 500;
-    }
+  @include only(smallDesktop) {
+    width: rem(960);
   }
-
-  .subcategoriesTitleContainer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: rem(48);
-    width: 100%;
-    .title {
-      color: $danger;
-      font-size: $h4;
-      font-weight: 500;
-    }
+  @include only(tablet) {
+    width: rem(960);
   }
-
   .wrapper {
-    width: 100%;
-    margin-right: rem(96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    .swipper {
-      width: rem(1440);
-      margin-left: rem(48);
-      display: none;
+    .titleContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(48);
+      width: 100%;
 
-      @include only(largeDesktop) {
-        display: block;
+      .title {
+        color: $danger;
+        font-size: $h4;
+        font-weight: 500;
       }
     }
 
-    .subcategories {
-      height: auto;
-      padding-bottom: rem(16);
-      display: none;
-
-      @include only(largeDesktop) {
-        display: block;
-      }
-
-      .subcategoriesWrapper {
-        margin-left: rem(48);
-        width: 150%;
+    .subcategoriesTitleContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(48);
+      width: 100%;
+      .title {
+        color: $danger;
+        font-size: $h4;
+        font-weight: 500;
       }
     }
 
-    .mobileSubcategoriesContainer {
-      display: block;
-      margin-bottom: rem(20);
+    .categoriesContainer {
+      width: 100%;
+      margin-left: rem(24);
+      
 
-      .mobileSubcategories {
-        background-color: $grey-one;
-      }
-
-      @include only(largeDesktop) {
+      .subcategories {
+        height: auto;
+        padding-bottom: rem(16);
         display: none;
+
+        @include only(largeDesktop) {
+          display: block;
+        }
+        @include only(smallDesktop) {
+          display: block;
+        }
+        @include only(tablet) {
+          display: block;
+        }
+
+        .subcategoriesWrapper {
+          margin-left: rem(48);
+          width: 150%;
+        }
       }
-    }
 
-    .navButtons {
-      display: none;
-      justify-content: flex-end;
-      align-items: center;
-      width: rem(1098);
-      padding-right: rem(72);
-      margin-bottom: rem(16);
+      .mobileSubcategoriesContainer {
+        display: block;
+        margin-bottom: rem(20);
 
-      @include only(largeDesktop) {
-        display: flex;
+        .mobileSubcategories {
+          background-color: $grey-one;
+        }
+
+        @include only(largeDesktop) {
+          display: none;
+        }
+        @include only(smallDesktop) {
+          display: none;
+        }
+        @include only(tablet) {
+          display: none;
+        }
       }
-    }
 
-    .goBackButtonContainer {
-      display: block;
+    
 
-      @include only(largeDesktop) {
-        display: none;
-      }
+      
     }
   }
 }

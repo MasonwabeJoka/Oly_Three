@@ -5,7 +5,7 @@ import LikedAds from "./components/LikedAds";
 const Page = () => {
   return (
     <div className={styles.container}>
-      <h4 className={styles.title}>Liked Ads</h4>
+      <h1 className={styles.title}>Liked Ads</h1>
       <div className={styles.listingsContainer}>
         <LikedAds />
       </div>

@@ -16,7 +16,16 @@
     @include only(largeDesktop) {
       font-size: $h4;
       top: rem(72);
-
+      margin-bottom: rem(48);
+    }
+    @include only(smallDesktop) {
+      font-size: $h4;
+      top: rem(72);
+      margin-bottom: rem(48);
+    }
+    @include only(tablet) {
+      font-size: $h4;
+      top: rem(72);
       margin-bottom: rem(48);
     }
   }

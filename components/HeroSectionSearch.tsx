@@ -4,8 +4,7 @@ import Link from "next/link";
 import HeroSectionSearchClient from "./HeroSectionSearchClient";
 import Button from "./Buttons";
 import Form from "next/form";
-import { searchAction } from "@/utils/FormServerActions/heroSectionSearchAction";
-import { SearchParam } from "sanity/router";
+
 
 const HeroSectionSearch = async ({
   searchParams,
@@ -17,10 +16,7 @@ const HeroSectionSearch = async ({
 
   return (
     <div className={styles.container}>
-      <p className={`${styles.text} ${styles.mobile}`}>Mobile</p>
-      <p className={`${styles.text} ${styles.tablet}`}>Tablet</p>
-      <p className={`${styles.text} ${styles.smallDesktop}`}>Small Desktop</p>
-      {/* <p className={`${styles.text} ${styles.largeDesktop}`}>Large Desktop</p> */}
+
       <div className={styles.formContainer}>
         <div className={styles.formWrapper}>
           <Form

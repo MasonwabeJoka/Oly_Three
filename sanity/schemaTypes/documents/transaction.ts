@@ -17,12 +17,12 @@ export const transaction = {
             description: 'The user involved in the transaction.'
         },
         {
-            name: 'ads',
-            title: 'Ads',
+            name: 'listings',
+            title: 'Listings',
             type: 'array',
-            of: [{ type:'reference', to: [{ type: 'ad' }] }],
-            description: 'The ads related to the transaction, if applicable.',
-            validation: (Rule: any) => Rule.required()
+            of: [{ type:'reference', to: [{ type: 'listing' }] }],
+            description: 'The listings related to the transaction, if applicable.',
+            validation: (Rule) => Rule.required()
         },
         {
             name: 'transactionType',
@@ -93,11 +93,11 @@ export const transaction = {
             description: 'The current status of the transaction.'
         },
         {
-            name: 'relatedAd',
-            title: 'Related Ad',
+            name: 'relatedListing',
+            title: 'Related Listing',
             type: 'reference',
-            to: [{ type: 'ad' }],
-            description: 'The ad related to the transaction, if applicable.'
+            to: [{ type: 'listing' }],
+            description: 'The listing related to the transaction, if applicable.'
         },
         {
             name: 'notes',

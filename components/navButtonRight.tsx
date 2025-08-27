@@ -4,7 +4,7 @@ import styles from "./NavButtonRight.module.scss";
 import { useSwiper } from "swiper/react";
 
 type Props = {
-  size: "large" | "standard" | "small";
+  size: "large" | "medium" | "small";
   onClick?: () => void;
   disabled?: boolean;
   autoFocus?: boolean;
@@ -25,10 +25,10 @@ const NavButtonRight = ({
         className={`${className} ${styles.rightArrow}`}
         buttonChildren={
           <Image
-            src="/icons/chevronRight.png"
+            src="/icons/right-arrow.png"
             alt="right"
-            width={16}
-            height={16}
+            width={20}
+            height={20}
             className={styles.right}
           />
         }

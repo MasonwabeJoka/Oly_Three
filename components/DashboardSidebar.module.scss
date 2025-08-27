@@ -16,6 +16,12 @@
     background-color: $grey-one;
     box-shadow: $shadow-one;
   }
+  @include only(smallDesktop) {
+    width: rem(342);
+    height: 90vh;
+    background-color: $grey-one;
+    box-shadow: $shadow-one;
+  }
 
   .profile {
     display: flex;
@@ -52,6 +58,11 @@
       justify-content: flex-start;
       align-items: center;
     }
+    @include only(smallDesktop) {
+      gap: rem(16);
+      justify-content: flex-start;
+      align-items: center;
+    }
 
     .icon {
     }
@@ -72,6 +83,11 @@
     justify-content: center;
     cursor: pointer;
     @include only(largeDesktop) {
+      font-size: rem(16);
+      justify-content: flex-start;
+      align-items: center;
+    }
+    @include only(smallDesktop) {
       font-size: rem(16);
       justify-content: flex-start;
       align-items: center;

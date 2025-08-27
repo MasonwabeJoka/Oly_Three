@@ -45,7 +45,7 @@ const LikedAds = () => {
           ]}
           condition={!expanded}
           width={954}
-          altWidth={988}
+          collageViewWidth={988}
           dashboard
           onClickHandlers={[undefined, undefined, changeViews]}
         />

@@ -7,11 +7,9 @@ import TitleAndDescription from "./TitleAndDescription";
 import UploadMedia from "./UploadMedia";
 import Location from "./Location";
 import PromoteYourAd from "./PromoteYourAd";
-import Congratulations from "./Congratulations";
+import Congratulations from "./ReviewListing";
 import ReviewAndSubmit from "./ReviewAndSubmit";
 import DashboardClient from "./DashboardClient";
-
-
 
 const Dashboard = ({ initialFormData, goTo, setCategory }) => {
   const steps = [

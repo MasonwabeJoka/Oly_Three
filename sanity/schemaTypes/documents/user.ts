@@ -16,7 +16,7 @@ export const user = defineType({
             title: 'First Name',
             type: 'string',
             description: 'The user\'s name.',
-            validation: (Rule: any) => Rule.required().error('A name is required'),
+            validation: (Rule) => Rule.required().error('A name is required'),
         }),
           
           defineField({
@@ -24,8 +24,15 @@ export const user = defineType({
             title: 'Last Name',
             type: 'string',
             description: 'The user\'s surname.',
-            validation: (Rule: any) => Rule.required().error('A last name is required'),
+            validation: (Rule) => Rule.required().error('A last name is required'),
           }),
+
+          defineField({
+          name: 'fullName',
+          title: 'Full Name',
+          type: 'string',
+          description: 'The user\'s full name.',
+        }),
           
           defineField({
             name: 'username',
@@ -123,91 +130,76 @@ export const user = defineType({
                 // Classifieds Core
                 {
                   title: 'Buyer',
-                  value: 'buyer',
-                  description: 'Individuals or businesses seeking to purchase items or services.',
+                  value: 'buyer'
                 },
                 {
                   title: 'Seller',
-                  value: 'seller',
-                  description: 'Private individuals looking to sell personal items or handcrafted products.',
+                  value: 'seller'
                 },
                 {
                   title: 'Professional Seller/Dealer',
-                  value: 'professional_seller',
-                  description: 'Businesses or professional sellers offering new or used products.',
+                  value: 'professional_seller'
                 },
                 {
                   title: 'Store Owner',
-                  value: 'store_owner',
-                  description: 'Businesses or individuals with a dedicated store page on the site, offering multiple listings under a unified brand or profile.',
-},
+                  value: 'store_owner'
+                },
                 {
                   title: 'Service Provider',
-                  value: 'service_provider',
-                  description: 'Professionals or companies offering services like home repair, tutoring, or event planning.',
+                  value: 'service_provider'
                 },
                 {
                   title: 'Job Seeker',
-                  value: 'job_seeker',
-                  description: 'Individuals looking for employment opportunities.',
+                  value: 'job_seeker'
                 },
                 {
                   title: 'Employer/Recruiter',
-                  value: 'employer',
-                  description: 'Companies or recruiters posting job vacancies.',
+                  value: 'employer'
                 },
 
                 // Community / Engagement
                 {
                   title: 'Casual Browser',
-                  value: 'casual_browser',
-                  description: 'Users who browse classifieds without a specific goal, often for entertainment or curiosity.',
+                  value: 'casual_browser'
                 },
                 {
                   title: 'Community Member',
-                  value: 'community_member',
-                  description: 'Users participating in community sections of the site, such as forums or groups.',
+                  value: 'community_member'
                 },
 
                 // Platform Admin
                 {
                   title: 'Administrator/Moderator',
-                  value: 'administrator',
-                  description: 'Individuals responsible for overseeing the website\'s operation, including content moderation and user support.',
+                  value: 'administrator'
                 },
 
                 // Monetization / Marketing
                 {
                   title: 'Advertiser',
-                  value: 'advertiser',
-                  description: 'Companies or individuals looking to advertise products or services on the site.',
+                  value: 'advertiser'
                 },
 
                 // Article & Content Section
                 {
                   title: 'Reader',
-                  value: 'reader',
-                  description: 'Users who engage with the blog, news, or article content.',
+                  value: 'reader'
                 },
                 {
                   title: 'Content Creator',
-                  value: 'content_creator',
-                  description: 'Writers or contributors submitting articles or content pieces to be published on the site.',
+                  value: 'content_creator'
                 },
                 {
                   title: 'Editor/Publisher',
-                  value: 'editor',
-                  description: 'Staff members or contributors responsible for reviewing, editing, and publishing article content.',
+                  value: 'editor'
                 },
+
                 {
                   title: 'Influencer/Blogger',
-                  value: 'influencer',
-                  description: 'Users promoting or sharing content with a wider audience through personal channels.',
+                  value: 'influencer'
                 },
                 {
                   title: 'Media/PR Representative',
-                  value: 'media_pr',
-                  description: 'Professionals from agencies or organizations submitting press releases or sponsored content.',
+                  value: 'media_pr'
                 },
               ],
             },
@@ -242,11 +234,11 @@ export const user = defineType({
           
           
           defineField({
-            name: 'postedAds',
-            title: 'Posted Ads',
+            name: 'postedListings',
+            title: 'Posted Listings',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'ad' }] }],
-            description: 'Ads posted by the user if they are a seller.',
+            of: [{ type: 'reference', to: [{ type: 'listing' }] }],
+            description: 'Listings posted by the user if they are a seller.',
           }),
 
           defineField({
@@ -279,8 +271,8 @@ export const user = defineType({
             name: 'favourites',
             title: 'Favourites',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'ad' }] }],
-            description: 'Ads that the user has marked as favourites.'
+            of: [{ type: 'reference', to: [{ type: 'listing' }] }],
+            description: 'Listings that the user has marked as favourites.'
           }),
           
           
@@ -553,8 +545,8 @@ export const user = defineType({
                     name: 'watchList',
                     title: 'Watch List',
                     type: 'array',
-                    of: [{ type: 'reference', to: [{ type: 'ad' }] }],
-                    description: 'A list of ads the user is monitoring or interested in.'
+                    of: [{ type: 'reference', to: [{ type: 'listing' }] }],
+                    description: 'A list of listings the user is monitoring or interested in.'
                 },
                 {
                     name: 'userRating',
@@ -563,11 +555,11 @@ export const user = defineType({
                     description: 'Average rating of the user based on reviews and transactions.'
                 },
                 {
-                    name: 'recentlyViewedAds',
-                    title: 'Recently Viewed Ads',
+                    name: 'recentlyViewedListings',
+                    title: 'Recently Viewed Listings',
                     type: 'array',
-                    of: [{ type: 'reference', to: [{ type: 'ad' }] }],
-                    description: 'Ads that the user has recently viewed on the platform.'
+                    of: [{ type: 'reference', to: [{ type: 'listing' }] }],
+                    description: 'Listings that the user has recently viewed on the platform.'
                 },
                 {
                     name: 'accountCreationDate',
@@ -706,7 +698,7 @@ export const user = defineType({
             title: 'Subscribed Categories',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'Categories of ads the user is interested in and subscribed to.'
+            description: 'Categories of listings the user is interested in and subscribed to.'
         }),
         defineField({
             name: 'registrationSource',
@@ -715,31 +707,31 @@ export const user = defineType({
             description: 'The platform or medium through which the user registered.'
         }),
         defineField({
-            name: 'adPostPreferences',
-            title: 'Ad Post Preferences',
+            name: 'listingPostPreferences',
+            title: 'Listing Post Preferences',
             type: 'object',
             fields: [
                 {
-                    name: 'defaultAdDuration',
-                    title: 'Default Ad Duration',
+                    name: 'defaultListingDuration',
+                    title: 'Default Listing Duration',
                     type: 'number',
-                    description: 'Default duration in days for the user\'s ads to remain active.'
+                    description: 'Default duration in days for the user\'s listings to remain active.'
                 },
                 {
-                    name: 'autoRenewAds',
-                    title: 'Auto Renew Ads',
+                    name: 'autoRenewListings',
+                    title: 'Auto Renew Listings',
                     type: 'boolean',
-                    description: 'Automatically renew ads after they expire.'
+                    description: 'Automatically renew listings after they expire.'
                 },
                 {
-                    name: 'showExpiredAds',
-                    title: 'Show Expired Ads',
+                    name: 'showExpiredListings',
+                    title: 'Show Expired Listings',
                     type: 'boolean',
-                    description: 'Option to show the user\'s expired ads to others.'
+                    description: 'Option to show the user\'s expired listings to others.'
                 },
                 {
-                    name: 'adVisibility',
-                    title: 'Ad Visibility',
+                    name: 'listingVisibility',
+                    title: 'Listing Visibility',
                     type: 'string',
                     options: {
                         list: [
@@ -747,10 +739,10 @@ export const user = defineType({
                             { title: 'Private', value: 'private' },
                         ],
                     },
-                    description: 'Control who can see the user’s ads (Public or Private).'
+                    description: 'Control who can see the user’s listings (Public or Private).'
                 },
             ],
-            description: 'Preferences related to posting ads on the platform.'
+            description: 'Preferences related to posting listings on the platform.'
         }),
         
         defineField({
@@ -794,7 +786,7 @@ export const user = defineType({
                 },
              
             ],
-            description: 'User-defined settings and preferences for searching ads.'
+            description: 'User-defined settings and preferences for searching listings.'
         }),
         defineField({
             name: 'privacyControls',
@@ -887,10 +879,10 @@ export const user = defineType({
                     description: 'Receive notifications for new messages.'
                 },
                 {
-                    name: 'adStatusUpdates',
-                    title: 'Ad Status Updates',
+                    name: 'listingStatusUpdates',
+                    title: 'Listing Status Updates',
                     type: 'boolean',
-                    description: 'Get notified when there is a change in the status of posted ads (like sold, expired).'
+                    description: 'Get notified when there is a change in the status of posted listings (like sold, expired).'
                 },
                 {
                     name: 'bidActivityAlerts',
@@ -908,7 +900,7 @@ export const user = defineType({
                     name: 'recommendationAlerts',
                     title: 'Recommendation Alerts',
                     type: 'boolean',
-                    description: 'Receive alerts for recommended ads based on the user\'s activity or preferences.'
+                    description: 'Receive alerts for recommended listings based on the user\'s activity or preferences.'
                 },
                 {
                     name: 'newsletterAlerts',

@@ -1,4 +1,3 @@
-// schemas/documents/storeOwner.ts
 import { defineType, defineField } from 'sanity';
 
 export const storeOwner = defineType({

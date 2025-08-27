@@ -10,7 +10,7 @@ export const flaggedContent = defineType({
       name: 'contentId',
       title: 'Content',
       type: 'reference',
-      to: [{ type: 'ad' }, { type: 'review' }, { type: 'message' }],
+      to: [{ type: 'listing' }, { type: 'review' }, { type: 'message' }],
       description: 'The referenced content flagged for review.',
       validation: (Rule) => Rule.required(),
     }),

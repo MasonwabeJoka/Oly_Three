@@ -27,8 +27,7 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
 
 
   const {
-    handleSubmit,
-    reset,
+
     formState: { errors, isSubmitting },
     control,
   } = useForm<FormValues>({

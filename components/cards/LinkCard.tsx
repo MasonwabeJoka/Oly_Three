@@ -1,31 +1,48 @@
 "use client";
+import Image from "next/image";
 import styles from "./LinkCard.module.scss";
-import useIsMobileStore from "@/store/useMobileStore";
-import useSidebarStore from "@/store/useSidebarStore";
-import useIsDashboardStore from "@/store/isDashboardStore";
 
 interface CardProps {
   className?: string;
   label: string;
   image: string;
+  cardSize: "large" | "standard" | "small";
+  cardVariant?: "regular" | "mobile" | "dashboard";
 }
 
-const LinkCardBox = ({ label, image }: CardProps): JSX.Element => {
+const LinkCardBox = ({
+  label,
+  image,
+  cardSize,
+  cardVariant = "regular",
+}: CardProps) => {
+  const cardSizeClass =
+    cardSize === "large"
+      ? styles.large
+      : cardSize === "standard"
+        ? styles.standard
+        : styles.small;
+
+  const labelContainer =
+    cardSize === "large"
+      ? styles.largeLabelContainer
+      : styles.standardLabelContainer;
+
   return (
     <article className={styles.cardContainer}>
-      <div
-        className={styles.imageContainer}
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          height: "75%",
-          borderRadius: "2.5rem 2.5rem 0rem 0rem",
-        }}
-      ></div>
-      <div className={styles.labelContainer}>
+      <div className={cardSizeClass} style={{ borderRadius: "2.5rem" }}>
+        <Image
+          src={image || "/bear.jpg"}
+          alt={label}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          style={{
+            objectFit: "cover",
+            borderRadius: "2.5rem",
+          }}
+        />
+      </div>
+      <div className={labelContainer}>
         <div className={styles.labelBackground}>
           <p className={styles.label}>{label}</p>
         </div>

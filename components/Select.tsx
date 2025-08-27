@@ -79,7 +79,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     },
     ref
   ) => {
-    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
     const [selectedOptions, setSelectedOptions] = useState<string[]>(
       Array.isArray(initialValue)
         ? initialValue
@@ -115,7 +114,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           : styles.xLargeDashboardSelect;
         break;
       default:
-        sizeClass = !dashboard ? styles.largeSelect : styles.largeDashboardSelect;
+        sizeClass = !dashboard
+          ? styles.largeSelect
+          : styles.largeDashboardSelect;
     }
 
     // Notify parent whenever showOptions changes
@@ -240,7 +241,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           : "Select an option";
 
     return (
-      <div ref={selectRef} className={className || ""}>
+      <div ref={selectRef} className={`${className} ${styles.container}`}>
         <div className={`${styles.selectMenu}`}>
           {error && <p className={styles.errorMessage}>{error as string}</p>}
 
@@ -300,13 +301,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         </div>
 
         {showOptions && (
-          <div
-            className={`${styles.searchInputContainer} ${styles.options}`}
-            style={{
-              marginTop:
-                dashboard && selectSize === "medium" ? "1rem" : "0.5rem",
-            }}
-          >
+          <div className={`${styles.searchInputContainer} ${styles.options}`}>
             {isMultiSelect && showSearchOptions && (
               <Input
                 className={`${styles.searchInput} ${styles.option}`}
@@ -332,9 +327,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
             <ul className={styles.optionsList}>
               {isMultiSelect && (
-                <li
-                  className={sizeClass}
-                >
+                <li className={sizeClass}>
                   <div
                     className={`${styles.option} ${styles.selectAll}`}
                     onClick={() =>
@@ -366,7 +359,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 return (
                   <li
                     key={index}
-                    className={`${!dashboard ? styles.select : styles.dashboardSelect} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
+                    className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                   >
                     <div
                       className={styles.option}

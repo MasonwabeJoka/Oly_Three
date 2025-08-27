@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
 const formDataSchema = z.object({
-category: z.object({
-  main: z.string(), // Allow empty initially
-  subcategory: z.string(), // Allow empty initially
-}).refine((data) => data.main !== "" && data.subcategory !== "", {
-  message: "Both main category and subcategory are required",
-  path: ["category"], // Trigger at the category level
-}),
+  category: z.object({
+    main: z.string(), // Allow empty initially
+    subcategory: z.string(), // Allow empty initially
+  }).refine((data) => data.main !== "" && data.subcategory !== "", {
+    message: "Both main category and subcategory are required",
+    path: ["category"], // Trigger at the category level
+  }),
 
   // Details section
   details: z.object({
@@ -32,11 +32,12 @@ category: z.object({
     title: z.string().min(1, { message: "Title is required" }),
     description: z.string().min(1, { message: "Description is required" }),
   }),
-  // Upload Media section (booleans, no additional constraints)
+  // Upload Media section
   uploadMedia: z.object({
-    uploadPhotos: z.boolean(),
-    uploadVideos: z.boolean(),
-    uploadAttachments: z.boolean(),
+    images: z.array(z.any()).optional(), // For uploaded image files
+    videos: z.array(z.any()).optional(), // For uploaded video files
+    videoUrl: z.string().optional(), // For video URL input
+    attachments: z.array(z.any()).optional(), // For uploaded attachment files
   }),
   // Location section
   location: z.object({

@@ -1,11 +1,11 @@
 import CategorySelectorClient from "./CategorySelectorClient";
 
-interface Category {
-  id: number;
-  category: string;
-  image: string;
-  subcategories: string[];
-}
+  interface Category {
+    id: number;
+    category: string;
+    image: string;
+    subcategories: string[];
+  }
 
 interface CategorySelectorServerProps {
   categories: Category[];
@@ -13,7 +13,7 @@ interface CategorySelectorServerProps {
   setCategory?: (main: string, subcategory: string) => void;
 }
 
-const CategorySelectorServer = ({
+const CategorySelector = ({
   categories,
   goTo = () => {},
   setCategory = () => {},
@@ -40,7 +40,9 @@ const CategorySelectorServer = ({
       goTo={goTo}
       setCategory={setCategory}
     />
+
+
   );
 };
 
-export default CategorySelectorServer;
+export default CategorySelector;

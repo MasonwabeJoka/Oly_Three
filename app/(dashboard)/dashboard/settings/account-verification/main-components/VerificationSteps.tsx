@@ -19,10 +19,11 @@ import UploadRepId from '../components/business/UploadRepId';
 import RepSelfie from '../components/business/RepSelfie';
 import EnterRepMobile from '../components/business/EnterRepMobile';
 import BusinessVerificationComplete from '../components/business/BusinessVerificationComplete';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 interface StepType {
   title: string;
-  content: JSX.Element;
+  content: React.ReactNode;
   path: string;
   fields: (keyof FormData)[];
 }
@@ -149,16 +150,20 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({ initialType, init
     <FormProvider {...methods}>
       <div className={styles.container}>
         {methods.formState.errors.root && <p className={styles.error}>{methods.formState.errors.root.message}</p>}
-        {!userType ? (
-          <UserTypeSelection onSelect={handleUserType} />
-        ) : (
+     {!userType ? (
+        <UserTypeSelection onSelect={handleUserType} />
+      ) : (
+        userType && steps[userType] && steps[userType][step] ? (
           <Step
             step={steps[userType][step]}
             onNext={handleNext}
             onBack={handleBack}
             isLastStep={step === steps[userType].length - 1}
           />
-        )}
+        ) : (
+          <div><LoadingSpinner/></div>
+        )
+      )}
       </div>
     </FormProvider>
   );

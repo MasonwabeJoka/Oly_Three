@@ -4,7 +4,7 @@ import styles from "./NavButtonLeft.module.scss";
 import { useSwiper } from "swiper/react";
 
 type Props = {
-  size: "large" | "standard" | "small";
+  size?: "large" | "medium" | "small";
   onClick?: () => void;
   disabled?: boolean;
   autoFocus?: boolean;
@@ -26,10 +26,10 @@ const NavButtonLeft = ({
         className={`${className} ${styles.leftArrow}`}
         buttonChildren={
           <Image
-            src="/icons/chevronLeft.png"
+            src="/icons/left-arrow.png"
             alt="left"
-            width={16}
-            height={16}
+            width={20}
+            height={20}
             className={styles.left}
           />
         }

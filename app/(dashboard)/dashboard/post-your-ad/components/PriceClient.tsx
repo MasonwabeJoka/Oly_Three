@@ -10,7 +10,11 @@
   import Modal from "@/components/Modal";
   import AuctionStartTime from "./AuctionStartTime";
 
-  const PriceClient = () => {
+interface Props {
+  onNext: () => void;
+}
+
+  const PriceClient = ({ onNext }: Props) => {
     const {
       register,
       formState: { errors },
@@ -47,14 +51,13 @@
     };
 
     return (
-      <FormWrapper
-        title=""
-        selectOpen={
-          isPricingOptionsOpen ||
-          isAuctionDurationOpen ||
-          isAuctionStartTimeOpen ||
-          isAuctionDurationOpen
-        }
+      <div
+        // selectOpen={
+        //   isPricingOptionsOpen ||
+        //   isAuctionDurationOpen ||
+        //   isAuctionStartTimeOpen ||
+        //   isAuctionDurationOpen
+        // }
       >
         <div className={styles.container}>
           <h2
@@ -274,7 +277,7 @@
             )}
           </div>
         </div>
-      </FormWrapper>
+      </div>
     );
   };
 

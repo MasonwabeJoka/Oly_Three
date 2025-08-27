@@ -40,10 +40,3 @@ export const getOlyHomepage = async () => {
 
 // delete
 
-// read
-
-// create
-
-// update
-
-// delete

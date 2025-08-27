@@ -17,7 +17,7 @@ export const olyHomepage = defineType({
       name: 'isActive',
       title: 'Is Active',
       type: 'boolean',
-      initialValue: false,
+      initialValue: true,
       description: 'Whether this homepage configuration is currently active.',
     }),
 
@@ -30,7 +30,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Hero Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the hero section on the homepage.',
         }),
         defineField({
@@ -69,7 +69,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable More from Oly Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the More from Oly section on the homepage.',
         }),
         defineField({
@@ -108,7 +108,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Featured Services Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Featured Services section on the homepage.',
         }),
         defineField({
@@ -147,7 +147,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Featured Categories Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Featured Categories section on the homepage.',
         }),
         defineField({
@@ -186,7 +186,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Featured Listings Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Featured Listings section on the homepage.',
         }),
         defineField({
@@ -225,7 +225,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Ad Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Ad section on the homepage.',
         }),
         defineField({
@@ -264,7 +264,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Top Ad Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Top Ad section on the homepage.',
         }),
         defineField({
@@ -303,7 +303,7 @@ export const olyHomepage = defineType({
           name: 'isEnabled',
           title: 'Enable Bottom Ad Section',
           type: 'boolean',
-          initialValue: false,
+          initialValue: true,
           description: 'Display the Bottom Ad section on the homepage.',
         }),
         defineField({
@@ -332,7 +332,83 @@ export const olyHomepage = defineType({
       ],
       description: 'Bottom Ad section configuration and reference.',
     }),
+defineField({
+      name: 'olyArticlesSection',
+      title: 'Oly Articles Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'isEnabled',
+          title: 'Enable Oly Articles Section',
+          type: 'boolean',
+          initialValue: true,
+          description: 'Display the Oly Articles section on the homepage.',
+        }),
+        defineField({
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Oly Articles',
+          description: 'Display title for this section.',
+        }),
+        defineField({
+          name: 'reference',
+          title: 'Oly Articles Section Reference',
+          type: 'reference',
+          to: [{ type: 'olyArticlesSection' }],
+          hidden: ({ parent }) => !parent?.isEnabled,
+          description: 'Reference to the Oly Articles section configuration.',
+        }),
+        defineField({
+          name: 'sortOrder',
+          title: 'Display Order',
+          type: 'number',
+          initialValue: 3,
+          hidden: ({ parent }) => !parent?.isEnabled,
+          description: 'Order in which this section appears on the homepage.',
+        }),
+      ],
+      description: 'Oly Articles section configuration and reference.',
+    }),
 
+    defineField({
+      name: 'sponsoredArticlesSection',
+      title: 'Sponsored Articles Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'isEnabled',
+          title: 'Enable Sponsored Articles Section',
+          type: 'boolean',
+          initialValue: true,
+          description: 'Display the Sponsored Articles section on the homepage.',
+        }),
+        defineField({
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Sponsored Articles',
+          description: 'Display title for this section.',
+        }),
+        defineField({
+          name: 'reference',
+          title: 'Sponsored Articles Section Reference',
+          type: 'reference',
+          to: [{ type: 'sponsoredArticlesSection' }],
+          hidden: ({ parent }) => !parent?.isEnabled,
+          description: 'Reference to the Sponsored Articles section configuration.',
+        }),
+        defineField({
+          name: 'sortOrder',
+          title: 'Display Order',
+          type: 'number',
+          initialValue: 4,
+          hidden: ({ parent }) => !parent?.isEnabled,
+          description: 'Order in which this section appears on the homepage.',
+        }),
+      ],
+      description: 'Sponsored Articles section configuration and reference.',
+    }),
     defineField({
       name: 'seoSettings',
       title: 'SEO Settings',
@@ -382,16 +458,20 @@ export const olyHomepage = defineType({
       isActive: 'isActive',
       heroEnabled: 'heroSection.isEnabled',
       moreFromOlyEnabled: 'moreFromOlySection.isEnabled',
+      olyArticlesEnabled: 'olyArticlesSection.isEnabled',
+      sponsoredArticlesEnabled: 'sponsoredArticlesSection.isEnabled',
       featuredServicesEnabled: 'featuredServicesSection.isEnabled',
       featuredCategoriesEnabled: 'featuredCategoriesSection.isEnabled',
       featuredListingsEnabled: 'featuredListingsSection.isEnabled',
     },
     prepare(selection) {
-      const { 
+const { 
         title, 
         isActive, 
         heroEnabled, 
         moreFromOlyEnabled, 
+        olyArticlesEnabled,
+        sponsoredArticlesEnabled,
         featuredServicesEnabled, 
         featuredCategoriesEnabled, 
         featuredListingsEnabled 
@@ -400,13 +480,15 @@ export const olyHomepage = defineType({
       const enabledSections = [
         heroEnabled,
         moreFromOlyEnabled,
+        olyArticlesEnabled,
+        sponsoredArticlesEnabled,
         featuredServicesEnabled,
         featuredCategoriesEnabled,
         featuredListingsEnabled,
       ].filter(Boolean).length;
       
       return {
-        title: title || "Homepage Configuration",
+       title: title || "Homepage Configuration",
         subtitle: `${isActive ? "Active" : "Inactive"} - ${enabledSections} sections enabled`,
       };
     },

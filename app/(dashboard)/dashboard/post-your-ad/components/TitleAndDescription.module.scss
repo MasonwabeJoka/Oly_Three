@@ -8,6 +8,12 @@
   @include only(largeDesktop) {
     width: rem(1098);
   }
+  @include only(smallDesktop) {
+    width: rem(1098);
+  }
+  @include only(tablet) {
+    width: rem(1098);
+  }
 
   .pageTitle {
     margin-top: rem(52);
@@ -15,8 +21,18 @@
     color: $danger;
     font-weight: 500;
     font-size: $h4;
-
+    text-align: center;
     @include only(largeDesktop) {
+      font-weight: 500;
+      margin-top: rem(96);
+      margin-bottom: rem(72);
+    }
+    @include only(smallDesktop) {
+      font-weight: 500;
+      margin-top: rem(96);
+      margin-bottom: rem(72);
+    }
+    @include only(tablet) {
       font-weight: 500;
       margin-top: rem(96);
       margin-bottom: rem(72);
@@ -28,6 +44,14 @@
 
     .title {
       @include only(largeDesktop) {
+        width: rem(640);
+        margin-bottom: rem(20);
+      }
+      @include only(smallDesktop) {
+        width: rem(640);
+        margin-bottom: rem(20);
+      }
+      @include only(tablet) {
         width: rem(640);
         margin-bottom: rem(20);
       }
@@ -47,8 +71,19 @@
         width: rem(640);
         border-radius: rem(40);
       }
+      @include only(smallDesktop) {
+        width: rem(640);
+        border-radius: rem(40);
+      }
+      @include only(tablet) {
+        width: rem(640);
+        border-radius: rem(40);
+      }
     }
   }
 
-  
+  .submitButtonContainer {
+    text-align: center;
+    margin-top: rem(16);
+  }
 }

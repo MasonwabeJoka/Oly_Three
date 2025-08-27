@@ -72,11 +72,11 @@ export const promotion = defineType({
       description: 'Optional promo code users can enter during checkout.',
     }),
     defineField({
-      name: 'ads',
-      title: 'Associated Ads',
+      name: 'listings',
+      title: 'Associated Listings',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'ad' }] }],
-      description: 'Ads that are being promoted via this campaign.',
+      of: [{ type: 'reference', to: [{ type: 'listing' }] }],
+      description: 'Listings that are being promoted via this campaign.',
     }),
     defineField({
       name: 'bannerImage',

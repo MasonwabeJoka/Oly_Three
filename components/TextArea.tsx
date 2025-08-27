@@ -140,6 +140,24 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       }
     };
 
+        let sizeClass = "";
+    switch (size) {
+      case "medium":
+        sizeClass = !dashboard
+          ? styles.mediumTextarea
+          : styles.mediumDashboardTextarea;
+        break;
+      case "xLarge":
+        sizeClass = !dashboard
+          ? styles.xLargeTextarea
+          : styles.xLargeDashboardTextarea;
+        break;
+      default:
+        sizeClass = !dashboard
+          ? styles.largeTextarea
+          : styles.largeDashboardTextarea;
+    }
+
     return (
       <>
         {(error || charCountError) && (
@@ -160,7 +178,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             style={{height: textareaHeight}}
           >
             <textarea
-              className={`${styles.textarea} ${
+              className={`${styles.textarea} ${sizeClass} ${
                 isMaxHeight ? styles.atMaxHeight : ""
               }`}
               id={id}

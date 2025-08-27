@@ -106,7 +106,7 @@ export const coupon = defineType({
       title: 'First-Time Users Only',
       type: 'boolean',
       initialValue: false,
-      description: 'Restrict coupon to users who have never posted an ad.',
+      description: 'Restrict coupon to users who have never posted a listing.',
     }),
     defineField({
       name: 'isActive',

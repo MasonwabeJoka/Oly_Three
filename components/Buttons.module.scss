@@ -11,6 +11,8 @@
   cursor: pointer;
 }
 
+
+
 .largeButton {
   width: rem(311);
   height: rem(56);
@@ -382,4 +384,6 @@
 .icon {
   background-color: unset;
   box-shadow: none;
+  width: fit-content;
+  height: fit-content;
 }

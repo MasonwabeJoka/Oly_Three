@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import useSidebarStore from "@/store/useSidebarStore";
-import { useResponsive } from "@/store/useResponsive";
 import styles from "./TabsClient.module.scss";
+import useBreakpointStore from "@/store/useBreakpointStore";
 
 type Tab =
   | {
@@ -16,7 +16,7 @@ type TabsProps = {
   dashboard: boolean;
   count?: number;
   width: number;
-  altWidth?: number;
+  collageViewWidth?: number;
   tabs: Tab[];
   data?: any[];
   onClickHandlers?: (
@@ -29,14 +29,13 @@ const TabsClient: React.FC<TabsProps> = ({
   condition,
   dashboard,
   width = 954,
-  altWidth = 988,
+  collageViewWidth = 988,
   tabs,
   data,
   onClickHandlers,
 }) => {
   const [isActive, setIsActive] = useState<number | null>(null);
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const isMobile = useResponsive("mobile", isSidebarOpen);
+  const { isMobile } = useBreakpointStore();
   const [tabOptions, setTabOptions] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
@@ -81,7 +80,8 @@ const TabsClient: React.FC<TabsProps> = ({
                     <div
                       className={styles.count}
                       style={{
-                        backgroundColor: isActive === index ? "white" : "#f3f7fa",
+                        backgroundColor:
+                          isActive === index ? "white" : "#f3f7fa",
                       }}
                     >
                       <div
@@ -101,13 +101,14 @@ const TabsClient: React.FC<TabsProps> = ({
                   }
                   style={{ width: "100%" }}
                 >
-                  {data && data[index].map((item, index) => {
-                    return (
-                      <li key={index} className={styles.option}>
-                        <div>{item}</div>
-                      </li>
-                    );
-                  })}
+                  {data &&
+                    data[index].map((item, index) => {
+                      return (
+                        <li key={index} className={styles.option}>
+                          <div>{item}</div>
+                        </li>
+                      );
+                    })}
                 </ul>
               </>
             );
@@ -118,6 +119,9 @@ const TabsClient: React.FC<TabsProps> = ({
   };
 
   const TabsDesktop = () => {
+    const tabWidth = condition
+      ? `${Math.floor((((collageViewWidth || width) / 4 - 8) / 16) * 1000) / 1000}rem`
+      : `${Math.floor(((width / 4 - 8) / 16) * 1000) / 1000}rem`;
     return (
       <ul
         className={styles.tabs}
@@ -126,7 +130,7 @@ const TabsClient: React.FC<TabsProps> = ({
           flexWrap: "wrap",
           justifyContent: "flex-start",
           width: condition
-            ? `${altWidth && altWidth / 16}rem`
+            ? `${(collageViewWidth || width) / 16}rem`
             : `${width / 16}rem`,
         }}
       >
@@ -137,25 +141,29 @@ const TabsClient: React.FC<TabsProps> = ({
             <li
               className={`${styles.tab} ${isActive === index ? styles.active : ""}`}
               style={{
-                flexBasis: condition
-                  ? `${altWidth && (altWidth / 4 - 8) / 16}rem`
-                  : `${(width / 4 - 8) / 16}rem`,
-                flexShrink: condition
-                  ? `${altWidth && (altWidth / 4 - 8) / 16}rem`
-                  : `${(width / 4 - 8) / 16}rem`,
+                flexBasis: tabWidth,
+                flexShrink: tabWidth,
                 color: tabs[index] === "Delete" ? "#ff3c14" : "#434b4d",
               }}
               key={index}
               onClick={(event) => {
                 handleClick(index);
-                onClickHandlers?.[index]?.(event);
+                try {
+                  if (onClickHandlers?.[index]) {
+                    onClickHandlers[index]!(event);
+                  }
+                } catch (error) {
+                  console.error("Error in tab click handler:", error);
+                }
               }}
             >
               {title}
               {count !== null && count !== 0 && (
                 <div
                   className={styles.count}
-                  style={{ backgroundColor: isActive === index ? "white" : "#ffffff" }}
+                  style={{
+                    backgroundColor: isActive === index ? "white" : "#f3f7fa",
+                  }}
                 >
                   <div
                     style={{

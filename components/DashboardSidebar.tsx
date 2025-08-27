@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
-import { User } from "@/sanityTemp/Types/User";
 import { useUser } from "@clerk/nextjs";
 import DashboardSidebarData from "@/data/DashboardSidebarData";
 
@@ -54,18 +53,18 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         href="/dashboard/settings/profile-settings"
         className={styles.profile}
       >
-        {user?.hasImage && (
+        {/* {user?.hasImage && (
           <Avatar
             className={styles.avatar}
             avatar={user?.imageUrl || ""}
             avatarSize={isMobile ? "regular" : "large"}
           />
-        )}
-        {/* <Avatar
+        )} */}
+        <Avatar
           className={styles.avatar}
           avatar={currentUser?.image || ""}
           avatarSize={isMobile ? "regular" : "large"}
-        /> */}
+        />
         {!isMobile && (
           <p className={styles.name}>{user?.fullName || user?.username}</p>
         )}

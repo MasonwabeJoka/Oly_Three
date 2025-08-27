@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
 import Image from "next/image";
-import { galleryData } from "@/data/GalleryData";
+import { imagesData } from "@/data/galleryImages";
 import Button from "@/components/Buttons";
 import useEditStore from "../../store/useEditStore";
 import useFormStore from "../../store/useFormStore";
@@ -17,7 +17,7 @@ import useUploadMediaStore from "../../store/useUploadMediaStore";
 const ReviewPhotos = () => {
   const { setIsEditMode } = useEditStore();
   const { goTo } = useFormStore();
-  const {setUploadVideos} = useUploadMediaStore();
+  const { setUploadVideos } = useUploadMediaStore();
   const onClick = () => {
     setIsEditMode(true);
     goTo(5);
@@ -30,10 +30,18 @@ const ReviewPhotos = () => {
         spaceBetween={-45}
         slidesPerView={"auto"}
       >
-        {galleryData.map((video: any, index: number) => {
+        {imagesData.map((video: any, index: number) => {
           return (
             <SwiperSlide className={styles.videoContainer} key={index}>
-              <Image src={video.image} alt="image" width={248} height={186.4} style={{borderRadius: "2.5rem"}}/>
+              {video.image && (
+                <Image
+                  src={video.image}
+                  alt="image"
+                  width={248}
+                  height={186.4}
+                  style={{ borderRadius: "2.5rem" }}
+                />
+              )}
             </SwiperSlide>
           );
         })}
@@ -41,18 +49,18 @@ const ReviewPhotos = () => {
         <div className={styles.buttonsContainer}>
           <NavButtons />
           <Button
-              className={styles.editButton}
-              buttonChildren="Edit"
-              buttonType="normal"
-              buttonSize="small"
-              name="edit-btn"
-              type="button"
-              ariaLabel="Edit Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard
-              onClick={onClick}
-            />
+            className={styles.editButton}
+            buttonChildren="Edit"
+            buttonType="normal"
+            buttonSize="small"
+            name="edit-btn"
+            type="button"
+            ariaLabel="Edit Button"
+            autoFocus={false}
+            disabled={false}
+            dashboard
+            onClick={onClick}
+          />
         </div>
       </Swiper>
     </MediaSectionWrapper>

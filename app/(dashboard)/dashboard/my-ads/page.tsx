@@ -5,11 +5,13 @@ import { listingsData } from "@/data/ListingsData";
 const Page = () => {
   return (
     <div className={styles.container}>
-      <h4 className={styles.title}>My Ads</h4>
+      <h1 className={styles.title}>My Ads</h1>
 
       <div className={styles.cardsContainer}>
         <MyAds listingsData={listingsData} />
       </div>
+
+      
     </div>
   );
 };

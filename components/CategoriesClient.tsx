@@ -5,35 +5,68 @@ import { useResponsive } from "@/store/useResponsive";
 import MobileSubcategories from "@/components/MobileSubcategories";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useModalStore } from "@/store/modalStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useBreakpoint } from "@/store/useBreakpointStore";
 
 export type CategoriesProps = {
-  fetchedCategories: any[];
+  categories: any[];
 };
 
-const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
-  const [visibleSubcategories, setVisibleSubcategories] = useState<
+const CategoriesClient = ({ categories }: CategoriesProps) => {
+  const [isClient, setIsClient] = useState(false);
+  const [totalVisibleSubcategories, setVisibleSubcategories] = useState<
     Record<string, number>
   >({});
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const isMobile = useResponsive("mobile", isSidebarOpen);
+  const { isMobile, isTablet, currentScreenSize } = useBreakpoint();
   const setShowCategoriesModal = useModalStore(
     (state) => state.setShowCategoriesModal
   );
+
+  // Define the number of subcategories to show per page
+  const SUBCATEGORIES_TO_SHOW = 6;
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleCategoriesContainerClick = (e) => {
     e.stopPropagation();
   };
 
-  const handleToggleSubcategories = (categoryId: string, currentCount: number, totalCount: number) => {
+  const handleToggleSubcategories = (
+    id: string,
+    numberOfCurrentlyVisible: number,
+    totalCount: number
+  ) => {
     setVisibleSubcategories((prev) => {
-      if (currentCount === totalCount) {
-        return { ...prev, [categoryId]: 8 };
+      // Create a new state object to reset all other categories
+      const newCurrentlyVisible: Record<string, number> = {};
+
+      // Reset all categories to default (SUBCATEGORIES_TO_SHOW)
+      categories.forEach((category) => {
+        if (category._id !== id) {
+          newCurrentlyVisible[category._id] = SUBCATEGORIES_TO_SHOW;
+        }
+      });
+
+      // Update the toggled category
+      if (numberOfCurrentlyVisible === totalCount) {
+        newCurrentlyVisible[id] = SUBCATEGORIES_TO_SHOW;
+      } else {
+        const nextCount =
+          (prev[id] || SUBCATEGORIES_TO_SHOW) + SUBCATEGORIES_TO_SHOW;
+        newCurrentlyVisible[id] =
+          nextCount >= totalCount ? totalCount : nextCount;
       }
-      const nextCount = (prev[categoryId] || 8) + 8;
-      return { ...prev, [categoryId]: nextCount >= totalCount ? totalCount : nextCount };
+
+      return newCurrentlyVisible;
     });
   };
+
+  // Don't render until client-side hydration is complete to prevent hydration mismatch
+  if (!isClient) {
+    return null;
+  }
 
   if (isMobile) {
     return (
@@ -50,21 +83,30 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
         onClick={() => setShowCategoriesModal(false)}
       >
         <ul className={styles.categoriesContainer}>
-          {fetchedCategories.map((categoryItem, index) => {
-            const { id, category, subcategories } = categoryItem;
+          {categories?.map((categoryItem, index) => {
+            const {
+              _id: id,
+              category,
+              secondLevelSubcategories,
+              thirdLevelSubcategories,
+            } = categoryItem;
+            const subcategories =
+              secondLevelSubcategories?.length < 3
+                ? thirdLevelSubcategories
+                : secondLevelSubcategories;
 
             return (
               <li
                 className={styles.mobileSubcategoriesContainer}
-                key={id}
+                key={`subcategory-mobile-${index}`}
                 onClick={handleCategoriesContainerClick}
               >
                 <MobileSubcategories
                   options={subcategories}
                   category={category}
                   id={id}
-                  name={subcategories[index]}
-                  ariaLabel={subcategories[index]}
+                  name={category}
+                  ariaLabel={category}
                 />
               </li>
             );
@@ -81,46 +123,94 @@ const CategoriesClient = ({ fetchedCategories }: CategoriesProps) => {
         <div
           className={styles.categoriesContainer}
           onClick={handleCategoriesContainerClick}
+          style={{
+            columns: isTablet
+              ? currentScreenSize < 1100
+                ? "200px 2"
+                : "200px 3"
+              : "",
+            width: isTablet
+              ? currentScreenSize < 1100 && isTablet
+                ? "47rem"
+                : ""
+              : "",
+          }}
         >
-          {fetchedCategories.map((categoryItem) => {
-            const { _id, title, subcategories } = categoryItem;
-            const categoryId = _id;
-            const visibleCount = visibleSubcategories[categoryId] || 8;
+          {categories?.map((category, index) => {
+            const {
+              _id: id,
+              title,
+              secondLevelSubcategories,
+              thirdLevelSubcategories,
+            } = category;
+            const subcategories =
+              secondLevelSubcategories?.length < 3
+                ? thirdLevelSubcategories
+                : secondLevelSubcategories;
+
+            const visibleCount =
+              totalVisibleSubcategories[id] || SUBCATEGORIES_TO_SHOW;
 
             return (
-              <div key={categoryId} className={styles.categoriesSection}>
+              <div
+                key={`category-${index}`}
+                className={styles.categoriesSection}
+              >
                 <h4 className={styles.category}>{title}</h4>
-                {subcategories
-                  .slice(0, visibleCount)
-                  .map((subcategory: string) => (
-                    <div
-                      key={subcategory}
-                      className={styles.subcategoryContainer}
-                    >
-                      <Link href="/">
-                        {isSidebarOpen ? (
+                {subcategories?.length > 0 &&
+                  subcategories?.slice(0, visibleCount).map(
+                    (
+                      subcategory: {
+                        _id: string;
+                        title: string;
+                        slug: { current: string };
+                      },
+                      subIndex: number
+                    ) => (
+                      <div
+                        key={`subcategory-${subIndex}`}
+                        className={styles.subcategoryContainer}
+                      >
+                        <Link href={`/category/${subcategory.slug.current}`}>
                           <p className={styles.subcategory}>
-                            {subcategory.length > 20
-                              ? `${subcategory.slice(0, 54)}`
-                              : subcategory}
+                            {subcategory.title?.length > 20
+                              ? `${subcategory.title.slice(0, 60)}`
+                              : subcategory.title}
                           </p>
-                        ) : (
-                          <p className={styles.subcategory}>
-                            {subcategory.length > 20
-                              ? `${subcategory.slice(0, 60)}`
-                              : subcategory}
-                          </p>
-                        )}
-                      </Link>
-                    </div>
-                  ))}
-                {subcategories.length > 8 && (
-                  <div className={styles.showMoreContainer}>
-                    <p
-                      className={styles.more}
-                      onClick={() => handleToggleSubcategories(categoryId, visibleCount, subcategories.length)}
-                    >
-                      {visibleCount === subcategories.length ? "Show Less..." : "Show More..."}
+                        </Link>
+                      </div>
+                    )
+                  )}
+                {!subcategories && (
+                  <div
+                    key={`subcategory-${index}`}
+                    className={styles.subcategoryContainer}
+                  >
+                    <Link href={`/category/${category.slug.current}`}>
+                      <p className={styles.subcategory}>
+                        {category.title?.length > 20
+                          ? `${category.title.slice(0, 60)}`
+                          : category.title}
+                      </p>
+                    </Link>
+                  </div>
+                )}
+
+                {subcategories?.length > SUBCATEGORIES_TO_SHOW && (
+                  <div
+                    className={styles.showMoreContainer}
+                    onClick={() =>
+                      handleToggleSubcategories(
+                        id,
+                        visibleCount,
+                        subcategories?.length
+                      )
+                    }
+                  >
+                    <p className={styles.more}>
+                      {visibleCount === subcategories?.length
+                        ? "Show Less..."
+                        : "Show More..."}
                     </p>
                   </div>
                 )}

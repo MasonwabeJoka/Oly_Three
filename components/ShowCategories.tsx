@@ -4,19 +4,24 @@ import Modal from "./Modal";
 import { useModalStore } from "@/store/modalStore";
 import CategoriesClient from "./CategoriesClient";
 
-const ShowCategories = ({ fetchedCategories }: { fetchedCategories: any[] }) => {
+type ShowCategoriesProps = {
+  categories: any[];
+};
+
+const ShowCategories = ({ categories }: ShowCategoriesProps) => {
   const showCategoriesModal = useModalStore(
     (state) => state.showCategoriesModal
   );
   const setShowCategoriesModal = useModalStore(
     (state) => state.setShowCategoriesModal
   );
+
   return (
     <div className={styles.container}>
       <Modal
         showModal={showCategoriesModal}
         setShowModal={setShowCategoriesModal}
-        modalContent={<CategoriesClient fetchedCategories={fetchedCategories} />}
+        modalContent={<CategoriesClient categories={categories} />}
       />
     </div>
   );

@@ -1,136 +1,138 @@
-
-
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
 .container::-webkit-scrollbar {
-    width: rem(8);
-  }
+  width: rem(8);
+}
 
-  .container::-webkit-scrollbar-track {
-    margin-block: rem(80);
-    background: transparent;
-  }
+.container::-webkit-scrollbar-track {
+  margin-block: rem(80);
+  background: transparent;
+}
 
-  .container::-webkit-scrollbar-thumb {
-    background-color: $warning-hover;
-    min-height: rem(56);
-    border-radius: rem(4);
-    margin-right: rem(4);
-  }
+.container::-webkit-scrollbar-thumb {
+  background-color: $warning-hover;
+  min-height: rem(56);
+  border-radius: rem(4);
+  margin-right: rem(4);
+}
 
-  .container::-webkit-scrollbar-thumb:hover {
-    background-color: $warning-hover;
-  }
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: $warning-hover;
+}
 
-  .container::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
-  }
+.container::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
 
-  .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: rem(40);
+  width: rem(736);
+  height: rem(816);
+  margin-bottom: rem(24);
+  // margin-top: rem(96);
+  // background-color: $white-three;
+  // box-shadow: $shadow-one;
+  overflow: auto;
+
+  .headerDiv {
+    width: rem(730);
+    min-height: 80px;
+    height: 84px !important;
+    display: block;
+    background-color: $white-four;
     border-radius: rem(40);
-    width: rem(736);
-    height: rem(816);
-    margin-bottom: rem(24);
-    // margin-top: rem(96);
-    background-color: $white-three;
+    position: fixed;
+    margin-left: rem(4);
+    z-index: 1;
+  }
+
+  .searchBar {
+    position: fixed;
+    top: rem(80);
+    width: rem(648) !important;
+    z-index: 2;
+    border-radius: rem(50);
     box-shadow: $shadow-one;
-    overflow: auto;
-
-    .headerDiv {
-      width: rem(730);
-      min-height: 80px;
-      height: 84px !important;
-      display: block;
-      background-color: $white-three;
-      border-radius: rem(40);
-      position: fixed;
-      margin-left: rem(4);
-      z-index: 1;
-
-    }
-
-    .searchBar {
-      position: fixed;
-      top: rem(116);
-      width: rem(648);
-      z-index: 2;
-      .search {
-        width: rem(648);
-      }
-    }
-
-    .chats {
-      margin-top: rem(132);
-      .chat {
-        display: flex;
-        align-items: center;
-        width: rem(648);
-        height: rem(88);
-        min-height: rem(88);
-        max-height: rem(88);
-        border-radius: rem(50);
-        margin-bottom: rem(20);
-        background-color: $white-two;
-        cursor: pointer;
-
-        &:focus {
-          outline: 2px solid $white-two;
-          outline-offset: 2px;
-        }
-
-        .avatarContainer {
-          margin: 0 rem(16) 0 rem(20);
-          .avatar {
-          }
-        }
-
-        .textContainer {
-          .name {
-            font-weight: 600;
-            font-size: rem(14);
-          }
-          .message {
-            font-size: rem(16);
-          }
-        }
-
-        .timeContainer {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          gap: rem(8);
-          align-items: center;
-          margin-left: auto;
-          margin-right: rem(12);
-          width: rem(56);
-          height: rem(56);
-
-          .time {
-            margin-bottom: rem(2);
-            font-size: rem(14);
-          }
-
-          .messageCount {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: $white-one;
-            background: $grey-four;
-            font-size: rem(12);
-          }
-        }
-      }
-
-      .chat:hover {
-        background-color: $white-one;
-      }
+    .search {
+      width: rem(648) !important;
+      height: rem(72) !important;
+      // margin-bottom: rem(50);
     }
   }
+
+  .chats {
+    margin-top: rem(132);
+    .chat {
+      display: flex;
+      align-items: center;
+      width: rem(648);
+      height: rem(88);
+      min-height: rem(88);
+      max-height: rem(88);
+      border-radius: rem(50);
+      margin-bottom: rem(20);
+      background-color: $white-two;
+      box-shadow: $shadow-one;
+      cursor: pointer;
+
+      &:focus {
+        outline: 2px solid $white-two;
+        outline-offset: 2px;
+      }
+
+      .avatarContainer {
+        margin: 0 rem(16) 0 rem(20);
+        .avatar {
+        }
+      }
+
+      .textContainer {
+        .name {
+          font-weight: 600;
+          font-size: rem(14);
+        }
+        .message {
+          font-size: rem(16);
+        }
+      }
+
+      .timeContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: rem(8);
+        align-items: center;
+        margin-left: auto;
+        margin-right: rem(12);
+        width: rem(56);
+        height: rem(56);
+
+        .time {
+          margin-bottom: rem(2);
+          font-size: rem(14);
+        }
+
+        .messageCount {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $white-one;
+          background: $grey-four;
+          font-size: rem(12);
+        }
+      }
+    }
+
+    .chat:hover {
+      background-color: $white-one;
+    }
+  }
+}

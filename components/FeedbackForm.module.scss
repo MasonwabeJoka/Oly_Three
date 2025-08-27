@@ -67,6 +67,9 @@
   .uploadButtonContainer {
     width: rem(514);
     margin-bottom: rem(48);
+    @include only(tablet) {
+      width: rem(462);
+    }
 
     .uploadButtonWrapper {
       display: flex;

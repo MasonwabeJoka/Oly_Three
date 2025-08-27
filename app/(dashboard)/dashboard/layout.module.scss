@@ -45,6 +45,12 @@
   @include only(largeDesktop) {
     width: 100vw;
   }
+  @include only(smallDesktop) {
+    width: 100vw;
+  }
+  @include only(tablet) {
+    width: 100vw;
+  }
 
   * {
     margin: 0;
@@ -87,11 +93,11 @@
     list-style-type: none;
   }
 
- li {
-  list-style-position: outside !important;
-  padding-left: 0;
-  margin-left: 0;
-}
+  li {
+    list-style-position: outside !important;
+    padding-left: 0;
+    margin-left: 0;
+  }
 
   a,
   a:visited,
@@ -118,20 +124,19 @@
 
   .wrapper {
     display: flex;
-
     align-items: center;
     justify-content: flex-start;
     width: rem(360);
     height: 100%;
-
     @include only(largeDesktop) {
       // width: rem(1440);
-      width: 100vw;
-    }
-    @include larger-than(smallDesktop) {
       width: 80vw;
-      // margin-left: rem(400);
-      // background-color: red;
+    }
+    @include only(smallDesktop) {
+      width: 96vw;
+    }
+    @include only(tablet) {
+      width: 96vw;
     }
 
     .nav {
@@ -143,10 +148,24 @@
       @include only(largeDesktop) {
         display: none;
       }
+      @include only(smallDesktop) {
+        display: none;
+      }
+      @include only(tablet) {
+        display: none;
+      }
     }
 
     .keepSidebarInPlace {
       @include only(largeDesktop) {
+        width: rem(342);
+        width: rem(342);
+      }
+      @include only(smallDesktop) {
+        width: rem(342);
+        width: rem(342);
+      }
+      @include only(tablet) {
         width: rem(342);
         width: rem(342);
       }
@@ -160,22 +179,31 @@
         display: unset;
         top: 50%;
       }
+      @include only(smallDesktop) {
+        display: unset;
+        top: 50%;
+      }
+      @include only(tablet) {
+        display: unset;
+        top: 50%;
+      }
     }
     .main {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-left: rem(32);
-
       @include only(largeDesktop) {
-        display: unset;
         width: rem(1098);
         margin-left: auto;
       }
-      @include larger-than(smallDesktop) {
-        display: unset;
-        width: 72%;
-        margin: 0;
+      @include only(smallDesktop) {
+        width: rem(1098) !important;
+        margin-left: rem(16);
+      }
+      @include only(tablet) {
+        width: rem(1098);
+        margin-left: rem(16);
       }
 
       .logo {
@@ -184,9 +212,13 @@
         @include only(largeDesktop) {
           display: none;
         }
+        @include only(smallDesktop) {
+          display: none;
+        }
+        @include only(tablet) {
+          display: none;
+        }
       }
     }
   }
 }
-
-

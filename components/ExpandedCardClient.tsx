@@ -7,7 +7,7 @@ import type { PortableTextBlock } from "sanity";
 
 type ExpandedCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  images?: string[];
+  imageUrls?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;
   isHeartClicked: boolean;
@@ -33,7 +33,7 @@ type ExpandedCardProps = {
 
 const ExpandedCardClient: React.FC<ExpandedCardProps> = ({
   category,
-  images,
+  imageUrls,
   aspectRatios,
   isCardHovered,
   isHeartClicked,
@@ -63,7 +63,7 @@ const ExpandedCardClient: React.FC<ExpandedCardProps> = ({
       onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
     >
       <ExpandedImageContainer
-        images={images}
+        imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         checkedHovered={checkedHovered}
         isHeartClicked={isHeartClicked}

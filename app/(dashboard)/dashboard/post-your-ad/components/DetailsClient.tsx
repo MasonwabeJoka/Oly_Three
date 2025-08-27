@@ -170,7 +170,7 @@ const DetailsClient = ({
   };
 
   return (
-    <FormWrapper
+    <div
       error={errors.details?.message as string}
       selectOpen={isConditionsOpen || isDetailsOpen}
     >
@@ -342,7 +342,7 @@ const DetailsClient = ({
           </div>
         </div>
       </div>
-    </FormWrapper>
+    </div>
   );
 };
 

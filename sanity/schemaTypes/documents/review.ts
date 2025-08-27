@@ -16,7 +16,7 @@ export const review = defineType({
             name: 'subject',
             title: 'Review Subject',
             type: 'reference',
-            to: [{ type: 'user' }, { type: 'ad' }, { type: 'auctionLot' }], // Adjust the types according to what can be reviewed on your platform
+            to: [{ type: 'user' }, { type: 'listing' }, { type: 'auctionLot' }], // Adjust the types according to what can be reviewed on your platform
             description: 'The subject of the review, such as a user, an ad, or an auction lot.'
         }),
         defineField({

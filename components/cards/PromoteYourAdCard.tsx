@@ -1,6 +1,6 @@
 "use client";
 import styles from "./PromoteYourAdCard.module.scss";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import Checkbox from "@/components/Checkbox";
@@ -20,6 +20,7 @@ interface CardProps {
 }
 
 const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
+  const [isClient, setIsClient] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState<number>(price[0]?.price);
   const [selectedDuration, setSelectedDuration] = useState<string>(
     price[0]?.duration
@@ -31,6 +32,10 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const [isDurationSelectOpen, setIsDurationSelectOpen] = useState(false);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,12 +58,18 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
     return duration;
   };
 
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormDataSchema>();
+  // Get form context - this will be available since we're inside FormProvider
+  const formContext = useFormContext<FormDataSchema>();
+  const register = formContext?.register || (() => ({}));
+  const errors = formContext?.formState?.errors || {};
+
   //Todo: When you select a promotion duration the value of the select must be replaced.
   //Todo: When you select a promotion duration the checkbox must be checked.
+
+  // Don't render until client-side hydration is complete to prevent hydration mismatch
+  if (!isClient) {
+    return null;
+  }
 
   if (isMobile) {
     return (
@@ -106,7 +117,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               disabled={false}
               required={true}
               multiple={false}
-              dashboard={isDashboard}
+              dashboard
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
@@ -153,7 +164,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   }
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container} ref={containerRef} style={{ backgroundColor: isDurationSelectOpen ? "#edf2f7" : "#f3f7fa" }}>
       <div className={styles.wrapper} ref={wrapperRef}>
         <div className={styles.iconContainer}>
           <Icon
@@ -165,7 +176,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           />
         </div>
         <div className={styles.formControls}>
-          <p className={styles.title}>{title}</p>
+          <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p>
 
           <div className={styles.setPromotionDurationContainer}>
             <Select
@@ -174,8 +185,6 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
-              selectPrompt="Select Promotion Duration"
-              displayTextArray={durations} // Display available durations
               label="Set Promotion Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
@@ -183,7 +192,6 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               autoComplete="on"
               disabled={false}
               required={true}
-              multiple={false}
               dashboard={isDashboard}
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}

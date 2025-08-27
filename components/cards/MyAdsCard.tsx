@@ -7,9 +7,9 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 import { useRef, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import AdCard from "./AdCard";
+import ListingCard from "./ListingCard";
 import { adAnalyticsData } from "@/data/adDataAnalytics";
-import AdCardAnalytics from "./AdCardAnalytics";
+import ListingCardAnalytics from "./ListingCardAnalytics";
 import { images } from "@/data/galleryImages";
 
 const adCardMockData = {
@@ -139,7 +139,7 @@ const MyAdsCard = () => {
   return (
     <div className={styles.container}>
       <div className={styles.cardContainer}>
-        <AdCard
+        <ListingCard
           category="all"
           ad={adCardMockData}
           id={id}
@@ -263,7 +263,7 @@ const MyAdsCard = () => {
       </div>
       {showAnalytics && (
         <div className={styles.analyticsSection} ref={analyticsRef}>
-          <AdCardAnalytics adAnalyticsData={adAnalyticsData} />
+          <ListingCardAnalytics adAnalyticsData={adAnalyticsData} />
         </div>
       )}
       <article className={styles.adCard}>

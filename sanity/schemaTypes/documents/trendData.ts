@@ -8,7 +8,7 @@ export const trendData = {
             title: 'Popular Categories',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'The most popular categories in the region based on user activity and ad postings.'
+            description: 'The most popular categories in the region based on user activity and listing postings.'
         },
         {
             name: 'averagePrice',
@@ -59,7 +59,7 @@ export const trendData = {
                     name: 'pageViews',
                     title: 'Page Views',
                     type: 'number',
-                    description: 'The average number of page views on ads.'
+                    description: 'The average number of page views on listings.'
                 },
                 {
                     name: 'timeSpent',
@@ -71,19 +71,19 @@ export const trendData = {
             description: 'Metrics indicating how users engage with the platform.'
         },
         {
-            name: 'adPostings',
-            title: 'Ad Postings',
+            name: 'listingPostings',
+            title: 'Listing Postings',
             type: 'object',
             fields: [
                 {
-                    name: 'totalAds',
-                    title: 'Total Ads Posted',
+                    name: 'totalListings',
+                    title: 'Total Listings Posted',
                     type: 'number',
-                    description: 'The total number of ads posted in the region.'
+                    description: 'The total number of listings posted in the region.'
                 },
                 {
-                    name: 'adsPerCategory',
-                    title: 'Ads Per Category',
+                    name: 'listingsPerCategory',
+                    title: 'Listings Per Category',
                     type: 'object',
                     fields: [
                         {
@@ -97,10 +97,10 @@ export const trendData = {
                             type: 'number'
                         },
                     ],
-                    description: 'The number of ads posted per category.'
+                    description: 'The number of listings posted per category.'
                 },
             ],
-            description: 'The number of ad postings in the region, including category breakdowns.'
+            description: 'The number of listing postings in the region, including category breakdowns.'
         },
         {
             name: 'demographics',

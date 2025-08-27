@@ -47,14 +47,15 @@
 .closeButton {
   position: absolute;
   top: 50%;
+  right: rem(32);
   transform: translateY(-50%);
-  right: rem(16);
   background: none;
   border: none;
- color: $black-four;
+  color: $black-four;
   font-size: 20px;
+
   cursor: pointer;
-  padding: 0 rem(16);
+  // padding: 0 rem(16);
   &:hover {
     color: $black-one;
   }

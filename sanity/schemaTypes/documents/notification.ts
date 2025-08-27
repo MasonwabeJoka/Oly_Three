@@ -65,7 +65,7 @@ export const notification = defineType({
       name: 'actionLabel',
       title: 'Action Label',
       type: 'string',
-      description: 'Optional call-to-action label, e.g., "View Ad", "Open Chat".',
+      description: 'Optional call-to-action label, e.g., "View Listing", "Open Chat".',
     }),
     defineField({
       name: 'actionUrl',
@@ -79,7 +79,7 @@ export const notification = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Ad', value: 'ad' },
+          { title: 'Listing', value: 'listing' },
           { title: 'Chat', value: 'chat' },
           { title: 'User', value: 'user' },
           { title: 'Auction', value: 'auction' },
@@ -93,7 +93,7 @@ export const notification = defineType({
       name: 'referenceId',
       title: 'Reference ID',
       type: 'string',
-      description: 'Optional related document ID (e.g., Ad ID, Chat ID). Used for linking.',
+      description: 'Optional related document ID (e.g., Listing ID, Chat ID). Used for linking.',
     }),
     defineField({
       name: 'site',

@@ -1,6 +1,5 @@
 import TabsClient from "./TabsClient";
 
-
 type Tab =
   | {
       title: string;
@@ -13,7 +12,7 @@ type TabsProps = {
   dashboard: boolean;
   count?: number;
   width: number;
-  altWidth?: number;
+  collageViewWidth?: number;
   tabs: Tab[];
   data?: any[];
   onClickHandlers?: (
@@ -26,7 +25,7 @@ const Tabs: React.FC<TabsProps> = ({
   condition,
   dashboard,
   width = 954,
-  altWidth = 988,
+  collageViewWidth = 988,
   tabs,
   data,
   onClickHandlers,
@@ -36,7 +35,7 @@ const Tabs: React.FC<TabsProps> = ({
       condition={condition}
       dashboard={dashboard}
       width={width}
-      altWidth={altWidth}
+      collageViewWidth={collageViewWidth}
       tabs={tabs}
       data={data}
       onClickHandlers={onClickHandlers}

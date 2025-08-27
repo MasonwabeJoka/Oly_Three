@@ -14,6 +14,16 @@
   box-shadow: $shadow-one;
   padding: rem(240);
 
+  @include only(largeDesktop) {
+    width: rem(365);
+    height: rem(688);
+  }
+
+  @include only(smallDesktop) {
+    width: rem(340);
+    height: rem(688);
+  }
+
 
   .profileSection {
     display: flex;

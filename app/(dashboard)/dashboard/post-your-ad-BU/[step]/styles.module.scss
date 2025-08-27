@@ -1,0 +1,87 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   width: 100%;
+    height: 100vh;
+  @include only(largeDesktop) {
+   
+  }
+  @include only(smallDesktop) {
+  
+  }
+  @include only(tablet) {
+    
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
+    .title {
+      position: fixed;
+      font-size: $h4;
+      font-weight: 500;
+      color: $danger;
+      margin-top: rem(56);
+
+      @include only(largeDesktop) {
+        margin-top: rem(24);
+        position: static;
+        margin-bottom: rem(48);
+      }
+      @include only(smallDesktop) {
+        margin-top: rem(24);
+        position: static;
+        margin-bottom: rem(48);
+      }
+      @include only(tablet) {
+        margin-top: rem(24);
+        position: static;
+        margin-bottom: rem(48);
+      }
+    }
+    .cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16vh;
+      @include only(largeDesktop) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      @include only(smallDesktop) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      @include only(tablet) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      .card {
+        margin-bottom: rem(24);
+
+        @include only(largeDesktop) {
+          margin-right: rem(24);
+        }
+        @include only(smallDesktop) {
+          margin-right: rem(24);
+        }
+        @include only(tablet) {
+          margin-right: rem(24);
+        }
+      }
+    }
+  }
+}

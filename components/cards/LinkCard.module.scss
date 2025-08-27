@@ -10,20 +10,6 @@
   cursor: pointer;
   box-shadow: $shadow-one;
   background-color: $grey-one;
-
-  @include only(largeDesktop) {
-    width: rem(306);
-    height: rem(338);
-  }
-  @include only(smallDesktop) {
-    width: rem(306);
-    height: rem(338);
-  }
-  @include only(tablet) {
-    width: rem(306);
-    height: rem(338);
-  }
-
   .imageContainer {
     height: rem(128);
     border-radius: rem(40) rem(40) 0 0;
@@ -32,8 +18,11 @@
     @include only(largeDesktop) {
       height: rem(216);
     }
+    @include only(smallDesktop) {
+      height: rem(216);
+    }
   }
-  .labelContainer {
+  .largeLabelContainer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -43,8 +32,6 @@
     border-radius: 0 0 rem(40) rem(40);
     margin-top: auto;
     background-color: $grey-one;
-
-    height: rem(88);
 
     .label {
       color: $black-four;
@@ -57,7 +44,65 @@
     }
   }
 }
+.standardLabelContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 rem(40) rem(40);
+  margin-top: auto;
+  background-color: $grey-one;
+}
+
+.large {
+  position: relative;
+  width: rem(306);
+  height: rem(338);
+}
+
+.standard {
+  position: relative;
+  width: rem(228) !important;
+  height: rem(236);
+}
+
+.largeImageContainer {
+  border-radius: rem(40) rem(40) 0 0;
+  height: rem(307);
+}
+.largeLabelContainer {
+  height: rem(88);
+  border-radius: 0 0 rem(40) rem(40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .label {
+    font-size: $h3;
+  }
+}
+
+.standardLabelContainer {
+  height: rem(56);
+  font-size: $h4;
+  padding: rem(8) !important;
+  width: rem(228);
+
+  @include only(largeDesktop) {
+    height: rem(72);
+  }
+  @include only(smallDesktop) {
+    height: rem(72);
+  }
+}
 
 .cardContainer:hover {
   transform: scale(1.04);
+  // border-radius: rem(40);
+}
+.cardContainer:hover .labelContainer {
+  // background-color: $white-three;
+  // color: $white-two;
 }

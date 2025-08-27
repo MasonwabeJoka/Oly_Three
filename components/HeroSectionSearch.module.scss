@@ -10,9 +10,7 @@
   height: 93vh;
   border-radius: rem(150) rem(150) rem(150) rem(150);
 
-  .text {
-    display: none;
-  }
+
 
   @include only(largeDesktop) {
     background-color: #c9e5e8;

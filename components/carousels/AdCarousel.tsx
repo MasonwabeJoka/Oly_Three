@@ -86,13 +86,13 @@ const AdCarousel = ({ images, onClick }: Props) => {
             className={styles.leftButtonContainer}
             onClick={(event) => event.stopPropagation()}
           >
-            <NavButtonLeft size="standard" />
+            <NavButtonLeft size="medium" />
           </div>
           <div
             className={styles.rightButtonContainer}
             onClick={(event) => event.stopPropagation()}
           >
-            <NavButtonRight size="standard" />
+            <NavButtonRight size="medium" />
           </div>
         </Swiper>
       </div>

@@ -1,3 +1,4 @@
+'use client'
 import styles from "./NavButtons.module.scss";
 import Button from "@/components/Buttons";
 import Image from "next/image";

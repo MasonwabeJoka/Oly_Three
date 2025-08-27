@@ -1,7 +1,7 @@
 "use client";
 import styles from "./PaginatedListingsCollage.module.scss";
 import { useEffect, useState } from "react";
-import AdCard from "@/components/cards/AdCard";
+import ListingCard from "@/components/cards/ListingCard";
 import Masonry from "react-masonry-css";
 import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
@@ -112,7 +112,7 @@ const PaginatedListingsCollageClient = ({
     return (
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
-          <AdCard
+          <ListingCard
             ad={ad}
             id={ad._id}
             index={index}

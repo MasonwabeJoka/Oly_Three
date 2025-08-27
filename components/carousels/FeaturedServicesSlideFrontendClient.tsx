@@ -2,18 +2,20 @@
 import { useEffect, useState } from "react";
 import styles from "./FeaturedServicesSlideFrontendClient.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, Autoplay, EffectFade } from "swiper/modules";
+import { Keyboard, Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
-import 'swiper/css/effect-fade';
+import "swiper/css/effect-fade";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import FeaturedServices from "../FeaturedServices";
 import NavButtons from "../NavButtons";
 import LoadingSpinner from "../LoadingSpinner";
+import useBreakpointStore from "@/store/useBreakpointStore";
 
 const FeaturedServicesSlideFrontendClient = ({ productData }) => {
+  const { isMobile, isTablet } = useBreakpointStore();
   const [initialSlideIndex, setInitialSlideIndex] = useState(null);
   const { setIsMoreInfo } = useFeatureInfo();
   const { setCurrentSlideIndex } = useCurrentSlideIndex();
@@ -40,6 +42,8 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
       fadeEffect={{
         crossFade: true,
       }}
+      grabCursor={true}
+      pagination={isTablet ? { clickable: true } : false}
       loop={true}
       keyboard={{
         enabled: true,
@@ -49,7 +53,7 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
         disableOnInteraction: true,
       }}
       onSlideChange={handleSlideChange}
-      modules={[Keyboard, Autoplay, EffectFade]}
+      modules={[Keyboard, Autoplay, EffectFade, Pagination]}
       className={styles.swiper}
     >
       {productData.map((product, index) => (
@@ -68,9 +72,11 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
           </div>
         </SwiperSlide>
       ))}
-      <div className={styles.navButtons}>
-        <NavButtons />
-      </div>
+      {!isMobile && !isTablet && (
+        <div className={styles.navButtons}>
+          <NavButtons />
+        </div>
+      )}
     </Swiper>
   );
 };

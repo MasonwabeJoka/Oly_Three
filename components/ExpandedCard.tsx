@@ -4,7 +4,7 @@ import ExpandedCardClient from "./ExpandedCardClient";
 
 type ExpandedCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  images?: string[];
+  imageUrls?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;
   isHeartClicked: boolean;
@@ -30,7 +30,7 @@ type ExpandedCardProps = {
 
 const ExpandedCard: React.FC<ExpandedCardProps> = ({
   category,
-  images,
+  imageUrls,
   aspectRatios,
   isCardHovered,
   isHeartClicked,
@@ -57,7 +57,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
     <article className={styles.expandedCard}>
       <ExpandedCardClient
         category={category}
-        images={images}
+        imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         isCardHovered={isCardHovered}
         isHeartClicked={isHeartClicked}

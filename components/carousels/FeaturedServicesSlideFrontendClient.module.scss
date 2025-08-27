@@ -16,6 +16,7 @@
     width: 100%;
     height: 100%;
   }
+  
   .slideContainer {
     display: flex;
     width: 100%;
@@ -56,4 +57,14 @@
       margin-bottom: rem(48);
     }
   }
+
+  
+  :global(.swiper-pagination-bullet) {
+      background-color: #cccccc; // Color for inactive bullets
+      opacity: 0.6; // Optional: adjust opacity for inactive bullets
+    }
+    :global(.swiper-pagination-bullet-active) {
+      background-color: $primary-hover; // Color for active bullet
+      opacity: 1; // Full opacity for active bullet
+    }
 }

@@ -2,65 +2,126 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-.likeIconContainer {
-  position: absolute;
+.container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: rem(128);
-  height: rem(128);
-  border-radius: 50%;
-  cursor: pointer;
+  width: rem(800);
+  overflow: hidden;
+  @include only(largeDesktop) {
+    width: rem(1556);
+    height: rem(570);
+  }
+  @include only(smallDesktop) {
+    width: rem(1245);
+    height: rem(456);
+  }
 
-  .likeIconBG {
+  .gallery {
+    display: flex;
+    gap: rem(20);
+    border-radius: rem(40);
+    width: max-content; /* Allow gallery to size based on children without stretching */
+
+    .image {
+      border-radius: rem(40);
+    }
+
+    .firstImage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      flex: 0 0 auto; /* Don't grow or shrink */
+      @include only(largeDesktop) {
+        width: rem(768); /* Default for landscape */
+        &.portrait {
+          width: rem(372); /* Width for portrait */
+        }
+      }
+      @include only(smallDesktop) {
+        width: rem(615); /* Default for landscape */
+        &.portrait {
+          width: rem(298); /* Width for portrait */
+        }
+      }
+    }
+
+    .remainingImages {
+      position: relative;
+      /* Keep fixed column width */
+      column-gap: rem(20);
+      column-fill: auto;
+      overflow: hidden;
+      border-radius: rem(40);
+
+      flex: 0 0 auto; /* Don't grow or shrink; base width on content */
+      height: auto; /* Default for small screens */
+
+      @include only(largeDesktop) {
+        column-width: rem(370);
+        max-width: rem(768);
+        height: rem(570); /* Fixed height for sequential filling */
+      }
+      @include only(smallDesktop) {
+        max-width: rem(615);
+        height: rem(456); /* Fixed height for sequential filling */
+      }
+
+      .imageContainer {
+        position: relative;
+        width: rem(372);
+        break-inside: avoid;
+        margin-bottom: rem(20);
+        border-radius: rem(40);
+        // Default height for landscape images
+        height: rem(275);
+        &[data-orientation="portrait"] {
+          height: rem(570);
+        }
+
+        @include only(smallDesktop) {
+          width: rem(298);
+          height: rem(275);
+          &[data-orientation="portrait"] {
+            height: rem(456);
+          }
+        }
+      }
+
+      .buttonContainer {
+        position: absolute;
+        bottom: 110;
+        right: 102;
+        z-index: 10;
+      }
+    }
+  }
+  .likeIconContainer {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(150);
-    height: rem(150);
-    transform: translateY(50%);
-    border: 0px solid black;
+    width: rem(128);
+    height: rem(128);
     border-radius: 50%;
-    background-color: hsla(195, 91%, 86%, 1);
+    cursor: pointer;
 
-    .likeIcon {
-      text-align: center;
-      background-color: #bdecfc;
-    }
-  }
-}
+    .likeIconBG {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(150);
+      height: rem(150);
+      transform: translateY(50%);
+      border: 0px solid black;
+      border-radius: 50%;
+      background-color: hsla(195, 91%, 86%, 1);
 
-.postMetrics {
-  width: rem(250);
-  height: rem(24);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: $black-four;
-  font-size: rem(12);
-
-
-  .likes {
-    display: flex;
-    margin-left: rem(16);
-    .icon {
-      margin-right: rem(4);
-      margin-top: rem(-1);
-    }
-  }
-  .views {
-    display: flex;
-    .icon {
-      margin-right: rem(4);
-      margin-top: rem(-1);
-    }
-  }
-
-  .postAge {
-    font-size: rem(12);
-    .duration {
-      margin-left: rem(8);
-      margin-right: rem(8);
+      .likeIcon {
+        text-align: center;
+        background-color: #bdecfc;
+      }
     }
   }
 }

@@ -58,6 +58,7 @@
   .categoriesContainer {
     display: flex;
     flex-direction: column;
+
     cursor: default;
     @include only(largeDesktop) {
       display: unset;
@@ -73,11 +74,22 @@
       column-gap: rem(24);
       padding: rem(32) rem(0) rem(32) rem(32);
     }
+    @include only(tablet) {
+      display: unset;
+      width: rem(1080);
+      columns: rem(200) 3;
+      column-gap: rem(24);
+      padding: rem(32) rem(0) rem(32) rem(32);
+    }
 
     .categoriesSection {
       margin-bottom: rem(24);
       break-inside: avoid-column;
       max-width: rem(334);
+      background-color: #d0d3d615;
+      border-radius: rem(40);
+      padding: rem(32);
+
       .category {
         color: $danger;
         font-weight: 500;

@@ -5,7 +5,6 @@ import Button from "@/components/Buttons";
 import multipleImages from "@/data/multipleImages";
 import FeaturedListingsClient from "./FeaturedListingsClient";
 
-
 const tempImages = multipleImages.map((item) => item.images);
 
 const FeaturedListings = ({ category }) => {

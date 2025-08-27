@@ -5,12 +5,13 @@ import Image from "next/image";
 import MenuButton from "../MenuButton";
 import { useState, useEffect } from 'react';
 import { usePathname } from "next/navigation";
+
 const Navbar = () => {
-  const pathname = usePathname(); // Get the current route
-  const isHomePage = pathname === '/'; // Check if the current page is the homepage
+  const pathname = usePathname();
+  const isHomePage = pathname === '/'; 
   const [isScrolled, setIsScrolled] = useState(false);
 
-useEffect(() => {
+  useEffect(() => {
     // Only add scroll listener if on the homepage
     if (isHomePage) {
       const handleScroll = () => {
@@ -29,11 +30,15 @@ useEffect(() => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
+    } else {
+      // Ensure logo is visible on non-homepage routes
+      setIsScrolled(true);
     }
   }, [isHomePage]); // Re-run effect if the pathname changes
+
   return (
     <div className={styles.container}>
-      <Link href="/" className={`${styles.logo} ${isScrolled ? styles.visible : styles.hidden}`}>
+      <Link href="/" className={`${styles.logo} ${isHomePage ? (isScrolled ? styles.visible : styles.hidden) : styles.visible}`}>
         <Image src="/logo.png" alt="Logo" width={70.14} height={32} />
       </Link>
 

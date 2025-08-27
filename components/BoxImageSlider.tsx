@@ -14,7 +14,7 @@ import { useLikeButton } from "./../hooks/useLikeButton";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  urls?: string[];
+  imagesUrls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
   isHeartClicked: boolean;
@@ -26,7 +26,7 @@ interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ImageSlider = ({
   category,
-  urls,
+  imagesUrls,
   hasLikeButton = false,
   aspectRatios,
   isHeartClicked,
@@ -39,7 +39,7 @@ const ImageSlider = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
-    isEnd: activeIndex === (urls?.length ?? 0) - 1,
+    isEnd: activeIndex === (imagesUrls?.length ?? 0) - 1,
   });
 
   const {
@@ -64,10 +64,10 @@ const ImageSlider = ({
       setActiveIndex(activeIndex);
       setSlideConfig({
         isBeginning: activeIndex === 0,
-        isEnd: activeIndex === (urls?.length ?? 0) - 1,
+        isEnd: activeIndex === (imagesUrls?.length ?? 0) - 1,
       });
     });
-  }, [swiper, urls]);
+  }, [swiper, imagesUrls]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -177,7 +177,7 @@ const ImageSlider = ({
         autoHeight
         style={swiperStyles}
       >
-        {urls?.map((url, index) => (
+        {imagesUrls?.map((url, index) => (
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{

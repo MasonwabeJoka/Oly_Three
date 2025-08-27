@@ -109,7 +109,7 @@ export const featuredListingsSection = defineType({
           options: {
             list: [
               { title: 'Manual Selection', value: 'manual' },
-              { title: 'Auto: Featured Ads', value: 'auto-featured' },
+              { title: 'Auto: Featured Listings', value: 'auto-featured' },
               { title: 'Auto: Recent Premium', value: 'auto-recent-premium' },
               { title: 'Auto: Most Viewed', value: 'auto-most-viewed' },
               { title: 'Auto: Highest Priced', value: 'auto-highest-priced' },
@@ -131,18 +131,18 @@ export const featuredListingsSection = defineType({
               title: 'Featured Listing',
               fields: [
                 defineField({
-                  name: 'adReference',
-                  title: 'Ad Reference',
+                  name: 'listingReference',
+                  title: 'Listing Reference',
                   type: 'reference',
-                  to: [{ type: 'ad' }],
-                  description: 'Reference to the actual ad document.',
+                  to: [{ type: 'listing' }],
+                  description: 'Reference to the actual listing document.',
                 }),
 
                 defineField({
                   name: 'customTitle',
                   title: 'Custom Title',
                   type: 'string',
-                  description: 'Override the ad title for this featured display (optional).',
+                  description: 'Override the listing title for this featured display (optional).',
                 }),
 
                 defineField({
@@ -160,7 +160,7 @@ export const featuredListingsSection = defineType({
                       type: 'string',
                     }),
                   ],
-                  description: 'Override the ad image for this featured display (optional).',
+                  description: 'Override the listing image for this featured display (optional).',
                 }),
 
                 defineField({
@@ -195,11 +195,11 @@ export const featuredListingsSection = defineType({
               ],
               preview: {
                 select: {
-                  title: 'adReference.title',
+                  title: 'listingReference.title',
                   customTitle: 'customTitle',
-                  media: 'adReference.featuredImage',
+                  media: 'listingReference.featuredImage',
                   customMedia: 'customImage',
-                  price: 'adReference.price',
+                  price: 'listingReference.price',
                   isActive: 'isActive',
                 },
                 prepare(selection) {

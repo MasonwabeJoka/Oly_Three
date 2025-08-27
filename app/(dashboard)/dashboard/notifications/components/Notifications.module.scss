@@ -6,6 +6,12 @@
   @include only(largeDesktop) {
     margin-bottom: rem(64);
   }
+  @include only(smallDesktop) {
+    margin-bottom: rem(64);
+  }
+  @include only(tablet) {
+    margin-bottom: rem(64);
+  }
 }
 
 .notificationOptionsTabs {

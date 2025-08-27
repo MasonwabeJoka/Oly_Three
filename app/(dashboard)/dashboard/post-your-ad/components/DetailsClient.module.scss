@@ -12,6 +12,12 @@
   @include only(largeDesktop) {
     width: rem(1098);
   }
+  @include only(smallDesktop) {
+    width: rem(960);
+  }
+  @include only(tablet) {
+    width: rem(960);
+  }
 
   .title {
     margin-top: rem(240);
@@ -26,8 +32,7 @@
     flex-direction: column;
     align-items: center;
 
-    @include only(largeDesktop) {
-    }
+   
 
     .formElements {
       display: flex;
@@ -54,8 +59,7 @@
       }
 
       .detailsListContainer {
-        margin-top: rem(48);
-        margin-bottom: rem(48);
+    
 
       }
 

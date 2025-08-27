@@ -3,6 +3,11 @@ interface Props {
   videoPath: string;
 }
 export default function VideoPlayer({ videoPath }: Props) {
+  // Don't render if videoPath is empty or invalid
+  if (!videoPath || videoPath.trim() === "") {
+    return null;
+  }
+
   return (
     <>
       <MediaThemeNotflix

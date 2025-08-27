@@ -26,11 +26,11 @@ export const bid = defineType({
             description: 'The date and time when the bid was placed.',
         }),
         defineField({
-            name: 'associatedAd',
-            title: 'Associated Ad',
+            name: 'associatedListing',
+            title: 'Associated Listing',
             type: 'reference',
-            to: [{ type: 'ad' }],
-            description: 'The classified ad this bid is associated with.',
+            to: [{ type: 'listing' }],
+            description: 'The classified listing this bid is associated with.',
         }),
         defineField({
             name: 'isLive',

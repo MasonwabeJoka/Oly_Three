@@ -12,7 +12,7 @@ import NavButtonRight from "./navButtonRight";
 import { useLikeButton } from "./../hooks/useLikeButton";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
-  urls?: string[];
+  imageUrls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
   isHeartClicked: boolean;
@@ -23,7 +23,7 @@ interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ExpandedImageSlider = ({
-  urls,
+  imageUrls,
   hasLikeButton = false,
   aspectRatios,
   isHeartClicked,
@@ -36,9 +36,8 @@ const ExpandedImageSlider = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
-    isEnd: activeIndex === (urls?.length ?? 0) - 1,
+    isEnd: activeIndex === (imageUrls?.length ?? 0) - 1,
   });
-
   const {
     showHeart,
     showNav,
@@ -56,15 +55,16 @@ const ExpandedImageSlider = ({
     isCardHovered,
   });
 
+
   useEffect(() => {
     swiper?.on("slideChange", ({ activeIndex }) => {
       setActiveIndex(activeIndex);
       setSlideConfig({
         isBeginning: activeIndex === 0,
-        isEnd: activeIndex === (urls?.length ?? 0) - 1,
+        isEnd: activeIndex === (imageUrls?.length ?? 0) - 1,
       });
     });
-  }, [swiper, urls]);
+  }, [swiper, imageUrls]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -77,6 +77,7 @@ const ExpandedImageSlider = ({
     }
     return () => clearTimeout(timer);
   }, [isCardHovered, swiper, activeIndex]);
+        console.log("IMAGE ULRS", imageUrls);
 
   return (
     <div className={styles.container}>
@@ -150,7 +151,8 @@ const ExpandedImageSlider = ({
         centeredSlides={true}
         slidesPerView={1}
       >
-        {urls?.map((url, index) => (
+
+         {imageUrls?.map((url, index) => (
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{

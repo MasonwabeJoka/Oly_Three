@@ -16,6 +16,9 @@ import {
   FaFlag,
   FaChartLine,
   FaUpload,
+  FaList,
+  FaTag,
+  FaBuilding,
 } from "react-icons/fa";
 
 // StructureResolver for OLY classifieds websites
@@ -69,59 +72,93 @@ export const structure: StructureResolver = (S, context) => {
               S.documentTypeListItem("userLocationPreference").title(
                 "Location Preferences"
               ),
-              S.documentTypeListItem("storeOwner").title("Store Owners"),
-              S.documentTypeListItem("dealerProfile").title("Dealer Profiles"),
               ...(isAdmin
                 ? [S.documentTypeListItem("auditEntry").title("Audit Logs")]
                 : []),
             ])
         ),
-
-      // Ads & Categories - Simplified without templates in structure
+      // User Entities (stores, companies, content channels)
       S.listItem()
-        .title("Ads & Categories")
+        .title("User Entities")
+        .icon(FaBuilding)
+        .child(
+          S.list()
+            .title("User Entities")
+            .items([
+              S.documentTypeListItem("store").title("Stores"),
+              S.documentTypeListItem("carDealership").title("Car Dealerships"),
+              S.documentTypeListItem("recruitmentAgency").title(
+                "Recruitment Agencies"
+              ),
+              S.documentTypeListItem("serviceProvider").title(
+                "Service Providers"
+              ),
+              S.documentTypeListItem("company").title("Companies"),
+            ])
+        ),
+      // Listings
+      S.listItem()
+        .title("Listings")
         .icon(FaAd)
         .child(
           S.list()
-            .title("Ads & Categories")
+            .title("Listings")
             .items([
               S.listItem()
-                .title("OLY Ads")
+                .title("OLY Listings")
                 .child(
                   S.documentList()
-                    .title("OLY Ads")
-                    .schemaType("ad")
-                    .filter('_type == "ad" && site == "oly"')
+                    .title("OLY Listings")
+                    .schemaType("listing")
+                    .filter('_type == "listing" && site == "oly"')
                 ),
               S.listItem()
-                .title("Oly Properties Ads")
+                .title("Oly Properties Listings")
                 .child(
                   S.documentList()
-                    .title("Oly Properties Ads")
-                    .schemaType("ad")
-                    .filter('_type == "ad" && site == "oly-properties"')
+                    .title("Oly Properties Listings")
+                    .schemaType("propertyListing")
+                    .filter(
+                      '_type == "propertyListing" && site == "oly-properties"'
+                    )
                 ),
               S.listItem()
-                .title("Oly Auto Ads")
+                .title("Oly Auto Listings")
                 .child(
                   S.documentList()
-                    .title("Oly Auto Ads")
-                    .schemaType("ad")
-                    .filter('_type == "ad" && site == "oly-auto"')
+                    .title("Oly Auto Listings")
+                    .schemaType("autoListing")
+                    .filter('_type == "autoListing" && site == "oly-auto"')
                 ),
               S.listItem()
-                .title("Oly Hiring Ads")
+                .title("Oly Hiring Listings")
                 .child(
                   S.documentList()
-                    .title("Oly Hiring Ads")
-                    .schemaType("ad")
-                    .filter('_type == "ad" && site == "oly-hiring"')
+                    .title("Oly Hiring Listings")
+                    .schemaType("jobListing")
+                    .filter('_type == "autoListing" && site == "oly-hiring"')
                 ),
-              S.documentTypeListItem("category").title("Categories"),
-              S.documentTypeListItem("listingPackage").title(
-                "Listing Packages"
-              ),
+              S.listItem()
+                .title("Oly Services Listings")
+                .child(
+                  S.documentList()
+                    .title("Oly Services Listings")
+                    .schemaType("servicesListing")
+                    .filter(
+                      '_type == "servicesListing" && site == "oly-hiring"'
+                    )
+                ),
             ])
+        ),
+
+      // Categories (new section)
+      S.listItem()
+        .title("Categories")
+        .icon(FaList) // Using FaList as a suitable icon for Categories
+        .child(
+          S.list()
+            .title("Categories")
+            .items([S.documentTypeListItem("category").title("Categories")])
         ),
 
       // Auctions (shared across all sites)
@@ -153,8 +190,8 @@ export const structure: StructureResolver = (S, context) => {
               S.documentTypeListItem("locationAlertSettings").title(
                 "Alert Settings"
               ),
-              S.documentTypeListItem("locationBasedAdTargeting").title(
-                "Ad Targeting"
+              S.documentTypeListItem("locationBasedListingTargeting").title(
+                "Listing Targeting"
               ),
               S.documentTypeListItem("locationBasedSearch").title(
                 "Search Settings"
@@ -187,6 +224,18 @@ export const structure: StructureResolver = (S, context) => {
                     ),
                     S.documentTypeListItem("transaction").title("Transactions"),
                     S.documentTypeListItem("bankDetails").title("Bank Details"),
+                  ])
+              ),
+            S.listItem()
+              .title("Listing Packages")
+              .icon(FaTag)
+              .child(
+                S.list()
+                  .title("Listing Packages")
+                  .items([
+                    S.documentTypeListItem("listingPackage").title(
+                      "Listing Packages"
+                    ),
                   ])
               ),
             S.divider(),
@@ -335,9 +384,9 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("serviceDetails").title(
                         "Service Details"
                       ),
-                      S.documentTypeListItem("professionalServiceProvider").title(
-                        "Professional Service Providers"
-                      ),
+                      S.documentTypeListItem(
+                        "professionalServiceProvider"
+                      ).title("Professional Service Providers"),
                       S.documentTypeListItem("heroSection").title(
                         "Hero Section"
                       ),
@@ -396,13 +445,14 @@ export const structure: StructureResolver = (S, context) => {
                 ),
             ])
         ),
+
       // Blog & Sponsored Content (shared)
       S.listItem()
-        .title("Blog & Articles")
+        .title("Articles")
         .icon(FaBlog)
         .child(
           S.list()
-            .title("Blog & Articles")
+            .title("Articles")
             .items([
               S.documentTypeListItem("Blog").title("Blog Posts"),
               S.documentTypeListItem("SponsoredArticles").title(
@@ -457,8 +507,8 @@ export const structure: StructureResolver = (S, context) => {
                     S.documentTypeListItem("userEngagement").title(
                       "User Engagement"
                     ),
-                    S.documentTypeListItem("adPerformance").title(
-                      "Ad Performance"
+                    S.documentTypeListItem("listingPerformance").title(
+                      "Listing Performance"
                     ),
                     S.documentTypeListItem("moderationLog").title(
                       "Moderation Logs"

@@ -14,7 +14,7 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   inputType: keyof typeof INPUT_TYPE;
   accept?: string;
   error?: string;
-  inputSize: "xxLarge" | "xLarge" | "large" | "medium";
+  inputSize: "xLarge" | "large" | "medium";
   inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
   iconPosition?: "left" | "right" | "leftRight";
   iconSrcLeft?: string;

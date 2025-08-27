@@ -18,12 +18,30 @@
       position: static;
       margin-bottom: rem(48);
     }
+    @include only(smallDesktop) {
+      font-size: $h4;
+      margin-top: rem(56);
+      position: static;
+      margin-bottom: rem(48);
+    }
+    @include only(tablet) {
+      font-size: $h4;
+      margin-top: rem(56);
+      position: static;
+      margin-bottom: rem(48);
+    }
   }
 
   .tabsWrapper {
     margin-top: rem(112);
 
     @include only(largeDesktop) {
+      margin: unset;
+    }
+    @include only(smallDesktop) {
+      margin: unset;
+    }
+    @include only(tablet) {
       margin: unset;
     }
   }

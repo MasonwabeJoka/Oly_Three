@@ -132,10 +132,10 @@ export const menuModalSection = defineType({
                   type: 'string',
                   options: {
                     list: [
-                      { title: 'Post Ad (AD)', value: 'post-ad' },
+                      { title: 'Post Listing (LISTING)', value: 'post-listing' },
                       { title: 'Dashboard (Chart)', value: 'dashboard' },
-                      { title: 'My Ads (Tag)', value: 'my-ads' },
-                      { title: 'Liked Ads (Heart)', value: 'liked-ads' },
+                      { title: 'My Listings (Tag)', value: 'my-listings' },
+                      { title: 'Liked Listings (Heart)', value: 'liked-listings' },
                       { title: 'Notifications (Bell)', value: 'notifications' },
                       { title: 'Messages (Chat)', value: 'messages' },
                       { title: 'Help (Question)', value: 'help' },
@@ -196,7 +196,7 @@ export const menuModalSection = defineType({
                     }
                     return true;
                   }),
-                  description: 'Text or emoji to display as icon (e.g., 📱, AD, etc.)',
+                  description: 'Text or emoji to display as icon (e.g., 📱, LISTING, etc.)',
                 }),
               ],
               validation: (Rule) => Rule.required(),
@@ -348,10 +348,10 @@ export const menuModalSection = defineType({
             prepare(selection) {
               const { title, url, isActive, iconType, predefinedIcon } = selection;
               const iconEmoji = {
-                'post-ad': '📝',
+                'post-listing': '📝',
                 'dashboard': '📊',
-                'my-ads': '🏷️',
-                'liked-ads': '❤️',
+                'my-listings': '🏷️',
+                'liked-listings': '❤️',
                 'notifications': '🔔',
                 'messages': '💬',
                 'help': '❓',

@@ -15,6 +15,14 @@
     width: rem(628);
     height: rem(353.25);
   }
+  @include only(tablet) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+  @include only(extraLargeDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
 
   .titleContainer {
     display: flex;

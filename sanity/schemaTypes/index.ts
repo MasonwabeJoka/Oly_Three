@@ -1,5 +1,9 @@
 import { type SchemaTypeDefinition } from 'sanity'
-import { ad } from "./documents/ad"
+import { listing } from "./documents/listings/oly-listing"
+import { propertyListing } from "./documents/listings/oly-properties-listing"
+import { autoListing } from "./documents/listings/oly-auto-listing"
+import { jobListing } from "./documents/listings/oly-hiring-listing"
+import { servicesListing } from "./documents/listings/oly-services-listing"
 import { address } from "./documents/address"
 import { auction } from "./documents/auction"
 import { auctionLot } from "./documents/auctionLot"
@@ -12,7 +16,7 @@ import { group } from "./documents/group"
 import { listingPackage } from "./documents/listingPackages"
 import { location } from "./documents/location"
 import { locationAlertSettings } from "./documents/locationAlertSettings"
-import { locationBasedAdTargeting } from "./documents/locationBasedAdTargeting"
+import { locationBasedListingTargeting } from "./documents/locationBasedListingTargeting"
 import { locationBasedSearch } from "./documents/locationBasedSearch"
 import { locationHistory } from "./documents/locationHistory"
 import { locationBasedRecommendationSettings } from "./documents/locationRecommendationSettings"
@@ -37,7 +41,6 @@ import { FeaturedCategories } from "./objects/FeaturedCategories"
 import { Blog } from "./objects/Blog"
 import { SponsoredArticles } from "./objects/SponsoredArticles"
 import { page } from "./documents/page"
-import { category } from "./documents/categories"
 import { Details } from "./documents/details"
 import { imageFile } from "./documents/imageFile"
 import { videoFile } from "./documents/videoFile"
@@ -49,7 +52,7 @@ import { vehicleDetails } from "./documents/vehicleDetails"
 import { jobDetails } from "./documents/jobDetails"
 import { serviceDetails } from "./documents/serviceDetails"
 import { userEngagement } from "./documents/userEngagement"
-import { adPerformance } from "./documents/adPerformance"
+import { listingPerformance } from "./documents/listingPerformance"
 import { moderationLog } from "./documents/moderationLog"
 import { moderationComment } from "./documents/moderationComment"
 import { storeOwner } from "./documents/storeOwner"
@@ -85,19 +88,31 @@ import {articleSidebar} from "./documents/layout/pages/article/sections/article-
 import {commentsSection} from "./documents/layout/pages/article/sections/comments-section"
 import {sponsoredArticle} from "./documents/layout/temp/temp-sponsoredArticle"
 import {sponsor} from "./documents/layout/temp/temp-sponsor"
+import {category} from './documents/category'
+import { propertyCategory } from "./documents/propertyCategory"
+import { vehicleCategory } from "./documents/vehicleCategory"
+import { jobCategory } from "./documents/jobCategory"
+import { servicesCategory } from "./documents/servicesCategory"
+import {store} from "./documents/store"
+import {company} from "./documents/company"
+import {contentChannel} from "./documents/contentChannel"
+import {carDealership} from "./documents/carDealership"
+import {recruitmentAgency} from "./documents/recruitmentAgency"
+import {serviceProvider} from "./documents/serviceProvider"
+import { messageReply } from "./documents/messageReply"
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     user,
-    ad,
+    listing,
     auction,
     bid,
     bidderHistory,
     listingPackage,
     location,
     locationAlertSettings,
-    locationBasedAdTargeting,
+    locationBasedListingTargeting,
     locationBasedSearch,
     locationHistory,
     locationBasedRecommendationSettings,
@@ -139,7 +154,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     jobDetails,
     serviceDetails,
     userEngagement,
-    adPerformance,
+    listingPerformance,
     makeModel,
     moderationLog,
     moderationComment,
@@ -173,7 +188,22 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     author,
     articleSidebar,
     commentsSection,
-    sponsoredArticle,
+    sponsoredArticle, 
     sponsor,
+    propertyListing,
+    autoListing,
+    jobListing,
+    servicesListing,
+    propertyCategory,
+    vehicleCategory,
+    jobCategory,
+    servicesCategory,
+    store,
+    company,
+    contentChannel,
+    carDealership,
+    recruitmentAgency,
+    serviceProvider,
+    messageReply,
   ],
 };

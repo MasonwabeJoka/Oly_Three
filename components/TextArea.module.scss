@@ -48,28 +48,7 @@
       overflow: hidden;
       border-radius: rem(40);
 
-      width: rem(311);
-      height: rem(56);
 
-      @include only(largeDesktop) {
-        width: rem(514);
-        height: rem(56);
-      }
-
-      @include only(smallDesktop) {
-        width: rem(462);
-        height: rem(56);
-      }
-
-      @include only(tablet) {
-        width: rem(514);
-        height: rem(56);
-      }
-
-      @include only(extraLargeDesktop) {
-        width: rem(514);
-        height: rem(56);
-      }
       
       // Hide scrollbar by default
       &::-webkit-scrollbar {
@@ -113,6 +92,84 @@
         }
       }
     }
+
+      .largeTextarea {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+  .mediumTextarea {
+    width: rem(202);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(424) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(424);
+      height: rem(56);
+    }
+  }
+
+  .largeDashboardTextarea {
+    width: rem(267);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(471);
+    }
+    @include only(smallDesktop) {
+      width: rem(424);
+    }
+    @include only(tablet) {
+      width: rem(424);
+    }
+  }
+
+  .mediumDashboardTextarea {
+    width: rem(240);
+    height: rem(48);
+    @include only(largeDesktop) {
+      width: rem(326);
+      height: rem(56);
+    }
+    @include only(smallDesktop) {
+      width: rem(293);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(293);
+      height: rem(56);
+    }
+  }
   }
 
   .buttons {

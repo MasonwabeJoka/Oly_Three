@@ -4,7 +4,11 @@ import PromoteYourAdCard from "@/components/cards/PromoteYourAdCard";
 import Button from "@/components/Buttons";
 import Link from "next/link";
 
-const PromoteYourAd = () => {
+interface Props {
+  onNext: () => void;
+}
+
+const PromoteYourAd = ({ onNext }: Props) => {
   return (
     <div className={styles.container}>
       <h4 className={styles.title}>Promote Your Ads</h4>
@@ -35,7 +39,7 @@ const PromoteYourAd = () => {
           <Button
             className={styles.proceedButton}
             buttonChildren="Proceed To Payments"
-            buttonType="primary"
+            buttonType="normal"
             buttonSize="large"
             name="proceed-btn"
             type="button"
@@ -45,20 +49,7 @@ const PromoteYourAd = () => {
             dashboard
           />
         </Link>
-        <Link href="/dashboard/post-your-ad/location">
-          <Button
-            className={styles.backButton}
-            buttonChildren="Back"
-            buttonType="normal"
-            buttonSize="large"
-            name="back-btn"
-            type="button"
-            ariaLabel="Back Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard
-          />
-        </Link>
+        
       </div>
     </div>
   );

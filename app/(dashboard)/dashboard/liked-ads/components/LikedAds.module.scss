@@ -14,6 +14,14 @@
     width: 100%;
     top: rem(152);
   }
+  @include only(smallDesktop) {
+    width: 100%;
+    top: rem(152);
+  }
+  @include only(tablet) {
+    width: 100%;
+    top: rem(152);
+  }
 
   .sortingButtons {
     position: absolute;

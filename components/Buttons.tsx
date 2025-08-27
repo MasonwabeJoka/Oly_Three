@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonChildren: any;
   dashboard?: boolean;
   buttonType: keyof typeof BUTTON_TYPE;
-  buttonSize:'large' | "medium" | "small"| "tiny";
+  buttonSize: "large" | "medium" | "small" | "tiny";
   name: string;
   type: "button" | "submit" | "reset";
   ariaLabel?: string;
@@ -94,10 +94,6 @@ const BUTTON_TYPE = {
   bidBuy: `${styles.bidBuy}`,
 };
 
-
-
-
-
 const Button = ({
   type,
   ariaLabel,
@@ -115,29 +111,28 @@ const Button = ({
   fontSize,
   ...otherProps
 }: ButtonProps): JSX.Element => {
-
-
-
   let sizeClass = "";
-    switch (buttonSize) {
-      case "medium":
-        sizeClass = !dashboard ? styles.mediumButton : styles.mediumDashboardButton;
-        break;
-      case "small":
-        sizeClass = !dashboard ? styles.smallButton : styles.smallDashboardButton;
-        break;
-      case "tiny":
-        sizeClass = !dashboard ? styles.tinyButton : styles.tinyDashboardButton;
-        break;
-      default:
-        sizeClass = !dashboard ? styles.largeButton : styles.largeDashboardButton;
-    }
- 
-let roundButtonSize = "";
-if(buttonType === "round") {
+  switch (buttonSize) {
+    case "medium":
+      sizeClass = !dashboard
+        ? styles.mediumButton
+        : styles.mediumDashboardButton;
+      break;
+    case "small":
+      sizeClass = !dashboard ? styles.smallButton : styles.smallDashboardButton;
+      break;
+    case "tiny":
+      sizeClass = !dashboard ? styles.tinyButton : styles.tinyDashboardButton;
+      break;
+    default:
+      sizeClass = !dashboard ? styles.largeButton : styles.largeDashboardButton;
+  }
+
+  let roundButtonSize = "";
+  if (buttonType === "round") {
     switch (buttonSize) {
       case "large":
-       roundButtonSize = styles.roundLarge;
+        roundButtonSize = styles.roundLarge;
         break;
       case "medium":
         roundButtonSize = styles.roundMedium;
@@ -149,11 +144,11 @@ if(buttonType === "round") {
         roundButtonSize = styles.roundStandard;
     }
   }
+
   return (
     <>
       <button
-        className={`${roundButtonSize} ${sizeClass} ${
-          !dashboard ? styles.button : styles.dashboardButton} ${
+        className={`${roundButtonSize} ${sizeClass} ${styles.button} ${
           BUTTON_TYPE[buttonType] || ""
         } ${className || ""}`}
         type={type}

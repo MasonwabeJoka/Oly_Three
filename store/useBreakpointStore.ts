@@ -23,8 +23,24 @@ const initialState = () => {
   };
 };
 
-const useBreakpointStore = create<State>((set) => {
+const useBreakpointStore = create<State>((set, get) => {
   const state = initialState();
+
+  // Initialize client-side values when the store is first accessed
+  const initializeClientValues = () => {
+    if (typeof window !== "undefined" && get().currentScreenSize === 0) {
+      const width = window.innerWidth;
+      set({
+        currentScreenSize: width,
+        isMobile: width >= variables.minMobile && width <= variables.maxMobile,
+        isTablet: width >= variables.minTablet && width <= variables.maxTablet,
+        isSmallDesktop: width >= variables.minSmallDesktop && width <= variables.maxSmallDesktop,
+        isLargeDesktop: width >= variables.minLargeDesktop && width <= variables.maxLargeDesktop,
+        isExtraLargeDesktop: width >= variables.minExtraLargeDesktop,
+      });
+    }
+  };
+
   if (typeof window !== "undefined") {
     const debounce = (func: Function, wait: number) => {
       let timeout: NodeJS.Timeout;
@@ -33,6 +49,7 @@ const useBreakpointStore = create<State>((set) => {
         timeout = setTimeout(() => func(...args), wait);
       };
     };
+
     const handleResize = debounce(() => {
       const width = window.innerWidth;
       set({
@@ -44,32 +61,40 @@ const useBreakpointStore = create<State>((set) => {
         isExtraLargeDesktop: width >= variables.minExtraLargeDesktop,
       });
     }, 100);
+
     window.addEventListener("resize", handleResize);
-    return {
-      ...state,
-      setCurrentScreenSize: (size) => set({
+
+    // Initialize immediately when on client
+    setTimeout(initializeClientValues, 0);
+  }
+
+  return {
+    ...state,
+    setCurrentScreenSize: (size) => {
+      initializeClientValues(); // Ensure client values are set
+      set({
         currentScreenSize: size,
         isMobile: size >= variables.minMobile && size <= variables.maxMobile,
         isTablet: size >= variables.minTablet && size <= variables.maxTablet,
         isSmallDesktop: size >= variables.minSmallDesktop && size <= variables.maxSmallDesktop,
         isLargeDesktop: size >= variables.minLargeDesktop && size <= variables.maxLargeDesktop,
         isExtraLargeDesktop: size >= variables.minExtraLargeDesktop,
-      }),
-      destroy: () => window.removeEventListener("resize", handleResize),
-    };
-  }
-  return {
-    ...state,
-    setCurrentScreenSize: (size) => set({
-      currentScreenSize: size,
-      isMobile: size >= variables.minMobile && size <= variables.maxMobile,
-      isTablet: size >= variables.minTablet && size <= variables.maxTablet,
-      isSmallDesktop: size >= variables.minSmallDesktop && size <= variables.maxSmallDesktop,
-      isLargeDesktop: size >= variables.minLargeDesktop && size <= variables.maxLargeDesktop,
-      isExtraLargeDesktop: size >= variables.minExtraLargeDesktop,
-    }),
+      });
+    },
   };
 });
+
+// Custom hook that ensures the store is initialized on the client
+export const useBreakpoint = () => {
+  const store = useBreakpointStore();
+
+  // Trigger initialization check when the hook is called
+  if (typeof window !== "undefined" && store.currentScreenSize === 0) {
+    store.setCurrentScreenSize(window.innerWidth);
+  }
+
+  return store;
+};
 
 export default useBreakpointStore;
 

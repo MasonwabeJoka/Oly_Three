@@ -36,7 +36,7 @@ const UploadButton = ({
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0] ;
+    const selectedFile = event.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile);
       dropAreaRef.current?.classList.add("active");
@@ -77,9 +77,15 @@ const UploadButton = ({
     const fileReader = new FileReader();
     fileReader.onload = () => {
       const fileURL = fileReader.result as string;
-      mediaType === "photo" && addImage(fileURL);
-      mediaType === "video" && addVideo(fileURL);
-      mediaType === "attachment" && addAttachment(fileURL);
+      // Only add to store if we have a valid, non-empty URL
+      if (fileURL && fileURL.trim() !== "") {
+        mediaType === "photo" && addImage(fileURL);
+        mediaType === "video" && addVideo(fileURL);
+        mediaType === "attachment" && addAttachment(fileURL);
+      }
+    };
+    fileReader.onerror = () => {
+      console.error("Error reading file:", selectedFile.name);
     };
     fileReader.readAsDataURL(selectedFile);
   };

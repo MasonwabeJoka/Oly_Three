@@ -2,17 +2,17 @@
 export const MenuData = [
   {
     id: 1,
-    icon: "/icons/dashboard-sidebar/post-your-ad.png",
-    active_icon: '/icons/dashboard-sidebar/post-your-ad-hovered.png',
-    text: "Post Your Ad",
-    path: "/dashboard/post-your-ad/select-category",
-  },
-  {
-    id: 2,
     icon: "/icons/dashboard-sidebar/dashboard.png",
     active_icon: '/icons/dashboard-sidebar/dashboard-hovered.png',
     text: "Dashboard",
     path: "/dashboard",
+  },
+  {
+    id: 2,
+    icon: "/icons/dashboard-sidebar/post-your-ad.png",
+    active_icon: '/icons/dashboard-sidebar/post-your-ad-hovered.png',
+    text: "Post Your Ad",
+    path: "/dashboard/post-your-ad/select-category",
   },
   {
     id: 3,

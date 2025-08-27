@@ -37,9 +37,9 @@ export default async function Layout({
          
             <div className={styles.wrapper}>
               <div className={styles.keepSidebarInPlace} />
-              <nav className={styles.nav}>
+              {/* <nav className={styles.nav}>
                 <Navbar />
-              </nav>
+              </nav> */}
               <aside className={styles.sidebar}>
                 {/* The exclamation point means that the currentUser can be null also. */}
                 <DashboardSidebar currentUser={currentUser!} />

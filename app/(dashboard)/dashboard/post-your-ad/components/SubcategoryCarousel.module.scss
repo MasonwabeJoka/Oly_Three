@@ -1,0 +1,99 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.subcategories {
+  height: auto;
+  padding-bottom: rem(16);
+  display: none;
+
+  @include only(largeDesktop) {
+    display: block;
+  }
+  @include only(smallDesktop) {
+    display: block;
+  }
+  @include only(tablet) {
+    display: block;
+  }
+
+  .subcategoriesWrapper {
+    width: 150%;
+
+    .swipper {
+      padding-top: rem(8);
+      padding-left: rem(8);
+      display: none;
+      background-color: #d0d3d615;
+      border-radius: rem(40);
+      @include only(largeDesktop) {
+        display: block;
+      }
+      @include only(smallDesktop) {
+        display: block;
+      }
+      @include only(tablet) {
+        display: block;
+      }
+
+      .subcategorySlide {
+        display: flex;
+        flex-direction: column;
+        // width: rem(288);
+        height: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-bottom: rem(16);
+
+        .subcategoryList {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: rem(16);
+
+          .subcategory {
+            display: flex;
+            align-items: center;
+            background-color: $white-three;
+            height: rem(56);
+            width: rem(256);
+            border-radius: rem(40);
+            cursor: pointer;
+
+            .subcategoryLink {
+              width: rem(256);
+              text-overflow: ellipsis;
+              padding-left: rem(18);
+              margin: rem(2);
+              line-height: 1.7;
+            }
+          }
+
+          .subcategory:hover {
+            cursor: pointer;
+            background-color: $white-one;
+          }
+        }
+      }
+
+      .navButtons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: rem(48);
+        margin-bottom: rem(16);
+        width: rem(160);
+        @include only(largeDesktop) {
+          margin-left: rem(906);
+        }
+        @include only(smallDesktop) {
+        }
+        @include only(tablet) {
+        }
+      }
+    }
+  }
+}

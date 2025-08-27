@@ -13,7 +13,11 @@ import AttachmentUploadSection from "@/components/AttachmentUploadSection";
 import { attachments } from "@/data/attachments";
 import { useFormContext } from "react-hook-form";
 
-const UploadMediaClient = () => {
+interface Props {
+  onNext: () => void;
+}
+
+const UploadMediaClient = ({ onNext }: Props) => {
   const { uploadedImages, uploadedVideos } = useUploadFiles();
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
@@ -47,91 +51,87 @@ const UploadMediaClient = () => {
   };
 
   return (
-    <FormWrapper>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Upload Media</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Upload Media</h2>
 
-        <div className={styles.uploadedPhotos}>
-          <ImageUploadsSection uploadedFiles={uploadedImages} />
-        </div>
+      <div className={styles.uploadedPhotos}>
+        <ImageUploadsSection uploadedFiles={uploadedImages} />
+      </div>
 
-        <Modal
-          showModal={showVideoUploadModal}
-          setShowModal={setShowVideoUploadModal}
-          modalContent={
-            uploadedVideoUrl ? (
-              <VideoUploadForm videoPath={uploadedVideoUrl} />
-            ) : null
-          }
+      <Modal
+        showModal={showVideoUploadModal}
+        setShowModal={setShowVideoUploadModal}
+        modalContent={
+          uploadedVideoUrl ? (
+            <VideoUploadForm videoPath={uploadedVideoUrl} />
+          ) : null
+        }
+      />
+
+      <div
+        className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
+      >
+        <UploadButton
+          mediaType="photo"
+          colour="primary"
+          required={true}
+          accept="image/*"
         />
-
-        <div
-          className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
-        >
-          <UploadButton
-            mediaType="photo"
-            colour="primary"
-            required={true}
-            accept="image/*"
-          />
+      </div>
+      <div className={styles.uploadedVideosContainer}>
+        <div className={styles.uploadedVideo}>
+          <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
         </div>
-        <div className={styles.uploadedVideosContainer}>
-          <div className={styles.uploadedVideo}>
-            <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
-          </div>
-          <div className={styles.uploadedVideo}>
-            <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
-          </div>
-          <div className={styles.uploadedVideo}>
-            <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
-          </div>
+        <div className={styles.uploadedVideo}>
+          <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
         </div>
-        <div
-          className={`${styles.buttonContainer} ${styles.videosButtonContainer}`}
-        >
-          <UploadButton
-            mediaType="video"
-            colour="normal"
-            required={true}
-            accept="video/*"
-            onFileSelect={handleVideoUpload}
-          />
-        </div>
-        <div
-          className={`${styles.buttonContainer} ${styles.videoUrlsContainer}`}
-        >
-          <Input
-            className={styles.videoURL}
-            inputType="text"
-            inputSize="large"
-            placeholder="Enter Video URL"
-            label="Enter Video URL"
-            id="video-url"
-            ariaLabel="Video URL Field"
-            autoFocus={false}
-            autoComplete="off"
-            disabled={false}
-            required
-            dashboard
-            {...register("uploadMedia.videoUrl")}
-            error={errors.uploadMedia?.videoUrl?.message}
-          />
-        </div>
-        <div className={styles.uploadedAttachmentsContainer}>
-          <AttachmentUploadSection attachments={attachments} />
-        </div>
-        <div
-          className={`${styles.buttonContainer} ${styles.attachmentsButtonContainer}`}
-        >
-          <UploadButton
-            mediaType="attachment"
-            colour="normal"
-            required={true}
-            accept="application/*,.pdf, .doc, .docx, .txt, .rtf, .odt, .xls, .xlsx, .ppt, .pptx"
-          />
+        <div className={styles.uploadedVideo}>
+          <VideoUploadCard videoPath="https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4" />
         </div>
       </div>
-    </FormWrapper>
+      <div
+        className={`${styles.buttonContainer} ${styles.videosButtonContainer}`}
+      >
+        <UploadButton
+          mediaType="video"
+          colour="normal"
+          required={true}
+          accept="video/*"
+          onFileSelect={handleVideoUpload}
+        />
+      </div>
+      <div className={`${styles.buttonContainer} ${styles.videoUrlsContainer}`}>
+        <Input
+          className={styles.videoURL}
+          inputType="text"
+          inputSize="large"
+          placeholder="Enter Video URL"
+          label="Enter Video URL"
+          id="video-url"
+          ariaLabel="Video URL Field"
+          autoFocus={false}
+          autoComplete="off"
+          disabled={false}
+          required
+          dashboard
+          {...register("uploadMedia.videoUrl")}
+          error={errors.uploadMedia?.videoUrl?.message}
+        />
+      </div>
+      <div className={styles.uploadedAttachmentsContainer}>
+        <AttachmentUploadSection attachments={attachments} />
+      </div>
+      <div
+        className={`${styles.buttonContainer} ${styles.attachmentsButtonContainer}`}
+      >
+        <UploadButton
+          mediaType="attachment"
+          colour="normal"
+          required={true}
+          accept="application/*,.pdf, .doc, .docx, .txt, .rtf, .odt, .xls, .xlsx, .ppt, .pptx"
+        />
+      </div>
+    </div>
   );
 };
 

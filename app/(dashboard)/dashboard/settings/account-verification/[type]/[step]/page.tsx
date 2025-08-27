@@ -6,7 +6,7 @@ export default function VerifyStepPage({
   params: { type: string; step: string };
 }) {
   const { type, step } = params;
-  console.log(type, step);
+ 
   return (
     <VerificationSteps
       initialType={type as "individual" | "business"}

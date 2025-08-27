@@ -21,6 +21,11 @@ const Icon = ({
   onClick,
   isButton = false,
 }: IconProps) => {
+  // Don't render if src is empty or invalid
+  if (!src || src.trim() === "") {
+    return null;
+  }
+
   return (
     <Image
       className={className}
@@ -32,12 +37,16 @@ const Icon = ({
       onClick={onClick}
       role={isButton ? "button" : undefined}
       tabIndex={isButton ? 0 : undefined}
-      onKeyDown={isButton ? (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onClick?.(e as any);
-        }
-      } : undefined}
+      onKeyDown={
+        isButton
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick?.(e as any);
+              }
+            }
+          : undefined
+      }
       aria-label={isButton ? alt : undefined}
     />
   );

@@ -5,7 +5,7 @@ import Checkbox from "./Checkbox";
 
 type BoxImageContainerProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  images?: string[];
+  imagesUrls?: string[];
   aspectRatios?: number[];
   isHeartClicked: boolean;
   isHeartHovered: boolean;
@@ -29,7 +29,7 @@ const PreventLinkClick = ({ children }: any) => {
 
 export const BoxImageContainer: React.FC<BoxImageContainerProps> = ({
   category,
-  images,
+  imagesUrls,
   aspectRatios,
   isHeartClicked,
   isHeartHovered,
@@ -47,7 +47,7 @@ export const BoxImageContainer: React.FC<BoxImageContainerProps> = ({
     <div className={styles.BoxImageContainer}>
       <BoxImageSlider
         category={category}
-        urls={images}
+        imagesUrls={imagesUrls}
         hasLikeButton={true}
         className={styles.image}
         aspectRatios={aspectRatios}

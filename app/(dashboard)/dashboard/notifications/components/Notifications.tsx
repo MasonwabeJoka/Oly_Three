@@ -7,7 +7,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 
 const Notifications = () => {
   const [expanded, setExpanded] = useState(false);
-  const [altWidth, setAltWidth] = useState(954);
+  const [collageViewWidth, setAltWidth] = useState(954);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
 
@@ -46,7 +46,7 @@ const Notifications = () => {
             ]}
             condition={!expanded}
             width={954}
-            altWidth={altWidth}
+            collageViewWidth={collageViewWidth}
             dashboard
             onClickHandlers={
               [
@@ -65,7 +65,7 @@ const Notifications = () => {
           tabs={notificationOptionsTabs}
           condition={!expanded}
           width={954}
-          altWidth={altWidth}
+          collageViewWidth={collageViewWidth}
           dashboard
           onClickHandlers={
             [
@@ -79,4 +79,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications
+export default Notifications;

@@ -9,6 +9,14 @@
     width: 100%;
     height: 100vh;
   }
+  @include only(smallDesktop) {
+    width: 90%;
+    height: 100vh;
+  }
+  @include only(tablet) {
+    width: 90%;
+    height: 100vh;
+  }
 
   .wrapper {
     display: flex;
@@ -17,16 +25,21 @@
     margin: auto 0;
 
     .title {
-      position: fixed;
       font-size: $h4;
       font-weight: 500;
       color: $danger;
       margin-top: rem(56);
 
       @include only(largeDesktop) {
-        font-size: $h4;
         margin-top: rem(24);
-        position: static;
+        margin-bottom: rem(48);
+      }
+      @include only(smallDesktop) {
+        margin-top: rem(24);
+        margin-bottom: rem(48);
+      }
+      @include only(tablet) {
+        margin-top: rem(24);
         margin-bottom: rem(48);
       }
     }
@@ -36,19 +49,28 @@
       flex-direction: column;
       align-items: center;
       margin-top: 16vh;
+      gap: rem(24);
+     
       @include only(largeDesktop) {
         margin-top: 0;
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: row;
       }
+      @include only(smallDesktop) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
+      @include only(tablet) {
+        margin-top: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+      }
       .card {
-        margin-bottom: rem(24);
-
-        @include only(largeDesktop) {
-          margin-bottom: rem(24);
-          margin-right: rem(24);
-        }
+       
       }
     }
   }

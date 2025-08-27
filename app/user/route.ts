@@ -1,17 +1,16 @@
-// app/create-sanity-user/route.ts
+// app/user/route.ts
 
-import sanityClient from "@/sanityTemp/sanityClient";
-import { currentUser } from "@clerk/nextjs";
-import { NextApiRequest } from "next";
+import { client } from "@/sanity/lib/client";
+import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export const GET = async (req: NextApiRequest) => {
+export async function GET(req: Request) {
   const user = await currentUser();
-  if (!user) {
-    return NextResponse.redirect("/sign-in");
-  }
+  console.log('user: ', user)
 
-  // return NextResponse.json(user);
+  if (!user) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
+  }
 
   const {
     id,
@@ -28,7 +27,7 @@ export const GET = async (req: NextApiRequest) => {
     primaryWeb3WalletId,
     lastSignInAt,
     externalId,
-    username, 
+    username,
     firstName,
     lastName,
     publicMetadata,
@@ -40,7 +39,7 @@ export const GET = async (req: NextApiRequest) => {
     web3Wallets,
   } = user;
 
-  await sanityClient.createIfNotExists({
+  await client.createIfNotExists({
     _type: "user",
     _id: id,
     passwordEnabled,
@@ -62,14 +61,13 @@ export const GET = async (req: NextApiRequest) => {
     publicMetadata,
     privateMetadata,
     unsafeMetadata,
-    emailAddress: emailAddresses[0].emailAddress,
+    emailAddress: emailAddresses?.[0]?.emailAddress ?? null,
     emailAddresses,
     phoneNumbers,
     web3Wallets,
     externalAccounts,
-    })
+  });
 
-  const url = req.url?.split("/user")[0]  || "/"
-   return NextResponse.redirect(url);
-};
-
+  const url = new URL("/", req.url);
+  return NextResponse.redirect(url);
+}

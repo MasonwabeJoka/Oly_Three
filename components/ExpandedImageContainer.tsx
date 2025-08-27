@@ -4,7 +4,7 @@ import ExpandedImageSlider from "./ExpandedImageSlider";
 import Checkbox from "./Checkbox";
 type ExpandedImageContainerProps = {
   id?: string;
-  images?: string[];
+  imageUrls?: string[];
   aspectRatios?: number[];
   isHeartClicked: boolean;
   isHeartHovered: boolean;
@@ -23,7 +23,7 @@ export const ExpandedImageContainer: React.FC<ExpandedImageContainerProps> = ({
   checkedColour,
   hoverColour,
   checkedHovered,
-  images,
+  imageUrls,
   aspectRatios,
   isHeartClicked,
   isHeartHovered,
@@ -35,7 +35,7 @@ export const ExpandedImageContainer: React.FC<ExpandedImageContainerProps> = ({
     <div className={styles.centerImageWrapper}>
       <div className={styles.imageContainer}>
         <ExpandedImageSlider
-          urls={images}
+          imageUrls={imageUrls}
           hasLikeButton={true}
           className={styles.image}
           aspectRatios={aspectRatios}

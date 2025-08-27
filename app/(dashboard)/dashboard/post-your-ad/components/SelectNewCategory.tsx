@@ -8,9 +8,13 @@ import { FormWrapper } from "./FormWrapper";
 import CategoryChangeWarning from "./CategoryChangeWarning";
 import styles from "./SelectNewCategory.module.scss";
 
-const SelectNewCategory = () => {
+interface Props {
+  onNext: () => void;
+  goTo: (index: number) => void;
+}
+const SelectNewCategory = ({ onNext, goTo }: Props) => {
   const {
-    goTo,
+  
     currentStepIndex,
     setCategoryPreviouslySelected,
     resetFormData,
@@ -41,7 +45,7 @@ const SelectNewCategory = () => {
   };
 
   return (
-    <FormWrapper title="Category Selection" selectOpen={true}>
+    <>
       <div className={styles.container}>
         <h2 className={styles.title}>Category Selection</h2>
         <p className={styles.description}>
@@ -87,7 +91,7 @@ const SelectNewCategory = () => {
           />
         }
       />
-    </FormWrapper>
+    </>
   );
 };
 

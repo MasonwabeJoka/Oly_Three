@@ -255,27 +255,27 @@ export const featuredCategoriesSection = defineType({
               fields: [
                 defineField({
                   name: 'showAdCount',
-                  title: 'Show Ad Count',
+                  title: 'Show Listing Count',
                   type: 'boolean',
                   initialValue: false,
-                  description: 'Display the number of ads in this category.',
+                  description: 'Display the number of listings in this category.',
                 }),
 
                 defineField({
-                  name: 'adCount',
-                  title: 'Ad Count',
+                  name: 'listingCount',
+                  title: 'Listing Count',
                   type: 'number',
-                  description: 'Number of ads in this category (can be auto-populated).',
-                  hidden: ({ parent }) => !parent?.showAdCount,
+                  description: 'Number of listings in this category (can be auto-populated).',
+                  hidden: ({ parent }) => !parent?.showListingCount,
                 }),
 
                 defineField({
-                  name: 'adCountLabel',
-                  title: 'Ad Count Label',
+                  name: 'listingCountLabel',
+                  title: 'Listing Count Label',
                   type: 'string',
-                  initialValue: 'ads',
-                  description: 'Label to display after the ad count (e.g., "ads", "listings").',
-                  hidden: ({ parent }) => !parent?.showAdCount,
+                  initialValue: 'listings',
+                  description: 'Label to display after the listing count (e.g., "listings", "listings").',
+                  hidden: ({ parent }) => !parent?.showListingCount,
                 }),
               ],
               description: 'Optional statistics to display on the category card.',
@@ -339,13 +339,13 @@ export const featuredCategoriesSection = defineType({
               subtitle: 'description',
               media: 'image',
               isActive: 'isActive',
-              adCount: 'statistics.adCount',
-              showAdCount: 'statistics.showAdCount',
+              listingCount: 'statistics.listingCount',
+              showListingCount: 'statistics.showListingCount',
             },
             prepare(selection) {
-              const { title, subtitle, media, isActive, adCount, showAdCount } = selection;
+              const { title, subtitle, media, isActive, listingCount, showListingCount } = selection;
               const statusIcon = isActive ? '✅' : '❌';
-              const countText = showAdCount && adCount ? ` (${adCount} ads)` : '';
+              const countText = showListingCount && listingCount ? ` (${listingCount} listings)` : '';
               
               return {
                 title: title || 'Unnamed Category',

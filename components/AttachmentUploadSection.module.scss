@@ -4,11 +4,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: $white-two;
   border-radius: rem(40);
-  // row-gap: rem(20);
+  gap: rem(20);
   .attachmentContainer {
     display: flex;
+    background-color: $white-two;
     justify-content: space-between;
     align-items: center;
     width: rem(920);

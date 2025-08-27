@@ -68,7 +68,7 @@ export const message = defineType({
             name: 'replies',
             title: 'Replies',
             type: 'array',
-            of: [{ type: 'message' }],
+            of: [{ type: 'reference', to: [{ type: 'messageReply' }] }],
             description: 'Replies to this message, enabling threaded conversations.',
         }),
         defineField({

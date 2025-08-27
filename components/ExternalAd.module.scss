@@ -15,7 +15,6 @@
       height: rem(100);
       z-index: 10;
       background-color: $white-four;
-      // background-color: red;
     }
     .topBoxTwo {
       position: absolute;
@@ -26,7 +25,6 @@
       border-radius: rem(120);
       box-shadow: $shadow-three;
       background-color: $white-four;
-      // background-color: yellow;
     }
   }
 
@@ -50,8 +48,6 @@
     }
   }
   .bottomContainer {
-    
-    background-color: pink;
     height: rem(100);
     .bottomBoxOne {
       position: relative;
@@ -62,7 +58,6 @@
       border-radius: rem(120);
       box-shadow: $shadow-three;
       background-color: $white-four;
-      //  background-color: yellow;
     }
     .bottomBoxTwo {
       position: relative;
@@ -71,7 +66,6 @@
       height: rem(100);
       z-index: 10;
       background-color: $white-four;
-      // background-color: red;
     }
   }
 }

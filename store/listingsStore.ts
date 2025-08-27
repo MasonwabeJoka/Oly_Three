@@ -4,7 +4,7 @@ interface ListingsState {
   expanded: boolean;
   sortOptions: boolean;
   priceOptions: boolean;
-  altWidth: number;
+  collageViewWidth: number;
   optionsWidth: string;
   page: number;
   loading: boolean;
@@ -26,7 +26,7 @@ export const useListingsStore = create<ListingsState>((set) => ({
   expanded: true,
   sortOptions: false,
   priceOptions: false,
-  altWidth: 954,
+  collageViewWidth: 954,
   optionsWidth: '57.24rem',
   page: 1,
   loading: false,
@@ -34,7 +34,7 @@ export const useListingsStore = create<ListingsState>((set) => ({
   setExpanded: (value) => set({ expanded: value }),
   setSortOptions: (value) => set({ sortOptions: value, priceOptions: false }),
   setPriceOptions: (value) => set({ priceOptions: value, sortOptions: false }),
-  setAltWidth: (value) => set({ altWidth: value }),
+  setAltWidth: (value) => set({ collageViewWidth: value }),
   setOptionsWidth: (value) => set({ optionsWidth: value }),
   setPage: (value) => set({ page: value }),
   setLoading: (value) => set({ loading: value }),

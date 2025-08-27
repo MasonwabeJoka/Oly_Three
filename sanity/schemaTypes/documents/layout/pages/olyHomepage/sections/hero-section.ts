@@ -113,14 +113,14 @@ export const heroSection = defineType({
           name: 'text',
           title: 'Button Text',
           type: 'string',
-          initialValue: 'Post Your Ad',
+          initialValue: 'Post Your Listing',
           validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'url',
           title: 'Button URL',
           type: 'string',
-          initialValue: '/post-ad',
+          initialValue: '/post-listing',
           validation: (Rule) => Rule.required(),
         }),
         defineField({

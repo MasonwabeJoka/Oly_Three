@@ -9,18 +9,20 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
-import { getCategories } from "@/sanityTemp/actions/categoriesActions";
-import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
 import { variables } from "./../../utils/typescript-variables/variables";
+import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
+import { getCategories } from "@/sanity/lib/crud/categories/data";
 const Home = async () => {
-  const fetchedCategories = await getCategories();
   const olyHomepage = await getOlyHomepage();
+  const categories = await getCategories();
+  const {categories: firstLevelCategories } = categories;
+
   const {
     heroSection,
     moreFromOlySection,
     topAdSection,
     featuredServicesSection,
-    featuredCategoriesSection,
+    featuredCategoriesSection,  
     featuredListingsSection,
     bottomAdSection,
     olyArticlesSection,
@@ -30,14 +32,14 @@ const Home = async () => {
   return (
     <div
       className={styles.container}
-      style={{ backgroundColor: variables.whiteFour}}
+      style={{ backgroundColor: variables.whiteFour }}
     >
       <div className={styles.main}>
         <div className={styles.modal}>
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories fetchedCategories={fetchedCategories} />
+          {categories && <ShowCategories categories={firstLevelCategories} />}
         </div>
 
         {heroSection.isEnabled === true && (
@@ -76,35 +78,35 @@ const Home = async () => {
             <FeaturedServicesSlide />
           </section>
         )}
-
+{/* 
         {featuredListingsSection.isEnabled === true && (
           <section className={styles.featuredListings}>
             <h2 className={styles.title}>Featured Listings</h2>
             <FeaturedListings category="all" />
           </section>
-        )}
+        )} */}
 
-        {/* {olyArticlesSection.isEnabled === true && (
+        {olyArticlesSection.isEnabled === true && (
           <section className={styles.blog}>
             <h2 className={styles.title}>Oly Articles</h2>
             <Blogs />
           </section>
-        )} */}
+        )}
 
-        {/* {bottomAdSection.isEnabled === true && ( */}
-        <section className={styles.belowFoldAd}>
-          <ExternalAd
-            adType="video"
-            path="//https://developers.google.com/youtube/player_parameters"
-          />
-        </section>
-        {/* )} */}
-        {/* {sponsoredArticlesSection.isEnabled === true && ( */}
-        <section className={styles.sponsoredArticles}>
-          <h2 className={styles.title}>Sponsored Articles</h2>
-          <SponsoredArticles />
-        </section>
-        {/* )} */}
+        {bottomAdSection.isEnabled === true && (
+          <section className={styles.belowFoldAd}>
+            <ExternalAd
+              adType="video"
+              path="//https://developers.google.com/youtube/player_parameters"
+            />
+          </section>
+        )}
+        {sponsoredArticlesSection.isEnabled === true && (
+          <section className={styles.sponsoredArticles}>
+            <h2 className={styles.title}>Sponsored Articles</h2>
+            <SponsoredArticles />
+          </section>
+        )}
       </div>
     </div>
   );
