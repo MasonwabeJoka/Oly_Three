@@ -22,7 +22,8 @@
       height: rem(216);
     }
   }
-  .largeLabelContainer {
+
+  .labelContainer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -31,35 +32,40 @@
     align-items: center;
     border-radius: 0 0 rem(40) rem(40);
     margin-top: auto;
-    background-color: $grey-one;
-
     .label {
-      color: $black-four;
+      color: $white-one;
       letter-spacing: 1.15px !important;
       text-align: center;
-      font-size: rem(20);
+      font-size: rem(28);
       font-weight: 500;
       line-height: 1.2;
       padding: 0 rem(20);
-    }
+    
   }
 }
+.largeLabelContainer {
+ .label {
+    -webkit-text-stroke: rem(0.4) $primary !important;
+    text-shadow: 2px 2px 4px #03181d71 !important;
+    font-weight: 800;
+
+  }
+ }
+}
 .standardLabelContainer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0 0 rem(40) rem(40);
-  margin-top: auto;
-  background-color: $grey-one;
+     .label {
+       color: $white-one !important;
+      -webkit-text-stroke: rem(0.1) #0a5f70ce !important;
+      text-shadow: 2px 2px 4px #03181d71 !important;
+      font-size: rem(24) !important;
+      font-weight: 800 !important;
+    }
 }
 
 .large {
   position: relative;
-  width: rem(306);
-  height: rem(338);
+  width: rem(290);
+  height: rem(321);
 }
 
 .standard {
@@ -68,27 +74,23 @@
   height: rem(236);
 }
 
-.largeImageContainer {
-  border-radius: rem(40) rem(40) 0 0;
-  height: rem(307);
-}
 .largeLabelContainer {
-  height: rem(88);
-  border-radius: 0 0 rem(40) rem(40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: rem(84);
+  // border-radius: 0 0 rem(40) rem(40);
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 
   .label {
-    font-size: $h3;
+    // font-size: $h3;
   }
 }
 
 .standardLabelContainer {
   height: rem(56);
-  font-size: $h4;
-  padding: rem(8) !important;
-  width: rem(228);
+  // font-size: $h4;
+  // padding: rem(8) !important;
+  // width: rem(228);
 
   @include only(largeDesktop) {
     height: rem(72);

@@ -19,6 +19,7 @@ import {
   FaList,
   FaTag,
   FaBuilding,
+  FaStar,
 } from "react-icons/fa";
 
 // StructureResolver for OLY classifieds websites
@@ -151,16 +152,36 @@ export const structure: StructureResolver = (S, context) => {
             ])
         ),
 
-      // Categories (new section)
+      // Categories
       S.listItem()
         .title("Categories")
-        .icon(FaList) // Using FaList as a suitable icon for Categories
+        .icon(FaList)
         .child(
           S.list()
             .title("Categories")
-            .items([S.documentTypeListItem("category").title("Categories")])
-        ),
+            .items([
+              // All categories (existing)
+              S.documentTypeListItem("category").title("Categories"),
 
+              // New: Featured Categories
+              S.listItem()
+                .title("Featured Categories")
+                .icon(FaStar)
+                .child(
+                  S.documentList()
+                    .title("Featured Categories")
+                    .schemaType("category")
+                    // GROQ filter: only categories where isFeatured is true
+                    .filter('_type == "category" && isFeatured == true')
+                    // Sort by featuredOrder and then title
+                    .params({})
+                    .defaultOrdering([
+                      { field: "featuredOrder", direction: "asc" },
+                      { field: "title", direction: "asc" },
+                    ])
+                ),
+            ])
+        ),
       // Auctions (shared across all sites)
       S.listItem()
         .title("Auctions")
@@ -185,7 +206,6 @@ export const structure: StructureResolver = (S, context) => {
           S.list()
             .title("Location Features")
             .items([
-              S.documentTypeListItem("location").title("Locations"),
               S.documentTypeListItem("address").title("Addresses"),
               S.documentTypeListItem("locationAlertSettings").title(
                 "Alert Settings"
@@ -282,8 +302,8 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("FeaturedListings").title(
                         "Featured Listings"
                       ),
-                      S.documentTypeListItem("FeaturedCategories").title(
-                        "Featured Categories"
+                      S.documentTypeListItem("featuredCategoriesSection").title(
+                        "Featured Categories Section"
                       ),
                       S.listItem()
                         .title("Sections & Layouts")

@@ -8,7 +8,7 @@ type DetailsProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   isCardHovered: boolean;
   title?: string;
-  description?: string | PortableTextBlock[] | null;
+  description?: string;
   descriptionLength?: number;
   price?: number;
   postAge?: string;
@@ -23,7 +23,6 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
   price,
   postAge,
 }) => {
-  const descriptionString = description && description[0]?.children[0]?.text;
 
   return category === "all" ? (
     <>
@@ -46,7 +45,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
         <div className={`${styles.details} ${styles.detailsHovered}`}>
           <div className={styles.titleDescription}>
             <p className={styles.title}>{title?.slice(0, 96)}</p>
-            <p className={styles.description}>{descriptionString}</p>
+            <p className={styles.description}>{description && description}</p>
           </div>
           <h3 className={styles.price}>
             {price

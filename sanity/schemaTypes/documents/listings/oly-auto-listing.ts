@@ -322,13 +322,12 @@ export const autoListing = defineType({
       initialValue: 'approved',
     }),
     defineField({
-      name: 'featured',
-      title: 'Featured',
+      name: 'isFeatured',
+      title: 'Featured Listing',
       type: 'boolean',
       initialValue: false,
-      description: 'Whether this vehicle ad is featured.',
+      description: 'Whether this listing is featured.',
     }),
-
     // Pricing and Payment Details
     defineField({
       name: 'price',

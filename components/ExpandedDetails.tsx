@@ -14,7 +14,7 @@ type ExpandedDetailsProps = {
   checkedHovered?: string;
   avatar?: string;
   title?: string;
-  description?: string | PortableTextBlock[] | null;
+  description?: string | null;
   descriptionLength?: number;
   suburb?: string;
   city?: string;
@@ -44,15 +44,13 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   avatar,
   title,
   description,
-  descriptionLength,
   suburb,
   city,
   price,
   postAge,
   isCardHovered,
 }) => {
-  const descriptionString = description && description[0]?.children[0]?.text;
-
+console.log("Suburb: ", suburb);
   return (
     <div className={styles.details}>
       {isDeletable && (
@@ -89,19 +87,17 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
               </p>
               <div className={styles.location}>
                 <p className={styles.locationText}>
-                  {/* {suburb && suburb}, {city && city} */}
-                  Bryanston, JHB
+                  {suburb ?? suburb}, {city && city}
+                  {/* Bryanston, JHB */}
                 </p>
               </div>
             </div>
           </div>
           <div className={styles.descriptionContainer}>
             <p className={styles.description}>
-              {descriptionLength
-                ? descriptionString.length > descriptionLength
-                  ? `${descriptionString.slice(0, descriptionLength)}...`
-                  : descriptionString
-                : ""}
+              {description && description?.length > 230
+                ? `${description?.slice(0, 230)}...`
+                : description}
             </p>
           </div>
           <div className={styles.cardBottom}>

@@ -1,16 +1,7 @@
-
-import { client } from "@/sanity/lib/client";
-import { tempListing } from "@/sanity/lib/crud/temp/queries";
-
-const Test = async () => {
-
-const listing = await client.fetch(tempListing)
-console.log(JSON.stringify(listing, null, 2))
+const Page = ({searchParams} : {searchParams: any}) => {
   return (
-    <div>
-  
-    </div>
+    <div>{searchParams.param}</div>
   )
 }
 
-export default Test
+export default Page

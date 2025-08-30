@@ -161,7 +161,7 @@ export default function ListingsSearchForm({
                     error={errors.locationSearch?.message}
                     ariaLabel="Location"
                     autoComplete="off"
-                    required
+                    // required
                   />
                 )}
               />

@@ -42,8 +42,8 @@ export const featuredCategoriesSection = defineType({
       rows: 2,
     }),
 
-    defineField({
-      name: 'categories',
+   defineField({
+      name: 'featuredCategories',
       title: 'Featured Categories',
       type: 'array',
       of: [
@@ -53,232 +53,12 @@ export const featuredCategoriesSection = defineType({
           title: 'Featured Category',
           fields: [
             defineField({
-              name: 'name',
-              title: 'Category Name',
-              type: 'string',
-              description: 'Display name for the category (e.g., "Cars And Vehicles")',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'slug',
-              title: 'Category Slug',
-              type: 'slug',
-              options: {
-                source: 'name',
-                maxLength: 50,
-              },
-              description: 'URL-friendly version of the category name.',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'text',
-              description: 'Brief description of what this category includes.',
-              rows: 2,
-            }),
-
-            defineField({
-              name: 'categoryReference',
-              title: 'Category Reference',
+              name: 'categoryRef',
+              title: 'Category',
               type: 'reference',
               to: [{ type: 'category' }],
-              description: 'Reference to the actual category document (if using category references).',
-            }),
-
-            defineField({
-              name: 'url',
-              title: 'Category URL',
-              type: 'string',
-              description: 'URL path to the category page (e.g., "/categories/cars-and-vehicles")',
+              description: 'Reference the canonical category document.',
               validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'image',
-              title: 'Category Image',
-              type: 'image',
-              options: {
-                hotspot: true,
-                metadata: ['blurhash', 'lqip', 'palette'],
-              },
-              fields: [
-                defineField({
-                  name: 'alt',
-                  title: 'Alt Text',
-                  type: 'string',
-                  description: 'Alternative text for accessibility.',
-                  validation: (Rule) => Rule.required(),
-                }),
-              ],
-              description: 'Representative image for the category.',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'icon',
-              title: 'Category Icon',
-              type: 'image',
-              options: {
-                metadata: ['blurhash', 'lqip'],
-              },
-              fields: [
-                defineField({
-                  name: 'alt',
-                  title: 'Alt Text',
-                  type: 'string',
-                }),
-              ],
-              description: 'Optional icon to display alongside or instead of the main image.',
-            }),
-
-            defineField({
-              name: 'cardStyle',
-              title: 'Card Style',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'backgroundColor',
-                  title: 'Background Color',
-                  type: 'string',
-                  options: {
-                    list: [
-                      { title: 'White', value: 'white' },
-                      { title: 'Light Gray', value: 'light-gray' },
-                      { title: 'Light Blue', value: 'light-blue' },
-                      { title: 'Light Green', value: 'light-green' },
-                      { title: 'Light Purple', value: 'light-purple' },
-                      { title: 'Custom', value: 'custom' },
-                    ],
-                  },
-                  initialValue: 'white',
-                  description: 'Background color for the category card.',
-                }),
-
-                defineField({
-                  name: 'customBackgroundColor',
-                  title: 'Custom Background Color',
-                  type: 'string',
-                  description: 'Hex color code (e.g., #F8F9FA)',
-                  hidden: ({ parent }) => parent?.backgroundColor !== 'custom',
-                }),
-
-                defineField({
-                  name: 'borderStyle',
-                  title: 'Border Style',
-                  type: 'string',
-                  options: {
-                    list: [
-                      { title: 'None', value: 'none' },
-                      { title: 'Light Border', value: 'light' },
-                      { title: 'Medium Border', value: 'medium' },
-                      { title: 'Thick Border', value: 'thick' },
-                    ],
-                  },
-                  initialValue: 'light',
-                  description: 'Border style for the category card.',
-                }),
-
-                defineField({
-                  name: 'borderRadius',
-                  title: 'Border Radius',
-                  type: 'string',
-                  options: {
-                    list: [
-                      { title: 'None', value: 'none' },
-                      { title: 'Small', value: 'small' },
-                      { title: 'Medium', value: 'medium' },
-                      { title: 'Large', value: 'large' },
-                      { title: 'Full', value: 'full' },
-                    ],
-                  },
-                  initialValue: 'medium',
-                  description: 'Corner rounding for the category card.',
-                }),
-
-                defineField({
-                  name: 'shadow',
-                  title: 'Card Shadow',
-                  type: 'string',
-                  options: {
-                    list: [
-                      { title: 'None', value: 'none' },
-                      { title: 'Small', value: 'small' },
-                      { title: 'Medium', value: 'medium' },
-                      { title: 'Large', value: 'large' },
-                    ],
-                  },
-                  initialValue: 'small',
-                  description: 'Drop shadow for the category card.',
-                }),
-              ],
-              description: 'Visual styling options for the category card.',
-            }),
-
-            defineField({
-              name: 'hoverEffect',
-              title: 'Hover Effect',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'enabled',
-                  title: 'Enable Hover Effects',
-                  type: 'boolean',
-                  initialValue: true,
-                }),
-
-                defineField({
-                  name: 'scaleOnHover',
-                  title: 'Scale on Hover',
-                  type: 'boolean',
-                  initialValue: true,
-                  hidden: ({ parent }) => !parent?.enabled,
-                }),
-
-                defineField({
-                  name: 'shadowOnHover',
-                  title: 'Enhanced Shadow on Hover',
-                  type: 'boolean',
-                  initialValue: true,
-                  hidden: ({ parent }) => !parent?.enabled,
-                }),
-              ],
-              description: 'Hover interaction effects for the category card.',
-            }),
-
-            defineField({
-              name: 'statistics',
-              title: 'Category Statistics',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'showAdCount',
-                  title: 'Show Listing Count',
-                  type: 'boolean',
-                  initialValue: false,
-                  description: 'Display the number of listings in this category.',
-                }),
-
-                defineField({
-                  name: 'listingCount',
-                  title: 'Listing Count',
-                  type: 'number',
-                  description: 'Number of listings in this category (can be auto-populated).',
-                  hidden: ({ parent }) => !parent?.showListingCount,
-                }),
-
-                defineField({
-                  name: 'listingCountLabel',
-                  title: 'Listing Count Label',
-                  type: 'string',
-                  initialValue: 'listings',
-                  description: 'Label to display after the listing count (e.g., "listings", "listings").',
-                  hidden: ({ parent }) => !parent?.showListingCount,
-                }),
-              ],
-              description: 'Optional statistics to display on the category card.',
             }),
 
             defineField({
@@ -286,78 +66,81 @@ export const featuredCategoriesSection = defineType({
               title: 'Is Active',
               type: 'boolean',
               initialValue: true,
-              description: 'Whether this category should be displayed in the section.',
+              description: 'Show this referenced category in the featured section.',
             }),
 
             defineField({
               name: 'sortOrder',
               title: 'Sort Order',
               type: 'number',
-              description: 'Order in which this category appears (lower numbers first).',
+              description: 'Manual order for featured categories (lower numbers appear first).',
+              validation: (Rule) => Rule.integer().min(0),
+              initialValue: 0,
             }),
 
             defineField({
-              name: 'featured',
+              name: 'overrideTitle',
+              title: 'Override Title',
+              type: 'string',
+              description: 'Optional display title (falls back to referenced category title).',
+            }),
+
+            defineField({
+              name: 'overrideUrl',
+              title: 'Override URL',
+              type: 'string',
+              description: 'Optional URL (falls back to referenced category slug/path).',
+            }),
+
+            defineField({
+              name: 'overrideImage',
+              title: 'Override Image',
+              type: 'image',
+              options: { hotspot: true, metadata: ['blurhash', 'lqip', 'palette'] },
+              description: 'Optional image used only for this section (falls back to category image).',
+              fields: [
+                defineField({
+                  name: 'alt',
+                  title: 'Alt Text',
+                  type: 'string',
+                }),
+              ],
+            }),
+
+            defineField({
+              name: 'featuredPriority',
               title: 'Featured Priority',
               type: 'string',
               options: {
                 list: [
                   { title: 'Normal', value: 'normal' },
-                  { title: 'High Priority', value: 'high' },
+                  { title: 'High', value: 'high' },
                   { title: 'Premium', value: 'premium' },
                 ],
               },
               initialValue: 'normal',
-              description: 'Priority level for featuring this category.',
+              description: 'Editorial priority label (useful for styling/placement).',
             }),
 
             defineField({
-              name: 'analytics',
-              title: 'Analytics',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'trackingId',
-                  title: 'Tracking ID',
-                  type: 'string',
-                  description: 'Custom tracking identifier for analytics.',
-                }),
-
-                defineField({
-                  name: 'conversionGoal',
-                  title: 'Conversion Goal',
-                  type: 'string',
-                  description: 'What action constitutes a conversion for this category.',
-                }),
-              ],
-              description: 'Analytics and tracking configuration.',
+              name: 'notes',
+              title: 'Editor Notes',
+              type: 'text',
+              rows: 2,
+              description: 'Optional notes for editors/marketing about this entry.',
             }),
           ],
-          preview: {
-            select: {
-              title: 'name',
-              subtitle: 'description',
-              media: 'image',
-              isActive: 'isActive',
-              listingCount: 'statistics.listingCount',
-              showListingCount: 'statistics.showListingCount',
-            },
-            prepare(selection) {
-              const { title, subtitle, media, isActive, listingCount, showListingCount } = selection;
-              const statusIcon = isActive ? '✅' : '❌';
-              const countText = showListingCount && listingCount ? ` (${listingCount} listings)` : '';
-              
-              return {
-                title: title || 'Unnamed Category',
-                subtitle: `${statusIcon} ${subtitle || 'No description'}${countText}`,
-                media: media,
-              };
-            },
-          },
+
+        
         },
       ],
-      validation: (Rule) => Rule.min(1).max(12).warning('Consider limiting to 6-9 categories for optimal display'),
-      description: 'The categories to feature in this section.',
+      validation: (Rule) =>
+        Rule.min(1)
+          .max(12)
+          .warning('Consider limiting to 6-9 categories for optimal display'),
+      description:
+        'Select categories to feature. Use overrides to change title/image/url for this section. ' +
+        'Use sortOrder for manual ordering of featured items.',
     }),
 
     defineField({
@@ -573,8 +356,8 @@ export const featuredCategoriesSection = defineType({
       
       return {
         title: title || 'Featured Categories Section',
-        subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} categories configured`,
-        media: '📂',
+        // subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} categories configured`,
+        // media: '📂',
       };
     },
   },

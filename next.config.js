@@ -5,6 +5,13 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
     optimizePackageImports: ["@phosphor-icons/react"],
     serverActions: true,
+    ppr: true,
+  },
+
+  devIndicators: {
+    pprIsrStatus: true,
+    buildActivity: true,
+    buildActivityPosition: "bottom-right",
   },
 
   images: {
@@ -52,7 +59,7 @@ const nextConfig = {
         hostname: "utfs.io",
       },
     ],
-    unoptimized: true,
+    unoptimized: false,
   },
 };
 

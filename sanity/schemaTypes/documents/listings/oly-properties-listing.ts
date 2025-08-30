@@ -296,12 +296,12 @@ export const propertyListing = defineType({
       },
       initialValue: 'approved',
     }),
-    defineField({
-      name: 'featured',
-      title: 'Featured',
+   defineField({
+      name: 'isFeatured',
+      title: 'Featured Listing',
       type: 'boolean',
       initialValue: false,
-      description: 'Whether this property ad is featured.',
+      description: 'Whether this listing is featured.',
     }),
 
     // Pricing and Payment Details

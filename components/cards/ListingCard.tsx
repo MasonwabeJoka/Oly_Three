@@ -42,7 +42,7 @@ const ListingCard: React.FC<Props> = ({
   cardType,
   imageUrls,
   title,
-  description = 230,
+  description,
   descriptionLength,
   postAge,
   price,

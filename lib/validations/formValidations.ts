@@ -4,14 +4,14 @@ import { z } from "zod";
 export const searchFormSchema = z.object({
     searchTerm: z
       .string()
-      .min(1, "Search term field cannot be empty.")
-      .min(3, "Search term must be at least 3 characters long.")
-      .refine((val) => val.trim().length > 0, "Search term cannot be only spaces."),
+      .optional(),
+      // .refine((val) => !val || val.trim().length >= 3, "Search term must be at least 3 characters long.")
+      // .refine((val) => !val || val.trim().length > 0, "Search term cannot be only spaces."),
     locationSearch: z
       .string()
-      .min(1, "Location field cannot be empty.")
-      .min(3, "Location must be at least 3 characters long.")
-      .refine((val) => val.trim().length > 0, "Location cannot be only spaces."),
+      .optional(),
+      // .refine((val) => !val || val.trim().length >= 3, "Location must be at least 3 characters long.")
+      // .refine((val) => !val || val.trim().length > 0, "Location cannot be only spaces."),
     categories: z.string().optional(), 
   });
 

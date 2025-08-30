@@ -45,26 +45,15 @@ export const carDealership = defineType({
       type: 'text',
     }),
 
-    // Address & geo
-    defineField({
-      name: 'address',
-      title: 'Address',
-      type: 'object',
-      fields: [
-        { name: 'line1', title: 'Address Line 1', type: 'string' },
-        { name: 'line2', title: 'Address Line 2', type: 'string' },
-        { name: 'city', title: 'City', type: 'string' },
-        { name: 'region', title: 'Region/State', type: 'string' },
-        { name: 'postalCode', title: 'Postal Code', type: 'string' },
-        { name: 'country', title: 'Country', type: 'string' },
-        {
-          name: 'location',
-          title: 'Geo Location',
-          type: 'geopoint',
-          description: 'Latitude/longitude for maps',
-        },
-      ],
-    }),
+    // Address 
+       defineField({
+            name: 'address',
+            title: 'Address',
+            type: 'reference',
+            to: [{ type: 'address' }],
+            description: 'The address associated with the user.',
+        }),
+          
 
     // Contact
     defineField({

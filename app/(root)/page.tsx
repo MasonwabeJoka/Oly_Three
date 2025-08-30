@@ -12,23 +12,30 @@ import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide"
 import { variables } from "./../../utils/typescript-variables/variables";
 import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
 import { getCategories } from "@/sanity/lib/crud/categories/data";
-const Home = async () => {
+import { getFeaturedListings } from "@/sanity/lib/crud/featuredListings/data";
+import { getFeaturedCategoriesSection } from "@/sanity/lib/crud/featuredCategoriesSection/data";
+
+const Home = async ({ searchParams }: { searchParams: { page?: string } }) => {
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
-  const {categories: firstLevelCategories } = categories;
-
+  const { categories: firstLevelCategories } = categories;
+  // Read page from URL parameters, default to 1
+  const currentPage = parseInt(searchParams.page || "1");
+  const featuredListings = await getFeaturedListings(currentPage);
+  const { listings, totalPages } = featuredListings;
   const {
     heroSection,
     moreFromOlySection,
     topAdSection,
     featuredServicesSection,
-    featuredCategoriesSection,  
+    featuredCategoriesSection,
     featuredListingsSection,
     bottomAdSection,
     olyArticlesSection,
     sponsoredArticlesSection,
   } = olyHomepage;
-
+  const featuredCategoriesSectionData = await getFeaturedCategoriesSection();
+console.log("featuredCategoriesSectionData: ", featuredCategoriesSectionData);
   return (
     <div
       className={styles.container}
@@ -68,8 +75,8 @@ const Home = async () => {
 
         {featuredCategoriesSection.isEnabled === true && (
           <section className={styles.categories}>
-            <h2 className={styles.title}>Featured Categories</h2>
-            <FeaturedCategories />
+            <h2 className={styles.title}>{featuredCategoriesSection.title}</h2>
+            <FeaturedCategories data={featuredCategoriesSectionData} />
           </section>
         )}
 
@@ -78,13 +85,18 @@ const Home = async () => {
             <FeaturedServicesSlide />
           </section>
         )}
-{/* 
+
         {featuredListingsSection.isEnabled === true && (
           <section className={styles.featuredListings}>
             <h2 className={styles.title}>Featured Listings</h2>
-            <FeaturedListings category="all" />
+            <FeaturedListings
+              category="all"
+              listings={listings}
+              totalPages={totalPages}
+              currentPage={currentPage}
+            />
           </section>
-        )} */}
+        )}
 
         {olyArticlesSection.isEnabled === true && (
           <section className={styles.blog}>

@@ -5,7 +5,7 @@ import  BoxCardClient from "./BoxCardClient";
 type BoxCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   sizeClass: string;
-  imagesUrls?: string[];
+  imageUrls?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;
   isHeartClicked: boolean;
@@ -29,7 +29,7 @@ type BoxCardProps = {
 const BoxCard: React.FC<BoxCardProps> = ({
   category,
   sizeClass,
-  imagesUrls,
+  imageUrls,
   aspectRatios,
   isCardHovered,
   isHeartClicked,
@@ -56,7 +56,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
           <BoxCardClient
             category={category}
             sizeClass={sizeClass}
-            images={imagesUrls}
+            imageUrls={imageUrls}
             aspectRatios={aspectRatios}
             isCardHovered={isCardHovered}
             isHeartClicked={isHeartClicked}
@@ -83,7 +83,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
           <BoxCardClient
             category={category}
             sizeClass={sizeClass}
-            images={images}
+            imageUrls={imageUrls}
             aspectRatios={aspectRatios}
             isCardHovered={isCardHovered}
             isHeartClicked={isHeartClicked}

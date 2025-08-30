@@ -42,7 +42,7 @@ const LinkCardBox = ({
           }}
         />
       </div>
-      <div className={labelContainer}>
+      <div className={`${labelContainer} ${styles.labelContainer}`}>
         <div className={styles.labelBackground}>
           <p className={styles.label}>{label}</p>
         </div>

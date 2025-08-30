@@ -64,7 +64,7 @@ const Home = () => {
         </section>
 
         <section className={styles.belowFoldAd}>
-        <ExternalAd
+          <ExternalAd
             adType="video"
             path="//https://developers.google.com/youtube/player_parameters"
           />

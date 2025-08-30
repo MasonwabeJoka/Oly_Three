@@ -107,11 +107,11 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
-        <h2 className={styles.title}>Featured Listings</h2>
+          <h2 className={styles.title}>Featured Listings</h2>
           <FeaturedListings />
         </section>
         <section className={styles.blog}>
-        <h2 className={styles.title}>Oly Articles</h2>
+          <h2 className={styles.title}>Oly Articles</h2>
           <Blogs />
         </section>
 
@@ -119,7 +119,7 @@ const Home = () => {
           <BelowFoldAd />
         </section>
         <section className={styles.sponsoredArticles}>
-        <h2 className={styles.title}>Sponsored Articles</h2>
+          <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
       </div>

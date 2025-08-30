@@ -8,7 +8,8 @@
     "lint": "next lint",
     "serve": "node server.js",
     "extract-variables": "node ./extract-variables.js",
-    "build": "npm run extract-variables && next build"
+    "build": "npm run extract-variables && next build",
+    "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
     "@adobe/css-tools": "^4.4.4",
@@ -78,13 +79,14 @@
     "masonry-layout": "^4.2.2",
     "media-chrome": "^4.5.0",
     "meilisearch": "^0.36.0",
-    "next": "^15.4.0-canary.42",
+    "next": "^15.5.1-canary.20",
     "next-sanity": "^10.0.4-canary.1",
     "next-superjson-plugin": "^0.6.2",
     "next-themes": "^0.2.1",
     "next-video": "^2.0.4",
     "nodemailer": "^6.9.9",
     "normalize.css": "^8.0.1",
+    "only": "^0.0.2",
     "payload": "^3.48.0",
     "player.style": "^0.1.8",
     "qrcode.react": "^4.2.0",
@@ -114,6 +116,7 @@
     "sanity": "^4.6.0",
     "sanity-plugin-asset-source-unsplash": "^0.2.5",
     "scrollmagic": "^2.0.8",
+    "server": "^1.0.42",
     "server-only": "^0.0.1",
     "sharp": "^0.33.5",
     "slick-carousel": "^1.8.1",

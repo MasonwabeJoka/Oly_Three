@@ -77,7 +77,6 @@ const ExpandedImageSlider = ({
     }
     return () => clearTimeout(timer);
   }, [isCardHovered, swiper, activeIndex]);
-        console.log("IMAGE ULRS", imageUrls);
 
   return (
     <div className={styles.container}>

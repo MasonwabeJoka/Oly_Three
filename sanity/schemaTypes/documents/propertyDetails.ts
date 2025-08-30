@@ -130,11 +130,14 @@ export const propertyDetails = defineType({
       type: 'string',
       validation: Rule => Rule.required(),
     }),
-    defineField({
-      name: 'address',
-      title: 'Street Address',
-      type: 'string',
-    }),
+      defineField({
+            name: 'address',
+            title: 'Address',
+            type: 'reference',
+            to: [{ type: 'address' }],
+            description: 'The address associated with the user.',
+        }),
+          
     defineField({
       name: 'geoLocation',
       title: 'GPS Coordinates',

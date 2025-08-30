@@ -166,19 +166,14 @@ export const serviceProvider = defineType({
       ],
     }),
 
-    defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'object',
-      fields: [
-        { name: 'address', title: 'Address', type: 'string' },
-        { name: 'city', title: 'City', type: 'string' },
-        { name: 'region', title: 'Region/State', type: 'string' },
-        { name: 'country', title: 'Country', type: 'string' },
-        { name: 'postalCode', title: 'Postal Code', type: 'string' },
-        { name: 'geo', title: 'Geo Location', type: 'geopoint' },
-      ],
-    }),
+     defineField({
+            name: 'address',
+            title: 'Address',
+            type: 'reference',
+            to: [{ type: 'address' }],
+            description: 'The address associated with the user.',
+        }),
+          
 
     defineField({
       name: 'availability',

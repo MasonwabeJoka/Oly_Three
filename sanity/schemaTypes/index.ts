@@ -205,5 +205,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     recruitmentAgency,
     serviceProvider,
     messageReply,
+    
   ],
 };

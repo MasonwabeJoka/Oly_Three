@@ -97,6 +97,13 @@ export const user = defineType({
             }],
             description: 'The email addresses associated with the user.',
           }),
+            defineField({
+            name: 'address',
+            title: 'Address',
+            type: 'reference',
+            to: [{ type: 'address' }],
+            description: 'The address associated with the user.',
+        }),
           
           
           defineField({

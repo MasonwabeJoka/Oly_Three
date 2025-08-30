@@ -1,10 +1,11 @@
+import { ListingsQueryResult } from "@/sanity.types";
 import ListingsCollage from "./ListingsCollage";
 import ListingsExpanded from "./ListingsExpanded";
 
 interface ListingsProps {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   expanded: boolean;
-  listings: any;
+  listings: ListingsQueryResult;
   limit: number;
   page?: number;
   sortBy: string;
@@ -15,8 +16,7 @@ const ListingsClient = ({
   category,
   expanded,
   listings,
-  // images,
-  // avatars,
+
   limit,
   page,
   sortBy,
@@ -28,8 +28,6 @@ const ListingsClient = ({
         <ListingsExpanded
           category={category}
           listings={listings}
-          // images={images}
-          // avatars={avatars}
           isDeletable={false}
           isDashboard={false}
           limit={limit}
@@ -41,7 +39,6 @@ const ListingsClient = ({
         <ListingsCollage
           category={category}
           listings={listings}
-          // images={images}
           isDeletable={false}
           isDashboard={false}
           limit={limit}

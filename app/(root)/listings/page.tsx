@@ -1,37 +1,47 @@
+// app/listings/page.tsx
 import styles from "./styles.module.scss";
-import multipleImages from "@/data/multipleImages";
-import { articles } from "@/data/articles";
-import { articleCategories } from "@/data/articlesCategories";
-import ListingsClient from "./Listings";
 import Listings from "./Listings";
 import ListingsSearchForm from "./components/ListingsSearchForm";
 import Form from "next/form";
 import Pagination from "@/components/Pagination";
 import TopNotification from "@/components/TopNotification";
-import ads from "@/data/adsData";
 import { getListings } from "@/sanity/lib/crud/listings/data";
-import { getUser } from "@/sanity/lib/crud/user/data";
+
+const listingsPerPage = 2;
 
 const Page = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ searchTerm: string; locationSearch: string }>;
+  searchParams: { searchTerm?: string; locationSearch?: string; page?: string };
 }) => {
-  const resolvedSearchParams = await searchParams;
-  const searchTerm = resolvedSearchParams?.searchTerm;
-  const locationSearch = resolvedSearchParams?.locationSearch;
+  const { searchTerm = "", locationSearch = "", page = "1" } = searchParams;
 
-  const listings = await getListings();
-  const { _id, description, images, postedOn, price, slug, title, user } =
-    listings;
-  console.log("user", listings[0].user);
-  // console.log(JSON.stringify(listings, null, 2));
+  const currentPage = Number(page) || 1;
+
+  let listings = [];
+  let totalCount = 0;
+
+  try {
+    const data = await getListings({
+      searchTerm,
+      locationSearch,
+      page: currentPage,
+      pageSize: listingsPerPage,
+    });
+    listings = data.listings;
+    totalCount = data.totalCount;
+  } catch (error) {
+    console.error("Failed to fetch listings:", error);
+  }
+
+  const totalPages = Math.ceil(totalCount / listingsPerPage);
 
   return (
     <div className={styles.container}>
+      {/* Top notification */}
       <div className={styles.toastContainer}>
         <div className={styles.toastWrapper}>
-          {searchTerm && locationSearch && (
+          {(searchTerm || locationSearch) && (
             <TopNotification
               key={`${searchTerm}-${locationSearch}`}
               type="success"
@@ -43,26 +53,23 @@ const Page = async ({
                   </h1>
                 </div>
               }
-              // onClose={() => {}}
             />
           )}
         </div>
       </div>
+
       <Form action="/listings" scroll={false} className={styles.formContainer}>
         <ListingsSearchForm
           searchTerm={searchTerm}
           locationSearch={locationSearch}
-          categories="  All Appliances"
+          categories="All Appliances"
         />
       </Form>
 
-      <Listings
-        listings={listings}
-        searchTerm={searchTerm}
-        locationSearch={locationSearch}
-      />
+      <Listings listings={listings} />
+
       <div className={styles.pagination}>
-        <Pagination totalPages={985} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </div>
     </div>
   );

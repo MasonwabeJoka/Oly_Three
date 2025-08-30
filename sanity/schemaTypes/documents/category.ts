@@ -101,6 +101,20 @@ export const category = defineType({
       type: "number",
       description: "Order within the same level",
     }),
+
+    defineField({
+      name: "featuredOrder",
+      title: "Featured Sort Order",
+      type: "number",
+      description:
+        "Numeric order used only for categories where `isFeatured` is true. "
+        + "Lower numbers appear first. Leave empty to fall back to other sorting.",
+      initialValue: 0,
+      validation: (rule) => rule.integer().min(0),
+      // hide on documents that are not featured
+      hidden: ({ parent }) => !parent?.isFeatured,
+    }),
+    
     defineField({
       name: "seo",
       title: "SEO Settings",

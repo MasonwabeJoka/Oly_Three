@@ -4,27 +4,40 @@ import Link from "next/link";
 import Button from "@/components/Buttons";
 import multipleImages from "@/data/multipleImages";
 import FeaturedListingsClient from "./FeaturedListingsClient";
+import { FeaturedListingsQueryResult } from "./../sanity/types";
+import Pagination from "./Pagination";
 
-const tempImages = multipleImages.map((item) => item.images);
+type FeaturedListingsProps = {
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  listings: FeaturedListingsQueryResult;
+  totalPages: number;
+  currentPage: number;
+};
 
-const FeaturedListings = ({ category }) => {
+const FeaturedListings = ({
+  category,
+  listings,
+  totalPages,
+  currentPage,
+}: FeaturedListingsProps) => {
   return (
     <>
       {category === "all" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
-            <FeaturedListingsClient category={category} />
+          <FeaturedListingsClient category={category} />
             <ListingsCollage
               category={category}
-              images={tempImages}
+              listings={listings}
+              sortBy="postedOn"
+              sortOrder="desc"
               isDeletable={false}
               isDashboard={false}
               cardSize="standard"
-              limit={4}
-              page={1}
-              sortBy="postedOn"
-              sortOrder="desc"
             />
+            <div className={styles.pagination}>
+              <Pagination totalPages={totalPages} currentPage={currentPage} />
+            </div>
           </div>
           <div className={styles.buttonsAndSearch}>
             <Link href="/listings" className={styles.buttons}>
@@ -49,12 +62,10 @@ const FeaturedListings = ({ category }) => {
             <FeaturedListingsClient category={category} />
             <ListingsCollage
               category={category}
-              images={tempImages}
+              listings={listings}
               isDeletable={false}
               isDashboard={false}
               cardSize="standard"
-              limit={4}
-              page={1}
               sortBy="postedOn"
               sortOrder="desc"
             />
@@ -80,17 +91,19 @@ const FeaturedListings = ({ category }) => {
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
             <FeaturedListingsClient category={category} />
-            <ListingsCollage
-              category={category}
-              images={tempImages}
-              isDeletable={false}
-              isDashboard={false}
-              cardSize="standard"
-              limit={4}
-              page={1}
-              sortBy="postedOn"
-              sortOrder="desc"
-            />
+            <div className={styles.collage}>
+              <ListingsCollage
+                category={category}
+                listings={listings}
+                isDeletable={false}
+                isDashboard={false}
+                cardSize="standard"
+                sortBy="postedOn"
+                sortOrder="desc"
+              />
+
+              <Pagination totalPages={totalPages} currentPage={currentPage} />
+            </div>
           </div>
           <div className={styles.buttonsAndSearch}>
             <Link href="/listings" className={styles.buttons}>

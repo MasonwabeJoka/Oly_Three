@@ -16,19 +16,55 @@ export const address = defineType({
             title: 'Address Line 2',
             type: 'string',
             description: 'The secondary line of the address (e.g., apartment, suite number).',
-            validation: (Rule) => Rule.optional(),
+        }),
+        defineField({
+            name: 'province',
+            title: 'Province',
+            type: 'string',
+            description: 'The province of the address.',
+            options: {
+                list: ["Western Cape", "Gauteng", "Eastern Cape", "KwaZulu-Natal", "Free State", "Limpopo", "Mpumalanga", "North West", "Northern Cape"] 
+            }
+        }),
+        defineField({
+            name: 'provinceAbbreviation',
+            title: 'Province Abbreviation',
+            type: 'string',
+            description: 'The abbreviation of the province of the address.',
+         
         }),
         defineField({
             name: 'city',
             title: 'City',
             type: 'string',
             description: 'The city in which the address is located.',
+            // options: {
+            //     list: [] // Populate with city options as needed
+            // }
         }),
         defineField({
-            name: 'state',
-            title: 'State/Province/Region',
+            name: 'cityAbbreviation',
+            title: 'City Abbreviation',
             type: 'string',
-            description: 'The state, province, or region of the address.',
+            description: 'The abbreviation of the city in which the address is located.',
+            // options: {
+            //     list: [] // Populate with city options as needed
+            // }
+        }),
+        defineField({
+            name: 'suburb',
+            title: 'Suburb',
+            type: 'string',
+            description: 'The suburb of the address.',
+            // options: {
+            //     list: [] // Populate with suburb options as needed
+            // }
+        }),
+        defineField({
+            name: 'additionalInfo',
+            title: 'Additional Information',
+            type: 'string',
+            description: 'Additional details or instructions related to the address.',
         }),
         defineField({
             name: 'postalCode',
@@ -62,38 +98,22 @@ export const address = defineType({
             description: 'The user to whom this address belongs.',
         }),
         defineField({
-            name: 'additionalInfo',
-            title: 'Additional Information',
-            type: 'array',
-            of: [
-                {
-                    type: 'block'
-                }
-            ],
-            description: 'Any additional information or instructions related to the address.',
-            validation: (Rule:any) => Rule.optional(),
-        }),
-        defineField({
             name: 'location',
             title: 'Location',
             type: 'geopoint',
             description: 'Geographical coordinates of the address.',
-            validation: (Rule) => Rule.optional(),
         }),
         defineField({
             name: 'contactPhone',
             title: 'Contact Phone',
             type: 'string',
             description: 'Contact phone number associated with the address.',
-            validation: (Rule) => Rule.optional(),
         }),
         defineField({
             name: 'contactEmail',
             title: 'Contact Email',
             type: 'string',
             description: 'Contact email associated with the address.',
-            validation: (Rule) => Rule.optional(),
         }),
-        // ... other relevant fields as needed
     ],
 });

@@ -8,12 +8,14 @@ export const location = defineType({
     type: 'object',
     fields: [
   
-        defineField({
+       defineField({
             name: 'address',
             title: 'Address',
-            type: 'string',
-            description: 'The full address as a string.',
+            type: 'reference',
+            to: [{ type: 'address' }],
+            description: 'The address associated with the user.',
         }),
+          
         defineField({
             name: 'suburb',
             title: 'Suburb',

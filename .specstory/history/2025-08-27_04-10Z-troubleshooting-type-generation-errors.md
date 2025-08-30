@@ -1307,3 +1307,350 @@ The key is to isolate the typegen process to only your Sanity schema files and a
 
 ---
 
+_**User**_
+
+check whether sanity-typegen.json is implemented correctly
+
+---
+
+_**Assistant**_
+
+Let me check your `sanity-typegen.json` file to see if it's configured correctly:
+
+
+---
+
+Read file: sanity-typegen.json
+
+---
+
+I can see several issues with your `sanity-typegen.json` configuration. Let me also check if the referenced files exist:
+
+
+---
+
+<details>
+            <summary>Searched codebase "schema.json" • **2** results</summary>
+        
+| File |
+|------|
+| `c:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly\schema.json` |
+| `c:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly\dist\static\3071e9e4.create-schema.json` |
+
+</details>
+
+---
+
+Read file: schema.json
+
+---
+
+Now let me check if the output directory exists:
+
+
+---
+
+<details>
+            <summary>Listed directory sanity • **8** results</summary>
+        
+| Name |
+|-------|
+| 📄 `types.ts` |
+| 📄 `structure.tsx` |
+| 📄 `initialValueTemplates.ts` |
+| 📄 `populate-categories.ts` |
+| 📄 `env.ts` |
+| 📄 `PopulateTemp.tsx` |
+| 📁 `schemaTypes` |
+| 📁 `lib` |
+
+</details>
+
+---
+
+## Issues with Your `sanity-typegen.json` Configuration
+
+Your `sanity-typegen.json` file has several problems:
+
+### 1. **Incorrect Path Configuration**
+```json
+{
+  "path": "./**/*.{ts,tsx,js,jsx}",
+  "schema": "./schema.json",
+  "generates": "./sanity/types.ts"
+}
+```
+
+**Problems:**
+- The `path` is too broad - it's trying to scan ALL TypeScript/JavaScript files in your project
+- This is why it's hitting the problematic `@adobe/css-tools` files in `node_modules`
+- The `schema` points to a generated schema file, not your Sanity configuration
+
+### 2. **Correct Configuration for Sanity v4**
+
+For Sanity v4, the `sanity-typegen.json` should be configured differently. Here's the correct setup:
+
+```json
+{
+  "path": "./sanity/**/*.{ts,tsx}",
+  "schema": "./sanity.config.ts",
+  "generates": "./sanity/types.ts"
+}
+```
+
+**Key changes:**
+- `path`: Only scan Sanity schema files in the `sanity/` directory
+- `schema`: Point to your Sanity config file, not the generated schema
+- `generates`: Keep the same output location
+
+### 3. **Alternative Configuration**
+
+If you want to be even more specific, you can use:
+
+```json
+{
+  "path": "./sanity/schemaTypes/**/*.{ts,tsx}",
+  "schema": "./sanity.config.ts",
+  "generates": "./sanity/types.ts"
+}
+```
+
+This will only scan your schema type definitions and avoid any other Sanity files.
+
+### 4. **Recommended Fix**
+
+Replace your current `sanity-typegen.json` with:
+
+```json
+{
+  "path": "./sanity/schemaTypes/**/*.{ts,tsx}",
+  "schema": "./sanity.config.ts",
+  "generates": "./sanity/types.ts"
+}
+```
+
+This configuration:
+- ✅ Only scans your schema type files
+- ✅ Avoids `node_modules` and other problematic directories
+- ✅ Points to the correct Sanity configuration
+- ✅ Generates types in the expected location
+
+After making this change, try running:
+
+```bash
+npx sanity typegen generate
+```
+
+This should resolve the dependency issues because the typegen will only process your Sanity schema files and won't touch any of the problematic dependency files in `node_modules`.
+
+---
+
+_**User**_
+
+This is an example from sanity, given my code structure what am I supposed to do for path:
+{
+  "path": "../day-one-with-sanity-nextjs/src/**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "../day-one-with-sanity-nextjs/src/sanity/types.ts"
+}
+
+---
+
+_**Assistant**_
+
+Looking at your code structure and the Sanity example, here's what you should use for the `path` in your `sanity-typegen.json`:
+
+## Your Current Project Structure
+```
+oly/
+├── sanity/
+│   ├── schemaTypes/
+│   │   ├── documents/
+│   │   ├── objects/
+│   │   └── ...
+│   ├── sanity.config.ts
+│   └── types.ts
+├── sanity-typegen.json
+└── ...
+```
+
+## Correct Configuration for Your Project
+
+Based on your structure, your `sanity-typegen.json` should be:
+
+```json
+{
+  "path": "./sanity/**/*.{ts,tsx,js,jsx}",
+  "schema": "./sanity.config.ts",
+  "generates": "./sanity/types.ts"
+}
+```
+
+## Explanation
+
+1. **`path`**: `"./sanity/**/*.{ts,tsx,js,jsx}"`
+   - This scans all TypeScript/JavaScript files in your `sanity/` directory and its subdirectories
+   - Includes your schema types, config files, and any other Sanity-related files
+   - The `./` means "from the current directory" (where your `sanity-typegen.json` is located)
+
+2. **`schema`**: `"./sanity.config.ts"`
+   - Points to your Sanity configuration file
+   - This is where your schema is defined and exported
+
+3. **`generates`**: `"./sanity/types.ts"`
+   - Outputs the generated types to your existing `types.ts` file in the sanity directory
+
+## Alternative (More Specific) Configuration
+
+If you want to be more specific and only scan schema type files:
+
+```json
+{
+  "path": "./sanity/schemaTypes/**/*.{ts,tsx,js,jsx}",
+  "schema": "./sanity.config.ts",
+  "generates": "./sanity/types.ts"
+}
+```
+
+This would only scan files in the `sanity/schemaTypes/` directory, which might be more efficient.
+
+## Why This Works
+
+- Your `sanity-typegen.json` is in the project root (`oly/`)
+- Your Sanity files are in the `sanity/` subdirectory
+- The `./` prefix tells the typegen to look relative to where the config file is located
+- This avoids scanning `node_modules` and other problematic directories
+
+After updating your `sanity-typegen.json` with this configuration, try running:
+
+```bash
+npx sanity typegen generate
+```
+
+This should work without the dependency errors because it will only process your Sanity files and avoid the problematic `@adobe/css-tools` files in `node_modules`.
+
+---
+
+_**User**_
+
+just addapt the example, don't make changes
+
+---
+
+_**Assistant**_
+
+Based on the Sanity example you provided, here's the adapted configuration for your project structure:
+
+```json
+{
+  "path": "./sanity/**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "./sanity/types.ts"
+}
+```
+
+This directly adapts the example:
+- `path`: Changed from `../day-one-with-sanity-nextjs/src/**/*.{ts,tsx,js,jsx}` to `./sanity/**/*.{ts,tsx,js,jsx}`
+- `schema`: Kept as `schema.json` (same as example)
+- `generates`: Changed from `../day-one-with-sanity-nextjs/src/sanity/types.ts` to `./sanity/types.ts`
+
+---
+
+_**User**_
+
+Are you sure because the path property doesn't have the sanity folder in it?
+
+---
+
+_**Assistant**_
+
+You're absolutely right! Looking at the example again:
+
+```json
+{
+  "path": "../day-one-with-sanity-nextjs/src/**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "../day-one-with-sanity-nextjs/src/sanity/types.ts"
+}
+```
+
+The `path` property scans the entire `src` directory, not just a `sanity` folder. So for your project structure, it should be:
+
+```json
+{
+  "path": "./**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "./sanity/types.ts"
+}
+```
+
+This would scan all TypeScript/JavaScript files in your entire project (like the example does), but that's exactly what was causing the dependency issues with `@adobe/css-tools` in `node_modules`.
+
+The example works because their project structure is different and doesn't have the problematic dependencies in the scanned paths.
+
+---
+
+_**User**_
+
+npx sanity@latest typegen generate
+✗ C:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly\sanityTemp\Types\Group.ts: Identifier 'Reference' has already been declared. (44:12)
+
+  42 |
+  43 | // Inferring the TypeScript type from the Zod schema
+> 44 | export type Reference = z.infer<typeof ReferenceSchema>;
+     |             ^
+  45 | export type Group = z.infer<typeof GroupSchema>;
+  46 |
+  47 | // Exporting the schemas in "sanityTemp/Types/Group.ts"
+✗ Unsupported expression type: ConditionalExpression in sanityTemp/actions/fetchAds.ts:32:24 in "sanityTemp/actions/fetchAds.ts"
+✗ Unsupported expression type: ConditionalExpression in sanityTemp/actions/fetchAdsTemp.ts:33:24 in "sanityTemp/actions/fetchAdsTemp.ts"
+✗ Duplicate query name found: "query". Query names must be unique across all files. in "sanityTemp/actions/getImageFilesById.ts"
+✗ Duplicate query name found: "query". Query names must be unique across all files. in "sanityTemp/actions/getUser.ts"
+⚠ Encountered errors in 5 files while generating types✓ Generated TypeScript types for 109 schema types and 7 GROQ queries in 7 files into: ./sanity/types.ts
+PS C:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly>
+
+
+---
+
+_**Assistant**_
+
+Great! The typegen actually worked this time! �� 
+
+The output shows:
+- ✅ **Generated TypeScript types for 109 schema types and 7 GROQ queries in 7 files into: ./sanity/types.ts**
+
+The errors you're seeing are from the `sanityTemp` directory, which appears to be a separate/older Sanity setup. These errors are not blocking the main typegen process.
+
+## What Happened
+
+1. **Success**: Your main Sanity types were generated successfully in `./sanity/types.ts`
+2. **Errors**: The errors are coming from `sanityTemp/` files, which seem to have:
+   - Duplicate type declarations (`Reference` type declared twice)
+   - Unsupported conditional expressions in some action files
+   - Duplicate query names
+
+## Next Steps
+
+Since the main typegen worked, you can:
+
+1. **Ignore the sanityTemp errors** - they're in a separate directory and don't affect your main Sanity setup
+2. **Check your generated types** - look at `./sanity/types.ts` to see your generated types
+3. **Clean up sanityTemp** (optional) - if you don't need the `sanityTemp` directory, you could remove it to avoid future confusion
+
+## To Verify the Types Were Generated
+
+Check your `sanity/types.ts` file to see the generated types:
+
+```bash
+# Check the file size/line count
+wc -l sanity/types.ts
+
+# Or just open it to see the generated types
+```
+
+The typegen successfully generated types for 109 schema types and 7 GROQ queries, which means your Sanity schema is working correctly!
+
+The errors in `sanityTemp` are separate issues and don't affect your main Sanity setup.
+
+---
+

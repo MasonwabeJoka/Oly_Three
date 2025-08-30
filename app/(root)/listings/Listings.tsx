@@ -12,10 +12,9 @@ import { useListingsStore } from "@/store/listingsStore";
 import { useBreakpoint } from "@/store/useBreakpointStore";
 import ListingsClient from "@/components/ListingsClient";
 import { SortData, PriceRanges } from "@/data/DropdownData";
+import { ListingsQueryResult } from "@/sanity.types";
 interface ListingsClientProps {
-  listings: any;
-  searchTerm: string;
-  locationSearch: string;
+  listings: ListingsQueryResult;
 }
 
 export default function Listings({ listings }: ListingsClientProps) {
@@ -40,11 +39,7 @@ export default function Listings({ listings }: ListingsClientProps) {
 
   const { avatars, getAvatars } = useArticlesStore();
   const { showMenuModal, setShowMenuModal } = useModalStore();
-  const { fetchAds } = useFetchAdStore();
   const { currentScreenSize } = useBreakpoint();
-
-  // const tempImages = multipleImages.map((item) => item.images);
-
   // Explicitly type refs as HTMLDivElement
   const filtersRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
@@ -54,19 +49,7 @@ export default function Listings({ listings }: ListingsClientProps) {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-    if (isClient) {
-      fetchAds({
-        limit: 5,
-        page: page,
-        offset: 0,
-        sortOrder: "desc",
-        sortBy: "price",
-      });
-    }
-    setLoading(false);
-  }, [isClient, page, fetchAds, setLoading]);
+
 
   useEffect(() => {
     getAvatars();

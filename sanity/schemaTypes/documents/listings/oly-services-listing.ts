@@ -252,11 +252,11 @@ export const servicesListing = defineType({
       initialValue: 'approved',
     }),
     defineField({
-      name: 'featured',
-      title: 'Featured',
+      name: 'isFeatured',
+      title: 'Featured Listing',
       type: 'boolean',
       initialValue: false,
-      description: 'Whether this service ad is featured.',
+      description: 'Whether this listing is featured.',
     }),
 
     // Pricing and Payment Details

@@ -72,6 +72,14 @@ export const listing = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+
+    defineField({
+      name: 'isFeatured',
+      title: 'Featured Listing',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Whether this listing is featured.',
+    }),
     defineField({
       name: 'approvedForSale',
       title: 'Approved For Sale',
@@ -86,13 +94,7 @@ export const listing = defineType({
       },
       initialValue: 'approved',
     }),
-    defineField({
-      name: 'featured',
-      title: 'Featured',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Whether this listing is featured.',
-    }),
+
 
     // Pricing and Payment Details
     defineField({
@@ -232,13 +234,7 @@ export const listing = defineType({
       validation: (Rule) => Rule.max(20),
     }),
 
-    // Location and Condition
-    defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'location',
-      description: 'The location of the listing.',
-    }),
+
     defineField({
       name: 'condition',
       title: 'Condition',

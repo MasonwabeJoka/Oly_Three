@@ -7,7 +7,7 @@ import type { PortableTextBlock } from "sanity";
 type BoxCardProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   sizeClass: string;
-  imagesUrls?: string[];
+  imageUrls?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;
   isHeartClicked: boolean;
@@ -31,7 +31,7 @@ type BoxCardProps = {
 const BoxCardClient: React.FC<BoxCardProps> = ({
   category,
   sizeClass,
-  imagesUrls,
+  imageUrls,
   aspectRatios,
   isCardHovered,
   isHeartClicked,
@@ -59,7 +59,7 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
     >
       <BoxImageContainer
         category={category}
-        imagesUrls={imagesUrls}
+        imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         isHeartClicked={isHeartClicked}
         isHeartHovered={isHeartHovered}
