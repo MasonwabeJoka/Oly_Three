@@ -7,7 +7,7 @@ export const listing = defineType({
   initialValue: {
     title: 'New Listing',
     site: 'oly',
-    featured: false,
+    isFeatured: false,
     isActive: true,
     currency: 'USD',
     pricingOption: 'fixed_price',
@@ -263,11 +263,11 @@ export const listing = defineType({
       description: 'Key details about the item or service e.g., technical specs, reason for selling, or age of item',
     }),
     defineField({
-      name: 'features',
-      title: 'Features',
+      name: 'productSpecifications',
+      title: 'Product Specifications',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'Key features or highlights of the item or service.',
+      description: 'Key specifications  of the product.',
     }),
 
     // Seller Information

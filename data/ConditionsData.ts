@@ -9,10 +9,6 @@ export const ConditionsData = [
     },
     {
         id: 3,
-        condition: "Gently Used",
-    },
-    {
-        id: 4,
         condition: "Used",
     },
     

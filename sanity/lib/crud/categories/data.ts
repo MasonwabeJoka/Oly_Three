@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 
 
 // Query
-export const categoriesQuery = defineQuery(`*[_id == "bpOoyNX3tQDTPKfB9G8HaC" && title == "Oly"][0]{
+export const categoriesQuery = defineQuery(`*[_type == "category" ][0]{
   title,
   "categories": subcategories[]->{
     _id,

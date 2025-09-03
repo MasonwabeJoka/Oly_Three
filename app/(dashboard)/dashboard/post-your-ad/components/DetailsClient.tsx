@@ -170,10 +170,7 @@ const DetailsClient = ({
   };
 
   return (
-    <div
-      error={errors.details?.message as string}
-      selectOpen={isConditionsOpen || isDetailsOpen}
-    >
+    <div>
       <div className={styles.container}>
         <h2 className={styles.title}>Product Details</h2>
 

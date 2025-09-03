@@ -32,7 +32,7 @@ const FeaturedCategories = ({
         {featuredCategories.slice(0, 12).map((category, index) => {
           const { _id, overrideTitle: title, displayImage: image } = category;
           return (
-            <li key={_id}>
+            <li key={_id || `category-${index}`}>
           
               <Link href={`/listings/?category=${title.toLocaleLowerCase()}`}>
                 <LinkCard label={title} cardSize="large" image={featuredCategories[index].displayImage} />

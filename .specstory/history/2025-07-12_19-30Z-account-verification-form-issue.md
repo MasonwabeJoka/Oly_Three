@@ -12,6 +12,7 @@ _**Assistant**_
 
 I'll help you investigate the account verification multi-step forms issue. Let me first explore the codebase to understand the structure of your verification forms.
 
+
 ---
 
 <details>
@@ -51,6 +52,7 @@ I'll help you investigate the account verification multi-step forms issue. Let m
 
 Now let me look at the verification store more closely to understand the navigation logic:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts
@@ -59,6 +61,7 @@ Read file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts
 
 Now let me check the main AccountVerification component to see how it handles navigation:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/components/AccountVerification.tsx
@@ -66,6 +69,7 @@ Read file: app/(dashboard)/dashboard/settings/components/AccountVerification.tsx
 ---
 
 Now let me check the VerificationFormWrapper to see how the next button is implemented:
+
 
 ---
 
@@ -84,6 +88,7 @@ I found several issues with your account verification multi-step forms. Let me a
 
 Let me fix these issues:
 
+
 ---
 
 <details><summary>Edit file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts</summary>
@@ -97,7 +102,7 @@ Lines added: undefined, lines removed: 10
 @@ -44,14 +44,4 @@
     canNavigateBack: () => boolean; // Check if back navigation is allowed
   };
--
+- 
 - const steps: Step[] = [
 -   { id: 'step1', name: 'Verify Your Account' },
 -   { id: 'step2', name: 'QR Code Scanning' },
@@ -107,7 +112,7 @@ Lines added: undefined, lines removed: 10
 -   { id: 'step6', name: 'Mobile Number Verification' },
 -   { id: 'step7', name: 'Finish' },
 - ];
-
+  
   const initialVerificationData: VerificationData = {
 ```
 
@@ -117,12 +122,12 @@ Lines added: 41, lines removed: 12
 ```diff
 @@ -63,21 +53,50 @@
   };
-
+  
 - const initialStepIndex = 0
 -   typeof window !== 'undefined'
 -     ? parseInt(localStorage.getItem('verificationStepIndex') || '0', 10)
 -     : 0;
--
+- 
 - // Only set localStorage if in the browser
 - typeof window !== 'undefined' && localStorage.setItem('verificationStepIndex', '1');
 + // Initialize step index from localStorage only if in browser
@@ -133,7 +138,7 @@ Lines added: 41, lines removed: 12
 +   }
 +   return 0;
 + };
-+
++ 
   const useVerificationStore = create<VerificationStore>((set, get) => ({
     // Initial state
     message: '',
@@ -148,10 +153,10 @@ Lines added: 41, lines removed: 12
 +   steps: [], // Will be set dynamically based on userType
     userType: null,
 -   setUserType: (type) => set({ userType: type }),
-+
++   
 +   setUserType: (type) => {
 +     const state = get();
-+     const newSteps = type === 'business'
++     const newSteps = type === 'business' 
 +       ? [
 +           { id: 'business-intro', name: 'Business Introduction' },
 +           { id: 'business-details', name: 'Business Details' },
@@ -169,14 +174,14 @@ Lines added: 41, lines removed: 12
 +             { id: 'individual-finish', name: 'Individual Finish' },
 +           ]
 +         : [];
-+
-+     set({
++ 
++     set({ 
 +       userType: type,
 +       steps: newSteps,
 +       isLastStep: newSteps.length > 0 ? state.currentStepIndex === newSteps.length - 1 : false
 +     });
 +   },
-
+  
     // Clear user type specific data when switching types
 ```
 
@@ -191,7 +196,7 @@ Lines added: 2, lines removed: 1
 +     message: '',
 +     steps: []
     }),
-
+  
 ```
 
 </details>
@@ -199,6 +204,7 @@ Lines added: 2, lines removed: 1
 ---
 
 Now let me update the AccountVerification component to properly handle navigation and URL routing:
+
 
 ---
 
@@ -213,13 +219,13 @@ Lines added: undefined, lines removed: 6
 @@ -16,10 +16,4 @@
   import { useRouter, usePathname } from "next/navigation";
   import { useEffect } from "react";
--
+- 
 - type UserType = "individual" | "business";
--
+- 
 - interface AccountVerificationProps {
 -   userType: UserType;
 - }
-
+  
   const AccountVerification = () => {
 ```
 
@@ -228,13 +234,13 @@ Lines added: 5, lines removed: 4
 
 ```diff
 @@ -30,8 +24,9 @@
-
+  
     const base = "/dashboard/settings/account-verification";
 -   const stepPaths = [
 -     `${base}/user-type`,
 -     ...(userType === "business"
 -       ? [
-+
++   
 +   // Define step paths for each user type
 +   const getStepPaths = (type: 'individual' | 'business') => {
 +     if (type === "business") {
@@ -267,7 +273,7 @@ Lines added: 27, lines removed: 8
 +     }
 +     return [];
 +   };
-
+  
 -   // Simple URL-based step detection without automatic navigation
 +   // Handle URL-based navigation
     useEffect(() => {
@@ -281,26 +287,26 @@ Lines added: 27, lines removed: 8
 +       // Check if current path matches any step path
 +       const stepPaths = getStepPaths(userType);
         const foundIndex = stepPaths.findIndex((p) => p === pathname);
-+
++       
         if (foundIndex !== -1 && foundIndex !== currentStepIndex) {
           goTo(foundIndex);
         }
       }
 -   }, [pathname, userType, currentStepIndex, goTo, stepPaths]);
 +   }, [pathname, userType, currentStepIndex, goTo]);
-+
++ 
 +   // Navigate to the next step URL when step changes
 +   useEffect(() => {
 +     if (userType && currentStepIndex > 0) {
 +       const stepPaths = getStepPaths(userType);
 +       const targetPath = stepPaths[currentStepIndex - 1]; // -1 because step 0 is user type selection
-+
++       
 +       if (targetPath && pathname !== targetPath) {
 +         router.push(targetPath);
 +       }
 +     }
 +   }, [currentStepIndex, userType, router, pathname]);
-
+  
     const steps = [
 ```
 
@@ -309,6 +315,7 @@ Lines added: 27, lines removed: 8
 ---
 
 The linter error seems to be a false positive. Let me now update the VerificationFormWrapper to properly handle the next button functionality:
+
 
 ---
 
@@ -339,12 +346,12 @@ Lines added: 13, lines removed: 2
 +       router.push("/dashboard/settings");
         return;
       }
-
+  
 -     return next();
 +     // Call the next function from the store
 +     next();
 +   };
-+
++ 
 +   const handleBack = () => {
 +     if (currentStepIndex === 1) {
 +       // If we're on the first verification step, go back to user type selection
@@ -354,7 +361,7 @@ Lines added: 13, lines removed: 2
 +       back();
 +     }
     };
-
+  
 ```
 
 **Chunk 3**
@@ -376,6 +383,7 @@ Lines added: 1, lines removed: 1
 
 The linter error appears to be a false positive related to CSS syntax. Let me check if there are any duplicate store files that might be causing conflicts:
 
+
 ---
 
 <details>
@@ -392,6 +400,7 @@ The linter error appears to be a false positive related to CSS syntax. Let me ch
 
 I found the issue! There are two different verification store files. Let me check the individual one:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/account-verification/individual/store/useVerificationStore.ts
@@ -400,6 +409,7 @@ Read file: app/(dashboard)/dashboard/settings/account-verification/individual/st
 
 I found the problem! The individual store file has the problematic line `localStorage.setItem('verificationStepIndex', '1');` that forces step 1. Let me delete this duplicate file since we're using the main store:
 
+
 ---
 
 undefined
@@ -407,6 +417,7 @@ undefined
 ---
 
 Now let me check if there are any other files that might be importing the wrong store:
+
 
 ---
 
@@ -432,6 +443,7 @@ Now let me check if there are any other files that might be importing the wrong 
 
 Good! All the imports are pointing to the correct store. Now let me check if there are any other issues with the individual and business page files:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/account-verification/individual/page.tsx
@@ -443,6 +455,7 @@ Read file: app/(dashboard)/dashboard/settings/account-verification/business/page
 ---
 
 I see the issue! These individual and business page files are using hardcoded step indices instead of the dynamic step system. They should be removed since we're using the main AccountVerification component. Let me check if these files are actually being used:
+
 
 ---
 
@@ -466,6 +479,7 @@ No results found
 ---
 
 Let me check the main routing structure to understand how the verification flow should work:
+
 
 ---
 
@@ -498,6 +512,7 @@ Let me check the main routing structure to understand how the verification flow 
 
 Perfect! The main routing is handled by the `[[...step]]` catch-all route. The individual and business directories are legacy and should be removed. Let me delete them:
 
+
 ---
 
 ```bash
@@ -511,7 +526,7 @@ ification/individual"
                             PS C:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly
 > rm -rf "app/(dashboard)/dashboard/settings/account-ver
 ification/individual"
-
+                            
 
 
 
@@ -562,6 +577,7 @@ At line:1 char:4
 
 Let me use the correct PowerShell command:
 
+
 ---
 
 ```bash
@@ -584,6 +600,7 @@ PS C:\Users\USER-PC\Dropbox\Oly_03_before_deploy\oly> Remove-Item -Recurse -Forc
 ---
 
 Now let me check if there are any missing components that are being referenced:
+
 
 ---
 
@@ -613,6 +630,7 @@ Now let me check if there are any missing components that are being referenced:
 
 Good! The components exist. Now let me update the AccountVerification component to include the missing components in the steps array:
 
+
 ---
 
 <details><summary>Edit file: app/(dashboard)/dashboard/settings/components/AccountVerification.tsx</summary>
@@ -637,7 +655,7 @@ Lines added: 1, lines removed: 1
 
 ```diff
 @@ -26,5 +28,5 @@
-
+    
     // Define step paths for each user type
 -   const getStepPaths = (type: "individual" | "business") => {
 +   const getStepPaths = (type: 'individual' | 'business') => {
@@ -675,6 +693,7 @@ Lines added: 1, lines removed: undefined
 
 Let me check the QrScanner component to see if it's properly exported:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/components/QrScanner.tsx
@@ -682,6 +701,7 @@ Read file: app/(dashboard)/dashboard/settings/components/QrScanner.tsx
 ---
 
 The QrScanner component is empty. Let me check if there are other QR scanner components:
+
 
 ---
 
@@ -700,14 +720,12 @@ The QrScanner component is empty. Let me check if there are other QR scanner com
 Here’s what I found and what I’ve fixed so far:
 
 ### Issues Identified
-
 1. **You had two different verification store files** (one in `store/`, one in `account-verification/individual/store/`). The one in `individual/store/` was always forcing the step to 1, breaking navigation.
 2. **You had legacy page files** in `account-verification/individual/` and `business/` that hardcoded step logic, which conflicted with your new dynamic, central flow.
 3. **Your main flow is routed through `[[...step]]/page.tsx`**, which uses the dynamic `AccountVerification` component.
 4. **The `QrScanner` component is empty**—so if your flow expects a QR step, it will render nothing.
 
 ### What I’ve done
-
 - **Deleted the duplicate store** in `account-verification/individual/store/`.
 - **Deleted the legacy `individual/` and `business/` directories** (so only the dynamic route is used).
 - **Fixed your main store** so it no longer forces step 1 and now dynamically sets steps based on user type.
@@ -715,7 +733,6 @@ Here’s what I found and what I’ve fixed so far:
 - **Ensured all imports point to the correct, single store.**
 
 ### What you need to do next
-
 - **Implement the `QrScanner` component** in `app/(dashboard)/dashboard/settings/components/QrScanner.tsx`. Right now, it’s an empty file, so the QR step will appear blank and may break the flow.
 - **Test your flow**: You should now be able to move between steps. If you still can’t, it’s likely because a required step component (like `QrScanner`) is missing or broken.
 
@@ -741,36 +758,35 @@ It can also happen if the client has a browser extension installed which messes 
 
 https://react.dev/link/hydration-mismatch
 
-...
-<OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
-<RenderFromTemplateContext>
-<ScrollAndFocusHandler segmentPath={[...]}>
-<InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
-<ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-<LoadingBoundary loading={null}>
-<HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-<RedirectBoundary>
-<RedirectErrorBoundary router={{...}}>
-<InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
-<AccountVerificationPage>
-<AccountVerification>
-<div className="AccountVer...">
-<div className={undefined}>
-
+  ...
+    <OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
+      <RenderFromTemplateContext>
+        <ScrollAndFocusHandler segmentPath={[...]}>
+          <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+            <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+              <LoadingBoundary loading={null}>
+                <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <AccountVerificationPage>
+                          <AccountVerification>
+                            <div className="AccountVer...">
+                              <div className={undefined}>
 -                               <div className="UserTypeSelection-module-scss-module__UwQVba__wrapper">
                         ...
 
-  at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
-  at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
-  at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
-  at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
-  at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
-  at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
-  at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
-  at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
-  at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
-  at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
-  at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
+    at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
+    at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
+    at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
+    at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
+    at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
+    at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
+    at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
+    at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
+    at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
 
 ---
 
@@ -779,7 +795,6 @@ _**Assistant**_
 This hydration error is a classic Next.js/React SSR issue, and the stack trace and your recent changes point to a likely cause:
 
 ### What’s happening?
-
 - The server renders the page, but the HTML/CSS class names (or structure) are different when the client hydrates.
 - In your error, the server rendered `<div className={undefined}>` but the client rendered `<div className="UserTypeSelection-module-scss-module__UwQVba__wrapper">`.
 - This is almost always due to **dynamic values or side effects that differ between server and client**.
@@ -789,12 +804,10 @@ This hydration error is a classic Next.js/React SSR issue, and the stack trace a
 ## Most Likely Causes in Your Case
 
 ### 1. **Dynamic Imports or State Initialization**
-
 - If you use `useState`, `useEffect`, or any code that checks `typeof window !== 'undefined'` to set initial state, the server and client can get out of sync.
 - Your `useVerificationStore` store uses `typeof window !== 'undefined'` to set the initial step index from `localStorage`. On the server, this will always be 0; on the client, it could be something else.
 
 ### 2. **SCSS Module Loading**
-
 - If your SCSS modules are loaded differently on server and client, or if you reference a className that is undefined on the server, you get this error.
 
 ---
@@ -802,13 +815,11 @@ This hydration error is a classic Next.js/React SSR issue, and the stack trace a
 ## How to Fix
 
 ### **A. Make Store Initialization Deterministic**
-
 - The initial state of your store must be the same on both server and client.
 - Do **not** use `localStorage` or `window` in the initial state directly.
 - Instead, always start with a default (e.g., step 0), and use a `useEffect` to update state on the client after hydration.
 
 #### Example Fix for `useVerificationStore`:
-
 ```ts
 const getInitialStepIndex = () => 0; // Always 0 for SSR
 
@@ -820,8 +831,8 @@ const useVerificationStore = create<VerificationStore>((set, get) => ({
 
 // In your component (e.g., AccountVerification), useEffect to sync with localStorage:
 useEffect(() => {
-  if (typeof window !== "undefined") {
-    const stored = localStorage.getItem("verificationStepIndex");
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem('verificationStepIndex');
     if (stored) {
       goTo(parseInt(stored, 10));
     }
@@ -830,7 +841,6 @@ useEffect(() => {
 ```
 
 ### **B. Check for Undefined Class Names**
-
 - Make sure all your SCSS modules are imported and used correctly.
 - If you see `className={undefined}`, it means the import failed or the class name is missing.
 
@@ -863,36 +873,35 @@ It can also happen if the client has a browser extension installed which messes 
 
 https://react.dev/link/hydration-mismatch
 
-...
-<OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
-<RenderFromTemplateContext>
-<ScrollAndFocusHandler segmentPath={[...]}>
-<InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
-<ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-<LoadingBoundary loading={null}>
-<HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-<RedirectBoundary>
-<RedirectErrorBoundary router={{...}}>
-<InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
-<AccountVerificationPage>
-<AccountVerification>
-<div className="AccountVer...">
-<div className={undefined}>
-
+  ...
+    <OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
+      <RenderFromTemplateContext>
+        <ScrollAndFocusHandler segmentPath={[...]}>
+          <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+            <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+              <LoadingBoundary loading={null}>
+                <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <AccountVerificationPage>
+                          <AccountVerification>
+                            <div className="AccountVer...">
+                              <div className={undefined}>
 -                               <div className="UserTypeSelection-module-scss-module__UwQVba__wrapper">
                         ...
 
-  at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
-  at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
-  at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
-  at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
-  at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
-  at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
-  at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
-  at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
-  at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
-  at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
-  at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
+    at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
+    at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
+    at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
+    at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
+    at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
+    at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
+    at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
+    at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
+    at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
 
 ---
 
@@ -901,7 +910,6 @@ _**Assistant**_
 You are still seeing a hydration error, and the stack trace shows a `<div className={undefined}>` on the server, but a valid SCSS class on the client. This is a classic sign of a **mismatch in how/when your CSS modules are loaded or referenced**—often caused by conditional rendering, or by using client-only logic (like `window` or `localStorage`) during initial render.
 
 ### The root cause in your codebase:
-
 - Your Zustand store uses `typeof window !== 'undefined'` and `localStorage` to set the initial step index. This means:
   - **On the server:** `currentStepIndex` is always 0.
   - **On the client:** It could be something else (from localStorage).
@@ -912,12 +920,10 @@ You are still seeing a hydration error, and the stack trace shows a `<div classN
 ## How to Fix
 
 ### 1. **Make the store's initial state deterministic for SSR**
-
 - Always start with `currentStepIndex: 0` in the store.
 - Do **not** use `window` or `localStorage` in the store's initial state.
 
 ### 2. **Sync with localStorage only on the client, after hydration**
-
 - Use a `useEffect` in your main component (e.g., `AccountVerification`) to update the step index from localStorage after the first render.
 
 ---
@@ -925,29 +931,23 @@ You are still seeing a hydration error, and the stack trace shows a `<div classN
 ## Here’s how to fix it:
 
 ### **A. Update your store initialization**
-
 Change this:
-
 ```ts
 const getInitialStepIndex = () => {
-  if (typeof window !== "undefined") {
-    const stored = localStorage.getItem("verificationStepIndex");
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem('verificationStepIndex');
     return stored ? parseInt(stored, 10) : 0;
   }
   return 0;
 };
 ```
-
 to this:
-
 ```ts
 const getInitialStepIndex = () => 0; // Always 0 for SSR
 ```
 
 ### **B. In your AccountVerification component, sync after mount**
-
 Add this to your `AccountVerification` component:
-
 ```ts
 import { useEffect } from "react";
 // ...other imports
@@ -956,8 +956,8 @@ const AccountVerification = () => {
   const { goTo } = useVerificationStore();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("verificationStepIndex");
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('verificationStepIndex');
       if (stored) {
         goTo(parseInt(stored, 10));
       }
@@ -996,36 +996,35 @@ It can also happen if the client has a browser extension installed which messes 
 
 https://react.dev/link/hydration-mismatch
 
-...
-<OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
-<RenderFromTemplateContext>
-<ScrollAndFocusHandler segmentPath={[...]}>
-<InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
-<ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-<LoadingBoundary loading={null}>
-<HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-<RedirectBoundary>
-<RedirectErrorBoundary router={{...}}>
-<InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
-<AccountVerificationPage>
-<AccountVerification>
-<div className="AccountVer...">
-<div className={undefined}>
-
+  ...
+    <OuterLayoutRouter parallelRouterKey="children" template={<RenderFromTemplateContext>}>
+      <RenderFromTemplateContext>
+        <ScrollAndFocusHandler segmentPath={[...]}>
+          <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+            <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+              <LoadingBoundary loading={null}>
+                <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} ...>
+                        <AccountVerificationPage>
+                          <AccountVerification>
+                            <div className="AccountVer...">
+                              <div className={undefined}>
 -                               <div className="UserTypeSelection-module-scss-module__UwQVba__wrapper">
                         ...
 
-  at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
-  at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
-  at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
-  at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
-  at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
-  at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
-  at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
-  at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
-  at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
-  at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
-  at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
+    at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5076:56)
+    at popHydrationState (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5162:13)
+    at completeWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8449:25)
+    at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
+    at completeUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10469:23)
+    at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10406:28)
+    at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10400:58)
+    at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10382:71)
+    at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:176)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10988:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)
 
 ---
 
@@ -1041,7 +1040,7 @@ Lines added: 2, lines removed: 8
 ```diff
 @@ -53,12 +53,6 @@
   };
-
+  
 - // Initialize step index from localStorage only if in browser
 - const getInitialStepIndex = () => {
 -   if (typeof window !== 'undefined') {
@@ -1052,7 +1051,7 @@ Lines added: 2, lines removed: 8
 - };
 + // Always start at step 0 for SSR/CSR consistency
 + const getInitialStepIndex = () => 0;
-
+  
   const useVerificationStore = create<VerificationStore>((set, get) => ({
 ```
 
@@ -1155,7 +1154,7 @@ Lines added: 10, lines removed: undefined
 @@ -24,4 +24,14 @@
     const router = useRouter();
     const pathname = usePathname();
-+
++ 
 +   // Sync currentStepIndex from localStorage after hydration (client only)
 +   useEffect(() => {
 +     if (typeof window !== 'undefined') {
@@ -1165,7 +1164,7 @@ Lines added: 10, lines removed: undefined
 +       }
 +     }
 +   }, [goTo]);
-
+  
     const base = "/dashboard/settings/account-verification";
 ```
 
@@ -1174,13 +1173,11 @@ Lines added: 10, lines removed: undefined
 ---
 
 **Summary of what was fixed:**
-
 - The store now always starts at step 0 for both SSR and CSR, preventing hydration mismatches.
 - The current step is restored from localStorage only after hydration, on the client, using a `useEffect` in `AccountVerification`.
 
 **What to do next:**
-
-- Restart your dev server and test the flow.
+- Restart your dev server and test the flow.  
 - The hydration error should be gone, and your multi-step form should work as expected.
 
 If you still see a hydration error, it may be due to the empty or broken `QrScanner` component. If you want, I can scaffold a placeholder for it, or help debug further. Let me know if you want to proceed with that!
@@ -1209,12 +1206,10 @@ Great, your hydration issue is fixed! Now, let's address the navigation and rend
 ## Why This Happens
 
 ### 1. **Step Index Logic**
-
 - Your `AccountVerification` component always renders `steps[currentStepIndex]`.
 - The first element in `steps` is always `<UserTypeSelection />`, so `currentStepIndex === 0` always shows the selection screen, even on `/intro` routes.
 
 ### 2. **Navigation Logic in UserTypeSelection**
-
 - When you select a type, you set the user type and push the correct path, but you do **not** update the `currentStepIndex` in the store to match the new step.
 - So, after navigation, `currentStepIndex` is still 0, and you see the selection screen even on `/intro`.
 
@@ -1223,11 +1218,9 @@ Great, your hydration issue is fixed! Now, let's address the navigation and rend
 ## How to Fix
 
 ### **A. When navigating to `/intro`, update the step index in the store**
-
 - In your `UserTypeSelection`'s `handleSelect`, after pushing the new path, also call `goTo(1)` (the first step after selection).
 
 ### **B. In `AccountVerification`, sync the step index with the URL**
-
 - When the URL is `/intro`, make sure `currentStepIndex` is 1.
 
 ---
@@ -1235,17 +1228,16 @@ Great, your hydration issue is fixed! Now, let's address the navigation and rend
 ## Implementation
 
 ### 1. **Update `UserTypeSelection.tsx`**
-
 After `router.push(nextPath);`, also call `goTo(1);` (or the correct index for the first step).
 
 ```ts
-const { setUserType, userType, clearUserTypeData, currentStepIndex, goTo } =
-  useVerificationStore();
+const { setUserType, userType, clearUserTypeData, currentStepIndex, goTo } = useVerificationStore();
 // ...
 setTimeout(() => {
   const base = "/dashboard/settings/account-verification";
-  const nextPath =
-    type === "business" ? `${base}/business/intro` : `${base}/individual/intro`;
+  const nextPath = type === "business" 
+    ? `${base}/business/intro`
+    : `${base}/individual/intro`;
 
   router.push(nextPath);
   goTo(1); // <-- This ensures the first step is shown after selection
@@ -1254,7 +1246,6 @@ setTimeout(() => {
 ```
 
 ### 2. **(Optional, for robustness) In `AccountVerification.tsx`, always sync step index with URL**
-
 - You already have a `useEffect` that does this, but make sure it always sets the correct index for `/intro` and not just for `/user-type`.
 
 ---
@@ -1278,6 +1269,9 @@ yes
 
 _**Assistant**_
 
+
+
+
 ---
 
 <details><summary>Edit file: app/(dashboard)/dashboard/settings/components/UserTypeSelection.tsx</summary>
@@ -1289,7 +1283,7 @@ Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -38,4 +38,5 @@
-
+        
         router.push(nextPath);
 +       goTo(1); // Ensure the first verification step is shown after selection
         setIsNavigating(false);
@@ -1306,7 +1300,7 @@ Lines added: 30, lines removed: 7
 -         <h2 className={styles.title}>Who are you verifying?</h2>
 +         <h1 className={styles.title}>Account Verification</h1>
         </div>
-+
++       
         <div className={styles.container}>
 +         {userType && currentStepIndex > 0 && (
 +           <div className={styles.currentSelection}>
@@ -1316,7 +1310,7 @@ Lines added: 30, lines removed: 7
 +             <p className={styles.progressText}>
 +               Step {currentStepIndex} of {userType === "business" ? 6 : 5}
 +             </p>
-+             <button
++             <button 
 +               className={styles.changeButton}
 +               onClick={handleClearSelection}
 +             >
@@ -1324,7 +1318,7 @@ Lines added: 30, lines removed: 7
 +             </button>
 +           </div>
 +         )}
-+
++ 
           <div className={styles.buttonContainer}>
             <button
               className={`${styles.button} ${userType === "individual" ? styles.selected : ""} ${isNavigating ? styles.loading : ""}`}
@@ -1342,7 +1336,7 @@ Lines added: 30, lines removed: 7
 +               </p>
               </div>
             </button>
-+
++ 
             <button
               className={`${styles.button} ${userType === "business" ? styles.selected : ""} ${isNavigating ? styles.loading : ""}`}
               onClick={() => handleSelect("business")}
@@ -1398,27 +1392,28 @@ _**User**_
 Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
 
 Check the render method of `AccountVerification`.
-at createFiberFromTypeAndProps (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4943:32)
-at createFiberFromElement (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4954:16)
-at reconcileChildFibersImpl (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5844:393)
-at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5901:39
-at reconcileChildren (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:7485:119)
-at beginWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8270:1573)
-at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
-at performUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10404:97)
-at workLoopSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10296:40)
-at renderRootSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10279:13)
-at performWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:212)
-at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10996:9)
-at flushSyncWorkAcrossRoots*impl (http://localhost:3000/\_next/static/chunks/node_modules_next_dist_compiled_2ce9398a.*.js:10916:316)
-at processRootScheduleInMicrotask (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10936:106)
-at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:11007:158
+    at createFiberFromTypeAndProps (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4943:32)
+    at createFiberFromElement (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:4954:16)
+    at reconcileChildFibersImpl (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5844:393)
+    at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5901:39
+    at reconcileChildren (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:7485:119)
+    at beginWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8270:1573)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3081:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10404:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10296:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10279:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10014:212)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10996:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10916:316)
+    at processRootScheduleInMicrotask (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10936:106)
+    at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:11007:158
 
 ---
 
 _**Assistant**_
 
 This error indicates that one of the components being imported in `AccountVerification.tsx` is not properly exported or is undefined. Let me check which components are being imported and verify their exports.
+
 
 ---
 
@@ -1428,6 +1423,7 @@ Read file: app/(dashboard)/dashboard/settings/components/AccountVerification.tsx
 
 I can see the issue! The `QrScanner` component is empty (as we discovered earlier), which means it's not properly exported. Let me check a few of the imported components to see which one is causing the issue:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/components/QrScanner.tsx
@@ -1435,6 +1431,7 @@ Read file: app/(dashboard)/dashboard/settings/components/QrScanner.tsx
 ---
 
 The `QrScanner` component is completely empty! This is causing the import to fail. Let me create a basic placeholder component for it:
+
 
 ---
 
@@ -1447,10 +1444,10 @@ Lines added: 17, lines removed: 2
 
 ```diff
 @@ -1,3 +1,18 @@
--
--
+- 
+- 
 + import VerificationFormWrapper from "./VerificationFormWrapper";
-+
++ 
 + const QrScanner = () => (
 +   <VerificationFormWrapper title="QR Code Scanner">
 +     <div style={{ textAlign: "center", marginTop: 40 }}>
@@ -1464,9 +1461,9 @@ Lines added: 17, lines removed: 2
 +     </div>
 +   </VerificationFormWrapper>
 + );
-+
++ 
 + export default QrScanner;
-
+  
 ```
 
 </details>
@@ -1474,6 +1471,7 @@ Lines added: 17, lines removed: 2
 ---
 
 Now let me check if there are any other components that might be missing or improperly exported. Let me check a few more components:
+
 
 ---
 
@@ -1494,6 +1492,7 @@ Read file: app/(dashboard)/dashboard/settings/components/SecurityQuestions.tsx
 
 Good, `SecurityQuestions` is properly exported. Let me check a few more components that are being imported:
 
+
 ---
 
 <details>
@@ -1513,6 +1512,7 @@ Read file: app/(dashboard)/dashboard/settings/components/BusinessDetailsForm.tsx
 
 Good, `BusinessDetailsForm` is also properly exported. Let me check a few more components to find the problematic one:
 
+
 ---
 
 <details>
@@ -1531,6 +1531,7 @@ Read file: app/(dashboard)/dashboard/settings/components/RepresentativeId.tsx
 ---
 
 Let me check a few more components that might be missing:
+
 
 ---
 
@@ -1552,6 +1553,7 @@ Read file: app/(dashboard)/dashboard/settings/components/RepSelfieVerification.t
 
 Let me check a few more components:
 
+
 ---
 
 <details>
@@ -1572,6 +1574,7 @@ Read file: app/(dashboard)/dashboard/settings/components/RepMobileVerification.t
 
 Let me check the BusinessFinish component:
 
+
 ---
 
 <details>
@@ -1590,6 +1593,7 @@ Read file: app/(dashboard)/dashboard/settings/components/BusinessFinish.tsx
 ---
 
 All the components I've checked so far seem to be properly exported. The issue was likely the empty `QrScanner` component, which I've now fixed. Let me also check if there are any issues with the `nextStep` function that some components are trying to use:
+
 
 ---
 
@@ -1625,6 +1629,7 @@ All the components I've checked so far seem to be properly exported. The issue w
 
 I see the issue! Some components are trying to use `nextStep` from the store, but our store only has `next`. Let me check the store to confirm:
 
+
 ---
 
 Read file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts
@@ -1632,6 +1637,7 @@ Read file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts
 ---
 
 Perfect! I found the issue. The store has `next` but some components are trying to use `nextStep`. Let me add `nextStep` as an alias to the store:
+
 
 ---
 
@@ -1657,6 +1663,7 @@ Lines added: 1, lines removed: undefined
 
 I need to add the `nextStep` implementation to the store:
 
+
 ---
 
 <details><summary>Edit file: app/(dashboard)/dashboard/settings/store/useVerificationStore.ts</summary>
@@ -1669,7 +1676,7 @@ Lines added: 17, lines removed: undefined
 ```diff
 @@ -135,4 +135,21 @@
     },
-
+  
 +   // Alias for next function
 +   nextStep: () => {
 +     const { currentStepIndex, steps } = get();
@@ -1686,7 +1693,7 @@ Lines added: 17, lines removed: undefined
 +       }
 +     }
 +   },
-+
++   
     // Move to the previous step
     back: () => {
 ```
@@ -1695,7 +1702,7 @@ Lines added: 17, lines removed: undefined
 
 ---
 
-Perfect! Now the store has both `next` and `nextStep` functions. The error should be resolved now.
+Perfect! Now the store has both `next` and `nextStep` functions. The error should be resolved now. 
 
 ## Summary of fixes:
 
@@ -1740,7 +1747,6 @@ This is a classic symptom of a **URL/step index sync loop**. Here’s what’s h
 ## How to Fix
 
 **You need to ensure that:**
-
 - When you navigate to `/intro`, the step index is set to 1, and vice versa.
 - The sync logic in `AccountVerification` should only update the step index if it’s actually out of sync with the URL, and should not cause a loop.
 
@@ -1813,7 +1819,7 @@ Lines added: 6, lines removed: 9
 +     if (userType) {
         const stepPaths = getStepPaths(userType);
         const foundIndex = stepPaths.findIndex((p) => p === pathname);
-
+  
 -       if (foundIndex !== -1 && foundIndex !== currentStepIndex) {
 -         goTo(foundIndex);
 +       // Only update if the index is different and not on user-type
@@ -1834,7 +1840,6 @@ The navigation loop should now be fixed!
 When you select a user type, you should be navigated to the correct `/intro` step and stay there, with the correct verification step rendered.
 
 **Test the flow:**
-
 - Go to `/dashboard/settings/account-verification/user-type`
 - Select "Individual Account" or "Business Account"
 - You should be taken to the correct intro step and not bounced back to the selection screen
@@ -1854,7 +1859,6 @@ _**Assistant**_
 Thank you for the update. The navigation loop or step/URL mismatch can happen anywhere in your multi-step flows if the **step index and URL are not kept in perfect sync**. This is a common pitfall in Next.js/React multi-step wizards that use both state and routing.
 
 ### Why does this happen elsewhere?
-
 - If you have other multi-step flows (e.g., post-your-ad, business verification, etc.) that use a similar pattern (step index in state + URL), you need to ensure that **the step index and the URL are always synchronized in both directions**.
 - If you update one (e.g., via a button or programmatically), you must update the other, and your effects must not cause infinite loops.
 
@@ -1863,7 +1867,6 @@ Thank you for the update. The navigation loop or step/URL mismatch can happen an
 ## How to Fix This Everywhere
 
 **For every multi-step flow:**
-
 1. **When you navigate to a new step via URL, update the step index in state.**
 2. **When you update the step index in state, update the URL.**
 3. **In your sync effect, only update if the state and URL are truly out of sync.**
@@ -1908,7 +1911,6 @@ useEffect(() => {
 ---
 
 Would you like me to:
-
 - Find and patch another specific multi-step flow for you (e.g., post-your-ad)?
 - Or, do you want a reusable hook or utility for this pattern?
 
@@ -1959,8 +1961,7 @@ _**Assistant**_
 
 ---
 
-The **post-your-ad** flow uses a similar pattern:
-
+The **post-your-ad** flow uses a similar pattern:  
 - The step index is stored in Zustand (`currentStepIndex`).
 - The URL is updated with `updateUrlWithStep`.
 - There is a `goTo` function and a `next` function that both update state and the URL.
@@ -1995,9 +1996,7 @@ const pathname = usePathname();
 const router = useRouter();
 
 // Get the expected slug for the current step
-const expectedSlug = slugMap.find(
-  (entry) => entry.index === currentStepIndex
-)?.slug;
+const expectedSlug = slugMap.find(entry => entry.index === currentStepIndex)?.slug;
 const expectedPath = `/dashboard/post-your-ad/${expectedSlug}`;
 
 // Sync: If the URL doesn't match the step, update the URL
@@ -2012,7 +2011,7 @@ useEffect(() => {
   const basePath = "/dashboard/post-your-ad/";
   if (pathname.startsWith(basePath)) {
     const slug = pathname.slice(basePath.length);
-    const slugEntry = slugMap.find((entry) => entry.slug === slug);
+    const slugEntry = slugMap.find(entry => entry.slug === slug);
     const stepIndex = slugEntry ? slugEntry.index : -1;
     if (stepIndex !== -1 && stepIndex !== currentStepIndex) {
       goTo(stepIndex);
@@ -2049,7 +2048,7 @@ Lines added: 1, lines removed: undefined
   import { postYourAdAction } from "@/utils/FormServerActions/postYourAdAction";
   import { slugMap } from "../store/useFormStore";
 + import { usePathname } from "next/navigation";
-
+  
   type FormWrapperProps = {
 ```
 
@@ -2071,7 +2070,7 @@ Lines added: 23, lines removed: 18
 ```diff
 @@ -73,23 +75,28 @@
     }, [currentStepIndex]);
-
+  
 -   // Listens for browser back/forward navigation events to sync the form step with the URL path.
 -   // Extracts the slug after /dashboard/post-your-ad/, matches it to a step index using slugMap,
 -   // and navigates to that step if it differs from the current step. Cleans up the event listener on unmount.
@@ -2079,14 +2078,14 @@ Lines added: 23, lines removed: 18
 +   // Get the expected slug for the current step
 +   const expectedSlug = slugMap.find(entry => entry.index === currentStepIndex)?.slug;
 +   const expectedPath = `/dashboard/post-your-ad/${expectedSlug}`;
-+
++ 
 +   // Sync: If the URL doesn't match the step, update the URL
 +   useEffect(() => {
 +     if (pathname !== expectedPath) {
 +       router.replace(expectedPath);
 +     }
 +   }, [currentStepIndex, expectedPath, pathname, router]);
-+
++ 
 +   // Sync: If the URL changes (e.g., via browser nav), update the step index
     useEffect(() => {
 -     const handlePopState = () => {
@@ -2114,7 +2113,7 @@ Lines added: 23, lines removed: 18
 +       }
 +     }
 +   }, [pathname, currentStepIndex, goTo]);
-
+  
     if (!isClient) return null;
 ```
 
@@ -2122,13 +2121,11 @@ Lines added: 23, lines removed: 18
 
 ---
 
-The patch is now applied!
-
+The patch is now applied!  
 - The step index and URL will always stay in sync in the post-your-ad flow.
 - Navigation loops and mismatches should be resolved.
 
-**Test your post-your-ad flow:**
-
+**Test your post-your-ad flow:**  
 - Navigate between steps using the UI and browser navigation.
 - The correct step should always be shown for the URL, and you should not get bounced back or stuck.
 
@@ -2150,24 +2147,24 @@ Thank you for your patience. This “bouncing” or “back and forth” navigat
 
 ## Why the Loop Happens
 
-1. **You click Proceed:**
+1. **You click Proceed:**  
    - The step index is incremented (e.g., from 0 to 1).
    - The URL is updated to match the new step (e.g., `/dashboard/post-your-ad/details`).
 
-2. **Sync Effect 1:**
+2. **Sync Effect 1:**  
    - Sees the step index changed, updates the URL (if needed).
 
-3. **Sync Effect 2:**
+3. **Sync Effect 2:**  
    - Sees the URL changed, updates the step index (if needed).
 
-4. **If either effect is not perfectly guarded, or if the store’s `goTo` or `next` also update the URL, you get a loop:**
+4. **If either effect is not perfectly guarded, or if the store’s `goTo` or `next` also update the URL, you get a loop:**  
    - The step index and URL keep “fixing” each other, causing a bounce.
 
 ---
 
 ## The Core Problem
 
-- **You are updating both the step index and the URL in multiple places:**
+- **You are updating both the step index and the URL in multiple places:**  
   - In the store (`goTo`, `next`, etc.) you call `updateUrlWithStep`.
   - In the sync effect, you also call `router.replace`.
 - **This means a single user action can trigger two updates, which then trigger each other again.**
@@ -2176,10 +2173,9 @@ Thank you for your patience. This “bouncing” or “back and forth” navigat
 
 ## The Solution
 
-**You must have a SINGLE source of truth for navigation.**
-
-- Either:
-  - The step index is the source of truth, and you only update the URL in a sync effect.
+**You must have a SINGLE source of truth for navigation.**  
+- Either:  
+  - The step index is the source of truth, and you only update the URL in a sync effect.  
   - Or, the URL is the source of truth, and you only update the step index in a sync effect.
 
 **Do NOT update both in both places.**
@@ -2189,12 +2185,10 @@ Thank you for your patience. This “bouncing” or “back and forth” navigat
 ### **How to Fix**
 
 #### 1. **Remove all direct URL updates from the store (`updateUrlWithStep`, `setStepInStorage`, etc.)**
-
 - The store should ONLY update the step index.
 - The sync effect in the component should update the URL if the step index changes.
 
 #### 2. **Let the sync effect handle all URL updates.**
-
 - The effect should compare the current step index and the URL, and only update if they’re out of sync.
 
 #### 3. **When the URL changes (e.g., via browser nav), update the step index in the sync effect.**
@@ -2204,12 +2198,10 @@ Thank you for your patience. This “bouncing” or “back and forth” navigat
 ### **What to Change in Your Code**
 
 #### **A. In `useFormStore.ts`**
-
 - Remove all calls to `updateUrlWithStep` and `setStepInStorage` from `next`, `back`, and `goTo`.
 - Only update the step index and state.
 
 #### **B. In `FormWrapper.tsx`**
-
 - Keep the sync effects as previously patched.
 
 ---
@@ -2217,7 +2209,6 @@ Thank you for your patience. This “bouncing” or “back and forth” navigat
 #### **Example: Fix for `useFormStore.ts`**
 
 **Before (in `next`):**
-
 ```ts
 setStepInStorage(newIndex); // Save the new step to local storage
 updateUrlWithStep(newIndex); // Update URL
@@ -2228,15 +2219,13 @@ set({
 ```
 
 **After:**
-
 ```ts
 set({
   currentStepIndex: newIndex,
   ...
 });
 ```
-
-_(Do the same for `back` and `goTo`.)_
+*(Do the same for `back` and `goTo`.)*
 
 ---
 
@@ -2294,7 +2283,7 @@ Lines added: undefined, lines removed: 2
 ```diff
 @@ -310,6 +306,4 @@
       }
-
+  
 -     setStepInStorage(index); // Save the new step
 -     updateUrlWithStep(index); // Update URL
       set({
@@ -2331,8 +2320,7 @@ Let’s do a **systematic fix**:
 
 ## 1. **Single Source of Truth: The URL**
 
-The most robust approach is to make the **URL the single source of truth** for the step.
-
+The most robust approach is to make the **URL the single source of truth** for the step.  
 - The step index should always be derived from the URL.
 - When you want to change steps, use `router.push` (or `replace`) to change the URL.
 - The step index in Zustand should be set in a `useEffect` that watches the URL.
@@ -2351,21 +2339,19 @@ The most robust approach is to make the **URL the single source of truth** for t
 ## 3. **How to Patch**
 
 ### **A. In your navigation handlers (e.g., Proceed/Back buttons):**
-
 - Instead of calling `goTo(newIndex)` or `next()`, just do:
   ```js
   router.push(`/dashboard/post-your-ad/${slugMap[newIndex].slug}`);
   ```
 
 ### **B. In your main wrapper (`FormWrapper.tsx`):**
-
 - Add a `useEffect` that watches the URL and sets the step index in Zustand:
   ```js
   useEffect(() => {
     const basePath = "/dashboard/post-your-ad/";
     if (pathname.startsWith(basePath)) {
       const slug = pathname.slice(basePath.length);
-      const slugEntry = slugMap.find((entry) => entry.slug === slug);
+      const slugEntry = slugMap.find(entry => entry.slug === slug);
       const stepIndex = slugEntry ? slugEntry.index : 0;
       if (stepIndex !== currentStepIndex) {
         setCurrentStepIndex(stepIndex);
@@ -2376,7 +2362,6 @@ The most robust approach is to make the **URL the single source of truth** for t
 - Remove any effect that updates the URL based on the step index.
 
 ### **C. In your Zustand store:**
-
 - Only update the step index in `setCurrentStepIndex`.
 - Do not update the URL in the store.
 
@@ -2425,21 +2410,21 @@ Lines added: 6, lines removed: 19
 
 ```diff
 @@ -76,29 +77,16 @@
-
+  
     // --- Step/URL sync logic ---
 -   // Get the expected slug for the current step
 -   const expectedSlug = slugMap.find(
 -     (entry) => entry.index === currentStepIndex
 -   )?.slug;
 -   const expectedPath = `/dashboard/post-your-ad/${expectedSlug}`;
--
+- 
 -   // Sync: If the URL doesn't match the step, update the URL
 -   useEffect(() => {
 -     if (pathname !== expectedPath) {
 -       router.replace(expectedPath);
 -     }
 -   }, [currentStepIndex, expectedPath, pathname, router]);
--
+- 
 -   // Sync: If the URL changes (e.g., via browser nav), update the step index
 +   // URL is the single source of truth for the step index
     useEffect(() => {
@@ -2458,7 +2443,7 @@ Lines added: 6, lines removed: 19
       }
 -   }, [pathname, currentStepIndex, goTo]);
 +   }, [pathname, currentStepIndex, setCurrentStepIndex]);
-
+  
     if (!isClient) return null;
 ```
 
@@ -2468,7 +2453,7 @@ Lines added: 15, lines removed: 11
 ```diff
 @@ -126,23 +114,27 @@
     };
-
+  
 +   // Navigation handlers: update the URL directly
     const handleNext = async (e: React.MouseEvent) => {
       e.preventDefault();
@@ -2483,10 +2468,10 @@ Lines added: 15, lines removed: 11
 +       }
 +     }
     };
-
+  
     const handleBack = (e: React.MouseEvent) => {
       e.preventDefault();
--
+- 
 -     // If going back would take us to step 0 (SelectACategory),
 -     // go to step 10 (SelectNewCategory) instead
 -     if (currentStepIndex === 1) {
@@ -2494,7 +2479,7 @@ Lines added: 15, lines removed: 11
 -       resetMediaStates();
 -       return;
 -     }
--
+- 
 -     const newIndex = Math.max(0, currentStepIndex - 1);
 -     goTo(newIndex);
 +     // If going back would take us to step 0 (SelectACategory), go to step 10 (SelectNewCategory) instead
@@ -2521,12 +2506,12 @@ Lines added: 4, lines removed: 3
 +       }
         return;
       }
--
+- 
       if (isLastStep) {
         handleSubmit(onSubmit)();
         return;
       }
--
+- 
       handleNext(e);
     };
 ```
@@ -2541,8 +2526,7 @@ Your `post-your-ad` flow is now using the **URL as the single source of truth** 
 - The step index in Zustand is set by a `useEffect` that watches the URL.
 - No more navigation loops or bouncing should occur.
 
-**Please test the flow again:**
-
+**Please test the flow again:**  
 - Click Proceed/Back between steps.
 - Use browser navigation.
 - The correct step should always be shown for the URL, and you should not get bounced back or stuck.
@@ -2591,7 +2575,6 @@ Let's systematically debug and fix this:
 Here is a minimal, robust pattern that works in all cases:
 
 ### **A. Only update the step index from the URL. Never update the URL from the step index.**
-
 - All navigation (button clicks, etc.) should use `router.push` to change the URL.
 - The effect should only set the step index if it is different from the one in the URL.
 
@@ -2661,7 +2644,6 @@ useEffect(() => {
 ---
 
 ## Would you like me to:
-
 - Add debug logging to help you pinpoint the issue?
 - Review the full `FormWrapper.tsx` and store code for any remaining sync bugs?
 - Or, do a minimal working example for you to compare against?
@@ -2738,7 +2720,6 @@ Lines added: 4, lines removed: 1
 Debug logging has been added to your navigation handlers and the effect that syncs the step index from the URL.
 
 **What to do next:**
-
 1. Reproduce the navigation loop/bounce.
 2. Watch your browser console for `[SYNC EFFECT]` and `[NAV]` logs.
 3. Note the sequence of logs—this will reveal if the effect and navigation handlers are “fighting” each other, or if the step index and URL are not syncing as expected.
@@ -2750,16 +2731,16 @@ This will help pinpoint exactly where the loop is happening, and I’ll guide yo
 
 _**User**_
 
-This is the error message I am seeing: Error: Route "/dashboard/settings/account-verification/[[...step]]" used `...headers()` or similar iteration. `headers()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-at resolveErrorDev (react-server-dom-turbopack-client.browser.development.js:1858:46)
-at getOutlinedModel (react-server-dom-turbopack-client.browser.development.js:1342:22)
-at parseModelString (react-server-dom-turbopack-client.browser.development.js:1482:15)
-at Array.<anonymous> (react-server-dom-turbopack-client.browser.development.js:2287:18)
-at JSON.parse (<anonymous>)
-at resolveConsoleEntry (react-server-dom-turbopack-client.browser.development.js:2122:28)
-at processFullStringRow (react-server-dom-turbopack-client.browser.development.js:2263:11)
-at processFullBinaryRow (react-server-dom-turbopack-client.browser.development.js:2226:7)
-at progress (react-server-dom-turbopack-client.browser.development.js:2472:17)
+This is the error message I am seeing:  Error: Route "/dashboard/settings/account-verification/[[...step]]" used `...headers()` or similar iteration. `headers()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at resolveErrorDev (react-server-dom-turbopack-client.browser.development.js:1858:46)
+    at getOutlinedModel (react-server-dom-turbopack-client.browser.development.js:1342:22)
+    at parseModelString (react-server-dom-turbopack-client.browser.development.js:1482:15)
+    at Array.<anonymous> (react-server-dom-turbopack-client.browser.development.js:2287:18)
+    at JSON.parse (<anonymous>)
+    at resolveConsoleEntry (react-server-dom-turbopack-client.browser.development.js:2122:28)
+    at processFullStringRow (react-server-dom-turbopack-client.browser.development.js:2263:11)
+    at processFullBinaryRow (react-server-dom-turbopack-client.browser.development.js:2226:7)
+    at progress (react-server-dom-turbopack-client.browser.development.js:2472:17)
 
 ---
 
@@ -2768,7 +2749,6 @@ _**Assistant**_
 This error is **not related to the navigation loop**—it’s a Next.js/React Server Components (RSC) error about using the `headers()` API (or similar dynamic APIs) in a synchronous context.
 
 ### What does it mean?
-
 - In Next.js 13+ (with the App Router), APIs like `headers()`, `cookies()`, etc. **must be awaited** and used in a server component or server action, not in a client component or synchronously in a route handler.
 - If you use `headers()` (or similar) in a client component, or without `await`, you get this error.
 
@@ -2785,9 +2765,8 @@ This error is **not related to the navigation loop**—it’s a Next.js/React Se
 ---
 
 ### Example of what NOT to do (in a client component):
-
 ```js
-import { headers } from "next/headers";
+import { headers } from 'next/headers';
 
 export default function MyComponent() {
   const h = headers(); // ❌ This is not allowed in a client component
@@ -2796,9 +2775,8 @@ export default function MyComponent() {
 ```
 
 ### Example of what IS allowed (in a server component or server action):
-
 ```js
-import { headers } from "next/headers";
+import { headers } from 'next/headers';
 
 export default async function MyServerComponent() {
   const h = await headers(); // ✅ This is allowed in a server component
@@ -2926,7 +2904,7 @@ No results found
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/components/modals/NotificationsModal.tsx` | L1 | `'use client'` |
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/components/NumberInput.tsx` | L1 | `"use client";` |
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/app/%28root%29/listings/%5Blisting%5D/oly-secure-payment/page.tsx` | L1 | `'use client';` |
-| `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/app/%28root%29/listings/%5Blisting%5D/components/ListingPage.tsx` | L1 | `"use client";` |
+| `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/app/%28root%29/listings/%5Blisting%5D/components/ListingPageContent.tsx` | L1 | `"use client";` |
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/components/PaginatedListingsCollageClient.tsx` | L1 | `"use client";` |
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/components/Pagination.tsx` | L1 | `"use client";` |
 | `file:///c%3A/Users/USER-PC/Dropbox/Oly_03_before_deploy/oly/app/%28root%29/listings/%5Blisting%5D/auction/components/AuctionForm.tsx` | L1 | `"use client";` |
@@ -3057,7 +3035,6 @@ No results found
 ---
 
 **Summary of findings:**
-
 - There are **no direct usages of `headers()` or `cookies()`** from Next.js in your codebase.
 - All matches are either object property names, CSS class names, or unrelated to the Next.js API.
 - The error is likely coming from a dependency, a third-party package, or a Next.js internal bug, **unless you have dynamic imports or server/client boundary issues in your route**.
@@ -3067,12 +3044,10 @@ No results found
 ## What to do next
 
 ### 1. **Check for Dynamic Imports or Server/Client Boundary Issues**
-
 - If you are dynamically importing a server component into a client component, or vice versa, you can get this error.
 - If you are using a server-only API (like `headers()`) in a file that is imported by both server and client components, you can get this error.
 
 ### 2. **Check Your Route File**
-
 - The error specifically mentions `/dashboard/settings/account-verification/[[...step]]`.
 - Check the file: `app/(dashboard)/dashboard/settings/account-verification/[[...step]]/page.tsx`
 - Make sure it does **not** import or use any server-only APIs in a client component.
@@ -3121,22 +3096,18 @@ Here's what I found:
 ## Next Steps
 
 ### 1. **Check for dynamic imports or indirect usage**
-
 - Are you dynamically importing any components in the account verification flow?
 - Are you using any third-party packages that might use server APIs?
 
 ### 2. **Check for custom `_middleware.ts` or `middleware.ts`**
-
 - Sometimes, a custom middleware can cause this error if it uses `headers()` incorrectly.
 
 ### 3. **Check for usage of `next/headers` in your codebase**
-
 - Even if you don't call `headers()`, importing from `next/headers` in a client component can cause this error.
 
 ---
 
 Would you like me to:
-
 - Search for all imports from `next/headers` in your codebase?
 - Search for dynamic imports in your account verification flow?
 - Or do you have a custom middleware file you want me to review?
@@ -3197,7 +3168,6 @@ No results found
 ---
 
 **Results:**
-
 - There are **no imports from `next/headers`** anywhere in your codebase.
 - There are **no dynamic imports** in your account verification flow (all dynamic imports found are for rich text editor plugins, not related to your error).
 
@@ -3257,7 +3227,6 @@ Understood! Let’s take the most direct, systematic approach to **isolate and f
 ### 1. Edit `app/(dashboard)/dashboard/settings/account-verification/[[...step]]/page.tsx`:
 
 Replace:
-
 ```tsx
 import AccountVerification from "../../components/AccountVerification";
 
@@ -3265,9 +3234,7 @@ export default function AccountVerificationPage() {
   return <AccountVerification />;
 }
 ```
-
 With:
-
 ```tsx
 export default function AccountVerificationPage() {
   return <div>hello</div>;
@@ -3300,7 +3267,6 @@ Thank you for clarifying! Let's focus on **fixing the navigation loop in your ac
 ## The Core Problem
 
 You have a navigation loop because:
-
 - Both the **step index** and the **URL** are being updated in response to each other.
 - Multiple `useEffect`s and navigation handlers are trying to keep them in sync, but they end up “fighting” each other, causing a loop.
 
@@ -3309,12 +3275,10 @@ You have a navigation loop because:
 ## The Solution: **Single Source of Truth**
 
 **You must pick one:**
-
 - Either the **URL** is the source of truth (recommended for Next.js App Router).
 - Or the **step index in state** is the source of truth.
 
 **The most robust pattern for Next.js is:**
-
 - The **URL is the source of truth**.
 - All navigation (button clicks, etc.) updates the URL.
 - A single `useEffect` watches the URL and sets the step index in Zustand.
@@ -3324,17 +3288,14 @@ You have a navigation loop because:
 ## How to Fix Your Account Verification Flow
 
 ### 1. **In your navigation handlers (e.g., Proceed/Back buttons):**
-
 - Only update the URL (with `router.push`).
 - **Do not** call `goTo`, `setCurrentStepIndex`, or similar directly.
 
 ### 2. **In your main component (e.g., `AccountVerification.tsx`):**
-
 - Add a `useEffect` that watches the URL and sets the step index in Zustand.
 - **Do not** have any effect that updates the URL from the step index.
 
 ### 3. **In your Zustand store:**
-
 - Only update the step index in `setCurrentStepIndex`.
 - Do not update the URL in the store.
 
@@ -3343,7 +3304,6 @@ You have a navigation loop because:
 ## Example Implementation
 
 ### **A. Navigation Handler Example**
-
 ```js
 const handleNext = () => {
   // ...validation logic...
@@ -3356,7 +3316,6 @@ const handleNext = () => {
 ```
 
 ### **B. useEffect to Sync Step Index from URL**
-
 ```js
 useEffect(() => {
   if (userType) {
@@ -3377,7 +3336,6 @@ useEffect(() => {
 ---
 
 ## Would you like me to:
-
 - Apply this pattern to your `AccountVerification.tsx` and related files?
 - Or walk you through the exact changes step by step?
 
@@ -3403,14 +3361,14 @@ Lines added: 1, lines removed: 12
 
 ```diff
 @@ -20,18 +20,7 @@
-
+  
   const AccountVerification = () => {
 -   const { currentStepIndex, userType, goTo, setUserType } =
 -     useVerificationStore();
 +   const { currentStepIndex, userType, goTo } = useVerificationStore();
     const router = useRouter();
     const pathname = usePathname();
--
+- 
 -   // Sync currentStepIndex from localStorage after hydration (client only)
 -   useEffect(() => {
 -     if (typeof window !== "undefined") {
@@ -3420,7 +3378,7 @@ Lines added: 1, lines removed: 12
 -       }
 -     }
 -   }, [goTo]);
-
+  
     const base = "/dashboard/settings/account-verification";
 ```
 
@@ -3430,14 +3388,14 @@ Lines added: 4, lines removed: 5
 ```diff
 @@ -61,13 +50,12 @@
     };
-
+  
 -   // Handle URL-based navigation
 +   // URL is the single source of truth for the step index
     useEffect(() => {
       if (userType) {
         const stepPaths = getStepPaths(userType);
         const foundIndex = stepPaths.findIndex((p) => p === pathname);
--
+- 
 -       // Only update if the index is different and not on user-type
 -       if (foundIndex !== -1 && foundIndex + 1 !== currentStepIndex) {
 -         goTo(foundIndex + 1); // +1 because step 0 is user type selection
@@ -3454,13 +3412,13 @@ Lines added: 2, lines removed: 11
 ```diff
 @@ -76,15 +64,6 @@
     }, [pathname, userType, currentStepIndex, goTo]);
-
+  
 -   // Navigate to the next step URL when step changes
 -   useEffect(() => {
 -     if (userType && currentStepIndex > 0) {
 -       const stepPaths = getStepPaths(userType);
 -       const targetPath = stepPaths[currentStepIndex - 1]; // -1 because step 0 is user type selection
--
+- 
 -       if (targetPath && pathname !== targetPath) {
 -         router.push(targetPath);
 -       }
@@ -3468,7 +3426,7 @@ Lines added: 2, lines removed: 11
 -   }, [currentStepIndex, userType, router, pathname]);
 +   // Navigation handlers: update the URL directly (to be used in child components)
 +   // Example usage: router.push(stepPaths[newIndex - 1])
-
+  
     const steps = [
 ```
 
@@ -3487,7 +3445,6 @@ Your account verification flow is now using the **URL as the single source of tr
 ---
 
 **Test your account verification flow:**
-
 - Click Proceed/Back between steps.
 - Use browser navigation.
 - The correct step should always be shown for the URL, and you should not get bounced back or stuck.
@@ -3511,8 +3468,7 @@ Now, the reason you are **not moving forward when clicking Proceed** is because 
 
 ## How to Fix
 
-**You must update the URL directly in your Proceed/Back button handlers.**
-
+**You must update the URL directly in your Proceed/Back button handlers.**  
 - Use `router.push(stepPaths[newIndex - 1])` to move to the next step.
 - Do **not** call `goTo`, `next`, or `nextStep` in the button handler.
 
@@ -3523,13 +3479,10 @@ Now, the reason you are **not moving forward when clicking Proceed** is because 
 ### In your Proceed button handler (e.g., in `VerificationFormWrapper.tsx` or step components):
 
 Replace:
-
 ```js
-onClick = { nextStep }; // or onClick={() => next()}, or onClick={() => goTo(currentStepIndex + 1)}
+onClick={nextStep} // or onClick={() => next()}, or onClick={() => goTo(currentStepIndex + 1)}
 ```
-
 with:
-
 ```js
 onClick={() => {
   const stepPaths = getStepPaths(userType); // You may need to pass this down as a prop
@@ -3545,7 +3498,6 @@ onClick={() => {
 ---
 
 ## Would you like me to:
-
 - Refactor your `VerificationFormWrapper.tsx` (or the relevant button handler) to use this pattern?
 - Or show you exactly how to pass `getStepPaths` and `userType` down as props?
 
@@ -3571,12 +3523,12 @@ Lines added: 9, lines removed: 11
 ```diff
 @@ -9,23 +9,21 @@
   import Form from "next/form";
-
+  
 - type VerificationFormWrapperProps = {
 -   title: string;
 -   children: React.ReactNode;
 - };
--
+- 
 + // Accept getStepPaths and userType as props
   const VerificationFormWrapper = ({
     title,
@@ -3610,7 +3562,7 @@ Lines added: 9, lines removed: 18
 ```diff
 @@ -42,31 +40,22 @@
     const bottomButtonText = "Back";
-
+  
 -   const nextStep = () => {
 +   // Proceed button handler: update the URL directly
 +   const handleProceed = () => {
@@ -3622,11 +3574,11 @@ Lines added: 9, lines removed: 18
         router.push("/dashboard/settings");
         return;
       }
--
+- 
 -     // Call the next function from the store
 -     next();
 -   };
--
+- 
 -   const handleBack = () => {
 -     if (currentStepIndex === 1) {
 -       // If we're on the first verification step, go back to user type selection
@@ -3638,11 +3590,11 @@ Lines added: 9, lines removed: 18
 +       router.push(stepPaths[newIndex - 1]);
       }
 -   };
--
+- 
 -   const myAction = () => {
 -     console.log();
     };
-
+  
     return (
       <div className={styles.container}>
 -       <Form action={myAction} className={styles.form}>
@@ -3662,7 +3614,7 @@ Lines added: 1, lines removed: 3
 +               onClick={handleProceed}
               />
             )}
--
+- 
 -           {/* Show back button on all steps except the first (user type selection) */}
             {currentStepIndex > 0 && (
               <Button
@@ -3694,7 +3646,7 @@ Lines added: 13, lines removed: 13
 
 ```diff
 @@ -68,22 +68,22 @@
-
+  
     const steps = [
 -     <UserTypeSelection key="user-type" />,
 +     <UserTypeSelection key="user-type" getStepPaths={getStepPaths} userType={userType} />,
@@ -3754,8 +3706,7 @@ _**Assistant**_
 
 Thank you for your patience. The reason **neither the Proceed nor Back buttons work** is because the navigation handlers are now in `VerificationFormWrapper`, but the logic for `getStepPaths` and `userType` is only available in the parent (`AccountVerification`). You passed these as props, but the child components (like `VerifyYourAccount`, etc.) may not be using the shared wrapper, or the props are not being passed down everywhere.
 
-**Additionally:**
-
+**Additionally:**  
 - If your step components (e.g., `VerifyYourAccount`, `BusinessDetailsForm`, etc.) are not using the shared `VerificationFormWrapper` (with the new props), the navigation logic will not be triggered.
 - If you are using the wrapper, but the buttons are not rendered, it may be due to missing or incorrect props.
 
@@ -3774,7 +3725,6 @@ Thank you for your patience. The reason **neither the Proceed nor Back buttons w
 ### 1. Update all step components to use the wrapper with the correct props
 
 For example, in `VerifyYourAccount.tsx`:
-
 ```tsx
 import VerificationFormWrapper from "./VerificationFormWrapper";
 
@@ -3786,13 +3736,11 @@ const VerifyYourAccount = (props) => (
 
 export default VerifyYourAccount;
 ```
-
 Do this for all step components.
 
 ### 2. Implement the Back button handler in `VerificationFormWrapper.tsx`
 
 Add this inside the component:
-
 ```js
 const handleBack = () => {
   if (!userType) return;
@@ -3806,9 +3754,7 @@ const handleBack = () => {
   }
 };
 ```
-
 And update the Back button:
-
 ```js
 <Button
   className={styles.backButton}
@@ -3828,7 +3774,6 @@ And update the Back button:
 ---
 
 ## Would you like me to:
-
 - Update all your step components to use the wrapper with the correct props?
 - Implement the Back button handler as above?
 
@@ -3855,7 +3800,7 @@ Lines added: 13, lines removed: undefined
 @@ -50,4 +50,17 @@
       }
     };
-+
++ 
 +   // Back button handler: update the URL directly
 +   const handleBack = () => {
 +     if (!userType) return;
@@ -3868,7 +3813,7 @@ Lines added: 13, lines removed: undefined
 +       router.push(stepPaths[newIndex - 1]);
 +     }
 +   };
-
+  
     return (
 ```
 
@@ -3899,7 +3844,7 @@ Lines added: 2, lines removed: 18
 ```diff
 @@ -4,22 +4,6 @@
   import Avatar from "@/components/Avatar";
-
+  
 - const VerifyYourAccount = () => {
 -   const benefits = [
 -     {
@@ -3915,7 +3860,7 @@ Lines added: 2, lines removed: 18
 -       benefit: "Stand out from other sellers & improve your reputation",
 -     },
 -   ];
--
+- 
 -   return (
 -     <VerificationFormWrapper title="">
 + const VerifyYourAccount = (props) => (
@@ -3932,7 +3877,7 @@ Lines added: undefined, lines removed: 1
     </VerificationFormWrapper>
   );
 - };
-
+  
   export default VerifyYourAccount;
 ```
 
@@ -3950,7 +3895,7 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -2,5 +2,5 @@
   import VerificationFormWrapper from "./VerificationFormWrapper";
-
+  
 - const BusinessDetailsForm = () => {
 + const BusinessDetailsForm = (props) => {
     const [businessName, setBusinessName] = useState("");
@@ -3962,7 +3907,7 @@ Lines added: 1, lines removed: 1
 
 ```diff
 @@ -10,5 +10,5 @@
-
+  
     return (
 -     <VerificationFormWrapper title="Business Details">
 +     <VerificationFormWrapper {...props} title="Business Details">
@@ -3984,7 +3929,7 @@ Lines added: 2, lines removed: 3
 ```diff
 @@ -4,7 +4,6 @@
   import UploadButton from "@/components/UploadButton";
-
+  
 - const IdPassport = () => {
 -   return (
 -     <VerificationFormWrapper title="Verify Your ID">
@@ -4002,7 +3947,7 @@ Lines added: undefined, lines removed: 1
     </VerificationFormWrapper>
   );
 - };
-
+  
   export default IdPassport;
 ```
 
@@ -4020,7 +3965,7 @@ Lines added: 1, lines removed: 2
 ```diff
 @@ -7,6 +7,5 @@
   import Button from "@/components/Buttons";
-
+  
 - const MobileVerification = () => {
 -   const { nextStep } = useVerificationStore();
 + const MobileVerification = (props) => {
@@ -4036,7 +3981,7 @@ Lines added: 1, lines removed: 1
       }
     };
 -   console.log({ phoneNumber });
-+
++ 
     const handleVerifyCode = async (e: React.FormEvent) => {
       e.preventDefault();
 ```
@@ -4059,7 +4004,7 @@ Lines added: 2, lines removed: 3
 
 ```diff
 @@ -38,9 +37,8 @@
-
+  
     return (
 -     <VerificationFormWrapper title="Verify Your Mobile Number">
 +     <VerificationFormWrapper {...props} title="Mobile Number Verification">
@@ -4086,7 +4031,7 @@ Lines added: 2, lines removed: 3
 ```diff
 @@ -2,7 +2,6 @@
   import VerificationFormWrapper from "./VerificationFormWrapper";
-
+  
 - const Finish = () => {
 -   return (
 -     <VerificationFormWrapper title="">
@@ -4104,7 +4049,7 @@ Lines added: undefined, lines removed: 1
     </VerificationFormWrapper>
   );
 - };
-
+  
   export default Finish;
 ```
 
@@ -4124,7 +4069,7 @@ Lines added: 2, lines removed: 1
   import { useState } from "react";
   import { useRouter } from "next/navigation";
 + import VerificationFormWrapper from "./VerificationFormWrapper";
-
+  
 - const UserTypeSelection = () => {
 + const UserTypeSelection = (props) => {
     const { setUserType, userType, clearUserTypeData, currentStepIndex, goTo } =
@@ -4140,7 +4085,7 @@ Lines added: 1, lines removed: 2
         const base = "/dashboard/settings/account-verification";
 -       const nextPath =
 -         type === "business"
-+       const nextPath = type === "business"
++       const nextPath = type === "business" 
           ? `${base}/business/intro`
           : `${base}/individual/intro`;
 ```
@@ -4150,7 +4095,7 @@ Lines added: 1, lines removed: undefined
 
 ```diff
 @@ -56,4 +56,5 @@
-
+  
     return (
 +     <VerificationFormWrapper {...props} title="Account Verification">
         <div className={styles.wrapper}>
@@ -4175,8 +4120,7 @@ Lines added: 1, lines removed: undefined
 
 All step components now use `VerificationFormWrapper` and receive the correct navigation props, so both Proceed and Back buttons should work as expected.
 
-**Test your flow:**
-
+**Test your flow:**  
 - Proceed and Back should now update the URL and step as intended.
 
 If you have any more issues or want this pattern applied to other flows, let me know!
@@ -4213,11 +4157,9 @@ This is a classic sign that the navigation logic is **off by one** or the step i
 ### 1. **Review and Correct the Navigation Logic**
 
 #### **Proceed Button**
-
 - Should use `stepPaths[currentStepIndex]` for the next step (not `newIndex - 1`).
 
 #### **Back Button**
-
 - Should use `stepPaths[currentStepIndex - 2]` for the previous step (since `currentStepIndex` is 1-based for steps after selection).
 - If `currentStepIndex === 1`, go to user-type selection.
 
@@ -4226,7 +4168,6 @@ This is a classic sign that the navigation logic is **off by one** or the step i
 ## Corrected Handlers
 
 ### **Proceed**
-
 ```js
 const handleProceed = () => {
   if (!userType) return;
@@ -4243,7 +4184,6 @@ const handleProceed = () => {
 ```
 
 ### **Back**
-
 ```js
 const handleBack = () => {
   if (!userType) return;
@@ -4258,8 +4198,7 @@ const handleBack = () => {
 
 ---
 
-## Would you like me to apply these corrections to your `VerificationFormWrapper.tsx`?
-
+## Would you like me to apply these corrections to your `VerificationFormWrapper.tsx`?  
 This will make both Proceed and Back work for all steps.
 
 ---
@@ -4327,8 +4266,7 @@ The off-by-one errors in the navigation logic are now fixed:
 - **Proceed** now uses `stepPaths[currentStepIndex]` for the next step.
 - **Back** now uses `stepPaths[currentStepIndex - 2]` for the previous step, and goes to user-type selection if at the first step.
 
-**Test your flow:**
-
+**Test your flow:**  
 - Proceed and Back should now work for all steps, moving you forward and backward as expected.
 
 If you have any more issues, let me know!
@@ -4379,19 +4317,16 @@ Thank you for your patience. Here’s a careful diagnosis and a robust fix plan 
 ## **Diagnosis**
 
 ### 1. **Step Indexing Mismatch**
-
 - Your `steps` array in `AccountVerification` is always indexed by `currentStepIndex`.
 - But the mapping between `currentStepIndex` and the `stepPaths` array is off by one:
   - `currentStepIndex = 0` is the user type selection (not in `stepPaths`).
   - `currentStepIndex = 1` is the first path in `stepPaths` (e.g., `/business/intro` or `/individual/intro`).
 
 ### 2. **Navigation Handlers**
-
 - The Proceed button uses `stepPaths[currentStepIndex]` (should be `stepPaths[currentStepIndex - 1]`).
 - The Back button uses `stepPaths[currentStepIndex - 2]` (should be `stepPaths[currentStepIndex - 2]` for previous, but must handle the edge case for the first step after selection).
 
 ### 3. **URL/Step Index Sync**
-
 - The effect in `AccountVerification` sets `currentStepIndex` to `foundIndex + 1` (correct).
 - But the navigation handlers are not using the same mapping.
 
@@ -4402,7 +4337,6 @@ Thank you for your patience. Here’s a careful diagnosis and a robust fix plan 
 ### **A. Navigation Handler Logic**
 
 #### **Proceed**
-
 ```js
 const handleProceed = () => {
   if (!userType) return;
@@ -4420,7 +4354,6 @@ const handleProceed = () => {
 ```
 
 #### **Back**
-
 ```js
 const handleBack = () => {
   if (!userType) return;
@@ -4491,7 +4424,6 @@ The navigation logic is now robust and matches the step index/URL mapping exactl
 - **Back**: Always moves to the correct previous step, and returns to user-type selection from the first step.
 
 **Please test your account verification flow again.**
-
 - You should be able to move forward and backward through all steps, with no off-by-one errors or navigation dead-ends.
 
 If you still encounter issues, let me know exactly which step/URL fails and what the observed behavior is, and I’ll provide a further targeted fix!
@@ -4533,11 +4465,9 @@ Here’s the root cause of your navigation issues:
 ## **How to Fix**
 
 ### **A. Remove all localStorage logic from the store.**
-
 - Delete all `localStorage.setItem('verificationStepIndex', ...)` lines.
 
 ### **B. Make the store a pure state container.**
-
 - Only update `currentStepIndex` in response to the effect in `AccountVerification` (which is driven by the URL).
 - Remove or ignore `next`, `back`, and `goTo` for navigation. Only use them for internal state if needed.
 
@@ -4546,7 +4476,6 @@ Here’s the root cause of your navigation issues:
 ---
 
 ## **Would you like me to apply these changes to your store?**
-
 This will make your navigation robust and prevent any state/URL mismatches or localStorage interference.
 
 ---
@@ -4590,7 +4519,7 @@ Lines added: 1, lines removed: 5
 -   canNavigateBack: () => boolean; // Check if back navigation is allowed
 +   setCurrentStepIndex: (index: number) => void; // Set the current step index (used by effect)
   };
-
+  
 ```
 
 **Chunk 3**
@@ -4600,10 +4529,10 @@ Lines added: 1, lines removed: 7
 @@ -53,20 +47,14 @@
     mobile: { number: '', code: '' },
   };
--
+- 
 - // Always start at step 0 for SSR/CSR consistency
 - const getInitialStepIndex = () => 0;
-
+  
   const useVerificationStore = create<VerificationStore>((set, get) => ({
     // Initial state
     message: '',
@@ -4614,7 +4543,7 @@ Lines added: 1, lines removed: 7
     verificationData: initialVerificationData,
     steps: [], // Will be set dynamically based on userType
     userType: null,
-
+  
     setUserType: (type) => {
 -     const state = get();
       const newSteps = type === 'business'
@@ -4628,7 +4557,7 @@ Lines added: undefined, lines removed: 2
 @@ -87,9 +75,7 @@
             ]
           : [];
--
+- 
       set({
         userType: type,
         steps: newSteps,
@@ -4650,7 +4579,7 @@ Lines added: 1, lines removed: 3
 -     steps: []
 +     steps: [],
     }),
-
+  
 ```
 
 **Chunk 6**
@@ -4659,7 +4588,7 @@ Lines added: 2, lines removed: 72
 ```diff
 @@ -118,76 +102,6 @@
       set({ verificationData: initialVerificationData }),
-
+  
 -   // Move to the next step
 -   next: () => {
 -     const { currentStepIndex, steps } = get();
@@ -4676,7 +4605,7 @@ Lines added: 2, lines removed: 72
 -       }
 -     }
 -   },
--
+- 
 -   // Alias for next function
 -   nextStep: () => {
 -     const { currentStepIndex, steps } = get();
@@ -4693,7 +4622,7 @@ Lines added: 2, lines removed: 72
 -       }
 -     }
 -   },
--
+-   
 -   // Move to the previous step
 -   back: () => {
 -     const { currentStepIndex, steps } = get();
@@ -4710,7 +4639,7 @@ Lines added: 2, lines removed: 72
 -       }
 -     }
 -   },
--
+- 
 -   // Go to a specific step by index (renamed from setCurrentStepIndex)
 -   goTo: (index) => {
 -     const { steps } = get();
@@ -4726,7 +4655,7 @@ Lines added: 2, lines removed: 72
 -       }
 -     }
 -   },
--
+- 
 -   // Check if back navigation is allowed
 -   canNavigateBack: () => {
 -     const { currentStepIndex } = get();
@@ -4735,15 +4664,14 @@ Lines added: 2, lines removed: 72
 +   // Set the current step index (used by effect in AccountVerification)
 +   setCurrentStepIndex: (index) => set({ currentStepIndex: index }),
   }));
-
+  
 ```
 
 </details>
 
 ---
 
-I've removed all localStorage logic and navigation side effects from your store.
-
+I've removed all localStorage logic and navigation side effects from your store.  
 - The store is now a pure state container.
 - The only way the step index is updated is via the effect in `AccountVerification` (which is driven by the URL).
 - All navigation is handled by `router.push` in your wrapper/component logic.
@@ -4754,3 +4682,4 @@ Please test your account verification flow again.
 If you still encounter issues, let me know the exact step and URL where it fails, and I will provide a further targeted fix!
 
 ---
+

@@ -7,7 +7,7 @@ export const servicesListing = defineType({
   initialValue: {
     title: 'New Service Offering',
     site: 'oly-services',
-    featured: false,
+    isFeatured: false,
     isActive: true,
     serviceType: 'consulting',
     currency: 'USD',

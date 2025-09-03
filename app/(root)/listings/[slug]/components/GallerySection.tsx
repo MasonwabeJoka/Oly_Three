@@ -4,7 +4,6 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import ImageGallery from "@/components/ImageGallery";
 import { imagesData } from "@/data/galleryImages";
 import PostMetrics from "./PostMetrics";
-import { useState } from "react";
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "#" },
@@ -12,7 +11,6 @@ const BREADCRUMBS = [
   { id: 3, name: "Gauteng", href: "#" },
   { id: 4, name: "Bryanston", href: "#" },
 ];
-
 
 type Image = {
   id?: string;
@@ -24,14 +22,9 @@ type Image = {
 };
 type Props = {
   images: Image[];
+  totalViews: number;
 };
-const GallerySection = ({
-  images,
-}: Props) => {
-
-
-
-
+const GallerySection = ({ images, totalViews }: Props) => {
   return (
     <div className={styles.listingImages}>
       <div className={styles.galleryContainer}>
@@ -44,14 +37,12 @@ const GallerySection = ({
           />
         </div>
         <div className={styles.gallery}>
-          <ImageGallery images={imagesData}/>
+          <ImageGallery images={images} />
         </div>
-        <PostMetrics/>
+        <PostMetrics totalViews={totalViews} />
       </div>
     </div>
   );
 };
 
 export default GallerySection;
-
-

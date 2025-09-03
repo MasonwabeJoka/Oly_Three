@@ -7,6 +7,7 @@
   justify-content: center;
   width: rem(800);
   overflow: hidden;
+  background-color: yellow;
   @include only(largeDesktop) {
     width: rem(1556);
     height: rem(570);

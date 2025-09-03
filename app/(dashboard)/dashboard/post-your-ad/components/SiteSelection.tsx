@@ -36,11 +36,7 @@ export const sites = [
   },
 ];
 
-// interface SiteSelectionProps {
-//   onSelect: (
-//     site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"
-//   ) => void;
-// }
+
 
 const SiteSelection = () => {
   return (

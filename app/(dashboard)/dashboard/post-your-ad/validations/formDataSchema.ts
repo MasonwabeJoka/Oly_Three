@@ -13,6 +13,9 @@ const formDataSchema = z.object({
   details: z.object({
     condition: z.string().min(1, { message: "Condition is required" }),
   }),
+
+  // Listing Type section
+  listingType: z.enum(['sale', 'auction']),
   // Price section
   price: z.object({
     pricingOption: z.string().min(1, { message: "Pricing option is required" }),

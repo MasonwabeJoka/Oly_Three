@@ -6,6 +6,6 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // To get the latest version of the data instead of the cached version set to false
+  useCdn: true, // To get the latest version of the data instead of the cached version set to false
   token
 })

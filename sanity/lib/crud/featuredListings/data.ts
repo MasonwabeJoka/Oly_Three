@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { defineQuery } from "next-sanity";
 
 export const featuredListingsQuery = defineQuery(`
-  *[_type == "listing" && defined(slug.current) && featured == true]
+  *[_type == "listing" && defined(slug.current) && isFeatured == true]
   | order(postedOn desc) [$offset...$limit]{
     _id,
     user->{

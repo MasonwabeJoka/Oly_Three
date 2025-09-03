@@ -76,12 +76,9 @@ const ListingsCollage = ({
     const aspectRatios = images?.map((image: any) => image.aspectRatio);
 
     return (
-      <Link
-        href={`/listings/${slugCurrent}`} 
-        key={listing._id}
-        className={styles.cardContainer}
-      >
-        <div className={styles.card}>
+      <div key={listing._id} className={styles.cardContainer}>
+        <Link href={`/listings/${slugCurrent}`}>
+          <div className={styles.card}>
           {category === "all" && (
             <ListingCard
               category={category}
@@ -124,8 +121,9 @@ const ListingsCollage = ({
               checkedHovered={checkedHovered}
             />
           )}
-        </div>
-      </Link>
+          </div>
+        </Link>
+      </div>
     );
   });
 

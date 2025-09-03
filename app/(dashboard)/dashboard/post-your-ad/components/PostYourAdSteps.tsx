@@ -5,8 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import styles from "./PostYourAdSteps.module.scss";
 import Step from "./Step";
-
-import { verificationSchema } from "../lib/validation-schema";
 import SelectACategory from "../../post-your-ad/components/SelectACategory";
 import Details from "../../post-your-ad/components/Details";
 import Price from "../../post-your-ad/components/Price";
@@ -20,11 +18,15 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import SiteSelection from "./SiteSelection";
 import ReviewListing from "./ReviewListing";
 import { formDataSchema } from "../validations/formDataSchema";
+import ListingType from "./ListingType";
 
 type FormDataFields =
   | "category.main"
   | "category.subcategory"
   | "details.condition"
+  | "titleAndDescription.title"
+  | "titleAndDescription.description"
+  | "listingType"
   | "price.pricingOption"
   | "price.amount"
   | "price.startingPrice"
@@ -33,8 +35,6 @@ type FormDataFields =
   | "createAccount.bankName"
   | "createAccount.accountHolder"
   | "createAccount.accountNumber"
-  | "titleAndDescription.title"
-  | "titleAndDescription.description"
   | "uploadMedia.uploadPhotos"
   | "uploadMedia.uploadVideos"
   | "uploadMedia.uploadAttachments"
@@ -54,6 +54,7 @@ interface StepType {
 export type FormData = {
   category: { main: string; subcategory: string };
   details: { condition: string };
+  listingType: "sale" | "auction";
   price: {
     pricingOption: string;
     amount: number;
@@ -121,17 +122,33 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
         fields: ["category.main", "category.subcategory"],
       },
       {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
+        title: "Listing Description",
+        content: <TitleAndDescription onNext={() => handleNext()} />,
+        path: "title-and-description",
+        fields: [
+          "titleAndDescription.title",
+          "titleAndDescription.description",
+        ],
       },
+      // {
+      //   title: "Listing Type",
+      //   content: <ListingType onNext={() => handleNext()} />,
+      //   path: "sale-or-auction",
+      //   fields: ["listingType"],
+      // },
       {
         title: "Price",
         content: <Price onNext={() => handleNext()} />,
         path: "price",
         fields: ["price.pricingOption", "price.amount"],
       },
+      {
+        title: "Product Details",
+        content: <Details onNext={() => handleNext()} />,
+        path: "details",
+        fields: ["details.condition"],
+      },
+
       {
         title: "Bank Account Details",
         content: <BankAccountDetails onNext={() => handleNext()} />,
@@ -142,15 +159,7 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
           "createAccount.accountNumber",
         ],
       },
-      {
-        title: "Ad Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
+
       {
         title: "Upload Media",
         content: <UploadMedia onNext={() => handleNext()} />,
@@ -490,7 +499,7 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
         path: "promote-your-ad",
         fields: ["promoteYourAd.promotionDuration"],
       },
-       {
+      {
         title: "Review Listing",
         content: <ReviewListing onNext={() => handleNext()} />,
         path: "review-message",
@@ -531,11 +540,12 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
       }
       const stepIndex =
         stepPaths[
-          (currentSite as "oly",
-          "oly-properties",
-          "oly-auto",
-          "oly-hiring",
-          "oly-services")
+          currentSite as
+            | "oly"
+            | "oly-properties"
+            | "oly-auto"
+            | "oly-hiring"
+            | "oly-services"
         ].indexOf(currentStep);
       if (stepIndex === -1) {
         router.push(`/dashboard/post-your-ad/${currentSite}/select-a-category`);
@@ -568,6 +578,7 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
     const isValid = await methods.trigger(currentFields);
     if (isValid && step < steps[site].length - 1) {
       const nextStep = step + 1;
+
       setStep(nextStep);
       router.push(
         `/dashboard/post-your-ad/${site}/${steps[site][nextStep].path}`
@@ -594,11 +605,10 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
 
   const handleBack = () => {
     if (!site) return;
-    
+
     // If on review-and-submit step (last step), skip review-message step
     if (step === steps[site].length - 1) {
       const prevStep = step - 2; // Skip review-message step
-      console.log(`Skipping back from step ${step} to step ${prevStep}`);
       setStep(prevStep);
       router.push(
         `/dashboard/post-your-ad/${site}/${steps[site][prevStep].path}`

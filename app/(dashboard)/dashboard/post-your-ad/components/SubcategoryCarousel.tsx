@@ -45,7 +45,7 @@ const SubcategoryCarousel = ({ subcategories }: SubcategoryCarouselProps) => {
               <ul className={styles.subcategoryList}>
                 {column.map((subcategory) => (
                   <li key={subcategory.id} className={styles.subcategory}>
-                    <Link href="/dashboard/post-your-ad/oly/details" className={styles.subcategoryLink}>
+                    <Link href="/dashboard/post-your-ad/oly/title-and-description" className={styles.subcategoryLink}>
                       {subcategory.name}
                     </Link>
                   </li>

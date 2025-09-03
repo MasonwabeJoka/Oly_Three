@@ -2,7 +2,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import styles from "./styles.module.scss";
 import { SignIn, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
 
-const Page = ({ searchParams }: { searchParams: { redirectUrl?: string } }) => {
+const Page = async ({ searchParams }: { searchParams: Promise<{ redirectUrl?: string }> }) => {
+  const resolvedSearchParams = await searchParams;
   return (
     <div className={styles.container}>
       <ClerkLoading>
@@ -10,7 +11,7 @@ const Page = ({ searchParams }: { searchParams: { redirectUrl?: string } }) => {
       </ClerkLoading>
       <ClerkLoaded>
         <SignIn
-          afterSignInUrl={searchParams.redirectUrl || "/"} // Fallback to "/" if no redirectUrl
+          afterSignInUrl={resolvedSearchParams.redirectUrl || "/"} // Fallback to "/" if no redirectUrl
         />
       </ClerkLoaded>
     </div>

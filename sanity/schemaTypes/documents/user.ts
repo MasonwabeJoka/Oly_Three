@@ -12,11 +12,17 @@ export const user = defineType({
             description: 'The unique identifier for the user.',
         }),
         defineField({
+            name: 'clerkId',
+            title: 'Clerk ID',
+            type: 'string',
+            description: 'The unique identifier for the user.',
+        }),
+        defineField({
             name: 'firstName',
             title: 'First Name',
             type: 'string',
             description: 'The user\'s name.',
-            validation: (Rule) => Rule.required().error('A name is required'),
+            validation: (Rule) => Rule.min(0).error('First name cannot be null'),
         }),
           
           defineField({
@@ -24,15 +30,21 @@ export const user = defineType({
             title: 'Last Name',
             type: 'string',
             description: 'The user\'s surname.',
-            validation: (Rule) => Rule.required().error('A last name is required'),
+            validation: (Rule) => Rule.min(0).error('Last name cannot be null'),
           }),
 
           defineField({
-          name: 'fullName',
-          title: 'Full Name',
-          type: 'string',
-          description: 'The user\'s full name.',
-        }),
+            name: 'fullName',
+            title: 'Full Name',
+            type: 'string',
+            description: "The user's full name.",
+            // initialValue can be a function; `parent` contains the other field values at creation
+            initialValue: (params) => {
+              const first = params?.parent?.firstName ?? '';
+              const last = params?.parent?.lastName ?? '';
+              return `${first}${first && last ? ' ' : ''}${last}`.trim();
+            },
+          },),
           
           defineField({
             name: 'username',
@@ -371,7 +383,14 @@ export const user = defineType({
             type: 'datetime',
             description: 'The timestamp when the user account was last updated.',
           }),
-          
+
+          defineField({
+            name: "createdAt",
+            title: "Created At",
+            type: "datetime",
+            description: 'The timestamp when the user account was created.',
+          }),
+                
           
           defineField({
             name: 'primaryWeb3WalletId',

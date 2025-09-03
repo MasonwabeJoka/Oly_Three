@@ -33,7 +33,7 @@ export const DetailsData: Detail[] = [
     },
     {
         id: 5,
-        detail: "Condition",
+        detail: "Describe Condition",
         description: "The current state or condition of the product.",
         example: "Smartphone is in excellent condition, always kept in a protective case."
     },

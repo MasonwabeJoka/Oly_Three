@@ -7,7 +7,7 @@ export const propertyListing = defineType({
   initialValue: {
     title: 'New Property Listing',
     site: 'oly-properties',
-    featured: false,
+    isFeatured: false,
     isActive: true,
     propertyType: 'house',
     listingType: 'for-sale',

@@ -7,7 +7,7 @@ export const autoListing = defineType({
   initialValue: {
     title: 'New Vehicle Listing',
     site: 'oly-auto',
-    featured: false,
+    isFeatured: false,
     isActive: true,
     vehicleType: 'car',
     listingType: 'for-sale',

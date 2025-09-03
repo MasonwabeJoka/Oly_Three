@@ -100,7 +100,12 @@ import {carDealership} from "./documents/carDealership"
 import {recruitmentAgency} from "./documents/recruitmentAgency"
 import {serviceProvider} from "./documents/serviceProvider"
 import { messageReply } from "./documents/messageReply"
-
+import { featuresSection } from './documents/layout/pages/listing/sections/features-section'
+import { listingPage } from './documents/layout/pages/listing/listing-page'
+import { productDetailsSection } from './documents/layout/pages/listing/sections/product-details-section'
+import { productSpecificationsSection } from './documents/layout/pages/listing/sections/product-specifications-section'
+import { sellerSection } from './documents/layout/pages/listing/sections/seller-section'
+import { similarListingsSection } from './documents/layout/pages/listing/sections/similar-listings-section'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -205,6 +210,11 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     recruitmentAgency,
     serviceProvider,
     messageReply,
-    
+    featuresSection,
+    listingPage,
+    productDetailsSection,
+    productSpecificationsSection,
+    sellerSection,
+    similarListingsSection,
   ],
 };

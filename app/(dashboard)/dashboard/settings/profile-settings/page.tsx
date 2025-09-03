@@ -31,6 +31,7 @@ const ProfileSettings = () => {
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { user, isSignedIn, isLoaded } = useUser();
+  console.log("User:", user);
 
   const {
     register,

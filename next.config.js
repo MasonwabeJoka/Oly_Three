@@ -2,16 +2,18 @@
 
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ["mongoose"],
     optimizePackageImports: ["@phosphor-icons/react"],
-    serverActions: true,
-    ppr: true,
+    serverActions: {
+      allowedOrigins: ["localhost:3000"]
+    },
+    // ppr: true,
   },
+
+  serverExternalPackages: ["mongoose"],
 
   devIndicators: {
     pprIsrStatus: true,
-    buildActivity: true,
-    buildActivityPosition: "bottom-right",
+    position: "bottom-right",
   },
 
   images: {

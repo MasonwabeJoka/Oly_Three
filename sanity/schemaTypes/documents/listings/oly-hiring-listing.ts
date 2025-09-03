@@ -7,7 +7,7 @@ export const jobListing = defineType({
   initialValue: {
     title: 'New Job Opening',
     site: 'oly-hiring',
-    featured: false,
+    isFeatured: false,
     isActive: true,
     employmentType: 'full-time',
     remoteOption: 'on-site',

@@ -8,18 +8,18 @@ import Modal from "./Modal";
 import AdCarousel from "./carousels/AdCarousel";
 import { useBreakpoint } from "@/store/useBreakpointStore";
 
-// Define interface for image data
-export interface ImageData {
-  id: string;
-  url: string;
-  width: number;
-  height: number;
-  alt: string;
-}
 
-// Define props interface for the component
+type Image = {
+  id?: string;
+  url?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+  aspectRatio?: number;
+};
+
 interface ImageGalleryProps {
-  images: ImageData[];
+  images: Image[];
 }
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {

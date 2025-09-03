@@ -15,12 +15,13 @@ import { getCategories } from "@/sanity/lib/crud/categories/data";
 import { getFeaturedListings } from "@/sanity/lib/crud/featuredListings/data";
 import { getFeaturedCategoriesSection } from "@/sanity/lib/crud/featuredCategoriesSection/data";
 
-const Home = async ({ searchParams }: { searchParams: { page?: string } }) => {
+const Home = async ({ searchParams }: { searchParams: Promise<{ page?: string }> }) => {
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
   const { categories: firstLevelCategories } = categories;
   // Read page from URL parameters, default to 1
-  const currentPage = parseInt(searchParams.page || "1");
+  const resolvedSearchParams = await searchParams;
+  const currentPage = parseInt(resolvedSearchParams.page || "1");
   const featuredListings = await getFeaturedListings(currentPage);
   const { listings, totalPages } = featuredListings;
   const {
@@ -35,7 +36,7 @@ const Home = async ({ searchParams }: { searchParams: { page?: string } }) => {
     sponsoredArticlesSection,
   } = olyHomepage;
   const featuredCategoriesSectionData = await getFeaturedCategoriesSection();
-console.log("featuredCategoriesSectionData: ", featuredCategoriesSectionData);
+  const { featuredCategories } = featuredCategoriesSectionData;
   return (
     <div
       className={styles.container}

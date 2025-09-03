@@ -18,26 +18,23 @@ import { ListingQueryResult } from "@/sanity/types";
 type ListingProps = {
   listing: ListingQueryResult;
   similarListings: any;
+  totalViews: number;
 };
 
-const Listing: React.FC<ListingProps> = ({ listing, similarListings }) => {
+const Listing: React.FC<ListingProps> = ({ listing, similarListings, totalViews }) => {
   const [showImages, setShowImages] = useState(false);
-  const [isAuction, setIsAuction] = useState(true);
+  const [isAuction, setIsAuction] = useState(false);
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
   const { showAuctionModal, setShowAuctionModal } = useAuctionModalStore();
   const sellerDetailsRef = useRef<HTMLDivElement>(null);
   const similarAdsRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname(); 
+  const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
 
-  const { images } = listing;
 
-  console.log("similarListings", similarListings);
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-
 
   useEffect(() => {
     if (isClient) {
@@ -48,14 +45,19 @@ const Listing: React.FC<ListingProps> = ({ listing, similarListings }) => {
   if (!isClient) {
     return null;
   }
-   
+
+  if (!listing) return null;
+  const { title, images } = listing;
+
+  console.log("similarListings", similarListings);
+
   return (
     <div className={styles.container}>
       <div className={styles.listingContainer}>
         {!showImages ? (
           <>
             <div className={styles.listingImagesContainer}>
-              <GallerySection images={images}/>
+              <GallerySection images={images as any} totalViews={totalViews} />
             </div>
             <section className={styles.listingDetails}>
               <div className={styles.mainSectionContainer}>
