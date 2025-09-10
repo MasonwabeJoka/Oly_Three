@@ -12,7 +12,6 @@ import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import { useModalStore } from "@/store/modalStore";
 
-
 type FormValues = z.infer<typeof searchFormSchema>;
 
 interface Props {
@@ -23,19 +22,17 @@ interface Props {
 const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
-  const setShowCategoriesModal = useModalStore((state) => state.setShowCategoriesModal);
-
+  const setShowCategoriesModal = useModalStore(
+    (state) => state.setShowCategoriesModal
+  );
 
   const {
-
     formState: { errors, isSubmitting },
     control,
   } = useForm<FormValues>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: { searchTerm, locationSearch },
   });
-
-
 
   // Get pending state from parent <Form>; fallback to isSubmitting if unavailable
   const { pending } = useFormStatus() || { pending: isSubmitting };
@@ -56,7 +53,7 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
           onClick={() => setShowCategoriesModal(true)}
         />
       </div>
-    
+
       <div className={styles.searchFields}>
         {/* Display server errors from useActionState */}
         {errors && <p className={styles.errorMessage}>{errors?.message}</p>}
@@ -78,21 +75,25 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
                 iconPosition="right"
                 iconWidth={32}
                 iconHeight={32}
-                label="Search"
+                label="Search Term"
                 placeholder="What are you looking for?"
                 id="searchTerm"
                 error={errors.searchTerm?.message}
                 ariaLabel="Search Term"
                 autoComplete="off"
-                required = {false}
-                onSuggestionsChange={(value) => setSearchTermSuggestions(value)}
+                required={false}
+                onSuggestionCountChange={(value) =>
+                  setSearchTermSuggestions(value)
+                }
               />
             )}
           />
         </div>
         {searchTermSuggestions === 0 && (
           <div className={styles.searchLocation}>
-            <p className={styles.errorMessage}>{errors.locationSearch?.message}</p>
+            <p className={styles.errorMessage}>
+              {errors.locationSearch?.message}
+            </p>
             <Controller
               name="locationSearch"
               control={control}
@@ -115,7 +116,9 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
                   ariaLabel="Location"
                   autoComplete="off"
                   required
-                  onSuggestionsChange={(count) => setLocationSuggestions(count)}
+                  onSuggestionCountChange={(count) =>
+                    setLocationSuggestions(count)
+                  }
                 />
               )}
             />

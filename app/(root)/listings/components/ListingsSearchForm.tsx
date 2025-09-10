@@ -73,7 +73,7 @@ export default function ListingsSearchForm({
                 autoFocus={false}
                 required={false}
                 error={errors.categories?.message}
-                onOpenChange={(isOpen) => setIsCategoriesOpen(isOpen)}
+                onDropdownOpenChange={(isOpen) => setIsCategoriesOpen(isOpen)}
               />
             )}
           />
@@ -117,7 +117,7 @@ export default function ListingsSearchForm({
                     error={errors.searchTerm?.message}
                     ariaLabel="Search Term"
                     autoComplete="off"
-                    required = {false}
+                    required={false}
                   />
                 )}
               />

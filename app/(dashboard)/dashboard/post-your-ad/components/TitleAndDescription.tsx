@@ -71,14 +71,14 @@ const TitleAndDescription = ({ onNext }: Props) => {
 
         // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
       >
-        <div className={styles.pageTitle}>Ad Description</div>
+        <div className={styles.pageTitle}>Title & Description</div>
         <div className={styles.titleContainer}>
           <Input
             className={styles.title}
             inputType="text"
             inputSize="large"
             placeholder="Write a title for your ad."
-            label="Write a title for your ad"
+            label="Title"
             id="titleAndDescription.title"
             ariaLabel="Ad title input field"
             aria-describedby={
@@ -100,6 +100,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
               titleOnChange(e);
               handleTitleChange(e);
             }}
+            dashboard
           />
         </div>
         <div className={styles.descriptionContainer}>
@@ -110,20 +111,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
             error={errors.titleAndDescription?.description?.message}
           />
         </div>
-        <div className={styles.submitButtonContainer}>
-          <Button
-            className={styles.submitButton}
-            buttonChildren="Submit"
-            buttonType="normal"
-            type="submit"
-            buttonSize="large"
-            name="submit-btn"
-            aria-label="Submit Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard
-          />
-        </div>
+      
       </div>
     </div>
   );

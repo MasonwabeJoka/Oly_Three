@@ -8,6 +8,8 @@
         padding-top: rem(8);
         padding-left: rem(8);
         display: none;
+      
+
         @include only(largeDesktop) {
           display: block;
         }

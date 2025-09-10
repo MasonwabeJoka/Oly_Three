@@ -42,13 +42,14 @@ const CategoryCarousel = ({
       mousewheel={true}
       modules={[FreeMode, Scrollbar, Mousewheel]}
     >
-      <div className={styles.categories}>
+      <div className={styles.categories} >
         {categories.map((category) => (
-          <SwiperSlide className={styles.category} key={category.id}>
+          <SwiperSlide className={styles.category} key={category.id} >
             <div
               className={`${styles.cardContainer} ${selectedId === category.id ? styles.active : ""}`}
               onClick={()=> onSelect(category.id)}
               aria-pressed={selectedId === category.id}
+          
             >
               <LinkCard
                 label={category.category}

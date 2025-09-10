@@ -6,10 +6,15 @@
   margin: 0;
   padding: 0;
   width: fit-content;
-
   .label {
     position: absolute;
-    left: -9999px;
+    top: rem(20);
+    left: rem(24);
+    z-index: 1;
+    color: $grey-four;
+    text-transform: uppercase;
+    font-size: rem(12);
+    
   }
 
   .inputContainer {
@@ -34,20 +39,22 @@
       left: rem(0);
       height: 100%;
       width: rem(80);
-
+      
       .leftIcon {
       }
     }
 
     .rightIconContainer {
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
       display: flex;
       justify-content: center;
       align-items: center;
       position: absolute;
       right: rem(0);
-      height: 100%;
+      height: rem(56);
       width: rem(80);
-
       .rightIcon {
       }
 
@@ -171,9 +178,9 @@
   }
 
   .searchSuggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
+    // position: absolute;
+    // top: 100%;
+    // left: 0;
     width: 100%;
     max-height: rem(400);
     cursor: pointer;
@@ -184,8 +191,9 @@
   }
 
   .suggestionContainer {
-
+   
     .suggestion {
+
       display: flex;
       justify-content: center;
       align-items: center;

@@ -39,7 +39,7 @@ const Location = ({ onNext }: Props) => {
             dashboard
             error={errors.location?.province?.message}
             {...register("location.province")}
-            onOpenChange={(isOpen) => setIsLocationOpen(isOpen)}
+            onDropdownOpenChange={(isOpen) => setIsLocationOpen(isOpen)}
           />
         </div>
         {!isLocationOpen && (
@@ -57,7 +57,7 @@ const Location = ({ onNext }: Props) => {
               dashboard
               error={errors.location?.city?.message}
               {...register("location.city")}
-              onOpenChange={(isOpen) => setIsCityOpen(isOpen)}
+              onDropdownOpenChange={(isOpen) => setIsCityOpen(isOpen)}
             />
           </div>
         )}
@@ -76,7 +76,7 @@ const Location = ({ onNext }: Props) => {
               dashboard
               error={errors.location?.suburb?.message}
               {...register("location.suburb")}
-              onOpenChange={(isOpen) => setIsSuburbOpen(isOpen)}
+              onDropdownOpenChange={(isOpen) => setIsSuburbOpen(isOpen)}
             />
           </div>
         )}
@@ -87,7 +87,7 @@ const Location = ({ onNext }: Props) => {
               inputType="text"
               inputSize="large"
               placeholder="You can add more here"
-              label="Custom Location"
+              label="More"
               id="customLocation"
               ariaLabel="Custom Location Field"
               autoFocus={false}

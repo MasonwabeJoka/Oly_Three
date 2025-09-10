@@ -24,9 +24,9 @@ export default function VideoPlayer({ videoPath }: Props) {
           playsInline
           crossOrigin=""
           style={{
-            borderRadius: "2.5rem",
-            maxWidth: "640px",
-            maxHeight: "640px",
+            // borderRadius: "2.5rem",
+             minWidth: "320px",
+            minHeight: "180px",
           }}
         ></video>
       </MediaThemeNotflix>

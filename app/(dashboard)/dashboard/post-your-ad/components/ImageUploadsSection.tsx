@@ -8,6 +8,7 @@ import Image from "next/image";
 import Icon from "@/components/Icon";
 import useUploadFiles from "@/app/(dashboard)/dashboard/post-your-ad/store/useUploadFiles";
 import { useEffect, useRef, useState } from "react";
+import UploadButton from "@/components/UploadButton";
 
 type Props = {
   uploadedFiles: string[];
@@ -146,6 +147,17 @@ const ImageUploadsSection = ({ uploadedFiles }: Props) => {
           {uploadedFiles.length > 4 && <NavButtons />}
         </div>
       </Swiper>
+      
+      <div
+        className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
+      >
+        <UploadButton
+          mediaType="photo"
+          colour="primary"
+          required={true}
+          accept="image/*"
+        />
+      </div>
     </div>
   );
 };

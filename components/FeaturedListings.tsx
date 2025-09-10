@@ -1,31 +1,37 @@
+"use client";
 import styles from "./FeaturedListings.module.scss";
 import ListingsCollage from "@/components/ListingsCollage";
 import Link from "next/link";
 import Button from "@/components/Buttons";
-import multipleImages from "@/data/multipleImages";
 import FeaturedListingsClient from "./FeaturedListingsClient";
-import { FeaturedListingsQueryResult } from "./../sanity/types";
+import { FeaturedListingsQueryResult } from "@/sanity/types";
 import Pagination from "./Pagination";
+import { use } from "react";
 
+
+type ListingsPromiseType =  Promise<{
+    listings: any;
+    totalPages: number;
+    currentPage: number;
+  }>
 type FeaturedListingsProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  listings: FeaturedListingsQueryResult;
-  totalPages: number;
-  currentPage: number;
+  listingsPromise: ListingsPromiseType;
 };
 
 const FeaturedListings = ({
   category,
-  listings,
-  totalPages,
-  currentPage,
+  listingsPromise,
 }: FeaturedListingsProps) => {
+  const resolvedListings = use(listingsPromise);
+  console.log("Resolved Listings", resolvedListings);
+  const { listings, totalPages, currentPage } = resolvedListings;
   return (
     <>
       {category === "all" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
-          <FeaturedListingsClient category={category} />
+            <FeaturedListingsClient category={category} />
             <ListingsCollage
               category={category}
               listings={listings}

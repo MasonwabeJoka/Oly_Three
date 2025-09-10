@@ -40,7 +40,9 @@ Add a `useEffect` that listens for changes in `searchParams` and calls `reset()`
 import React, { useState, useEffect } from "react";
 // ... existing imports
 
-const HeroSectionSearchClient = ({ searchParams = {} }: HeroSectionSearchClientProps) => {
+const HeroSectionSearchClient = ({
+  searchParams = {},
+}: HeroSectionSearchClientProps) => {
   // ... existing code
 
   useEffect(() => {
@@ -81,7 +83,7 @@ Lines added: 8, lines removed: undefined
 @@ -43,4 +43,12 @@
       },
     });
-+ 
++
 +   // Add this useEffect to update form values when searchParams changes
 +   React.useEffect(() => {
 +     reset({
@@ -89,7 +91,7 @@ Lines added: 8, lines removed: undefined
 +       locationSearch: searchParams.locationSearch || "",
 +     });
 +   }, [searchParams, reset]);
-  
+
     const onSubmit = async (data: FormValues) => {
 ```
 
@@ -114,13 +116,16 @@ _**Assistant**_
 Thank you for the update and the URL example. If the fields are still not prefilled, let's troubleshoot further:
 
 ### 1. Are `searchParams` being passed correctly?
+
 - In Next.js App Router, `searchParams` are typically passed to server components, not client components.
 - In your client component, you are using a prop `searchParams`, but unless the parent (likely a server component) is explicitly passing these props, they will be empty.
 
 ### 2. How are you rendering `HeroSectionSearchClient`?
+
 - If you are using this component directly in a page or another component, you need to ensure that the parent is extracting the search params and passing them down.
 
 #### Example: Correct usage in a server component
+
 ```tsx
 // In your page.tsx or a server component
 import HeroSectionSearchClient from "@/components/HeroSectionSearchClient";
@@ -129,9 +134,11 @@ export default function Page({ searchParams }) {
   return <HeroSectionSearchClient searchParams={searchParams} />;
 }
 ```
+
 - Here, `searchParams` is provided by Next.js App Router to server components.
 
 ### 3. In the client component, `useSearchParams` is not used for default values
+
 - You are using `useSearchParams` but only for navigation, not for initial values.
 
 ---
@@ -185,16 +192,16 @@ Lines added: 1, lines removed: 12
 ```diff
 @@ -13,16 +13,5 @@
   import { searchAction } from "@/utils/FormServerActions/heroSectionSearchAction";
-  
+
 - interface HeroSectionSearchClientProps {
 -   searchParams?: {
 -     searchTerm?: string;
 -     locationSearch?: string;
 -   };
 - }
-- 
+-
 - type FormValues = z.infer<typeof searchFormSchema>;
-- 
+-
 - const HeroSectionSearchClient = ({
 -   searchParams = {},
 - }: HeroSectionSearchClientProps) => {
@@ -213,10 +220,10 @@ Lines added: 5, lines removed: 2
 -   const searchParamsHook = useSearchParams();
 -   console.log("searchParams in HeroSectionSearchClient:", searchParams);
 +   const searchParams = useSearchParams();
-+ 
++
 +   const searchTerm = searchParams.get("searchTerm") || "";
 +   const locationSearch = searchParams.get("locationSearch") || "";
-+ 
++
     const {
       register,
 ```
@@ -250,7 +257,7 @@ Lines added: 4, lines removed: 4
       });
 -   }, [searchParams, reset]);
 +   }, [searchTerm, locationSearch, reset]);
-  
+
     const onSubmit = async (data: FormValues) => {
 -     const params = new URLSearchParams(searchParamsHook.toString());
 +     const params = new URLSearchParams(searchParams.toString());
@@ -273,9 +280,9 @@ Lines added: 2, lines removed: undefined
 @@ -12,4 +12,6 @@
   import { useRouter, useSearchParams } from "next/navigation";
   import { searchAction } from "@/utils/FormServerActions/heroSectionSearchAction";
-+ 
++
 + type FormValues = z.infer<typeof searchFormSchema>;
-  
+
   const HeroSectionSearchClient = () => {
 ```
 
@@ -298,6 +305,7 @@ Lines added: undefined, lines removed: 1
 The component now directly reads the search parameters from the URL using `useSearchParams`, and the form fields will always reflect the current values in the URL. The duplicate `name` prop on the location input has also been removed, and the missing type definition has been restored.
 
 Your fields should now preload as expected when you visit a URL like:
+
 ```
 http://localhost:3000/?searchTerm=phone&locationSearch=Tokyo
 ```
@@ -325,7 +333,11 @@ interface HeroSectionProps {
   searchParams?: { searchTerm?: string; locationSearch?: string };
 }
 
-const HeroSection = ({ category, mainTitle, searchParams = {} }: HeroSectionProps) => {
+const HeroSection = ({
+  category,
+  mainTitle,
+  searchParams = {},
+}: HeroSectionProps) => {
   // ...
   return (
     // ...
@@ -380,6 +392,7 @@ export default function Page({ searchParams }) {
 ---
 
 ### Would you like me to:
+
 - Show you how to update your page component to pass `searchParams` down to `HeroSection`?
 - Or refactor `HeroSectionSearch` to not require the `searchParams` prop at all (recommended for simplicity)?
 
@@ -428,7 +441,7 @@ Lines added: 1, lines removed: 2
 ```diff
 @@ -5,6 +5,5 @@
   import Button from "./Buttons";
-  
+
 - const HeroSectionSearch = ({ searchParams }: { searchParams: { searchTerm?: string; locationSearch?: string } }) => {
 -   console.log("searchParams in HeroSectionSearch:", searchParams.searchTerm);
 + const HeroSectionSearch = () => {
@@ -482,7 +495,7 @@ Lines added: 1, lines removed: 3
     mainTitle?: string;
 -   searchParams?: { searchTerm?: string; locationSearch?: string };
   }
-  
+
 - const HeroSection = ({ category, mainTitle, searchParams = {} }: HeroSectionProps) => {
 -   console.log("searchParams in HeroSection:", searchParams);
 + const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
@@ -515,7 +528,7 @@ You can now use `HeroSection` anywhere without worrying about `searchParams`. If
 
 _**User**_
 
-My fields are still  not prefilled. Also examine the Input component and its use in HeroSectionSearchClient to see if there is something that is causing this issue.
+My fields are still not prefilled. Also examine the Input component and its use in HeroSectionSearchClient to see if there is something that is causing this issue.
 
 ---
 
@@ -562,7 +575,8 @@ Here’s what’s happening and why your fields are not prefilled:
 ---
 
 ### 1. **Input Component is Controlled Internally**
-- Your `Input` component maintains its own internal state:  
+
+- Your `Input` component maintains its own internal state:
   ```js
   const [internalValue, setInternalValue] = useState(value);
   ```
@@ -572,12 +586,14 @@ Here’s what’s happening and why your fields are not prefilled:
 ---
 
 ### 2. **How React Hook Form Works**
+
 - With react-hook-form, you use `{...register("fieldName")}` on the input, and **do not** set the `value` prop directly.
 - React Hook Form expects the input to be "uncontrolled" (i.e., the DOM manages its value, not React state).
 
 ---
 
 ### 3. **Why This Breaks Prefilling**
+
 - Because your `Input` is always controlled by its own `internalValue` state, and not by react-hook-form, the value from the form's state (including default values and resets) is ignored after the first render.
 - This means the field will not update when you call `reset` or when the form's default values change.
 
@@ -588,10 +604,12 @@ Here’s what’s happening and why your fields are not prefilled:
 You have two options:
 
 ### **Option 1: Make Input Fully Controlled by React Hook Form**
+
 - Pass the `value` and `onChange` from react-hook-form to your `Input` component.
 - In `HeroSectionSearchClient`, use `control` and `Controller` from react-hook-form for each field.
 
 #### Example for one field:
+
 ```tsx
 import { Controller } from "react-hook-form";
 
@@ -606,11 +624,13 @@ import { Controller } from "react-hook-form";
       // Remove {...register("searchTerm")}
     />
   )}
-/>
+/>;
 ```
+
 - Do the same for `locationSearch`.
 
 ### **Option 2: Make Input Uncontrolled**
+
 - Remove all internal state (`internalValue`, `setInternalValue`, etc.) from your `Input` component.
 - Let the DOM manage the value, and let react-hook-form handle everything via `register`.
 
@@ -688,7 +708,7 @@ Lines added: 2, lines removed: 1
                   autoComplete="off"
                   required
 -             {...register("searchTerm")}
-                  onSuggestionsChange={(value) => setSearchTermSuggestions(value)}
+                  onSuggestionCountChange={(value) => setSearchTermSuggestions(value)}
 +               />
 +             )}
             />
@@ -720,7 +740,7 @@ Lines added: 2, lines removed: 1
                     autoComplete="off"
                     required
 -               {...register("locationSearch")}
-                    onSuggestionsChange={(count) => setLocationSuggestions(count)}
+                    onSuggestionCountChange={(count) => setLocationSuggestions(count)}
 +                 />
 +               )}
               />
@@ -734,6 +754,7 @@ Lines added: 2, lines removed: 1
 Your `HeroSectionSearchClient` form is now using react-hook-form's `Controller` for both the `searchTerm` and `locationSearch` fields. This makes the `Input` component fully controlled by react-hook-form, ensuring that prefilled values from the URL (or any default/reset) will now appear in the fields as expected.
 
 You should now see the fields prefilled when you visit a URL like:
+
 ```
 http://localhost:3000/?searchTerm=phone&locationSearch=Tokyo
 ```
@@ -755,29 +776,34 @@ No, it is **not advisable** to use `searchParams` from the URL for a profile set
 ---
 
 ### 1. **Profile Data Should Come from the User’s Account, Not the URL**
+
 - Profile settings (name, email, phone, etc.) are user-specific and should be loaded from your authentication/user management system (e.g., Clerk, Firebase, your backend).
 - The URL’s query parameters (`searchParams`) are meant for things like search filters, navigation state, or sharing a specific view—not for sensitive or persistent user data.
 
 ---
 
 ### 2. **Security and Consistency**
+
 - Allowing profile data to be set via URL parameters could be a security risk (e.g., someone could craft a URL to prefill someone else’s data).
 - It could also lead to inconsistent or unexpected behavior if the URL is manipulated.
 
 ---
 
 ### 3. **Best Practice**
+
 - Always load profile form defaults from the authenticated user’s data (as you are doing with Clerk’s `user` object and `reset(defaultValues)` in your `useEffect`).
 - Only use `searchParams` for things that are meant to be shareable or navigational (like search filters, pagination, etc.).
 
 ---
 
 ### 4. **Your Current Approach is Correct**
+
 - Your current `ProfileSettings` form loads the user’s data from Clerk and sets it as the form’s default values. This is the correct and secure approach.
 
 ---
 
-**Summary:**  
+**Summary:**
+
 - Use `searchParams` for search/filter/navigation state.
 - Use user/account data for profile forms.
 
@@ -812,10 +838,13 @@ Here’s a robust approach to achieve your requirements, matching the search exp
 - You already have this working: it updates the URL and navigates to `/` (or you can change it to `/listings`).
 
 **Change this line:**
+
 ```ts
 router.push(`/?${params.toString()}`);
 ```
+
 **To:**
+
 ```ts
 router.push(`/listings?${params.toString()}`);
 ```
@@ -983,7 +1012,7 @@ Lines added: 110, lines removed: 1
 
 ```diff
 @@ -1,1 +1,110 @@
-- 
+-
 + "use client";
 + import { useEffect } from "react";
 + import { useForm, Controller } from "react-hook-form";
@@ -995,16 +1024,16 @@ Lines added: 110, lines removed: 1
 + import Button from "@/components/Buttons";
 + import { suggestions } from "@/data/SuggestionsData";
 + import styles from "./ListingsSearchClient.module.scss";
-+ 
++
 + type FormValues = z.infer<typeof searchFormSchema>;
-+ 
++
 + const ListingsSearchClient = () => {
 +   const router = useRouter();
 +   const searchParams = useSearchParams();
-+ 
++
 +   const searchTerm = searchParams.get("searchTerm") || "";
 +   const locationSearch = searchParams.get("locationSearch") || "";
-+ 
++
 +   const {
 +     handleSubmit,
 +     setError,
@@ -1018,14 +1047,14 @@ Lines added: 110, lines removed: 1
 +       locationSearch,
 +     },
 +   });
-+ 
++
 +   useEffect(() => {
 +     reset({
 +       searchTerm,
 +       locationSearch,
 +     });
 +   }, [searchTerm, locationSearch, reset]);
-+ 
++
 +   const onSubmit = (data: FormValues) => {
 +     const params = new URLSearchParams(searchParams.toString());
 +     params.set("searchTerm", data.searchTerm);
@@ -1033,7 +1062,7 @@ Lines added: 110, lines removed: 1
 +     router.push(`/listings?${params.toString()}`);
 +     // (eventually: trigger backend search here)
 +   };
-+ 
++
 +   return (
 +     <form onSubmit={handleSubmit(onSubmit)} className={styles.searchFields}>
 +       <Controller
@@ -1092,8 +1121,8 @@ Lines added: 110, lines removed: 1
 +     </form>
 +   );
 + };
-+ 
-+ export default ListingsSearchClient; 
++
++ export default ListingsSearchClient;
 ```
 
 </details>
@@ -1112,7 +1141,7 @@ Lines added: 1, lines removed: undefined
   import Pagination from "@/components/Pagination";
   import { useSearchParams } from "next/navigation";
 + import ListingsSearchClient from "./ListingsSearchClient";
-  
+
   export default function ListingsClient({
 ```
 
@@ -1123,6 +1152,7 @@ Lines added: 1, lines removed: undefined
 You now have a `ListingsSearchClient` component that matches the search functionality and UX of your hero section search. It is rendered at the top of your listings page and will keep the search fields in sync with the URL, allowing users to search and update the URL with their search parameters.
 
 **Next steps for you:**
+
 - Style `ListingsSearchClient` as needed (create `ListingsSearchClient.module.scss` if you want custom styles).
 - When you implement backend search, use the values from the URL (via `useSearchParams`) to fetch and display results.
 
@@ -1171,7 +1201,7 @@ Your `ListingsSearchForm` implementation is **very close to correct** and follow
 ## 🟡 Minor Issues / Recommendations
 
 1. **Form Tag**
-   - You are using `<Form>` from `next/form`, which is not standard and may not work as expected for client-side forms.  
+   - You are using `<Form>` from `next/form`, which is not standard and may not work as expected for client-side forms.
    - **Recommendation:** Use a regular `<form>` tag for client-side forms with react-hook-form.
 
    ```tsx
@@ -1259,13 +1289,13 @@ Using the `<Form>` component from `next/form` is only beneficial if you are leve
 
 ## Summary Table
 
-| Use Case                        | Use `<Form>` from `next/form` | Use regular `<form>` |
-|----------------------------------|:-----------------------------:|:--------------------:|
-| Server Actions (server-side)     | ✅                            |                      |
-| Client-side validation/logic     |                               | ✅                   |
-| Update URL with router           |                               | ✅                   |
-| Use react-hook-form              |                               | ✅                   |
-| Works without JS (progressive)   | ✅                            |                      |
+| Use Case                       | Use `<Form>` from `next/form` | Use regular `<form>` |
+| ------------------------------ | :---------------------------: | :------------------: |
+| Server Actions (server-side)   |              ✅               |                      |
+| Client-side validation/logic   |                               |          ✅          |
+| Update URL with router         |                               |          ✅          |
+| Use react-hook-form            |                               |          ✅          |
+| Works without JS (progressive) |              ✅               |                      |
 
 ---
 
@@ -1280,4 +1310,3 @@ Using the `<Form>` component from `next/form` is only beneficial if you are leve
 If you want, I can update your code to use a regular `<form>` and ensure everything works as intended!
 
 ---
-

@@ -1,0 +1,36 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  justify-content: center;
+  gap: rem(64);
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      margin-top: rem(52);
+      margin-bottom: rem(32);
+      color: $danger;
+      font-size: $body;
+      font-weight: 500;
+
+      @include only(largeDesktop) {
+        font-size: $h4;
+        margin-top: rem(124);
+        margin-bottom: rem(48);
+      }
+    }
+
+    .cards {
+      .cardContainer {
+        margin-bottom: rem(48);
+      }
+    }
+  }
+
+  .paymentSummaryContainer{
+      width: rem(342);
+  }
+}

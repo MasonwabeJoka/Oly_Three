@@ -94,7 +94,7 @@ const Home = () => {
 
         <section className={styles.featuredListings}>
           <h2 className={styles.title}>Featured Properties</h2>
-          <FeaturedListings category="property" />
+          {/* <FeaturedListings category="property" /> */}
         </section>
 
         <section className={styles.belowFoldAd}>

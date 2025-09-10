@@ -189,7 +189,7 @@ const DetailsClient = ({
                 dashboard
                 error={errors.details?.condition?.message as string}
                 {...register("details.condition")}
-                onOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
+                onDropdownOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
               />
             </div>
 
@@ -208,7 +208,7 @@ const DetailsClient = ({
                   dashboard
                   error={errors.details?.selectDetail?.message as string}
                   {...register("details.selectDetail")}
-                  onOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
+                  onDropdownOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
                 />
               </div>
             )}

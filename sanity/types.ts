@@ -6229,18 +6229,10 @@ export type SanityAssetSourceData = {
 
 export type AllSanitySchemaTypes = MessageReply | ServiceProvider | RecruitmentAgency | CarDealership | ContentChannel | Company | Store | ServicesListing | ServicesCategory | JobListing | JobCategory | AutoListing | VehicleCategory | PropertyListing | PropertyCategory | ArticleCard | OlyHomepage | SponsoredArticlesSection | Sponsor | SponsoredArticle | OlyArticlesSection | ArticlePage | CommentsSection | ArticleSidebar | ArticleCategory | Author | BottomAdSection | TopAdSection | AdSection | FeaturedListingsSection | FeaturedCategoriesSection | FeaturedServicesSection | MoreFromOlySection | HeroSection | SiteLogo | NotificationSettings | Notification | Coupon | Promotion | SeoMetadata | FlaggedContent | ModerationLog | ModerationComment | MakeModel | ListingPerformance | UserEngagement | ServiceDetails | ProfessionalServiceProvider | StoreOwner | JobDetails | DealerProfile | PropertyDetails | BankDetails | AuctionTest | Attachment | VideoFile | InspectionReport | VehicleDetails | ImageFile | Details | Page | Slide | SponsoredArticles | Blog | FeaturedCategories | FeaturedListings | Features | SocialMediaLink | Footer | Upload | AuditEntry | MessageFlag | Message | Conversation | Group | Review | Transaction | Subscription | PaymentMethod | Address | AuctionLot | UserLocationConsent | RegionalTrends | TrendData | LocationBasedRecommendationSettings | LocationHistory | LocationBasedSearch | LocationBasedListingTargeting | ListingPackage | BidderHistory | Listing | Auction | Bid | Category | User | LocationAlertSettings | UserLocationPreference | Location | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: sanity/lib/actionsTemp/fetchProducts.ts
-// Variable: query
-// Query: *[_type == "ad" && _id in $adIds && defined(priceId)] {        _id,        "slug": slug.current,        title,        description,        price,        priceId,        category,        pricingOption,        "images": images[]{          _ref,          _key,          alt,          "aspectRatio": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.aspectRatio,          "width": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.width,          "height": *[_type == "imageFile" && _id == ^._ref][0].image.asset->metadata.dimensions.height,          "url": *[_type == "imageFile" && _id == ^._ref][0].image.asset->url        },        "videos": videos[]{          _ref,          _key,          "duration": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.duration,          "format": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.format,          "resolution": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.resolution,          "frameRate": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.frameRate,          "bitrate": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.bitrate,          "codec": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.codec,          "audioChannels": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.audioChannels,          "aspectRatio": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.aspectRatio,          "fileSize": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.fileSize,          "creationDate": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.creationDate,          "tags": *[_type == "videoFile" && _id == ^._ref][0].video.asset->metadata.tags,          "url": *[_type == "videoFile" && _id == ^._ref][0].video.asset->url        },        "attachments": attachments[]{          _ref,          _key,          "size": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.size,          "format": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.format,          "creationDate": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.creationDate,          "modifiedDate": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.modifiedDate,          "author": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.author,          "pageCount": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.pageCount,          "title": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.title,          "tags": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->metadata.tags,          "url": *[_type == "attachment" && _id == ^._ref][0].attachment.asset->url        },        featuredImage,        postedOn,        details,        features,        condition,        quantity,        avatar,        location {          suburb,          city,          coordinates        },        "suburb": location->location.suburb,        "city": location->city,        "coordinates": location->coordinates,        attachment,        promotions,        bids,        likes,        todaysViews,        totalViews,        unreadMessages,        associatedAuction       }
-export type QueryResult = Array<never>;
-
 // Source: sanity/lib/crud/categories/data.ts
 // Variable: categoriesQuery
-// Query: *[_id == "bpOoyNX3tQDTPKfB9G8HaC" && title == "Oly"][0]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
+// Query: *[_type == "category" ][0]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
 export type CategoriesQueryResult = {
-  title: string | null;
-  categories: null;
-} | {
   title: string | null;
   categories: Array<{
     _id: string;
@@ -6281,51 +6273,8 @@ export type FeaturedCategoriesSectionQueryResult = {
 
 // Source: sanity/lib/crud/featuredListings/data.ts
 // Variable: featuredListingsQuery
-// Query: *[_type == "listing" && defined(slug.current) && featured == true]  | order(postedOn desc) [$offset...$limit]{    _id,    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation,    },    title,    slug,    description,    price,    priceOption,    postedOn,    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    },  }
-export type FeaturedListingsQueryResult = Array<{
-  _id: string;
-  user: {
-    _id: string;
-    firstName: string | null;
-    lastName: string | null;
-    fullName: string | null;
-    profileImage: string | null;
-    city: null;
-    suburb: null;
-    cityAbbr: null;
-  } | null;
-  title: string | null;
-  slug: Slug | null;
-  description: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
-  price: number | null;
-  priceOption: null;
-  postedOn: string | null;
-  images: Array<{
-    alt: string | null;
-    id: string | null;
-    url: string | null;
-    width: number | null;
-    height: number | null;
-    aspectRatio: number | null;
-  }> | null;
-}>;
+// Query: *[_type == "listing" && defined(slug.current) && isFeatured == true]  | order(postedOn desc) [$offset...$limit]{    _id,    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation,    },    title,    slug,    description,    price,    priceOption,    postedOn,    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    },  }
+export type FeaturedListingsQueryResult = Array<never>;
 // Variable: featuredListingsCountQuery
 // Query: count(*[_type == "listing" && defined(slug.current) && isFeatured == true])
 export type FeaturedListingsCountQueryResult = number;
@@ -6418,6 +6367,14 @@ export type ListingQueryResult = {
     height: number | null;
     aspectRatio: number | null;
   }> | null;
+} | null;
+
+// Source: sanity/lib/crud/listingViews/data.ts
+// Variable: listingViewsQuery
+// Query: *[_type == "listing" && _id == $id][0]{    _id,  views,}
+export type ListingViewsQueryResult = {
+  _id: string;
+  views: null;
 } | null;
 
 // Source: sanity/lib/crud/listings/data.ts
@@ -6707,12 +6664,12 @@ export type UserQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"ad\" && _id in $adIds && defined(priceId)] {\n        _id,\n        \"slug\": slug.current,\n        title,\n        description,\n        price,\n        priceId,\n        category,\n        pricingOption,\n        \"images\": images[]{\n          _ref,\n          _key,\n          alt,\n          \"aspectRatio\": *[_type == \"imageFile\" && _id == ^._ref][0].image.asset->metadata.dimensions.aspectRatio,\n          \"width\": *[_type == \"imageFile\" && _id == ^._ref][0].image.asset->metadata.dimensions.width,\n          \"height\": *[_type == \"imageFile\" && _id == ^._ref][0].image.asset->metadata.dimensions.height,\n          \"url\": *[_type == \"imageFile\" && _id == ^._ref][0].image.asset->url\n        },\n        \"videos\": videos[]{\n          _ref,\n          _key,\n          \"duration\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.duration,\n          \"format\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.format,\n          \"resolution\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.resolution,\n          \"frameRate\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.frameRate,\n          \"bitrate\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.bitrate,\n          \"codec\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.codec,\n          \"audioChannels\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.audioChannels,\n          \"aspectRatio\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.aspectRatio,\n          \"fileSize\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.fileSize,\n          \"creationDate\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.creationDate,\n          \"tags\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->metadata.tags,\n          \"url\": *[_type == \"videoFile\" && _id == ^._ref][0].video.asset->url\n        },\n        \"attachments\": attachments[]{\n          _ref,\n          _key,\n          \"size\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.size,\n          \"format\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.format,\n          \"creationDate\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.creationDate,\n          \"modifiedDate\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.modifiedDate,\n          \"author\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.author,\n          \"pageCount\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.pageCount,\n          \"title\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.title,\n          \"tags\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->metadata.tags,\n          \"url\": *[_type == \"attachment\" && _id == ^._ref][0].attachment.asset->url\n        },\n        featuredImage,\n        postedOn,\n        details,\n        features,\n        condition,\n        quantity,\n        avatar,\n        location {\n          suburb,\n          city,\n          coordinates\n        },\n        \"suburb\": location->location.suburb,\n        \"city\": location->city,\n        \"coordinates\": location->coordinates,\n        attachment,\n        promotions,\n        bids,\n        likes,\n        todaysViews,\n        totalViews,\n        unreadMessages,\n        associatedAuction\n       }": QueryResult;
-    "*[_id == \"bpOoyNX3tQDTPKfB9G8HaC\" && title == \"Oly\"][0]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
+    "*[_type == \"category\" ][0]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
     "\n  *[_type == \"featuredCategoriesSection\" && isActive == true][0] {\n    _id,\n    title,\n    callToAction,\n    featuredCategories[]{\n        _key,\n        isActive,\n        sortOrder,\n        featuredPriority,\n        overrideTitle,\n        overrideUrl,\n        overrideImage,\n        \"category\": categoryRef->{\n        _id,\n        title,\n        slug,\n        path,\n        \"image\": image.asset->url,\n        isActive,\n        order\n        },\n        // computed displayTitle - prefer overrideTitle, then referenced title, else blank\n        \"displayTitle\": coalesce(overrideTitle, categoryRef->title),\n        // computed displayImage - prefer overrideImage, then referenced image\n        \"displayImage\": coalesce(overrideImage, categoryRef->image.asset->url)\n    }\n  }\n": FeaturedCategoriesSectionQueryResult;
-    "\n  *[_type == \"listing\" && defined(slug.current) && featured == true]\n  | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }\n": FeaturedListingsQueryResult;
+    "\n  *[_type == \"listing\" && defined(slug.current) && isFeatured == true]\n  | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }\n": FeaturedListingsQueryResult;
     "\n  count(*[_type == \"listing\" && defined(slug.current) && isFeatured == true])\n": FeaturedListingsCountQueryResult;
     "*[_type == \"listing\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    price,\n    pricingOption,\n    description,\n    site,\n    postedOn,\n    expiresAt,\n    location,\n    details,\n    category->{\n      _id,\n      title,\n      slug\n    },\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation\n    },\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }": ListingQueryResult;
+    "*[_type == \"listing\" && _id == $id][0]{\n    _id,\n  views,\n}": ListingViewsQueryResult;
     "\n  *[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ] | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    }\n  }\n": ListingsQueryResult;
     "\n  count(*[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ])\n": ListingsCountQueryResult;
     "*[_type == \"olyHomepage\" && isActive == true][0] {\n  _id,\n  _type,\n  title,\n  publishedAt,\n  isActive,\n  adSection,\n  topAdSection,\n  bottomAdSection,\n  featuredCategoriesSection,\n  featuredListingsSection,\n  featuredServicesSection,\n  heroSection,\n  moreFromOlySection,\n  olyArticlesSection,\n  sponsoredArticlesSection,\n}": OlyHomepageQueryResult;

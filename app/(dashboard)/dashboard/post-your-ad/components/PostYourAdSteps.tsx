@@ -12,13 +12,14 @@ import BankAccountDetails from "../../post-your-ad/components/BankAccountDetails
 import TitleAndDescription from "../../post-your-ad/components/TitleAndDescription";
 import UploadMedia from "../../post-your-ad/components/UploadMedia";
 import Location from "../../post-your-ad/components/Location";
-import PromoteYourAd from "@/components/PromoteYourAds";
+import PromoteYourAd from "../../post-your-ad/components/PromoteYourAds";
 import ReviewAndSubmit from "../../post-your-ad/components/ReviewAndSubmit";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import SiteSelection from "./SiteSelection";
 import ReviewListing from "./ReviewListing";
 import { formDataSchema } from "../validations/formDataSchema";
-import ListingType from "./ListingType";
+import AuctionPrice from "./AuctionPrice";
+import { useIsAuctionStore } from "../store/useIsAuction";
 
 type FormDataFields =
   | "category.main"
@@ -101,15 +102,20 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
   currentStep,
 }) => {
   const router = useRouter();
+  const { isAuction } = useIsAuctionStore();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const [site, setSite] = useState<
     "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services" | null
   >(currentSite || null);
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number | null>(null);
   const methods = useForm<FormData>({
     mode: "onChange",
     resolver: zodResolver(formDataSchema),
   });
-
   const steps: Record<
     "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services",
     StepType[]
@@ -130,18 +136,20 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
           "titleAndDescription.description",
         ],
       },
-      // {
-      //   title: "Listing Type",
-      //   content: <ListingType onNext={() => handleNext()} />,
-      //   path: "sale-or-auction",
-      //   fields: ["listingType"],
-      // },
-      {
-        title: "Price",
-        content: <Price onNext={() => handleNext()} />,
-        path: "price",
-        fields: ["price.pricingOption", "price.amount"],
-      },
+      isAuction
+        ? {
+            title: "Auction Price",
+            content: <AuctionPrice onNext={() => handleNext()} />,
+            path: "auction-price",
+            fields: ["price.pricingOption", "price.amount"],
+          }
+        : {
+            title: "Price",
+            content: <Price onNext={() => handleNext()} />,
+            path: "price",
+            fields: ["price.pricingOption", "price.amount"],
+          },
+
       {
         title: "Product Details",
         content: <Details onNext={() => handleNext()} />,
@@ -526,7 +534,7 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
   };
 
   useEffect(() => {
-    if (currentSite && currentStep) {
+    if (currentSite && currentStep && isClient) {
       const validTypes = [
         "oly",
         "oly-properties",
@@ -535,33 +543,18 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
         "oly-services",
       ];
       if (!validTypes.includes(currentSite)) {
-        router.push("/dashboard/post-your-ad/oly/select-a-category");
+        router.push("/dashboard/post-your-ad/oly/select-category");
         return;
       }
-      const stepIndex =
-        stepPaths[
-          currentSite as
-            | "oly"
-            | "oly-properties"
-            | "oly-auto"
-            | "oly-hiring"
-            | "oly-services"
-        ].indexOf(currentStep);
+      const stepIndex = stepPaths[currentSite].indexOf(currentStep);
       if (stepIndex === -1) {
-        router.push(`/dashboard/post-your-ad/${currentSite}/select-a-category`);
+        router.push(`/dashboard/post-your-ad/${currentSite}/select-category`);
       } else {
-        setSite(
-          currentSite as
-            | "oly"
-            | "oly-properties"
-            | "oly-auto"
-            | "oly-hiring"
-            | "oly-services"
-        );
+        setSite(currentSite);
         setStep(stepIndex);
       }
     }
-  }, [currentSite, currentStep, router]);
+  }, [currentSite, currentStep, router, isAuction, isClient]);
 
   const handleSiteSelection = (
     site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"
@@ -646,7 +639,11 @@ const PostYourAdSteps: React.FC<PostYourAdStepsProps> = ({
             {methods.formState.errors.root.message}
           </p>
         )}
-        {!site ? (
+        {!isClient ? (
+          <div>
+            <LoadingSpinner />
+          </div>
+        ) : !site ? (
           <SiteSelection onSelect={handleSiteSelection} />
         ) : site && steps[site] && steps[site][step] ? (
           <Step

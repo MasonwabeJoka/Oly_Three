@@ -42,24 +42,8 @@
     padding: 0 rem(100);
     width: 114%;
   }
-  .uploadedVideosContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: rem(48);
-    margin-bottom: rem(64);
-    row-gap: rem(20);
-    .uploadedVideo {
-    }
-  }
 
-  .uploadedAttachmentsContainer {
-    width: rem(920);
-    margin-top: rem(48);
-    margin-bottom: rem(64);
-  }
-
-  .mediaType {
+  .mediaSection {
     display: flex;
     flex-direction: column;
     margin-bottom: rem(48);
@@ -67,8 +51,6 @@
 
   .buttons {
     margin-top: rem(48);
-  }
-  .buttonContainer {
   }
 
   .photosButtonContainer {

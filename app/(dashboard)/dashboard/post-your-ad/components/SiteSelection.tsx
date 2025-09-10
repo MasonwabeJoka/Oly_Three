@@ -8,7 +8,7 @@ export const sites = [
     id: 1,
     text: "Oly",
     image: "/bear.jpg",
-    link: "/dashboard/post-your-ad/oly/select-category",
+    link: "/dashboard/post-your-ad/listing-type",
   },
   {
     id: 2,

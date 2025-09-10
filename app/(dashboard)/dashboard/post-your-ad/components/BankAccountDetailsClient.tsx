@@ -41,6 +41,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isBankNameOpen, setIsBankNameOpen] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -75,7 +76,6 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
   if (isError) return <div>Error fetching banks: {errorMessage}</div>;
 
   const bankNames = banks?.map((bank: any) => bank.name);
-
   return (
     <>
       <div className={styles.bankNameContainer}>
@@ -99,55 +99,60 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
           error={errors.createAccount?.bankName?.message as string}
           {...register("createAccount.bankName")}
           onChange={(e) => handleInputChange(e, "bankName")}
+          onDropdownOpenChange={(isOpen) => setIsBankNameOpen(isOpen)}
           dashboard
         />
       </div>
-      <div className={styles.accountHolderContainer}>
-        <Input
-          className={styles.accountHolder}
-          isSearchBar={false}
-          inputType="text"
-          inputSize="large"
-          iconSrcRight="/icons/search.png"
-          iconPosition="right"
-          iconWidth={32}
-          iconHeight={32}
-          label="Account Holder"
-          id="createAccount.accountHolder"
-          placeholder="Enter account holder's name"
-          ariaLabel="Account Holder"
-          autoComplete="off"
-          required
-          value={watch("createAccount.accountHolder") || ""}
-          error={errors.createAccount?.accountHolder?.message as string}
-          {...register("createAccount.accountHolder")}
-          onChange={(e) => handleInputChange(e, "accountHolder")}
-          dashboard
-        />
-      </div>
-      <div className={styles.accountNumberContainer}>
-        <Input
-          className={styles.accountNumber}
-          isSearchBar={false}
-          inputType="text"
-          inputSize="large"
-          iconSrcRight="/icons/search.png"
-          iconPosition="right"
-          iconWidth={32}
-          iconHeight={32}
-          label="Account Number"
-          placeholder="Enter your account number"
-          id="accountNumber"
-          ariaLabel="Account Number"
-          autoComplete="off"
-          required
-          value={watch("createAccount.accountNumber") || ""}
-          error={errors.createAccount?.accountNumber?.message as string}
-          {...register("createAccount.accountNumber")}
-          onChange={(e) => handleInputChange(e, "accountNumber")}
-          dashboard
-        />
-      </div>
+      {!isBankNameOpen && (
+        <>
+          <div className={styles.accountHolderContainer}>
+            <Input
+              className={styles.accountHolder}
+              isSearchBar={false}
+              inputType="text"
+              inputSize="large"
+              iconSrcRight="/icons/search.png"
+              iconPosition="right"
+              iconWidth={32}
+              iconHeight={32}
+              label="Name"
+              id="createAccount.accountHolder"
+              placeholder="Enter account holder's name"
+              ariaLabel="Account Holder"
+              autoComplete="off"
+              required
+              value={watch("createAccount.accountHolder") || ""}
+              error={errors.createAccount?.accountHolder?.message as string}
+              {...register("createAccount.accountHolder")}
+              onChange={(e) => handleInputChange(e, "accountHolder")}
+              dashboard
+            />
+          </div>
+          <div className={styles.accountNumberContainer}>
+            <Input
+              className={styles.accountNumber}
+              isSearchBar={false}
+              inputType="text"
+              inputSize="large"
+              iconSrcRight="/icons/search.png"
+              iconPosition="right"
+              iconWidth={32}
+              iconHeight={32}
+              label="Account #"
+              placeholder="Enter your account number"
+              id="accountNumber"
+              ariaLabel="Account Number"
+              autoComplete="off"
+              required
+              value={watch("createAccount.accountNumber") || ""}
+              error={errors.createAccount?.accountNumber?.message as string}
+              {...register("createAccount.accountNumber")}
+              onChange={(e) => handleInputChange(e, "accountNumber")}
+              dashboard
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };

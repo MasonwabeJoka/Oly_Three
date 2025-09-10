@@ -158,7 +158,7 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open) => {
+      onDropdownOpenChange: (open) => {
         if (!open) dismiss()
       },
     },

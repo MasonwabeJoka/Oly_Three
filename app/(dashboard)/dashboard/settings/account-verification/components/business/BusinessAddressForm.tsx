@@ -1,29 +1,35 @@
-'use client';
-import { useCallback } from 'react';
-import styles from './BusinessAddressForm.module.scss';
-import Input from '@/components/Input';
-import Select from '@/components/Select';
-import useIsSelectOpen from '../../store/useIsSelectOpen';
-import { useFormContext } from 'react-hook-form';
+"use client";
+import { useCallback } from "react";
+import styles from "./BusinessAddressForm.module.scss";
+import Input from "@/components/Input";
+import Select from "@/components/Select";
+import useIsSelectOpen from "../../store/useIsSelectOpen";
+import { useFormContext } from "react-hook-form";
 
 const BusinessAddressForm: React.FC = () => {
   const { isSelectOpen, setIsSelectOpen } = useIsSelectOpen();
-  const { register, formState: { errors } } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
-  const handleSelectOpenChange = useCallback((isOpen: boolean) => {
-    setIsSelectOpen(isOpen);
-  }, [setIsSelectOpen]);
+  const handleSelectOpenChange = useCallback(
+    (isOpen: boolean) => {
+      setIsSelectOpen(isOpen);
+    },
+    [setIsSelectOpen]
+  );
 
   const provinces = [
-    'Eastern Cape',
-    'Free State',
-    'Gauteng',
-    'KwaZulu-Natal',
-    'Limpopo',
-    'Mpumalanga',
-    'North West',
-    'Northern Cape',
-    'Western Cape',
+    "Eastern Cape",
+    "Free State",
+    "Gauteng",
+    "KwaZulu-Natal",
+    "Limpopo",
+    "Mpumalanga",
+    "North West",
+    "Northern Cape",
+    "Western Cape",
   ];
 
   return (
@@ -43,9 +49,11 @@ const BusinessAddressForm: React.FC = () => {
           ariaLabel="Street Address"
           required
           dashboard
-          {...register('street')}
+          {...register("street")}
         />
-        {errors.street && <p className={styles.error}>{errors.street.message}</p>}
+        {errors.street && (
+          <p className={styles.error}>{errors.street.message}</p>
+        )}
       </div>
       <div className={styles.formGroup}>
         <Input
@@ -62,9 +70,11 @@ const BusinessAddressForm: React.FC = () => {
           ariaLabel="Suburb"
           required
           dashboard
-          {...register('suburb')}
+          {...register("suburb")}
         />
-        {errors.suburb && <p className={styles.error}>{errors.suburb.message}</p>}
+        {errors.suburb && (
+          <p className={styles.error}>{errors.suburb.message}</p>
+        )}
       </div>
       <div className={styles.formGroup}>
         <Input
@@ -81,7 +91,7 @@ const BusinessAddressForm: React.FC = () => {
           ariaLabel="City"
           required
           dashboard
-          {...register('city')}
+          {...register("city")}
         />
         {errors.city && <p className={styles.error}>{errors.city.message}</p>}
       </div>
@@ -98,10 +108,12 @@ const BusinessAddressForm: React.FC = () => {
           ariaLabel="Province"
           dashboard
           required
-          onChange={(e) => register('province').onChange(e)}
-          onOpenChange={handleSelectOpenChange}
+          onChange={(e) => register("province").onChange(e)}
+          onDropdownOpenChange={handleSelectOpenChange}
         />
-        {errors.province && <p className={styles.error}>{errors.province.message}</p>}
+        {errors.province && (
+          <p className={styles.error}>{errors.province.message}</p>
+        )}
       </div>
       {!isSelectOpen && (
         <div className={styles.formGroup}>
@@ -119,9 +131,11 @@ const BusinessAddressForm: React.FC = () => {
             ariaLabel="Postal Code"
             required
             dashboard
-            {...register('postalCode')}
+            {...register("postalCode")}
           />
-          {errors.postalCode && <p className={styles.error}>{errors.postalCode.message}</p>}
+          {errors.postalCode && (
+            <p className={styles.error}>{errors.postalCode.message}</p>
+          )}
         </div>
       )}
     </div>

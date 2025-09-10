@@ -2,9 +2,23 @@
 
 # Debug multi-step form navigation issue (2025-09-03 05:05Z)
 
-_**User**_
+_**User (2025-09-03 05:05Z)**_
 
 check my post your add component multi-step form and see why clicking the proceed button in from the title and  and description steps navigates me to the select-a-category step
+
+---
+
+_**Assistant**_
+
+
+
+---
+
+_**User (2025-09-06 17:34Z)**_
+
+@videoPlayer in this MediaThemeNotflix component I want to only set the border radius if the video is full screen.
+
+
 
 ---
 

@@ -111,19 +111,18 @@ const ShopsHeroSectionSearch = () => {
             />
           </Link>
 
-  
           <Button
-                buttonChildren={"See All Categories"}
-                className={styles.categoriesBtn}
-                buttonType="normal"
-                buttonSize="large"
-                name="Categories Button"
-                type="button"
-                ariaLabel="Categories Button"
-                autoFocus={false}
-                disabled={false}
-                onClick={() => setShowCategoriesModal(true)}
-              />
+            buttonChildren={"See All Categories"}
+            className={styles.categoriesBtn}
+            buttonType="normal"
+            buttonSize="large"
+            name="Categories Button"
+            type="button"
+            ariaLabel="Categories Button"
+            autoFocus={false}
+            disabled={false}
+            onClick={() => setShowCategoriesModal(true)}
+          />
         </div>
 
         <div className={styles.searchFields}>
@@ -155,7 +154,9 @@ const ShopsHeroSectionSearch = () => {
                   shouldValidate: true,
                 })
               }
-              onSuggestionsChange={(count) => setSearchTermSuggestions(count)}
+              onSuggestionCountChange={(count) =>
+                setSearchTermSuggestions(count)
+              }
             />
           </div>
 
@@ -189,7 +190,9 @@ const ShopsHeroSectionSearch = () => {
                     shouldValidate: true,
                   })
                 }
-                onSuggestionsChange={(count) => setLocationSuggestions(count)}
+                onSuggestionCountChange={(count) =>
+                  setLocationSuggestions(count)
+                }
               />
             </div>
           )}

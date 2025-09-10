@@ -114,7 +114,7 @@ const PropertiesHeroSectionSearchClient = () => {
               ariaLabel="Property Type Selector"
               autoFocus={false}
               required={false}
-              onOpenChange={(isOpen) => {
+              onDropdownOpenChange={(isOpen) => {
                 setIsPropertyTypeSelect(isOpen);
               }}
             />
@@ -133,7 +133,7 @@ const PropertiesHeroSectionSearchClient = () => {
                 ariaLabel="Buy or Rent Selector"
                 autoFocus={false}
                 required={false}
-                onOpenChange={(isOpen) => {
+                onDropdownOpenChange={(isOpen) => {
                   setIsForSaleToLetOpen(isOpen);
                 }}
               />

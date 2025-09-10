@@ -4,34 +4,25 @@ import React, { useState } from "react";
 import Button from "@/components/Buttons";
 import Modal from "@/components/Modal";
 import useFormStore from "../store/useFormStore";
-import { FormWrapper } from "./FormWrapper";
 import CategoryChangeWarning from "./CategoryChangeWarning";
 import styles from "./SelectNewCategory.module.scss";
+import ExitButton from "@/components/ExitButton";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props {
   onNext: () => void;
   goTo: (index: number) => void;
 }
 const SelectNewCategory = ({ onNext, goTo }: Props) => {
-  const {
-  
-    currentStepIndex,
-    setCategoryPreviouslySelected,
-    resetFormData,
-  } = useFormStore();
+  const { currentStepIndex, setCategoryPreviouslySelected, resetFormData } =
+    useFormStore();
   const [showWarningModal, setShowWarningModal] = useState(false);
+  const router = useRouter();
 
   const handleSelectNewCategoryClick = () => {
     // Show the warning modal instead of immediately proceeding
     setShowWarningModal(true);
-  };
-
-  const handleProceedWithNewCategory = () => {
-    // Reset all form data and category selection flag
-    resetFormData();
-    setCategoryPreviouslySelected(false);
-    setShowWarningModal(false);
-    goTo(0);
   };
 
   const handleCancelCategoryChange = () => {
@@ -39,23 +30,33 @@ const SelectNewCategory = ({ onNext, goTo }: Props) => {
     setShowWarningModal(false);
   };
 
-  const continueToNextStep = () => {
-    // Go to the step after category selection
-    goTo(1);
+  const handleContainerClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      router.push("/dashboard/post-your-ad/oly/title-and-description");
+    }
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Category Selection</h2>
+    <div className={styles.container} onClick={handleContainerClick}>
+      <div className={styles.wrapper}>
+        <Link
+          href="/dashboard/post-your-ad/oly/title-and-description"
+          className={styles.exitButtonContainer}
+        >
+          <ExitButton />
+        </Link>
+        {/* <h2 className={styles.title}>Category Selection</h2> */}
         <p className={styles.description}>
-          Would you like to select a new category or continue with your current
-          selection?
+          Hold on! You haven't finished creating your listing. Do you want to complete it, or start over from scratch?
         </p>
+        {/* <p className={styles.description}>
+          You haven't finished creating your listing yet. Would you like to
+          continue and finish posting your ad, or would you like to start over a new listing?
+        </p> */}
 
         <div className={styles.buttonContainer}>
           <Button
-            buttonChildren="Select New Category"
+            buttonChildren="Start New Listing"
             buttonType="primary"
             buttonSize="large"
             name="select-new-category"
@@ -65,18 +66,21 @@ const SelectNewCategory = ({ onNext, goTo }: Props) => {
             onClick={handleSelectNewCategoryClick}
             dashboard
           />
-
-          <Button
-            buttonChildren="Continue with Current Category"
-            buttonType="normal"
-            buttonSize="large"
-            name="continue-current-category"
-            type="button"
-            ariaLabel="Continue with current category"
-            autoFocus={false}
-            onClick={continueToNextStep}
-            dashboard
-          />
+          <Link
+            href="/dashboard/post-your-ad/oly/title-and-description"
+            className={styles.continueButtonContainer}
+          >
+            <Button
+              buttonChildren="Complete Current Listing"
+              buttonType="normal"
+              buttonSize="large"
+              name="continue-current-category"
+              type="button"
+              ariaLabel="Continue with current category"
+              autoFocus={false}
+              dashboard
+            />
+          </Link>
         </div>
       </div>
 
@@ -84,14 +88,14 @@ const SelectNewCategory = ({ onNext, goTo }: Props) => {
       <Modal
         showModal={showWarningModal}
         setShowModal={setShowWarningModal}
+        path="/dashboard/post-your-ad/oly/title-and-description"
         modalContent={
           <CategoryChangeWarning
-            onProceed={handleProceedWithNewCategory}
-            onCancel={handleCancelCategoryChange}
+            // onCancel={handleCancelCategoryChange}
           />
         }
       />
-    </>
+    </div>
   );
 };
 

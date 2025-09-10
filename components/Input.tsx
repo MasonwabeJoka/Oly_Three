@@ -39,9 +39,10 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onSuggestionsChange?: (count: number) => void;
+  onSuggestionCountChange?: (count: number) => void;
   selectedItems?: string[];
   onSelectedItemsChange?: (selectedItems: string[]) => void;
+  onDropdownOpenChange?: (isOpen: boolean) => void;
 }
 
 const INPUT_TYPE = {
@@ -117,9 +118,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onKeyUp,
       onFocus,
       onBlur,
-      onSuggestionsChange,
+      onSuggestionCountChange,
       selectedItems = [],
       onSelectedItemsChange,
+      onDropdownOpenChange,
       ...otherProps
     },
     ref
@@ -147,10 +149,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           : styles.xLargeDashboardInput;
         break;
       default:
-        sizeClass = !dashboard
-          ? styles.largeInput
-          : styles.largeDashboardInput;
+        sizeClass = !dashboard ? styles.largeInput : styles.largeDashboardInput;
     }
+
+    useEffect(() => {
+      if (isSearchBar && !isMultiSelect) {
+        const isVisible = revealedSuggestions.length > 0;
+        onDropdownOpenChange?.(isVisible);
+      }
+    }, [
+      revealedSuggestions.length,
+      isSearchBar,
+      isMultiSelect,
+      onDropdownOpenChange,
+    ]);
 
     // Sync internalValue with value prop
     useEffect(() => {
@@ -204,12 +216,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       if (isMultiSelect) {
         setRevealedSuggestions(suggestions || []);
       } else {
-        onSuggestionsChange?.(revealedSuggestions.length);
+        onSuggestionCountChange?.(revealedSuggestions.length);
       }
     }, [
       suggestions,
       isMultiSelect,
-      onSuggestionsChange,
+      onSuggestionCountChange,
       revealedSuggestions.length,
     ]);
 
@@ -299,11 +311,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={`${styles.container} ${className || ""}`} ref={inputRef}>
-        {label && (
-          <label className={styles.label} htmlFor={id}>
-            {label}
-          </label>
-        )}
+        {label &&
+          (internalValue || selectedItems.length > 0) &&
+          internalValue.length < 30 && (
+            <label className={styles.label} htmlFor={id}>
+              {label.length > 12 ? label.substring(0, 12) : label}
+            </label>
+          )}
         <div className={styles.inputContainer}>
           {error && (
             <p id={`${id}-error`} className={styles.errorMessage}>
@@ -342,7 +356,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             autoFocus={autoFocus}
             autoComplete={autoComplete}
             readOnly={readonly}
-            required={required === true} // Only apply required if explicitly true
+            required
             form={form}
           />
           {iconPosition && (
@@ -429,9 +443,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   if (e.key === "Enter") handleSuggestionClick(suggestion);
                 }}
                 tabIndex={0}
-                className={
-                  `${styles.suggestionContainer} ${sizeClass}`
-                }
+                className={`${styles.suggestionContainer} ${sizeClass}`}
                 style={{ marginBottom: "0.5rem" }}
               >
                 <div className={styles.suggestion}>

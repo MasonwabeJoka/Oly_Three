@@ -60,7 +60,7 @@ const AuctionStartTimeClient = () => {
             day_outside: styles.dayOutside,
           }}
         />
-     </div>
+      </div>
       <div className={styles.controls}>
         <div ref={selectRef} className={styles.setStartTimeContainer}>
           <Select
@@ -102,7 +102,7 @@ const AuctionStartTimeClient = () => {
             disabled={false}
             required={true}
             dashboard
-            onOpenChange={onAuctionStartTimeOpen}
+            onDropdownOpenChange={onAuctionStartTimeOpen}
           />
         </div>
         {!isAuctionStartTimeOpen && (
@@ -135,7 +135,7 @@ const AuctionStartTimeClient = () => {
               disabled={false}
               required={true}
               dashboard
-              onOpenChange={onAuctionDurationOpen}
+              onDropdownOpenChange={onAuctionDurationOpen}
             />
           </div>
         )}
@@ -156,7 +156,6 @@ const AuctionStartTimeClient = () => {
           </div>
         )}
       </div>
-       
     </div>
   );
 };

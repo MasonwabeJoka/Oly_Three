@@ -56,7 +56,13 @@ const FeaturedListingsClient = ({ category }) => {
       {category === "all" && (
         <div className={styles.control}>
           <Select
-            options={["All Categories", "Properties", "Vehicles", "Jobs", "Services"]}
+            options={[
+              "All Categories",
+              "Properties",
+              "Vehicles",
+              "Jobs",
+              "Services",
+            ]}
             initialValue="All Categories"
             selectSize="large"
             label="Categories"
@@ -115,7 +121,7 @@ const FeaturedListingsClient = ({ category }) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionsChange={(count) => setLocationSuggestions(count)}
+              onSuggestionCountChange={(count) => setLocationSuggestions(count)}
             />
           </div>
         </>
@@ -168,7 +174,7 @@ const FeaturedListingsClient = ({ category }) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionsChange={(count) => setLocationSuggestions(count)}
+              onSuggestionCountChange={(count) => setLocationSuggestions(count)}
             />
           </div>
         </>

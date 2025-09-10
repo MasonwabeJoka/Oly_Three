@@ -1,4 +1,3 @@
-// Select.tsx (updated component)
 import styles from "./Select.module.scss";
 import { useState, forwardRef, useRef, useEffect } from "react";
 import Icon from "@/components/Icon";
@@ -32,7 +31,7 @@ interface SelectProps {
   onBlur?: any;
   isMultiSelect?: boolean;
   dashboard?: boolean;
-  onOpenChange?: (isOpen: boolean) => void;
+  onDropdownOpenChange?: (isOpen: boolean) => void;
   onOptionsCountChange?: (count: number) => void;
 }
 
@@ -73,7 +72,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       onBlur,
       dashboard = false,
       isMultiSelect = false,
-      onOpenChange,
+      onDropdownOpenChange,
       onOptionsCountChange,
       ...otherProps
     },
@@ -121,8 +120,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
 
     // Notify parent whenever showOptions changes
     useEffect(() => {
-      onOpenChange?.(showOptions);
-    }, [showOptions, onOpenChange]);
+      onDropdownOpenChange?.(showOptions);
+    }, [showOptions, onDropdownOpenChange]);
 
     // Notify parent of options count whenever options or searchValue changes
     useEffect(() => {
@@ -164,8 +163,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       setShowOptions(false);
     });
 
-    const handleSingleSelect = (optionText: string) => {
-      const newSelected = [optionText];
+    const handleSingleSelect = (optionValue: string) => {
+      const newSelected = [optionValue];
       if (!controlled) {
         setSelectedOptions(newSelected);
       }
@@ -365,8 +364,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       className={styles.option}
                       onClick={() =>
                         isMultiSelect
-                          ? handleMultiSelect(label, !selected.includes(label))
-                          : handleSingleSelect(label)
+                          ? handleMultiSelect(value, !selected.includes(value))
+                          : handleSingleSelect(value)
                       }
                     >
                       {isMultiSelect && (

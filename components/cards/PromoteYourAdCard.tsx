@@ -121,7 +121,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
-              onOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
+              onDropdownOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
             />
           </div>
 
@@ -164,7 +164,11 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
   }
 
   return (
-    <div className={styles.container} ref={containerRef} style={{ backgroundColor: isDurationSelectOpen ? "#edf2f7" : "#f3f7fa" }}>
+    <div
+      className={styles.container}
+      ref={containerRef}
+      style={{ backgroundColor: isDurationSelectOpen ? "#edf2f7" : "#f3f7fa" }}
+    >
       <div className={styles.wrapper} ref={wrapperRef}>
         <div className={styles.iconContainer}>
           <Icon
@@ -196,7 +200,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={errors.promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
-              onOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
+              onDropdownOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
             />
           </div>
 

@@ -354,7 +354,7 @@ const ProfileSettings = () => {
                 setValue("socialMediaUrl", "");
                 trigger(["socialMediaName", "socialMediaUrl"]);
               }}
-              onOpenChange={(isOpen) => setIsSocialMediaOpen(isOpen)}
+              onDropdownOpenChange={(isOpen) => setIsSocialMediaOpen(isOpen)}
               dashboard
             />
             {selected && selected === "Other" ? (

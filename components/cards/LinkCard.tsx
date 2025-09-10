@@ -29,7 +29,7 @@ const LinkCardBox = ({
       : styles.standardLabelContainer;
 
   return (
-    <article className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} ${cardSizeClass}`}>
       <div className={cardSizeClass} style={{ borderRadius: "2.5rem" }}>
         <Image
           src={image || "/bear.jpg"}
@@ -47,7 +47,7 @@ const LinkCardBox = ({
           <p className={styles.label}>{label}</p>
         </div>
       </div>
-    </article>
+    </div>
   );
 };
 

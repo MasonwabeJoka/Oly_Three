@@ -61,10 +61,10 @@ const DetailsList = ({
               className={`${styles.deleteButton} ${styles.detailButton}`}
               buttonChildren={
                 <Image
-                  src="/icons/trash.png"
+                  src="/icons/X.png"
                   alt="delete-icon"
-                  width={18}
-                  height={18}
+                  width={15}
+                  height={15}
                 />
               }
               buttonSize="standard"

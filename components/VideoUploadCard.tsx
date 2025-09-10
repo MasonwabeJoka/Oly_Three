@@ -1,19 +1,16 @@
-
 import ToggleButton from "./ToggleButton";
 import VideoPlayer from "./VideoPlayer";
 
 import styles from "./VideoUploadCard.module.scss";
 
-
 interface Props {
   videoPath: string;
 }
-const VideoUploadCard = ({videoPath}: Props) => {
+const VideoUploadCard = ({ videoPath }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.video}>
-      <VideoPlayer videoPath={videoPath} />
-      
+        {videoPath && <VideoPlayer videoPath={videoPath} />}
       </div>
       <div className={styles.text}>
         <h1 className={styles.title}>

@@ -40,20 +40,22 @@
   }
 
   .titleContainer {
+    display: flex;
+    justify-self: center;
     margin-bottom: rem(20);
 
     .title {
       @include only(largeDesktop) {
-        width: rem(640);
-        margin-bottom: rem(20);
+        width: rem(580);
+        margin-bottom: rem(16);
       }
       @include only(smallDesktop) {
-        width: rem(640);
-        margin-bottom: rem(20);
+        width: rem(580);
+        margin-bottom: rem(16);
       }
       @include only(tablet) {
-        width: rem(640);
-        margin-bottom: rem(20);
+        width: rem(580);
+        margin-bottom: rem(16);
       }
     }
   }
@@ -61,6 +63,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    // background-color: $grey-one;
+    border-radius: rem(40);
+     width: rem(640);
+      height: rem(348);
     .description {
       display: flex;
       flex-direction: column;

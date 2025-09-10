@@ -1,8 +1,9 @@
 "use client";
 import ExitButton from "./ExitButton";
 import styles from "./Modal.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "./LoadingSpinner";
 // Todo: Consider adding logo that takes you to home screen to modal
 type Props = {
   showModal: boolean; // Boolean to show or hide the modal
@@ -24,7 +25,7 @@ const Modal = ({
   closeAllModals,
 }: Props) => {
   const router = useRouter();
-  // Close modal function
+const [isNavigating, setIsNavigating] = useState(false);
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement>) => {
     // Only close if the click is directly on the modalOverlay, not its children except for the exit button container
@@ -32,8 +33,9 @@ const Modal = ({
       e.target === e.currentTarget ||
       e.currentTarget.className.includes(styles.exitButtonContainer)
     ) {
-      setShowModal(false);
       if (path) {
+        setShowModal(true);
+         setIsNavigating(true);
         try {
           router.push(path);
         } catch (error) {
@@ -41,6 +43,10 @@ const Modal = ({
           // Fallback to direct navigation if router fails
           window.location.href = path;
         }
+        
+      } else {
+
+        setShowModal(false);
       }
       reload && window.location.reload();
       refresh && router.refresh();
@@ -65,10 +71,10 @@ const Modal = ({
     <>
       {showModal && (
         <div className={styles.modalOverlay} onClick={handleClose}>
-          <div className={styles.exitButtonContainer}  onClick={handleClose}>
+          <div className={styles.exitButtonContainer}  onClick={handleClose }>
             <ExitButton />
           </div>
-          <div className={styles.modalContent}>{modalContent}</div>
+          <div className={styles.modalContent}> {isNavigating ? <LoadingSpinner/> : modalContent}</div>
         </div>
       )}
     </>
