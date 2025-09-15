@@ -1,58 +1,60 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .details {
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: rem(0);
   font-size: rem(13);
   letter-spacing: rem(1.1);
   line-height: 1.5 !important;
   background-color: $grey-one;
-  color: rgb(233, 252, 255);
-  color: $black-four;
+  color: $black-three;
   width: 100%;
   height: rem(96);
   z-index: 1;
   border-radius: rem(0) rem(0) rem(40) rem(40);
   padding: 0 rem(8) rem(8) rem(8);
 
-  .titleDescription {
+  .titleAndDescription {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 80%;
-    height: 100%;
+
     .title {
       padding: rem(8) rem(0) rem(4) rem(20);
       line-height: 1.2;
       text-transform: uppercase;
     }
   }
+
   .price {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: rem(16);
     text-align: center;
-    height: 100%;
     font-size: $h4 !important;
     font-weight: 600;
+    margin-top: rem(-12);
   }
 
-  .titlePrice {
+  .titleAndPrice {  
     display: flex;
     justify-content: space-between;
     align-items: center !important;
     width: 100%;
     padding: 0 rem(20);
     margin-top: rem(16);
+
     .title {
       text-transform: uppercase;
       width: 75%;
       font-size: rem(16);
     }
+
     .price {
       width: fit-content;
       height: fit-content;
@@ -68,6 +70,7 @@
     font-size: rem(12);
     margin-bottom: rem(4);
   }
+
   .featuresWithIcons {
     width: 100%;
     display: flex;
@@ -76,6 +79,7 @@
     padding: 0 rem(20);
     margin-top: auto;
     margin-bottom: rem(24);
+
     .feature {
       display: flex;
       gap: rem(8);
@@ -83,18 +87,30 @@
       p {
         font-size: rem(12);
       }
+
+      .featureValue {
+        margin-right: rem(3.2);
+      }
     }
+  }
+
+  // Property category specific styles
+  &.property {
+    flex-direction: column;
+    height: rem(160);
+    width: rem(387);
   }
 }
 
 .detailsHovered {
-  position: static;
+  position: absolute;
   display: block;
   color: $black-four;
   background: $grey-one;
-  height: 100%;
+  height: auto;
+  transform-origin: top;
 
-  .titleDescription {
+  .titleAndDescription {
     width: 100%;
     margin-bottom: rem(-12);
 
@@ -106,6 +122,7 @@
       font-weight: bold;
       text-align: center;
     }
+
     .description {
       padding: rem(4) rem(20) rem(0) rem(20);
       font-size: rem(16);
@@ -113,8 +130,9 @@
       text-align: center;
     }
   }
+
   .price {
     font-size: $h2;
-    margin-bottom: rem(8);
+    padding-bottom: rem(36) !important;
   }
 }

@@ -55,7 +55,6 @@ const ExpandedImageSlider = ({
     isCardHovered,
   });
 
-
   useEffect(() => {
     swiper?.on("slideChange", ({ activeIndex }) => {
       setActiveIndex(activeIndex);
@@ -150,28 +149,33 @@ const ExpandedImageSlider = ({
         centeredSlides={true}
         slidesPerView={1}
       >
-
-         {imageUrls?.map((url, index) => (
-          <SwiperSlide key={index} className={styles.swiperSlide}>
-            <div
-              style={{
-                position: "relative",
-                height: "16rem",
-                width: `calc(16rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : "auto"})`,
-                borderRadius: "2.5rem",
-              }}
-            >
-              <Image
-                className={styles.image}
-                src={url}
-                fill
-                alt="Ad Image"
-                style={{ objectFit: "cover", borderRadius: "2.5rem", zIndex: "50" }}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
+        {imageUrls &&
+          imageUrls.length > 0 &&
+          imageUrls.map((url, index) => (
+            <SwiperSlide key={index} className={styles.swiperSlide}>
+              <div
+                style={{
+                  position: "relative",
+                  height: "16rem",
+                  width: `calc(16rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : 1.77})`,
+                  borderRadius: "2.5rem",
+                }}
+              >
+                <Image
+                  className={styles.image}
+                  src={url}
+                  fill
+                  alt="Ad Image"
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "2.5rem",
+                    zIndex: "50",
+                  }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

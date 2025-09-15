@@ -7,6 +7,12 @@
   background-color: rgba(0, 0, 0, 0.041);
   outline: rem(4) solid $white-one;
 
+  .skeleton {
+    background-color: $grey-one;
+    border-radius: 50%;
+    outline: rem(4) solid $white-one;
+  }
+
   .isOnline {
     position: absolute;
     top: 0;

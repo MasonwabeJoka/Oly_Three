@@ -51,7 +51,7 @@ const BoxCard: React.FC<BoxCardProps> = ({
 }) => {
   return (
     <>
-      {category === "all" && (
+      {(category === "all" || category === "shops") && (
         <article className={`${sizeClass} ${styles.boxCard}`}>
           <BoxCardClient
             category={category}

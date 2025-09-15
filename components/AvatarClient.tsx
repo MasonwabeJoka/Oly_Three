@@ -28,6 +28,7 @@ const AvatarClient = ({
   isBusiness,
 }: AvatarClientProps) => {
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(!!avatar);
 
   // Placeholder component
   const Placeholder = () => (
@@ -49,14 +50,18 @@ const AvatarClient = ({
   return (
     <>
       {!hasError && avatar ? (
-        <Image
-          src={avatar}
-          alt={imageAlt}
-          fill={true}
-          sizes="(max-width: 768px) 100vw"
-          style={{ width: "100%", objectFit: "cover", borderRadius: "50%" }}
-          onError={() => setHasError(true)}
-        />
+        <>
+          {isLoading && <div className={`${styles.skeleton} ${AVATAR_SIZE[avatarSize]}`} />}
+          <Image
+            src={avatar}
+            alt={imageAlt}
+            fill={true}
+            sizes="(max-width: 768px) 100vw"
+            style={{ width: "100%", objectFit: "cover", borderRadius: "50%" }}
+            onLoad={() => setIsLoading(false)}
+            onError={() => setHasError(true)}
+          />
+        </>
       ) : !hasError && !avatar ? (
         <div></div>
       ) : (

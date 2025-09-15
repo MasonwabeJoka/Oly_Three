@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Dashboard = () => {
   return (
-    <MaxWidthWrapper className={styles.maxWidthWrapper}>
+    // <MaxWidthWrapper className={styles.maxWidthWrapper}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
          
@@ -56,7 +56,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </MaxWidthWrapper>
+    // </MaxWidthWrapper>
     
   );
 };

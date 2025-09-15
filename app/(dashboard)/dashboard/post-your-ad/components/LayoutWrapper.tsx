@@ -9,11 +9,13 @@ import useBreakpointStore from "@/store/useBreakpointStore";
 interface LayoutWrapperProps {
   children: React.ReactNode;
   currentUser: any;
+  sidebarItems?: any;
 }
 
 export default function LayoutWrapper({
   currentUser,
   children,
+  sidebarItems,
 }: LayoutWrapperProps) {
   const isVisible = useShowSidebarStore((state) => state.isVisible);
   const {isLargeDesktop, isSmallDesktop, isTablet} = useBreakpointStore()
@@ -47,10 +49,10 @@ export default function LayoutWrapper({
       {isVisible && <div className={styles.keepSidebarInPlace} />}
       {isVisible && (
         <aside className={styles.sidebar}>
-          <DashboardSidebar currentUser={currentUser} />
+          <DashboardSidebar currentUser={currentUser} sidebarItems={sidebarItems}/>
         </aside>
       )}
-      <main className={styles.main} style={{ marginLeft }}>
+      <main className={styles.main} style={{ marginLeft }} suppressHydrationWarning>
         {children}
         <Toaster
           richColors

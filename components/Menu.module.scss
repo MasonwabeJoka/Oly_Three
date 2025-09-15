@@ -17,7 +17,6 @@
   background-color: $white-four;
   pointer-events: auto;
 
-  // background-color: palevioletred;
   @include only(largeDesktop) {
     width: rem(888);
     height: 80vh;

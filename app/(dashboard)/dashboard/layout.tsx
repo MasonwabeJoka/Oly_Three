@@ -1,17 +1,11 @@
-import Bottombar from "@/components/Bottombar";
 import "../../globals.css";
 import styles from "./layout.module.scss";
-import DashboardSidebar from "@/components/DashboardSidebar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { localFont } from "next/font/local";
-import Navbar from "@/components/layouts/Navbar";
 import { currentUser } from "@/app/temp/tempForMessages";
 import "@uploadthing/react/styles.css";
-import QueryProvider from "@/app/(root)/queryProvider";
-
-import { Toaster } from "sonner";
-import DashboardSidebarWrapper from "./post-your-ad/components/LayoutWrapper";
 import LayoutWrapper from "./post-your-ad/components/LayoutWrapper";
+import DashboardSidebarData from "@/data/DashboardSidebarData";
 
 export const metadata = {
   title: "Oly Dashboard",
@@ -29,13 +23,11 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
+    const sidebarItems = DashboardSidebarData;
+ 
   return (
     <ClerkProvider>
-      <html lang="en" className={`${outfit.className} ${styles.html}`}>
-        <body className={styles.body}>
-          <LayoutWrapper currentUser={currentUser!}>{children}</LayoutWrapper>
-        </body>
-      </html>
+      <LayoutWrapper currentUser={currentUser!} sidebarItems={sidebarItems}>{children}</LayoutWrapper>
     </ClerkProvider>
   );
 }

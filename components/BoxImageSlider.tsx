@@ -76,7 +76,7 @@ const ImageSlider = ({
         if (swiper && activeIndex !== 0) {
           swiper.slideTo(0);
         }
-      }, 2000);
+      }, 4000);
     }
     return () => clearTimeout(timer);
   }, [isCardHovered, swiper, activeIndex]);
@@ -84,25 +84,28 @@ const ImageSlider = ({
   const swiperStyles = {
     width: category === "property" ? "24.21875rem" : "19.375rem",
   };
-
+  const testArray = [0.7, 1.7, 1];
   const swiperSlideHeight = (index: number) => {
     if (category === "property") {
       return "13.623046875rem";
+    } else if (category === "shops") {
+      if (testArray && testArray[index] >= 1) {
+      // if (aspectRatios && aspectRatios[index] >= 1) {
+        return "15.5rem";
+      } else {
+        return "27.5rem";
+      }
     } else {
-      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
+      return `calc(19.375rem / ${testArray[index]})`;
+      // return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
     }
   };
 
-  const swiperSlideWidth = (index: number) => {
-    if (category === "property") {
-      return "24.21875rem";
-    } else {
-      return "19.375rem";
-    }
-  };
+  const swiperSlideWidth =
+    category === "property" ? "24.21875rem" : "19.375rem";
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={swiperStyles}>
       <div className={styles.buttonsAndLike}>
         {hasLikeButton && (
           <div
@@ -183,9 +186,9 @@ const ImageSlider = ({
               style={{
                 position: "relative",
                 height: swiperSlideHeight(index),
-                width: swiperSlideWidth(index),
+                width: swiperSlideWidth,
                 borderRadius: "2rem",
-                backgroundColor: "#F5F5F5",
+                backgroundColor: "#e4e6e7",
               }}
             >
               <Image

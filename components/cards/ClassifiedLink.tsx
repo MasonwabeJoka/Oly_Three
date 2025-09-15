@@ -1,15 +1,15 @@
 import styles from "./ClassifiedLink.module.scss";
 import Image from "next/image";
 
-interface RecommendedArticleProps {
+interface ClassifiedLinkProps {
   text: string;
   image: string;
 }
-const RecommendedArticle = ({
+const ClassifiedLink = ({
   text,
 
   image,
-}: RecommendedArticleProps) => {
+}: ClassifiedLinkProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.link}>
@@ -33,4 +33,4 @@ const RecommendedArticle = ({
   );
 };
 
-export default RecommendedArticle;
+export default ClassifiedLink;

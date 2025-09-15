@@ -1,5 +1,4 @@
 "use client";
-import styles from "./BoxCard.module.scss";
 import { BoxImageContainer } from "./BoxImageContainer";
 import { BoxCardDetails } from "./BoxCardDetails";
 import type { PortableTextBlock } from "sanity";
@@ -53,9 +52,9 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
 }) => {
   return (
     <div
-      onMouseEnter={() => setIsCardHovered(true)}
+      onMouseEnter={category === "property" ? () => {} : () => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
-      style={{ paddingBottom: isCardHovered ? "0" : "6rem" }}
+      style={{ position: "relative" }}
     >
       <BoxImageContainer
         category={category}

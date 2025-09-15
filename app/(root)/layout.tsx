@@ -1,5 +1,3 @@
-
-import Feed from "@/components/Feed";
 import styles from "../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -18,10 +16,10 @@ export const metadata = {
 };
 
 const outfit = Outfit({
-  // src: "./outfit.ttf",
   src: "../../public/fonts/Outfit-VariableFont_wght.ttf",
   display: "swap",
   fallback: ["roboto", "system-ui", "arial"],
+  variable: "--font-outfit",
 });
 
 export default function RootLayout({
@@ -31,34 +29,31 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${outfit.className} ${styles.html}`}>
-        <body className={styles.body}>
-            <div className={styles.wrapper}>
-              <aside className={styles.feed}>
-                <Feed />
-              </aside>
-              <div className={styles.main}>
-                <nav className={styles.nav}>
-                  <Navbar />
-                </nav>
-                <main className={styles.children}>
-                  {children}
-                  <Toaster
-                    richColors
-                    toastOptions={{
-                      style: {
-                        height: "60px",
-                        padding: "32px 28px",
-                      },
-                      className: "class",
-                    }}
-                  />
-                </main>
-              </div>
+      <html lang="en" className={styles.html}>
+        <body className={`${outfit.variable} ${styles.body}`}>
+          <div className={styles.wrapper}>
+            <div className={styles.main}>
+              <nav className={styles.nav}>
+                <Navbar />
+              </nav>
+              <main className={styles.children} >
+                {children}
+                <Toaster
+                  richColors
+                  toastOptions={{
+                    style: {
+                      height: "60px",
+                      padding: "32px 28px",
+                    },
+                    className: "class",
+                  }}
+                />
+              </main>
             </div>
-            <footer className={styles.footer}>
-              <Footer />
-            </footer>
+          </div>
+          <footer className={styles.footer}>
+            <Footer />
+          </footer>
         </body>
       </html>
     </ClerkProvider>

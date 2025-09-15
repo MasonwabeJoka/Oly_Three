@@ -8,7 +8,8 @@ import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import DashboardSidebarData from "@/data/DashboardSidebarData";
+import { usePathname } from "next/navigation";
+import { Backpack } from "lucide-react";
 
 interface CurrentUserTemp {
   conversationIds: string[];
@@ -22,19 +23,32 @@ interface CurrentUserTemp {
   updatedAt: string;
 }
 interface DashboardSidebarProps {
-  // currentUser: User;
   currentUser: CurrentUserTemp;
+  sidebarItems?: any;
 }
 
 const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   currentUser,
-  users,
+  sidebarItems,
 }) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
-  const data = DashboardSidebarData();
   const { user, isSignedIn, isLoaded } = useUser();
+  const pathname = usePathname();
+
+  const itemsWithActiveState = sidebarItems?.map((item) => ({
+    ...item,
+    active:
+      item.link === "/dashboard"
+        ? pathname === "/dashboard"
+        : item.link === "/dashboard/post-your-ad"
+          ? pathname.startsWith("/dashboard/post-your-ad")
+          : item.link === ""
+            ? pathname === ""
+            : pathname === item.link,
+    onClick: () => {},
+  }));
 
   const logoStyles = {
     marginTop: isMobile ? "1rem" : "1.5rem",
@@ -52,6 +66,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
       <Link
         href="/dashboard/settings/profile-settings"
         className={styles.profile}
+       
       >
         {/* {user?.hasImage && (
           <Avatar
@@ -66,12 +81,18 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           avatarSize={isMobile ? "regular" : "large"}
         />
         {!isMobile && (
-          <p className={styles.name}>{user?.fullName || user?.username}</p>
+          <p
+            className={styles.name}
+            style={{ visibility: user?.fullName ? "visible" : "hidden" }}
+          >
+            {/* The \u00A0 is a non-breaking space to maintain height when there's no text*/}
+            {user?.fullName || user?.username || "\u00A0"}
+          </p>
         )}
       </Link>
       <div>
         <ul className={styles.mainMenu} role="list">
-          {data.slice(0, -1).map((menuItem) => {
+          {itemsWithActiveState?.slice(0, -1).map((menuItem) => {
             const { id, icon, active_icon, label, link, active, onClick } =
               menuItem;
             return (
@@ -84,23 +105,31 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
                   link={link}
                   active={active}
                   onClick={onClick}
-                  data={data}
+                  data={itemsWithActiveState}
                 />
               </li>
             );
           })}
         </ul>
-        <LogoutMenuItem
-          key={data[data.length - 1].id}
-          id={data[data.length - 1].id}
-          icon={data[data.length - 1].icon}
-          active_icon={data[data.length - 1].active_icon}
-          label={data[data.length - 1].label}
-          link={data[data.length - 1].link}
-          active={data[data.length - 1].active}
-          onClick={data[data.length - 1].onClick}
-          data={data}
-        />
+        {itemsWithActiveState && itemsWithActiveState.length > 0 && (
+          <LogoutMenuItem
+            key={itemsWithActiveState[itemsWithActiveState.length - 1].id}
+            id={itemsWithActiveState[itemsWithActiveState.length - 1].id}
+            icon={itemsWithActiveState[itemsWithActiveState.length - 1].icon}
+            active_icon={
+              itemsWithActiveState[itemsWithActiveState.length - 1].active_icon
+            }
+            label={itemsWithActiveState[itemsWithActiveState.length - 1].label}
+            link={itemsWithActiveState[itemsWithActiveState.length - 1].link}
+            active={
+              itemsWithActiveState[itemsWithActiveState.length - 1].active
+            }
+            onClick={
+              itemsWithActiveState[itemsWithActiveState.length - 1].onClick
+            }
+            data={itemsWithActiveState}
+          />
+        )}
       </div>
     </div>
   );

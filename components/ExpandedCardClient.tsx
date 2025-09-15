@@ -77,6 +77,7 @@ const ExpandedCardClient: React.FC<ExpandedCardProps> = ({
         onHeartHover={onHeartHover}
       />
       <ExpandedDetails
+        category={category}
         isDeletable={isDeletable}
         id={id}
         isFeed={isFeed}

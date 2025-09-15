@@ -3,9 +3,10 @@ import styles from "./ExpandedDetails.module.scss";
 import Avatar from "@/components/Avatar";
 import Checkbox from "./Checkbox";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
-import { PortableTextBlock } from "sanity";
+import Icon from "./Icon";
 
 type ExpandedDetailsProps = {
+  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
   isDeletable: boolean;
   id?: string;
   isFeed: boolean;
@@ -23,6 +24,12 @@ type ExpandedDetailsProps = {
   isCardHovered: boolean;
 };
 
+const propertyAttributes = [
+  { icon: "/icons/property/beds.png", alt: "BedsIcon", value: "3", label: "Beds", className: "beds" },
+  { icon: "/icons/property/bathrooms.png", alt: "BathroomsIcon", value: "2", label: "Bathrooms", className: "bathrooms" },
+  { icon: "/icons/property/landSize.png", alt: "LandSizeIcon", value: "100m²", label: "", className: "landSize" }
+];
+
 const PreventLinkClick = ({ children }: any) => {
   const handleClick = (event: any) => {
     event.stopPropagation();
@@ -35,6 +42,7 @@ const PreventLinkClick = ({ children }: any) => {
 };
 
 export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
+  category,
   isDeletable,
   id,
   isFeed,
@@ -48,11 +56,26 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   city,
   price,
   postAge,
-  isCardHovered,
 }) => {
-console.log("Suburb: ", suburb);
+  const truncateTitle = (text: string, maxLength: number) => 
+    text.length > maxLength ? text.slice(0, maxLength) : text;
+
+  const truncateDescription = (text: string, maxLength: number) => 
+    text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+
+  const getDetailsClass = () => {
+    let className = styles.details;
+    if (category === "property") className += ` ${styles.property}`;
+    return className;
+  };
+
+  const formatLocation = () => {
+    if (!suburb && !city) return "";
+    return `${suburb || ""}, ${city || ""}`;
+  };
+
   return (
-    <div className={styles.details}>
+    <div className={getDetailsClass()}>
       {isDeletable && (
         <div className={styles.checkboxContainer}>
           <PreventLinkClick>
@@ -68,6 +91,7 @@ console.log("Suburb: ", suburb);
           </PreventLinkClick>
         </div>
       )}
+      
       <div className={styles.infoSectionContainer}>
         <div className={styles.infoSection}>
           <div className={styles.topSection}>
@@ -79,36 +103,53 @@ console.log("Suburb: ", suburb);
             />
             <div className={styles.titleWrapper}>
               <p className={styles.title}>
-                {title
-                  ? title.length > 42
-                    ? `${title.slice(0, 44)}`
-                    : title
-                  : ""}
+                {title && truncateTitle(title, 44)}
               </p>
               <div className={styles.location}>
                 <p className={styles.locationText}>
-                  {suburb ?? suburb}, {city && city}
-                  {/* Bryanston, JHB */}
+                  {formatLocation()}
                 </p>
               </div>
-            </div>
-          </div>
-          <div className={styles.descriptionContainer}>
-            <p className={styles.description}>
-              {description && description?.length > 230
-                ? `${description?.slice(0, 230)}...`
-                : description}
-            </p>
-          </div>
-          <div className={styles.cardBottom}>
-            <div className={styles.postMetrics}>
-              <div className={styles.postAge}>
-                {postAge ? Formatter.formatRelativeTime(postAge) : ""}
+               <div className={styles.postAge}>
+                {/* {postAge && Formatter.formatRelativeTime(postAge)} */}
+               12 June
               </div>
             </div>
-            <h2 className={styles.price}>
-              {price ? Formatter.formatPrice(price) : ""}
-            </h2>
+          </div>
+          
+          <div className={styles.descriptionContainer}>
+            <p className={styles.description}>
+              {description && truncateDescription(description, 230)}
+            </p>
+          </div>
+          
+          <div className={styles.cardBottom}>
+            <div className={styles.propertiesContainer}>
+              {category === "property" && (
+                <div className={styles.featuresWithIcons}>
+                  {propertyAttributes.map(({ icon, alt, value, label, className }) => (
+                    <div key={alt} className={`${styles.feature} ${styles[className]}`}>
+                      <Icon
+                        src={icon}
+                        alt={alt}
+                        width={16}
+                        height={alt === "LandSizeIcon" ? 11 : 16}
+                      />
+                      <p>
+                        {label && <span className={styles.featureValue}>{value}</span>}
+                        {label || value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+             
+              
+            </div>
+            
+            <p className={styles.price}>
+              {price && Formatter.formatPrice(price)}
+            </p>
           </div>
         </div>
       </div>

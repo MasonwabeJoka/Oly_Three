@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./HeroSection.module.scss";
 import HeroSectionSearch from "./HeroSectionSearch";
-import ShopsHeroSectionSearch from "@/app/(oly-shops)/components/ShopsHeroSectionSearch";
+import ShopsHeroSectionSearch from "@/app/(oly-shops)/oly-shops/components/ShopsHeroSectionSearch";
 import PropertiesHeroSectionSearch from "@/app/(oly-properties)/properties/components/PropertiesHeroSectionSearch";
 
 interface HeroSectionProps {
