@@ -1,0 +1,25 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: rem(16);
+  margin-right: rem(48);
+  margin-top: rem(-24);
+  width: fit-content;
+  height: rem(72);
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .right {
+  }
+
+  .left {
+    transform: rotate(180);
+  }
+}

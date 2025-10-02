@@ -1,0 +1,249 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1440);
+
+  .header {
+    position: relative;
+    width: 95%;
+    height: rem(640);
+    border-radius: rem(40);
+    margin-top: rem(32);
+    box-shadow: $shadow-one;
+
+    .topSection {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      z-index: 50;
+      margin-top: rem(32);
+
+      .homeButton {
+        margin-left: rem(56);
+        width: fit-content;
+      }
+
+      .readArticleButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        color: $black-two;
+        margin-right: rem(56);
+        height: rem(48);
+        padding: 0 rem(64);
+        box-shadow: none;
+
+        &:hover {
+          background-color: $primary-hover;
+          color: $white-one;
+        }
+      }
+    }
+    .swipper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bottomSection {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding-left: rem(56);
+      padding-top: rem(56);
+      color: $white-one;
+      background: linear-gradient(
+        to top,
+        rgba($black-one, 1),
+        rgba($black-one, 0)
+      );
+      // backdrop-filter: blur(8px);
+      border-bottom-left-radius: rem(32);
+      border-bottom-right-radius: rem(32);
+
+      .categoryPill {
+        margin-left: rem(24);
+        // margin-bottom: rem(8);
+        color: $black-four;
+        box-shadow: none !important;
+      }
+
+      .articleDetails {
+        display: flex;
+        margin-bottom: rem(56);
+
+        padding: rem(24);
+        border-radius: rem(40);
+
+        .leftSection {
+          width: 50%;
+          .articleTitle {
+            font-size: $h2;
+            font-weight: 600;
+            // margin-bottom: rem(4);
+            line-height: 1.2;
+            p {
+              // text-shadow: 2px 2px 4px rgba(180, 191, 203, 0.3);
+            }
+          }
+
+          .articleExcerpt {
+            margin-bottom: rem(12);
+            p {
+            }
+          }
+
+          .articleMetadata {
+            display: flex;
+            gap: rem(56);
+            font-size: rem(14);
+            font-weight: 300;
+          }
+        }
+
+        .rightSection {
+          margin-left: auto;
+          margin-right: rem(56);
+          .articleAuthor {
+            display: flex;
+            align-items: center;
+            gap: rem(12);
+            cursor: pointer;
+
+            .authorAvatar {
+            }
+
+            .authorName {
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .topBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    padding: rem(72) 0;
+
+    .icons {
+      display: flex;
+      gap: rem(20);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: rem(24);
+      .iconContainer {
+        cursor: pointer;
+        .icon {
+          // box-shadow: $shadow-one;
+        }
+      }
+    }
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: inherit;
+
+    .leftSideBar {
+      width: 20%;
+      padding: rem(12);
+      .categories {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: rem(16);
+        .category {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $white-one;
+          width: 90%;
+          height: rem(56);
+          border-radius: rem(40);
+          box-shadow: $shadow-six;
+          box-shadow: $shadow-one;
+          cursor: pointer;
+        }
+
+        .category:hover {
+          background-color: $white-two;
+        }
+      }
+    }
+
+    .main {
+      display: flex;
+      gap: rem(20);
+      flex-wrap: wrap;
+      width: 100%;
+      margin-bottom: rem(56);
+      .article {
+        cursor: pointer;
+      }
+    }
+  }
+  .bottomSection {
+  }
+}
+
+:global(.swiper-pagination) {
+  position: absolute;
+  bottom: rem(48) !important; // Adjust this value to move up/down
+  left: rem(74) !important; // Adjust this value to move left/right
+  text-align: left; // Align bullets to the left
+  width: auto !important; // Allow custom width instead of 100%
+}
+
+:global(.swiper-pagination-bullet) {
+  width: rem(12);
+  height: rem(12);
+  background-color: $white-one !important;
+  transform: scale(1);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  background-color: red;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  opacity: 0.8;
+  background-color: $white-one !important;
+  transform: scale(1);
+}
+
+:global(.swiper-pagination-bullet-active-main) {
+  transform: scale(1);
+}
+
+:global(.swiper-pagination-bullet-active-prev) {
+  opacity: 0.5 !important;
+  transform: scale(1);
+  background-color: $white-one !important;
+}
+:global(.swiper-pagination-bullet-active-next) {
+  opacity: 0.5 !important;
+  transform: scale(1);
+  background-color: $white-one !important;
+}
+
+:global(.swiper-horizontal > .swiper-pagination-bullets),
+:global(.swiper-pagination-bullets.swiper-pagination-horizontal) {
+  gap: rem(8);
+}
+
+:global(.swiper-pagination-progressbar) {
+  background: rgba($white-one, 0.25);
+}
+
+:global(.swiper-pagination-progressbar-fill) {
+  background: $primary;
+}

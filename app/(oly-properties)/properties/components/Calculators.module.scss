@@ -1,0 +1,69 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  padding: rem(64) rem(16);
+  background-color: $white-four;
+  border-radius: rem(40);
+  margin: rem(40) 0;
+
+  @include only(largeDesktop) {
+    padding: rem(80) rem(40);
+  }
+
+  .calculators {
+    display: flex;
+    gap: rem(32);
+    width: 100%;
+    max-width: rem(1200);
+
+    @include only(largeDesktop) {
+    }
+
+    .calculator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: rem(32);
+      width: rem(336);
+      height: rem(420);
+      background-color: $white-one;
+      border-radius: rem(40);
+      box-shadow: $shadow-six;
+      cursor: pointer;
+      background-color: $warning-hover;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        // box-shadow: $shadow-eight;
+      }
+
+      .calculatorTitle {
+        font-size: $h2 !important;
+        font-size: rem(40) !important;
+        font-weight: 600;
+        color: $white-four;
+        line-height: 1.3;
+        line-height: 1.2;
+        margin-bottom: rem(32);
+        text-align: center;
+      }
+
+      .calculatorDescription {
+        font-size: $body;
+        color: $white-four;
+        text-align: center;
+      }
+    }
+  }
+}

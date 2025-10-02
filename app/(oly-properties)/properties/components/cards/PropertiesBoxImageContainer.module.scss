@@ -1,0 +1,49 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.imageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: rem(40);
+  .image {
+    border-radius: rem(40);
+    box-shadow: $shadow-eight;
+  }
+
+  .likeIconContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(72);
+    height: rem(72);
+    border-radius: 50%;
+
+    .likeIcon {
+    }
+    .likeIconHover {
+      transition: all 1.3s ease;
+    }
+  }
+  .postMetrics {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    z-index: 1;
+  }
+}
+
+.imageContainerHovered {
+  box-sizing: $shadow-one;
+  transform: scale(1.04);
+
+  .image {
+    margin-bottom: rem(8);
+  }
+}

@@ -1,0 +1,228 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import "../globals.css";
+.container {
+  overflow: hidden;
+  background-color: $white-four;
+}
+
+.rootBox {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  width: 50%;
+  height: rem(800);
+  border-radius: rem(40) 0 0 rem(40);
+
+  .logoBox {
+    display: flex;
+    justify-content: center;
+    height: rem(32);
+    margin-top: rem(32);
+  }
+
+  .card {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: rem(40) 0 0 rem(40);
+    box-shadow: none;
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $black-four;
+
+      .headerTitle {
+        font-size: $body;
+        color: $black-four;
+      }
+      .headerSubtitle {
+        display: none;
+      }
+    }
+    .main {
+      height: rem(500);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      .socialButtons {
+        display: flex;
+        flex-direction: column;
+        color: $black-four;
+        margin-bottom: rem(32);
+        border: none;
+
+        .socialButtonsBlockButton {
+          // text-align: center;
+          width: rem(424);
+          height: rem(56);
+          border-radius: rem(40);
+          margin-bottom: rem(8);
+          box-shadow: $shadow-one;
+        }
+
+        .socialButtonsProviderIcon {
+          // margin-left: rem(100);
+        }
+        .socialButtonsBlockButtonText {
+          font-size: $body;
+          // margin-left: rem(8);
+          margin: 0 auto;
+          color: $black-three;
+        }
+        .socialButtonsBlockButtonArrow {
+          // display: none;
+          color: $black-four;
+        }
+
+        .linkedin {
+          margin-bottom: rem(0);
+        }
+      }
+
+      .dividerRow {
+        display: none;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+
+        :global(.cl-formFieldRow__name) {
+          display: flex;
+          flex-direction: column;
+        }
+        .formField {
+          border: none;
+          // margin-bottom: rem(16);
+
+          .formFieldLabelRow {
+            width: 90%;
+            margin: 0 auto rem(8);
+
+            .formFieldLabel {
+              color: $black-four;
+              font-weight: 400;
+            }
+            .formFieldAction {
+              color: $black-three;
+            }
+          }
+
+          .formFieldInput {
+            width: rem(424);
+            height: rem(56);
+
+            border-radius: rem(40);
+            border: none;
+            font-size: $body;
+            color: $black-four;
+            box-shadow: $shadow-two;
+          }
+          .formFieldInput[type="email"] {
+            border-radius: rem(40);
+          }
+
+          .formFieldInput[type="tel"] {
+            font-size: $body;
+            border-radius: 0 rem(40) rem(40) 0;
+          }
+
+          .identityPreview {
+            .identityPreviewEditButtonIcon {
+              color: $black-four;
+              // width: rem(16);
+              // height: rem(16);
+            }
+          }
+          .formFieldInputShowPasswordButton {
+            .formFieldInputShowPasswordIcon {
+              color: $black-four;
+              width: rem(16);
+              height: rem(16);
+            }
+          }
+
+          .formFieldErrorText {
+            margin: 0 auto;
+          }
+          .phoneInputBox {
+            display: flex;
+            border: none;
+            outline: none;
+            background-color: $white-one;
+            border-radius: rem(40);
+            height: rem(56);
+            width: rem(424);
+
+            .phoneInputBox > div:first-child {
+              flex-basis: 20%;
+            }
+
+            .phoneInputBox > input:nth-child(2) {
+              border-radius: rem(40);
+              flex-basis: 80%;
+            }
+          }
+
+          .phoneInput {
+          }
+        }
+
+        .formButtonPrimary {
+          font-size: $body;
+          color: $black-four;
+          text-transform: capitalize;
+          width: rem(424);
+          height: rem(56);
+          border-radius: rem(40);
+          background: $primary;
+          box-shadow: $shadow-one;
+        }
+      }
+    }
+  }
+
+  .identityPreview {
+    .identityPreviewEditButtonIcon {
+      color: $black-four;
+      width: rem(16);
+      height: rem(16);
+    }
+  }
+
+  .headerBackRow {
+    .headerBackLink {
+      color: $black-three;
+    }
+
+    .headerBackIcon {
+      color: $black-three;
+    }
+  }
+  .selectButton {
+    border: none;
+    background-color: none;
+  }
+  .footer {
+    display: flex;
+    flex-direction: column;
+
+    .footerActionText {
+      font-size: $body;
+    }
+    .footerActionLink {
+      font-size: $body;
+      color: $primary-hover;
+      margin-bottom: rem(4);
+    }
+    margin-bottom: rem(32);
+  }
+}

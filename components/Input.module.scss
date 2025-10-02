@@ -1,0 +1,303 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  .label {
+    position: absolute;
+    top: rem(20);
+    left: rem(24);
+    z-index: 1;
+    color: $grey-four;
+    text-transform: uppercase;
+    font-size: rem(12);
+    
+  }
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    border-radius: rem(40);
+    margin-bottom: rem(-4);
+
+    .errorMessage {
+      color: $danger;
+      margin-bottom: rem(8);
+    }
+
+    .leftIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: rem(0);
+      height: 100%;
+      width: rem(80);
+      
+      .leftIcon {
+      }
+    }
+
+    .rightIconContainer {
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: rem(0);
+      height: rem(56);
+      width: rem(80);
+      .rightIcon {
+      }
+
+      .selectedCount {
+        .selectedCount {
+          position: absolute;
+          right: rem(10);
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: $black-four;
+          color: $white-one;
+          border-radius: 50%;
+          width: rem(20);
+          height: rem(20);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: rem(12);
+        }
+      }
+    }
+
+    .input {
+      border-radius: rem(40);
+      background-color: $white-one;
+      box-shadow: $shadow-two;
+      color: $black-four;
+      text-align: center;
+      border: none;
+      margin: 0;
+      padding: 0;
+      height: rem(56);
+      appearance: none;
+    }
+
+    .input:focus {
+      background-color: $white-one;
+    }
+
+    .error {
+      color: $danger;
+    }
+
+  }
+  .largeInput {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+  .mediumInput {
+    width: rem(202);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(424) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(424);
+      height: rem(56);
+    }
+  }
+
+  // .xLargeInput {
+  //   width: rem(311);
+  //   height: rem(56);
+
+  //   @include only(largeDesktop) {
+  //     width: rem(514);
+  //     height: rem(56);
+  //   }
+
+  //   @include only(smallDesktop) {
+  //     width: rem(462);
+  //     height: rem(56);
+  //   }
+
+  //   @include only(tablet) {
+  //     width: rem(462);
+  //     height: rem(56);
+  //   }
+
+  //   @include only(extraLargeDesktop) {
+  //     width: rem(514);
+  //     height: rem(56);
+  //   }
+  // }
+  .xLargeDashboardInput {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(1000);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+
+  .largeDashboardInput {
+    width: rem(267);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(471);
+    }
+    @include only(smallDesktop) {
+      width: rem(424);
+    }
+    @include only(tablet) {
+      width: rem(424);
+    }
+  }
+
+  .mediumDashboardInput {
+    width: rem(240);
+    height: rem(48);
+    @include only(largeDesktop) {
+      width: rem(326);
+      height: rem(56);
+    }
+    @include only(smallDesktop) {
+      width: rem(293);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(293);
+      height: rem(56);
+    }
+  }
+
+  .searchSuggestions {
+    // position: absolute;
+    // top: 100%;
+    // left: 0;
+    width: 100%;
+    max-height: rem(400);
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: rem(8);
+    z-index: 1;
+  }
+
+  .suggestionContainer {
+   
+    .suggestion {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      height: 94%;
+      margin: rem(4) auto 0;
+      background-color: $white-two;
+    }
+  }
+
+ 
+
+  .selectAll {
+    background-color: $grey-one;
+  }
+
+  .suggestion:hover {
+    background-color: $white-three;
+  }
+  .multiSelectSuggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: rem(400);
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: rem(8);
+    z-index: 1;
+  }
+}
+
+@mixin suggestion-width($width) {
+  width: calc(#{$width} * 0.96);
+}
+
+
+
+.primary:focus {
+  outline: $primary-hover;
+}
+
+.normal:focus {
+  outline-style: solid;
+  outline-color: $white-one;
+  outline-width: rem(2);
+}
+
+.linkBtn {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.icon {
+  background-color: unset;
+  box-shadow: none;
+}

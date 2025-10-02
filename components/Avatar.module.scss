@@ -1,0 +1,122 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.avatarsContainer {
+  position: relative;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.041);
+  outline: rem(4) solid $white-one;
+
+  .skeleton {
+    background-color: $grey-one;
+    border-radius: 50%;
+    outline: rem(4) solid $white-one;
+  }
+
+  .isOnline {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: rem(8);
+    height: rem(8);
+    border-radius: 50%;
+    background-color: $success-hover;
+    outline: rem(2) solid $white-one;
+
+    @include only(largeDesktop) {
+      width: rem(12);
+      height: rem(12);
+    }
+    @include only(smallDesktop) {
+      width: rem(12);
+      height: rem(12);
+    }
+  }
+}
+.isVerified {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: rem(22);
+  height: rem(22);
+  border-radius: 50%;
+}
+
+.large {
+  position: relative;
+  width: rem(56);
+  height: rem(56);
+
+  @include only(largeDesktop) {
+    width: rem(72);
+    height: rem(72);
+
+    .isOnline {
+      position: absolute;
+      top: 0;
+      right: rem(4);
+      width: rem(14);
+      height: rem(14);
+    }
+  }
+  @include only(smallDesktop) {
+    width: rem(72);
+    height: rem(72);
+
+    .isOnline {
+      position: absolute;
+      top: 0;
+      right: rem(4);
+      width: rem(14);
+      height: rem(14);
+    }
+  }
+}
+.regular {
+  width: rem(32);
+  height: rem(32);
+
+  @include only(largeDesktop) {
+    width: rem(40);
+    height: rem(40);
+  }
+  @include only(smallDesktop) {
+    width: rem(40);
+    height: rem(40);
+  }
+}
+.small {
+  width: rem(20);
+  height: rem(20);
+
+  @include only(largeDesktop) {
+    width: rem(32);
+    height: rem(32);
+  }
+  @include only(smallDesktop) {
+    width: rem(32);
+    height: rem(32);
+  }
+
+  .isOnline {
+    position: absolute;
+    top: 0;
+    right: rem(-2);
+    width: rem(10);
+    height: rem(10);
+  }
+}
+.tiny {
+  width: rem(20);
+  height: rem(20);
+  outline: rem(2) solid $white-one !important;
+  @include only(largeDesktop) {
+    width: rem(28);
+    height: rem(28);
+  }
+  @include only(smallDesktop) {
+    width: rem(28);
+    height: rem(28);
+  }
+}

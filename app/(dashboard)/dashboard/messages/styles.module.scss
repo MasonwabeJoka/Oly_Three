@@ -1,0 +1,264 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  .recentChats::-webkit-scrollbar {
+    width: rem(8); // Set a consistent width for the scrollbar
+  }
+
+  .recentChats::-webkit-scrollbar-track {
+    margin-block: rem(80);
+    background: transparent;
+  }
+
+  .recentChats::-webkit-scrollbar-thumb {
+    background-color: $warning-hover;
+    min-height: rem(56);
+    border-radius: rem(4);
+    margin-right: rem(
+      4
+    ); // Note: margin-right may not work as expected; consider border for spacing
+  }
+
+  .recentChats::-webkit-scrollbar-thumb:hover {
+    background-color: $warning-hover;
+  }
+
+  .recentChats::-webkit-scrollbar-button {
+    display: none; // Explicitly hide the arrows
+    width: 0; // Additional precaution to collapse button area
+    height: 0; // Additional precaution to collapse button area
+  }
+
+  .recentChats {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: rem(40);
+    width: rem(736);
+    margin-bottom: rem(24);
+    margin-top: rem(96);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+    overflow: auto;
+
+    .headerDiv {
+      width: rem(730);
+      min-height: 80px;
+      height: 84px !important ;
+      display: block;
+      background-color: $white-three;
+      border-radius: rem(40);
+      position: fixed;
+      margin-left: rem(4);
+      z-index: 1;
+    }
+
+    .searchBar {
+      position: fixed;
+      top: rem(152);
+      width: rem(648);
+      z-index: 2;
+      .search {
+        width: rem(648);
+      }
+    }
+
+    .chats {
+      margin-top: rem(132);
+      .chat {
+        display: flex;
+        align-items: center;
+        width: rem(648);
+        height: rem(88);
+        min-height: rem(88);
+        max-height: rem(88);
+        border-radius: rem(50);
+        margin-bottom: rem(20);
+        background-color: $white-two;
+        cursor: pointer;
+
+        .avatarContainer {
+          margin: 0 rem(16) 0 rem(20);
+
+          .avatar {
+          }
+        }
+
+        .textContainer {
+          .name {
+            font-weight: 500;
+          }
+          .message {
+            font-size: rem(16);
+          }
+        }
+
+        .timeContainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: rem(8);
+          align-items: center;
+          margin-left: auto;
+          margin-right: rem(12);
+
+          width: rem(56);
+          height: rem(56);
+
+          .time {
+            margin-bottom: rem(2);
+          }
+
+          .messageCount {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $white-one;
+            background: $grey-four;
+            font-size: rem(12);
+          }
+        }
+      }
+
+      .chat:hover {
+        background-color: $white-one;
+      }
+    }
+  }
+  .contactsLink {
+    font-weight: bold;
+  }
+
+  .contactsLink:hover {
+    color: $primary-hover;
+  }
+
+  .mainSection {
+    position: relative;
+    width: rem(800);
+    margin-left: rem(32);
+    z-index: 10;
+    
+
+    .mainSectionWrapper {
+      margin-top: rem(96);
+      margin-bottom: rem(360);
+
+      .contactChatBubbleContainer {
+        display: flex;
+        margin-bottom: rem(24);
+        align-items: flex-start;
+
+        .exitButtonContainer {
+          position: fixed;
+          left: 95%;
+          top: 3%;
+          gap: rem(16);
+          cursor: pointer;
+          width: 100%;
+
+          z-index: 500;
+        }
+        .avatarContainer {
+          margin-right: rem(36);
+          .avatar {
+            margin-bottom: rem(8);
+          }
+          .contactTime {
+            font-size: rem(14);
+          }
+        }
+        .chatBubblesWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          .bubbleWidthSetter {
+            display: inline-flex;
+            max-width: rem(456);
+
+            .contactChatBubble {
+              padding: rem(18) !important;
+              width: fit-content;
+              border-radius: 0 rem(40) rem(40) rem(40);
+              margin-bottom: rem(16);
+              background-color: $white-two;
+
+              box-shadow: $shadow-one;
+            }
+          }
+        }
+      }
+
+      .userChatBubbleContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: rem(24);
+
+        .avatarContainer {
+          margin-right: rem(36);
+          .avatar {
+            margin-bottom: rem(8);
+          }
+          .contactTime {
+            font-size: rem(14);
+          }
+        }
+
+        .chatBubblesWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+
+          .bubbleWidthSetter {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+            max-width: rem(456);
+
+            .userTime {
+              // margin-right: rem(48);
+              margin-bottom: rem(8);
+            }
+            .userChatBubble {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              padding: rem(18) !important;
+              border-radius: rem(40) 0 rem(40) rem(40);
+              margin-right: rem(32);
+              margin-bottom: rem(16);
+              background-color: $white-five;
+
+              box-shadow: $shadow-one;
+
+              .userTime {
+                font-size: rem(14);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottomSection {
+    position: relative;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: center;
+    position: fixed;
+    bottom: 0;
+    margin-left: rem(56);
+    // width: rem(1098);
+    margin-bottom: rem(56);
+  }
+}

@@ -1,0 +1,25 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.wrapper {
+  transition: max-width 0.3s ease;
+  // overflow-x: hidden;
+  // width: 100%;
+}
+
+.mobile {
+  max-width: 23.4375em;
+}
+
+.tablet {
+  max-width: 68.625em;
+}
+
+.desktop {
+  max-width: 90.625em;
+}
+
+.MessagesSidebarOpen {
+  max-width: 68.625rem;
+}

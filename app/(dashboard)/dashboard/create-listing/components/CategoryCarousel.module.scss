@@ -1,0 +1,40 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.swipper {
+        width: rem(1440);
+        margin-left: rem(48);
+        padding-top: rem(8);
+        padding-left: rem(8);
+        display: none;
+      
+
+        @include only(largeDesktop) {
+          display: block;
+        }
+        @include only(smallDesktop) {
+          display: block;
+        }
+        @include only(tablet) {
+          display: block;
+        }
+      }
+
+        .navButtons {
+        display: flex;
+        justify-content: center;
+        width: rem(160);
+        align-items: center;
+        margin-left: rem(914) !important;
+        margin-bottom: rem(16);
+
+        @include only(largeDesktop) {
+        }
+        @include only(smallDesktop) {
+        
+        }
+        @include only(tablet) {
+        
+        }
+      }

@@ -1,0 +1,46 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(918);
+  min-height: rem(200);
+ 
+
+
+  .details {
+    // margin: 0 auto rem(96);
+    margin-left: rem(144);
+    display: grid;
+    grid-template-columns: repeat(2, rem(400));
+    gap: rem(24) rem(48);
+   
+    .detail {
+      display: flex;
+      align-items: flex-start;
+      width: rem(400);
+      gap: rem(32);
+      // background-color: yellow;
+      .bulletContainer {
+        .bullet {
+          margin-top: rem(1);
+          width: rem(24);
+          height: rem(24);
+          border-radius: 30%;
+          box-shadow: $shadow-one;
+          background-color: $white-one;
+        }
+      }
+    
+      .textContainer {
+        // background-color: yellowgreen;
+        p {
+          font-size: $body;
+        }
+      }
+    }
+  }
+}

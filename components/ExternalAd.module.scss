@@ -1,0 +1,71 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: 100vw;
+  height: fit-content;
+  .topContainer {
+    position: relative;
+
+    .topBoxOne {
+      position: absolute;
+      top: rem(-100);
+      width: 100%;
+      height: rem(100);
+      z-index: 10;
+      background-color: $white-four;
+    }
+    .topBoxTwo {
+      position: absolute;
+      top: rem(-40);
+      right: rem(16);
+      width: 99%;
+      height: rem(100);
+      border-radius: rem(120);
+      box-shadow: $shadow-three;
+      background-color: $white-four;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $white-one;
+    padding-top: rem(144);
+    padding-bottom: rem(144);
+    .adContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: rem(48);
+      cursor: pointer;
+
+      .imageContainer {
+        box-shadow: $shadow-three;
+      }
+    }
+  }
+  .bottomContainer {
+    height: rem(100);
+    .bottomBoxOne {
+      position: relative;
+      top: rem(-50);
+      left: rem(2);
+      width: 99%;
+      height: rem(100);
+      border-radius: rem(120);
+      box-shadow: $shadow-three;
+      background-color: $white-four;
+    }
+    .bottomBoxTwo {
+      position: relative;
+      top: rem(-100);
+      width: 100%;
+      height: rem(100);
+      z-index: 10;
+      background-color: $white-four;
+    }
+  }
+}

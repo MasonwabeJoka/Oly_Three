@@ -1,0 +1,166 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@use "./layout.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  // background-color: $white-four;
+
+  @include only(largeDesktop) {
+    // background-color: pink;
+  }
+  @include only(smallDesktop) {
+    
+    // background-color: blue;
+  }
+
+  @include only(tablet) {
+    // background-color:burlywood;
+  }
+
+  @include only(extraLargeDesktop) {
+    // background-color: yellow;
+  }
+
+  .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: margin-left 0.5s;
+    overflow-x: hidden;
+    width: 100vw !important;
+    min-height: 100vh;
+    @include only(largeDesktop) {
+      // width: rem(1440);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      width: 100vw;
+
+      @include only(largeDesktop) {
+      }
+    }
+    .modal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .heroSection,
+    .categories,
+    .features,
+    .featuredListings,
+    .blog,
+    .sponsoredArticles {
+      min-height: 200px; /* Placeholder height for sections */
+    }
+
+    .heroSection {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: rem(96);
+      margin-top: rem(24);
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(112);
+      }
+    }
+    .title {
+      display: flex;
+      justify-content: center;
+      font-size: $h3 !important;
+      font-weight: 600;
+      color: $black-four;
+      margin-bottom: rem(48);
+
+      @include only(largeDesktop) {
+      }
+
+      @include only(smallDesktop) {
+        margin-bottom: rem(20);
+      }
+    }
+    .moreFromOly {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-top: rem(32);
+
+      gap: rem(20);
+      @include only(largeDesktop) {
+        margin-bottom: rem(112);
+      }
+      @include only(smallDesktop) {
+        flex-wrap: wrap;
+        width: rem(844);
+        height: rem(980);
+      }
+      @include only(tablet) {
+      }
+      @include only(mobile) {
+      }
+    }
+    .aboveFoldAd {
+      width: 100%;
+      margin-top: rem(32);
+    }
+    .features {
+      width: 95vw;
+      margin-bottom: rem(96);
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .categories {
+      margin-bottom: rem(96);
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .featuredListings {
+      margin-bottom: rem(96);
+      width: 100%;
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+      }
+    }
+
+    .blog {
+      margin-bottom: rem(96);
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+        width: 100%;
+      }
+    }
+
+    .belowFoldAd {
+      width: 100%;
+      margin-top: rem(32);
+      @include only(largeDesktop) {
+      }
+    }
+    .sponsoredArticles {
+      margin-bottom: rem(96);
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+        width: 100%;
+      }
+    }
+  }
+}

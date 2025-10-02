@@ -1,0 +1,87 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.profile {
+  position: absolute;
+  top: rem(32);
+  left: rem(52);
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: rem(40);
+  background-color: $white-four;
+  pointer-events: auto;
+
+  @include only(largeDesktop) {
+    width: rem(888);
+    height: 80vh;
+  }
+  @include only(smallDesktop) {
+     width: rem(888);
+    height: 80vh;
+  }
+  @include only(tablet) {
+     width: rem(888);
+    height: 80vh;
+  }
+
+  .menuStyles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .menuItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+
+      .iconContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(52);
+        height: rem(52);
+        margin-bottom: rem(16);
+        border-radius: 50%;
+        background-color: $white-four;
+        box-shadow: $shadow-seven;
+
+        .icon {
+        }
+
+        .logoutBtnContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .iconContainer:hover {
+        background-color: $white-three;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .iconContainer:active {
+        box-shadow: $shadow-eight;
+        transition: background-color 1s ease-in-out;
+      }
+
+      .text {
+      }
+    }
+  }
+  .goBackButtonContainer {
+    margin-top: rem(64);
+    .goBackButton {
+      background-color: $white-three;
+    }
+  }
+}

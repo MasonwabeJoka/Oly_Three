@@ -1,0 +1,30 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .title {
+    margin-top: rem(56);
+    margin-bottom: rem(48);
+    font-size: $h4;
+    color: $danger;
+    font-weight: 500;
+  }
+
+    .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(240);
+
+    .acceptPreferences {
+      margin-bottom: rem(20);
+    }
+
+    .backButton {
+    }
+  }
+}

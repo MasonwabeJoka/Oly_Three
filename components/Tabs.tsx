@@ -1,0 +1,46 @@
+import TabsClient from "./TabsClient";
+
+type Tab =
+  | {
+      title: string;
+      count?: number;
+    }
+  | string;
+
+type TabsProps = {
+  condition?: boolean;
+  dashboard: boolean;
+  count?: number;
+  width: number;
+  collageViewWidth?: number;
+  tabs: Tab[];
+  data?: any[];
+  onClickHandlers?: (
+    | ((event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
+    | undefined
+  )[];
+};
+
+const Tabs: React.FC<TabsProps> = ({
+  condition,
+  dashboard,
+  width = 954,
+  collageViewWidth = 988,
+  tabs,
+  data,
+  onClickHandlers,
+}) => {
+  return (
+    <TabsClient
+      condition={condition}
+      dashboard={dashboard}
+      width={width}
+      collageViewWidth={collageViewWidth}
+      tabs={tabs}
+      data={data}
+      onClickHandlers={onClickHandlers}
+    />
+  );
+};
+
+export default Tabs;

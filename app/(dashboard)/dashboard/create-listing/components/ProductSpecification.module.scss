@@ -1,0 +1,84 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  padding: rem(50);
+  overflow: hidden;
+}
+
+.productSpecificationContainer {
+  position: relative;
+  padding: rem(16) rem(32);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  background-color: $white-two;
+  border-radius: rem(40) rem(40) rem(44) rem(44);
+  width: rem(544);
+  min-height: rem(232);
+  margin-bottom: rem(48);
+    &.open {
+    opacity: 1;
+    transform: translateY(0);
+  margin-bottom: rem(20);
+
+  }
+
+  .deleteButtonContainer {
+    position: absolute;
+    top: rem(16);
+    right: rem(20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white-three;
+    width: rem(28);
+    height: rem(28);
+    border-radius: 50%;
+    cursor: pointer;
+
+    .deleteButton {
+    }
+  }
+
+  .productSpecificationDescriptionContainer {
+    text-align: center;
+
+    .productSpecificationTitle {
+      color: $black-four;
+      margin-top: rem(24);
+      margin-bottom: rem(8);
+      padding: 0 rem(16);
+      text-align: center;
+    }
+
+    .productSpecificationDescription {
+      color: $grey-four;
+      text-align: center;
+      padding: 0 rem(16);
+    }
+
+    .productSpecificationExample {
+      color: $grey-four;
+      padding: 0 rem(16);
+    }
+  }
+
+  .productSpecificationInputContainer {
+    margin-bottom: rem(20);
+
+    .productSpecificationInput {
+      background-color: $white-two;
+      width: rem(471);
+    }
+  }
+}
+
+.submitButtonContainer {
+  margin-bottom: rem(40) !important;
+}

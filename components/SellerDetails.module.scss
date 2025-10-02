@@ -1,0 +1,81 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: rem(365);
+  height: rem(688);
+  border-radius: rem(40);
+  background-color: $grey-one !important;
+  color: $black-four;
+  box-shadow: $shadow-one;
+  padding: rem(240);
+
+  @include only(largeDesktop) {
+    width: rem(365);
+    height: rem(688);
+  }
+
+  @include only(smallDesktop) {
+    width: rem(340);
+    height: rem(688);
+  }
+
+
+  .profileSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .avatar {
+      margin-top: rem(96);
+      margin-bottom: rem(12);
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .name {
+        // text-transform: uppercase;
+        font-size: $h4;
+      }
+
+      .phoneNumber {
+        font-size: rem(14);
+      }
+
+      .email {
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: rem(-72);;
+    .button {
+      margin-bottom: rem(12);
+    }
+    .chatButton {
+    }
+
+    .followButton {
+    }
+  }
+
+  .socialMediaContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: rem(32);
+
+    width: 80%;
+    // background-color: red;
+    .app {
+    }
+  }
+}

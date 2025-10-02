@@ -1,0 +1,9 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.name {
+  width: rem(20) !important;
+  background-color: red;
+  color: red;
+}

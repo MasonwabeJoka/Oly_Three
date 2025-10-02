@@ -1,0 +1,77 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(342);
+  height: 50%;
+  border-radius: rem(40);
+  background-color: $grey-one;
+  box-shadow: $shadow-one;
+
+  .avatar {
+    margin-top: rem(48);
+    margin-bottom: rem(16);
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    .nameSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.2;
+      margin-bottom: rem(20);
+      .username {
+        font-size: $body;
+        font-weight: 500;
+      }
+
+      .handle {
+        font-size: rem(14);
+        font-weight: 300;
+      }
+    }
+
+    .bio {
+      text-align: center;
+      font-size: rem(14);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: rem(16);
+    }
+    .locationSection {
+      margin-bottom: rem(16);
+      line-height: 1.2;
+      font-size: rem(14);
+      font-weight: 300;
+    }
+  
+    .bottomSection {
+    
+      margin-top: auto;
+      line-height: 1.5;
+       margin-bottom: rem(20);
+      .joinDate,
+      .following {
+        display: flex;
+        align-items: center;
+        gap: rem(8);
+       
+        font-size: rem(14);
+        font-weight: 300;
+        
+        margin-top: auto;
+      }
+    }
+  }
+
+}

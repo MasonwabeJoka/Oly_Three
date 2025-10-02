@@ -1,0 +1,35 @@
+import MediaThemeNotflix from "player.style/notflix/react";
+interface Props {
+  videoPath: string;
+}
+export default function VideoPlayer({ videoPath }: Props) {
+  // Don't render if videoPath is empty or invalid
+  if (!videoPath || videoPath.trim() === "") {
+    return null;
+  }
+
+  return (
+    <>
+      <MediaThemeNotflix
+        style={{
+          "--media-primary-color": "#ccf6ff",
+          "--media-secondary-color": "#14d6ff",
+          "--media-accent-color": "#14d6ff",
+          borderRadius: "2.5rem",
+        }}
+      >
+        <video
+          slot="media"
+          src={videoPath}
+          playsInline
+          crossOrigin=""
+          style={{
+            // borderRadius: "2.5rem",
+             minWidth: "320px",
+            minHeight: "180px",
+          }}
+        ></video>
+      </MediaThemeNotflix>
+    </>
+  );
+}

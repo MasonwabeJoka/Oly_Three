@@ -1,0 +1,100 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: rem(360);
+  height: 100vh;
+  @include only(largeDesktop) {
+    width: rem(1098);
+  }
+  @include only(smallDesktop) {
+    width: rem(960);
+  }
+  @include only(tablet) {
+    width: rem(960);
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .titleContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(48);
+      width: 100%;
+
+      .title {
+        color: $danger;
+        font-size: $h4;
+        font-weight: 500;
+      }
+    }
+
+    .subcategoriesTitleContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(48);
+      width: 100%;
+      .title {
+        color: $danger;
+        font-size: $h4;
+        font-weight: 500;
+      }
+    }
+
+    .categoriesContainer {
+      width: 100%;
+      margin-left: rem(24);
+      
+
+      .subcategories {
+        height: auto;
+        padding-bottom: rem(16);
+        display: none;
+
+        @include only(largeDesktop) {
+          display: block;
+        }
+        @include only(smallDesktop) {
+          display: block;
+        }
+        @include only(tablet) {
+          display: block;
+        }
+
+        .subcategoriesWrapper {
+          margin-left: rem(48);
+          width: 150%;
+        }
+      }
+
+      .mobileSubcategoriesContainer {
+        display: block;
+        margin-bottom: rem(20);
+
+        .mobileSubcategories {
+          background-color: $grey-one;
+        }
+
+        @include only(largeDesktop) {
+          display: none;
+        }
+        @include only(smallDesktop) {
+          display: none;
+        }
+        @include only(tablet) {
+          display: none;
+        }
+      }
+
+    
+
+      
+    }
+  }
+}

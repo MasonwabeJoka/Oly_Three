@@ -1,0 +1,16 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.bankNameContainer {
+  position: relative;
+  z-index: 2;
+  margin-bottom: rem(20) !important;
+}
+
+.accountHolderContainer {
+  margin-bottom: rem(20) !important;
+}
+
+.accountNumberContainer {
+  margin-bottom: rem(16) !important;
+}

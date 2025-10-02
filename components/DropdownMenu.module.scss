@@ -1,0 +1,30 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+.dropdownMenuContent {
+  width: rem(250);
+  border-radius: rem(32);
+  padding: rem(20) rem(40) rem(32) rem(40) !important;
+  border: none;
+  box-shadow: $shadow-one;
+  background-color: $white-one;
+
+  
+
+  .dropdownMenuLabel {
+    font-size: $body;
+    font-weight: 500;
+    margin-bottom: rem(20);
+  }
+
+  .dropdownMenuSeparator {
+    background-color: $grey-three;
+    margin-bottom: rem(8);
+  }
+
+  .dropdownMenuItem {
+    margin-bottom: rem(8);
+  }
+}

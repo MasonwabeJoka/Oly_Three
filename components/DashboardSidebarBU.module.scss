@@ -1,0 +1,81 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  color: $black-four;
+  border-radius: rem(40);
+  // box-shadow: $shadow-one;
+  width: rem(48);
+
+  @include only(largeDesktop) {
+    width: rem(342);
+    height: 90vh;
+    background-color: $grey-one;
+  }
+
+  .logo {
+    margin-top: rem(48);
+    margin-bottom: rem(16);
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(40);
+    cursor: url("/icons/pencil.png"), auto;
+
+    .avatar {
+      margin-bottom: rem(8);
+    }
+
+    .name {
+      margin-bottom: rem(4);
+    }
+
+    .editIcon {
+    }
+  }
+  .mainMenu {
+    margin-bottom: rem(72);
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: rem(24);
+    @include only(largeDesktop) {
+      gap: rem(16);
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .icon {
+    }
+
+    .menuText {
+      margin: 0;
+      font-weight: normal;
+      font-size: rem(16);
+    }
+  }
+
+  .menu:hover {
+    transform: scale(1.05);
+  }
+
+  .logout {
+    display: flex;
+    justify-content: center;
+
+    @include only(largeDesktop) {
+      font-size: rem(16);
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}

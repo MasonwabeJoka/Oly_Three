@@ -1,0 +1,37 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  width: rem(311);
+
+  @include only(largeDesktop) {
+    width: rem(1098);
+  }
+  @include only(smallDesktop) {
+    width: rem(960);
+  }
+  @include only(tablet) {
+    width: rem(960);
+  }
+
+  .titleContainer {
+    margin-bottom: rem(20);
+    padding-left: rem(100);
+    width: 100%;
+    .title {
+      font-size: $h4;
+      font-weight: 500;
+      color: $danger;
+    }
+  }
+  .childrenContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: rem(100);
+    padding-right: rem(100);
+
+    .children {
+    }
+  }
+}

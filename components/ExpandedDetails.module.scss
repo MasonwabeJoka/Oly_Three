@@ -1,0 +1,121 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.details {
+  display: flex;
+  flex-direction: column;
+  width: rem(530);
+  height: rem(250);
+  border-radius: 0 rem(32) rem(32) 0;
+  background-color: $grey-one;
+
+  .checkboxContainer {
+    position: relative;
+    top: rem(20);
+    left: rem(488);
+  }
+
+  .infoSectionContainer {
+    display: flex;
+    margin: rem(24) rem(24) rem(16) rem(16);
+    width: rem(530);
+    height: 100%;
+
+    .infoSection {
+      display: flex;
+      flex-direction: column;
+
+      .topSection {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          margin-right: rem(16);
+          width: rem(40) !important;
+          height: rem(40) !important;
+        }
+
+        .titleWrapper {
+          .title {
+            line-height: 1.2;
+            text-transform: uppercase;
+            font-weight: 500;
+          }
+
+          .location {
+            display: flex;
+            align-items: center;
+
+            .locationText {
+              font-size: rem(12);
+            }
+          }
+
+          .postAge {
+            margin-right: rem(32);
+            font-size: rem(12);
+          }
+        }
+      }
+
+      .descriptionContainer {
+        display: flex;
+        height: 100%;
+        margin-left: rem(56);
+        width: rem(416);
+
+        .description {
+          overflow: hidden;
+          margin-top: rem(8);
+          padding-bottom: rem(8);
+        }
+      }
+
+      .cardBottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        width: rem(400);
+        margin-left: rem(56);
+
+        .propertiesContainer {
+          width: rem(320);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+
+          .featuresWithIcons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 rem(20) 0 0;
+            margin-bottom: rem(8);
+            .feature {
+              display: flex;
+              gap: rem(8);
+
+              p {
+                font-size: rem(12);
+              }
+
+              .featureValue {
+                margin-right: rem(3.2);
+              }
+            }
+          }
+        }
+        .price {
+          font-size: $h4 !important;
+          font-weight: 600;
+          margin-top: rem(-5);
+        }
+      }
+    }
+  }
+
+  // Property category specific styles
+  &.property {
+    // Add property-specific styles here if needed
+  }
+}

@@ -1,0 +1,235 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.extraLargeDesktop {
+  width: rem(500);
+  height: rem(50);
+}
+
+.medium {
+  width: rem(300);
+  height: rem(50);
+}
+
+.small {
+  width: rem(150);
+  height: rem(30);
+  margin-bottom: rem(20);
+}
+
+.round {
+  width: rem(50);
+  height: rem(50);
+  border-radius: 50%;
+}
+
+.primary {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.primary:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.primary:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.primary:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.primary:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.normal {
+  background-color: $normal;
+  color: $main-text;
+}
+
+.normal:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.normal:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.primary:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.normal:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.outline {
+  background-color: $outline;
+  color: $main-text;
+}
+
+.outline:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.outline:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.outline:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.outline:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.flat {
+  background-color: $flat;
+  color: $main-text;
+}
+
+.flat:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.flat:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.flat:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.flat:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.success {
+  background-color: $success;
+  color: $white-text;
+}
+
+.success:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.success:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.success:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.success:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.warning {
+  background-color: $warning;
+  color: $white-text;
+}
+
+.warning:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.warning:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.warning:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.warning:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.danger {
+  background-color: $danger-hover;
+  color: $white-text;
+}
+
+.danger:hover {
+  background-color: $danger-hover;
+  color: $white-text;
+}
+.danger:active {
+  background-color: $danger-hover;
+  color: $white-text;
+}
+.danger:disabled {
+  background-color: $danger-disabled;
+  color: $white-text;
+}
+
+.danger:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.info {
+  background-color: $info;
+  color: $white-text;
+}
+
+.info:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.info:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.info:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.info:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.linkBtn {
+  background-color: $linkBtn;
+  color: $main-text;
+}
+
+.linkBtn:hover {
+  background-color: $primary;
+  color: $white-text;
+}
+.linkBtn:active {
+  background-color: $primary;
+  color: $white-text;
+}
+.linkBtn:disabled {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.linkBtn:focus {
+  background-color: $primary;
+  color: $white-text;
+}
+
+.icon {
+  background-color: $icon;
+}

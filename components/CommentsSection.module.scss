@@ -1,0 +1,39 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  border-radius: rem(40);
+  padding: rem(32);
+  .commentCount {
+    margin-right: auto;
+    margin-left: rem(32);
+    margin-bottom: rem(20);
+    font-size: $body !important;
+
+    .count {
+      margin-right: rem(8);
+    }
+  }
+
+  .commentInputContainer {
+    margin-bottom: rem(48);
+    .commentInput {
+      min-height: rem(80) !important;
+    }
+  }
+
+  .commentsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+    .comment {
+      margin-bottom: rem(32);
+    
+    }
+  }
+
+ 
+}

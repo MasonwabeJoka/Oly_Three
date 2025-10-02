@@ -1,0 +1,107 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(656);
+  .wrapper {
+    position: relative;
+    padding: rem(40) rem(80);
+    background-color: $white-three;
+    border-radius: rem(40);
+    width: 100%;
+    height: 100%;
+    
+    .userContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: rem(20);
+      .profile {
+        display: flex;
+        align-items: center;
+        margin-right: rem(20);
+        .avatar {
+          margin-right: rem(12);
+        }
+
+        .profileNameContainer {
+          display: flex;
+          flex-direction: column;
+
+          .profileName {
+            font-weight: 500;
+            font-size: $body;
+
+            .fullName {
+              font-weight: 500;
+            }
+
+            .username {
+              font-weight: 300;
+            }
+          }
+
+          .commentAge {
+            font-weight: 300;
+            font-size: rem(14);
+          }
+
+          &:hover {
+            color: $black-three;
+          }
+        }
+      }
+    }
+
+    .comment {
+      margin-bottom: rem(32) !important;
+    }
+    .reactions {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: rem(20);
+      width: 80%;
+      display: flex;
+
+      .reactionsWrapper {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+
+        .reaction {
+          &:hover {
+            color: $black-three;
+          }
+        }
+      }
+    }
+  }
+
+  .replyContainer {
+    margin-top: rem(32);
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+    }
+  }
+
+  .textarea {
+    padding-left: rem(80)!important;
+    padding-right: rem(88)!important;
+  }
+}
+
+.standardContainer {
+  min-height: rem(270);
+}
+
+.postOpenContainer {
+ min-height: rem(270);
+ 
+ cursor:auto;
+}
+

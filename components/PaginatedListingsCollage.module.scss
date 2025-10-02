@@ -1,0 +1,22 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .listingsContainer {
+    display: flex;
+    justify-content: center;
+    gap: rem(32);
+    width: 85%;
+  }
+}
+.cardContainer {
+  .card {
+    width: fit-content;
+    margin-bottom: rem(40);
+  }
+}

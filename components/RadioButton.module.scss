@@ -1,0 +1,116 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+// Container for the radio group
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// Individual radio option
+.radioOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  // Hide the native radio input
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    // Ensure focus state is visible for accessibility
+    &:focus + span::before {
+      outline: 2px solid $primary-hover;
+      outline-offset: 0.5px;
+    }
+
+    // Style for checked state
+    &:checked + span::before {
+      background-color: $primary-hover;
+      width: 24px;
+      height: 24px;
+      border-radius: rem(8);
+      box-shadow: none;
+    }
+
+    // Style for checked state (inner dot)
+    // &:checked + span::after {
+    //   opacity: 1;
+    //   transform: scale(1);
+    // }
+
+    // Disabled state
+    &:disabled + span {
+      cursor: not-allowed;
+      color: #e0e0e0;
+
+      &::before {
+        border-color: #e0e0e0;
+        background-color: #e0e0e0;
+      }
+
+      &::after {
+        background-color: darken(#e0e0e0, 10%);
+      }
+    }
+  }
+
+  // Custom radio button
+  span {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 16px;
+
+    // Outer circle
+    &::before {
+      content: "";
+      margin-right: rem(20);
+      width: rem(24);
+      height: rem(24);
+      background-color: $white-one;
+      border: rem(4) solid $white-one;
+      outline: rem(0.5) solid #9defff;
+      border-radius: rem(8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow:
+        -2px -2px 10px 0px #fff inset,
+        2px 2px 10px 0px rgba(170, 186, 204, 0.5) inset,
+        2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset,
+        -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    // Inner dot (visible when checked)
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   left: calc(#{$radio-size} / 4);
+    //   top: calc(#{$radio-size} / 4);
+    //   width: calc(#{$radio-size} / 2);
+    //   height: calc(#{$radio-size} / 2);
+    //   border-radius: 50%;
+    //   background-color: $background-color;
+    //   opacity: 0;
+    //   transform: scale(0);
+    //   transition: $transition;
+    // }
+  }
+
+  // Hover effect (only when not disabled)
+  &:hover {
+    input[type="radio"]:not(:disabled) + span::before {
+      background-color: $primary;
+    }
+
+    input[type="radio"]:checked:not(:disabled) + span::before {
+      background-color: #00c9f1;
+    }
+  }
+}

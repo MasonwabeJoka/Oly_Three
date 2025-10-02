@@ -1,0 +1,20 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(48);
+    height: rem(48);
+    border-radius: 50%;
+    background-color: $white-two;
+    box-shadow: $shadow-one;
+    cursor: pointer;
+  }
+
+  .container:hover {
+    background-color: $white-one;
+  }

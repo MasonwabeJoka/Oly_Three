@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.body {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+
+  .name {
+    font-weight: 600;
+  }
+  .username {
+    color: #666;
+  }
+  .date {
+    color: #aaa;
+    margin-left: auto;
+  }
+}
+
+.content {
+  margin: 2px 0 6px;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+
+  button {
+    background: none;
+    border: none;
+    color: #1da1f2;
+    cursor: pointer;
+  }
+}

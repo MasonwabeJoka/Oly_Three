@@ -1,0 +1,555 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.selectMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  .errorMessage {
+    color: $danger;
+    margin-bottom: rem(8);
+  }
+  .selectContainer {
+    position: relative;
+    cursor: pointer;
+
+    .select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      background-color: $white-three;
+      height: rem(56);
+      box-shadow: $shadow-one;
+      text-align: center;
+      border: none;
+      outline: none;
+      appearance: none;
+      margin: 0 !important;
+      // width: rem(311);
+      // height: rem(56);
+
+      // @include only(largeDesktop) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      // @include only(smallDesktop) {
+      //   width: rem(462);
+      //   height: rem(56);
+      // }
+
+      // @include only(tablet) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      // @include only(extraLargeDesktop) {
+      //   width: rem(514);
+      //   height: rem(56);
+      // }
+
+      &:hover {
+        background-color: $white-one !important;
+      }
+    }
+
+    .largeSelect {
+      width: rem(311);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+
+      @include only(smallDesktop) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(tablet) {
+        width: rem(462);
+        height: rem(56);
+      }
+
+      @include only(extraLargeDesktop) {
+        width: rem(514);
+        height: rem(56);
+      }
+    }
+    .mediumSelect {
+      width: rem(202);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(424) !important;
+        height: rem(56) !important;
+      }
+      @include only(smallDesktop) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(tablet) {
+        width: rem(381);
+        height: rem(56);
+      }
+      @include only(extraLargeDesktop) {
+        width: rem(424);
+        height: rem(56);
+      }
+    }
+
+    .largeDashboardSelect {
+      width: rem(267);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(471);
+      }
+      @include only(smallDesktop) {
+        width: rem(424);
+      }
+      @include only(tablet) {
+        width: rem(424);
+      }
+    }
+
+    .mediumDashboardSelect {
+      width: rem(240);
+      height: rem(48);
+
+      @include only(largeDesktop) {
+        width: rem(326) !important;
+        height: rem(56) !important;
+      }
+      @include only(smallDesktop) {
+        width: rem(293) !important;
+        height: rem(56) !important;
+      }
+      @include only(tablet) {
+        width: rem(293) !important;
+        height: rem(56) !important;
+      }
+    }
+    .dashboardSelect {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      background-color: $white-three;
+      height: rem(56);
+      box-shadow: $shadow-one;
+      text-align: center;
+      border: none;
+      outline: none;
+      appearance: none;
+      margin: 0 !important;
+      width: rem(267);
+      height: rem(56);
+
+      @include only(largeDesktop) {
+        width: rem(471);
+      }
+      @include only(smallDesktop) {
+        width: rem(424);
+      }
+      @include only(tablet) {
+        width: rem(424);
+      }
+
+      &:hover {
+        background-color: $white-one !important;
+      }
+    }
+    .input {
+      height: rem(56);
+      border-radius: rem(40);
+      box-shadow: $shadow-two;
+    }
+
+    .dropdownIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: rem(80);
+      height: 100%;
+      border-radius: rem(40);
+      pointer-events: none;
+
+      .dropdownIcon {
+      }
+    }
+
+    .clearIconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: rem(80);
+      height: 100%;
+      border-radius: rem(40);
+      .clearIcon {
+      }
+    }
+
+    .selectCountContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: rem(80);
+      height: 100%;
+      border-radius: rem(40);
+      pointer-events: none;
+
+      .selectCount {
+        border-radius: 50%;
+        width: rem(24);
+        height: rem(24);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(12);
+        font-weight: 600;
+        color: $white-one;
+        background-color: $primary-hover;
+      }
+    }
+  }
+}
+
+.options {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: rem(346);
+  cursor: pointer;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
+  padding: 0 rem(8) rem(16) rem(8) !important;
+  margin-top: rem(8) !important;
+
+  .optionWrapper {
+    margin-bottom: rem(8) !important;
+    .option {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      height: rem(56);
+      margin: 0 auto;
+      background-color: $white-two;
+      box-shadow: $shadow-one;
+      .checkboxContainer {
+        position: absolute;
+        left: rem(48);
+      }
+
+      .optionText {
+      }
+    }
+  }
+  .mediumOptionWrapper {
+    margin-bottom: rem(8) !important;
+    .option {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: rem(40);
+      height: rem(56);
+      margin: 0 auto;
+      background-color: $white-two;
+      box-shadow: $shadow-one;
+
+      .checkboxContainer {
+        position: absolute;
+        left: rem(48);
+      }
+
+      .optionText {
+      }
+    }
+  }
+
+  .option:hover {
+    background-color: $white-three;
+  }
+
+  .option:focus {
+    outline-offset: rem(1);
+    outline-style: solid;
+    outline-color: $white-one;
+    outline-width: rem(2);
+  }
+}
+
+.options::-webkit-scrollbar-track {
+  border-radius: rem(40);
+  margin-block: rem(30);
+}
+
+.hideOptions {
+  display: none;
+}
+
+.searchInputContainer {
+  // background-color: burlywood !important;
+  .searchInput {
+    width: rem(493.44);
+    height: rem(52.64);
+    margin-top: rem(6) !important;
+    margin-bottom: rem(4) !important;
+    outline: none !important;
+  }
+}
+
+@mixin option-width($width) {
+  // width: calc(#{$width} * 0.96);
+  width: #{$width};
+}
+
+.largeSelect .option {
+  @include option-width(rem(311));
+
+  @include only(largeDesktop) {
+    @include option-width(rem(514));
+  }
+
+  @include only(smallDesktop) {
+    @include option-width(rem(462));
+  }
+
+  @include only(tablet) {
+    @include option-width(rem(514));
+  }
+
+  @include only(extraLargeDesktop) {
+    @include option-width(rem(514));
+  }
+}
+
+.largeDashboardSelect .option {
+  @include option-width(rem(267));
+  @include only(largeDesktop) {
+    @include option-width(rem(471));
+  }
+
+  @include only(smallDesktop) {
+    @include option-width(rem(424));
+  }
+
+  @include only(tablet) {
+    @include option-width(rem(424));
+  }
+}
+.mediumSelect .option {
+  @include option-width(rem(311));
+
+  @include only(largeDesktop) {
+    @include option-width(rem(381));
+  }
+
+  @include only(smallDesktop) {
+    @include option-width(rem(381));
+  }
+
+  @include only(tablet) {
+    @include option-width(rem(381));
+  }
+
+  @include only(extraLargeDesktop) {
+    @include option-width(rem(424));
+  }
+}
+
+.mediumDashboardSelect .option {
+  @include option-width(rem(240));
+
+  @include only(largeDesktop) {
+    @include option-width(rem(326));
+  }
+
+  @include only(smallDesktop) {
+    @include option-width(rem(293));
+  }
+
+  @include only(tablet) {
+    @include option-width(rem(293));
+  }
+}
+
+.primary {
+  background-color: $primary;
+}
+
+.primary:hover {
+  background-color: $primary-hover;
+}
+
+.primary:active {
+  background-color: $primary-hover;
+}
+.primary:disabled {
+  background-color: $primary-disabled;
+}
+
+.primary:focus {
+  background-color: $primary;
+  outline: $primary-hover;
+}
+
+.normal {
+}
+
+.normal:hover {
+}
+.normal:active {
+}
+
+.normal:focus {
+  outline-offset: rem(1);
+  outline-style: solid;
+  outline-color: $white-one;
+  outline-width: rem(2);
+  border-radius: rem(40);
+}
+
+.outline {
+}
+
+.outline:hover {
+  background-color: $primary;
+}
+.outline:active {
+  background-color: $primary;
+}
+.outline:disabled {
+  background-color: $primary;
+}
+
+.outline:focus {
+  background-color: $primary;
+}
+
+.success {
+  background-color: $success;
+}
+
+.success:hover {
+  background-color: $primary;
+}
+.success:active {
+  background-color: $primary;
+}
+.success:disabled {
+  background-color: $primary;
+}
+
+.success:focus {
+  background-color: $primary;
+}
+
+.warning {
+  background-color: $warning;
+}
+
+.warning:hover {
+  background-color: $primary;
+}
+.warning:active {
+  background-color: $primary;
+}
+.warning:disabled {
+  background-color: $primary;
+}
+
+.warning:focus {
+  background-color: $primary;
+}
+
+.danger {
+  background-color: $danger;
+}
+
+.danger:hover {
+  background-color: $primary;
+}
+.danger:active {
+  background-color: $primary;
+}
+.danger:disabled {
+  background-color: $primary;
+}
+
+.danger:focus {
+  background-color: $primary;
+}
+
+.info {
+  background-color: $info;
+}
+
+.info:hover {
+  // background-color: $primary;
+}
+.info:active {
+  background-color: $primary;
+}
+.info:disabled {
+  background-color: $primary;
+}
+
+.info:focus {
+  background-color: $primary;
+}
+
+.linkBtn {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.linkBtn:hover {
+  background-color: $primary;
+}
+.linkBtn:active {
+  background-color: $primary;
+}
+.linkBtn:disabled {
+  background-color: $primary;
+}
+
+.linkBtn:focus {
+  background-color: $primary;
+}
+
+.icon {
+  background-color: unset;
+  box-shadow: none;
+}

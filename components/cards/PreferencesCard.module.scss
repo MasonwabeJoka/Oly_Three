@@ -1,0 +1,56 @@
+@use "@/utils/functions" as *;
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: rem(64);
+ 
+  .preferenceCategory {
+    margin-left: rem(80);
+    margin-bottom: rem(16);
+    font-size: $h4;
+    font-weight: 600;
+  }
+  .cardWrapper {
+    display: flex;
+    flex-direction: column;
+    width: rem(920);
+    min-height: rem(180);
+    border-radius: rem(40);
+    background-color: $white-three;
+    box-shadow: $shadow-one;
+    padding-top: rem(32);
+    padding-bottom: rem(64);
+  
+
+    fieldset {
+      margin-top: rem(32);
+      .preferenceType {
+        font-size: $h4;
+        font-weight: 600;
+        margin-left: rem(80);
+        margin-bottom: rem(24);
+      }
+      .preferencesContainer {
+        display: flex;
+        justify-content: space-between;
+        .preference {
+          margin-left: rem(80);
+        }
+
+        .options {
+          display: flex;
+          flex-direction: column;
+          width: 20%;
+        
+          
+          .option {
+            margin-bottom: rem(8);
+            
+          }
+        }
+      }
+    }
+  }
+}

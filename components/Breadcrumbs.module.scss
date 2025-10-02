@@ -1,0 +1,28 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+
+.breadcrumbs {
+  color: $grey-two;
+  width: fit-content;
+  font-size: rem(12);
+
+  li {
+    display: inline;
+
+    .breadcrumb {
+      text-decoration: none;
+    }
+
+    .breadcrumb:hover {
+      color: $danger-hover;
+    }
+  }
+
+  .lastBreadcrumb {
+  }
+
+  .searchResult {
+    font-weight: 500;
+    color: $black-four;
+  }
+}

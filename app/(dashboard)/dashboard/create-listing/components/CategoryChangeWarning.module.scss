@@ -1,0 +1,43 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include only(tablet) {
+  }
+}
+
+.title {
+  color: $danger;
+  font-size: $body !important;
+  margin-bottom: rem(20) !important;
+  font-weight: 500;
+  @include only(tablet) {
+    font-size: $h4;
+  }
+}
+
+.content {
+  width: 50%;
+  text-align: center;
+  color: $danger;
+  margin-bottom: rem(20) !important;
+  .description {
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+
+  @include only(tablet) {
+    flex-direction: row;
+    gap: rem(20);
+    justify-content: center;
+  }
+}

@@ -1,0 +1,54 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  cursor:
+    url("/icons/X.png") 16 0,
+    auto; /* Set hotspot (exact clicking point) to 16px from the left */
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: rem(24);
+    cursor:auto;
+
+    .exitButtonContainer {
+      position: fixed;
+      top: rem(20);
+      right: rem(220);
+      margin-bottom: rem(20);
+    }
+    .title {
+      color: $danger;
+      font-size: $h4;
+      font-weight: 500;
+      margin-bottom: rem(24);
+    }
+
+    .description {
+      text-align: center;
+      margin-bottom: rem(48);
+      max-width: rem(600);
+    }
+
+    .buttonContainer {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+      @include only(largeDesktop) {
+      }
+      @include only(smallDesktop) {
+      }
+      @include only(tablet) {
+      }
+    }
+  }
+}

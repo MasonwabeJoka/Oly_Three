@@ -1,0 +1,69 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.portraitAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(40);
+}
+
+.landscapeAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(40);
+}
+
+.largePortrait {
+ 
+}
+
+.standardPortrait {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.smallPortrait {
+}
+
+
+
+
+.largeDashboardPortrait {
+  @include only(largeDesktop) {
+  }
+}
+.standardDashboardPortrait {
+  @include only(largeDesktop) {
+    width: rem(310);
+    min-height: rem(413);
+  }
+}
+.smallDashboardPortrait {
+}
+.largeLandscape {
+ 
+}
+
+.standardLandscape {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.smallLandscape {
+}
+
+
+
+
+.largeDashboardLandscape {
+  @include only(largeDesktop) {
+    width: rem(918);
+    min-height: rem(248);
+  }
+}
+.standardDashboardLandscape {
+  @include only(largeDesktop) {
+    width: rem(918);
+    min-height: rem(248);
+  }
+}
+.smallDashboardLandscape {
+}

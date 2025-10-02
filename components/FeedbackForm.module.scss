@@ -1,0 +1,100 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: rem(740);
+  height: rem(600);
+  border-radius: rem(40);
+  background-color: $white-four;
+
+  .title {
+    margin-bottom: rem(20);
+    font-size: $h4 !important;
+    font-weight: 500;
+    color: $danger;
+  }
+
+  .control {
+    margin-bottom: rem(20);
+  }
+
+  .nameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .name {
+    
+      
+    }
+  }
+
+  .emailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(20);
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .email {
+    }
+  }
+
+  .messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(20);
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .message {
+      // width: rem(640) !important;
+    //  height: rem(240) !important;
+    }
+  }
+
+  .uploadButtonContainer {
+    width: rem(514);
+    margin-bottom: rem(48);
+    @include only(tablet) {
+      width: rem(462);
+    }
+
+    .uploadButtonWrapper {
+      display: flex;
+      align-items: center;
+      gap: rem(16);
+      width: fit-content;
+      cursor: pointer;
+      .uploadButton {
+        box-shadow: $shadow-one;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(48);
+        height: rem(48);
+        border-radius: 50%;
+        background-color: $white-two;
+        cursor: pointer;
+      }
+
+      .uploadButton:hover {
+        background-color: $white-one;
+      }
+    }
+  }
+
+  .submitButtonContainer {
+  }
+}

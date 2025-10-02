@@ -1,0 +1,32 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  position: fixed;
+  top: rem(4);
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  z-index: 12;
+  transition: transform 0.5s ease-in-out;
+  // pointer-events: none; /* Make the div click-through */
+  width: 95vw;
+  @include only(largeDesktop) {
+    top: rem(8);
+  }
+
+  .logo {
+    transition: opacity 0.1s ease; /* Smooth transition for visibility */
+  }
+
+  .hidden {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
+  }
+
+  .visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

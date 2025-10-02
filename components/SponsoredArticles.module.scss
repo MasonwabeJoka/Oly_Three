@@ -1,0 +1,34 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.sponsoredArticlesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  .articlesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .sponsoredBy {
+      display: flex;
+      margin-left: auto;
+      height: rem(24);
+    }
+    .articles {
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(56);
+
+    .moreArticlesBtn {
+      margin-bottom: rem(20);
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}

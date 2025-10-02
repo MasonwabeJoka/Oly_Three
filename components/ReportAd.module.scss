@@ -1,0 +1,47 @@
+@import "@/utils/variables.scss";
+@import "@/utils/functions.scss";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: rem(980);
+
+  .violations {
+    width: 50%;
+    // margin-top:rem(72);
+    .violation {
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+      // margin-left: rem(24);
+      margin-bottom: rem(24);
+    }
+
+    .violationLabel {
+    }
+  }
+
+  .moreInfoContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    // margin-right: rem(24);
+
+    .moreInfo {
+      border: none;
+      outline: none;
+    }
+    .exitBtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+    .submitReportBtn {
+      margin-top: rem(20);
+    }
+  }
+}

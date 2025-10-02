@@ -1,0 +1,104 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+* {
+  font-family: "Outfit", sans-serif !important;
+}
+
+.fr-box .fr-toolbar {
+  height: rem(64);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none !important;
+}
+
+.fr-view {
+  border: none !important;
+  padding: rem(20) rem(88) !important;
+}
+
+.default-styles-2 p {
+  font-family: "Outfit", sans-serif !important;
+  font-size: rem(18) !important;
+  color: $black-four !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.fr-second-toolbar {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.fr-wrapper {
+  position: relative !important;
+  box-shadow: $shadow-two !important;
+  border: none !important;
+  border-radius: 0 0 rem(40) rem(40);
+  overflow: auto !important;
+}
+
+.fr-new-line {
+  display: none !important;
+}
+
+.fr-element {
+  position: relative !important;
+  width: auto !important;
+}
+
+.fr-placeholder {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  font-family: "Outfit", sans-serif !important;
+  font-size: $body;
+  width: fit-content !important;
+}
+
+.fr-placeholder span {
+  text-align: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure ordered lists are styled correctly */
+.fr-view ol {
+  list-style-type: decimal !important; /* Ensure numbers are shown */
+  padding-left: 40px; /* Add padding for better visibility */
+}
+
+.fr-view ul {
+  list-style-type: disc;
+  padding-left: 40px; /* Add padding for better visibility */
+}
+
+.fr-toolbar {
+  background-color: $white-two !important; /* Set toolbar background color to yellow */
+  border-radius: rem(40) rem(40) 0 0 !important; /* Optional: Add border radius if needed */
+}
+
+.fr-logo {
+  display: none !important; /* Hide toolbar logo */
+}
+#fr-logo > span {
+  display: none !important; /* Hide toolbar logo */
+}
+
+.fr-toolbar .fr-command {
+  // color: black !important; /* Set toolbar button color */
+}
+
+.fr-toolbar .fr-dropdown > button {
+  color: black !important; /* Set dropdown button color */
+}
+
+.fr-toolbar .fr-dropdown-menu {
+  /* Set dropdown menu background color */
+}
+
+.fr-toolbar .fr-dropdown-menu .fr-dropdown-content {
+  // background-color: yellow !important; /* Set dropdown content background color */
+}

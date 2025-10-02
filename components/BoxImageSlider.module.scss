@@ -1,0 +1,111 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  position: relative;
+ width: rem(310);
+  .buttonsAndLike {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .likeIconContainer {
+      bottom: rem(88);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(72);
+      height: rem(72);
+      border-radius: 50%;
+
+      .likeIcon {
+      }
+
+      .likeIconHover {
+        transition: all 1.3s ease;
+      }
+    }
+
+    .navButtonContainer {
+      
+      position: absolute;
+      top: 50%;
+      z-index: 20;
+      transform: translateY(-50%);
+      width: rem(60);
+      height: rem(60);
+      cursor: auto;
+
+      .buttonWrapper {
+        position: absolute;
+        top: 50%;
+        z-index: 20;
+        transform: translateY(-50%);
+        width: rem(40);
+        height: rem(40);
+        background-color: transparent;
+        border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .button {
+      opacity: 0;
+      
+   
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(48);
+        height: rem(48);
+
+        opacity: 0;
+
+        pointer-events: visible;
+      }
+
+      .leftButton {
+      }
+
+      .rightButton {
+        // margin-right: rem(19)
+      }
+    }
+
+      .buttonWrapper:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+  }
+
+  .buttonsAndLike:hover {
+    // opacity: 1;
+    .likeIconContainer {
+    }
+    .button {
+      opacity: 1;
+    }
+  }
+
+  .swiper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: rem(310);
+    min-height: rem(248);
+    border-radius: rem(40) rem(40) rem(0) rem(0);
+    object-fit: cover;
+    
+    
+    .swiperSlide {
+      z-index: -1;
+      position: relative;
+    }
+  }
+}

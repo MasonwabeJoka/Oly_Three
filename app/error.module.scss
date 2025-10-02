@@ -1,0 +1,28 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: $white-four;
+
+  .message {
+    font-size: $h4;
+    margin-bottom: rem(48);
+  }
+  .description {
+    font-size: $body;
+    margin-bottom: rem(48);
+    // color: $danger;
+    width: 70%;
+  }
+  .buttonContainer {
+    margin-bottom: rem(20);
+  }
+}

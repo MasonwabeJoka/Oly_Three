@@ -1,0 +1,37 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.extraLargeDesktop {
+  width: rem(500);
+  height: rem(50);
+}
+
+.dropdown {
+  width: rem(500);
+}
+.standard {
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+
+  .searchFieldContainer {
+    position: relative;
+    display: flex;
+
+    .searchField {
+    }
+
+    .iconContainer {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.searchOpen {
+  width: rem(500);
+  height: re;
+  background-color: white;
+}

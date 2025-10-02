@@ -1,0 +1,51 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: rem(288);
+  height: rem(224);
+  background-color: $white-two;
+  border-radius: rem(40);
+  box-shadow: $shadow-one;
+  box-shadow: $shadow-seven;
+  outline: rem(6) solid $white-one;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(8);
+    font-size: $h4;
+    font-weight: 500;
+    color: $black-four;
+  }
+  .icon {
+  }
+
+  .subtitle {
+    display: flex;
+    justify-content: center;
+    font-size: rem(12);
+  }
+
+  .value {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    font-size: $h1;
+    margin-top: rem(28);
+    font-weight: 700;
+  }
+
+  .stat {
+    font-size: rem(12);
+    margin-top: rem(16);
+     display: flex;
+    justify-content: center;
+
+    .icon {
+      margin-top: rem(3);
+      margin-left: rem(5);
+    }
+  }
+}

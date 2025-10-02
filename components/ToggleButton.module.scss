@@ -1,0 +1,40 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  cursor: pointer;
+
+  .checkbox {
+    display: none;
+  }
+
+  .toggleContainer {
+    position: relative;
+    width: rem(60);
+    height: rem(30);
+    border-radius: rem(50);
+    background-color: $grey-one;
+    transition: background 0.2s;
+  }
+
+  .checkbox:checked ~ .toggleContainer {
+    background-color: $primary-hover;
+  }
+
+  .toggleContainer::after {
+    content: "";
+    position: absolute;
+    top: rem(3);
+    left: rem(3);
+    width: rem(24);
+    height: rem(24);
+    border-radius: 50%;
+    background-color: $white-one;
+    transition: transform 0.2s;
+  }
+
+  .checkbox:checked ~ .toggleContainer::after {
+    transform: translateX(rem(30));
+    // background-color: red;
+  }
+}
