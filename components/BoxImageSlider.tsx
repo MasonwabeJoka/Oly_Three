@@ -89,15 +89,14 @@ const ImageSlider = ({
     if (category === "property") {
       return "13.623046875rem";
     } else if (category === "shops") {
-      if (testArray && testArray[index] >= 1) {
-        // if (aspectRatios && aspectRatios[index] >= 1) {
+     
+        if (aspectRatios && aspectRatios[index] >= 1) {
         return "15.5rem";
       } else {
         return "27.5rem";
       }
     } else {
-      return `calc(19.375rem / ${testArray[index]})`;
-      // return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
+      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
     }
   };
 

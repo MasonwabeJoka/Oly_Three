@@ -56,49 +56,61 @@ Here is a comprehensive list of form components in your codebase, including thos
 ### Components with `<form>` or Form Logic
 
 #### 1. **`components/FeedbackForm.tsx`**
+
 - Uses a custom `Form` component (from `next/form`), handles input, validation, and submission.
 - Contains fields for name, email, message, and file upload.
 
 #### 2. **`components/forms/DetailsFormClient.tsx`**
+
 - Handles form state and validation with `react-hook-form`.
 - Manages details input, edit, and submission logic.
 
 #### 3. **`components/forms/EditModeForm.tsx`**
+
 - Renders a `<form>` element.
 - Handles editing a detail with validation and submission.
 
 #### 4. **`components/forms/SelectedFeature.tsx`**
+
 - Handles form logic for selecting and submitting a feature detail.
 - Uses `useFormContext` for validation and state.
 
 #### 5. **`components/forms/Post.tsx`**
+
 - Handles post creation, image upload, and form state.
 - Uses form logic but the `<form>` element is not shown in the snippet.
 
 #### 6. **`app/(dashboard)/dashboard/post-your-ad/components/VideoUploadForm.tsx`**
+
 - Handles video upload form logic and validation.
 - Uses `react-hook-form` for state and validation.
 
 #### 7. **`app/(dashboard)/dashboard/post-your-ad/components/DashboardClient.tsx`**
+
 - Wraps steps in a `FormProvider` for multi-step form logic.
 - Each step may contain its own form elements.
 
 #### 8. **`app/(dashboard)/dashboard/post-your-ad/components/PostYourAdClient.tsx`**
+
 - Manages a multi-step form with `useForm` and `FormProvider`.
 - Handles form state, validation, and step navigation.
 
 #### 9. **`app/(dashboard)/dashboard/post-your-ad/components/FeaturesClient.tsx`**
+
 - Handles feature selection and submission logic using `useFormContext`.
 
 #### 10. **`app/(dashboard)/dashboard/post-your-ad/components/FormWrapperTemp.tsx`**
+
 - Handles form step navigation, validation, and submission.
 - Uses `useFormContext` for form state.
 
 #### 11. **`app/(dashboard)/dashboard/post-your-ad/components/TitleAndDescription.tsx`**
+
 - Handles title and description input with validation.
 - Uses `useFormContext` for form state.
 
 #### 12. **`components/ui/form.tsx`**
+
 - Provides a set of form utility components (`Form`, `FormField`, `FormMessage`, etc.) for use with `react-hook-form`.
 
 ---
@@ -124,7 +136,7 @@ If you need a more detailed breakdown (e.g., file paths, which ones use `<form>`
 
 _**User (2025-07-10 09:09Z)**_
 
-I dentify components that should be using form or Form elements and are not 
+I dentify components that should be using form or Form elements and are not
 
 ---
 
@@ -174,31 +186,37 @@ Based on the codebase analysis, here are components that **handle form logic (in
 ### Components That Should Use `<form>` or `Form` But Do Not
 
 #### 1. **`components/forms/DetailsFormClient.tsx`**
+
 - **Handles:** Form state, validation, and submission logic with `react-hook-form`.
 - **Missing:** No `<form>` or `Form` element wrapping the inputs and submission logic.
 - **Recommendation:** Wrap the main content and submission handler in a `<form onSubmit={handleSubmit(onSubmitDetail)}>`.
 
 #### 2. **`components/forms/SelectedFeature.tsx`**
+
 - **Handles:** Form state, validation, and submission logic for a feature detail.
 - **Missing:** No `<form>` or `Form` element; the main container is a `<div>` with an `onSubmit` prop (which is not valid for `<div>`).
 - **Recommendation:** Replace the outer `<div>` with a `<form>` and move the `onSubmit` handler to it.
 
 #### 3. **`app/(dashboard)/dashboard/post-your-ad/components/FeaturesClient.tsx`**
+
 - **Handles:** Form state, validation, and submission for feature selection.
 - **Missing:** No `<form>` or `Form` element; logic is handled via context and handlers.
 - **Recommendation:** Wrap the relevant UI in a `<form>` and use the `onSubmit` handler.
 
 #### 4. **`app/(dashboard)/dashboard/post-your-ad/components/DetailsClient.tsx`**
+
 - **Handles:** Form state, validation, and updating details.
 - **Missing:** No `<form>` or `Form` element; all logic is handled via context and handlers.
 - **Recommendation:** Wrap the main UI in a `<form>` for proper submission and accessibility.
 
 #### 5. **`app/(dashboard)/dashboard/post-your-ad/components/SelectedDetail.tsx`**
+
 - **Handles:** Form state, validation, and submission for a selected detail.
 - **Missing:** No `<form>` or `Form` element; uses a `<div>` and button for submission.
 - **Recommendation:** Use a `<form>` and move the submission logic to its `onSubmit`.
 
 #### 6. **`app/(dashboard)/dashboard/post-your-ad/components/TitleAndDescription.tsx`**
+
 - **Handles:** Form state, validation, and input for title and description.
 - **Missing:** No `<form>` or `Form` element; only uses context and handlers.
 - **Recommendation:** Wrap the content in a `<form>` for accessibility and submission.
@@ -279,7 +297,6 @@ Tool use: **grep_search**
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/forms/DetailsFormClient.tsx</summary>
 
 Refactor DetailsFormClient to use the Form element from next/form instead of <form>, and add a mock async server action to the action prop. Remove the old <form> and replace it with <Form>.
@@ -292,7 +309,7 @@ Lines added: 1, lines removed: undefined
   import EditModeForm from "@/components/forms/EditModeForm";
   import SelectedDetail from "./SelectedDetail";
 + import Form from "next/form";
-  
+
   export type DetailsFormProps = {};
 ```
 
@@ -303,14 +320,14 @@ Lines added: 12, lines removed: 1
 @@ -70,8 +71,19 @@
       });
     };
-+ 
++
 +   // Mock server action for demonstration
 +   async function mockServerAction(formData: FormData) {
 +     // Simulate server-side processing
 +     await new Promise((resolve) => setTimeout(resolve, 500));
 +     return { success: true };
 +   }
-  
+
     return (
       <div className={styles.container}>
 -       <form className={styles.form} onSubmit={submitDetails(onSubmitDetail)}>
@@ -342,7 +359,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/forms/DetailsFormClient.tsx</summary>
 
 Fix the linter error by making mockServerAction return void instead of an object, as required by the Form action prop type.
@@ -352,7 +368,7 @@ Lines added: 2, lines removed: 2
 
 ```diff
 @@ -73,8 +73,8 @@
-  
+
     // Mock server action for demonstration
 -   async function mockServerAction(formData: FormData) {
 +   async function mockServerAction(formData: FormData): Promise<void> {
@@ -361,7 +377,7 @@ Lines added: 2, lines removed: 2
 -     return { success: true };
 +     // No return value needed
     }
-  
+
 ```
 
 </details>
@@ -424,7 +440,6 @@ Read file: components/forms/SelectedFeature.tsx
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/forms/SelectedFeature.tsx</summary>
 
 Refactor SelectedFeature to use the Form element from next/form instead of a <div> for the form container, and add a mock async server action to the action property. Move the onSubmit handler to the Form element. The submit button should be of type 'submit' and trigger the form submission, not just a click handler.
@@ -437,7 +452,7 @@ Lines added: 1, lines removed: undefined
   import { multiStepFormSchema } from "@/lib/validations/formValidations";
   import styles from "./SelectedFeature.module.scss";
 + import Form from "next/form";
-  
+
   type FormValues = z.infer<typeof multiStepFormSchema>;
 ```
 
@@ -448,14 +463,14 @@ Lines added: 7, lines removed: undefined
 @@ -23,4 +24,11 @@
     errors: any; // Ensure this matches the type expected from useForm()
   };
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const SelectedFeature = ({
 ```
 
@@ -501,7 +516,7 @@ Lines added: 1, lines removed: 3
             </div>
           </div>
 -       </div>
-- 
+-
 +       </Form>
       </>
     );
@@ -548,7 +563,6 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/FeaturesClient.tsx
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/FeaturesClient.tsx</summary>
 
 Refactor FeaturesClient to use the Form element from next/form for the form section inside FormWrapper. Add a mock async server action to the action property. Move the form logic (inputs, selects, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -561,7 +575,7 @@ Lines added: 1, lines removed: undefined
   import SelectedFeature from "@/components/forms/SelectedFeature";
   import { FormWrapper } from "./FormWrapper";
 + import Form from "next/form";
-  
+
   export type FeaturesProps = {};
 ```
 
@@ -572,14 +586,14 @@ Lines added: 12, lines removed: 1
 @@ -60,9 +61,20 @@
       });
     };
-+ 
++
 +   // Mock server action for demonstration
 +   async function mockServerAction(formData: FormData): Promise<void> {
 +     // Simulate server-side processing
 +     await new Promise((resolve) => setTimeout(resolve, 500));
 +     // No return value needed
 +   }
-  
+
     return (
       <FormWrapper title="Product Features">
         <div className={styles.container}>
@@ -647,7 +661,6 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/DetailsClient.tsx
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/DetailsClient.tsx</summary>
 
 Refactor DetailsClient to use the Form element from next/form for the form section inside FormWrapper. Add a mock async server action to the action property. Move the form logic (inputs, selects, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -660,7 +673,7 @@ Lines added: 1, lines removed: undefined
     import DetailsList from "./DetailsList";
     import SpecificationsList from "./SpecificationsList";
 +   import Form from "next/form";
-  
+
     export interface DetailItem {
 ```
 
@@ -671,14 +684,14 @@ Lines added: 7, lines removed: undefined
 @@ -20,4 +21,11 @@
       detailsData: any[];
     }
-+ 
++
 +   // Mock server action for demonstration
 +   async function mockServerAction(formData: FormData): Promise<void> {
 +     // Simulate server-side processing
 +     await new Promise((resolve) => setTimeout(resolve, 500));
 +     // No return value needed
 +   }
-  
+
     const DetailsClient = ({ conditions, detailsTitles, detailsData }: DetailsProps) => {
 ```
 
@@ -688,7 +701,7 @@ Lines added: 5, lines removed: 1
 ```diff
 @@ -112,5 +120,9 @@
             <h2 className={styles.title}>Product Details</h2>
-  
+
 -           <div className={styles.form}>
 +           <Form
 +             className={styles.form}
@@ -773,7 +786,6 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/TitleAndDescription
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/SelectedDetail.tsx</summary>
 
 Refactor SelectedDetail to use the Form element from next/form for the form section. Add a mock async server action to the action property. Move the form logic (inputs, textarea, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -786,7 +798,7 @@ Lines added: 1, lines removed: undefined
   import Icon from "@/components/Icon";
   import TextArea from "@/components/TextArea";
 + import Form from "next/form";
-  
+
   type FormValues = z.infer<typeof multiStepFormSchema>;
 ```
 
@@ -797,14 +809,14 @@ Lines added: 7, lines removed: undefined
 @@ -34,4 +35,11 @@
     setMatchFound: any;
   };
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const SelectedDetail = ({
 ```
 
@@ -832,7 +844,7 @@ Lines added: undefined, lines removed: 1
 @@ -95,5 +107,4 @@
               />
             </div>
-- 
+-
             <div className={styles.selectedDetailDescriptionContainer}>
               <p className={styles.selectedDetailTitle}>{detail}</p>
 ```
@@ -844,8 +856,8 @@ Lines added: undefined, lines removed: 1
 @@ -110,5 +121,4 @@
                 {description}
               </p>
-- 
-              {detail === "Define Your Own Detail" && (
+-
+              {detail === "Add Your Own Details" && (
                 <p
 ```
 
@@ -874,7 +886,7 @@ Lines added: undefined, lines removed: 2
                 </p>
               )}
             </div>
-- 
+-
             <div className={styles.selectedDetailInputContainer}>
               <TextArea
 ```
@@ -886,7 +898,7 @@ Lines added: 1, lines removed: 2
 @@ -168,11 +175,10 @@
               />
             </div>
-- 
+-
             <div className={styles.submitButtonContainer}>
               <Button
                 className={styles.submitButton}
@@ -921,7 +933,6 @@ Lines added: 1, lines removed: 2
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/TitleAndDescription.tsx</summary>
 
 Refactor TitleAndDescription to use the Form element from next/form for the form section inside FormWrapper. Add a mock async server action to the action property. Move the form logic (inputs, rich text editor, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -934,14 +945,14 @@ Lines added: 8, lines removed: undefined
   import { debounce } from "lodash";
   import type { FormDataSchema } from "../validations/formDataSchema";
 + import Form from "next/form";
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const TitleAndDescription = () => {
 ```
 
@@ -1105,6 +1116,7 @@ Based on the latest codebase search, the main remaining component that handles f
 ---
 
 ### `VideoUploadForm.tsx`
+
 - **Path:** `app/(dashboard)/dashboard/post-your-ad/components/VideoUploadForm.tsx`
 - **Current:** Handles form state, validation, and submission logic, but does not use a `<form>` or `Form` element.
 - **Action:** Needs to be refactored to use the `Form` element from `next/form` with a mock async server action.
@@ -1146,7 +1158,6 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/VideoUploadForm.tsx
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/VideoUploadForm.tsx</summary>
 
 Refactor VideoUploadForm to use the Form element from next/form for the form section. Add a mock async server action to the action property. Move the form logic (inputs, textarea, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1159,7 +1170,7 @@ Lines added: 1, lines removed: undefined
   import Image from "next/image";
   import {screenshots} from "@/data/screenshots";
 + import Form from "next/form";
-  
+
   type FormValues = z.infer<typeof feedbackFormSchema>;
 ```
 
@@ -1170,14 +1181,14 @@ Lines added: 10, lines removed: 2
 @@ -53,9 +54,17 @@
       }
     };
-+ 
++
 +   // Mock server action for demonstration
 +   async function mockServerAction(formData: FormData): Promise<void> {
 +     // Simulate server-side processing
 +     await new Promise((resolve) => setTimeout(resolve, 500));
 +     // No return value needed
 +   }
-  
+
     return (
 -     <div
 +     <Form
@@ -1196,7 +1207,7 @@ Lines added: undefined, lines removed: 1
 @@ -64,5 +73,4 @@
             <VideoPlayer videoPath={videoPath} />
           </div>
-- 
+-
           <div className={`${styles.thumbnailsContainer} ${styles.control}`}>
             <p className={styles.thumbnailTitle}>
 ```
@@ -1208,7 +1219,7 @@ Lines added: undefined, lines removed: 1
 @@ -81,5 +89,4 @@
                 </div>
               ))}
-- 
+-
               <div className={`${styles.thumbnail} ${styles.customThumbnail}`}>
                 <Image src="/icons/plus.png" alt="plus" width={40} height={40} />
 ```
@@ -1220,7 +1231,7 @@ Lines added: undefined, lines removed: 1
 @@ -112,5 +119,4 @@
             />
           </div>
-- 
+-
           <div className={`${styles.descriptionContainer} ${styles.control}`}>
             <p className={styles.errorMessage}>{errors.message?.message}</p>
 ```
@@ -1232,7 +1243,7 @@ Lines added: undefined, lines removed: 1
 @@ -133,5 +139,4 @@
           </div>
         </div>
-- 
+-
         <div className={`${styles.publishButtonContainer} ${styles.control}`}>
           <Button
 ```
@@ -1255,7 +1266,6 @@ Lines added: 1, lines removed: 1
 ---
 
 Tool use: **edit_file**
-
 
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/VideoUploadForm.tsx</summary>
 
@@ -1568,7 +1578,6 @@ _**Assistant**_
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: features/oly-feed/components/forms/CommentForm.tsx</summary>
 
 Refactor CommentForm to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (inputs, submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1581,7 +1590,7 @@ Lines added: 1, lines removed: undefined
   import Avatar from "@/components/Avatar";
   import { addCommentToPost } from "@/utils/serverActions/postActions";
 + import Form from "next/form";
-  
+
   interface Props {
 ```
 
@@ -1592,14 +1601,14 @@ Lines added: 7, lines removed: undefined
 @@ -21,4 +22,11 @@
     currentUserId: string;
   }
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const CommentForm = ({ postId, currentUserImage, currentUserId }: Props) => {
 ```
 
@@ -1633,7 +1642,7 @@ Lines added: undefined, lines removed: 1
 @@ -120,5 +123,4 @@
               }
             />
-- 
+-
             <Button
               className={styles.replyButton}
 ```
@@ -1657,7 +1666,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(root)/listings/[listing]/auction/components/EnterBidAmount.tsx</summary>
 
 Refactor EnterBidAmount to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (inputs, submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1670,7 +1678,7 @@ Lines added: 1, lines removed: undefined
   import Button from "@/components/Buttons";
   import BidHistory from "./BidHistory";
 + import Form from "next/form";
-  
+
   interface BidInputProps {
 ```
 
@@ -1681,14 +1689,14 @@ Lines added: 7, lines removed: undefined
 @@ -11,4 +12,11 @@
     error: string;
   }
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const EnterBidAmount = ({
 ```
 
@@ -1728,7 +1736,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/forms/Post.tsx</summary>
 
 Refactor Post to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (inputs, textarea, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1741,14 +1748,14 @@ Lines added: 8, lines removed: undefined
   import PostImage from "@/components/PostImage";
   import { createPost } from "@/utils/serverActions/postActions";
 + import Form from "next/form";
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const Post = ({ userId }: { userId: string }) => {
 ```
 
@@ -1794,7 +1801,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/forms/EditModeForm.tsx</summary>
 
 Refactor EditModeForm to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (textarea, submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1807,16 +1813,16 @@ Lines added: 8, lines removed: undefined
   import Icon from "@/components/Icon";
   import SelectedDetail from "./SelectedDetail";
 + import Form from "next/form";
-  
+
   type FormValues = z.infer<typeof detailsFormSchema>;
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const EditModeForm = ({initialValue}) => {
 ```
 
@@ -1825,7 +1831,7 @@ Lines added: 1, lines removed: 1
 
 ```diff
 @@ -24,5 +32,5 @@
-  
+
     return (
 -     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
 +     <Form className={styles.container} action={mockServerAction} onSubmit={handleSubmit(onSubmit)}>
@@ -1852,7 +1858,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/ReportAd.tsx</summary>
 
 Refactor ReportAd to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (inputs, textarea, and submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper. Change the submit button type to 'submit'.
@@ -1865,14 +1870,14 @@ Lines added: 8, lines removed: undefined
   import { useState } from "react";
   import Checkbox from "./Checkbox";
 + import Form from "next/form";
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const ReportAd = () => {
 ```
 
@@ -1881,7 +1886,7 @@ Lines added: 1, lines removed: 1
 
 ```diff
 @@ -13,5 +21,5 @@
-    
+
     return (
 -     <form name="reportForm" className={styles.container}>
 +     <Form name="reportForm" className={styles.container} action={mockServerAction}>
@@ -1896,7 +1901,7 @@ Lines added: undefined, lines removed: 1
 @@ -96,5 +104,4 @@
           error={''}
         />
-- 
+-
           <div className={styles.submitReportBtn}>
             <Button
 ```
@@ -1933,7 +1938,6 @@ Lines added: 1, lines removed: 1
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: components/SearchField.tsx</summary>
 
 Refactor SearchField to use the Form element from next/form instead of <form>. Add a mock async server action to the action property. Move the form logic (inputs, submission) inside the Form element, and ensure the submit button triggers the form submission. The UI and structure should remain unchanged except for the form wrapper.
@@ -1957,14 +1961,14 @@ Lines added: 7, lines removed: undefined
 @@ -13,4 +14,11 @@
     small: `${styles.small}`,
   };
-+ 
++
 + // Mock server action for demonstration
 + async function mockServerAction(formData: FormData): Promise<void> {
 +   // Simulate server-side processing
 +   await new Promise((resolve) => setTimeout(resolve, 500));
 +   // No return value needed
 + }
-  
+
   const SearchField = ({
 ```
 
@@ -1993,7 +1997,7 @@ Lines added: 1, lines removed: 2
 @@ -37,8 +46,7 @@
             required={require}
           />
-- 
+-
           <div className={styles.iconContainer}>Search Icon</div>
         </div>
 -     </form>
@@ -2009,6 +2013,7 @@ Lines added: 1, lines removed: 2
 All identified components that previously used a native `<form>` have now been refactored to use the `Form` element from `next/form` with a mock async server action. The UI and user experience will remain unchanged, but these components are now consistent with your server action and progressive enhancement strategy.
 
 **Refactored components:**
+
 - `features/oly-feed/components/forms/CommentForm.tsx`
 - `app/(root)/listings/[listing]/auction/components/EnterBidAmount.tsx`
 - `components/forms/Post.tsx`
@@ -2052,7 +2057,6 @@ Tool use: **file_search**
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(root)/page.tsx</summary>
 
 Throw a test error at the top of the file to simulate an error for testing purposes.
@@ -2064,9 +2068,9 @@ Lines added: 2, lines removed: undefined
 @@ -17,4 +17,6 @@
   const Home = async () => {
     const fetchedCategories = await getCategories();
-+ 
++
 +   throw new Error("Test error: This is a simulated error for testing purposes.");
-  
+
     return (
 ```
 
@@ -2079,4 +2083,3 @@ A test error has been thrown in `app/(root)/page.tsx` as requested. This will ca
 If you want to remove the error or need to test error handling in another way, just let me know!
 
 ---
-

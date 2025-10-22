@@ -1,0 +1,56 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: rem(16);
+  border-radius: rem(12);
+  background-color: $white-one;
+  box-shadow: $shadow-one;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $grey-one;
+    transform: translateY(-2px);
+  }
+}
+
+.avatarContainer {
+  position: relative;
+  margin-right: rem(16);
+
+  .avatar {
+    // Avatar styles are handled by the Avatar component
+  }
+
+  .onlineIndicator {
+    position: absolute;
+    bottom: rem(2);
+    right: rem(2);
+    width: rem(12);
+    height: rem(12);
+    background-color: $success;
+    border: 2px solid $white-one;
+    border-radius: 50%;
+  }
+}
+
+.contactInfo {
+  flex: 1;
+
+  .name {
+    font-size: rem(16);
+    font-weight: 600;
+    color: $black-one;
+    margin: 0 0 rem(4) 0;
+  }
+
+  .status {
+    font-size: rem(14);
+    color: $grey-three;
+    margin: 0;
+  }
+}

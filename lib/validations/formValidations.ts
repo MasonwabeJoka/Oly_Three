@@ -18,6 +18,7 @@ export const searchFormSchema = z.object({
 export const feedbackFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
+  title: z.string().min(1, "Title is required"),
   message: z.string().min(1, "Message is required"),
   attachment: z.any().optional() // Add this line for file attachments
 });
@@ -79,6 +80,14 @@ export const multiStepFormSchema = z.object({
   }).refine((val) => val !== "", {
     message: "Please select an option.",
   }),
+specifications: z.object({
+  list: z.array(z.object({
+    selectSpecification: z.string(),
+    value: z.string()
+  })).optional(),
+  // Individual specification fields for form validation
+  "Product Specifications": z.string().optional()
+}).optional(),
 
   moreDetails: z.string().optional(),
 
@@ -254,7 +263,7 @@ export const multiStepFormSchema = z.object({
   "Age": z.string().optional(),
   "Environmental Impact": z.string().optional(),
   "Known Issues": z.string().optional(),
-  "Define Your Own Detail": z.string().optional(),
+  "Add Your Own Details": z.string().optional(),
 });
 
 

@@ -2,7 +2,6 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-
 .container {
   display: flex;
   flex-direction: column;
@@ -60,9 +59,7 @@
         width: 100%;
         height: 100%;
       }
-
     }
-  
 
     .bottomSection {
       position: absolute;
@@ -127,7 +124,7 @@
       }
     }
   }
- 
+
   .topBar {
     display: flex;
     justify-content: center;
@@ -167,72 +164,74 @@
         }
       }
     }
-.main {
-width: 100%;
-  .articlesContainer {
-    display: flex;
-    justify-content: center;
-    gap: rem(32);
-    flex-wrap: wrap;
-    width: 100%;
-     .article {
-      cursor: pointer;
+    .main {
+      width: 100%;
+      .articlesContainer {
+        display: flex;
+        justify-content: center;
+        gap: rem(32);
+        flex-wrap: wrap;
+        width: 100%;
+        .article {
+          cursor: pointer;
+        }
+      }
     }
-  }
-}
   }
 
   .bottomSection {
   }
 }
 
-:global(.swiper-pagination) {
-  position: absolute;
-  bottom: rem(48) !important;
-  left: rem(74) !important;
-  text-align: left;
-  width: auto !important;
-}
+.swiperGlobalStyles {
+  :global(.swiper-pagination) {
+    position: absolute;
+    bottom: rem(48) !important;
+    left: rem(74) !important;
+    text-align: left;
+    width: auto !important;
+  }
 
-:global(.swiper-pagination-bullet) {
-  width: rem(12);
-  height: rem(12);
-  background-color: $white-one !important;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-}
+  :global(.swiper-pagination-bullet) {
+    width: rem(12);
+    height: rem(12);
+    background-color: $white-one !important;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
 
-:global(.swiper-pagination-bullet-active) {
-  opacity: 1;
-  background-color: $primary !important;
-  transform: scale(1);
-}
+  :global(.swiper-pagination-bullet-active) {
+    opacity: 1;
+    background-color: $primary !important;
+    transform: scale(1);
+  }
 
-:global(.swiper-pagination-bullet-active-main) {
-  transform: scale(1);
-}
+  :global(.swiper-pagination-bullet-active-main) {
+    transform: scale(1);
+  }
 
-:global(.swiper-pagination-bullet-active-prev) {
-  opacity: 0.5 !important;
-  transform: scale(1);
-  background-color: $white-one !important;
-}
+  :global(.swiper-pagination-bullet-active-prev) {
+    opacity: 0.5 !important;
+    transform: scale(1);
+    background-color: $white-one !important;
+  }
 
-:global(.swiper-pagination-bullet-active-next) {
-  opacity: 0.5 !important;
-  transform: scale(1);
-  background-color: $white-one !important;
-}
+  :global(.swiper-pagination-bullet-active-next) {
+    opacity: 0.5 !important;
+    transform: scale(1);
+    background-color: $white-one !important;
+  }
 
-:global(.swiper-horizontal > .swiper-pagination-bullets),
-:global(.swiper-pagination-bullets.swiper-pagination-horizontal) {
-  gap: rem(8);
-}
+  :global(.swiper-horizontal > .swiper-pagination-bullets),
+  :global(.swiper-pagination-bullets.swiper-pagination-horizontal) {
+    gap: rem(8);
+  }
 
-:global(.swiper-pagination-progressbar) {
-  background: rgba($white-one, 0.25);
-}
+  :global(.swiper-pagination-progressbar) {
+    background: rgba($white-one, 0.25);
+  }
 
-:global(.swiper-pagination-progressbar-fill) {
-  background: $primary;
+  :global(.swiper-pagination-progressbar-fill) {
+    background: $primary;
+  }
 }

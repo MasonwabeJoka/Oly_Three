@@ -1,7 +1,6 @@
 import styles from "./OlyFeedHeader.module.scss";
 import Link from "next/link";
 import Image from "@/components/Image";
-import { OrganizationSwitcher, SignOutButton, SignedIn } from "@clerk/nextjs";
 
 const OlyFeedHeader = () => {
   return (

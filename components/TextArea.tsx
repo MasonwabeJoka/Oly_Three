@@ -10,7 +10,7 @@ import { Textarea as ShadcnTextarea } from "@/components/ui/textarea";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
-  size:"xxLarge" | "xLarge" | "large" | "medium";
+  size: "xxLarge" | "xLarge" | "large" | "medium";
   hasSubmitButton?: boolean;
   placeholder?: string;
   value?: string;
@@ -38,8 +38,6 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   onSubmit?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 }
-
-
 
 const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   (
@@ -78,8 +76,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
     const [isFocused, setIsFocused] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
-   
- 
+
+    // Sync localValue with value prop changes (for controlled components)
+    useEffect(() => {
+      if (value !== undefined && value !== localValue) {
+        setLocalValue(value);
+      }
+    }, [value, localValue]);
 
     useEffect(() => {
       if (mirrorDivRef.current) {
@@ -108,8 +111,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
     const handleWrapperFocus = () => setIsFocused(true);
 
-   
-
     const handleWrapperBlur = (event: React.FocusEvent<HTMLDivElement>) => {
       const relatedTarget = event.relatedTarget as HTMLElement | null;
       if (relatedTarget && event.currentTarget.contains(relatedTarget)) {
@@ -118,9 +119,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       setIsFocused(false);
     };
 
-
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (event.key === "Enter" && !event.shiftKey) {
+      if (event.key === "Enter" && !event.shiftKey && hasSubmitButton) {
         event.preventDefault();
         handleSubmit();
       }
@@ -133,7 +133,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       if (textareaRef.current && onSubmit) {
         const event = new Event("submit", { bubbles: true }) as any;
         Object.defineProperty(event, "target", { value: textareaRef.current });
-        Object.defineProperty(event, "currentTarget", { value: textareaRef.current });
+        Object.defineProperty(event, "currentTarget", {
+          value: textareaRef.current,
+        });
         onSubmit(event);
       }
     };
@@ -148,7 +150,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       }
     };
 
-        let sizeClass = "";
+    let sizeClass = "";
     switch (size) {
       case "medium":
         sizeClass = !dashboard
@@ -167,23 +169,30 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
     }
 
     const textareaId = `textarea-${id}`;
-    const errorId = (error || charCountError) ? `${id}-error` : undefined;
+    const errorId = error || charCountError ? `${id}-error` : undefined;
     const charCountId = characterLimit ? `${id}-char-count` : undefined;
-    const ariaDescribedByIds = [errorId, charCountId, ariaDescribedBy].filter(Boolean).join(' ');
-    const accessibleLabel = ariaLabel || label || placeholder || 'Text input';
+    const ariaDescribedByIds = [errorId, charCountId, ariaDescribedBy]
+      .filter(Boolean)
+      .join(" ");
+    const accessibleLabel = ariaLabel || label || placeholder || "Text input";
 
     return (
       <>
-        <div className={`${styles.container} ${className || ''}`}>
+        <div className={`${styles.container} ${className || ""}`}>
           {label && (
             <label className={styles.label} htmlFor={textareaId}>
               {label}
               {required && <span aria-label="required"> *</span>}
             </label>
           )}
-          
+
           {(error || charCountError) && (
-            <p id={errorId} className={styles.errorMessage} role="alert" aria-live="polite">
+            <p
+              id={errorId}
+              className={styles.errorMessage}
+              role="alert"
+              aria-live="polite"
+            >
               {error || charCountError}
             </p>
           )}
@@ -191,17 +200,17 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             className={styles.textareaWrapper}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
-            style={{height: textareaHeight}}
+            style={{ height: textareaHeight }}
           >
             <ShadcnTextarea
               id={textareaId}
               name={name}
               placeholder={placeholder}
-              value={value || localValue}
+              value={localValue}
               onChange={handleChange}
               onFocus={onFocus}
               onBlur={onBlur}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               {...reactHookFormProps}
             />
             <textarea
@@ -211,7 +220,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
               id={textareaId}
               name={name}
               placeholder={!isFocused ? placeholder : ""}
-              value={value || localValue}
+              value={localValue}
               aria-label={accessibleLabel}
               aria-describedby={ariaDescribedByIds || undefined}
               aria-invalid={ariaInvalid || !!(error || charCountError)}
@@ -234,27 +243,24 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
                 height: textareaHeight,
                 maxHeight: maxHeight ? `${maxHeight}px` : "240px",
               }}
-              {...reactHookFormProps}
             />
 
-          
             <div
               ref={mirrorDivRef}
               className={`${styles.mirrorDiv}`}
               aria-hidden="true"
             >
-              {value || localValue || " "}
+              {localValue || " "}
             </div>
 
-              {isEmojiPickerOpen && (
-                <div role="dialog" aria-label="Emoji picker">
-                  <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />
-                </div>
-              )}
-            
-            {(value || localValue || isFocused) && (
+            {isEmojiPickerOpen && (
+              <div role="dialog" aria-label="Emoji picker">
+                <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />
+              </div>
+            )}
+
+            {(localValue || isFocused) && (
               <div className={styles.buttons}>
-              
                 {hasSubmitButton && (
                   <div className={styles.submitButtonContainer}>
                     <Button
@@ -276,8 +282,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           </div>
         </div>
         {characterLimit && (
-          <div 
-            id={charCountId} 
+          <div
+            id={charCountId}
             className={styles.charCount}
             aria-live="polite"
             aria-label={`Character count: ${localValue.length} of ${characterLimit}`}

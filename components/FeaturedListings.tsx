@@ -6,25 +6,17 @@ import Button from "@/components/Buttons";
 import FeaturedListingsClient from "./FeaturedListingsClient";
 import { FeaturedListingsQueryResult } from "@/sanity/types";
 import Pagination from "./Pagination";
-import { use } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { featuredListingsQueryOptions } from "@/sanity/lib/crud/listings/queryOptions";
 
-
-type ListingsPromiseType =  Promise<{
-    listings: any;
-    totalPages: number;
-    currentPage: number;
-  }>
 type FeaturedListingsProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
-  listingsPromise: ListingsPromiseType;
+  currentPage: number;
 };
 
-const FeaturedListings = ({
-  category,
-  listingsPromise,
-}: FeaturedListingsProps) => {
-  const resolvedListings = use(listingsPromise);
-  const { listings, totalPages, currentPage } = resolvedListings;
+const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
+  const { data } = useSuspenseQuery(featuredListingsQueryOptions(currentPage));
+  const { listings, totalPages } = data;
   return (
     <>
       {category === "all" && (

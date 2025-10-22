@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import useSidebarStore from "@/store/useSidebarStore";
-import styles from "./TabsClient.module.scss";
 import useBreakpointStore from "@/store/useBreakpointStore";
+import Tab from "./Tab";
+import TabOptions from "./TabOptions";
+import styles from "./TabsClient.module.scss";
 
 type Tab =
   | {
@@ -35,10 +36,10 @@ const TabsClient: React.FC<TabsProps> = ({
   onClickHandlers,
 }) => {
   const [isActive, setIsActive] = useState<number | null>(null);
-  const { isMobile } = useBreakpointStore();
   const [tabOptions, setTabOptions] = useState<number | null>(null);
+  const { isMobile } = useBreakpointStore();
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, event: React.MouseEvent<HTMLLIElement>) => {
     if (tabOptions === null) {
       setIsActive(index);
       setTabOptions(index);
@@ -46,78 +47,50 @@ const TabsClient: React.FC<TabsProps> = ({
       setIsActive(null);
       setTabOptions(null);
     }
+
+    if (onClickHandlers?.[index]) {
+      try {
+        onClickHandlers[index]!(event);
+      } catch (error) {
+        console.error("Error in tab click handler:", error);
+      }
+    }
   };
 
-  const TabsMobile = () => {
-    return (
-      <>
-        <ul
-          className={styles.tabs}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            width: dashboard ? "16.6875rem" : "19.1475rem",
-          }}
-        >
-          {tabs?.map((tab, index) => {
-            const title = typeof tab === "object" ? tab.title : tab;
-            const count = typeof tab === "object" ? tab.count : null;
-            return (
-              <>
-                <li
-                  className={`${styles.tab} ${
-                    isActive === index ? styles.active : ""
-                  }`}
-                  key={index}
-                  onClick={(event) => {
-                    handleClick(index);
-                  }}
-                  style={{
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {title}
-                  {count && (
-                    <div
-                      className={styles.count}
-                      style={{
-                        backgroundColor: "white",
-                      }}
-                    >
-                      <div
-                        style={{
-                          margin: "0 auto",
-                        }}
-                      >
-                        {count}
-                      </div>
-                    </div>
-                  )}
-                </li>
+  const TabsMobile = () => (
+    <ul
+      className={styles.tabs}
+      style={{
+        flexDirection: "column",
+        justifyContent: "center",
+        width: dashboard ? "16.6875rem" : "19.1475rem",
+      }}
+    >
+      {tabs.map((tab, index) => {
+        const title = typeof tab === "object" ? tab.title : tab;
+        const count = typeof tab === "object" ? tab.count : null;
 
-                <ul
-                  className={
-                    tabOptions === index ? styles.options : styles.hideOptions
-                  }
-                  style={{ width: "100%" }}
-                >
-                  {data &&
-                    data[index].map((item, index) => {
-                      return (
-                        <li key={index} className={styles.option}>
-                          <div>{item}</div>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </>
-            );
-          })}
-        </ul>
-      </>
-    );
-  };
+        return (
+          <div key={index}>
+            <Tab
+              index={index}
+              title={title}
+              count={count}
+              isActive={isActive === index}
+              isMobile
+              onClick={(event) => handleClick(index, event)}
+            />
+            {data && (
+              <TabOptions
+                items={data[index]}
+                visible={tabOptions === index}
+              />
+            )}
+          </div>
+        );
+      })}
+    </ul>
+  );
 
   const TabsDesktop = () => {
     const tabWidth = condition
@@ -125,11 +98,11 @@ const TabsClient: React.FC<TabsProps> = ({
           Math.floor((((collageViewWidth || width) / 4 - 8) / 16) * 1000) / 1000
         }rem`
       : `${Math.floor(((width / 4 - 8) / 16) * 1000) / 1000}rem`;
+
     return (
       <ul
         className={styles.tabs}
         style={{
-          display: "flex",
           flexWrap: "wrap",
           justifyContent: "flex-start",
           width: condition
@@ -137,60 +110,31 @@ const TabsClient: React.FC<TabsProps> = ({
             : `${width / 16}rem`,
         }}
       >
-        {tabs?.map((tab, index) => {
+        {tabs.map((tab, index) => {
           const title = typeof tab === "object" ? tab.title : tab;
           const count = typeof tab === "object" ? tab.count : null;
+
           return (
-            <li
-              className={`${styles.tab} ${
-                isActive === index ? styles.active : ""
-              }`}
+            <Tab
+              key={index}
+              index={index}
+              title={title}
+              count={count}
+              isActive={isActive === index}
               style={{
                 flexBasis: tabWidth,
                 flexShrink: tabWidth,
-                color: tabs[index] === "Delete" ? "#ff3c14" : "#434b4d",
               }}
-              key={index}
-              onClick={(event) => {
-                handleClick(index);
-                try {
-                  if (onClickHandlers?.[index]) {
-                    onClickHandlers[index]!(event);
-                  }
-                } catch (error) {
-                  console.error("Error in tab click handler:", error);
-                }
-              }}
-            >
-              {title}
-              {count !== null && count !== 0 && (
-                <div
-                  className={styles.count}
-                  style={{
-                    backgroundColor: "white",
-                  }}
-                >
-                  <div
-                    style={{
-                      margin: "0 auto",
-                    }}
-                  >
-                    {count}
-                  </div>
-                </div>
-              )}
-            </li>
+              color={title === "Delete" ? "#ff3c14" : "#434b4d"}
+              onClick={(event) => handleClick(index, event)}
+            />
           );
         })}
       </ul>
     );
   };
 
-  if (isMobile) {
-    return <TabsMobile />;
-  } else {
-    return <TabsDesktop />;
-  }
+  return isMobile ? <TabsMobile /> : <TabsDesktop />;
 };
 
 export default TabsClient;

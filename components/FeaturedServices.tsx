@@ -11,10 +11,11 @@ type Props = {
   description: string;
   cta: string;
   features: {
-    id: number;
+    id: string;
     feature: string;
   }[];
-  content: JSX.Element;
+  content?: React.ReactElement;
+  onClick?: () => void;
 };
 const FeaturedServices = ({
   layout,

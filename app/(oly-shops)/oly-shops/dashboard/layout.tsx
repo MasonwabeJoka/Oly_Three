@@ -1,4 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import localFont from "next/font/local";
 import { currentUser } from "@/app/temp/tempForMessages";
 import DashboardLayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/DashboardLayoutWrapper";
@@ -22,13 +21,15 @@ export default async function Layout({
 }) {
   const sidebarItems = StoreDashboardSidebarData;
   return (
-    <ClerkProvider>
-      <DashboardLayoutWrapper
-        currentUser={currentUser!}
-        sidebarItems={sidebarItems}
-      >
-        {children}
-      </DashboardLayoutWrapper>
-    </ClerkProvider>
+    <html lang="en" className={`${outfit.className}`}>
+      <body>
+        <DashboardLayoutWrapper
+          currentUser={currentUser!}
+          sidebarItems={sidebarItems}
+        >
+          {children}
+        </DashboardLayoutWrapper>
+      </body>
+    </html>
   );
 }

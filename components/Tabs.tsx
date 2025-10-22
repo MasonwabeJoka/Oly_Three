@@ -1,4 +1,4 @@
-import TabsClient from "./TabsClient";
+import dynamic from "next/dynamic";
 
 type Tab =
   | {
@@ -20,6 +20,8 @@ type TabsProps = {
     | undefined
   )[];
 };
+
+const TabsClient = dynamic(() => import("./TabsClient"), { ssr: false });
 
 const Tabs: React.FC<TabsProps> = ({
   condition,

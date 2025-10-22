@@ -30,7 +30,6 @@
     ".next/types/**/*.ts",
     "app/(root)/Blog.tsx",
     "app/(root)/Blog.tsx",
-    "app/Articles.tsx",
     "app/Unsplash.jsx",
     "app/api/temp.js",
     "app/layouta.tsx",

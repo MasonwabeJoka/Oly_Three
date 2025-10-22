@@ -10,24 +10,14 @@ import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
 import Button from "./Buttons";
 import { useModalStore } from "@/store/modalStore";
-import { useClerk } from "@clerk/nextjs";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
-import { sign } from "crypto";
-import UserButtonCustom from "@/components/clerk/UserButtonCustom";
+
 const Menu = () => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const router = useRouter();
   const showMenuModal = useModalStore((state) => state.showMenuModal);
   const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
-  const { isSignedIn } = useUser();
-  const { signOut } = useClerk();
-
-  const handleSignOut = () => {
-    signOut();
-    setShowMenuModal(false);
-  };
+  // Authentication removed - no longer using Clerk
 
   const containerStyles = {
     width: isMobile ? "100vw" : isSidebarOpen ? "85vw" : "51.51rem",
@@ -58,8 +48,7 @@ const Menu = () => {
   // TODO: When Menu is open and the user is logged out, dynamically change the logout button to exit button, with an X icon.
   return (
     <>
-      
-      <div className={styles.container} >
+      <div className={styles.container}>
         <ul className={styles.menuStyles} style={menuStyles}>
           {MenuData.map((menuItem: any) => {
             const { id, icon, text, path } = menuItem;
@@ -67,37 +56,18 @@ const Menu = () => {
               <Link href={path} key={id}>
                 <li className={styles.menuItem} style={menuItemStyles}>
                   {text === "Logout" ? (
-                    <div>
-                      <SignedIn>
-                        <div
-                          className={styles.iconContainer}
-                          style={iconContainerSize}
-                          onClick={handleSignOut}
-                        >
-                          <Icon
-                            src={icon}
-                            alt={`{${text} icon}`}
-                            width={isMobile ? 20 : isSidebarOpen ? 32 : 40}
-                            height={isMobile ? 20 : isSidebarOpen ? 32 : 40}
-                            className={styles.icon}
-                          />
-                        </div>
-                      </SignedIn>
-                      <SignedOut>
-                        <div
-                          className={styles.iconContainer}
-                          style={iconContainerSize}
-                          onClick={() => setShowMenuModal(false)}
-                        >
-                          <Icon
-                            src={icon}
-                            alt={`{${text} icon}`}
-                            width={isMobile ? 20 : isSidebarOpen ? 32 : 40}
-                            height={isMobile ? 20 : isSidebarOpen ? 32 : 40}
-                            className={styles.icon}
-                          />
-                        </div>
-                      </SignedOut>
+                    <div
+                      className={styles.iconContainer}
+                      style={iconContainerSize}
+                      onClick={() => setShowMenuModal(false)}
+                    >
+                      <Icon
+                        src={icon}
+                        alt={`{${text} icon}`}
+                        width={isMobile ? 20 : isSidebarOpen ? 32 : 40}
+                        height={isMobile ? 20 : isSidebarOpen ? 32 : 40}
+                        className={styles.icon}
+                      />
                     </div>
                   ) : (
                     <div

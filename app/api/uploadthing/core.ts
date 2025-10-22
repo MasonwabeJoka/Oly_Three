@@ -1,6 +1,4 @@
-import { auth } from "@clerk/nextjs";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
  
 const f = createUploadthing();
 
@@ -13,68 +11,59 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
-      const {userId} = auth()
- 
-      // If you throw, the user will not be able to upload
-      if (!userId) throw new UploadThingError("Unauthorized");
- 
+      // Authentication removed - allowing all uploads
+
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId};
+      return { uploadedBy: "anonymous" };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
- 
+      console.log("Upload complete for user:", metadata.uploadedBy);
+
       console.log("file url", file.url);
- 
+
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+      return { uploadedBy: metadata.uploadedBy };
     }),
 
 
   videoUploader: f({ video: { maxFileSize: "2GB" } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
-      // This code runs on your server before upload    
-      const {userId} = auth()
- 
-      // If you throw, the user will not be able to upload
-      if (!userId) throw new UploadThingError("Unauthorized");
- 
+      // This code runs on your server before upload
+      // Authentication removed - allowing all uploads
+
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId};
+      return { uploadedBy: "anonymous" };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
- 
+      console.log("Upload complete for user:", metadata.uploadedBy);
+
       console.log("file url", file.url);
- 
+
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+      return { uploadedBy: metadata.uploadedBy };
     }),
 
 
   attachmentUploader: f({ pdf : { maxFileSize: "4MB" } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
-       // This code runs on your server before upload    
-       const {userId} = auth()
- 
-       // If you throw, the user will not be able to upload
-       if (!userId) throw new UploadThingError("Unauthorized");
-  
+       // This code runs on your server before upload
+       // Authentication removed - allowing all uploads
+
        // Whatever is returned here is accessible in onUploadComplete as `metadata`
-       return { userId};
+       return { uploadedBy: "anonymous" };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
- 
+      console.log("Upload complete for user:", metadata.uploadedBy);
+
       console.log("file url", file.url);
- 
+
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+      return { uploadedBy: metadata.uploadedBy };
     }),
 } satisfies FileRouter;
  

@@ -21,7 +21,7 @@ interface ItemsListProps {
   register: any;
   errors: any;
   watch: any;
-  type: 'details' | 'specifications';
+  type: "details" | "specifications";
 }
 
 const ItemsList = ({
@@ -39,15 +39,31 @@ const ItemsList = ({
   type,
 }: ItemsListProps) => {
   const renderItemText = (item: Item) => {
-    if (type === 'details') {
+    if (type === "details") {
+      if (item.selectDetail === "Add Your Own Details") {
+        const colonIndex = item.value.indexOf(":");
+        if (colonIndex > 0) {
+          const boldPart = item.value.substring(0, colonIndex);
+          const normalPart = item.value.substring(colonIndex + 1);
+          return (
+            <>
+              <span style={{ fontWeight: "600" }}>{boldPart}:</span>
+              <span>{normalPart}</span>
+            </>
+          );
+        }
+      }
       return (
         <>
           <span style={{ fontWeight: "600" }}>{item.selectDetail}:</span>{" "}
           <span>{item.value}</span>
         </>
       );
-    } else {
-      const colonIndex = item.value.indexOf(':');
+    }
+
+    if (type === "specifications") {
+      // Parse the value for colon to make text before colon bold
+      const colonIndex = item.value.indexOf(":");
       if (colonIndex > 0) {
         const boldPart = item.value.substring(0, colonIndex);
         const normalPart = item.value.substring(colonIndex + 1);
@@ -58,6 +74,7 @@ const ItemsList = ({
           </>
         );
       }
+      // If no colon found, just display the value
       return <span>{item.value}</span>;
     }
   };
@@ -67,9 +84,7 @@ const ItemsList = ({
       {items.map((item, index) =>
         editIndex !== index ? (
           <li key={index} className={styles.detail}>
-            <p className={styles.detailText}>
-              {renderItemText(item)}
-            </p>
+            <p className={styles.detailText}>{renderItemText(item)}</p>
             <div className={styles.detailButtons}>
               <div
                 className={styles.editButtonContainer}

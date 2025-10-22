@@ -55,7 +55,7 @@ const Articles = ({
     .slice(0, 3);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles.swiperGlobalStyles}`}>
       <header className={styles.header}>
         <section className={styles.topSection}>
           <nav className={styles.homeButton}>

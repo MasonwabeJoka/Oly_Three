@@ -4,7 +4,7 @@ import Articles from "@/components/ArticlesSlider";
 import useArticlesStore from "@/store/articlesStore";
 import useTitleStore from "@/store/titleStore";
 import styles from "./SponsoredArticles.module.scss";
-import { blogData } from "@/data/BlogData";
+import { articlesData } from "@/data/articleData";
 
 const SponsoredArticlesClient = () => {
   const images = useArticlesStore((state) => state.images);
@@ -32,7 +32,7 @@ const SponsoredArticlesClient = () => {
 
   useEffect(() => {
     setData(
-      blogData.map((item) => ({
+      articlesData.map((item) => ({
         ...item,
         images: [item.images],
         avatars: [],

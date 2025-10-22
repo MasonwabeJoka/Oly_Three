@@ -27,7 +27,7 @@ const ArticleCardBox = ({
   // Default image if none provided
   const defaultImage = "/placeholder-image.jpg"; // Make sure this exists in your public folder
   const imageSource = images || defaultImage;
-
+;
   return (
     <article className={styles.articleCard}>
       <div className={styles.imageContainer}>
@@ -48,7 +48,7 @@ const ArticleCardBox = ({
       <div className={styles.details}>
         <div className={styles.titleContainer}>
           <p className={styles.title}>
-            {title?.length > 64 ? `${title.slice(0, 64)}...` : title}
+            {title?.length > 84 ? `${title.slice(0, 84)}...` : title}
           </p>
         </div>
         <div className={styles.author}>

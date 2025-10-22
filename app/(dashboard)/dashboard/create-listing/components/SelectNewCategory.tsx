@@ -45,35 +45,19 @@ const SelectNewCategory = ({ onNext, goTo }: Props) => {
         >
           <ExitButton />
         </Link>
-        {/* <h2 className={styles.title}>Category Selection</h2> */}
         <p className={styles.description}>
           Hold on! You haven't finished creating your listing. Do you want to
           complete it, or start over from scratch?
         </p>
-        {/* <p className={styles.description}>
-          You haven't finished creating your listing yet. Would you like to
-          continue and finish posting your ad, or would you like to start over a new listing?
-        </p> */}
 
         <div className={styles.buttonContainer}>
-          <Button
-            buttonChildren="Start New Listing"
-            buttonType="primary"
-            buttonSize="large"
-            name="select-new-category"
-            type="button"
-            ariaLabel="Select new category"
-            autoFocus={false}
-            onClick={handleSelectNewCategoryClick}
-            dashboard
-          />
           <Link
-            href="/dashboard/create-listing/oly/title-and-description"
+            href="/dashboard/create-listing"
             className={styles.continueButtonContainer}
           >
             <Button
               buttonChildren="Complete Current Listing"
-              buttonType="normal"
+              buttonType="primary"
               buttonSize="large"
               name="continue-current-category"
               type="button"
@@ -82,6 +66,17 @@ const SelectNewCategory = ({ onNext, goTo }: Props) => {
               dashboard
             />
           </Link>
+          <Button
+            buttonChildren="Start New Listing"
+            buttonType="normal"
+            buttonSize="large"
+            name="select-new-category"
+            type="button"
+            ariaLabel="Select new category"
+            autoFocus={false}
+            onClick={handleSelectNewCategoryClick}
+            dashboard
+          />
         </div>
       </div>
 

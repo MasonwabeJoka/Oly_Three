@@ -1,6 +1,4 @@
-import Blogs from "@/components/Blogs";
 import styles from "./../global-styles/homepage.module.scss";
-import FeaturedCategories from "@/components/FeaturedCategories";
 import FeaturedListings from "@/components/FeaturedListings";
 import SponsoredArticles from "@/components/SponsoredArticles";
 import HeroSection from "@/components/HeroSection";
@@ -9,13 +7,14 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
-import { variables } from "./../../utils/typescript-variables/variables";
+
 import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
 import { getCategories } from "@/sanity/lib/crud/categories/data";
-import { getFeaturedListings } from "@/sanity/lib/crud/featuredListings/data";
 import { getFeaturedCategoriesSection } from "@/sanity/lib/crud/featuredCategoriesSection/data";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import OlyArticles from "@/components/OlyArticles";
+import FeaturedCategories from "@/components/FeaturedCategories";
 
 const Home = async ({
   searchParams,
@@ -24,12 +23,15 @@ const Home = async ({
 }) => {
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
-  const { categories: firstLevelCategories, title } = categories;
+  const { categories: firstLevelCategories, title } = categories || {
+    categories: null,
+    title: null,
+  };
 
   // Read page from URL parameters, default to 1
   const resolvedSearchParams = await searchParams;
   const currentPage = parseInt(resolvedSearchParams.page || "1");
-  const featuredListings =  getFeaturedListings(currentPage);
+
   const {
     heroSection,
     moreFromOlySection,
@@ -40,18 +42,19 @@ const Home = async ({
     bottomAdSection,
     olyArticlesSection,
     sponsoredArticlesSection,
-  } = olyHomepage;
+  } = olyHomepage || {};
   const featuredCategoriesSectionData = await getFeaturedCategoriesSection();
-  const { featuredCategories } = featuredCategoriesSectionData;
+  const { featuredCategories } = featuredCategoriesSectionData || {
+    featuredCategories: null,
+  };
+
   return (
     <div
       className={styles.container}
-      style={{ backgroundColor: variables.whiteFour }}
+    
     >
       <div className={styles.main}>
-        <div className={styles.modal}>
-          <ShowMenu />
-        </div>
+      
         <div className={styles.modal}>
           <Suspense
             fallback={
@@ -64,7 +67,7 @@ const Home = async ({
           </Suspense>
         </div>
 
-        {heroSection.isEnabled === true && (
+        {heroSection?.isEnabled === true && (
           <section className={styles.heroSection}>
             <Suspense
               fallback={
@@ -81,13 +84,21 @@ const Home = async ({
             </Suspense>
           </section>
         )}
-        {moreFromOlySection.isEnabled === true && (
+        {moreFromOlySection?.isEnabled === true && (
           <section className={styles.moreFromOly}>
             <h2 className={styles.title}>More from Oly</h2>
-            <MoreFromOly />
+            <Suspense
+              fallback={
+                <div>
+                  <LoadingSpinner />
+                </div>
+              }
+            >
+              <MoreFromOly />
+            </Suspense>
           </section>
         )}
-        {topAdSection.isEnabled === true && (
+        {topAdSection?.isEnabled === true && (
           <section className={styles.aboveFoldAd}>
             <Suspense
               fallback={
@@ -103,10 +114,10 @@ const Home = async ({
             </Suspense>
           </section>
         )}
-{/* 
-        {featuredCategoriesSection.isEnabled === true && (
+      
+         {featuredCategoriesSection?.isEnabled === true && (
           <section className={styles.categories}>
-            <h2 className={styles.title}>{featuredCategoriesSection.title}</h2>
+            <h2 className={styles.title}>Featured Categories</h2>
             <Suspense
               fallback={
                 <div>
@@ -114,12 +125,12 @@ const Home = async ({
                 </div>
               }
             >
-              <FeaturedCategories data={featuredCategoriesSectionData} />
+              <FeaturedCategories/>
             </Suspense>
           </section>
-        )} */}
+        )}  
 
-        {featuredServicesSection.isEnabled === true && (
+        {featuredServicesSection?.isEnabled === true && (
           <section className={styles.features}>
             <Suspense
               fallback={
@@ -133,7 +144,7 @@ const Home = async ({
           </section>
         )}
 
-        {featuredListingsSection.isEnabled === true && (
+        {featuredListingsSection?.isEnabled === true && (
           <section className={styles.featuredListings}>
             <h2 className={styles.title}>Featured Listings</h2>
             <Suspense
@@ -143,17 +154,13 @@ const Home = async ({
                 </div>
               }
             >
-              <FeaturedListings
-                category="all"
-                listingsPromise={featuredListings}
-              />
+              <FeaturedListings category="all" currentPage={currentPage} />
             </Suspense>
           </section>
         )}
 
-        {olyArticlesSection.isEnabled === true && (
-          <section className={styles.blog}>
-            <h2 className={styles.title}>Oly Articles</h2>
+        {olyArticlesSection?.isEnabled === true && (
+          <section className={styles.articles}>
             <Suspense
               fallback={
                 <div>
@@ -161,12 +168,12 @@ const Home = async ({
                 </div>
               }
             >
-              <Blogs />
+              <OlyArticles />
             </Suspense>
           </section>
         )}
 
-        {bottomAdSection.isEnabled === true && (
+        {bottomAdSection?.isEnabled === true && (
           <section className={styles.belowFoldAd}>
             <Suspense
               fallback={
@@ -182,7 +189,7 @@ const Home = async ({
             </Suspense>
           </section>
         )}
-        {sponsoredArticlesSection.isEnabled === true && (
+        {sponsoredArticlesSection?.isEnabled === true && (
           <section className={styles.sponsoredArticles}>
             <h2 className={styles.title}>Sponsored Articles</h2>
             <Suspense

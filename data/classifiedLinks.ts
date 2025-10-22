@@ -15,12 +15,12 @@ export const classifieds = [
         id: 3,
         text: "Oly Hiring",
         image: "/hiring.jpg",
-        link: "/"
+        link: "/hiring"
     },
     {
         id: 4,
         text: "Oly Services",
         image: "/services.jpg",
-        link: "/"
+        link: "/services"
     },
 ]

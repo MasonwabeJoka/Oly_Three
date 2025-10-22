@@ -93,7 +93,7 @@ const ProductSpecification = ({
 
       // Reset the field
       setValue(fieldName, "");
-      
+
       // Close the ProductSpecification UI to show SpecificationsList
       setShowSpecificationForm(false);
     }
@@ -101,11 +101,9 @@ const ProductSpecification = ({
 
   return (
     <div className={styles.container}>
-      
       <div
         key={id}
         className={`${styles.productSpecificationContainer} ${styles.open}`}
-        
       >
         <div className={styles.deleteButtonContainer} onClick={() => close()}>
           <Icon
@@ -124,8 +122,8 @@ const ProductSpecification = ({
               marginBottom: placeholder
                 ? 0
                 : specification === "Product Specifications"
-                  ? "0.5rem"
-                  : "1.25rem",
+                ? "0.5rem"
+                : "1.25rem",
             }}
           >
             {description}
@@ -155,23 +153,26 @@ const ProductSpecification = ({
                       : placeholder
                   }`
                 : example
-                  ? `eg. ${
-                      typeof example === "string" && example.length > 55
-                        ? example.slice(0, 55) + "..."
-                        : example
-                    }`
-                  : ""
+                ? `eg. ${
+                    typeof example === "string" && example.length > 55
+                      ? example.slice(0, 55) + "..."
+                      : example
+                  }`
+                : ""
             }
             value={inputValue}
             ariaLabel="Product Specification"
             dashboard
-            error={errors?.specifications?.[selectSpecificationValue]?.message as string}
+            error={
+              errors?.specifications?.[selectSpecificationValue]
+                ?.message as string
+            }
             maxHeight={120}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              handleChange(e); 
+              handleChange(e);
             }}
             onBlur={handleBlur}
-            {...register(`specifications.${selectSpecificationValue}`)} 
+            {...register(`specifications.${selectSpecificationValue}`)}
           />
         </div>
         <div className={styles.submitButtonContainer}>
@@ -179,14 +180,14 @@ const ProductSpecification = ({
             className={styles.submitButton}
             buttonChildren="Submit Specification"
             buttonType="normal"
-            type="button" 
+            type="button"
             buttonSize="large"
             name="submit-specification-btn"
             aria-label="Submit Specification Button"
             autoFocus={false}
             disabled={false}
             dashboard
-            onClick={clickHandler} 
+            onClick={clickHandler}
           />
         </div>
       </div>

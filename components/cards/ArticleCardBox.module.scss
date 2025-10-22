@@ -35,10 +35,10 @@
       justify-content: center;
       align-items: center;
       height: rem(220);
-      padding: rem(16);
+      padding: rem(32);
       .title {
         color: $black-four;
-        font-size: rem(20);
+        font-size: $body;
         font-style: normal;
         line-height: 150%; /* 36px */
         text-transform: uppercase;

@@ -88,7 +88,7 @@ const SelectedDetail = ({
       // Reset the field
       setValue(fieldName, "");
       setValue("details.selectDetail", "");
-      
+
       // Close the SelectedDetail UI to show DetailsList/SpecificationsList
       setMatchFound(false);
     }
@@ -96,7 +96,6 @@ const SelectedDetail = ({
 
   return (
     <div className={styles.container}>
-      
       <div
         key={id}
         className={`${styles.selectedDetailContainer} ${styles.open}`}
@@ -117,14 +116,14 @@ const SelectedDetail = ({
             style={{
               marginBottom: placeholder
                 ? 0
-                : detail === "Define Your Own Detail"
-                  ? "0.5rem"
-                  : "1.25rem",
+                : detail === "Add Your Own Details"
+                ? "0.5rem"
+                : "1.25rem",
             }}
           >
             {description}
           </p>
-          {detail === "Define Your Own Detail" && (
+          {detail === "Add Your Own Details" && (
             <p
               className={styles.selectedDetailExample}
               style={{ marginBottom: "1.25rem" }}
@@ -159,12 +158,12 @@ const SelectedDetail = ({
                       : placeholder
                   }`
                 : example
-                  ? `eg. ${
-                      typeof example === "string" && example.length > 55
-                        ? example.slice(0, 55) + "..."
-                        : example
-                    }`
-                  : ""
+                ? `eg. ${
+                    typeof example === "string" && example.length > 55
+                      ? example.slice(0, 55) + "..."
+                      : example
+                  }`
+                : ""
             }
             value={inputValue}
             ariaLabel="Chosen Detail"
@@ -172,10 +171,10 @@ const SelectedDetail = ({
             error={errors?.details?.[selectDetailValue]?.message as string}
             maxHeight={120}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              handleChange(e); 
+              handleChange(e);
             }}
             onBlur={handleBlur}
-            {...register(`details.${selectDetailValue}`)} 
+            {...register(`details.${selectDetailValue}`)}
           />
         </div>
         <div className={styles.submitButtonContainer}>
@@ -183,14 +182,14 @@ const SelectedDetail = ({
             className={styles.submitButton}
             buttonChildren="Submit Detail"
             buttonType="normal"
-            type="button" 
+            type="button"
             buttonSize="large"
             name="submit-detail-btn"
             aria-label="Submit Detail Button"
             autoFocus={false}
             disabled={false}
             dashboard
-            onClick={clickHandler} 
+            onClick={clickHandler}
           />
         </div>
       </div>

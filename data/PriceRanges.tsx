@@ -1,4 +1,5 @@
 let prices: number[] = [];
+
 for (let i = 0; i < 100; i++) {
   let price: number = Math.floor(Math.random() * (1000 - 100 + 1) + 100);
   prices.push(price);

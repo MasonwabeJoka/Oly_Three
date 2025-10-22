@@ -4,7 +4,7 @@ import { sidebarLinks } from "@/features/oly-feed/data/OlyFeedSidebarData";
 import Link from "next/link";
 import Image from "@/components/Image";
 import { useRouter, usePathname } from "next/navigation";
-import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
+// Authentication removed - no longer using Clerk
 
 const OlyFeedSidebar = () => {
   const router = useRouter();

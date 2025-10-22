@@ -7,7 +7,7 @@ import Image from "@/components/Image";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
+// Authentication removed - no longer using Clerk
 import { usePathname } from "next/navigation";
 import { Backpack } from "lucide-react";
 
@@ -34,7 +34,8 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isSignedIn, isLoaded } = useUser();
+  // Authentication removed - no longer using Clerk
+  // const { user, isSignedIn, isLoaded } = useUser();
   const pathname = usePathname();
 
   const itemsWithActiveState = sidebarItems?.map((item) => ({
@@ -82,10 +83,10 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         {!isMobile && (
           <p
             className={styles.name}
-            style={{ visibility: user?.fullName ? "visible" : "hidden" }}
+            style={{ visibility: currentUser?.fullName ? "visible" : "hidden" }}
           >
             {/* The \u00A0 is a non-breaking space to maintain height when there's no text*/}
-            {user?.fullName || user?.username || "\u00A0"}
+            {currentUser?.fullName || currentUser?.username || "\u00A0"}
           </p>
         )}
       </Link>

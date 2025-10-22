@@ -96,7 +96,6 @@ const ChatList: React.FC = () => {
                 </p>
               </div>
               <div className={styles.timeContainer}>
-                <div className={styles.time}>{message.createdAt}</div>
                 <p
                   className={styles.messageCount}
                   style={
@@ -119,6 +118,7 @@ const ChatList: React.FC = () => {
                     ? "9+"
                     : message.messages.length}
                 </p>
+                <div className={styles.time}>{message.createdAt}</div>
               </div>
             </li>
           ))

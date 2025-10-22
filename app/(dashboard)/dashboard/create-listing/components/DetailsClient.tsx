@@ -153,7 +153,7 @@ const DetailsClient = ({
     }
   };
 
-  const handleDeleteSpecification = (index: number) => {
+  const handleDeleteSpecification = async (index: number): Promise<void> => {
     const updatedSpecifications = specifications.filter((_, i) => i !== index);
     setSpecifications(updatedSpecifications);
     setValue("specifications.list", updatedSpecifications, {
@@ -165,7 +165,7 @@ const DetailsClient = ({
       setEditIndex(null);
     }
 
-    trigger("specifications.list");
+    await trigger("specifications.list");
   };
 
   return (
@@ -197,7 +197,8 @@ const DetailsClient = ({
                 <Select
                   options={detailsTitles}
                   className={styles.selectDetail}
-                  initialValue="Select a product detail"
+                  initialValue="Add all product details"
+                   value="Add all product details" 
                   selectSize="large"
                   selectColourType="normal"
                   label="Choose a detail"
@@ -297,7 +298,7 @@ const DetailsClient = ({
                   id="custom-spec"
                   initialValue="Select a product specification to add"
                   specification="Product Specifications"
-                  description="Provide details such as dimensions, weight, or any other relevant technical specifications. Add a colon after labels to make them bold."
+                  description="Provide details such as dimensions, weight, or any other relevant technical specifications. Add a colon after details to make them bold."
                   boldTextExample="Screen size"
                   normalTextExample="6.1 inches"
                   placeholder="Add product specification"

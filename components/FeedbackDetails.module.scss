@@ -1,0 +1,29 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  
+
+  .wrapper {
+    display: flex;
+  gap: rem(40);
+    margin-top: rem(180);
+    .userDetails {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: rem(342);
+      height: rem(456);
+      padding: rem(80) rem(40);
+      border-radius: rem(40);
+      background-color: $grey-one;
+      box-shadow: $shadow-one;
+      .detail {
+        display: flex;
+        gap: rem(16);
+        margin-bottom: rem(20);
+      }
+    }
+  }
+}

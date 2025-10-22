@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonChildren: any;
   dashboard?: boolean;
   buttonType: keyof typeof BUTTON_TYPE;
-  buttonSize: "large" | "medium" | "small" | "tiny"|"";
+  buttonSize: "large" | "medium" | "small" | "tiny" | "";
   name: string;
   type: "button" | "submit" | "reset";
   ariaLabel?: string;
@@ -122,6 +122,7 @@ const Button = ({
   ariaControls,
   role,
   tabIndex,
+
   ...otherProps
 }: ButtonProps): JSX.Element => {
   let sizeClass = "";
@@ -169,7 +170,9 @@ const Button = ({
     onKeyDown?.(event);
   };
 
-  const buttonId = `button-${buttonType}-${name.replace(/\s+/g, "-").toLowerCase()}`;
+  const buttonId = `button-${buttonType}-${name
+    .replace(/\s+/g, "-")
+    .toLowerCase()}`;
 
   const accessibleLabel =
     ariaLabel ||
@@ -208,7 +211,7 @@ const Button = ({
         aria-controls={ariaControls}
         aria-hidden={ariaHidden}
         role={role}
-        tabIndex={disabled ? -1 : (tabIndex ?? 0)}
+        tabIndex={disabled ? -1 : tabIndex ?? 0}
         autoFocus={autoFocus}
         disabled={disabled}
         style={{ fontSize: fontSize }}
@@ -228,7 +231,7 @@ const Button = ({
 export default Button;
 
 {
-  /* 
+  /*
   <Button
     className={styles.proceedButton}
     buttonChildren="Proceed"
@@ -239,6 +242,6 @@ export default Button;
     ariaLabel="Proceed Button"
     autoFocus={false}
     disabled={false}
-/>; 
+/>;
 */
 }

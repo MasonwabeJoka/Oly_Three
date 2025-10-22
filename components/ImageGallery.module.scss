@@ -74,11 +74,12 @@
         break-inside: avoid;
         margin-bottom: rem(20);
         border-radius: rem(40);
-        // Default height for landscape images
         height: rem(275);
         &[data-orientation="portrait"] {
           height: rem(570);
         }
+              background-color: $grey-one;
+
 
         @include only(smallDesktop) {
           width: rem(298);

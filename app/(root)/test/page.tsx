@@ -1,12 +1,13 @@
-"use client";
+import FeedbackBoard from "./components/Feedbackboard";
 
-import ErrorComponent from "@/components/ErrorComponent"; 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  return <ErrorComponent error={error} reset={reset} />;
+interface PageProps {
+  
 }
+
+const Page = ({}: PageProps) => {
+  return (
+   <FeedbackBoard/>
+  );
+};
+
+export default Page;

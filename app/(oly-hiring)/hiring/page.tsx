@@ -1,6 +1,6 @@
 "use client";
-import Blogs from "@/components/Blogs";
-import styles from "../styles/styles.module.scss";
+import Blogs from "@/components/OlyArticles";
+import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import Features from "@/components/Features";
 import FeaturedListings from "@/components/FeaturedListings";

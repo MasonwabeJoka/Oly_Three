@@ -14,15 +14,19 @@ import NavButtons from "../NavButtons";
 import LoadingSpinner from "../LoadingSpinner";
 import useBreakpointStore from "@/store/useBreakpointStore";
 
-const FeaturedServicesSlideFrontendClient = ({ productData }) => {
+const FeaturedServicesSlideFrontendClient = ({ featuredServicesData }) => {
   const { isMobile, isTablet } = useBreakpointStore();
   const [initialSlideIndex, setInitialSlideIndex] = useState(null);
   const { setIsMoreInfo } = useFeatureInfo();
   const { setCurrentSlideIndex } = useCurrentSlideIndex();
+  const services = featuredServicesData.services?.map(service => ({
+    ...service,
+    features: service.features?.map(f => ({ id: f.featureId, feature: f.featureText })) || []
+  })) || [];
 
   useEffect(() => {
-    setInitialSlideIndex(Math.floor(Math.random() * productData.length));
-  }, [productData]);
+    setInitialSlideIndex(Math.floor(Math.random() * services.length));
+  }, [featuredServicesData]);
 
   const handleSlideChange = (swiper) => {
     setCurrentSlideIndex(swiper.realIndex);
@@ -31,6 +35,7 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
   if (initialSlideIndex === null) {
     return <LoadingSpinner />;
   }
+
 
   return (
     <Swiper
@@ -42,7 +47,7 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
       fadeEffect={{
         crossFade: true,
       }}
-      grabCursor={true}
+      grabCursor={isMobile ? true: false}
       pagination={isTablet ? { clickable: true } : false}
       loop={true}
       keyboard={{
@@ -56,17 +61,17 @@ const FeaturedServicesSlideFrontendClient = ({ productData }) => {
       modules={[Keyboard, Autoplay, EffectFade, Pagination]}
       className={styles.swiper}
     >
-      {productData.map((product, index) => (
+      {services.map((service: any, index: number) => (
         <SwiperSlide className={styles.slideContainer} key={index}>
           <div className={styles.slide}>
             <FeaturedServices
-              layout={product.layout}
-              path={product.path}
-              image={product.image}
-              title={product.title}
-              description={product.description}
-              cta={product.cta}
-              features={product.features}
+              layout={service.layout}
+              path={service.path}
+              image={service.image}
+              title={service.title}
+              description={service.description}
+              cta={service.cta}
+              features={service.features}
               onClick={() => setIsMoreInfo(true)}
             />
           </div>

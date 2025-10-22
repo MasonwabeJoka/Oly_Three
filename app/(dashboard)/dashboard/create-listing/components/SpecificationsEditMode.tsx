@@ -47,7 +47,7 @@ const SpecificationsEditMode = ({
         label="Edit Specification"
         required={true}
         hasSubmitButton={false}
-        value={updatedSpecification} 
+        value={updatedSpecification}
         onChange={handleChange}
         {...register("editSpecification")}
         error={errors.editSpecification?.message as string}

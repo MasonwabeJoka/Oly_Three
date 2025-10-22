@@ -1,15 +1,11 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-@import "@/app/globals.css";
+// Note: globals.css should be imported in root layout, not in CSS modules
 .html {
   scroll-behavior: smooth;
   height: 100%;
-  font-family:
-    var(--font-outfit),
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
 }
 .html::-webkit-scrollbar {
   width: rem(12);

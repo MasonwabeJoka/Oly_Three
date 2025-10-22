@@ -96,6 +96,14 @@ export const category = defineType({
       initialValue: false,
     }),
     defineField({
+      name: "featuredTitle",
+      title: "Featured Title",
+      type: "string",
+      description:
+        "An alternate title shown when this category is featured. Falls back to the main title if empty.",
+      hidden: ({ parent }) => !parent?.isFeatured, // Only visible when 'isFeatured' is true
+    }),
+    defineField({
       name: "order",
       title: "Sort Order",
       type: "number",

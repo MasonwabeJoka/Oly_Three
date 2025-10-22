@@ -1,13 +1,11 @@
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { UTApi } from "uploadthing/server";
 
 const uploadthingApi = new UTApi()
 
 export async function POST(req: Request) {
-    const {userId} = auth()
-
-    if(!userId) return new NextResponse('Unauthorized', {status: 401})
+    // Authentication removed - allowing all delete requests
+    // You may want to implement alternative authentication here
     
     const {imageKey} = await req.json() 
 

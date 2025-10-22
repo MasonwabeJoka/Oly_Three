@@ -32,7 +32,7 @@ const LinkCardBox = ({
     <div className={`${styles.cardContainer} ${cardSizeClass}`}>
       <div className={cardSizeClass} style={{ borderRadius: "2.5rem" }}>
         <Image
-          src={image || "/bear.jpg"}
+          src={image || ""}
           alt={label}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"

@@ -1,0 +1,12 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+        .bullet {
+          margin-top: rem(1);
+          width: rem(24);
+          height: rem(24);
+          border-radius: 30%;
+          box-shadow: $shadow-one;
+          background-color: $white-one;
+        }

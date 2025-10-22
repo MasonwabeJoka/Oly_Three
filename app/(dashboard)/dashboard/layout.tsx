@@ -1,6 +1,6 @@
 import "../../globals.css";
 import styles from "./layout.module.scss";
-import { ClerkProvider } from "@clerk/nextjs";
+
 import localFont from "next/font/local";
 import { currentUser } from "@/app/temp/tempForMessages";
 import "@uploadthing/react/styles.css";
@@ -26,17 +26,15 @@ export default async function Layout({
   const sidebarItems = DashboardSidebarData;
 
   return (
-    <ClerkProvider>
-      <html lang="en" className={`${outfit.className} ${styles.html}`}>
-        <body className={styles.body}>
-          <DashboardLayoutWrapper
-            currentUser={currentUser!}
-            sidebarItems={sidebarItems}
-          >
-            {children}
-          </DashboardLayoutWrapper>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+      <body className={styles.body}>
+        <DashboardLayoutWrapper
+          currentUser={currentUser!}
+          sidebarItems={sidebarItems}
+        >
+          {children}
+        </DashboardLayoutWrapper>
+      </body>
+    </html>
   );
 }

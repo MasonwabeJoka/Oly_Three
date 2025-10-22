@@ -37,10 +37,9 @@ const EditMode = ({
     updateDetail(updatedDetail); // Call the update function with the new value
   };
 
-
   return (
     <div className={styles.editMode}>
-       <TextArea
+      <TextArea
         className={styles.editDetail}
         id="edit-detail"
         name="editDetail"
@@ -48,7 +47,7 @@ const EditMode = ({
         label="Edit Detail"
         required={true}
         hasSubmitButton={false}
-        value={updatedDetail} 
+        value={updatedDetail}
         onChange={handleChange}
         {...register("editDetail")}
         error={errors.editDetail?.message as string}

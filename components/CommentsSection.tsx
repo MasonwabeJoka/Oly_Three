@@ -1,6 +1,5 @@
 import Comment from "./Comment";
 import styles from "./CommentsSection.module.scss";
-import TextArea from "./TextArea";
 import TextAreaComponent from "./TextArea";
 
 const CommentsSection = () => {

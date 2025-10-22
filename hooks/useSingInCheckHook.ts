@@ -1,6 +1,5 @@
-import { useEffect, useCallback } from "react";
-import { useUser } from "@clerk/nextjs";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProtectedActionConfig {
   actionId: string; // Unique identifier for the action (e.g., "openChat", "startAuction")
@@ -9,35 +8,17 @@ interface ProtectedActionConfig {
 }
 
 export const useSingInCheckHook = ({ actionId, queryParam, onAction }: ProtectedActionConfig) => {
-  const { isSignedIn, isLoaded } = useUser();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  // Redirect to sign-in if user is not signed in
+  // Authentication removed - directly execute action
   const signInAndReturnUser = useCallback(() => {
-    if (!isLoaded) return;
-    if (!isSignedIn) {
-      const returnUrl = new URL(window.location.href);
-      if (queryParam) {
-        returnUrl.searchParams.set(queryParam, "true");
-      }
-      router.push(`/sign-in?redirectUrl=${encodeURIComponent(returnUrl.toString())}`);
-    } else {
-      onAction();
-    }
-  }, [isLoaded, isSignedIn, router, onAction, queryParam]);
+    onAction();
+  }, [onAction]);
 
-  // Check for query param on mount to trigger action post-sign-in
-  useEffect(() => {
-    if (!isLoaded || !isSignedIn) return;
-    if (queryParam && searchParams.get(queryParam) === "true") {
-      onAction();
-      // Clean up query param
-      const cleanUrl = new URL(window.location.href);
-      cleanUrl.searchParams.delete(queryParam);
-      router.replace(cleanUrl.toString());
-    }
-  }, [isLoaded, isSignedIn, searchParams, queryParam, onAction, router]);
-
-  return { signInAndReturnUser, isSignedIn, isLoaded };
+  // Authentication removed - always return as signed in and loaded
+  return {
+    signInAndReturnUser,
+    isSignedIn: true, // Always true since auth is removed
+    isLoaded: true    // Always true since auth is removed
+  };
 };

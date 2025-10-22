@@ -72,7 +72,7 @@ const ListingsCollage = ({
     const slugCurrent = slug?.current;
     const imageUrls =
       images
-        ?.map((image: Image) => image.url)
+        ?.map((image: Image, index) => image.url)
         .filter((url): url is string => url !== null) ?? [];
     const aspectRatios = images?.map((image: any) => image.aspectRatio);
 

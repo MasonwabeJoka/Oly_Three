@@ -9,7 +9,7 @@ export const listing = defineType({
     site: 'oly',
     isFeatured: false,
     isActive: true,
-    currency: 'USD',
+    currency: 'ZAR',
     pricingOption: 'fixed_price',
     approvedForSale: 'approved',
     postedOn: new Date().toISOString(),

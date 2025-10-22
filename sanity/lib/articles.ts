@@ -1,6 +1,7 @@
 interface NewsDataArticle {
   article_id?: string;
   id?: string;
+  creator?: string;
   title: string;
   content?: string;
   description?: string;
@@ -20,6 +21,8 @@ interface NewsDataArticle {
   tags?: string;
   sentiment?: 'positive' | 'negative' | 'neutral';
   source_id?: string;
+  source_url?: string;
+  source_icon?: string;
   is_duplicate_removed?: boolean;
 }
 
@@ -27,6 +30,7 @@ interface OlyArticle {
   _type: 'olyArticle';
   _id: string;
   articleId: string;
+  author?: string;
   title: string;
   keywords?: string[];
   content: Array<{ _type: 'block'; children: Array<{ _type: 'span'; text: string }> }>;
@@ -52,17 +56,31 @@ interface OlyArticle {
   videoUrl?: string;
   isDuplicateRemoved?: boolean;
   category?: string;
+  sourceId?: string;     
+  sourceUrl?: string;    
+  sourceIcon?: string;   
 }
 
+
 // Map NewsData.io article to Sanity schema
-export function articlesToSanity(article: NewsDataArticle, imageUrl: string | null, category: string | null): OlyArticle {
+export function articlesToSanity(
+  article: NewsDataArticle,
+  imageUrl: string | null,
+  category: string | null
+): OlyArticle {
   return {
     _type: 'olyArticle',
     _id: article.article_id || article.id || `article-${Date.now()}`,
     articleId: article.article_id || article.id || `article-${Date.now()}`,
+    author: article.creator || 'Unknown',
     title: article.title,
     keywords: article.keywords ? article.keywords.split(',').map((k) => k.trim()) : [],
-    content: [{ _type: 'block', children: [{ _type: 'span', text: article.content || article.description || '' }] }],
+    content: [
+      {
+        _type: 'block',
+        children: [{ _type: 'span', text: article.content || article.description || '' }],
+      },
+    ],
     fullContent: article.full_content
       ? [{ _type: 'block', children: [{ _type: 'span', text: article.full_content }] }]
       : undefined,
@@ -87,5 +105,8 @@ export function articlesToSanity(article: NewsDataArticle, imageUrl: string | nu
     videoUrl: article.video_url || undefined,
     isDuplicateRemoved: article.is_duplicate_removed ?? true,
     category: category || 'general',
+    sourceId: article.source_id || undefined, 
+    sourceUrl: article.source_url || undefined, 
+    sourceIcon: article.source_icon || undefined, 
   };
 }

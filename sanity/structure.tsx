@@ -160,10 +160,10 @@ export const structure: StructureResolver = (S, context) => {
           S.list()
             .title("Categories")
             .items([
-              // All categories (existing)
+             
               S.documentTypeListItem("category").title("Categories"),
 
-              // New: Featured Categories
+           
               S.listItem()
                 .title("Featured Categories")
                 .icon(FaStar)
@@ -171,9 +171,7 @@ export const structure: StructureResolver = (S, context) => {
                   S.documentList()
                     .title("Featured Categories")
                     .schemaType("category")
-                    // GROQ filter: only categories where isFeatured is true
                     .filter('_type == "category" && isFeatured == true')
-                    // Sort by featuredOrder and then title
                     .params({})
                     .defaultOrdering([
                       { field: "featuredOrder", direction: "asc" },
@@ -298,12 +296,21 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("heroSection").title(
                         "Hero Section"
                       ),
+                      S.documentTypeListItem("moreFromOlySection").title(
+                        "More from Oly Section"
+                      ),
+                      S.documentTypeListItem("featuredServicesSection").title(
+                        "Featured Services Section"
+                      ),
                       S.documentTypeListItem("Features").title("Features"),
                       S.documentTypeListItem("FeaturedListings").title(
                         "Featured Listings"
                       ),
                       S.documentTypeListItem("featuredCategoriesSection").title(
                         "Featured Categories Section"
+                      ),
+                      S.documentTypeListItem("olyArticlesSection").title(
+                        "Oly Articles Section"
                       ),
                       S.listItem()
                         .title("Sections & Layouts")
@@ -442,9 +449,7 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("FeaturedListings").title(
                         "Featured Listings"
                       ),
-                      S.documentTypeListItem("FeaturedCategories").title(
-                        "Featured Categories"
-                      ),
+                    
                       S.listItem()
                         .title("Sections & Layouts")
                         .child(

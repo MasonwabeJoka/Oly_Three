@@ -14,7 +14,7 @@ import {
   socialMediaOptions,
   otherSocialMediaPlatforms,
 } from "@/data/socialMediaPlatforms";
-import { useUser } from "@clerk/nextjs";
+// Authentication removed - no longer using Clerk
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 type FormValues = z.infer<typeof profileSchema>;
@@ -30,8 +30,12 @@ const ProfileSettings = () => {
     metadata: null as string | null,
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { user, isSignedIn, isLoaded } = useUser();
-  console.log("User:", user);
+  // Authentication removed - no longer using Clerk
+  // const { user, isSignedIn, isLoaded } = useUser();
+  // console.log("User:", user);
+  const user = null;
+  const isSignedIn = false;
+  const isLoaded = true;
 
   const {
     register,

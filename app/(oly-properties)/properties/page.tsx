@@ -1,4 +1,4 @@
-import Blogs from "@/components/Blogs";
+import Blogs from "@/components/OlyArticles";
 import styles from "./styles.module.scss";
 import FeaturedListings from "@/components/FeaturedListings";
 import SponsoredArticles from "@/components/SponsoredArticles";

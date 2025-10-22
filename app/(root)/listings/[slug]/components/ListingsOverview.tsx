@@ -17,7 +17,7 @@ interface Props {
 
 const ListingOverview = ({ listing }: Props) => {
   const { chats, setChats } = useMessageStore();
-  const [isAuction, setIsAuction] = useState(false);
+  const [isAuction, setIsAuction] = useState(true);
   const { showAuctionModal, setShowAuctionModal } = useAuctionModalStore();
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
 

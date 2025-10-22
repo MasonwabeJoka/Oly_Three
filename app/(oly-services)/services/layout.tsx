@@ -1,8 +1,7 @@
-
 import Feed from "@/components/Feed";
 import styles from "./layout.module.scss";
 import localFont from "next/font/local";
-import { ClerkProvider } from "@clerk/nextjs";
+
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
@@ -28,34 +27,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" className={`${outfit.className} ${styles.html}`}>
-        <body className={styles.body}>
-          <div className={styles.wrapper}>
-            <aside className={styles.feed}>
-              <Feed />
-            </aside>
-            <div className={styles.main}>
-              <main className={styles.children}>
-                {children}
-                <Toaster
-                  richColors
-                  toastOptions={{
-                    style: {
-                      height: "60px",
-                      padding: "32px 28px",
-                    },
-                    className: "class",
-                  }}
-                />
-              </main>
-            </div>
+    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+      <body className={styles.body}>
+        <div className={styles.wrapper}>
+          <aside className={styles.feed}>
+            <Feed />
+          </aside>
+          <div className={styles.main}>
+            <main className={styles.children}>
+              {children}
+              <Toaster
+                richColors
+                toastOptions={{
+                  style: {
+                    height: "60px",
+                    padding: "32px 28px",
+                  },
+                  className: "class",
+                }}
+              />
+            </main>
           </div>
-          <footer className={styles.footer}>
-            <Footer />
-          </footer>
-        </body>
-      </html>
-    </ClerkProvider>
+        </div>
+        <footer className={styles.footer}>
+          <Footer />
+        </footer>
+      </body>
+    </html>
   );
 }

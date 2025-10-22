@@ -1,13 +1,13 @@
 import  createClient  from '@sanity/client';
 import ClientConfig from '@/sanityTemp/config/client-config';
 import { NextRequest, NextResponse } from 'next/server';
-import { currentUser } from '@clerk/nextjs'
 
 const client = createClient(ClientConfig);
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const user = await currentUser();
+    // Authentication removed - no longer using Clerk
+    const user = null;
     const { 
         
         category, 

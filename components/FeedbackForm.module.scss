@@ -19,7 +19,7 @@
   }
 
   .control {
-    margin-bottom: rem(20);
+    margin-bottom: rem(32);
   }
 
   .nameContainer {
@@ -40,13 +40,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: rem(20);
     .errorMessage {
       margin-bottom: rem(8);
       color: $danger;
     }
     .email {
     }
+  }
+
+  .titleInputContainer {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    .errorMessage {
+      margin-bottom: rem(8);
+      color: $danger;
+    }
+    .title {
+    
+      
+    }
+
   }
 
   .messageContainer {

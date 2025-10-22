@@ -1,0 +1,38 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.options {
+  position: relative;
+  background-color: $white-four;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: rem(400);
+  overflow-y: auto;
+  margin-top: rem(-7);
+  z-index: -1;
+
+  .option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: rem(40);
+    border-radius: rem(40);
+    margin-bottom: rem(8);
+    background-color: $white-two;
+    box-shadow: $shadow-one;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $white-three;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: rem(40);
+    margin-block: rem(30);
+  }
+}

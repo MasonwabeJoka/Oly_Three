@@ -1,0 +1,39 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1440);
+  .titleTabWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    background-color: $white-four;
+    .title {
+      margin-top: rem(96);
+      margin-bottom: rem(32);
+      font-size: $h4;
+      font-weight: 500;
+      color: $danger;
+    }
+
+    .tabsContainer {
+    
+    }
+  }
+
+  .feedbackCardsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(32);
+    margin-top: rem(320);
+    margin-bottom: rem(120);
+  }
+}

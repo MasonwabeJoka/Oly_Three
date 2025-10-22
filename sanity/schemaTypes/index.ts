@@ -37,7 +37,7 @@ import { Footer } from "./documents/footer"
 import { socialMediaLink } from "./documents/socialMediaLink"
 import { Features } from "./objects/Features"
 import { FeaturedListings } from "./objects/FeaturedListings"
-import { FeaturedCategories } from "./objects/FeaturedCategories"
+// import { FeaturedCategories } from "./objects/FeaturedCategories"
 import { page } from "./documents/page"
 import { Details } from "./documents/details"
 import { imageFile } from "./documents/imageFile"
@@ -105,6 +105,8 @@ import { productSpecificationsSection } from './documents/layout/pages/listing/s
 import { sellerSection } from './documents/layout/pages/listing/sections/seller-section'
 import { similarListingsSection } from './documents/layout/pages/listing/sections/similar-listings-section'
 import {olyArticle} from "./documents/oly-article"
+import {featuredService} from "./documents/featuredService"
+import { olySite } from "./documents/olySite"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -140,7 +142,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     socialMediaLink,
     Features,
     FeaturedListings,
-    FeaturedCategories,
+    // FeaturedCategories,
     slide,
     page,
     category,
@@ -214,5 +216,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     sellerSection,
     similarListingsSection,
     olyArticle,
+    featuredService,
+    olySite,
   ],
 };

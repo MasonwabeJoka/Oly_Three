@@ -5,14 +5,14 @@ import Button from "@/components/Buttons";
 import Link from "next/link";
 
 const IsAuction = () => {
-  const { isAuction, setIsAuction } = useIsAuctionStore();
+  const { setIsAuction } = useIsAuctionStore();
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Is this an auction?</h1>
+      <h1 className={styles.title}>Want to auction your item?
+</h1>
       <p className={styles.description}>
-        Select "Yes" if you want to run an auction for your item. Select "No" if
-        you want to sell your item for a fixed price.
+       Choose 'Yes' to auction your item or 'No' to sell at a fixed price.
       </p>
       <div className={styles.buttons}>
         <Link
@@ -29,7 +29,7 @@ const IsAuction = () => {
             ariaLabel="Sale Listing Button"
             autoFocus={false}
             disabled={false}
-            onClick={() => setIsAuction(false)}
+            onClick={() => setIsAuction(true)}
             dashboard
           />
         </Link>
@@ -47,7 +47,7 @@ const IsAuction = () => {
             ariaLabel="Auction Listing Button"
             autoFocus={false}
             disabled={false}
-            onClick={() => setIsAuction(true)}
+            onClick={() => setIsAuction(false)}
             dashboard
           />
         </Link>

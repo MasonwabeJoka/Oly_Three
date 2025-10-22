@@ -64,7 +64,7 @@ export const categoriesValidations = z.object({
     "Age": z.string().optional(),
     "Environmental Impact": z.string().optional(),
     "Known Issues": z.string().optional(),
-    "Define Your Own Detail": z.string().optional(),
+    "Add Your Own Details": z.string().optional(),
   });
   
   export const 

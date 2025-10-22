@@ -151,6 +151,32 @@ const FeedbackForm = ({ title }: { title: string }) => {
           }
         />
       </div>
+      <div className={`${styles.titleInputContainer} ${styles.control}`}>
+        <p className={styles.errorMessage}>
+          {errors.title?.message || serverErrors.title}
+        </p>
+        <Input
+          legend=""
+          label="Title"
+          className={styles.titleInput}
+          inputType="text"
+          inputSize="large"
+          placeholder="Please enter a title for your feedback"
+          autoComplete="off"
+          autoFocus={false}
+          id="title"
+          name="title" // Required for FormData
+          ariaLabel="Title Field"
+          required={true}
+          {...register("title")}
+          onChange={(e) =>
+            setValue("title", e.target.value, {
+              shouldDirty: true,
+              shouldValidate: true,
+            })
+          }
+        />
+      </div>
 
       <div className={`${styles.messageContainer} ${styles.control}`}>
         <p className={styles.errorMessage}>

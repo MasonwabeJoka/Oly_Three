@@ -1,6 +1,7 @@
 import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./ListingDetails.module.scss";
 import { listingDetails } from "@/data/listingDetails";
+import BulletPoint from "../../../../../components/BulletPoint";
 type Detail = {
   id: number;
   text: string;
@@ -13,7 +14,7 @@ const ListingDetails = ({ details }: { details: Detail[] }) => {
         {details.map((detail) => (
           <li className={styles.detail} key={detail.id}>
             <div className={styles.bulletContainer}>
-              <div className={styles.bullet}></div>
+              <BulletPoint />
             </div>
 
             <div className={styles.textContainer}>

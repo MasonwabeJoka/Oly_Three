@@ -47,7 +47,7 @@ const DetailsEditMode = ({
         label="Edit Detail"
         required={true}
         hasSubmitButton={false}
-        value={updatedDetail} 
+        value={updatedDetail}
         onChange={handleChange}
         {...register("editDetail")}
         error={errors.editDetail?.message as string}
@@ -107,4 +107,3 @@ const DetailsEditMode = ({
 };
 
 export default DetailsEditMode;
-

@@ -1,9 +1,7 @@
-
-
 import { create } from "zustand";
 import { fetchImages } from "../lib/unsplash";
 import { fetchAvatars } from "../lib/unsplash";
-import { blogData } from "@/data/BlogData";
+import { articlesData } from "@/data/articleData";
 
 interface ArticleData {
   id: number;
@@ -64,7 +62,7 @@ const useArticlesStore = create<State>((set) => ({
   ],
   setData: (data: ArticleData[]) => set({ data }),
   title: [""],
-  setTitle: () => set({ title: blogData.map((element) => element.title) }),
+  setTitle: () => set({ title: articlesData.map((element) => element.title) }),
   description: "",
   setDescription: (description) => set({ description }),
   author: "",

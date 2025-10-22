@@ -50,7 +50,9 @@ export default function DashboardLayoutWrapper({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ImageKitProvider urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
+      <ImageKitProvider
+        urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+      >
         <div className={styles.wrapper} style={flexStyles}>
           {isVisible && <div className={styles.keepSidebarInPlace} />}
           {isVisible && (

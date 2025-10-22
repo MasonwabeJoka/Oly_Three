@@ -1,0 +1,94 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(656);
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: rem(40) rem(80);
+    background-color: $white-three;
+    border-radius: rem(40);
+    width: 100%;
+     min-height: rem(270);
+
+    .userContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: rem(20);
+      .profile {
+        display: flex;
+        align-items: center;
+        margin-right: rem(20);
+        .avatar {
+          margin-right: rem(12);
+        }
+
+        .profileNameContainer {
+          display: flex;
+          flex-direction: column;
+
+          .profileName {
+            font-weight: 500;
+            font-size: $body;
+
+            .fullName {
+              font-weight: 500;
+            }
+
+            .username {
+              font-weight: 300;
+            }
+          }
+
+          .commentAge {
+            font-weight: 300;
+            font-size: rem(14);
+          }
+
+          &:hover {
+            color: $black-three;
+          }
+        }
+      }
+    }
+
+    .title {
+      margin-bottom: rem(20);
+      font-weight: 500;
+    }
+    .feedback {
+      margin-bottom: rem(32);
+    }
+    .buttonContainer {
+      text-align: center;
+      width: fit-content;
+
+      .chatButton {
+        background-color: $white-two;
+        
+      }
+    }
+  }
+
+  .replyContainer {
+    margin-top: rem(32);
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+    }
+  }
+
+  .textarea {
+    padding-left: rem(80) !important;
+    padding-right: rem(88) !important;
+  }
+}

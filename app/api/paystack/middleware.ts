@@ -1,18 +1,12 @@
 
 import { NextResponse } from 'next/server';
-import { getAuth } from '@clerk/nextjs/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  // Get user authentication information
-  const { userId } = getAuth(req);
+  // Authentication removed - allowing all requests
+  // You may want to implement alternative authentication here
 
-  // If user is not authenticated, redirect to login page
-  if (!userId) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
-
-  // Allow the request to proceed if user is authenticated
+  // Allow all requests to proceed
   return NextResponse.next();
 }
 

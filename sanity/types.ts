@@ -6231,7 +6231,7 @@ export type AllSanitySchemaTypes = MessageReply | ServiceProvider | RecruitmentA
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/crud/categories/data.ts
 // Variable: categoriesQuery
-// Query: *[_type == "category" ][0]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
+// Query: *[_type == "category" && level == 0][1]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
 export type CategoriesQueryResult = {
   title: string | null;
   categories: Array<{
@@ -6278,6 +6278,33 @@ export type FeaturedListingsQueryResult = Array<never>;
 // Variable: featuredListingsCountQuery
 // Query: count(*[_type == "listing" && defined(slug.current) && isFeatured == true])
 export type FeaturedListingsCountQueryResult = number;
+
+// Source: sanity/lib/crud/featuredServicesSection/data.ts
+// Variable: featuredServicesSectionQuery
+// Query: *[_type == "featuredServicesSection"][0] {    _id,    _type,    title,    "services": coalesce(services[]{      callToAction,      description,      "features": coalesce(features[]{        text      }, []),      layout,      "path": callToAction.url,      "serviceTitle": title    }, [])  }
+export type FeaturedServicesSectionQueryResult = {
+  _id: string;
+  _type: "featuredServicesSection";
+  title: string | null;
+  services: Array<{
+    callToAction: {
+      text?: string;
+      url?: string;
+      style?: "ghost" | "outline" | "primary" | "secondary";
+      openInNewTab?: boolean;
+    } | null;
+    description: string | null;
+    features: Array<{
+      text: string | null;
+    }> | Array<never>;
+    layout: {
+      contentPosition?: "center-content" | "left-content" | "right-content";
+      contentWidth?: "40-60" | "50-50" | "60-40";
+    } | null;
+    path: string | null;
+    serviceTitle: string | null;
+  }> | Array<never>;
+} | null;
 
 // Source: sanity/lib/crud/listing/data.ts
 // Variable: listingQuery
@@ -6427,6 +6454,20 @@ export type ListingsQueryResult = Array<{
 // Variable: listingsCountQuery
 // Query: count(*[_type == "listing" && defined(slug.current)    && ($searchTerm == "" || title match $searchTerm || description match $searchTerm)    && ($locationSearch == "" || user->address->city match $locationSearch                               || user->address->suburb match $locationSearch                               || user->address->cityAbbreviation match $locationSearch)  ])
 export type ListingsCountQueryResult = number;
+
+// Source: sanity/lib/crud/moreFromOly/data.ts
+// Variable: moreFromOlyQuery
+// Query: *[_type == "moreFromOlySection"][0] {  title,  "sites": coalesce(sites[]{    _id,    _type,    name,    url,    "imageUrl": backgroundImage.asset->url  }, [])}
+export type MoreFromOlyQueryResult = {
+  title: string | null;
+  sites: Array<{
+    _id: null;
+    _type: "networkSite";
+    name: string | null;
+    url: string | null;
+    imageUrl: string | null;
+  }> | Array<never>;
+} | null;
 
 // Source: sanity/lib/crud/pages/oly-homepage/data.ts
 // Variable: olyHomepageQuery
@@ -6664,14 +6705,16 @@ export type UserQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"category\" ][0]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
+    "*[_type == \"category\" && level == 0][1]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
     "\n  *[_type == \"featuredCategoriesSection\" && isActive == true][0] {\n    _id,\n    title,\n    callToAction,\n    featuredCategories[]{\n        _key,\n        isActive,\n        sortOrder,\n        featuredPriority,\n        overrideTitle,\n        overrideUrl,\n        overrideImage,\n        \"category\": categoryRef->{\n        _id,\n        title,\n        slug,\n        path,\n        \"image\": image.asset->url,\n        isActive,\n        order\n        },\n        // computed displayTitle - prefer overrideTitle, then referenced title, else blank\n        \"displayTitle\": coalesce(overrideTitle, categoryRef->title),\n        // computed displayImage - prefer overrideImage, then referenced image\n        \"displayImage\": coalesce(overrideImage, categoryRef->image.asset->url)\n    }\n  }\n": FeaturedCategoriesSectionQueryResult;
     "\n  *[_type == \"listing\" && defined(slug.current) && isFeatured == true]\n  | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }\n": FeaturedListingsQueryResult;
     "\n  count(*[_type == \"listing\" && defined(slug.current) && isFeatured == true])\n": FeaturedListingsCountQueryResult;
+    "\n  *[_type == \"featuredServicesSection\"][0] {\n    _id,\n    _type,\n    title,\n    \"services\": coalesce(services[]{\n      callToAction,\n      description,\n      \"features\": coalesce(features[]{\n        text\n      }, []),\n      layout,\n      \"path\": callToAction.url,\n      \"serviceTitle\": title\n    }, [])\n  }\n": FeaturedServicesSectionQueryResult;
     "*[_type == \"listing\" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    price,\n    pricingOption,\n    description,\n    site,\n    postedOn,\n    expiresAt,\n    location,\n    details,\n    category->{\n      _id,\n      title,\n      slug\n    },\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation\n    },\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }": ListingQueryResult;
     "*[_type == \"listing\" && _id == $id][0]{\n    _id,\n  views,\n}": ListingViewsQueryResult;
     "\n  *[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ] | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    }\n  }\n": ListingsQueryResult;
     "\n  count(*[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ])\n": ListingsCountQueryResult;
+    "*[_type == \"moreFromOlySection\"][0] {\n  title,\n  \"sites\": coalesce(sites[]{\n    _id,\n    _type,\n    name,\n    url,\n    \"imageUrl\": backgroundImage.asset->url\n  }, [])\n}": MoreFromOlyQueryResult;
     "*[_type == \"olyHomepage\" && isActive == true][0] {\n  _id,\n  _type,\n  title,\n  publishedAt,\n  isActive,\n  adSection,\n  topAdSection,\n  bottomAdSection,\n  featuredCategoriesSection,\n  featuredListingsSection,\n  featuredServicesSection,\n  heroSection,\n  moreFromOlySection,\n  olyArticlesSection,\n  sponsoredArticlesSection,\n}": OlyHomepageQueryResult;
     "\n  *[_type == \"listing\" && \n    defined(slug.current) && \n    isActive == true && \n    approvedForSale == \"approved\" &&\n    _id != $currentListingId &&\n    (\n      category._ref == $categoryRef ||\n      (price >= $minPrice && price <= $maxPrice) ||\n      user->address->city == $userCity\n    )\n  ] | order(postedOn desc) [0...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    category->{\n      _id,\n      title,\n      slug\n    },\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    },\n  }\n": SimilarListingsQueryResult;
     "\n        *[_type == \"listing\" && \n          defined(slug.current) && \n          isActive == true && \n          approvedForSale == \"approved\" &&\n          _id != $currentListingId\n        ] | order(postedOn desc) [0...$remainingLimit]{\n          _id,\n          user->{\n            _id,\n            firstName,\n            lastName,\n            fullName,\n            \"profileImage\": profileImage.asset->url,\n            \"city\": address->city,\n            \"suburb\": address->suburb,\n            \"cityAbbr\": address->cityAbbreviation,\n          },\n          title,\n          slug,\n          description,\n          price,\n          priceOption,\n          postedOn,\n          \"images\": images[]->{\n            \"alt\": image.alt,\n            \"id\": image.asset->_id,\n            \"url\": image.asset->url,\n            \"width\": image.asset->metadata.dimensions.width,\n            \"height\": image.asset->metadata.dimensions.height,\n            \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n          },\n        }\n      ": RecentListingsQueryResult;

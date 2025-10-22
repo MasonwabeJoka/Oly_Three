@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const olyArticle = defineType({
   name: 'olyArticle',
@@ -13,6 +13,12 @@ export const olyArticle = defineType({
       validation: Rule => Rule.required().error('Article ID is required'),
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      description: 'Article author or creator',
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -23,7 +29,7 @@ export const olyArticle = defineType({
       name: 'keywords',
       title: 'Keywords',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Searchable keywords for the article, derived from q parameter',
       validation: Rule => Rule.max(512).error('Keywords must be 512 characters or less in total'),
     }),
@@ -31,7 +37,7 @@ export const olyArticle = defineType({
       name: 'content',
       title: 'Content',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
       description: 'Article content snippet, searchable via q, as Portable Text',
       validation: Rule => Rule.required().error('Content is required'),
     }),
@@ -39,7 +45,7 @@ export const olyArticle = defineType({
       name: 'fullContent',
       title: 'Full Content',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
       description: 'Full article content, included if full_content=1, as Portable Text',
     }),
     defineField({
@@ -53,7 +59,7 @@ export const olyArticle = defineType({
       name: 'metaKeywords',
       title: 'Meta Keywords',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Meta keywords, searchable via q or qInMeta',
       validation: Rule => Rule.max(512).error('Meta keywords must be 512 characters or less in total'),
     }),
@@ -93,7 +99,7 @@ export const olyArticle = defineType({
       name: 'language',
       title: 'Language',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Languages of the article, up to 5, e.g., fr, en',
       validation: Rule => Rule.max(5).error('Maximum 5 languages allowed'),
     }),
@@ -101,7 +107,7 @@ export const olyArticle = defineType({
       name: 'coins',
       title: 'Coins',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Associated crypto coins, up to 5, e.g., btc, eth',
       validation: Rule => Rule.max(5).error('Maximum 5 coins allowed'),
     }),
@@ -109,7 +115,7 @@ export const olyArticle = defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'AI-classified tags, up to 5, e.g., blockchain',
       validation: Rule => Rule.max(5).error('Maximum 5 tags allowed'),
     }),
@@ -120,19 +126,19 @@ export const olyArticle = defineType({
       description: 'Sentiment of the article (positive, negative, neutral)',
       options: {
         list: [
-          {title: 'Positive', value: 'positive'},
-          {title: 'Negative', value: 'negative'},
-          {title: 'Neutral', value: 'neutral'},
+          { title: 'Positive', value: 'positive' },
+          { title: 'Negative', value: 'negative' },
+          { title: 'Neutral', value: 'neutral' },
         ],
       },
       validation: Rule =>
-        Rule.custom(value => ['positive', 'negative', 'neutral'].includes(value) || 'Sentiment must be positive, negative, or neutral'),
+        Rule.custom(value => !value || ['positive', 'negative', 'neutral'].includes(value) || 'Sentiment must be positive, negative, or neutral'),
     }),
     defineField({
       name: 'domain',
       title: 'Domain',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Source domains, up to 5, e.g., nytimes, bbc',
       validation: Rule => Rule.max(5).error('Maximum 5 domains allowed'),
     }),
@@ -140,15 +146,36 @@ export const olyArticle = defineType({
       name: 'domainUrl',
       title: 'Domain URL',
       type: 'array',
-      of: [{type: 'url'}],
+      of: [{ type: 'url' }],
       description: 'Source domain URLs, up to 5, e.g., nytimes.com',
       validation: Rule => Rule.max(5).error('Maximum 5 domain URLs allowed'),
     }),
+
+    // ✅ Newly Added Source Fields
+    defineField({
+      name: 'sourceId',
+      title: 'Source ID',
+      type: 'string',
+      description: 'Unique source identifier from NewsData.io (source_id)',
+    }),
+    defineField({
+      name: 'sourceUrl',
+      title: 'Source URL',
+      type: 'url',
+      description: 'Base website URL of the source (source_url)',
+    }),
+    defineField({
+      name: 'sourceIcon',
+      title: 'Source Icon',
+      type: 'url',
+      description: 'Favicon or logo URL of the source (source_icon)',
+    }),
+
     defineField({
       name: 'excludedDomain',
       title: 'Excluded Domain',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       description: 'Domains to exclude, up to 5, e.g., nytimes.com',
       validation: Rule => Rule.max(5).error('Maximum 5 excluded domains allowed'),
     }),
@@ -159,12 +186,13 @@ export const olyArticle = defineType({
       description: 'Priority level of domains (top, medium, low)',
       options: {
         list: [
-          {title: 'Top', value: 'top'},
-          {title: 'Medium', value: 'medium'},
-          {title: 'Low', value: 'low'},
+          { title: 'Top', value: 'top' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Low', value: 'low' },
         ],
       },
-      validation: Rule => Rule.custom(value => !value || ['top', 'medium', 'low'].includes(value) || 'Priority must be top, medium, or low'),
+      validation: Rule =>
+        Rule.custom(value => !value || ['top', 'medium', 'low'].includes(value) || 'Priority must be top, medium, or low'),
     }),
     defineField({
       name: 'hasImage',

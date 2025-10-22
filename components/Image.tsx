@@ -7,7 +7,8 @@ import { ComponentProps } from "react";
 type IKImageProps = ComponentProps<typeof IKImage>;
 
 interface OlyImageProps extends Omit<IKImageProps, "src"> {
-  src: string | null | undefined;
+  // src: string | null | undefined;
+  src: string | { url(): string } | null | undefined;
 }
 
 const Image = ({ src, transformation, ...props }: OlyImageProps) => {
@@ -17,20 +18,35 @@ const Image = ({ src, transformation, ...props }: OlyImageProps) => {
     return null;
   }
 
-  if (!endpoint) {
-    // If endpoint not set, treat all as external
-    return <NextImage src={src} {...props} />;
+  // Convert Sanity image builder to string if needed
+  let srcString: string;
+  if (typeof src === 'string') {
+    srcString = src;
+  } else {
+    try {
+      srcString = src.url();
+    } catch {
+      return null;
+    }
+  }
+  
+  if (!srcString) {
+    return null;
   }
 
-  const isImageKitUrl = src.startsWith(endpoint);
-  const finalSrc = isImageKitUrl ? src.replace(endpoint, "") : src;
+  if (!endpoint) {
+    return <NextImage src={srcString} {...props} />;
+  }
+
+  const isImageKitUrl = srcString.startsWith(endpoint);
+  const finalSrc = isImageKitUrl ? srcString.replace(endpoint, "") : srcString;
 
   if (isImageKitUrl) {
     return <IKImage src={finalSrc} transformation={transformation} {...props} />;
   } else {
-    // Use Next.js Image for external URLs
     return <NextImage src={finalSrc} {...props} />;
   }
 };
+
 
 export default Image;

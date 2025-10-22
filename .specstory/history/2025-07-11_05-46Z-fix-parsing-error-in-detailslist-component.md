@@ -8,27 +8,27 @@ _**User (2025-07-11 05:46Z)**_
 
 I am getting this error, please fix it Error: ./app/(dashboard)/dashboard/post-your-ad/components/DetailsList.tsx:34:1
 Parsing ecmascript source code failed
-[0m [90m 32 |[39m   errors[33m,[39m
- [90m 33 |[39m   watch[33m,[39m
+[0m [90m 32 |[39m errors[33m,[39m
+[90m 33 |[39m watch[33m,[39m
 [31m[1m>[22m[39m[90m 34 |[39m )[33m:[39m [33mDetailsListProps[39m) [33m=>[39m (
- [90m    |[39m [31m[1m^[22m[39m
- [90m 35 |[39m   [33m<[39m[33mul[39m className[33m=[39m{[32m`${styles.details} ${details.length > 0 ? styles.open : ''}`[39m}[33m>[39m
- [90m 36 |[39m     {details[33m.[39mmap((detail[33m,[39m index) [33m=>[39m
- [90m 37 |[39m       editIndex [33m!==[39m index [33m?[39m ([0m
+[90m |[39m [31m[1m^[22m[39m
+[90m 35 |[39m [33m<[39m[33mul[39m className[33m=[39m{[32m`${styles.details} ${details.length > 0 ? styles.open : ''}`[39m}[33m>[39m
+[90m 36 |[39m {details[33m.[39mmap((detail[33m,[39m index) [33m=>[39m
+[90m 37 |[39m editIndex [33m!==[39m index [33m?[39m ([0m
 
 Unexpected token `)`. Expected identifier, string literal, numeric literal or [ for the computed key
-    at BuildError (http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__16ba2972._.js:17359:41)
-    at renderWithHooks (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:13260:28)
-    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:16755:32)
-    at beginWork (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:18388:32)
-    at beginWork$1 (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:23101:28)
-    at performUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22402:24)
-    at workLoopSync (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22331:17)
-    at renderRootSync (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22308:21)
-    at performConcurrentWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:21732:84)
-    at workLoop (http://localhost:3000/_next/static/chunks/node_modules_3bfdc6a4._.js:291:48)
-    at flushWork (http://localhost:3000/_next/static/chunks/node_modules_3bfdc6a4._.js:270:28)
-    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/node_modules_3bfdc6a4._.js:498:35)
+at BuildError (http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D\_\_16ba2972._.js:17359:41)
+at renderWithHooks (http://localhost:3000/_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:13260:28)
+at updateFunctionComponent (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:16755:32)
+at beginWork (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:18388:32)
+at beginWork$1 (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:23101:28)
+at performUnitOfWork (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22402:24)
+at workLoopSync (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22331:17)
+at renderRootSync (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:22308:21)
+at performConcurrentWorkOnRoot (http://localhost:3000/\_next/static/chunks/node_modules_react-dom_cjs_react-dom_development_ab7e073c.js:21732:84)
+at workLoop (http://localhost:3000/\_next/static/chunks/node_modules_3bfdc6a4._.js:291:48)
+at flushWork (http://localhost:3000/_next/static/chunks/node_modules_3bfdc6a4._.js:270:28)
+at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/node_modules_3bfdc6a4._.js:498:35)
 
 ---
 
@@ -89,7 +89,6 @@ I will make this correction for you.
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/DetailsList.tsx</summary>
 
 Fix the function component props type annotation to use the correct TypeScript syntax for DetailsList.
@@ -120,36 +119,40 @@ _**User (2025-07-11 05:46Z)**_
 I am getting this error: Error: In HTML, <form> cannot be a descendant of <form>.
 This will cause a hydration error.
 
-  ...
-    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-      <RedirectBoundary>
-        <RedirectErrorBoundary router={{...}}>
-          <InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
-            <PostYourAd>
-              <div className="styles-mod...">
-                <div>
-                  <PostYourAdClient initialFormData={{category:{...}, ...}} steps={[...]}>
-                    <FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
-                      <Details>
-                        <DetailsClient conditions={[...]} detailsTitles={[...]} detailsData={[...]}>
-                          <FormWrapper error={undefined} selectOpen={false}>
-                            <div className="FormWrappe...">
-                              <Form onSubmit={function} action={undefined} className="FormWrappe...">
+...
+<HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+<RedirectBoundary>
+<RedirectErrorBoundary router={{...}}>
+<InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+<PostYourAd>
+<div className="styles-mod...">
+<div>
+<PostYourAdClient initialFormData={{category:{...}, ...}} steps={[...]}>
+<FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
+<Details>
+<DetailsClient conditions={[...]} detailsTitles={[...]} detailsData={[...]}>
+<FormWrapper error={undefined} selectOpen={false}>
+<div className="FormWrappe...">
+<Form onSubmit={function} action={undefined} className="FormWrappe...">
+
 >                               <form
 >                                 onSubmit={function}
 >                                 action={undefined}
 >                                 className="FormWrapper-module-scss-module__V89Uzq__form"
 >                                 ref={function}
 >                               >
+
                                   <div className="FormWrappe..." ref={{current:null}}>
                                     <div className="DetailsCli...">
                                       <h2>
                                       <Form className="DetailsCli..." action={function mockServerAction}>
+
 >                                       <form
 >                                         className="DetailsClient-module-scss-module__tVEAeq__form"
 >                                         action={function mockServerAction}
 >                                         ref={function}
 >                                       >
+
                                   ...
                               ...
             ...
@@ -328,16 +331,19 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/DetailsClient.tsx
 You are correct: the error is because `<FormWrapper>` renders a `<Form>` (which is a form element), and inside `DetailsClient`, you are also rendering another `<Form>`. This results in a nested `<form>`, which is invalid in HTML and causes hydration errors in React/Next.js.
 
 **How to fix:**
+
 - Only one `<form>` element should be present in the rendered tree for a given section.
 - The parent (`FormWrapper`) should render the `<form>`, and all children should only render form fields and controls, not another `<form>`.
 
 **What to do:**
+
 - In `DetailsClient.tsx`, remove the inner `<Form>` and move its props (like `onSubmit`, `className`, etc.) to the `<FormWrapper>` if needed.
 - Render only the form fields and controls inside `FormWrapper`, not another `<Form>`.
 
 **Example Fix:**
 
 1. In `DetailsClient.tsx`, replace:
+
    ```tsx
    <FormWrapper ...>
      ...
@@ -346,7 +352,9 @@ You are correct: the error is because `<FormWrapper>` renders a `<Form>` (which 
      </Form>
    </FormWrapper>
    ```
+
    with:
+
    ```tsx
    <FormWrapper ...>
      ...fields...
@@ -364,35 +372,39 @@ _**User (2025-07-11 05:46Z)**_
 Error: In HTML, <form> cannot be a descendant of <form>.
 This will cause a hydration error.
 
-  ...
-    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
-      <RedirectBoundary>
-        <RedirectErrorBoundary router={{...}}>
-          <InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
-            <PostYourAd>
-              <div className="styles-mod...">
-                <div>
-                  <PostYourAdClient initialFormData={{category:{...}, ...}} steps={[...]}>
-                    <FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
-                      <Details>
-                        <DetailsClient conditions={[...]} detailsTitles={[...]} detailsData={[...]}>
-                          <FormWrapper error={undefined} selectOpen={false}>
-                            <div className="FormWrappe...">
-                              <Form onSubmit={function} action={undefined} className="FormWrappe...">
+...
+<HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+<RedirectBoundary>
+<RedirectErrorBoundary router={{...}}>
+<InnerLayoutRouter url="/dashboard..." tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+<PostYourAd>
+<div className="styles-mod...">
+<div>
+<PostYourAdClient initialFormData={{category:{...}, ...}} steps={[...]}>
+<FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
+<Details>
+<DetailsClient conditions={[...]} detailsTitles={[...]} detailsData={[...]}>
+<FormWrapper error={undefined} selectOpen={false}>
+<div className="FormWrappe...">
+<Form onSubmit={function} action={undefined} className="FormWrappe...">
+
 >                               <form
 >                                 onSubmit={function}
 >                                 action={undefined}
 >                                 className="FormWrapper-module-scss-module__V89Uzq__form"
 >                                 ref={function}
 >                               >
+
                                   ...
                                     <SelectedDetail id={1} initialValue="See a list..." detail="Reason for..." ...>
                                       <Form className="SelectedDe..." action={function mockServerAction}>
+
 >                                       <form
 >                                         className="SelectedDetail-module-scss-module__tIRFca__form"
 >                                         action={function mockServerAction}
 >                                         ref={function}
 >                                       >
+
                                   ...
                               ...
             ...
@@ -434,7 +446,8 @@ Read file: app/(dashboard)/dashboard/post-your-ad/components/SelectedDetail.tsx
 
 ---
 
-The root cause of your error is confirmed:  
+The root cause of your error is confirmed:
+
 - Both `FormWrapper` and `SelectedDetail` render a `<Form>` (which is a `<form>` element).
 - When `SelectedDetail` is used inside `FormWrapper`, this creates a nested `<form>`, which is invalid in HTML and causes hydration errors in React/Next.js.
 
@@ -447,10 +460,12 @@ The root cause of your error is confirmed:
 ### Solution Options
 
 #### Option 1: Remove `<Form>` from `SelectedDetail`
+
 - Make `SelectedDetail` render only form fields and controls, not a `<Form>`.
 - The parent `FormWrapper` should be responsible for the `<form>` element.
 
 #### Option 2: Render `SelectedDetail` outside of `FormWrapper`
+
 - If `SelectedDetail` must have its own `<form>`, do not render it inside `FormWrapper` (which already renders a `<form>`).
 
 ---
@@ -458,6 +473,7 @@ The root cause of your error is confirmed:
 ### Recommended Fix
 
 **Option 1 is best for multi-step forms:**
+
 - Remove the `<Form>` from `SelectedDetail.tsx`.
 - Let `FormWrapper` handle the `<form>`.
 - Move any `onSubmit` logic for the detail to the parent, and pass it as a prop if needed.
@@ -467,6 +483,7 @@ The root cause of your error is confirmed:
 ## Next Steps
 
 Would you like me to:
+
 - Refactor `SelectedDetail.tsx` to remove the `<Form>` and make it a pure form field component?
 - Or do you want to discuss another approach?
 
@@ -483,7 +500,6 @@ yes
 _**Assistant**_
 
 Tool use: **edit_file**
-
 
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/components/SelectedDetail.tsx</summary>
 
@@ -518,14 +534,14 @@ Lines added: 95, lines removed: 99
 -               style={{
 -                 marginBottom: placeholder
 -                   ? 0
--                   : detail === "Define Your Own Detail"
+-                   : detail === "Add Your Own Details"
 -                     ? "0.5rem"
 -                     : "1.25rem",
 -               }}
 -             >
 -               {description}
 -             </p>
--             {detail === "Define Your Own Detail" && (
+-             {detail === "Add Your Own Details" && (
 -               <p
 -                 className={styles.selectedDetailExample}
 -                 style={{ marginBottom: "1.25rem" }}
@@ -613,14 +629,14 @@ Lines added: 95, lines removed: 99
 +             style={{
 +               marginBottom: placeholder
 +                 ? 0
-+                 : detail === "Define Your Own Detail"
++                 : detail === "Add Your Own Details"
 +                   ? "0.5rem"
 +                   : "1.25rem",
 +             }}
 +           >
 +             {description}
 +           </p>
-+           {detail === "Define Your Own Detail" && (
++           {detail === "Add Your Own Details" && (
 +             <p
 +               className={styles.selectedDetailExample}
 +               style={{ marginBottom: "1.25rem" }}
@@ -705,4 +721,3 @@ You can now use `SelectedDetail` inside `FormWrapper` (or any parent form) witho
 Please test your app again. If you encounter any further issues or need additional adjustments, let me know!
 
 ---
-

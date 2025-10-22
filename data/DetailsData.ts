@@ -190,8 +190,8 @@ export const DetailsData: Detail[] = [
 
     {
         id: 31,
-        detail: "Define Your Own Detail",
-        description: "If you use a colon (:) to separate the label from the value, the label will be displayed in bold to make key details stand out.",
+        detail: "Add Your Own Details",
+        description: "Put a colon (:) between the detail and description to show the detail in bold for clarity.",
         example: "Title: Your detail here."
     },
 ];

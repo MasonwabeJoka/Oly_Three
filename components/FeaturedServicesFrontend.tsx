@@ -3,6 +3,7 @@ import styles from "./FeaturedServicesFrontend.module.scss";
 import Button from "@/components/Buttons";
 import useFeatureInfo from "@/store/featuresInfo";
 import useBreakpointStore from "@/store/useBreakpointStore";
+import BulletPoint from "@/components/BulletPoint";
 
 type Props = {
   layout: "textLeft" | "textRight";
@@ -12,7 +13,7 @@ type Props = {
   description: string;
   cta: string;
   features: {
-    id: number;
+    id: string;
     feature: string;
   }[];
 };
@@ -97,14 +98,9 @@ export const TextLeft = ({
           <ul className={styles.features}>
             {features.map((feature) => {
               return (
-                <li className={styles.feature} key={`textRight ${feature.id}`}>
-                  <div className={styles.featureIcon}>
-                    <Image
-                      src="/icons/check-circle.svg"
-                      alt="Check"
-                      width={24}
-                      height={24}
-                    />
+                <li className={styles.feature} key={`textLeft-${feature.id}`}>
+                  <div className={styles.bullet}>
+                    <BulletPoint />
                   </div>
                   {feature && <p>{feature.feature}</p>}
                 </li>
@@ -167,15 +163,10 @@ export const TextRight = ({
                 return (
                   <li
                     className={styles.feature}
-                    key={`textRight ${feature.id}`}
+                    key={`textRight-${feature.id}`}
                   >
-                    <div className={styles.featureIcon}>
-                      <Image
-                        src="/icons/check-circle.svg"
-                        alt="Check"
-                        width={24}
-                        height={24}
-                      />
+                    <div className={styles.bullet}>
+                      <BulletPoint />
                     </div>
                     {feature && <p>{feature.feature}</p>}
                   </li>
@@ -217,14 +208,9 @@ export const TextLeftTablet = ({
           <ul className={styles.features}>
             {features.map((feature) => {
               return (
-                <li className={styles.feature} key={`textRight ${feature.id}`}>
-                  <div className={styles.featureIcon}>
-                    <Image
-                      src="/icons/check-circle.svg"
-                      alt="Check"
-                      width={24}
-                      height={24}
-                    />
+                <li className={styles.feature} key={`textLeftTablet-${feature.id}`}>
+                  <div className={styles.bullet}>
+                    <BulletPoint />
                   </div>
                   {feature && <p>{feature.feature}</p>}
                 </li>
