@@ -47,13 +47,13 @@ export default function Listings({ listings, site }: ListingsClientProps) {
   const { avatars, getAvatars } = useArticlesStore();
   const { showMenuModal, setShowMenuModal } = useModalStore();
   const { currentScreenSize } = useBreakpoint();
-  const filtersRef = useRef<HTMLDivElement>(null);
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [activeFilterOptions, setActiveFilterOptions] = useState<number | null>(
     null
   );
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const listingsRef = useRef<HTMLDivElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
   const resultsToolbarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -161,8 +161,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
     const filterLabels = filters.map((filter) => filter.filterLabel);
 
     if (showMoreFilters) {
-      filterLabels.splice(3, 0, "More Filters +");
-      return filterLabels;
+      return [...filterLabels, "Less Filters -"];
     } else {
       const visibleFilters = filterLabels.slice(0, 3);
       visibleFilters.push("More Filters +");
@@ -172,28 +171,26 @@ export default function Listings({ listings, site }: ListingsClientProps) {
 
   const handleMoreFiltersClick = () => {
     setShowMoreFilters(!showMoreFilters);
-    setActiveFilterOptions(null); 
+    setActiveFilterOptions(null);
   };
 
   const createFilterClickHandlers = (site: string) => {
     const currentFilters = filters(site);
 
     return currentFilters.map((filterLabel: string, index: number) => {
-      if (filterLabel === "More Filters +") {
+      if (filterLabel === "More Filters +" || filterLabel === "Less Filters -") {
         return handleMoreFiltersClick;
       }
-
 
       let actualFilterIndex = index;
 
       if (showMoreFilters) {
-
-        if (index > 3) {
-          actualFilterIndex = index - 1;
+        // When showing more filters, all are actual filters except the last one
+        if (index === currentFilters.length - 1) {
+          return () => {};
         }
-
       } else {
-
+        // When not showing more filters, only first 3 are actual filters
         if (index >= 3) {
           return () => {};
         }
@@ -221,7 +218,18 @@ export default function Listings({ listings, site }: ListingsClientProps) {
     return null;
   };
 
-  useOnClickOutside(resultsToolbarRef, handleClickOutsideResultsToolbar);
+  useOnClickOutside(filtersRef as React.RefObject<HTMLElement>, () => {
+    setActiveFilterOptions(null);
+    setShowMoreFilters(false);
+  });
+
+  useOnClickOutside(resultsToolbarRef as React.RefObject<HTMLElement>, (event) => {
+    if (filtersRef.current && filtersRef.current.contains(event.target as Node)) {
+      return;
+    }
+    setSortOptions(false);
+    setPriceOptions(false);
+  });
 
   const renderOptions = (options: any[]) => {
     if (!options || options.length === 0) return null;
@@ -287,7 +295,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
               />
               {renderFilterOptions()}
             </div>
-            <div className={styles.resultsToolbar}>
+            <div className={styles.resultsToolbar} ref={resultsToolbarRef}>
               <Tabs
                 tabs={[
                   "Order",
@@ -306,7 +314,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
               {renderResultsOptions()}
             </div>
           </div>
-          <div className={styles.listings} ref={listingsRef}>
+          <div className={styles.listings} >
             <ListingsClient
               category="all"
               listings={listings}
