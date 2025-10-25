@@ -1,26 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  experimental: {
-    optimizePackageImports: ["@phosphor-icons/react"],
-    serverActions: {
-      allowedOrigins: ["localhost:3000"],
-    },
-  },
-
+  cacheComponents: true, 
   serverExternalPackages: ["mongoose"],
-
   sassOptions: {
     api: "modern-compiler",
     silenceDeprecations: ["legacy-js-api"],
+    includePaths: ['./styles'],
   },
-
-  devIndicators: {
-    pprIsrStatus: true,
-    position: "bottom-right",
-  },
-
-  // Single images configuration block
   images: {
     remotePatterns: [
       {
@@ -44,7 +31,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "fastly.picsum.photos",
       },
-
       {
         protocol: "https",
         hostname: "uploadthing.com",
@@ -70,8 +56,13 @@ const nextConfig = {
         hostname: "oly-images.gumlet.io",
       },
     ],
+    localPatterns: [
+      {
+        pathname: '/assets/**',
+        search: '?*', // Add if using query strings
+      },
+    ],
   },
-
   distDir: "build",
 };
 

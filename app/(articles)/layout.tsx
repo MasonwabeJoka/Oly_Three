@@ -22,7 +22,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
       <body className={styles.body}>
         <LayoutWrapper>
           <div className={styles.wrapper}>

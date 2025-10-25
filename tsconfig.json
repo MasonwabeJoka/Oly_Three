@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2020", 
+    "target": "es2020",
     "downlevelIteration": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "allowImportingTsExtensions": true,
     "skipLibCheck": true,
@@ -15,13 +19,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "jsxFactory": "React.createElement",
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*", "./sanity/*"]
-    },
+      "@/*": [
+        "./*",
+        "./sanity/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",
@@ -51,8 +62,12 @@
     "store/unsplashStore.tsx",
     "tailwind.config.js",
     "video.d.ts",
-    "build/types/**/*.ts"
-, "utils/imageloader.ts"  ],
+    "build/types/**/*.ts",
+    "utils/imageloader.ts",
+    "build\\dev/types/**/*.ts",
+    "build\\dev/types/**/*.ts",
+    "build/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

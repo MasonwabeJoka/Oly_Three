@@ -30,7 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+    <html
+      lang="en"
+      className={`${outfit.className} ${styles.html}`}
+      data-scroll-behavior="smooth"
+    >
       <body className={`${outfit.variable} ${styles.body}`}>
         <LayoutWrapper>
           <div className={styles.wrapper}>

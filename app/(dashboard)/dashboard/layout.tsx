@@ -26,7 +26,7 @@ export default async function Layout({
   const sidebarItems = DashboardSidebarData;
 
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+    <html lang="en" className={`${outfit.className} ${styles.html}`} >
       <body className={styles.body}>
         <DashboardLayoutWrapper
           currentUser={currentUser!}

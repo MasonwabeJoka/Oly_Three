@@ -28,7 +28,7 @@ export default function OlyShopsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={outfit.variable}>
+    <html lang="en" className={outfit.variable} data-scroll-behavior="smooth">
       <body className={`${styles.body} ${outfit.className}`}>
         <div className={styles.container}>
           <Navbar />

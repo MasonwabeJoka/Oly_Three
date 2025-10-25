@@ -4,7 +4,7 @@ export default function StudioLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html data-scroll-behavior="smooth">
       <head>
         <style>{`
           /* Reset only for studio */

@@ -1,12 +1,6 @@
-import styles from "./Emojis.module.scss";
-import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
-const Emojis =() => {
-    return (
-        <div>
-           <Picker data={data} onEmojiSelect={console.log} />
-        </div>
-    );
+import EmojiPicker from "emoji-picker-react";
+const Emojis = () => {
+  return <EmojiPicker />;
 };
 
 export default Emojis;

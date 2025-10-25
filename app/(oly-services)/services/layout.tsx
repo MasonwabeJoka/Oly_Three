@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`}>
+    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
       <body className={styles.body}>
         <div className={styles.wrapper}>
           <aside className={styles.feed}>

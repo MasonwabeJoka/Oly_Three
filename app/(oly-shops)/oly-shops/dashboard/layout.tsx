@@ -21,7 +21,7 @@ export default async function Layout({
 }) {
   const sidebarItems = StoreDashboardSidebarData;
   return (
-    <html lang="en" className={`${outfit.className}`}>
+    <html lang="en" className={`${outfit.className}`} data-scroll-behavior="smooth">
       <body>
         <DashboardLayoutWrapper
           currentUser={currentUser!}
