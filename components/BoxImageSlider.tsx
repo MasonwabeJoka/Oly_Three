@@ -84,7 +84,6 @@ const ImageSlider = ({
   const swiperStyles = {
     width: category === "property" ? "24.21875rem" : "19.375rem",
   };
-  const testArray = [0.7, 1.7, 1];
   const swiperSlideHeight = (index: number) => {
     if (category === "property") {
       return "13.623046875rem";

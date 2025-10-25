@@ -2,18 +2,12 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 100%;
-//   background-color: antiquewhite;
-// }
+
 
 .listingsContainer {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: rem(1650);
   gap: rem(32);
 
 }

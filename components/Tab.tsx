@@ -15,13 +15,13 @@ interface TabProps {
 
 const Tab: React.FC<TabProps> = ({
   title,
-  count,
+  count = null,
   isActive,
-  isMobile,
-  style,
-  color,
-  onClick,
   index,
+  isMobile = false,
+  style,
+  color = "#434b4d",
+  onClick,
 }) => {
   return (
     <li
@@ -29,7 +29,7 @@ const Tab: React.FC<TabProps> = ({
       className={`${styles.tab} ${isActive ? styles.active : ""}`}
       style={{
         ...style,
-        color: color || "#434b4d",
+        color,
         marginBottom: isMobile ? "1rem" : undefined,
       }}
       onClick={onClick}

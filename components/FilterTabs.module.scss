@@ -2,6 +2,10 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
+.filters {
+  margin-top: auto;
+  margin-bottom: rem(32);
+}
 .options {
   position: relative;
   background-color: $white-four;

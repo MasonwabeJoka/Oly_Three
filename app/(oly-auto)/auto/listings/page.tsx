@@ -37,7 +37,7 @@ const Page = async ({
       listings={listings}
       totalPages={totalPages}
       currentPage={currentPage}
-      site="oly"
+      site="oly-auto"
     />
   );
 };

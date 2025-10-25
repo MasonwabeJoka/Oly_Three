@@ -5,26 +5,18 @@ import Tab from "./Tab";
 import TabOptions from "./TabOptions";
 import styles from "./TabsClient.module.scss";
 
-type Tab =
-  | {
-      title: string;
-      count?: number;
-    }
-  | string;
+type Tab = { title: string; count?: number } | string;
 
-type TabsProps = {
+interface TabsProps {
   condition?: boolean;
   dashboard: boolean;
-  count?: number;
   width: number;
   collageViewWidth?: number;
   tabs: Tab[];
   data?: any[];
-  onClickHandlers?: (
-    | ((event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
-    | undefined
-  )[];
-};
+  onClickHandlers?: (() => void)[];
+  activeTabIndex?: number | null;
+}
 
 const TabsClient: React.FC<TabsProps> = ({
   condition,
@@ -34,23 +26,26 @@ const TabsClient: React.FC<TabsProps> = ({
   tabs,
   data,
   onClickHandlers,
+  activeTabIndex,
 }) => {
   const [isActive, setIsActive] = useState<number | null>(null);
   const [tabOptions, setTabOptions] = useState<number | null>(null);
   const { isMobile } = useBreakpointStore();
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLLIElement>) => {
-    if (tabOptions === null) {
-      setIsActive(index);
-      setTabOptions(index);
-    } else {
-      setIsActive(null);
-      setTabOptions(null);
+    console.log("TabsClient: clicked tab index =", index, "tab =", tabs[index]);
+    if (data) {
+      if (tabOptions === null) {
+        setIsActive(index);
+        setTabOptions(index);
+      } else {
+        setIsActive(null);
+        setTabOptions(null);
+      }
     }
-
     if (onClickHandlers?.[index]) {
       try {
-        onClickHandlers[index]!(event);
+        onClickHandlers[index]!();
       } catch (error) {
         console.error("Error in tab click handler:", error);
       }
@@ -69,14 +64,13 @@ const TabsClient: React.FC<TabsProps> = ({
       {tabs.map((tab, index) => {
         const title = typeof tab === "object" ? tab.title : tab;
         const count = typeof tab === "object" ? tab.count : null;
-
         return (
           <div key={index}>
             <Tab
               index={index}
               title={title}
               count={count}
-              isActive={isActive === index}
+              isActive={activeTabIndex !== undefined ? activeTabIndex === index : isActive === index}
               isMobile
               onClick={(event) => handleClick(index, event)}
             />
@@ -94,9 +88,7 @@ const TabsClient: React.FC<TabsProps> = ({
 
   const TabsDesktop = () => {
     const tabWidth = condition
-      ? `${
-          Math.floor((((collageViewWidth || width) / 4 - 8) / 16) * 1000) / 1000
-        }rem`
+      ? `${Math.floor((((collageViewWidth || width) / 4 - 8) / 16) * 1000) / 1000}rem`
       : `${Math.floor(((width / 4 - 8) / 16) * 1000) / 1000}rem`;
 
     return (
@@ -113,18 +105,14 @@ const TabsClient: React.FC<TabsProps> = ({
         {tabs.map((tab, index) => {
           const title = typeof tab === "object" ? tab.title : tab;
           const count = typeof tab === "object" ? tab.count : null;
-
           return (
             <Tab
               key={index}
               index={index}
               title={title}
               count={count}
-              isActive={isActive === index}
-              style={{
-                flexBasis: tabWidth,
-                flexShrink: tabWidth,
-              }}
+              isActive={activeTabIndex !== undefined ? activeTabIndex === index : isActive === index}
+              style={{ flexBasis: tabWidth, flexShrink: tabWidth }}
               color={title === "Delete" ? "#ff3c14" : "#434b4d"}
               onClick={(event) => handleClick(index, event)}
             />

@@ -8,6 +8,7 @@ import { FeaturedListingsQueryResult } from "@/sanity/types";
 import Pagination from "./Pagination";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { featuredListingsQueryOptions } from "@/sanity/lib/crud/listings/queryOptions";
+import TempListingsCollage from "./Temp/TempListingCollage";
 
 type FeaturedListingsProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -23,7 +24,16 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
             <FeaturedListingsClient category={category} />
-            <ListingsCollage
+            <TempListingsCollage
+              category={category}
+              // listings={ListingsData}
+              sortBy="postedOn"
+              sortOrder="desc"
+              isDeletable={false}
+              isDashboard={false}
+              cardSize="standard"
+            />
+            {/* <ListingsCollage
               category={category}
               listings={listings}
               sortBy="postedOn"
@@ -31,7 +41,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
               isDeletable={false}
               isDashboard={false}
               cardSize="standard"
-            />
+            /> */}
             <div className={styles.pagination}>
               <Pagination totalPages={totalPages} currentPage={currentPage} />
             </div>

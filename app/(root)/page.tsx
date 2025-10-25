@@ -54,6 +54,9 @@ const Home = async ({
     
     >
       <div className={styles.main}>
+             <div className={styles.modal}>
+          <ShowMenu />
+        </div>
       
         <div className={styles.modal}>
           <Suspense

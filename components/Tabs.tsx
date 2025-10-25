@@ -8,6 +8,7 @@ type Tab =
   | string;
 
 type TabsProps = {
+  activeTabIndex?: number;
   condition?: boolean;
   dashboard: boolean;
   count?: number;
@@ -15,10 +16,7 @@ type TabsProps = {
   collageViewWidth?: number;
   tabs: Tab[];
   data?: any[];
-  onClickHandlers?: (
-    | ((event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
-    | undefined
-  )[];
+  onClickHandlers?: ((event?: React.MouseEvent) => void)[];
 };
 
 const TabsClient = dynamic(() => import("./TabsClient"), { ssr: false });
@@ -31,6 +29,7 @@ const Tabs: React.FC<TabsProps> = ({
   tabs,
   data,
   onClickHandlers,
+  activeTabIndex,
 }) => {
   return (
     <TabsClient
@@ -41,6 +40,7 @@ const Tabs: React.FC<TabsProps> = ({
       tabs={tabs}
       data={data}
       onClickHandlers={onClickHandlers}
+      activeTabIndex={activeTabIndex}
     />
   );
 };
