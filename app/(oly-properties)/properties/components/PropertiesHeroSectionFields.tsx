@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./PropertiesHeroSectionSearch.module.scss";
+import styles from "./PropertiesHeroSectionFields.module.scss";
 import Link from "next/link";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
@@ -34,7 +34,7 @@ async function searchAction(formData: FormData) {
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const PropertiesHeroSectionSearchClient = () => {
+const PropertiesHeroSectionFields = () => {
   const [isPropertyTypeSelect, setIsPropertyTypeSelect] = useState(false);
   const [isForSaleToLetOpen, setIsForSaleToLetOpen] = useState(false);
   const [isPriceRangeSelect, setIsPriceRangeSelect] = useState(false);
@@ -81,7 +81,7 @@ const PropertiesHeroSectionSearchClient = () => {
           <Link href="/dashboard/create-listing" className={styles.link}>
             <Button
               buttonChildren={"Create A Listing"}
-              className={styles.CreateAListingBtn}
+              className={styles.createAListingBtn}
               buttonType="primary"
               buttonSize="large"
               name="Create A Listing Button"
@@ -238,4 +238,4 @@ const PropertiesHeroSectionSearchClient = () => {
   );
 };
 
-export default PropertiesHeroSectionSearchClient;
+export default PropertiesHeroSectionFields;

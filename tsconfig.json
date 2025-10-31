@@ -20,7 +20,6 @@
     "isolatedModules": true,
     "incremental": true,
     "jsx": "react-jsx",
-    "jsxFactory": "React.createElement",
     "plugins": [
       {
         "name": "next"

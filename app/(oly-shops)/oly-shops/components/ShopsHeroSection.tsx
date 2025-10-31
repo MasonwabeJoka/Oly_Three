@@ -1,6 +1,6 @@
 import Image from "@/components/Image";
 import styles from "./ShopsHeroSection.module.scss";
-import ShopsHeroSectionSearch from "./ShopsHeroSectionSearch";
+import ShopsHeroSectionFields from "./ShopsHeroSectionFields";
 
 interface HeroSectionProps {
   mainTitle?: string;
@@ -13,7 +13,7 @@ const ShopsHeroSection = ({ mainTitle }: HeroSectionProps) => {
         <Image src="/brandNew.svg" height={100} width={100} alt="star" />
       </div>
       <h1 className={styles.mainTitle}>{mainTitle}</h1>
-      <div className={styles.heroSectionSearchContainer}></div>
+      <div className={styles.HeroSectionFieldsContainer}></div>
     </div>
   );
 };

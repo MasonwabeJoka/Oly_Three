@@ -1,11 +1,10 @@
 import "../../globals.css";
 import styles from "./layout.module.scss";
-
 import localFont from "next/font/local";
-import { currentUser } from "@/app/temp/tempForMessages";
 import "@uploadthing/react/styles.css";
 import DashboardLayoutWrapper from "./create-listing/components/DashboardLayoutWrapper";
 import DashboardSidebarData from "@/data/DashboardSidebarData";
+import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export const metadata = {
   title: "Oly Dashboard",
@@ -24,12 +23,13 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const sidebarItems = DashboardSidebarData;
-
+  const {user} = await withAuth()
+  
   return (
     <html lang="en" className={`${outfit.className} ${styles.html}`} >
       <body className={styles.body}>
         <DashboardLayoutWrapper
-          currentUser={currentUser!}
+          currentUser={user}
           sidebarItems={sidebarItems}
         >
           {children}

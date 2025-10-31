@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbo",
-    "lint": "next lint",
+    "lint": "eslint .",
     "serve": "node server.js",
     "extract-variables": "node ./extract-variables.js",
     "build": "npm run extract-variables && next build",
@@ -64,6 +64,7 @@
     "@types/youtube": "^0.0.50",
     "@uploadthing/react": "^7.3.3",
     "@workos-inc/authkit-nextjs": "^2.10.0",
+    "@workos-inc/node": "^7.72.0",
     "@xata.io/client": "^0.28.0",
     "axios": "^1.6.2",
     "canvas-confetti": "^1.9.3",

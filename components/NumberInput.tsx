@@ -247,7 +247,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <div className={styles.arrows}>
             <button
               type="button"
-              className={styles.upArrow}
+              className={`${styles.upArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("up")}
               onMouseDown={(e) => e.preventDefault()}
               aria-label="Increase value"
@@ -257,7 +257,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             </button>
             <button
               type="button"
-              className={styles.downArrow}
+              className={`${styles.downArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("down")}
               onMouseDown={(e) => e.preventDefault()}
               aria-label="Decrease value"

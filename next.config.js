@@ -29,6 +29,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "workoscdn.com",
+      },
+      {
+        protocol: "https",
         hostname: "fastly.picsum.photos",
       },
       {
@@ -59,7 +63,11 @@ const nextConfig = {
     localPatterns: [
       {
         pathname: '/assets/**',
-        search: '?*', // Add if using query strings
+        search: '?*', // Allows query strings under /assets/
+      },
+      {
+        pathname: '/**', // Allows all root-level images (e.g., /logo.png)
+        search: '', // No query strings required
       },
     ],
   },

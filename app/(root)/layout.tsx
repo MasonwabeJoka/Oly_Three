@@ -7,6 +7,7 @@ import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
 import Layout from "../(articles)/layout";
 import LayoutWrapper from "../(dashboard)/dashboard/create-listing/components/LayoutWrapper";
+import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
@@ -24,11 +25,12 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const {user} = await withAuth()
   return (
     <html
       lang="en"
@@ -36,7 +38,9 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className={`${outfit.variable} ${styles.body}`}>
-        <LayoutWrapper>
+        <LayoutWrapper
+          currentUser={user}
+        >
           <div className={styles.wrapper}>
             <div className={styles.main}>
               <nav className={styles.nav}>

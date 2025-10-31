@@ -66,7 +66,7 @@ const TempListingsCollage = ({
   };
 
 
-  const cards = listingsData?.map((listing, index) => {
+  const cards = listingsData.slice(0, 30)?.map((listing, index) => {
     const { _id,  imageUrls, title, text, price, user } = listing;
   
    

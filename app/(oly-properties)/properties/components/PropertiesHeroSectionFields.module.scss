@@ -8,14 +8,12 @@
   width: 50vw;
   height: 93vh;
   border-radius: rem(150) rem(150) rem(150) rem(150);
-  background-color: $primary;
-  background-color: #c9e5e8;
-  background-color: $danger;
-  background-color: $warning;
+  background-color: $grey-one;
+  // background-color: #c9e5e8;
 
   .logo {
-    margin-top: rem(104);
-    margin-bottom: rem(48);
+    margin-top: rem(80);
+    margin-bottom: rem(24);
   }
   .buttonsAndSearch {
     display: flex;
@@ -32,21 +30,27 @@
       .link {
       }
 
-      .createYourShopBtn {
+      .createAListingBtn {
         margin-bottom: rem(20);
         background-color: $danger-hover;
         color: $white-one;
       }
 
-      .CreateAListingBtn:hover {
+      .createAListingBtn:hover {
         background-color: #f83710;
       }
 
-      .categoriesBtn {
-        background-color: $white-two;
-        box-shadow: none;
+      .propertyTypeSelectContainer {
+        margin-bottom: rem(20);
+      }
+      .forSaleToLetSelectContainer {
+        margin-bottom: rem(20);
+        .forSaleToLetSelect {
+        }
       }
 
+      .priceRangeSelectContainer {
+      }
       .categoriesBtn:hover {
         background-color: $white-one;
       }
@@ -80,8 +84,8 @@
     }
     .searchButton {
       .search {
-        background-color: $white-two;
-        box-shadow: none;
+        // background-color: $white-two;
+        // box-shadow: none;
       }
 
       .search:hover {

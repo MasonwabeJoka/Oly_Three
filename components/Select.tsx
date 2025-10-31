@@ -467,7 +467,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             >
               {isMultiSelect && (
                 <li
-                  className={sizeClass}
+                  className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
                   role="option"
                   aria-selected={filteredOptions.every((option) =>
                     selected.includes(getOptionLabel(option))

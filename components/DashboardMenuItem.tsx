@@ -62,11 +62,15 @@ export const MainMenuItem: React.FC<Props> = ({
   );
 };
 
-export const LogoutMenuItem: React.FC<Props> = ({ data }) => {
+export const LogoutMenuItem: React.FC<Props> = ({ data, onClick }) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   return (
-    <div className={`${styles.menu} ${styles.logout}`}>
+    <div 
+      className={`${styles.menu} ${styles.logout}`}
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}
+    >
       <Icon
         className={`${styles.logoutIcon} ${styles.icon}`}
         src={data[data.length - 1].icon}

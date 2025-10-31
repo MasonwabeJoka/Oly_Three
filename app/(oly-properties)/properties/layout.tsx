@@ -5,6 +5,8 @@ import localFont from "next/font/local";
 import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
+import LayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/LayoutWrapper";
+import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
@@ -21,14 +23,18 @@ const outfit = localFont({
   fallback: ["roboto", "system-ui", "arial"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const {user} = await withAuth()
   return (
     <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
       <body className={styles.body}>
+         <LayoutWrapper
+          currentUser={user}
+        >
         <div className={styles.wrapper}>
           <aside className={styles.feed}>
             <Feed />
@@ -49,6 +55,7 @@ export default function RootLayout({
             </main>
           </div>
         </div>
+        </LayoutWrapper>
         <footer className={styles.footer}>
           <Footer />
         </footer>

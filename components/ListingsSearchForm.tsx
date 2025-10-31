@@ -10,7 +10,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./ListingsSearchForm.module.scss";
 import Form from "next/form";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation"; 
+import { useRouter, useSearchParams } from "next/navigation";
 import { suggestions } from "@/data/SuggestionsData";
 
 type FormValues = z.infer<typeof searchFormSchema>;
@@ -156,7 +156,7 @@ export default function ListingsSearchForm({
                     inputType="text"
                     inputSize="large"
                     label="Location"
-                    placeholder="Search by city, province, township..."
+                    placeholder="Search by city, province, town..."
                     id="locationSearch"
                     error={errors.locationSearch?.message}
                     ariaLabel="Location"

@@ -92,17 +92,17 @@
         .link {
         }
 
-        .CreateAListingBtn {
+        .createAListingBtn {
           margin-bottom: rem(20);
           background-color: $danger-hover;
           color: $white-one;
         }
 
-        .CreateAListingBtn:hover {
+        .createAListingBtn:hover {
           background-color: #f83710;
         }
 
-        .CreateAListingBtn:focus {
+        .createAListingBtn:focus {
           outline-offset: rem(1);
           outline-style: solid;
           outline-color: $danger-hover;

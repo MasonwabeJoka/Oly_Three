@@ -114,7 +114,7 @@ const FeaturedListingsClient = ({ category }) => {
               iconWidth={32}
               iconHeight={32}
               label="Location"
-              placeholder="Search by city, province, township..."
+              placeholder="Search by city, province, town..."
               id="locationSearch"
               name="locationSearch"
               ariaLabel="Location"
@@ -167,7 +167,7 @@ const FeaturedListingsClient = ({ category }) => {
               iconWidth={32}
               iconHeight={32}
               label="Location"
-              placeholder="Search by city, province, township..."
+              placeholder="Search by city, province, town..."
               id="locationSearch"
               name="locationSearch"
               ariaLabel="Location"

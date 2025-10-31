@@ -1,14 +1,14 @@
-import styles from "./HeroSectionSearch.module.scss";
+import styles from "./HeroSectionFields.module.scss";
 import Image from "@/components/Image";
 import Link from "next/link";
-import HeroSectionSearchClient from "./HeroSectionSearchClient";
+import HeroSectionFieldsClient from "./HeroSectionFieldsClient";
 import Button from "./Buttons";
 import Form from "next/form";
 
-const HeroSectionSearch = async ({
+const HeroSectionFields = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ searchTerm: string; locationSearch: string }>;
+  searchParams?: Promise<{ searchTerm: string; locationSearch: string }>;
 }) => {
   const searchTerm = (await searchParams)?.searchTerm;
   const locationSearch = (await searchParams)?.locationSearch;
@@ -35,7 +35,7 @@ const HeroSectionSearch = async ({
               <Link href="/dashboard/create-listing" className={styles.link}>
                 <Button
                   buttonChildren="Create A Listing"
-                  className={styles.CreateAListingBtn}
+                  className={styles.createAListingBtn}
                   buttonType="danger"
                   buttonSize="large"
                   name="Create A Listing Button"
@@ -45,7 +45,7 @@ const HeroSectionSearch = async ({
                   disabled={false}
                 />
               </Link>
-              <HeroSectionSearchClient
+              <HeroSectionFieldsClient
                 searchTerm={searchTerm}
                 locationSearch={locationSearch}
               />
@@ -57,4 +57,4 @@ const HeroSectionSearch = async ({
   );
 };
 
-export default HeroSectionSearch;
+export default HeroSectionFields;

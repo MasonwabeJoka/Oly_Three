@@ -1,0 +1,68 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.searchFields {
+  .field {
+    margin-bottom: rem(20);
+  }
+  .link {
+    // display: block; 
+  }
+  .createAListingBtn {
+    background-color: $danger-hover;
+    color: $white-one;
+  }
+
+  .createAListingBtn:hover {
+    background-color: #f83710;
+  }
+
+  .createAListingBtn:focus {
+    outline-offset: rem(1);
+    outline-style: solid;
+    outline-color: $danger-hover;
+    outline-width: rem(2);
+    border-radius: rem(40);
+  }
+
+  .vehicleType {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .errorMessage {
+    color: $danger;
+    margin-bottom: rem(8);
+  }
+}
+
+.searchFields {
+  margin-top: rem(4) !important;
+
+  .searchLocation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .searchLocationInput {
+      // margin-bottom: rem(10);
+    }
+  }
+
+  .errorMessage {
+    color: $danger;
+    margin-bottom: rem(8);
+  }
+}
+.searchButton {
+  .search {
+    background-color: $white-two;
+    box-shadow: none;
+  }
+
+  .search:hover {
+    background-color: $white-one;
+  }
+}

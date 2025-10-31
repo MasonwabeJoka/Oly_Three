@@ -1,8 +1,9 @@
 import Image from "@/components/Image";
 import styles from "./HeroSection.module.scss";
-import HeroSectionSearch from "./HeroSectionSearch";
-import ShopsHeroSectionSearch from "@/app/(oly-shops)/oly-shops/components/ShopsHeroSectionSearch";
-import PropertiesHeroSectionSearch from "@/app/(oly-properties)/properties/components/PropertiesHeroSectionSearch";
+import HeroSectionFields from "./HeroSectionFields";
+import ShopsHeroSectionFields from "@/app/(oly-shops)/oly-shops/components/ShopsHeroSectionFields";
+import PropertiesHeroSectionFields from "@/app/(oly-properties)/properties/components/PropertiesHeroSectionFields";
+import AutoHeroSectionFields from "../app/(oly-auto)/auto/components/AutoHeroSectionFields";
 
 interface HeroSectionProps {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -17,10 +18,11 @@ const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
       </div>
       <div className={styles.mainSection}>
         <h1 className={styles.mainTitle}>{mainTitle}</h1>
-        <div className={styles.heroSectionSearchContainer}>
-          {category === "all" && <HeroSectionSearch />}
-          {category === "property" && <PropertiesHeroSectionSearch />}
-          {category === "shops" && <ShopsHeroSectionSearch />}
+        <div className={styles.HeroSectionFieldsContainer}>
+          {category === "all" && <HeroSectionFields />}
+          {category === "property" && <PropertiesHeroSectionFields />}
+          {category === "vehicles" && <AutoHeroSectionFields />}
+          {category === "shops" && <ShopsHeroSectionFields />}
         </div>
       </div>
     </>

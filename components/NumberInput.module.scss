@@ -61,6 +61,19 @@
       border-radius: rem(40);
       cursor: pointer;
 
+      .arrow {
+        background: none; 
+        padding: 0; 
+        margin: 0; 
+        font: inherit; 
+        cursor: pointer;
+        outline: none; 
+        box-shadow: none; 
+        text-decoration: none; 
+        color: inherit;
+        border: none;
+      }
+
       .upArrow {
         margin-bottom: rem(-4);
       }

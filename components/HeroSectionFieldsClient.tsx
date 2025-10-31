@@ -15,11 +15,11 @@ import { useModalStore } from "@/store/modalStore";
 type FormValues = z.infer<typeof searchFormSchema>;
 
 interface Props {
-  searchTerm: string;
-  locationSearch: string;
+  searchTerm?: string;
+  locationSearch?: string;
 }
 
-const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
+const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
   const setShowCategoriesModal = useModalStore(
@@ -110,7 +110,7 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
                   iconWidth={32}
                   iconHeight={32}
                   label="Location"
-                  placeholder="Search by city, province, township..."
+                  placeholder="Search by city, province, town..."
                   id="locationSearch"
                   error={errors.locationSearch?.message}
                   ariaLabel="Location"
@@ -144,4 +144,4 @@ const HeroSectionSearchClient = ({ searchTerm, locationSearch }: Props) => {
   );
 };
 
-export default HeroSectionSearchClient;
+export default HeroSectionFieldsClient;

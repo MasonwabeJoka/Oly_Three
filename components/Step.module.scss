@@ -1,0 +1,46 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(311);
+
+  @include only(largeDesktop) {
+    width: rem(1098);
+  }
+  @include only(smallDesktop) {
+    width: rem(960);
+  }
+  @include only(tablet) {
+    width: rem(1098);
+  }
+
+  .title {
+    color: $danger;
+    font-size: $h4;
+    margin-top: rem(64);
+    margin-bottom: rem(64);
+    font-weight: 600;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    margin-bottom: rem(64);
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    margin-bottom: rem(120);
+
+    .proceedButton {
+      margin-bottom: rem(20);
+    }
+  }
+}

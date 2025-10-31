@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import styles from "./../../global-styles/homepage.module.scss";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ExternalAd from "@/components/ExternalAd";
+import HeroSection from "@/components/HeroSection";
 const Page = () => {
   return (
     <div className={styles.container}>
@@ -15,7 +16,11 @@ const Page = () => {
               </div>
             }
           >
-            Hero Section
+            <HeroSection
+              category="vehicles"
+              mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
+        modern marketplace. The future of classifieds."
+            />
           </Suspense>
         </section>
         <section className={styles.aboveFoldAd}>

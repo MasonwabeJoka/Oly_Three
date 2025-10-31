@@ -210,7 +210,7 @@ export const heroSection = defineType({
           name: 'locationPlaceholder',
           title: 'Location Placeholder',
           type: 'string',
-          initialValue: 'Search by city, province, township...',
+          initialValue: 'Search by city, province, town...',
           hidden: ({ parent }) => !parent?.showSearch,
         }),
         defineField({

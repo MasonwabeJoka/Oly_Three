@@ -13,7 +13,6 @@ import { NextStudio } from "next-sanity/studio";
 import config from "../../../sanity.config";
 import { useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic";
 
 export default function StudioPage() {
   const [client, setClient] = useState(false);

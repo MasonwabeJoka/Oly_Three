@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./ShopsHeroSectionSearch.module.scss";
+import styles from "./ShopsHeroSectionFields.module.scss";
 import Link from "next/link";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
@@ -39,7 +39,7 @@ async function searchAction(formData: FormData) {
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const ShopsHeroSectionSearch = () => {
+const ShopsHeroSectionFields = () => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
@@ -176,7 +176,7 @@ const ShopsHeroSectionSearch = () => {
                 iconWidth={32}
                 iconHeight={32}
                 label="Location"
-                placeholder="Search by city, province, township..."
+                placeholder="Search by city, province, town..."
                 id="locationSearch"
                 name="locationSearch" // Required for FormData
                 ariaLabel="Location"
@@ -218,4 +218,4 @@ const ShopsHeroSectionSearch = () => {
   );
 };
 
-export default ShopsHeroSectionSearch;
+export default ShopsHeroSectionFields;

@@ -6,7 +6,7 @@ import { updateListingView } from "@/sanity/lib/crud/listingViews/actions";
 import { after } from 'next/server'
 
 
-export const experimental_ppr = true;
+// export const experimental_ppr = true;
 type ParamsProp = {
   params: {
     slug: string;

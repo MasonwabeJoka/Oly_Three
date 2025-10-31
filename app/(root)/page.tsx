@@ -162,7 +162,7 @@ const Home = async ({
           </section>
         )}
 
-        {olyArticlesSection?.isEnabled === true && (
+        {/* {olyArticlesSection?.isEnabled === true && (
           <section className={styles.articles}>
             <Suspense
               fallback={
@@ -174,7 +174,7 @@ const Home = async ({
               <OlyArticles />
             </Suspense>
           </section>
-        )}
+        )} */}
 
         {bottomAdSection?.isEnabled === true && (
           <section className={styles.belowFoldAd}>

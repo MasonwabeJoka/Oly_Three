@@ -7,23 +7,13 @@ import Image from "@/components/Image";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
-// Authentication removed - no longer using Clerk
 import { usePathname } from "next/navigation";
-import { Backpack } from "lucide-react";
+import { signOutAction } from "@/app/actions/signOut";
+import { User } from "@workos-inc/node";
 
-interface CurrentUserTemp {
-  conversationIds: string[];
-  createdAt: string;
-  email: string;
-  emailVerified: boolean;
-  id: string;
-  image: string;
-  name: string;
-  messageIds: string[];
-  updatedAt: string;
-}
+
 interface DashboardSidebarProps {
-  currentUser: CurrentUserTemp;
+  currentUser: User;
   sidebarItems?: any;
 }
 
@@ -34,11 +24,10 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
-  // Authentication removed - no longer using Clerk
-  // const { user, isSignedIn, isLoaded } = useUser();
   const pathname = usePathname();
+  const user = currentUser.profilePictureUrl ?? '';
 
-  const itemsWithActiveState = sidebarItems?.map((item) => ({
+  const itemsWithActiveState = sidebarItems?.map((item, index) => ({
     ...item,
     active:
       item.link === "/dashboard"
@@ -48,7 +37,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           : item.link === ""
             ? pathname === ""
             : pathname === item.link,
-    onClick: () => {},
+    onClick: index === sidebarItems.length - 1 ? signOutAction : () => {},
   }));
 
   const logoStyles = {
@@ -68,25 +57,22 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         href="/dashboard/settings/profile-settings"
         className={styles.profile}
       >
-        {/* {user?.hasImage && (
+       
           <Avatar
             className={styles.avatar}
-            avatar={user?.imageUrl || ""}
+            avatar={currentUser}
             avatarSize={isMobile ? "regular" : "large"}
           />
-        )} */}
-        <Avatar
-          className={styles.avatar}
-          avatar={currentUser?.image || ""}
-          avatarSize={isMobile ? "regular" : "large"}
-        />
+      
+       
         {!isMobile && (
           <p
             className={styles.name}
-            style={{ visibility: currentUser?.fullName ? "visible" : "hidden" }}
+            style={{ visibility: currentUser?.firstName ? "visible" : "hidden" }}
           >
             {/* The \u00A0 is a non-breaking space to maintain height when there's no text*/}
-            {currentUser?.fullName || currentUser?.username || "\u00A0"}
+            <span>{currentUser?.firstName || "\u00A0"}</span> {""}
+            <span>{currentUser?.lastName || "\u00A0"}</span>
           </p>
         )}
       </Link>

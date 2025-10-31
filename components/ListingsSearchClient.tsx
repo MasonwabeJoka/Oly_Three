@@ -83,7 +83,7 @@ const ListingsSearchClient = () => {
             inputType="text"
             inputSize="large"
             label="Location"
-            placeholder="Search by city, province, township..."
+            placeholder="Search by city, province, town..."
             id="locationSearch"
             error={errors.locationSearch?.message}
             ariaLabel="Location"
