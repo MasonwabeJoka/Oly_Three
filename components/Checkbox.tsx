@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+"use client";
+import { useEffect, useRef, useState, useId } from "react";
 import styles from "./Checkbox.module.scss";
 import useFeedStore from "@/store/feedStore";
 import { Checkbox as ShadcnCheckbox } from "@/components/ui/checkbox";
@@ -8,6 +9,7 @@ type CheckboxProps = {
   className?: string;
   name?: string;
   label?: string;
+  labelSide?: "left" | "right";
   isFeed?: boolean;
   indeterminate?: boolean;
   checkedColour?: string;
@@ -31,6 +33,7 @@ const Checkbox = ({
   className,
   name,
   label,
+  labelSide = "right",
   indeterminate = false,
   hoverColour = "#ffff",
   checkedColour = "#14d6ff",
@@ -77,7 +80,7 @@ const Checkbox = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       if (!disabled) {
         handleToggle(!isCheckboxChecked);
@@ -85,41 +88,62 @@ const Checkbox = ({
     }
   };
 
-  const isCheckboxChecked = checked === "indeterminate" ? false : (checked !== undefined ? checked : isChecked);
-  const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+  const isCheckboxChecked =
+    checked === "indeterminate"
+      ? false
+      : checked !== undefined
+        ? checked
+        : isChecked;
+  const generatedId = useId();
+  const checkboxId = id || generatedId;
   const accessibleLabel = ariaLabel || label || `${type} input`;
 
   return (
     <div
       className={`${isFeedOpen ? styles.feedOpen : ""} ${
         styles.checkboxContainer
-      } ${className || ''}`}
+      } ${className || ""}`}
     >
       <ShadcnCheckbox
         id={checkboxId}
         name={name}
-        className={`${styles.checkboxInput} ${className || ''}`}
+        className={`${styles.checkboxInput} ${className || ""}`}
         onCheckedChange={handleToggle}
-        checked={checked === "indeterminate" ? "indeterminate" : isCheckboxChecked}
+        checked={
+          checked === "indeterminate" ? "indeterminate" : isCheckboxChecked
+        }
         disabled={disabled ?? false}
         aria-label={accessibleLabel}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
       />
-      
+
       {error && (
-        <p id={`${checkboxId}-error`} className={styles.errorMessage} role="alert" aria-live="polite">
+        <p
+          id={`${checkboxId}-error`}
+          className={styles.errorMessage}
+          role="alert"
+          aria-live="polite"
+        >
           {error}
         </p>
       )}
-      
+
       <div
         role={type}
         tabIndex={disabled ? -1 : 0}
-        aria-checked={checked === "indeterminate" ? "mixed" : (isCheckboxChecked ? "true" : "false")}
+        aria-checked={
+          checked === "indeterminate"
+            ? "mixed"
+            : isCheckboxChecked
+              ? "true"
+              : "false"
+        }
         aria-disabled={disabled}
         aria-required={ariaRequired || required}
         aria-invalid={ariaInvalid || !!error}
-        aria-describedby={ariaDescribedBy || (error ? `${checkboxId}-error` : undefined)}
+        aria-describedby={
+          ariaDescribedBy || (error ? `${checkboxId}-error` : undefined)
+        }
         aria-label={accessibleLabel}
         onClick={() => !disabled && handleToggle(!isCheckboxChecked)}
         onKeyDown={handleKeyDown}
@@ -127,14 +151,29 @@ const Checkbox = ({
         onMouseLeave={() => setIsHovered(false)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        style={{ 
-          cursor: disabled ? "not-allowed" : "pointer", 
-          display: "flex", 
+        style={{
+          display: "flex",
           alignItems: "center",
+          gap: "0.875rem",
+          cursor: disabled ? "not-allowed" : "pointer",
           outline: isFocused ? "1px solid #14d6ff" : "none",
           borderRadius: "8px",
         }}
       >
+        {label && labelSide === "left" && (
+          <span
+            style={{
+              fontSize: "0.875rem",
+              marginLeft: "8px",
+              color: disabled ? "#999" : "inherit",
+            }}
+          >
+            {label}
+            {(required || ariaRequired) && (
+              <span aria-label="required"> *</span>
+            )}
+          </span>
+        )}
         <div
           style={{
             width: "24px",
@@ -142,7 +181,7 @@ const Checkbox = ({
             border: "4px solid #fff",
             outline: "0.5px solid #9defff",
             borderRadius: "8px",
-            backgroundColor: disabled 
+            backgroundColor: disabled
               ? "#f5f5f5"
               : isCheckboxChecked
                 ? isHovered
@@ -151,19 +190,24 @@ const Checkbox = ({
                 : isHovered
                   ? hoverColour
                   : "#edf2f7",
-            boxShadow: isCheckboxChecked ? "none" : "-2px -2px 10px 0px #fff inset, 2px 2px 10px 0px rgba(170, 186, 204, 0.5) inset, 2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset, -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset",
-            opacity: disabled ? 0.6 : 1
+            boxShadow: isCheckboxChecked
+              ? "none"
+              : "-2px -2px 10px 0px #fff inset, 2px 2px 10px 0px rgba(170, 186, 204, 0.5) inset, 2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset, -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset",
+            opacity: disabled ? 0.6 : 1,
           }}
         />
-        {label && (
-          <span 
-            style={{ 
+        {label && labelSide === "right" && (
+          <span
+            style={{
+              fontSize: "0.875rem",
               marginLeft: "8px",
-              color: disabled ? "#999" : "inherit"
+              color: disabled ? "#999" : "inherit",
             }}
           >
             {label}
-            {(required || ariaRequired) && <span aria-label="required"> *</span>}
+            {(required || ariaRequired) && (
+              <span aria-label="required"> *</span>
+            )}
           </span>
         )}
         <span className="sr-only">

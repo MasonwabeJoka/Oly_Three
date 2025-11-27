@@ -1,7 +1,7 @@
 "use client";
 import styles from "./UploadMediaClient.module.scss";
 import UploadButton from "@/components/UploadButton";
-import ImageUploadsSection from "./ImageUploadsSection";
+import ImageUploadSection from "./ImageUploadSection";
 import useUploadFiles from "../store/useUploadFiles";
 import Input from "@/components/Input";
 import { useEffect, useState } from "react";
@@ -44,14 +44,19 @@ const UploadMediaClient = ({ onNext }: Props) => {
       <h2 className={styles.title}>Upload Media</h2>
 
       <div className={`${styles.mediaSection} ${styles.uploadedPhotos}`}>
-        <ImageUploadsSection uploadedFiles={uploadedImages} />
+        <ImageUploadSection isDashboard uploadedFiles={uploadedImages} />
       </div>
+      {/* <div className={`${styles.mediaSection} ${styles.uploadedPhotos}`}>
+        <ImageSlider uploadedFiles={uploadedImages} />
+      </div> */}
 
       <div className={`${styles.mediaSection} ${styles.uploadedVideos}`}>
         <VideoUploadsSection />
       </div>
 
-      <div className={`${styles.mediaSection} ${styles.uploadedAttachmentsContainer}`}>
+      <div
+        className={`${styles.mediaSection} ${styles.uploadedAttachmentsContainer}`}
+      >
         <AttachmentUploadSection attachments={attachments} />
       </div>
     </div>

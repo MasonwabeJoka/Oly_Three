@@ -1,0 +1,98 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: rem(200);
+  // height: 100vh;
+
+  .title {
+    font-size: $h4;
+    color: $danger;
+    font-weight: 500;
+    margin-top: rem(48);
+    margin-bottom: rem(20);
+  }
+  .searchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(20);
+    // margin-top: rem(80);
+    margin-bottom: rem(80);
+  }
+  .tabsContainer {
+    margin-bottom: rem(20);
+  }
+
+  .pillsContainer {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding-top: rem(35);
+    z-index: 10;
+    background-color: $white-four;
+    .pillsWrapper {
+      display: flex;
+      justify-content: center;
+      width: rem(1200);
+      margin-bottom: rem(20);
+      margin-left: rem(112);
+
+      .pills {
+        display: flex;
+        justify-content: flex-start;
+        gap: rem(14);
+        flex-wrap: wrap;
+        max-width: rem(1200);
+        width: fit-content;
+      }
+    }
+
+    .checkboxContainer {
+      position: relative;
+      left: rem(74);
+      justify-self: end;
+      margin-bottom: rem(20);
+      z-index: 20;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: rem(20);
+
+    .cardsContainer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: rem(32);
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .searchButton {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+    background-color: $white-four;
+    width: 100vw;
+
+    .search {
+      margin-top: rem(20);
+      margin-bottom: rem(48);
+    }
+  }
+}

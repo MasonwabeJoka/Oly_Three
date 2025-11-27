@@ -4,17 +4,19 @@
 .modalOverlay {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
-  position: fixed; /* Stays in place when scrolling */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centers the element */
-  z-index: 5; /* Ensures it's above other content */
+  transform: translate(-50%, -50%);
+  z-index: 5;
   width: 100vw;
   height: 102vh;
   z-index: 100;
-  cursor: url("/icons/X.png") 16 0, auto; /* Set hotspot (exact clicking point) to 16px from the left */
+  cursor:
+    url("/icons/X.png") 16 0,
+    auto;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $white-four;
@@ -48,7 +50,6 @@
   gap: rem(16);
   cursor: pointer;
   width: 100%;
-
   z-index: 10;
 }
 .modalContent {
@@ -56,5 +57,27 @@
   justify-content: center;
   align-items: center;
   cursor: default;
+}
 
+.lessThanScreenHeight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.moreThanScreenHeight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .exitButtonContainer {
+    position: sticky;
+    right: 5%;
+    top: 3%;
+    gap: rem(16);
+    cursor: pointer;
+    width: fit-content;
+    z-index: 20;
+  }
 }

@@ -51,10 +51,10 @@
       .text {
         position: relative;
         text-align: center;
-        padding: 0 rem(16);
+        padding: 0 rem(20);
         margin-bottom: rem(16);
-        line-height: 1.2;
-        font-size: $h1;
+        line-height: 1;
+        font-size: rem(40);
         font-weight: 600;
         color: $primary;
 

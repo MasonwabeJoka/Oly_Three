@@ -9,6 +9,7 @@
   padding: rem(40) rem(20);
   width: 100%;
   min-height: 100vh;
+  // background-color: yellow;
   
 
   .title {
@@ -21,10 +22,27 @@
 
   .sitesContainer {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 80%;
-    gap: rem(32);
+    flex-direction: column;
+    // justify-content: center;
+    // flex-wrap: wrap;
+    width: 100vw;
+      margin-left: rem(960);
+    // gap: rem(32);
  
   }
+      .navButtons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: rem(16);
+      margin-right: rem(1000);
+      margin-top: rem(16);
+      margin-bottom: rem(16);
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
 }

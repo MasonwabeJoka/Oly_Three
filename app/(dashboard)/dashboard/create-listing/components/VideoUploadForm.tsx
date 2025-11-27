@@ -1,3 +1,4 @@
+'use client'
 import styles from "./VideoUploadForm.module.scss";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +11,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import musicVideo from "@/videos/musicVideo.mp4.json";
 import Image from "@/components/Image";
 import { screenshots } from "@/data/screenshots";
+import Form from "next/form";
 
 type FormValues = z.infer<typeof feedbackFormSchema>;
 //TODO: Fix tittle missing when portrait video is uploaded.

@@ -4,13 +4,16 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-bottom: rem(64);
+  margin-bottom: rem(32 );
  
   .preferenceCategory {
+    display: flex;
+    width: 100%;
+    margin-top: rem(32);
     margin-left: rem(80);
     margin-bottom: rem(16);
-    font-size: $h4;
-    font-weight: 600;
+    font-size: rem(20);
+    font-weight: 500;
   }
   .cardWrapper {
     display: flex;
@@ -19,7 +22,7 @@
     min-height: rem(180);
     border-radius: rem(40);
     background-color: $white-three;
-    box-shadow: $shadow-one;
+    // box-shadow: $shadow-one;
     padding-top: rem(32);
     padding-bottom: rem(64);
   
@@ -28,7 +31,7 @@
       margin-top: rem(32);
       .preferenceType {
         font-size: $h4;
-        font-weight: 600;
+        font-weight: 500;
         margin-left: rem(80);
         margin-bottom: rem(24);
       }
@@ -37,6 +40,8 @@
         justify-content: space-between;
         .preference {
           margin-left: rem(80);
+        
+          font-weight: 300;
         }
 
         .options {

@@ -7,7 +7,6 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
-
 import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
 import { getCategories } from "@/sanity/lib/crud/categories/data";
 import { getFeaturedCategoriesSection } from "@/sanity/lib/crud/featuredCategoriesSection/data";
@@ -49,15 +48,12 @@ const Home = async ({
   };
 
   return (
-    <div
-      className={styles.container}
-    
-    >
+    <div className={styles.container}>
       <div className={styles.main}>
-             <div className={styles.modal}>
+        <div className={styles.modal}>
           <ShowMenu />
         </div>
-      
+
         <div className={styles.modal}>
           <Suspense
             fallback={
@@ -89,7 +85,6 @@ const Home = async ({
         )}
         {moreFromOlySection?.isEnabled === true && (
           <section className={styles.moreFromOly}>
-            <h2 className={styles.title}>More from Oly</h2>
             <Suspense
               fallback={
                 <div>
@@ -117,10 +112,9 @@ const Home = async ({
             </Suspense>
           </section>
         )}
-      
-         {featuredCategoriesSection?.isEnabled === true && (
+
+        {featuredCategoriesSection?.isEnabled === true && (
           <section className={styles.categories}>
-            <h2 className={styles.title}>Featured Categories</h2>
             <Suspense
               fallback={
                 <div>
@@ -128,10 +122,10 @@ const Home = async ({
                 </div>
               }
             >
-              <FeaturedCategories/>
+              <FeaturedCategories />
             </Suspense>
           </section>
-        )}  
+        )}
 
         {featuredServicesSection?.isEnabled === true && (
           <section className={styles.features}>
@@ -149,7 +143,7 @@ const Home = async ({
 
         {featuredListingsSection?.isEnabled === true && (
           <section className={styles.featuredListings}>
-            <h2 className={styles.title}>Featured Listings</h2>
+          
             <Suspense
               fallback={
                 <div>
@@ -162,7 +156,7 @@ const Home = async ({
           </section>
         )}
 
-        {/* {olyArticlesSection?.isEnabled === true && (
+        {olyArticlesSection?.isEnabled === true && (
           <section className={styles.articles}>
             <Suspense
               fallback={
@@ -174,7 +168,7 @@ const Home = async ({
               <OlyArticles />
             </Suspense>
           </section>
-        )} */}
+        )}
 
         {bottomAdSection?.isEnabled === true && (
           <section className={styles.belowFoldAd}>
@@ -194,7 +188,7 @@ const Home = async ({
         )}
         {sponsoredArticlesSection?.isEnabled === true && (
           <section className={styles.sponsoredArticles}>
-            <h2 className={styles.title}>Sponsored Articles</h2>
+           
             <Suspense
               fallback={
                 <div>

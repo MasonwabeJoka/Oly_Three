@@ -5623,7 +5623,7 @@ Lines added: 5, lines removed: 138
 - import styles from "./UploadMedia.module.scss";
 - import { FormWrapper } from "./FormWrapper";
 - import UploadButton from "@/components/UploadButton";
-- import ImageUploadsSection from "./ImageUploadsSection";
+- import ImageSlider from "./ImageSlider";
 - import useUploadFiles from "../store/useUploadFiles";
 - import Input from "@/components/Input";
 - import { useEffect, useState } from "react";
@@ -5673,7 +5673,7 @@ Lines added: 5, lines removed: 138
 -         <h2 className={styles.title}>Upload Media</h2>
 -
 -         <div className={styles.uploadedPhotos}>
--           <ImageUploadsSection uploadedFiles={uploadedImages} />
+-           <ImageSlider uploadedFiles={uploadedImages} />
 -         </div>
 -
 -         <Modal
@@ -5785,7 +5785,7 @@ Lines added: 138, lines removed: 1
 + import styles from "./UploadMedia.module.scss";
 + import { FormWrapper } from "./FormWrapper";
 + import UploadButton from "@/components/UploadButton";
-+ import ImageUploadsSection from "./ImageUploadsSection";
++ import ImageSlider from "./ImageSlider";
 + import useUploadFiles from "../store/useUploadFiles";
 + import Input from "@/components/Input";
 + import { useEffect, useState } from "react";
@@ -5835,7 +5835,7 @@ Lines added: 138, lines removed: 1
 +         <h2 className={styles.title}>Upload Media</h2>
 +
 +         <div className={styles.uploadedPhotos}>
-+           <ImageUploadsSection uploadedFiles={uploadedImages} />
++           <ImageSlider uploadedFiles={uploadedImages} />
 +         </div>
 +
 +         <Modal

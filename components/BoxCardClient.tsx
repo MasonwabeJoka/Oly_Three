@@ -53,7 +53,7 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
   return (
     <div
       onMouseEnter={
-        category === "property" ? () => {} : () => setIsCardHovered(true)
+        category === "property" || category === "vehicles" ? () => {} : () => setIsCardHovered(true)
       }
       onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
       style={{ position: "relative"}}

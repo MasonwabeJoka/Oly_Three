@@ -105,6 +105,33 @@ const BoxCard: React.FC<BoxCardProps> = ({
           />
         </article>
       )}
+      {category === "vehicles" && (
+        <article className={`${sizeClass} ${styles.boxCard}`}>
+          <BoxCardClient
+            category={category}
+            sizeClass={sizeClass}
+            imageUrls={imageUrls}
+            aspectRatios={aspectRatios}
+            isCardHovered={isCardHovered}
+            isHeartClicked={isHeartClicked}
+            isHeartHovered={isHeartHovered}
+            isDeletable={isDeletable}
+            id={id}
+            isFeed={isFeed}
+            checkedColour={checkedColour}
+            hoverColour={hoverColour}
+            checkedHovered={checkedHovered}
+            title={title}
+            description={description}
+            descriptionLength={descriptionLength}
+            price={price}
+            postAge={postAge}
+            onHeartClick={onHeartClick}
+            onHeartHover={onHeartHover}
+            setIsCardHovered={setIsCardHovered}
+          />
+        </article>
+      )}
     </>
   );
 };

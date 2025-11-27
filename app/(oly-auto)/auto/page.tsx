@@ -3,6 +3,11 @@ import styles from "./../../global-styles/homepage.module.scss";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ExternalAd from "@/components/ExternalAd";
 import HeroSection from "@/components/HeroSection";
+import FeaturedServices from "@/components/FeaturedServicesFrontend";
+import Calculators from "@/app/(oly-properties)/properties/components/Calculators";
+import FeaturedListings from "@/components/FeaturedListings";
+import OlyArticles from "@/components/OlyArticles";
+import SponsoredArticles from "@/components/SponsoredArticles";
 const Page = () => {
   return (
     <div className={styles.container}>
@@ -18,8 +23,7 @@ const Page = () => {
           >
             <HeroSection
               category="vehicles"
-              mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
-        modern marketplace. The future of classifieds."
+              mainTitle=" South Africa’s leading car marketplace. Oly Auto a modern approach — it's easier to buy, sell, and discover your next ride"
             />
           </Suspense>
         </section>
@@ -37,17 +41,7 @@ const Page = () => {
             />
           </Suspense>
         </section>
-        <section className={styles.categories}>
-          <Suspense
-            fallback={
-              <div>
-                <LoadingSpinner />
-              </div>
-            }
-          >
-            Vehicle Categories
-          </Suspense>
-        </section>
+ 
         <section className={styles.features}>
             <Suspense
               fallback={
@@ -55,8 +49,29 @@ const Page = () => {
                   <LoadingSpinner />
                 </div>
               }
+              
+
             >
-             Features
+          <section className={styles.featured}>
+          <FeaturedServices
+            layout="textLeft"
+            path="#"
+            image="/cars/5.jpg"
+            title="Secure Car Finance"
+            description="We work with trusted lenders to help you get the best deal."
+            cta="Get Finance Help"
+            features={[
+              { id: 1, feature: "Compare offers from multiple finance partners" },
+              { id: 2, feature: "Get quick pre-qualification" },
+              { id: 3, feature: "No commitment, completely free"},
+            ]}
+            content={<Calculators />}
+          />
+        </section>
+
+        
+
+        
             </Suspense>
           </section>
           <section className={styles.featuredListings}>
@@ -67,9 +82,12 @@ const Page = () => {
                 </div>
               }
             >
-              Featured Listings
+              <FeaturedListings category="all" currentPage={0} />
             </Suspense>
           </section>
+           <section className={styles.calculators}>
+          <Calculators />
+        </section>
           <section className={styles.articles}>
             <Suspense
               fallback={
@@ -78,7 +96,7 @@ const Page = () => {
                 </div>
               }
             >
-              Oly Articles
+              <OlyArticles />
             </Suspense>
           </section>
            <section className={styles.belowFoldAd}>
@@ -103,7 +121,7 @@ const Page = () => {
                 </div>
               }
             >
-              Sponsored Articles
+              <SponsoredArticles />
             </Suspense>
           </section>
       </div>

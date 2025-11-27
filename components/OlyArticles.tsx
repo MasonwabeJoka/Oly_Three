@@ -7,6 +7,7 @@ import ArticlesSlider from "@/components/ArticlesSlider";
 const OlyArticles = () => {
   return (
     <div className={styles.blogSection}>
+      <h2 className={styles.title}>Oly Articles</h2>
       <ArticlesSlider />
       <div className={styles.buttons}>
         <Link href="/articles">

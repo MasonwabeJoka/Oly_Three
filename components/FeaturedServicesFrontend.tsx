@@ -1,3 +1,4 @@
+'use client';
 import Image from "@/components/Image";
 import styles from "./FeaturedServicesFrontend.module.scss";
 import Button from "@/components/Buttons";

@@ -1,6 +1,6 @@
 "use client";
 import styles from "./ReorderPhotos.module.scss";
-import ImageUploadsSection from "../components/ImageUploadsSection";
+import ImageUploadSection from "./ImageUploadSection";
 import { galleryData } from "@/data/GalleryData";
 import { SwiperSlide } from "swiper/react";
 import Icon from "@/components/Icon";

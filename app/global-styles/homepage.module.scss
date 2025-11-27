@@ -114,6 +114,19 @@
       width: 100%;
       margin-top: rem(32);
     }
+
+    
+    .featured {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: rem(32);
+      margin-bottom: rem(96);
+
+      @include only(largeDesktop) {
+        margin-bottom: rem(192);
+      }
+    }
     .features {
       width: 95vw;
       margin-bottom: rem(96);

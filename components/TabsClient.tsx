@@ -32,7 +32,10 @@ const TabsClient: React.FC<TabsProps> = ({
   const [tabOptions, setTabOptions] = useState<number | null>(null);
   const { isMobile } = useBreakpointStore();
 
-  const handleClick = (index: number, event: React.MouseEvent<HTMLLIElement>) => {
+  const handleClick = (
+    index: number,
+    event: React.MouseEvent<HTMLLIElement>
+  ) => {
     console.log("TabsClient: clicked tab index =", index, "tab =", tabs[index]);
     if (data) {
       if (tabOptions === null) {
@@ -56,8 +59,6 @@ const TabsClient: React.FC<TabsProps> = ({
     <ul
       className={styles.tabs}
       style={{
-        flexDirection: "column",
-        justifyContent: "center",
         width: dashboard ? "16.6875rem" : "19.1475rem",
       }}
     >
@@ -70,15 +71,16 @@ const TabsClient: React.FC<TabsProps> = ({
               index={index}
               title={title}
               count={count}
-              isActive={activeTabIndex !== undefined ? activeTabIndex === index : isActive === index}
+              isActive={
+                activeTabIndex !== undefined
+                  ? activeTabIndex === index
+                  : isActive === index
+              }
               isMobile
               onClick={(event) => handleClick(index, event)}
             />
             {data && (
-              <TabOptions
-                items={data[index]}
-                visible={tabOptions === index}
-              />
+              <TabOptions items={data[index]} visible={tabOptions === index} />
             )}
           </div>
         );
@@ -95,8 +97,7 @@ const TabsClient: React.FC<TabsProps> = ({
       <ul
         className={styles.tabs}
         style={{
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
+       
           width: condition
             ? `${(collageViewWidth || width) / 16}rem`
             : `${width / 16}rem`,
@@ -111,7 +112,11 @@ const TabsClient: React.FC<TabsProps> = ({
               index={index}
               title={title}
               count={count}
-              isActive={activeTabIndex !== undefined ? activeTabIndex === index : isActive === index}
+              isActive={
+                activeTabIndex !== undefined
+                  ? activeTabIndex === index
+                  : isActive === index
+              }
               style={{ flexBasis: tabWidth, flexShrink: tabWidth }}
               color={title === "Delete" ? "#ff3c14" : "#434b4d"}
               onClick={(event) => handleClick(index, event)}

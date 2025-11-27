@@ -16,6 +16,7 @@ type Props = {
   id?: string;
   imageUrls?: string[];
   title?: string;
+  vehicleVariant?: string;
   description?: string | PortableTextBlock[] | null;
   descriptionLength?: number;
   postAge?: string;
@@ -69,6 +70,7 @@ const ListingCardClient: React.FC<Props> = ({
   cardType,
   imageUrls,
   title,
+  vehicleVariant,
   description,
   descriptionLength,
   postAge,
@@ -145,39 +147,46 @@ const ListingCardClient: React.FC<Props> = ({
         setIsCardHovered={setIsCardHovered}
       />
     ) : (
-     <ListingCardSkeleton orientation="portrait" cardSize={cardSize || "standard"} />
+      <ListingCardSkeleton
+        orientation="portrait"
+        cardSize={cardSize || "standard"}
+      />
     )
   ) : cardType === "expanded" ? (
-    listing ? ( 
-    <ExpandedCard
-      category={category}
-      imageUrls={imageUrls}
-      aspectRatios={aspectRatios}
-      isCardHovered={isCardHovered}
-      isHeartClicked={isHeartClicked}
-      isHeartHovered={isHeartHovered}
-      isDeletable={isDeletable}
-      id={id}
-      isFeed={isFeed}
-      checkedColour={checkedColour}
-      hoverColour={hoverColour}
-      checkedHovered={checkedHovered}
-      avatar={avatar}
-      title={title}
-      description={description}
-      descriptionLength={descriptionLength}
-      suburb={suburb}
-      city={city}
-      price={price}
-      postAge={postAge}
-      onHeartClick={handleHeartClick}
-      onHeartHover={(hovered) => setIsHeartHovered(hovered)}
-      setIsCardHovered={setIsCardHovered}
-    />
+    listing ? (
+      <ExpandedCard
+        category={category}
+        imageUrls={imageUrls}
+        aspectRatios={aspectRatios}
+        isCardHovered={isCardHovered}
+        isHeartClicked={isHeartClicked}
+        isHeartHovered={isHeartHovered}
+        isDeletable={isDeletable}
+        id={id}
+        isFeed={isFeed}
+        checkedColour={checkedColour}
+        hoverColour={hoverColour}
+        checkedHovered={checkedHovered}
+        avatar={avatar}
+        title={title}
+        vehicleVariant={vehicleVariant}
+        description={description}
+        descriptionLength={descriptionLength}
+        suburb={suburb}
+        city={city}
+        price={price}
+        postAge={postAge}
+        onHeartClick={handleHeartClick}
+        onHeartHover={(hovered) => setIsHeartHovered(hovered)}
+        setIsCardHovered={setIsCardHovered}
+      />
     ) : (
-      <ListingCardSkeleton orientation="landscape" cardSize={cardSize || "standard"} />
+      <ListingCardSkeleton
+        orientation="landscape"
+        cardSize={cardSize || "standard"}
+      />
     )
-  ) : null
+  ) : null;
 };
 
 export default ListingCardClient;

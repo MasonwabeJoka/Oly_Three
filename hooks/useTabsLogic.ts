@@ -17,7 +17,6 @@ export function useTabsLogic({ getOptions }: UseTabsLogicProps) {
   });
 
   const handleTabClick = (index: number) => {
-    console.log("useTabsLogic: clicked tab index =", index);
     if (activeTabIndex === index) {
       setActiveTabIndex(null);
     } else {

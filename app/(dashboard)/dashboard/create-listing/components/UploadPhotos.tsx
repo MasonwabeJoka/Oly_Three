@@ -1,7 +1,7 @@
 import { FormWrapper } from "./FormWrapper";
 import styles from "./UploadPhotos.module.scss";
 import UploadBox from "@/components/UploadBox";
-import ImageUploadsSection from "../components/ImageUploadsSection";
+import ImageUploadSection from "./ImageUploadSection";
 import Button from "@/components/Buttons";
 import useUploadMediaStore from "../store/useUploadMediaStore";
 import useUploadFiles from "../store/useUploadFiles";
@@ -21,7 +21,7 @@ const UploadPhotos = () => {
           <UploadBox mediaType="photo" required={true} accept="image/*" />
         </div>
         <div className={styles.uploadedPhotos}>
-          <ImageUploadsSection uploadedFiles={uploadedImages} />
+          <ImageSlider uploadedFiles={uploadedImages} />
         </div>
         <div className={styles.buttonContainer}>
           <Button

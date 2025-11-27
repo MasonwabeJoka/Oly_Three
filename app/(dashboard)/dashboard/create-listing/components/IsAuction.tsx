@@ -4,16 +4,18 @@ import { useIsAuctionStore } from "../store/useIsAuction";
 import Button from "@/components/Buttons";
 import Link from "next/link";
 
-const IsAuction = () => {
+interface isAuctionProps {
+  title: string;
+  description: string;
+}
+
+const IsAuction = ({ title, description }: isAuctionProps) => {
   const { setIsAuction } = useIsAuctionStore();
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Want to auction your item?
-</h1>
-      <p className={styles.description}>
-       Choose 'Yes' to auction your item or 'No' to sell at a fixed price.
-      </p>
+      <h1 className={styles.title}>{title}</h1>
+      <p className={styles.description}>{description}</p>
       <div className={styles.buttons}>
         <Link
           href="/dashboard/create-listing/oly/select-category"

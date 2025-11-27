@@ -1,0 +1,46 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  touch-action: none;
+  width: 200px;
+  height: 20px;
+}
+
+.sliderTrack {
+  background-color: #e2e8f0;
+  position: relative;
+  flex-grow: 1;
+  border-radius: 9999px;
+  height: 3px;
+}
+
+.sliderRange {
+  position: absolute;
+  background-color: #3b82f6;
+  border-radius: 9999px;
+  height: 100%;
+}
+
+.sliderThumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #f8fafc;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.3);
+  }
+}

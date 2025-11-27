@@ -1,0 +1,67 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .description {
+    font-size: $h4;
+    font-weight: 500;
+
+    margin-bottom: rem(16);
+  }
+
+  .sub {
+    font-size: rem(14);
+    margin-bottom: rem(56);
+  }
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: rem(12);
+    border-radius: rem(72);
+    padding: rem(12);
+    // box-shadow: $shadow-two;
+
+    .button {
+      height: rem(112);
+      border-radius: rem(60);
+    }
+
+    .buttonChildren {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: rem(8);
+        padding-left: 0 rem(96);
+
+      .buttonLabel {
+        font-size: $h4;
+        font-weight: 500;
+      }
+
+      .buttonLabelSub {
+        font-size: rem(14);
+        font-weight: 300;
+        width: 70%;
+        color: $grey-four;
+      }
+
+     
+    }
+  }
+  
+  .disclaimer {
+    text-align: center;
+    font-size: rem(14);
+    font-weight: 300;
+    width: 70%;
+    color: $grey-four;
+    margin-top: rem(16);
+  } 
+}

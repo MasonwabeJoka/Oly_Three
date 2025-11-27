@@ -2,6 +2,12 @@ import styles from "./AutoHeroSectionFields.module.scss";
 import Image from "@/components/Image";
 import Form from "next/form";
 import AutoHeroSectionFieldsClient from "./AutoHeroSectionFieldsClient";
+import AutoSearchHome from "./AutoSearchHome";
+import AutoSearchByPrice from "./AutoSearchByPrice";
+import MakeModel from "./MakeModel";
+import MoreFilters from "./MoreFilters";
+import Location from "./SearchByLocation";
+import FinancialAssistance from "./FinancialAssistance";
 
 const AutoHeroSectionFields = async ({
   searchParams,
@@ -27,7 +33,12 @@ const AutoHeroSectionFields = async ({
               />
             </div>
             <div className={styles.buttons}>
-              <AutoHeroSectionFieldsClient />
+              {/* <AutoSearchHome/> */}
+              <AutoSearchByPrice/>
+              {/* <FinancialAssistance/> */}
+              {/* <MakeModel/> */}
+              {/* <MoreFilters/> */}
+              {/* <Location/> */}
             </div>
           </Form>
         </div>

@@ -2,33 +2,28 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: rem(1080);
+
+  .title {
+    font-size: $h4;
+    font-weight: 500;
+    margin-bottom: rem(20);
+  }
+  .description {
+    width: 50%;
+    margin-bottom: rem(48);
+    text-align: center;
+  }
+
+  .buttons {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: rem(1080);
-
-    .title {
-        font-size: $h4;
-        font-weight: 500;
-        margin-bottom: rem(20);
-    }
-    .description {
-        width: 50%;
-        margin-bottom: rem(48);
-        text-align: center;
-    }
-
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: rem(20);
-        margin-bottom: rem(120);
-
-       
-    }
-
+    gap: rem(20);
+  }
 }

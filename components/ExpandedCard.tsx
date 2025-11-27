@@ -17,6 +17,7 @@ type ExpandedCardProps = {
   checkedHovered?: string;
   avatar?: string;
   title?: string;
+  vehicleVariant?: string;
   description?: string | PortableTextBlock[] | null;
   descriptionLength?: number;
   suburb?: string;
@@ -43,6 +44,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
   checkedHovered,
   avatar,
   title,
+  vehicleVariant,
   description,
   descriptionLength,
   suburb,
@@ -70,6 +72,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
         checkedHovered={checkedHovered}
         avatar={avatar}
         title={title}
+        vehicleVariant={vehicleVariant}
         description={description}
         descriptionLength={descriptionLength}
         suburb={suburb}

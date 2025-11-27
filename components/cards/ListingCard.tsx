@@ -42,6 +42,7 @@ const ListingCard: React.FC<Props> = ({
   cardType,
   imageUrls,
   title,
+  vehicleVariant,
   description,
   descriptionLength,
   postAge,
@@ -71,6 +72,7 @@ const ListingCard: React.FC<Props> = ({
           cardType={cardType}
           imageUrls={imageUrls}
           title={title}
+          vehicleVariant={vehicleVariant}
           description={description}
           descriptionLength={descriptionLength}
           postAge={postAge}

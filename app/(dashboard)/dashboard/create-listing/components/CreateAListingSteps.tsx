@@ -208,6 +208,7 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
         path: "review-and-submit",
         fields: [],
       },
+    
     ],
     "oly-properties": [
       {
@@ -288,12 +289,7 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
       },
     ],
     "oly-auto": [
-      {
-        title: "Select A Category",
-        content: <SelectACategory />,
-        path: "select-category",
-        fields: ["category.main", "category.subcategory"],
-      },
+    
       {
         title: "Product Details",
         content: <Details onNext={() => handleNext()} />,
@@ -649,7 +645,8 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
         ) : site && steps[site] && steps[site][step] ? (
           <>
             <Step
-              step={steps[site][step]}
+              step={steps[site][step ?? 0] as StepType}
+              key={steps[site][step]}
               onNext={handleNext}
               onBack={handleBack}
               isLastStep={step === steps[site].length - 1}

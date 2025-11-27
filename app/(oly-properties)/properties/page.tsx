@@ -28,7 +28,7 @@ const Home = () => {
         <section className={styles.heroSection}>
           <HeroSection
             category="property"
-            mainTitle="Welcome to South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"
+            mainTitle="South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"
           />
         </section>
 
@@ -38,7 +38,7 @@ const Home = () => {
             path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
           />
         </section>
-        <section className={styles.propertyValuation}>
+        <section className={styles.featured}>
           <FeaturedServices
             layout="textLeft"
             path="/properties/valuation"
@@ -57,7 +57,7 @@ const Home = () => {
           />
         </section>
 
-        <section className={styles.preQualification}>
+        <section className={styles.featured}>
           <FeaturedServices
             layout="textRight"
             path="/properties/pre-qualification"
@@ -77,7 +77,7 @@ const Home = () => {
           />
         </section>
 
-        <section className={styles.agentFinder}>
+        <section className={styles.featured}>
           <FeaturedServices
             layout="textLeft"
             path="/properties/find-agent"
@@ -93,7 +93,7 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
-          <h2 className={styles.title}>Featured Properties</h2>
+         
           {/* <FeaturedListings category="property" /> */}
         </section>
 
@@ -107,12 +107,10 @@ const Home = () => {
           <Calculators />
         </section>
         <section className={styles.blog}>
-          <h2 className={styles.title}>Oly Articles</h2>
           <Blogs />
         </section>
 
         <section className={styles.sponsoredArticles}>
-          <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
       </div>

@@ -94,12 +94,26 @@
     }
   }
 
-  // Property category specific styles
+
+  &.vehicles,
   &.property {
     flex-direction: column;
     height: rem(160);
     width: rem(387);
   }
+
+  .vehicleSpecs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    // gap: rem(32);
+    font-size: rem(12);
+    padding: 0 rem(28);
+    // text-transform: uppercase;
+    margin-top: rem(40);
+    
+  }
+  
 }
 
 .detailsHovered {

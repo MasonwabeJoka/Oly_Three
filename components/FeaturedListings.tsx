@@ -22,6 +22,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
     <>
       {category === "all" && (
         <div className={styles.listingsSection}>
+          <h2 className={styles.title}>Featured Listings</h2>
           <div className={styles.collage}>
             <FeaturedListingsClient category={category} />
             <TempListingsCollage

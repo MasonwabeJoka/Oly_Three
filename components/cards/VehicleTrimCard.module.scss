@@ -1,0 +1,60 @@
+@use "@/utils/functions" as *;
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  position: relative;
+  display: flex;
+  background-color: $white-three;
+  width: rem(918);
+  height: rem(378);
+  border-radius: rem(40);
+  cursor: pointer;
+
+  .checkboxContainer {
+    position: absolute;
+    top: rem(20);
+    right: rem(20);
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    border-radius: rem(40);
+    box-shadow: $shadow-one;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: rem(20);
+    width: 40%;
+    height: 100%;
+    border-radius: rem(40);
+
+    .trimName {
+      font-size: $h4;
+      font-weight: 500;
+    }
+
+    .trimDetails {
+      width: 80%;
+      .detail {
+        display: flex;
+        gap: rem(16);
+        font-size: rem(14);
+        margin-bottom: rem(16);
+      }
+    }
+  }
+}

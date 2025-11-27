@@ -35,7 +35,7 @@ const Location = ({ onNext }: Props) => {
             ariaLabel="Province"
             autoFocus={false}
             required={false}
-            multiple={false}
+            isMultiSelect={false}
             dashboard
             error={errors.location?.province?.message}
             {...register("location.province")}

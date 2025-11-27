@@ -30,6 +30,7 @@ const FeaturedCategories = () => {
 
   return (
     <div className={styles.categoriesSection}>
+      <h2 className={styles.title}>Featured Categories</h2>
       <ul className={styles.categoriesContainer}>
         {data?.slice(0, 12).map((category, index) => {
           const { id, title, displayTitle, image } = category;

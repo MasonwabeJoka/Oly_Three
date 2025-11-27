@@ -1,0 +1,79 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    font-size: $h4;
+    font-weight: 500;
+    color: $danger;
+    margin-top: rem(64);
+    margin-bottom: rem(32);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: rem(920);
+    min-height: rem(180);
+    border-radius: rem(40);
+    background-color: $white-three;
+    padding: rem(64) rem(64);
+    margin-bottom: rem(32);
+    .cardHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: rem(32);
+      padding: 0 rem(32);
+
+      .cardTitle {
+        font-size: $h4;
+        font-weight: 500;
+        color: $black-four;
+      }
+
+      .editButtonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: rem(48);
+        height: rem(48);
+        border-radius: 50%;
+       
+        box-shadow: $shadow-three;
+        cursor: pointer;
+      }
+
+      .editButtonContainer:hover {
+      background-color: $white-four;
+      }
+    }
+
+    .cardContent {
+      display: flex;
+      flex-direction: column;
+    
+      padding: 0 rem(32);
+      margin-bottom: rem(32);
+
+      .cardItem {
+        font-weight: 300;
+        margin-bottom: rem(20)
+    }
+    .itemList {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: rem(20);
+        margin-left: rem(20);
+        .subItem {
+            font-weight: 300;
+        }
+    }
+    }
+  }
+}

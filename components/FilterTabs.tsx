@@ -46,7 +46,6 @@ const FilterTabs = ({
   const getFilterOptions = (filterIndex: number) => {
     const filters = renderSites();
     const filter = filters[filterIndex];
-    console.log("FilterTabs: filterIndex =", filterIndex, "filter =", filter);
     if (!filter || !filter.filterValues) return null;
 
     const { filterValues } = filter;

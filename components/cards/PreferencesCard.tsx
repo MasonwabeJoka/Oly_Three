@@ -12,8 +12,8 @@ type PreferencesCardProps = {
 const PreferencesCard = ({ preferenceCategory, preferences, onChange }: PreferencesCardProps) => {
   return (
     <section className={styles.container}>
-      <h2 className={styles.preferenceCategory}>{preferenceCategory}</h2>
       <div className={styles.cardWrapper}>
+      <h2 className={styles.preferenceCategory}>{preferenceCategory}</h2>
         {preferences.map((preference) => (
           <fieldset key={preference.id}>
             <legend className={styles.preferenceType}>
@@ -25,7 +25,8 @@ const PreferencesCard = ({ preferenceCategory, preferences, onChange }: Preferen
                 <div className={styles.option}>
                   <RadioButton
                     className={styles.radioButton}
-                    name={`${preferenceCategory}-${preference.id}`} // Unique name per preference
+                    name={`${preferenceCategory}-${preference.id}`}
+                    labelSide="right"
                     options={preference.options.map((opt) => ({ value: opt.value, label: opt.label }))}
                     selectedValue={preference.selectedValue}
                     onChange={(value: string) => onChange(preference.id, value)}

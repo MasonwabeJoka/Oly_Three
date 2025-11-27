@@ -25,9 +25,27 @@ type ExpandedDetailsProps = {
 };
 
 const propertyAttributes = [
-  { icon: "/icons/property/beds.png", alt: "BedsIcon", value: "3", label: "Beds", className: "beds" },
-  { icon: "/icons/property/bathrooms.png", alt: "BathroomsIcon", value: "2", label: "Bathrooms", className: "bathrooms" },
-  { icon: "/icons/property/landSize.png", alt: "LandSizeIcon", value: "100m²", label: "", className: "landSize" }
+  {
+    icon: "/icons/property/beds.png",
+    alt: "BedsIcon",
+    value: "3",
+    label: "Beds",
+    className: "beds",
+  },
+  {
+    icon: "/icons/property/bathrooms.png",
+    alt: "BathroomsIcon",
+    value: "2",
+    label: "Bathrooms",
+    className: "bathrooms",
+  },
+  {
+    icon: "/icons/property/landSize.png",
+    alt: "LandSizeIcon",
+    value: "100m²",
+    label: "",
+    className: "landSize",
+  },
 ];
 
 const PreventLinkClick = ({ children }: any) => {
@@ -57,10 +75,10 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
   price,
   postAge,
 }) => {
-  const truncateTitle = (text: string, maxLength: number) => 
+  const truncateTitle = (text: string, maxLength: number) =>
     text.length > maxLength ? text.slice(0, maxLength) : text;
 
-  const truncateDescription = (text: string, maxLength: number) => 
+  const truncateDescription = (text: string, maxLength: number) =>
     text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
 
   const getDetailsClass = () => {
@@ -91,7 +109,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
           </PreventLinkClick>
         </div>
       )}
-      
+
       <div className={styles.infoSectionContainer}>
         <div className={styles.infoSection}>
           <div className={styles.topSection}>
@@ -103,50 +121,63 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
             />
             <div className={styles.titleWrapper}>
               <p className={styles.title}>
+                {category === "vehicles" && <span>2018</span>}{" "}
                 {title && truncateTitle(title, 44)}
               </p>
               <div className={styles.location}>
                 <p className={styles.locationText}>
                   {formatLocation()}
+                  Sandton, JHB
                 </p>
               </div>
-               <div className={styles.postAge}>
+              <div className={styles.postAge}>
                 {/* {postAge && Formatter.formatRelativeTime(postAge)} */}
-               12 June
+                12 June
               </div>
             </div>
           </div>
-          
+
           <div className={styles.descriptionContainer}>
             <p className={styles.description}>
               {description && truncateDescription(description, 230)}
             </p>
           </div>
-          
+
           <div className={styles.cardBottom}>
             <div className={styles.propertiesContainer}>
               {category === "property" && (
                 <div className={styles.featuresWithIcons}>
-                  {propertyAttributes.map(({ icon, alt, value, label, className }) => (
-                    <div key={alt} className={`${styles.feature} ${styles[className]}`}>
-                      <Icon
-                        src={icon}
-                        alt={alt}
-                        width={16}
-                        height={alt === "LandSizeIcon" ? 11 : 16}
-                      />
-                      <p>
-                        {label && <span className={styles.featureValue}>{value}</span>}
-                        {label || value}
-                      </p>
-                    </div>
-                  ))}
+                  {propertyAttributes.map(
+                    ({ icon, alt, value, label, className }) => (
+                      <div
+                        key={alt}
+                        className={`${styles.feature} ${styles[className]}`}
+                      >
+                        <Icon
+                          src={icon}
+                          alt={alt}
+                          width={16}
+                          height={alt === "LandSizeIcon" ? 11 : 16}
+                        />
+                        <p>
+                          {label && (
+                            <span className={styles.featureValue}>{value}</span>
+                          )}
+                          {label || value}
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
               )}
-             
-              
+              {category === "vehicles" && (
+                <div className={styles.vehicleSpecs}>
+                  <span>Used</span> •<span>Automatic</span> •
+                  <span>10000km</span> •<span>Petrol</span>
+                </div>
+              )}
             </div>
-            
+
             <p className={styles.price}>
               {price && Formatter.formatPrice(price)}
             </p>

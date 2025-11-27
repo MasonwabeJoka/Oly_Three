@@ -1,28 +1,35 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   
 }
-.label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+
+
+
 .selectMenu {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: fit-content;
+  .label {
+    position: absolute;
+    top: rem(20);
+    left: rem(24);
+    z-index: 1;
+    color: $grey-four;
+    text-transform: uppercase;
+    font-size: rem(12);
+  }
+
+  // .labelHidden {
+  //   display: none;
+  // }
   .errorMessage {
     color: $danger;
     margin-bottom: rem(8);

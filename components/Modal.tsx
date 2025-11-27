@@ -13,6 +13,7 @@ type Props = {
   reload?: boolean; // Optional boolean to reload the page when modal is closed
   refresh?: boolean; // Optional boolean to refresh the page when modal is closed
   closeAllModals?: boolean; // Optional boolean to close the current modal
+  contentMoreThanScreenHeight?: boolean; // Optional boolean to determine if the modal content is more than the screen height
 };
 
 const Modal = ({
@@ -23,6 +24,7 @@ const Modal = ({
   reload,
   refresh,
   closeAllModals,
+  contentMoreThanScreenHeight,
 }: Props) => {
   const router = useRouter();
 const [isNavigating, setIsNavigating] = useState(false);
@@ -70,7 +72,7 @@ const [isNavigating, setIsNavigating] = useState(false);
   return (
     <>
       {showModal && (
-        <div className={styles.modalOverlay} onClick={handleClose}>
+        <div className={`${styles.modalOverlay} ${contentMoreThanScreenHeight ? styles.moreThanScreenHeight : styles.lessThanScreenHeight}`} onClick={handleClose}>
           <div className={styles.exitButtonContainer}  onClick={handleClose }>
             <ExitButton />
           </div>

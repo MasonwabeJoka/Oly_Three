@@ -82,10 +82,10 @@ const ImageSlider = ({
   }, [isCardHovered, swiper, activeIndex]);
 
   const swiperStyles = {
-    width: category === "property" ? "24.21875rem" : "19.375rem",
+    width: category === "property" || category === "vehicles" ? "24.21875rem" : "19.375rem",
   };
   const swiperSlideHeight = (index: number) => {
-    if (category === "property") {
+    if (category === "property" || category === "vehicles") {
       return "13.623046875rem";
     } else if (category === "shops") {
      
@@ -100,7 +100,7 @@ const ImageSlider = ({
   };
 
   const swiperSlideWidth =
-    category === "property" ? "24.21875rem" : "19.375rem";
+    category === "property" || category === "vehicles" ? "24.21875rem" : "19.375rem";
 
   return (
     <div className={styles.container} style={swiperStyles}>

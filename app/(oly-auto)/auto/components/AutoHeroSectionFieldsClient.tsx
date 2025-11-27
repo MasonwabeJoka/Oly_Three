@@ -137,7 +137,7 @@ const AutoHeroSectionFieldsClient = () => {
             type="submit"
             ariaLabel="Continue Button"
             autoFocus={false}
-            disabled={pending} // Disables during submission
+            disabled={pending} 
           />
         </div>
       </div>

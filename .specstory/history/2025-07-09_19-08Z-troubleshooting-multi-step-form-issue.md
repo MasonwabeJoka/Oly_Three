@@ -178,13 +178,13 @@ Tool use: **list_dir**
 | 📄 `VideoUploadForm.module.scss` |
 | 📄 `UploadVideos.module.scss` |
 | 📄 `UploadAttachments.module.scss` |
-| 📄 `ImageUploadsSection.module.scss` |
+| 📄 `ImageSlider.module.scss` |
 | 📄 `ReorderPhotos.module.scss` |
 | 📄 `FormWrapperTemp.tsx` |
 | 📄 `EditMode.module.scss` |
 | 📄 `layout.module.scss` |
 | 📄 `VideoUploadForm.tsx` |
-| 📄 `ImageUploadsSection.tsx` |
+| 📄 `ImageSlider.tsx` |
 | 📄 `ReorderPhotos.tsx` |
 | 📄 `UploadPhotos.tsx` |
 | 📄 `FormProgressBar.tsx` |
@@ -278,32 +278,37 @@ Read file: app/(dashboard)/dashboard/post-your-ad/validations/formDataSchema.ts
 Here’s what I found about why you can’t proceed after the Price step in your multi-step "post-your-ad" form:
 
 ### How Step Progression Works
+
 - When you click "Proceed," the form calls a `next` function from your Zustand store (`useFormStore`).
 - This function validates all fields up to and including the current step using React Hook Form’s `trigger` method and your Zod schema.
 - If validation fails, it sets an error message and **does not advance** to the next step.
 
 ### Price Step Validation
+
 - The Zod schema for the price step requires:
   - `pricingOption`: must be a non-empty string.
   - `price`: must be a positive number.
 
 ### Common Reasons for Getting Stuck on Price Step
+
 1. **Field Mismatch**:  
    Your `PriceClient.tsx` component uses fields like `price.amount`, `price.startingPrice`, and `price.buyNowPrice`, but your Zod schema expects `price.price`.
    - If you’re filling `price.amount` or `price.startingPrice` but not `price.price`, validation will fail and you can’t proceed.
 
-2. **Required Fields Not Filled**:  
+2. **Required Fields Not Filled**:
    - If `pricingOption` is empty or `price.price` is zero or missing, you can’t proceed.
 
-3. **Error Message**:  
+3. **Error Message**:
    - If validation fails, a message should appear (from `useFormStore().message`). If you don’t see it, check if it’s being rendered in your UI.
 
 ### What to Check/Fix
+
 - **Make sure the input for the price step is updating the `price.price` field** (not `price.amount`, `price.startingPrice`, etc., unless you update the schema to match).
 - **Ensure a pricing option is selected** and a positive price is entered.
 - **Look for any error message** on the form after clicking "Proceed"—it should tell you what’s missing.
 
 #### Example Fix (if using `price.amount` in the UI):
+
 - Either change your Zod schema to expect `amount` instead of `price`:
   ```js
   price: z.object({
@@ -332,7 +337,6 @@ _**Assistant**_
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/validations/formDataSchema.ts</summary>
 
 Update the Zod schema to use 'amount' instead of 'price' in the price object, matching the field used in the PriceClient form. Also add optional fields for 'startingPrice', 'buyNowPrice', and 'startTime' for auction support.
@@ -358,7 +362,6 @@ Lines added: 4, lines removed: 1
 ---
 
 Tool use: **edit_file**
-
 
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/store/useFormStore.ts</summary>
 
@@ -472,7 +475,6 @@ Read file: sanity/Types/Ad.ts
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: sanity/Types/Ad.ts</summary>
 
 Add 'amount' and 'startTime' as optional fields to the Ad type and AdSchema to match the new form structure and resolve linter errors in transformAdData.
@@ -488,7 +490,7 @@ Lines added: 3, lines removed: undefined
 +   amount: z.number().optional(),
 +   startTime: z.string().optional(),
   });
-  
+
 ```
 
 </details>
@@ -550,49 +552,56 @@ Your form and schema are now consistent, but you still cannot proceed past the P
 ---
 
 ### 1. **UI and Schema Are Now Consistent**
+
 - The form uses `price.amount` for the main price field, and the Zod schema expects `amount`.
 - The initial value for `amount` is `0`, which is **not valid** (the schema requires a positive number).
 
 ---
 
 ### 2. **What Could Still Block Progression?**
-- **Required fields not filled:**  
+
+- **Required fields not filled:**
   - `pricingOption` must be a non-empty string.
   - `amount` must be a positive number (greater than 0).
-- **Auction fields:**  
+- **Auction fields:**
   - If you select "Auction" as the pricing option, you may also need to fill `startingPrice`, `buyNowPrice`, and `startTime` if your UI or schema requires them.
 
 ---
 
 ### 3. **What to Try**
+
 - **Select a pricing option** (e.g., "Fixed Price").
 - **Enter a price greater than 0** in the price field.
-- **If using Auction:**  
+- **If using Auction:**
   - Enter values for starting price, buy now price, and start time if those fields are visible and required.
 
 ---
 
 ### 4. **If You Still Can't Proceed**
-- **Look for an error message** on the form. The form should display a message if validation fails (from `useFormStore().message`).  
+
+- **Look for an error message** on the form. The form should display a message if validation fails (from `useFormStore().message`).
   - If you see a message, what does it say?
 - **Check the browser console** for errors or warnings.
 
 ---
 
 ### 5. **If No Error Message Is Shown**
-- There may be a UI bug where the error message is not rendered.  
+
+- There may be a UI bug where the error message is not rendered.
   - Make sure your `FormWrapper` or Price step displays the `message` from the store.
 
 ---
 
 ### 6. **If You Want Me to Debug Further**
+
 - Tell me what pricing option you selected and what values you entered.
 - Tell me if you see any error message, and if so, what it says.
 - If you want, I can update the Price step to always show the error message from the store.
 
 ---
 
-**Summary:**  
+**Summary:**
+
 - Make sure you select a pricing option and enter a price greater than 0.
 - If you still can't proceed, let me know what you see (error message, console error, etc.), or I can update the UI to always show the error message for you.
 
@@ -648,6 +657,7 @@ The reason you cannot proceed from the "PromoteYourAd" step is the same as with 
 **The required field `promoteYourAd.promotionDuration` is not being set in your form data unless the user interacts with the Select component inside one of the PromoteYourAdCard cards.**
 
 ### Why This Happens
+
 - The Zod schema requires `promoteYourAd.promotionDuration` to be a non-empty string.
 - The PromoteYourAd step renders a set of cards, each with a Select for duration, but **none of them is selected by default** and the value is not set unless the user interacts with the Select.
 - If the user does not select a promotion duration, the field remains empty, validation fails, and you cannot proceed.
@@ -657,15 +667,18 @@ The reason you cannot proceed from the "PromoteYourAd" step is the same as with 
 ## How to Fix
 
 ### 1. **Set a Default Value for `promotionDuration`**
+
 - When the PromoteYourAd step is rendered, set a default value for `promoteYourAd.promotionDuration` in the form (e.g., the first available duration from the first card).
 - Alternatively, make the Select component in the first card auto-select its first option and update the form value.
 
 ### 2. **Show Error Message**
+
 - Make sure the error message from validation is displayed if the user tries to proceed without selecting a duration.
 
 ---
 
 ## Would you like me to:
+
 - Update the PromoteYourAd step to set a default value for `promotionDuration` when the step loads?
 - Or, update the UI to always show the error message if the field is not set?
 
@@ -682,7 +695,6 @@ I don't want anything to be validated in this step
 _**Assistant**_
 
 Tool use: **edit_file**
-
 
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/validations/formDataSchema.ts</summary>
 
@@ -738,7 +750,8 @@ Yes, I see exactly what you are talking about—and why it’s happening.
 ## Why You Can't Proceed From Any Step
 
 **The `next` function in your form store is validating _all fields up to and including the current step_ every time you try to proceed.**  
-This means:  
+This means:
+
 - If any previous step is incomplete or invalid (even if you made validation optional for the current step), you cannot proceed.
 - For example, if you skip the "Details" step or leave "category" empty, you will be blocked at any later step, not just the one with missing/invalid data.
 
@@ -762,7 +775,8 @@ This means:
 
 **Update the `next` function to only validate the fields for the current step, not all previous steps.**
 
-Would you like me to make this change for you?  
+Would you like me to make this change for you?
+
 - This will make each step validate only its own fields, and you will be able to proceed as long as the current step is valid (or has no required fields).
 
 Let me know if you want this update!
@@ -779,7 +793,6 @@ _**Assistant**_
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: app/(dashboard)/dashboard/post-your-ad/store/useFormStore.ts</summary>
 
 Update the next function so it only validates the fields for the current step, not all previous steps. This will allow users to proceed as long as the current step is valid, regardless of previous steps.
@@ -790,7 +803,7 @@ Lines added: 4, lines removed: 5
 ```diff
 @@ -221,9 +221,8 @@
       set({ message: '' });
-  
+
 -     // Validate all fields up to the current step
 -    const fieldsToValidate = steps
 -       .slice(0, currentStepIndex + 1)
@@ -800,7 +813,7 @@ Lines added: 4, lines removed: 5
 +     const fieldsToValidate = steps[currentStepIndex].fields.filter(
 +       field => field !== "location.customLocation" && field !== "reviewYourAd"
 +     );
-  
+
       if (fieldsToValidate.length > 0) {
 ```
 
@@ -822,7 +835,6 @@ Read file: sanity/Types/Ad.ts
 
 Tool use: **edit_file**
 
-
 <details><summary>Edit file: sanity/Types/Ad.ts</summary>
 
 Add 'images' and 'promotionDuration' as optional fields to the AdSchema and Ad type to resolve linter errors in transformAdData.
@@ -837,7 +849,7 @@ Lines added: 2, lines removed: undefined
 +   images: z.array(ImageSchema).optional(),
 +   promotionDuration: z.string().optional(),
   });
-  
+
 ```
 
 </details>
@@ -854,4 +866,3 @@ You should now be able to proceed through your form as expected, with each step 
 If you still encounter any issues, let me know what you see (error messages, console output, or UI behavior), and I’ll help you resolve them!
 
 ---
-

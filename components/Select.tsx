@@ -1,7 +1,8 @@
+"use client";
+
 import styles from "./Select.module.scss";
-import { useState, forwardRef, useRef, useEffect } from "react";
+import { useState, forwardRef, useRef, useEffect, useCallback } from "react";
 import Icon from "@/components/Icon";
-import useSidebarStore from "@/store/useSidebarStore";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Input from "./Input";
@@ -25,43 +26,37 @@ interface SelectProps {
   id: string;
   name: string;
   ariaLabel: string;
-  autoFocus?: boolean;
-  autoComplete?: "on" | "off";
   required?: boolean;
   selectDescription?: string;
-  form?: string;
-  initialValue?: string | string[];
-  setterValue?: any;
+  initialValue?: string;
   value?: any;
-  showSearchOptions?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onBlur?: any;
   isMultiSelect?: boolean;
   dashboard?: boolean;
+  showSearchOptions?: boolean;
   onDropdownOpenChange?: (isOpen: boolean) => void;
   onOptionsCountChange?: (count: number) => void;
-  ariaDescribedBy?: string;
-  ariaInvalid?: boolean;
+  disabled?: boolean;
+  autoFocus?: boolean; // ← Added
 }
 
 const SELECT_COLOUR_TYPE = {
-  primary: `${styles.primary}`,
-  normal: `${styles.normal}`,
-  round: `${styles.round}`,
-  outlined: `${styles.outlined}`,
-  success: `${styles.success}`,
-  warning: `${styles.warning}`,
-  danger: `${styles.danger}`,
-  info: `${styles.info}`,
-  link: `${styles.linkBtn}`,
+  primary: styles.primary,
+  normal: styles.normal,
+  round: styles.round,
+  outlined: styles.outlined,
+  success: styles.success,
+  warning: styles.warning,
+  danger: styles.danger,
+  info: styles.info,
+  link: styles.linkBtn,
   "": "",
-};
+} as const;
 
 const Select = forwardRef<HTMLDivElement, SelectProps>(
   (
     {
       value,
-      showSearchOptions = false,
       options = [],
       reactHookFormProps,
       error,
@@ -69,265 +64,236 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       selectColourType = "normal",
       className = "",
       label,
-      autoComplete,
       id,
-      initialValue = "",
-      setterValue,
       name,
       ariaLabel,
       required = false,
       selectDescription,
+      initialValue,
       onChange,
-      onBlur,
       dashboard = false,
       isMultiSelect = false,
+      showSearchOptions = false,
       onDropdownOpenChange,
       onOptionsCountChange,
-      ...otherProps
+      disabled = false,
+      autoFocus = false,
+      ...rest
     },
-    ref
+    refFromForwardRef
   ) => {
-    const [selectedOptions, setSelectedOptions] = useState<string[]>(
-      Array.isArray(initialValue)
-        ? initialValue
-        : typeof initialValue === "string"
-          ? [initialValue]
-          : []
-    );
-    const controlled = value !== undefined;
-    const selected = controlled
+    // Refs
+    const rootRef = useRef<HTMLDivElement>(null);
+    const optionsListRef = useRef<HTMLUListElement>(null);
+    const dropDownOpenerRef = useRef<HTMLDivElement>(null);
+
+    // State
+    const [internalSelected, setInternalSelected] = useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
+
+    const hasControlledValue =
+      value !== undefined && value !== null && value !== "";
+    const selected = hasControlledValue
       ? isMultiSelect
         ? Array.isArray(value)
           ? value
-          : []
-        : typeof value === "string"
+          : value
+            ? [value]
+            : []
+        : value != null
           ? [value]
           : []
-      : selectedOptions;
-    const [showOptions, setShowOptions] = useState<boolean>(false);
-    const [searchValue, setSearchValue] = useState("");
-    const [focusedOptionIndex, setFocusedOptionIndex] = useState<number>(-1);
-    const selectRef = useRef<HTMLDivElement>(null);
-    const searchInputRef = useRef<HTMLInputElement | null>(null);
-    const optionsListRef = useRef<HTMLUListElement>(null);
+      : internalSelected;
 
-    let sizeClass = "";
-    switch (selectSize) {
-      case "medium":
-        sizeClass = !dashboard
-          ? styles.mediumSelect
-          : styles.mediumDashboardSelect;
-        break;
-      case "xLarge":
-        sizeClass = !dashboard
-          ? styles.xLargeSelect
-          : styles.xLargeDashboardSelect;
-        break;
-      default:
-        sizeClass = !dashboard
-          ? styles.largeSelect
-          : styles.largeDashboardSelect;
-    }
+    // Auto-focus the opener when requested
+    useEffect(() => {
+      if (autoFocus && dropDownOpenerRef.current) {
+        dropDownOpenerRef.current.focus();
+      }
+    }, [autoFocus]);
 
-    const getOptionLabel = (option: string | { label: string; value: any }) =>
-      typeof option === "string" ? option : option.label;
+    // Merge internal ref + forwardRef from parent
+    const setDropDownOpenerElement = useCallback(
+      (element: HTMLDivElement | null) => {
+        dropDownOpenerRef.current = element;
 
-    const getOptionValue = (option: string | { label: string; value: any }) =>
-      typeof option === "string" ? option : option.value;
-    const filteredOptions = options.filter((option) =>
-      getOptionLabel(option).toLowerCase().includes(searchValue.toLowerCase())
+        if (refFromForwardRef) {
+          if (typeof refFromForwardRef === "function") {
+            refFromForwardRef(element);
+          } else {
+            refFromForwardRef.current = element;
+          }
+        }
+      },
+      [refFromForwardRef]
     );
 
-    // Notify parent whenever showOptions changes
+    // Size class
+    const sizeClass = (() => {
+      switch (selectSize) {
+        case "medium":
+          return dashboard ? styles.mediumDashboardSelect : styles.mediumSelect;
+        case "xLarge":
+          return dashboard ? styles.xLargeDashboardSelect : styles.xLargeSelect;
+        default:
+          return dashboard ? styles.largeDashboardSelect : styles.largeSelect;
+      }
+    })();
+
+    // Helper functions
+    const getOptionLabel = (opt: string | { label: string; value: any }) =>
+      typeof opt === "string" ? opt : opt.label;
+
+    const getOptionValue = (opt: string | { label: string; value: any }) =>
+      typeof opt === "string" ? opt : opt.value;
+
+    const filteredOptions = options.filter((opt) =>
+      getOptionLabel(opt).toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const getLabelFromValue = (val: any): string => {
+      if (val == null) return "";
+      const option = options.find((opt) => getOptionValue(opt) === val);
+      return option ? getOptionLabel(option) : String(val);
+    };
+
+    const selectedLabels = selected.map(getLabelFromValue).filter(Boolean);
+
+    const placeholderText =
+  typeof initialValue === "string" && initialValue.trim() !== ""
+    ? initialValue
+    : "Select an option";
+
+const displayText = isOpen
+  ? placeholderText
+  : selectedLabels.length > 0
+    ? selectedLabels.join(", ")
+    : placeholderText;
+
+    const hasSelection = selected.length > 0;
+
+    // Effects
+    useEffect(
+      () => onDropdownOpenChange?.(isOpen),
+      [isOpen, onDropdownOpenChange]
+    );
+    useEffect(
+      () => onOptionsCountChange?.(filteredOptions.length),
+      [filteredOptions.length, onOptionsCountChange]
+    );
+    useOnClickOutside(rootRef, () => setIsOpen(false));
+
+    // Change handlers
+    const triggerChange = (values: any[]) => {
+      if (!onChange) return;
+      const newValue = isMultiSelect ? values : (values[0] ?? "");
+      onChange({ target: { value: newValue, name } } as any);
+    };
+
+    const handleSingleSelect = (val: any) => {
+      if (!hasControlledValue) setInternalSelected([val]);
+      triggerChange([val]);
+      setIsOpen(false);
+    };
+
+    const handleMultiSelect = (val: any, checked: boolean) => {
+      const updated = checked
+        ? [...selected, val]
+        : selected.filter((v) => v !== val);
+      if (!hasControlledValue) setInternalSelected(updated);
+      triggerChange(updated);
+    };
+
+    const handleSelectAll = (checked: boolean) => {
+      const allValues = filteredOptions.map(getOptionValue);
+      const updated = checked
+        ? [...new Set([...selected, ...allValues])]
+        : selected.filter((v) => !allValues.includes(v));
+      if (!hasControlledValue) setInternalSelected(updated);
+      triggerChange(updated);
+    };
+
+    const clearSelections = () => {
+      if (!hasControlledValue) setInternalSelected([]);
+      triggerChange([]);
+      setSearchTerm("");
+    };
+
+    // Keyboard navigation
     useEffect(() => {
-      onDropdownOpenChange?.(showOptions);
-    }, [showOptions, onDropdownOpenChange]);
+      if (!isOpen) return;
 
-    // Notify parent of options count whenever options or searchValue changes
-
-    useEffect(() => {
-      const filteredOptions = options.filter((option) =>
-        getOptionLabel(option).toLowerCase().includes(searchValue.toLowerCase())
-      );
-
-      onOptionsCountChange?.(filteredOptions.length);
-    }, [options, searchValue, onOptionsCountChange]);
-
-    useEffect(() => {
-      const handleWheel = (e: WheelEvent) => {
-        const optionsElement = selectRef.current?.querySelector(".options");
-        if (optionsElement && optionsElement.contains(e.target as Node)) {
-          e.preventDefault();
-        }
-      };
-
-      document.addEventListener("wheel", handleWheel, { passive: false });
-      return () => {
-        document.removeEventListener("wheel", handleWheel);
-      };
-    }, [showOptions]);
-
-    useEffect(() => {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (!showOptions) return;
-
+      const handleKey = (e: KeyboardEvent) => {
         switch (e.key) {
           case "Escape":
-            setShowOptions(false);
+            setIsOpen(false);
             setFocusedOptionIndex(-1);
             break;
           case "ArrowDown":
             e.preventDefault();
-            setFocusedOptionIndex((prev) =>
-              prev < filteredOptions.length - 1 ? prev + 1 : 0
+            setFocusedOptionIndex((i) =>
+              i < filteredOptions.length - 1 ? i + 1 : 0
             );
             break;
           case "ArrowUp":
             e.preventDefault();
-            setFocusedOptionIndex((prev) =>
-              prev > 0 ? prev - 1 : filteredOptions.length - 1
+            setFocusedOptionIndex((i) =>
+              i > 0 ? i - 1 : filteredOptions.length - 1
             );
             break;
           case "Enter":
           case " ":
             e.preventDefault();
-            if (focusedOptionIndex >= 0) {
-              const option = filteredOptions[focusedOptionIndex];
-              const value = getOptionValue(option);
-              const label = getOptionLabel(option);
-
-              if (isMultiSelect) {
-                handleMultiSelect(label, !selected.includes(label));
-              } else {
-                handleSingleSelect(value);
-              }
-            }
+            if (focusedOptionIndex < 0) return;
+            const opt = filteredOptions[focusedOptionIndex];
+            const val = getOptionValue(opt);
+            isMultiSelect
+              ? handleMultiSelect(val, !selected.includes(val))
+              : handleSingleSelect(val);
             break;
         }
       };
 
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    }, [
-      showOptions,
-      focusedOptionIndex,
-      filteredOptions,
-      selected,
-      isMultiSelect,
-    ]);
+      document.addEventListener("keydown", handleKey);
+      return () => document.removeEventListener("keydown", handleKey);
+    }, [isOpen, focusedOptionIndex, filteredOptions, selected, isMultiSelect]);
 
-    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => {
-      setShowOptions(false);
-    });
-
-    const handleSingleSelect = (optionValue: string) => {
-      const newSelected = [optionValue];
-      if (!controlled) {
-        setSelectedOptions(newSelected);
-      }
-      triggerChangeEvent(newSelected);
-      setShowOptions(false);
-    };
-
-    const handleMultiSelect = (optionText: string, checked: boolean) => {
-      const updatedOptions = checked
-        ? [...selected, optionText]
-        : selected.filter((item) => item !== optionText);
-      if (!controlled) {
-        setSelectedOptions(updatedOptions);
-      }
-      triggerChangeEvent(updatedOptions);
-    };
-
-    const handleSelectAll = (checked: boolean) => {
-      const allOptionLabels = filteredOptions.map(getOptionLabel);
-      const updatedOptions = checked
-        ? [...new Set([...selected, ...allOptionLabels])]
-        : selected.filter((item) => !allOptionLabels.includes(item));
-      if (!controlled) {
-        setSelectedOptions(updatedOptions);
-      }
-      triggerChangeEvent(updatedOptions);
-    };
-
-    const triggerChangeEvent = (values: string[]) => {
-      if (onChange) {
-        const changeValue = isMultiSelect ? values : (values[0] ?? "");
-        onChange({
-          target: { value: changeValue, name } as any,
-        } as React.ChangeEvent<HTMLSelectElement>);
-      }
-    };
-
-    const handleShadcnChange = (value: string) => {
-      if (!isMultiSelect) {
-        handleSingleSelect(value);
-      }
-    };
-
-    const clearSelections = () => {
-      const newSelected: string[] = [];
-      if (!controlled) {
-        setSelectedOptions(newSelected);
-      }
-      setSearchValue("");
-      triggerChangeEvent(newSelected);
-    };
-
-    const selectClass = `${
-      !dashboard ? styles.select : styles.dashboardSelect
-    } ${sizeClass} ${
+    // CSS classes
+    const selectClass = `${dashboard ? styles.dashboardSelect : styles.select} ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-    } ${className || ""}`;
-
-    const displayText = showOptions
-      ? typeof initialValue === "string"
-        ? initialValue
-        : "Select an option"
-      : selected.length > 0
-        ? selected.join(", ").length > 40
-          ? selected.join(", ").slice(0, 40) + "..."
-          : selected.join(", ")
-        : typeof initialValue === "string"
-          ? initialValue
-          : "Select an option";
+    } ${className}`;
 
     const selectId = `select-${id}`;
     const listboxId = `listbox-${id}`;
     const errorId = error ? `${id}-error` : undefined;
     const descriptionId = selectDescription ? `${id}-description` : undefined;
-    const ariaDescribedByIds = [errorId, descriptionId]
-      .filter(Boolean)
-      .join(" ");
+    const ariaDescribedBy = [errorId, descriptionId].filter(Boolean).join(" ");
 
     return (
-      <div ref={selectRef} className={`${className} ${styles.container}`}>
+      <div ref={rootRef} className={`${className} ${styles.container}`}>
+        {/* Hidden native select for form accessibility */}
         <ShadcnSelect
-          value={isMultiSelect ? undefined : selected[0] || ""}
-          onValueChange={handleShadcnChange}
-          disabled={isMultiSelect}
+          value={isMultiSelect ? undefined : (selected[0] ?? "")}
+          disabled={disabled}
         >
           <SelectTrigger style={{ display: "none" }}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent style={{ display: "none" }}>
-            {options.map((option, index) => {
-              const value = getOptionValue(option);
-              const label = getOptionLabel(option);
-              return (
-                <SelectItem key={index} value={value}>
-                  {label}
-                </SelectItem>
-              );
-            })}
+            {options.map((opt, i) => (
+              <SelectItem key={i} value={getOptionValue(opt)}>
+                {getOptionLabel(opt)}
+              </SelectItem>
+            ))}
           </SelectContent>
         </ShadcnSelect>
-        <div className={`${styles.selectMenu}`}>
-          {label && (
+
+        <div className={styles.selectMenu}>
+          {label && hasSelection && !isOpen && (
             <label htmlFor={selectId} className={styles.label}>
-              {label}
+              {label.length > 12 ? `${label.substring(0, 12)}...` : label}
               {required && <span aria-label="required"> *</span>}
             </label>
           )}
@@ -339,57 +305,48 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           )}
 
           {error && (
-            <p
-              id={errorId}
-              className={styles.errorMessage}
-              role="alert"
-              aria-live="polite"
-            >
-              {error as string}
+            <p id={errorId} className={styles.errorMessage} role="alert">
+              {error}
             </p>
           )}
 
           <div
+            ref={setDropDownOpenerElement}
             id={selectId}
             className={`${styles.selectContainer} ${selectClass}`}
             role="combobox"
-            aria-expanded={showOptions}
+            aria-expanded={isOpen}
             aria-haspopup="listbox"
             aria-controls={listboxId}
             aria-label={ariaLabel}
-            aria-describedby={ariaDescribedByIds || undefined}
+            aria-describedby={ariaDescribedBy || undefined}
             aria-invalid={!!error}
             aria-required={required}
             tabIndex={0}
-            onClick={() => {
-              setShowOptions((prev) => !prev);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setShowOptions((prev) => !prev);
-              }
-            }}
+            onClick={() => setIsOpen((o) => !o)}
+            onKeyDown={(e) =>
+              (e.key === "Enter" || e.key === " ") &&
+              (e.preventDefault(), setIsOpen((o) => !o))
+            }
             {...(reactHookFormProps ?? {})}
+            {...rest}
           >
             <div
               className={selectClass}
-              style={{
-                backgroundColor: showOptions ? "#ffffff" : "#f3f7fa",
-              }}
+              style={{ backgroundColor: isOpen ? "#ffffff" : "#f3f7fa" }}
             >
-              {isMultiSelect && showOptions && selected.length > 0 && (
+              {isMultiSelect && isOpen && selected.length > 0 && (
                 <div className={styles.selectCountContainer}>
                   <div className={styles.selectCount}>{selected.length}</div>
                 </div>
               )}
 
-              {isMultiSelect && selected.length > 0 && !showOptions && (
+              {isMultiSelect && selected.length > 0 && !isOpen && (
                 <div className={styles.clearIconContainer}>
                   <Icon
                     className={styles.clearIcon}
                     src="/icons/X.png"
-                    alt="clear"
+                    alt="Clear selection"
                     width={16}
                     height={16}
                     onClick={(e) => {
@@ -399,10 +356,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                   />
                 </div>
               )}
+
               <p
-                style={{
-                  color: selected.length === 0 ? "#67787c" : "#434b4d",
-                }}
+                style={{ color: selected.length === 0 ? "#67787c" : "#434b4d" }}
               >
                 {displayText}
               </p>
@@ -412,7 +368,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               <Icon
                 className={`${styles.dropdownIconOpen} ${styles.dropdownIcon}`}
                 src="/icons/chevron-down.png"
-                alt="chevron"
+                alt=""
                 width={28}
                 height={28}
               />
@@ -420,17 +376,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           </div>
         </div>
 
-        {showOptions && (
-          <div
-            className={`${styles.searchInputContainer} ${styles.options}`}
-            role="region"
-            aria-label="Select options"
-          >
+        {isOpen && (
+          <div className={`${styles.searchInputContainer} ${styles.options}`}>
             {isMultiSelect && showSearchOptions && (
               <div className={styles.searchContainer}>
                 <Input
                   className={`${styles.searchInput} ${styles.option}`}
-                  isSearchBar={false}
                   inputType="text"
                   inputSize="large"
                   iconSrcRight="/icons/search.png"
@@ -439,21 +390,16 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                   iconHeight={32}
                   label="Search options"
                   id={`${id}-search`}
-                  name="searchInput"
-                  value={searchValue}
+                  name={`${name}-search`}
+                  value={searchTerm}
                   placeholder="Search options..."
                   ariaLabel="Search options"
-                  autoComplete="off"
                   onChange={(e) => {
-                    setSearchValue(e.target.value);
+                    setSearchTerm(e.target.value);
                     setFocusedOptionIndex(-1);
                   }}
                   autoFocus
-                  required={false}
                 />
-                <div className="sr-only" aria-live="polite">
-                  {filteredOptions.length} options available
-                </div>
               </div>
             )}
 
@@ -462,48 +408,34 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               id={listboxId}
               className={styles.optionsList}
               role="listbox"
-              aria-label={`${label} options`}
               aria-multiselectable={isMultiSelect}
             >
-              {isMultiSelect && (
+              {isMultiSelect && filteredOptions.length > 0 && (
                 <li
-                  className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper}`}
-                  role="option"
-                  aria-selected={filteredOptions.every((option) =>
-                    selected.includes(getOptionLabel(option))
-                  )}
+                  className={`${sizeClass} ${
+                    dashboard && selectSize === "medium"
+                      ? styles.mediumOptionWrapper
+                      : styles.optionWrapper
+                  }`}
                 >
                   <div
                     className={`${styles.option} ${styles.selectAll}`}
                     onClick={() =>
                       handleSelectAll(
-                        !filteredOptions.every((option) =>
-                          selected.includes(getOptionLabel(option))
+                        !filteredOptions.every((o) =>
+                          selected.includes(getOptionValue(o))
                         )
                       )
                     }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        handleSelectAll(
-                          !filteredOptions.every((option) =>
-                            selected.includes(getOptionLabel(option))
-                          )
-                        );
-                      }
-                    }}
                     tabIndex={0}
-                    role="button"
-                    aria-label="Select all options"
+                    role="option"
                   >
                     <div className={styles.checkboxContainer}>
                       <Checkbox
-                        id={`${id}-select-all`}
-                        type="checkbox"
-                        checked={filteredOptions.every((option) =>
-                          selected.includes(getOptionLabel(option))
+                        checked={filteredOptions.every((o) =>
+                          selected.includes(getOptionValue(o))
                         )}
-                        onChange={(checked) => handleSelectAll(checked)}
+                        onChange={handleSelectAll}
                       />
                     </div>
                     <span className={styles.optionText}>Select All</span>
@@ -514,38 +446,28 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               {filteredOptions.map((option, index) => {
                 const label = getOptionLabel(option);
                 const value = getOptionValue(option);
-                const isSelected = selected.includes(label);
+                const isSelected = selected.includes(value);
                 const isFocused = focusedOptionIndex === index;
 
                 return (
                   <li
                     key={index}
-                    className={`${sizeClass} ${dashboard && selectSize === "medium" ? styles.mediumOptionWrapper : styles.optionWrapper} ${isFocused ? styles.focused : ""}`}
+                    className={`${sizeClass} ${
+                      dashboard && selectSize === "medium"
+                        ? styles.mediumOptionWrapper
+                        : styles.optionWrapper
+                    } ${isFocused ? styles.focused : ""}`}
                     role="option"
                     aria-selected={isSelected}
-                    id={`${id}-option-${index}`}
                   >
                     <div
                       className={`${styles.option} ${isFocused ? styles.focusedOption : ""}`}
                       onClick={() =>
                         isMultiSelect
-                          ? handleMultiSelect(value, !selected.includes(value))
+                          ? handleMultiSelect(value, !isSelected)
                           : handleSingleSelect(value)
                       }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          isMultiSelect
-                            ? handleMultiSelect(
-                                value,
-                                !selected.includes(value)
-                              )
-                            : handleSingleSelect(value);
-                        }
-                      }}
                       tabIndex={0}
-                      role="button"
-                      aria-label={`${isMultiSelect ? (isSelected ? "Deselect" : "Select") : "Choose"} ${label}`}
                     >
                       {isMultiSelect && (
                         <div
@@ -553,33 +475,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                           onClick={(e) => e.stopPropagation()}
                         >
                           <Checkbox
-                            id={`${id}-checkbox-${index}`}
-                            type="checkbox"
                             checked={isSelected}
-                            onChange={(checked) =>
-                              handleMultiSelect(label, checked)
-                            }
+                            onChange={(c) => handleMultiSelect(value, c)}
                           />
                         </div>
                       )}
                       <span className={styles.optionText}>{label}</span>
-                      {isSelected && !isMultiSelect && (
-                        <span className="sr-only">Selected</span>
-                      )}
                     </div>
                   </li>
                 );
               })}
             </ul>
-
-            <div className="sr-only" aria-live="polite" aria-atomic="true">
-              {isMultiSelect &&
-                selected.length > 0 &&
-                `${selected.length} option${selected.length === 1 ? "" : "s"} selected`}
-              {focusedOptionIndex >= 0 &&
-                filteredOptions[focusedOptionIndex] &&
-                `Focused on ${getOptionLabel(filteredOptions[focusedOptionIndex])}`}
-            </div>
           </div>
         )}
       </div>

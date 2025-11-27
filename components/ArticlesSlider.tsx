@@ -19,7 +19,6 @@ const ArticleSlider = () => {
     setIsClient(true);
   }, []);
 
-  // Don't render anything until we're on the client to avoid hydration mismatch
   if (!isClient) {
     return (
       <div className={styles.articleSection}>

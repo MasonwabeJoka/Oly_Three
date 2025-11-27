@@ -52,6 +52,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
     if ((category === "all" || category === "shops") && isCardHovered)
       className += ` ${styles.detailsHovered}`;
     if (category === "property") className += ` ${styles.property}`;
+    if (category === "vehicles") className += ` ${styles.vehicles}`;
     return className;
   };
 
@@ -120,13 +121,58 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
         </>
       );
     }
+    if (category === "vehicles") {
+      return (
+        <>
+          <div className={styles.titleAndPrice}>
+            
+            <p className={styles.title}><span>2018</span> {title && truncateTitle(title, 44)} </p>
+            <p className={styles.price}>
+              {price && Formatter.formatLargeNumber(price)}
+            </p>
+          </div>
+
+          <div className={styles.locationContainer}>
+            <div className={styles.city}>Sunnyside</div>
+            <div className={styles.suburb}>PTA</div>
+          </div>
+          <div className={styles.vehicleSpecs}>
+            <span>Used</span>
+            <span>Automatic</span>  
+            <span>10000km</span>
+            <span>Petrol</span>
+          </div>
+
+
+          {/* <div className={styles.featuresWithIcons}>
+            {FEATURES.map(({ icon, alt, value, label, className }) => (
+              <div key={alt} className={`${styles.feature} ${className}`}>
+                <Icon
+                  src={icon}
+                  alt={alt}
+                  width={16}
+                  height={alt === "LandSizeIcon" ? 11 : 16}
+                />
+                <p>
+                  {label && (
+                    <span className={styles.featureValue}>{value}</span>
+                  )}
+                  {label || value}
+                </p>
+              </div>
+            ))}
+          </div> */}
+        </>
+      );
+    }
 
     return null;
   };
 
   return category === "all" ||
     category === "shops" ||
-    category === "property" ? (
+    category === "property" ||
+    category === "vehicles" ? (
     <div className={getDetailsClass()}>{renderContent()}</div>
   ) : null;
 };

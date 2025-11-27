@@ -104,6 +104,14 @@
               }
             }
           }
+
+          .vehicleSpecs {
+   display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 rem(20) 0 0;
+            margin-bottom: rem(8);
+          }
         }
         .price {
           font-size: $h4 !important;

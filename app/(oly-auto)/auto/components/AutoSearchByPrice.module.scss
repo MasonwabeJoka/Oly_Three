@@ -1,0 +1,86 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: rem(8);
+  .searchOptions {
+    border-radius: rem(48);
+    background-color: #e0f1fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: rem(8);
+    .searchOption {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #c9dce8;
+      cursor: pointer;
+      width: rem(600);
+      height: rem(160);
+      padding: 0 rem(60);
+      margin: 0 rem(8);
+      border-radius: rem(40);
+
+      &:first-child {
+        margin-top: rem(8);
+      }
+
+      &:last-child {
+        margin-bottom: rem(8);
+      }
+      .detail {
+        margin-bottom: rem(12);
+      }
+
+      .searchAmountWrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .term {
+          font-size: $body;
+          font-weight: 400;
+          span {
+            font-weight: 600;
+          }
+        }
+        .amount {
+          font-size: $h4;
+
+          span {
+            font-weight: 600;
+          }
+        }
+      }
+
+      .interestRate {
+        font-size: $body;
+        font-weight: 400;
+        span {
+          font-weight: 600;
+        }
+      }
+
+      .note {
+        margin-bottom: rem(8);
+        font-size: $body;
+        font-weight: 400;
+        color: $black-four;
+      }
+    }
+  }
+
+  .searchOption:hover {
+    background-color: #cfe6f5;
+  }
+
+  .disclosure {
+    margin-top: rem(8);
+    font-size: rem(14);
+  }
+}

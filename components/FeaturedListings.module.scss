@@ -7,6 +7,22 @@
   align-items: center;
   justify-content: center;
   
+  .title {
+    display: flex;
+    justify-content: center;
+    font-size: $h3 !important;
+    font-weight: 600;
+    color: $black-four;
+    margin-bottom: rem(48);
+
+    @include only(largeDesktop) {
+    }
+
+    @include only(smallDesktop) {
+      margin-bottom: rem(20);
+    }
+  }
+
   .collage {
     display: flex;
     flex-direction: column;
@@ -19,7 +35,6 @@
 
       .control {
         margin-bottom: rem(20);
-  
       }
     }
   }

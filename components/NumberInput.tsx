@@ -11,7 +11,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Image from "@/components/Image";
 import { formatNumberWithSpaces } from "@/utils/formatterFunctions/Formatter"; // Import your formatter
-import { Input } from "@/components/ui/input";
+import Input from "@/components/Input";
 
 const INPUT_SIZE = {
   regular: {
@@ -60,6 +60,7 @@ interface NumberInputProps {
   debounceTime?: number;
   className?: string;
   placeholder?: string;
+  label?: string;
   inputSize:
     | keyof typeof INPUT_SIZE.regular
     | keyof typeof INPUT_SIZE.feed
@@ -87,6 +88,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       debounceTime = 300,
       className,
       placeholder,
+      label,
       dashboard,
       autoFocus = false,
       required = true,
@@ -226,6 +228,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             inputMode="numeric"
             role="spinbutton"
             name={reactHookFormProps?.name}
+            label={label}
             value={displayValue}
             onChange={handleInternalChange}
             onKeyDown={handleKeyDown}

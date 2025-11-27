@@ -26,18 +26,13 @@ const MoreFromOly = () => {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>More from Oly</h2>
+
       <ul className={styles.classifieds}>
         {sites.map((site: SanityOlySite, index: number) => (
           <li key={site?._id || `fallback-${index}`}>
-            <Link
-              href={site.path}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ClassifiedLink
-                text={site?.siteName}
-                image={site?.imageUrl}
-              />
+            <Link href={site.path} target="_blank" rel="noopener noreferrer">
+              <ClassifiedLink text={site?.siteName} image={site?.imageUrl} />
             </Link>
           </li>
         ))}
