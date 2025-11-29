@@ -1,7 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-@import "../styles/layout.module.scss";
+@use "../styles/layout.module.scss" as *;
 
 .container {
   display: flex;
@@ -63,7 +63,6 @@
       margin-top: rem(32);
       margin-bottom: rem(112);
       gap: rem(20);
-     
     }
     .aboveFoldAd {
       width: 100%;

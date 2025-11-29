@@ -1,4 +1,3 @@
-import Feed from "@/components/Feed";
 import styles from "../../styles/layout.module.scss";
 import localFont from "next/font/local";
 

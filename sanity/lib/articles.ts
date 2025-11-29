@@ -1,4 +1,4 @@
-interface NewsDataArticle {
+export interface NewsDataArticle {
   article_id?: string;
   id?: string;
   creator?: string;
@@ -26,7 +26,7 @@ interface NewsDataArticle {
   is_duplicate_removed?: boolean;
 }
 
-interface OlyArticle {
+export interface OlyArticle {
   _type: 'olyArticle';
   _id: string;
   articleId: string;

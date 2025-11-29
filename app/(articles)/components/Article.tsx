@@ -10,9 +10,35 @@ import TempArticle from "../../../components/TempArticle";
 import RecommendedArticle from "../../../components/cards/RecommendedArticle";
 import CommentsSection from "../../../components/CommentsSection";
 
+interface SocialMedia {
+  name: string;
+  icon: string;
+}
+
+interface ArticleCategory {
+  name: string;
+}
+
+interface Author {
+  name: string;
+  avatar: string;
+}
+
+interface Article {
+  coverImage: string;
+  title: string;
+  author: Author;
+}
+
+interface ArticleProps {
+  socialMediaData: SocialMedia[];
+  articleCategories: ArticleCategory[];
+  articles: Article[];
+}
+
 const readLengthTemp = 0;
 
-const Article = ({ socialMediaData, articleCategories, articles }) => {
+const Article = ({ socialMediaData, articleCategories, articles }: ArticleProps) => {
   const boxShadow = `0px 1px 3px 0px rgba(180, 191, 203, 0.2),
       0px 5px 5px 0px rgba(180, 191, 203, 0.17),
       0px 11px 7px 0px rgba(180, 191, 203, 0.1),

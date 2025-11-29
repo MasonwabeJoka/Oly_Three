@@ -2,7 +2,6 @@ import FeedbackChatComponent from "./cards/FeedbackDetailsCard";
 import styles from "./FeedbackDetails.module.scss";
 interface FeedbackDetailsProps {
   id: string;
-  name: string;
   email: string;
   title: string;
   feedback: string;

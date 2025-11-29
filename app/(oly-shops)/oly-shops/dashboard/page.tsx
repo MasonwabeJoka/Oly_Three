@@ -13,7 +13,6 @@ import {
 } from "@/utils/formatterFunctions/Formatter";
 import DashboardCard from "@/components/cards/DashboardCard";
 
-export const dynamic = "force-dynamic"; // Don't cache this admin
 
 const Page = () => {
   const { totalSales } = storeStats;

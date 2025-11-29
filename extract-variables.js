@@ -1,147 +1,110 @@
+import "tsconfig-paths/register.js";
+
 import * as sass from "sass";
 import { readFileSync, writeFileSync } from "fs";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
 
-// Compile SCSS to ensure variables are processed
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const variablesPath = resolve(__dirname, "utils/variables.scss");
+
+// Custom importer so Sass understands "@/utils/..."
+const aliasImporter = {
+  findFileUrl(url) {
+    if (url.startsWith("@/")) {
+      const relativePath = url.slice(2); // remove "@/"
+      const fullPath = resolve(__dirname, relativePath);
+      // Try with .scss extension if missing
+      const candidate = fullPath.endsWith(".scss") ? fullPath : `${fullPath}.scss`;
+      try {
+        // Just check if file exists (fs.accessSync would be sync, we fake it with URL)
+        return new URL(`file://${candidate}`);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  },
+};
+
+// 1. Compile SCSS — now @/ works perfectly
 try {
-  sass.compile("./utils/variables.scss", {
-    loadPaths: ["./utils"], // Resolve @use "./functions"
+  sass.compile(variablesPath, {
+    loadPaths: ["."],
+    importers: [aliasImporter],
     style: "expanded",
   });
-} catch (error) {
-  console.error("Error compiling SCSS:", error);
+  console.log("SCSS compiled successfully");
+} catch (err) {
+  console.error("SCSS compilation failed:", err.message);
   process.exit(1);
 }
 
-// Parse variables from SCSS content
-const scssContent = readFileSync("./utils/variables.scss", "utf-8");
-// Join lines to handle multi-line values, remove comments
-const cleanedContent = scssContent
-  .replace(/\/\/.*$/gm, "") // Remove single-line comments
-  .replace(/\/\*[\s\S]*?\*\//g, "") // Remove multi-line comments
-  .split("\n")
-  .map(line => line.trim())
-  .join(" ");
+// 2. Parse variables (your existing parser — unchanged)
+const content = readFileSync(variablesPath, "utf-8");
 
-// Match variables, capturing complex values until semicolon
-const variableRegex = /\$([a-zA-Z0-9-]+)\s*:\s*([^;]*?);/g;
-const extractedVariables = {};
-const baseFontSize = 16; // Matches rem function's 16px base
+const variableMap = new Map();
+let currentName = "";
+let currentValue = "";
 
-let match;
-while ((match = variableRegex.exec(cleanedContent)) !== null) {
-  const [, scssKey, value] = match;
-  // Convert kebab-case to camelCase for TypeScript
-  const key = scssKey.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-  // Colors
-  if (
-    key.startsWith("white") ||
-    key.startsWith("black") ||
-    key.includes("blue") ||
-    key.startsWith("grey") ||
-    key.includes("primary") ||
-    key.includes("normal") ||
-    key.includes("success") ||
-    key.includes("warning") ||
-    key.includes("danger") ||
-    key.includes("info") ||
-    key === "link"
-  ) {
-    // Remove !important and trim
-    extractedVariables[key] = value.replace(/!important/, "").trim();
+for (const rawLine of content.split("\n")) {
+  let line = rawLine.trim();
+  if (!line || line.startsWith("//") || line.startsWith("/*") || line.startsWith("@")) continue;
+
+  if (line.startsWith("$") && line.includes(":")) {
+    if (currentName) variableMap.set(currentName, currentValue.trim());
+
+    const colonIdx = line.indexOf(":");
+    currentName = line.slice(0, colonIdx).trim();
+    let rest = line.slice(colonIdx + 1).trim().replace(/[;!\w]+$/, "").trim();
+
+    if (rest.endsWith(",")) {
+      currentValue = rest.slice(0, -1);
+    } else {
+      variableMap.set(currentName, rest);
+      currentName = currentValue = "";
+    }
+  } else if (currentName) {
+    if (line.endsWith(",")) {
+      currentValue += " " + line.slice(0, -1);
+    } else {
+      currentValue += " " + line.replace(";", "");
+      variableMap.set(currentName, currentValue.trim());
+      currentName = currentValue = "";
+    }
   }
-  // Typography: rem($pixels) -> ($pixels / 16) * 1rem, convert to pixels
-  else if (key.startsWith("body") || key.startsWith("h")) {
-    const remMatch = value.match(/rem\((\d+)\)/);
-    extractedVariables[key] = remMatch ? parseFloat(remMatch[1]) : parseFloat(value) * baseFontSize;
-  }
-  // Breakpoints: em units, convert to pixels
-  else if (key.startsWith("min") || key.startsWith("max")) {
-    const emMatch = value.match(/([\d.]+)em/);
-    extractedVariables[key] = emMatch
-      ? Math.round(parseFloat(emMatch[1]) * baseFontSize)
-      : key === "maxExtraLargeDesktop"
-      ? null
-      : parseFloat(value);
-  }
-  // Shadows: preserve complex values with commas
-  else if (key.startsWith("shadow")) {
-    extractedVariables[key] = value.trim();
-  }
-  // Transitions
-  else if (key.startsWith("transition")) {
-    extractedVariables[key] = value.trim();
+}
+if (currentName) variableMap.set(currentName, currentValue.trim());
+
+// 3. Convert to camelCase + process values
+const extracted = {};
+const baseFontSize = 16;
+const toCamelCase = (s) => s.replace("$", "").replace(/-([a-z])/g, (_, l) => l.toUpperCase());
+
+for (const [name, value] of variableMap) {
+  const key = toCamelCase(name);
+  let val = value.replace(/!default|!important/g, "").trim();
+
+  if (/white|black|blue|grey|primary|normal|success|warning|danger|info|link|shadow|transition/.test(key)) {
+    extracted[key] = val;
+  } else if (/^(body|h\d)$/.test(key)) {
+    const m = val.match(/rem\((\d+)\)/);
+    extracted[key] = m ? Number(m[1]) : Number(val) * baseFontSize;
+  } else if (key.startsWith("min") || key.startsWith("max")) {
+    const m = val.match(/([\d.]+)em/);
+    extracted[key] = m ? Math.round(Number(m[1]) * baseFontSize) : val === "null" ? null : val;
+  } else {
+    extracted[key] = val;
   }
 }
 
-const tsContent = `
-export const variables = ${JSON.stringify(extractedVariables, null, 2).replace(/"([^"]+)":/g, "$1:")} as const;
+// 4. Write TS file
+const ts = `// Auto-generated — do not edit
+export const variables = ${JSON.stringify(extracted, null, 2).replace(/"([^"]+)":/g, "$1:")} as const;
 
-export type Variables = {
-  whiteOne: string;
-  whiteTwo: string;
-  whiteThree: string;
-  whiteFour: string;
-  whiteFive: string;
-  blackOne: string;
-  blackTwo: string;
-  blackThree: string;
-  blackFour: string;
-  blueOne: string;
-  blueOneComplimentary: string;
-  blueOneComplimentaryTwo: string;
-  greyOne: string;
-  greyTwo: string;
-  greyThree: string;
-  greyFour: string;
-  primary: string;
-  primaryHover: string;
-  primaryDisabled: string;
-  normal: string;
-  normalHover: string;
-  normalDisabled: string;
-  success: string;
-  successHover: string;
-  successDisabled: string;
-  warning: string;
-  warningHover: string;
-  warningDisabled: string;
-  danger: string;
-  dangerHover: string;
-  dangerDisabled: string;
-  info: string;
-  infoHover: string;
-  infoDisabled: string;
-  link: string;
-  body: number;
-  h0: number;
-  h1: number;
-  h2: number;
-  h3: number;
-  h4: number;
-  minMobile: number;
-  maxMobile: number;
-  minTablet: number;
-  maxTable: number;
-  minSmallDesktop: number;
-  maxSmallDesktop: number;
-  minLargeDesktop: number;
-  maxLargeDesktop: number;
-  minExtraLargeDesktop: number;
-  maxExtraLargeDesktop: null;
-  shadowGradient: string;
-  shadowOne: string;
-  shadowTwo: string;
-  shadowThree: string;
-  shadowFour: string;
-  shadowFive: string;
-  shadowSix: string;
-  shadowSeven: string;
-  shadowEight: string;
-  transitionOne: string;
-  transitionTwo: string;
-  transitionThree: string;
-};
+export type Variables = typeof variables;
 `;
 
-writeFileSync("./utils/typescript-variables/variables.ts", tsContent);
-console.log("Generated variables.ts successfully");
+writeFileSync("./utils/typescript-variables/variables.ts", ts.trim() + "\n");
+console.log("variables.ts generated successfully!");

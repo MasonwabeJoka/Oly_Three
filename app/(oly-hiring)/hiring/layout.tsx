@@ -1,4 +1,3 @@
-import Feed from "@/components/Feed";
 import styles from "../../styles/layout.module.scss";
 import localFont from "next/font/local";
 
@@ -30,9 +29,7 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
       <body className={styles.body}>
         <div className={styles.wrapper}>
-          <aside className={styles.feed}>
-            <Feed />
-          </aside>
+          
           <div className={styles.main}>
             <main className={styles.children}>
               {children}

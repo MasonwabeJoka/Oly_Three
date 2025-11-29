@@ -1,11 +1,11 @@
-import TestSteps from "../components/TestSteps";
-
-export default function VerifyStepPage({
-  params,
-}: {
-  params: { type: string; step: string };
-}) {
-  const { step } = params;
-
-  return <TestSteps />;
+interface PageProps {
+  
 }
+
+const Page = ({}: PageProps) => {
+  return (
+    <div>Page</div>
+  );
+};
+
+export default Page;

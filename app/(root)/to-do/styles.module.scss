@@ -43,9 +43,7 @@ $gray-color: #6b7280;
     border-radius: 4px;
     cursor: pointer;
 
-    &:hover {
-      background-color: darken($primary-color, 10%);
-    }
+   
   }
 }
 
@@ -87,9 +85,7 @@ $gray-color: #6b7280;
         border-radius: 4px;
         cursor: pointer;
 
-        &:hover {
-          background-color: darken($success-color, 10%);
-        }
+      
       }
 
       .cancelBtn {
@@ -100,9 +96,7 @@ $gray-color: #6b7280;
         border-radius: 4px;
         cursor: pointer;
 
-        &:hover {
-          background-color: darken($gray-color, 10%);
-        }
+     
       }
     }
   }

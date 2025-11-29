@@ -1,12 +1,11 @@
-// app/dashboard/settings/account-verification/page.tsx
+import EnterMobileNumber from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/EnterMobileNumber";
+import IndividualAccountVerification from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/IndividualAccountVerification";
+import TakeSelfie from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/TakeSelfie";
+import UploadId from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/UploadID";
+import Finish from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/VerificationComplete";
+import { verificationSchema } from "@/app/(dashboard)/dashboard/settings/account-verification/lib/validation-schema";
 import MultiStepForm from "@/components/MultiStepForm";
-import { verificationSchema } from "@/lib/validation-schema";
 
-import IndividualAccountVerification from "./components/individual/IndividualAccountVerification";
-import UploadId from "./components/individual/UploadID";
-import TakeSelfie from "./components/individual/TakeSelfie";
-import EnterMobileNumber from "./components/individual/EnterMobileNumber";
-import Finish from "./components/individual/VerificationComplete";
 
 export type FormData = {
   phoneNumber: string;

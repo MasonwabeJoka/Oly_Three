@@ -1,7 +1,15 @@
 import axios from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
 
-const verifyTransaction = async (reference: string) => {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const reference = searchParams.get('reference');
+    
+    if (!reference) {
+      return NextResponse.json({ error: 'Transaction reference is required' }, { status: 400 });
+    }
+
     const response = await axios.get(
       `https://api.paystack.co/transaction/verify/${reference}`,
       {
@@ -10,11 +18,10 @@ const verifyTransaction = async (reference: string) => {
         },
       }
     );
-    return response.data;
+    
+    return NextResponse.json(response.data);
   } catch (error) {
     console.error('Error verifying transaction:', error);
-    throw new Error('Failed to verify transaction');
+    return NextResponse.json({ error: 'Failed to verify transaction' }, { status: 500 });
   }
-};
-
-export default verifyTransaction;
+}

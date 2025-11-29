@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface SellerDetails {
   businessName: string;
@@ -7,11 +8,12 @@ interface SellerDetails {
   percentageCharge: number;
 }
 
-const createSubaccount = async (sellerDetails: SellerDetails) => {
+export async function POST(request: NextRequest) {
   try {
-    // Validate seller details (basic example)
+    const sellerDetails: SellerDetails = await request.json();
+    
     if (!sellerDetails.businessName || !sellerDetails.bankCode || !sellerDetails.accountNumber || sellerDetails.percentageCharge === undefined) {
-      throw new Error('Invalid seller details');
+      return NextResponse.json({ error: 'Invalid seller details' }, { status: 400 });
     }
 
     const response = await axios.post(
@@ -20,7 +22,7 @@ const createSubaccount = async (sellerDetails: SellerDetails) => {
         business_name: sellerDetails.businessName,
         bank_code: sellerDetails.bankCode,
         account_number: sellerDetails.accountNumber,
-        percentage_charge: sellerDetails.percentageCharge, // Percentage the seller will receive
+        percentage_charge: sellerDetails.percentageCharge,
       },
       {
         headers: {
@@ -29,11 +31,9 @@ const createSubaccount = async (sellerDetails: SellerDetails) => {
       }
     );
 
-    return response.data;
+    return NextResponse.json(response.data);
   } catch (error) {
     console.error('Error creating subaccount:', error);
-    throw new Error('Failed to create subaccount');
+    return NextResponse.json({ error: 'Failed to create subaccount' }, { status: 500 });
   }
-};
-
-export default createSubaccount;
+}
