@@ -37,7 +37,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile }) => {
           <h1 className={styles.username}>{profile.username}</h1>
           <span className={styles.handle}>@{profile.handle}</span>
           <p className={styles.bio}>{profile.bio}</p>
-          <div class={styles.details}>
+          <div className={styles.details}>
             {profile.location && <span className={styles.detail}>{profile.location}</span>}
             {profile.website && <a href={profile.website} className={styles.detail}>{profile.website}</a>}
             <span className={styles.detail}>Joined {profile.joinDate}</span>

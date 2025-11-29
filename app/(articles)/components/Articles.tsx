@@ -185,9 +185,9 @@ const Articles = ({
               {filteredByCategory.map((article, index) => (
                 <li className={styles.article} key={index}>
                   <RecommendedArticle
-                    image={article.imageUrl}
+                    image={article.imageUrl || ""}
                     title={article.title}
-                    author={article.creator?.[0] || ""}
+                    author={article.author || ""}
                     avatar=""
                   />
                 </li>
@@ -208,6 +208,8 @@ const Articles = ({
               name="load-more"
               type="button"
               ariaLabel="Load More Articles"
+              autoFocus={false}
+              disabled={false}
             />
           </Link>
         )}

@@ -63,7 +63,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                   autoFocus={false}
                   required={true}
                   dashboard
-                  error={errors.price?.startingPrice?.message as string}
+                  error={errors?.price?.startingPrice?.message as string}
                   {...register("price.startingPrice", { valueAsNumber: true })}
                   onChange={(e) => handlePriceChange(e, "startingPrice")}
                 />
@@ -84,7 +84,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     autoFocus={false}
                     required={true}
                     dashboard
-                    error={errors.price?.buyNowPrice?.message as string}
+                    error={errors?.price?.buyNowPrice?.message as string}
                     {...register("price.buyNowPrice", { valueAsNumber: true })}
                     onChange={(e) => handlePriceChange(e, "buyNowPrice")}
                   />
@@ -119,7 +119,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     disabled={false}
                     required={true}
                     dashboard
-                    error={errors.price?.startTime?.message as string}
+                    error={errors?.price?.startTime?.message as string}
                     {...register("price.startTime")}
                     onDropdownOpenChange={(isOpen) =>
                       setIsAuctionStartTimeOpen(isOpen)
@@ -165,7 +165,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     disabled={false}
                     required={true}
                     dashboard
-                    error={errors.price?.auctionDuration?.message as string}
+                    error={errors?.price?.auctionDuration?.message as string}
                     {...register("price.auctionDuration")}
                     onDropdownOpenChange={(isOpen) =>
                       setIsAuctionDurationOpen(isOpen)
