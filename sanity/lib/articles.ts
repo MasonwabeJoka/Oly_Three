@@ -32,6 +32,7 @@ export interface OlyArticle {
   articleId: string;
   author?: string;
   title: string;
+  description?: string;
   keywords?: string[];
   content: Array<{ _type: 'block'; children: Array<{ _type: 'span'; text: string }> }>;
   fullContent?: Array<{ _type: 'block'; children: Array<{ _type: 'span'; text: string }> }>;
@@ -74,6 +75,7 @@ export function articlesToSanity(
     articleId: article.article_id || article.id || `article-${Date.now()}`,
     author: article.creator || 'Unknown',
     title: article.title,
+    description: article.description,
     keywords: article.keywords ? article.keywords.split(',').map((k) => k.trim()) : [],
     content: [
       {

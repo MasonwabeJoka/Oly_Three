@@ -124,9 +124,9 @@ const Articles = ({
                     <div className={styles.articleTitle}>{article.title}</div>
                     <div className={styles.articleExcerpt}>
                       <p>
-                        {article.description?.length > 140
+                        {article.description && article.description.length > 140
                           ? `${article.description.slice(0, 140)}...`
-                          : article.description}
+                          : article.description || ''}
                       </p>
                     </div>
                     <div className={styles.articleMetadata}>
