@@ -58,3 +58,7 @@ public/_next-video
 
 #Ignore cursor AI rules
 .cursor\rules\codacy.mdc
+
+#excecutable files
+*.exe
+*.dmg
