@@ -56,6 +56,7 @@ const VideoUploadsSection = () => {
           placeholder="Enter Video URL"
           label="Enter Video URL"
           id="video-url"
+          name="videoUrl"
           ariaLabel="Video URL Field"
           autoFocus={false}
           autoComplete="off"
@@ -63,7 +64,7 @@ const VideoUploadsSection = () => {
           required
           dashboard
           {...register("uploadMedia.videoUrl")}
-          error={errors.uploadMedia?.videoUrl?.message}
+          error={(errors.uploadMedia as any)?.videoUrl?.message}
         />
       </div>
       <Modal

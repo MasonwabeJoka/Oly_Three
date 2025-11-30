@@ -86,10 +86,10 @@ const DetailsClient = ({
     setEditValue(details[index].value);
   };
 
-  const updateDetail = async (
+  const updateDetail = (
     index: number,
     updatedValue: string
-  ): Promise<void> => {
+  ) => {
     if (updatedValue.trim()) {
       const updatedDetails = [...details];
       updatedDetails[index] = {
@@ -186,7 +186,7 @@ const DetailsClient = ({
                 id="conditions"
                 ariaLabel="Conditions"
                 dashboard
-                error={errors.details?.condition?.message as string}
+                error={(errors.details as any)?.condition?.message}
                 {...register("details.condition")}
                 onDropdownOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
               />
@@ -205,7 +205,7 @@ const DetailsClient = ({
                   id="choose-detail"
                   ariaLabel="Choose Detail Select"
                   dashboard
-                  error={errors.details?.selectDetail?.message as string}
+                  error={(errors.details as any)?.selectDetail?.message}
                   {...register("details.selectDetail")}
                   onDropdownOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
                 />
