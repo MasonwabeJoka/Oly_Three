@@ -98,7 +98,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
           value={watch("createAccount.bankName") || ""}
           error={errors.createAccount?.bankName?.message as string}
           {...register("createAccount.bankName")}
-          onChange={(e) => handleInputChange(e, "bankName")}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, "bankName")}
           onDropdownOpenChange={(isOpen) => setIsBankNameOpen(isOpen)}
           dashboard
         />
@@ -124,7 +124,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
               value={watch("createAccount.accountHolder") || ""}
               error={errors.createAccount?.accountHolder?.message as string}
               {...register("createAccount.accountHolder")}
-              onChange={(e) => handleInputChange(e, "accountHolder")}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, "accountHolder")}
               dashboard
             />
           </div>
@@ -147,7 +147,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
               value={watch("createAccount.accountNumber") || ""}
               error={errors.createAccount?.accountNumber?.message as string}
               {...register("createAccount.accountNumber")}
-              onChange={(e) => handleInputChange(e, "accountNumber")}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, "accountNumber")}
               dashboard
             />
           </div>

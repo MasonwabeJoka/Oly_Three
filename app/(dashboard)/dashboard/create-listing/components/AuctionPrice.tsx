@@ -63,9 +63,9 @@ const AuctionPrice = ({ onNext }: Props) => {
                   autoFocus={false}
                   required={true}
                   dashboard
-                  error={errors?.price?.startingPrice?.message as string}
+                  error={(errors as any)?.price?.startingPrice?.message}
                   {...register("price.startingPrice", { valueAsNumber: true })}
-                  onChange={(e) => handlePriceChange(e, "startingPrice")}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "startingPrice")}
                 />
               </div>
 
@@ -84,9 +84,9 @@ const AuctionPrice = ({ onNext }: Props) => {
                     autoFocus={false}
                     required={true}
                     dashboard
-                    error={errors?.price?.buyNowPrice?.message as string}
+                    error={(errors as any)?.price?.buyNowPrice?.message}
                     {...register("price.buyNowPrice", { valueAsNumber: true })}
-                    onChange={(e) => handlePriceChange(e, "buyNowPrice")}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "buyNowPrice")}
                   />
                 </div>
               )}
@@ -119,12 +119,12 @@ const AuctionPrice = ({ onNext }: Props) => {
                     disabled={false}
                     required={true}
                     dashboard
-                    error={errors?.price?.startTime?.message as string}
+                    error={(errors as any)?.price?.startTime?.message}
                     {...register("price.startTime")}
                     onDropdownOpenChange={(isOpen) =>
                       setIsAuctionStartTimeOpen(isOpen)
                     }
-                    onChange={(e) => {
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                       if (e.target.value === "customStartTime") {
                         setShowAuctionStartTime(true);
                         setValue("price.startTime", "");
@@ -165,12 +165,12 @@ const AuctionPrice = ({ onNext }: Props) => {
                     disabled={false}
                     required={true}
                     dashboard
-                    error={errors?.price?.auctionDuration?.message as string}
+                    error={(errors as any)?.price?.auctionDuration?.message}
                     {...register("price.auctionDuration")}
                     onDropdownOpenChange={(isOpen) =>
                       setIsAuctionDurationOpen(isOpen)
                     }
-                    onChange={(e) => {
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                       if (e.target.value === "customDuration") {
                         setShowAuctionStartTime(true);
                         setValue("price.auctionDuration", "");

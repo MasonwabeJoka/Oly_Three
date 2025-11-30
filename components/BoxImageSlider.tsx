@@ -130,14 +130,14 @@ const ImageSlider = ({
             alignItems: "center",
             marginRight: category === "property" ? "21rem" : "16rem",
           }}
-          onClick={(e) => e.preventDefault()}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
           onMouseLeave={() => setIsLeftNavHovered(false)}
         >
           <div className={styles.buttonWrapper}>
             <div
               className={`${styles.button} ${styles.leftButton}`}
-              onClick={(e) => handleNavButtonClick(e, "prev", swiper)}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "prev", swiper)}
               style={{
                 display: slideConfig.isBeginning || !showNav ? "none" : "flex",
               }}
@@ -154,13 +154,13 @@ const ImageSlider = ({
             alignItems: "center",
             marginLeft: category === "property" ? "21rem" : "16rem",
           }}
-          onClick={(e) => e.preventDefault()}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
           onMouseLeave={() => setIsRightNavHovered(false)}
         >
           <div
             className={styles.button}
-            onClick={(e) => handleNavButtonClick(e, "next", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "next", swiper)}
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}

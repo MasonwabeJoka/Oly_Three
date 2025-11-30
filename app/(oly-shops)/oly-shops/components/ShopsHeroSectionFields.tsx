@@ -148,7 +148,7 @@ const ShopsHeroSectionFields = () => {
               autoComplete="off"
               required
               {...register("searchTerm")}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setValue("searchTerm", e.target.value, {
                   shouldDirty: true,
                   shouldValidate: true,
@@ -184,7 +184,7 @@ const ShopsHeroSectionFields = () => {
                 autoComplete="off"
                 required
                 {...register("locationSearch")}
-                onChange={(e) =>
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setValue("locationSearch", e.target.value, {
                     shouldDirty: true,
                     shouldValidate: true,

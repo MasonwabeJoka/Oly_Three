@@ -9,7 +9,7 @@ const ExitButton = () => {
       role="button"
       tabIndex={0}
       aria-label="Close chat"
-      onKeyDown={(e) => {
+      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           document.dispatchEvent(new Event("click")); // Trigger parent onClick

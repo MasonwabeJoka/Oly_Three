@@ -27,7 +27,7 @@ const AddProductForm = ({}: AddProductFormProps) => {
           id="priceInCents"
           name="priceInCents"
           value={priceInCents || ""}
-          onChange={(e) => setPriceInCents(Number(e.target.value) || undefined)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPriceInCents(Number(e.target.value) || undefined)}
           required
         />
       </div>

@@ -110,7 +110,7 @@ const VideoUploadForm = ({ videoPath }: Props) => {
             ariaLabel="Name Field"
             required={true}
             {...register("name")}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setValue("name", e.target.value, {
                 shouldDirty: true,
                 shouldTouch: true,

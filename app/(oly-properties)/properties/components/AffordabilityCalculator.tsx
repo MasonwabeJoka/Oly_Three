@@ -100,12 +100,12 @@ const AffordabilityCalculator = () => {
               step={1}
               debounceTime={500}
               id="grossIncome"
-              value={grossIncome} // Keep value as raw number
+              value={grossIncome} 
               inputSize="large"
               placeholder="Enter Your Monthly Gross Income"
               autoFocus={false}
               required={true}
-              onChange={(e) => handleInputChange(setGrossIncome, e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setGrossIncome, e.target.value)}
               // Optional: Add a formatter prop if NumberInput supports it
             />
           </div>
@@ -123,7 +123,7 @@ const AffordabilityCalculator = () => {
               placeholder="Enter Your Monthly Net Income"
               autoFocus={false}
               required={true}
-              onChange={(e) => handleInputChange(setNetIncome, e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setNetIncome, e.target.value)}
             />
           </div>
 
@@ -140,7 +140,7 @@ const AffordabilityCalculator = () => {
               placeholder="Enter Your Monthly Expenses"
               autoFocus={false}
               required={true}
-              onChange={(e) => handleInputChange(setExpenses, e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setExpenses, e.target.value)}
             />
           </div>
 
@@ -157,7 +157,7 @@ const AffordabilityCalculator = () => {
               placeholder="11% Interest Rate"
               autoFocus={false}
               required={true}
-              onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInterestRate(parseFloat(e.target.value) || 0)}
             />
           </div>
 
@@ -177,7 +177,7 @@ const AffordabilityCalculator = () => {
               id="repaymentTerm"
               name="repaymentTerm"
               ariaLabel="Repayment Term Selector"
-              onChange={(e) => setRepaymentTerm(parseInt(e.target.value.split(" ")[0]))}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRepaymentTerm(parseInt(e.target.value.split(" ")[0]))}
               autoFocus={false}
               required={false}
             />

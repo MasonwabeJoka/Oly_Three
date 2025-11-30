@@ -88,7 +88,7 @@ const AutoSearchHome = () => {
             placeholder="What’s your budget (total amount)"
             autoFocus={false}
             required={true}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e : React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
         </div>
         <div className={`${styles.totalPrice} ${styles.field}`}>
@@ -104,7 +104,7 @@ const AutoSearchHome = () => {
             placeholder="What's your target monthly payment"
             autoFocus={false}
             required={true}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
         </div>
         <div className={`${styles.totalPrice} ${styles.field}`}>
@@ -120,7 +120,7 @@ const AutoSearchHome = () => {
             placeholder="Your planned deposit amount"
             autoFocus={false}
             required={true}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
         </div>
         
@@ -135,7 +135,7 @@ const AutoSearchHome = () => {
             type="submit"
             ariaLabel="Continue Button"
             autoFocus={false}
-            disabled={pending} // Disables during submission
+            disabled={pending} 
           />
         </div>
       </div>

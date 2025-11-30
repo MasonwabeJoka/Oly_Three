@@ -108,22 +108,22 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
               key={`${imageUrl}-${index}`}
               className={styles.fileContainer}
               draggable
-              onDragStart={(e) => handleDragStart(e, index)}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDrop={(e) => handleDrop(e, index)}
+              onDragStart={(e: React.DragEvent<HTMLDivElement>) => handleDragStart(e, index)}
+              onDragOver={(e: React.DragEvent<HTMLDivElement>) => handleDragOver(e, index)}
+              onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
-              onDragLeave={(e) =>
+              onDragLeave={(e: React.DragEvent<HTMLDivElement>) =>
                 e.currentTarget.classList.remove(styles.dragOver)
               }
             >
               <div
                 className={styles.deleteButtonContainer}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.stopPropagation();
                   removeImage(imageUrl);
                 }}
                 draggable={false}
-                onDragStart={(e) => {
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
                   e.stopPropagation();
                   e.preventDefault();
                 }}

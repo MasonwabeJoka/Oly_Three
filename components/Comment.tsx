@@ -83,7 +83,7 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
             placeholder="Reply..."
             submitButtonText="Reply"
             required
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => console.log(e.target.value)}
             hasShadow={false}
           />
         )}

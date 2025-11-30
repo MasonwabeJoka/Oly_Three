@@ -96,7 +96,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
             value={title}
             error={errors.titleAndDescription?.title?.message}
             {...restTitleRegister}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               titleOnChange(e);
               handleTitleChange(e);
             }}

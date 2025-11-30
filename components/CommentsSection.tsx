@@ -15,7 +15,7 @@ const CommentsSection = () => {
           submitButtonText="Comment"
           size="large"
           required
-          onChange={(e) => console.log(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => console.log(e.target.value)}
         />
       </div>
 

@@ -70,7 +70,7 @@ const EnterBidAmount = ({
             autoFocus={false}
             required={true}
             dashboard
-            onChange={(e) => setBid(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBid(e.target.value)}
             onBlur={() => {
               if (parseFloat(bid) < currentBid + 100) {
                 setBid(`${currentBid + 100}`);

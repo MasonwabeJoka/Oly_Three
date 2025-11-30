@@ -105,13 +105,13 @@ const ExpandedImageSlider = ({
             alignItems: "center",
             marginRight: "20.5rem",
           }}
-          onClick={(e) => e.preventDefault()}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
           onMouseLeave={() => setIsLeftNavHovered(false)}
         >
           <div
             className={`${styles.button} ${styles.leftButton}`}
-            onClick={(e) => handleNavButtonClick(e, "prev", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "prev", swiper)}
             style={{
               display: slideConfig.isBeginning || !showNav ? "none" : "flex",
             }}
@@ -127,13 +127,13 @@ const ExpandedImageSlider = ({
             alignItems: "center",
             marginLeft: "20.5rem",
           }}
-          onClick={(e) => e.preventDefault()}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
           onMouseLeave={() => setIsRightNavHovered(false)}
         >
           <div
             className={`${styles.button} ${styles.rightButton}`}
-            onClick={(e) => handleNavButtonClick(e, "next", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "next", swiper)}
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}

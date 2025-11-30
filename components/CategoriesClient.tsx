@@ -30,7 +30,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
     setIsClient(true);
   }, []);
 
-  const handleCategoriesContainerClick = (e) => {
+  const handleCategoriesContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 

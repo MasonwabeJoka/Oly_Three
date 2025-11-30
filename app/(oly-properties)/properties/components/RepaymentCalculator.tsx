@@ -155,9 +155,9 @@ const RepaymentCalculator = () => {
               placeholder="Enter The Purchase Price"
               autoFocus={false}
               required={true}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPurchasePrice(parseFloat(e.target.value) || 0)
-              } // Convert string to number
+              } 
             />
           </div>
 
@@ -174,7 +174,7 @@ const RepaymentCalculator = () => {
               placeholder="Purchase Price - Deposit"
               autoFocus={false}
               required={true}
-              onChange={(e) => setBondAmount(parseFloat(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBondAmount(parseFloat(e.target.value) || 0)}
             />
           </div>
 
@@ -186,12 +186,12 @@ const RepaymentCalculator = () => {
               step={1}
               debounceTime={500}
               id="interestRate"
-              value={interestRate === 11 ? undefined : interestRate} // Set to undefined if it's the default value
+              value={interestRate === 11 ? undefined : interestRate} 
               inputSize="large"
               placeholder="11% Interest Rate"
               autoFocus={false}
               required={true}
-              onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInterestRate(parseFloat(e.target.value) || 0)}
             />
           </div>
 
@@ -211,7 +211,7 @@ const RepaymentCalculator = () => {
               id="repaymentTerm"
               name="repaymentTerm"
               ariaLabel="Repayment Term Selector"
-              onChange={(e) => setRepaymentTerm(parseInt(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRepaymentTerm(parseInt(e.target.value) || 0)}
               autoFocus={false}
               required={false}
             />

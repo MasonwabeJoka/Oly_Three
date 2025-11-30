@@ -145,7 +145,7 @@ const transferDutyBrackets = [
               placeholder="Enter The Purchase Price"
               autoFocus={false}
               required={true}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPurchasePrice(parseFloat(e.target.value) || 0)
               }
             />
@@ -164,7 +164,7 @@ const transferDutyBrackets = [
               placeholder="Purchase Price - Deposit"
               autoFocus={false}
               required={true}
-              onChange={(e) => setBondAmount(parseFloat(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBondAmount(parseFloat(e.target.value) || 0)}
             />
           </div>
 

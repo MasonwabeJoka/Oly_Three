@@ -108,7 +108,7 @@ const BusinessAddressForm: React.FC = () => {
           ariaLabel="Province"
           dashboard
           required
-          onChange={(e) => register("province").onChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => register("province").onChange(e)}
           onDropdownOpenChange={handleSelectOpenChange}
         />
         {errors.province && (

@@ -88,7 +88,7 @@ const Price = ({ onNext }: Props) => {
                   dashboard
                   error={errors.price?.amount?.message as string}
                   {...register("price.amount", { valueAsNumber: true })}
-                  onChange={(e) => handlePriceChange(e, "amount")}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "amount")}
                 />
               </div>
             )}

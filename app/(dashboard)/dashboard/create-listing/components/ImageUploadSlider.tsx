@@ -105,22 +105,22 @@ const ImageUploadSlider = ({ uploadedFiles }: Props) => {
               key={`${imageUrl}-${index}`}
               className={styles.fileContainer}
               draggable
-              onDragStart={(e) => handleDragStart(e, index)}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDrop={(e) => handleDrop(e, index)}
+              onDragStart={(e: React.DragEvent) => handleDragStart(e, index)}
+              onDragOver={(e: React.DragEvent) => handleDragOver(e, index)}
+              onDrop={(e: React.DragEvent) => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
-              onDragLeave={(e) =>
+              onDragLeave={(e: React.DragEvent) =>
                 e.currentTarget.classList.remove(styles.dragOver)
               }
             >
               <div
                 className={styles.deleteButtonContainer}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.stopPropagation();
                   removeImage(imageUrl);
                 }}
                 draggable={false}
-                onDragStart={(e) => {
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
                   e.stopPropagation();
                   e.preventDefault();
                 }}

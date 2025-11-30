@@ -116,7 +116,7 @@ const FeedbackForm = ({ title }: { title: string }) => {
           ariaLabel="Name Field"
           required={true}
           {...register("name")}
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValue("name", e.target.value, {
               shouldDirty: true,
               shouldValidate: true,
@@ -143,7 +143,7 @@ const FeedbackForm = ({ title }: { title: string }) => {
           ariaLabel="Email Field"
           required={true}
           {...register("email")}
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValue("email", e.target.value, {
               shouldDirty: true,
               shouldValidate: true,
@@ -169,7 +169,7 @@ const FeedbackForm = ({ title }: { title: string }) => {
           ariaLabel="Title Field"
           required={true}
           {...register("title")}
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setValue("title", e.target.value, {
               shouldDirty: true,
               shouldValidate: true,

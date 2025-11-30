@@ -54,7 +54,7 @@ const EnterRepMobile = () => {
             required={true}
             dashboard
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)}
           />
           {codeSent && (
             <Input
@@ -64,13 +64,14 @@ const EnterRepMobile = () => {
               placeholder="Verification Code"
               label="Verification Code"
               id="rep-verification-code"
+              name="rep-verification-code"
               ariaLabel="Verification Code Field"
               autoFocus={true}
               autoComplete="off"
               required={true}
               dashboard
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
             />
           )}
         </div>

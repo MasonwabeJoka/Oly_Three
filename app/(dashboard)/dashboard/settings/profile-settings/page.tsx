@@ -351,7 +351,7 @@ const ProfileSettings = () => {
               name="social-media"
               id="social-media"
               ariaLabel="Social Media Links"
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 const newValue = e.target.value;
                 setSelected(newValue);
                 setValue("socialMediaName", "");
