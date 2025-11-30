@@ -10,11 +10,12 @@ const MobileCategorySelector = ({
   goTo = () => {},
   setCategory = () => {},
 }: {
-  categories: Array<{ id: number; category: string; subcategories: string[] }>;
+  categories: Array<{ id: number; category: string; subcategories: { id: number; name: string; }[] }>;
   goTo?: (index: number) => void;
   setCategory?: (main: string, subcategory: string) => void;
 }) => {
   const { setValue, trigger } = useFormContext();
+  const [activeCategoryId, setActiveCategoryId] = React.useState<number | null>(null);
 
 const handleSubcategoryClick = async (subcategory: string) => {
   const selectedCategory = categories.find((cat) => cat.id === activeCategoryId);
@@ -35,12 +36,12 @@ const handleSubcategoryClick = async (subcategory: string) => {
         {categories.map((categoryItem) => (
           <li key={categoryItem.id}>
             <MobileSubcategories
-              options={categoryItem.subcategories}
+              options={categoryItem.subcategories.map(sub => sub.name)}
               category={categoryItem.category}
               id={categoryItem.id}
               name={categoryItem.category}
               ariaLabel={categoryItem.category}
-              onSubcategorySelect={(subcategory) =>
+              onSubcategorySelect={(subcategory: string) =>
                 handleSubcategoryClick(subcategory)
               }
             />

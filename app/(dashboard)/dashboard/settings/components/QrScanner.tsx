@@ -1,7 +1,8 @@
-import VerificationFormWrapper from "./VerificationFormWrapper";
+// import VerificationFormWrapper from "./VerificationFormWrapper";
 
 const QrScanner = () => (
-  <VerificationFormWrapper title="QR Code Scanner">
+  <div>
+    <h2>QR Code Scanner</h2>
     <div style={{ textAlign: "center", marginTop: 40 }}>
       <h2>QR Code Scanner</h2>
       <p>
@@ -12,7 +13,7 @@ const QrScanner = () => (
         verification purposes.
       </p>
     </div>
-  </VerificationFormWrapper>
+  </div>
 );
 
 export default QrScanner;

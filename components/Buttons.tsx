@@ -24,6 +24,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   role?: string;
   tabIndex?: number;
   fontSize?: string;
+  style?: React.CSSProperties;
   form?: string;
   formAction?: string;
   formEncType?:
@@ -100,7 +101,7 @@ const BUTTON_TYPE = {
   bidBuy: `${styles.bidBuy}`,
 };
 
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   type,
   ariaLabel,
   ariaHidden = false,
@@ -116,6 +117,7 @@ const Button = ({
   autoFocus = false,
   disabled = false,
   fontSize,
+  style,
   ariaDescribedBy,
   ariaPressed,
   ariaExpanded,
@@ -124,7 +126,7 @@ const Button = ({
   tabIndex,
 
   ...otherProps
-}: ButtonProps): JSX.Element => {
+}) => {
   let sizeClass = "";
   switch (buttonSize) {
     case "medium":
@@ -211,10 +213,10 @@ const Button = ({
         aria-controls={ariaControls}
         aria-hidden={ariaHidden}
         role={role}
-        tabIndex={disabled ? -1 : tabIndex ?? 0}
+        tabIndex={disabled ? -1 : (tabIndex ?? 0)}
         autoFocus={autoFocus}
         disabled={disabled}
-        style={{ fontSize: fontSize }}
+        style={{ fontSize: fontSize, ...style }}
         {...otherProps}
       >
         <span className="sr-only">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import BidInput from "./BidInput";
+// import BidInput from "./BidInput";
 import BidConfirmation from "./BidConfirmation";
 import BidSuccess from "./BidSuccess";
 

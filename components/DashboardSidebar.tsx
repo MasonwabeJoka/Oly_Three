@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 import { signOutAction } from "@/app/actions/signOut";
 import { User } from "@workos-inc/node";
 
-
 interface DashboardSidebarProps {
   currentUser: User;
   sidebarItems?: any;
@@ -25,9 +24,9 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const user = currentUser.profilePictureUrl ?? '';
+  const user = currentUser.profilePictureUrl ?? "";
 
-  const itemsWithActiveState = sidebarItems?.map((item, index) => ({
+  const itemsWithActiveState = sidebarItems?.map((item: any, index: any) => ({
     ...item,
     active:
       item.link === "/dashboard"
@@ -57,18 +56,18 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         href="/dashboard/settings/profile-settings"
         className={styles.profile}
       >
-       
-          <Avatar
-            className={styles.avatar}
-            avatar={currentUser}
-            avatarSize={isMobile ? "regular" : "large"}
-          />
-      
-       
+        <Avatar
+          className={styles.avatar}
+          avatar={currentUser}
+          avatarSize={isMobile ? "regular" : "large"}
+        />
+
         {!isMobile && (
           <p
             className={styles.name}
-            style={{ visibility: currentUser?.firstName ? "visible" : "hidden" }}
+            style={{
+              visibility: currentUser?.firstName ? "visible" : "hidden",
+            }}
           >
             {/* The \u00A0 is a non-breaking space to maintain height when there's no text*/}
             <span>{currentUser?.firstName || "\u00A0"}</span> {""}
@@ -78,7 +77,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
       </Link>
       <div>
         <ul className={styles.mainMenu} role="list">
-          {itemsWithActiveState?.slice(0, -1).map((menuItem) => {
+          {itemsWithActiveState?.slice(0, -1).map((menuItem: any) => {
             const { id, icon, active_icon, label, link, active, onClick } =
               menuItem;
             return (

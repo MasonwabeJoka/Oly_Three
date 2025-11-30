@@ -18,7 +18,7 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
     const isValid = await trigger('phoneNumber');
     if (isValid) {
       try {
-        const phoneNumber = document.getElementById('phone-number')?.value;
+        const phoneNumber = (document.getElementById('phone-number') as HTMLInputElement)?.value;
         await axios.post('https://api.example.com/send-sms', { phoneNumber });
         setCodeSent(true);
         clearErrors('phoneNumber');
@@ -32,8 +32,8 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
     const isValid = await trigger('verificationCode');
     if (isValid) {
       try {
-        const phoneNumber = document.getElementById('phone-number')?.value;
-        const code = document.getElementById('verification-code')?.value;
+        const phoneNumber = (document.getElementById('phone-number') as HTMLInputElement)?.value;
+        const code = (document.getElementById('verification-code') as HTMLInputElement)?.value;
         await axios.post('https://api.example.com/verify-sms', { phoneNumber, code });
         onNext();
       } catch (error) {
@@ -53,7 +53,6 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
           inputType="tel"
           inputSize="large"
           placeholder="Phone Number"
-          name="phoneNumber"
           label="Phone Number"
           id="phone-number"
           ariaLabel="Phone Number Field"
@@ -64,14 +63,13 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
           dashboard
           {...register('phoneNumber')}
         />
-        {errors.phoneNumber && <p className={styles.error}>{errors.phoneNumber.message}</p>}
+        {errors.phoneNumber && <p className={styles.error}>{String(errors.phoneNumber.message || '')}</p>}
         {codeSent && (
           <Input
             className={styles.input}
             inputType="text"
             inputSize="large"
             placeholder="Verification Code"
-            name="verificationCode"
             label="Verification Code"
             id="verification-code"
             ariaLabel="Verification Code Field"
@@ -82,7 +80,7 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
             {...register('verificationCode')}
           />
         )}
-        {errors.verificationCode && <p className={styles.error}>{errors.verificationCode.message}</p>}
+        {errors.verificationCode && <p className={styles.error}>{String(errors.verificationCode.message || '')}</p>}
       </div>
       {!codeSent ? (
         <Button

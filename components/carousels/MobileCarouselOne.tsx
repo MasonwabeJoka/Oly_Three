@@ -36,7 +36,7 @@ const MobileCarouselOne = ({
   const slideNames = useRef<HTMLButtonElement[]>([]);
 
   const nextSlideName = (number: number): void => {
-    slideNames?.current[number]?.classList.add(`${styles.active}`);
+    slideNames?.current?.[number]?.classList.add(`${styles.active}`);
   };
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,14 +59,15 @@ const MobileCarouselOne = ({
           return (
             <li
               className={styles.slide}
-              ref={(element) =>
-                (slides.current[index] = element as HTMLDivElement)
-              }
+              ref={(element) => {
+                if (element && slides.current)
+                  slides.current[index] = element as any;
+              }}
               key={index}
             >
               <Image
                 className={styles.image}
-                src={slide.mobileSrc}
+                src={(slide as any).mobileSrc || slide.src}
                 alt={slide.slideName}
                 width={311}
                 height={333}

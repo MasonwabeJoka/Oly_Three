@@ -24,7 +24,7 @@ import FormProgressBar from "../../../create-listing/components/FormProgressBar"
 
 interface StepType {
   title: string;
-  content: React.ReactNode;
+  content: JSX.Element;
   path: string;
   fields: (keyof FormData)[];
 }

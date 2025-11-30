@@ -27,14 +27,14 @@ const TransferCostCalculator = () => {
   } | null>(null);
 
   // Transfer Duty Brackets (2025 SARS rates)
-const transferDutyBrackets = [
-  { upTo: 1100000, rate: 0 },        // 0% up to R1,100,000
-  { upTo: 1572500, rate: 0.03 },     // 3% from R1,100,001 to R1,572,500
-  { upTo: 2200000, rate: 0.06 },     // 6% from R1,572,501 to R2,200,000
-  { upTo: 2825000, rate: 0.08 },     // 8% from R2,200,001 to R2,825,000
-  { upTo: 11312500, rate: 0.11 },    // 11% from R2,825,001 to R11,312,500
-  { upTo: Infinity, rate: 0.13 },    // 13% above R11,312,500
-];
+  const transferDutyBrackets = [
+    { upTo: 1100000, rate: 0 }, // 0% up to R1,100,000
+    { upTo: 1572500, rate: 0.03 }, // 3% from R1,100,001 to R1,572,500
+    { upTo: 2200000, rate: 0.06 }, // 6% from R1,572,501 to R2,200,000
+    { upTo: 2825000, rate: 0.08 }, // 8% from R2,200,001 to R2,825,000
+    { upTo: 11312500, rate: 0.11 }, // 11% from R2,825,001 to R11,312,500
+    { upTo: Infinity, rate: 0.13 }, // 13% above R11,312,500
+  ];
   // Calculate Transfer Duty
   function calculateTransferDuty(purchasePrice: number): number {
     let duty = 0;
@@ -164,7 +164,9 @@ const transferDutyBrackets = [
               placeholder="Purchase Price - Deposit"
               autoFocus={false}
               required={true}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBondAmount(parseFloat(e.target.value) || 0)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setBondAmount(parseFloat(e.target.value) || 0)
+              }
             />
           </div>
 
@@ -193,7 +195,10 @@ const transferDutyBrackets = [
 
           <h3 className={styles.title}>Total Bond Costs</h3>
           <p className={styles.resultValue}>
-            R {result ? result.bondCosts.total.toLocaleString() : "0.00"}
+            R{" "}
+            {result
+              ? (result.bondCosts as any).total?.toLocaleString() || "0.00"
+              : "0.00"}
           </p>
 
           <div className={styles.subItems}>
@@ -227,7 +232,10 @@ const transferDutyBrackets = [
 
           <h3 className={styles.title}>Total Transfer Costs</h3>
           <p className={styles.resultValue}>
-            R {result ? result.transferCosts.total.toLocaleString() : "0.00"}
+            R{" "}
+            {result
+              ? (result.transferCosts as any).total?.toLocaleString() || "0.00"
+              : "0.00"}
           </p>
 
           <div className={styles.subItems}>

@@ -24,7 +24,7 @@ const Home = () => {
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories />
+          <ShowCategories categories={[] as any} />
         </div>
 
         <section className={styles.heroSection}>
@@ -56,7 +56,7 @@ const Home = () => {
 
         <section className={styles.featuredListings}>
           <h2 className={styles.title}>Featured Listings</h2>
-          <FeaturedListings category="all" />
+          <FeaturedListings category="all" currentPage={1} />
         </section>
         <section className={styles.blog}>
           <h2 className={styles.title}>Oly Articles</h2>

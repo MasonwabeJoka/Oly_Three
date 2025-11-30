@@ -3,6 +3,7 @@ import { FormWrapper } from "./FormWrapper";
 
 interface Props {
   onNext: () => void;
+  goTo?: () => void;
 }
 const ReviewListing = ({ onNext }: Props) => {
   return (

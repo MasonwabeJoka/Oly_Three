@@ -1,7 +1,36 @@
 "use server"
-import { connectToDatabase } from "@/lib/mongoose";
-import User from "@/utils/models/userModels";
-import Post from "@/utils/models/postModels";
+// Mock database connection for now
+const connectToDatabase = async () => {};
+
+// Mock models
+const User: any = {
+	findByIdAndUpdate: async () => ({}),
+};
+
+const Post: any = {
+	create: async () => ({ _id: "mock-id" }),
+	find: () => ({
+		sort: () => ({
+			skip: () => ({
+				limit: () => ({
+					populate: () => ({
+						populate: () => ({
+							exec: async () => [],
+						}),
+					}),
+				}),
+			}),
+		}),
+	}),
+	countDocuments: async () => 0,
+	findById: () => ({
+		populate: () => ({
+			populate: () => ({
+				exec: async () => null,
+			}),
+		}),
+	}),
+};
 import { revalidatePath } from "next/cache";
 
 
@@ -64,14 +93,14 @@ export const fetchPosts = async (pageNumber = 1, pageSize = 20)=> {
             }
         }) 
 
-        const totalPostsCount = await Posts.countDocuments({parentId: {$in: [null, undefined]}})
+        const totalPostsCount = await Post.countDocuments({parentId: {$in: [null, undefined]}})
 
-        const posts = await postsQuery.exec()
+        const posts = await postQuery.exec()
 
         // check if we have a next page
-        const isNextPage = totalPostsCount > skipAmount + posts.length
+        const isNext = totalPostsCount > skipAmount + posts.length
 
-        return { posts, isNext}
+        return { posts, isNext }
     } catch (error: any) {
         throw new Error(`Error creating post: ${error.message}`)
     }

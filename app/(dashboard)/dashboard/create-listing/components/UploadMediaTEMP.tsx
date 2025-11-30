@@ -22,7 +22,7 @@ const UploadMedia = () => {
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={() => setUploadPhotos(true)}
+              onClick={() => setUploadPhotos([])}
             />
           </div>
           <div className={styles.buttonContainer}>
@@ -37,7 +37,7 @@ const UploadMedia = () => {
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={() => setUploadVideos(true)}
+              onClick={() => setUploadVideos([])}
             />
           </div>
           <div className={styles.buttonContainer}>
@@ -52,7 +52,7 @@ const UploadMedia = () => {
               autoFocus={false}
               disabled={false}
               dashboard
-              onClick={() => setUploadAttachments(true)}
+              onClick={() => setUploadAttachments([])}
             />
           </div>
         </div>

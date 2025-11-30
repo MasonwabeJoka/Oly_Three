@@ -14,7 +14,7 @@ import { searchAction } from "./../utils/featuredListingSearchAction";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const FeaturedListingsClient = ({ category }) => {
+const FeaturedListingsClient = ({ category }: any) => {
   const Title = useTitleStore((state) => state.Title);
   const [searchTermClicked, setSearchTermClicked] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
@@ -31,7 +31,7 @@ const FeaturedListingsClient = ({ category }) => {
     resolver: zodResolver(searchFormSchema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const formData = new FormData();
     formData.append("searchTerm", data.searchTerm);
     formData.append("locationSearch", data.locationSearch);
@@ -121,7 +121,9 @@ const FeaturedListingsClient = ({ category }) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionCountChange={(count) => setLocationSuggestions(count)}
+              onSuggestionCountChange={(count: any) =>
+                setLocationSuggestions(count)
+              }
             />
           </div>
         </>
@@ -174,7 +176,9 @@ const FeaturedListingsClient = ({ category }) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionCountChange={(count) => setLocationSuggestions(count)}
+              onSuggestionCountChange={(count: any) =>
+                setLocationSuggestions(count)
+              }
             />
           </div>
         </>

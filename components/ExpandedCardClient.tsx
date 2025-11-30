@@ -1,4 +1,3 @@
-
 "use client";
 import styles from "./ExpandedCardClient.module.scss";
 import { ExpandedImageContainer } from "./ExpandedImageContainer";
@@ -88,7 +87,7 @@ const ExpandedCardClient: React.FC<ExpandedCardProps> = ({
         checkedHovered={checkedHovered}
         avatar={avatar}
         title={title}
-        description={description}
+        description={description as any}
         descriptionLength={descriptionLength}
         vehicleVariant={vehicleVariant}
         suburb={suburb}
@@ -99,6 +98,6 @@ const ExpandedCardClient: React.FC<ExpandedCardProps> = ({
       />
     </div>
   );
-}
+};
 
 export default ExpandedCardClient;

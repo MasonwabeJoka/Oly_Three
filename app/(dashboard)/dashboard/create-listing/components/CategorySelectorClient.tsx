@@ -14,12 +14,12 @@ interface Category {
   id: number;
   category: string;
   image: string;
-  subcategories: string[];
+  subcategories: { id: number; name: string; }[];
 }
 
 interface CategorySelectorClientProps {
   categories: Category[];
-  categoriesChunks: string[][];
+  categoriesChunks: { id: number; name: string; }[][];
   activeCategory: Category | null;
   showButtons: boolean;
   goTo: (index: number) => void;
@@ -38,14 +38,14 @@ const CategorySelectorClient = ({
   const [hovered, setHovered] = useState<string | null>(null);
   const { setValue, trigger } = useFormContext();
 
-  const handleSubcategoryClick = async (subcategory: string) => {
+  const handleSubcategoryClick = async (subcategory: { id: number; name: string; }) => {
     const selectedCategory = categories.find((cat) => cat.id === activeCategoryId);
     if (selectedCategory) {
       setValue("category.main", selectedCategory.category, { shouldValidate: true });
-      setValue("category.subcategory", subcategory, { shouldValidate: true });
+      setValue("category.subcategory", subcategory.name, { shouldValidate: true });
       const isValid = await trigger(["category.main", "category.subcategory"]);
       if (isValid) {
-        setCategory(selectedCategory.category, subcategory);
+        setCategory(selectedCategory.category, subcategory.name);
         goTo(1);
       }
     }
@@ -160,7 +160,7 @@ const CategorySelectorClient = ({
                         data-identifier={identifier}
                         onClick={() => handleSubcategoryClick(subcategory)}
                       >
-                        {subcategory}
+                        {subcategory.name}
                       </div>
                     );
                   })}

@@ -96,15 +96,15 @@ const PaginatedListingsCollageClient = ({
     639: 1,
   };
 
-  const cards = ads.map((ad, index) => {
+  const cards = ads.map((ad: any, index: any) => {
     const adImages = Array.isArray(ad.images) ? ad.images : [];
     const aspectRatios = adImages
-      .map((image) => image.aspectRatio)
-      .filter((ratio): ratio is number => typeof ratio === "number");
+      .map((image: any) => image.aspectRatio)
+      .filter((ratio: any): ratio is number => typeof ratio === "number");
     const urls: string[] = imageFiles
-      .map((imageFile) => {
+      .map((imageFile: any) => {
         const matchingImage = adImages.find(
-          (img) => img._ref === imageFile._id
+          (img: any) => img._ref === imageFile._id
         );
         return matchingImage ? imageFile.image.url : undefined;
       })

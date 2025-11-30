@@ -73,7 +73,9 @@ export default function ListingsSearchForm({
                 autoFocus={false}
                 required={false}
                 error={errors.categories?.message}
-                onDropdownOpenChange={(isOpen) => setIsCategoriesOpen(isOpen)}
+                onDropdownOpenChange={(isOpen: any) =>
+                  setIsCategoriesOpen(isOpen)
+                }
               />
             )}
           />

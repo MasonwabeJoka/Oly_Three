@@ -10,11 +10,14 @@ interface UploadIdProps {
 const UploadId: React.FC<UploadIdProps> = ({ onNext }) => {
   const { setValue, formState: { errors }, trigger } = useFormContext();
 
-  const handleFileChange = async (file: File) => {
-    setValue('idFile', file, { shouldValidate: true });
-    await trigger('idFile');
-    if (!errors.idFile) {
-      onNext();
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setValue('idFile', file, { shouldValidate: true });
+      await trigger('idFile');
+      if (!errors.idFile) {
+        onNext();
+      }
     }
   };
 
@@ -32,7 +35,7 @@ const UploadId: React.FC<UploadIdProps> = ({ onNext }) => {
           onChange={handleFileChange}
         />
       </div>
-      {errors.idFile && <p className={styles.error}>{errors.idFile.message}</p>}
+      {errors.idFile && <p className={styles.error}>{String(errors.idFile.message || '')}</p>}
     </div>
   );
 };

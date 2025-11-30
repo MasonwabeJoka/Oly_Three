@@ -8,7 +8,7 @@ export function groupFeedbackByType(data: Feedback[]) {
       return acc;
     },
     {
-      general: [],
+      General: [],
       "feature-request": [],
       "bug-report": [],
       "report-listing": [],

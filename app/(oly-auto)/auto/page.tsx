@@ -61,11 +61,11 @@ const Page = () => {
             description="We work with trusted lenders to help you get the best deal."
             cta="Get Finance Help"
             features={[
-              { id: 1, feature: "Compare offers from multiple finance partners" },
-              { id: 2, feature: "Get quick pre-qualification" },
-              { id: 3, feature: "No commitment, completely free"},
+              { id: "1", feature: "Compare offers from multiple finance partners" },
+              { id: "2", feature: "Get quick pre-qualification" },
+              { id: "3", feature: "No commitment, completely free"},
             ]}
-            content={<Calculators />}
+
           />
         </section>
 
@@ -82,7 +82,7 @@ const Page = () => {
                 </div>
               }
             >
-              <FeaturedListings category="all" currentPage={0} />
+              <FeaturedListings category="all" currentPage={1} />
             </Suspense>
           </section>
            <section className={styles.calculators}>

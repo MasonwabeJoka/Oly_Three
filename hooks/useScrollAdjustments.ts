@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, RefObject } from "react";
 
 export function useScrollAdjustments({
   filtersRef,
@@ -8,15 +8,15 @@ export function useScrollAdjustments({
   currentScreenSize,
   setOptionsWidth,
   setAltWidth,
-}: {
-  filtersRef: React.RefObject<HTMLDivElement>;
-  tabsContainerRef: React.RefObject<HTMLDivElement>;
-  listingsRef: React.RefObject<HTMLDivElement>;
-  expanded: boolean;
-  currentScreenSize: number;
-  setOptionsWidth: (value: string) => void;
-  setAltWidth: (value: number) => void;
-}) {
+	}: {
+	  filtersRef: RefObject<HTMLDivElement>;
+	  tabsContainerRef: RefObject<HTMLDivElement>;
+	  listingsRef: RefObject<HTMLDivElement>;
+	  expanded: boolean;
+	  currentScreenSize: number;
+	  setOptionsWidth: (value: string) => void;
+	  setAltWidth: (value: number) => void;
+	}) {
   useEffect(() => {
     const handleScroll = () => {
       if (!filtersRef.current || !tabsContainerRef.current || !listingsRef.current) return;

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import styles from "./VideoUploadForm.module.scss";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -97,7 +97,7 @@ const VideoUploadForm = ({ videoPath }: Props) => {
       </div>
       <div className={styles.detailsContainer}>
         <div className={`${styles.videoTitleContainer} ${styles.control}`}>
-          <p className={styles.errorMessage}>{errors.name?.message}</p>
+          <p className={styles.errorMessage}>{(errors.name as any)?.message}</p>
           <Input
             label="Name"
             className={styles.videoTitle}
@@ -119,7 +119,9 @@ const VideoUploadForm = ({ videoPath }: Props) => {
           />
         </div>
         <div className={`${styles.descriptionContainer} ${styles.control}`}>
-          <p className={styles.errorMessage}>{errors.message?.message}</p>
+          <p className={styles.errorMessage}>
+            {(errors.message as any)?.message}
+          </p>
           <TextArea
             className={styles.description}
             placeholder="Tell viewers what your video is about"

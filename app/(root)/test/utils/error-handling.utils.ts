@@ -93,7 +93,7 @@ export const ErrorHandler = {
       {
         operation: "calculateRanges",
         productType,
-        priceCount: prices.length,
+
         stackTrace: error.stack,
       },
       true
@@ -112,7 +112,7 @@ export const ErrorHandler = {
       ErrorCode.INSUFFICIENT_DATA,
       {
         operation: "validateData",
-        dataCount,
+
         minRequired,
       },
       false
@@ -126,7 +126,7 @@ export const ErrorHandler = {
     return this.createError(
       `Operation timed out after ${timeoutMs}ms`,
       ErrorCode.TIMEOUT_ERROR,
-      { operation, timeoutMs },
+      { operation },
       true
     );
   },

@@ -20,13 +20,13 @@ async function mockServerAction(formData: FormData): Promise<void> {
   // No return value needed
 }
 
-const EditModeForm = ({ initialValue }) => {
+const EditModeForm = ({ initialValue }: any) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(detailsFormSchema),
   });
   const { register, control, handleSubmit, formState, setValue, watch } = form;
   const { errors, isDirty, isValid, isSubmitting } = formState;
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     console.log(data);
   };
 

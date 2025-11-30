@@ -33,7 +33,11 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
     if (!swiperInstance) return;
 
     // Only trigger for net new additions (not reorders)
-    if (uploadedFiles.length > prevCountRef.current && !isReordering.current) {
+    if (
+      prevCountRef.current !== null &&
+      uploadedFiles.length > prevCountRef.current &&
+      !isReordering.current
+    ) {
       swiperInstance.slideTo(uploadedFiles.length - 1);
     }
 
@@ -51,7 +55,8 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
 
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setDragImage(new Image(), 0, 0);
+    const dragImage = document.createElement("img");
+    e.dataTransfer.setDragImage(dragImage, 0, 0);
     swiperInstance?.disable();
   };
 
@@ -90,7 +95,6 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
 
   const breakpointColumnsObj = {
     default: isDashboard ? 4 : 5,
-  
   };
 
   return (
@@ -99,7 +103,6 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
         className={styles.content}
         breakpointCols={breakpointColumnsObj}
         columnClassName={styles.listingsContainerColumns}
-       
       >
         {uploadedFiles
           .filter((imageUrl) => imageUrl && imageUrl.trim() !== "") // Filter out empty or invalid URLs
@@ -108,9 +111,15 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
               key={`${imageUrl}-${index}`}
               className={styles.fileContainer}
               draggable
-              onDragStart={(e: React.DragEvent<HTMLDivElement>) => handleDragStart(e, index)}
-              onDragOver={(e: React.DragEvent<HTMLDivElement>) => handleDragOver(e, index)}
-              onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e, index)}
+              onDragStart={(e: React.DragEvent<HTMLDivElement>) =>
+                handleDragStart(e, index)
+              }
+              onDragOver={(e: React.DragEvent<HTMLDivElement>) =>
+                handleDragOver(e, index)
+              }
+              onDrop={(e: React.DragEvent<HTMLDivElement>) =>
+                handleDrop(e, index)
+              }
               onDragEnd={handleDragEnd}
               onDragLeave={(e: React.DragEvent<HTMLDivElement>) =>
                 e.currentTarget.classList.remove(styles.dragOver)

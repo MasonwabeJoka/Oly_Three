@@ -15,6 +15,7 @@ type ExpandedDetailsProps = {
   checkedHovered?: string;
   avatar?: string;
   title?: string;
+  vehicleVariant?: any;
   description?: string | null;
   descriptionLength?: number;
   suburb?: string;

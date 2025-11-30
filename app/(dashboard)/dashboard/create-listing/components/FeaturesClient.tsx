@@ -33,7 +33,7 @@ const FeaturesClient = (props: FeaturesProps) => {
   const [detailId, setDetailId] = useState<string | number | null>(null);
   const selectFeatureValue = watch("selectFeature");
 
-  const onSubmitDetail = (data: FormValues) => {
+  const onSubmitDetail = (data: any) => {
     console.log(data);
     setDetailId(null);
     // Perform any additional actions here
@@ -49,14 +49,14 @@ const FeaturesClient = (props: FeaturesProps) => {
   let matchFound = false;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as any, e.target.value, {
       shouldDirty: true,
       shouldTouch: true,
     });
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as any, e.target.value, {
       shouldTouch: true,
     });
   };
@@ -90,7 +90,6 @@ const FeaturesClient = (props: FeaturesProps) => {
                 autoFocus={false}
                 disabled={false}
                 required={false}
-                multiple={false}
                 error={errors.selectDetail?.message as string}
                 {...register("selectFeature")}
               />
@@ -143,7 +142,7 @@ const FeaturesClient = (props: FeaturesProps) => {
                           ariaLabel="Edit Button"
                           autoFocus={false}
                           disabled={false}
-                          onClick={() => editDetail(detail.id)}
+                          onClick={() => editDetail(String(detail.id))}
                         />
                       </div>
                       <div className={styles.deleteButtonContainer}>
@@ -174,7 +173,7 @@ const FeaturesClient = (props: FeaturesProps) => {
                     </p>
                   </li>
                 ) : (
-                  <EditModeForm />
+                  <EditModeForm initialValue="" />
                 )
               )}
             </ul>

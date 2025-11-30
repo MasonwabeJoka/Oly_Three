@@ -86,10 +86,7 @@ const DetailsClient = ({
     setEditValue(details[index].value);
   };
 
-  const updateDetail = (
-    index: number,
-    updatedValue: string
-  ) => {
+  const updateDetail = async (index: number, updatedValue: string) => {
     if (updatedValue.trim()) {
       const updatedDetails = [...details];
       updatedDetails[index] = {
@@ -131,7 +128,7 @@ const DetailsClient = ({
     setEditValue(specifications[index].value);
   };
 
-  const updateSpecification = (index: number, updatedValue: string) => {
+  const updateSpecification = async (index: number, updatedValue: string) => {
     if (updatedValue.trim()) {
       const updatedSpecifications = [...specifications];
       updatedSpecifications[index] = {
@@ -188,7 +185,9 @@ const DetailsClient = ({
                 dashboard
                 error={(errors.details as any)?.condition?.message}
                 {...register("details.condition")}
-                onDropdownOpenChange={(isOpen) => setIsConditionsOpen(isOpen)}
+                onDropdownOpenChange={(isOpen: any) =>
+                  setIsConditionsOpen(isOpen)
+                }
               />
             </div>
 
@@ -198,7 +197,7 @@ const DetailsClient = ({
                   options={detailsTitles}
                   className={styles.selectDetail}
                   initialValue="Add all product details"
-                   value="Add all product details" 
+                  value="Add all product details"
                   selectSize="large"
                   selectColourType="normal"
                   label="Choose a detail"
@@ -207,7 +206,9 @@ const DetailsClient = ({
                   dashboard
                   error={(errors.details as any)?.selectDetail?.message}
                   {...register("details.selectDetail")}
-                  onDropdownOpenChange={(isOpen) => setIsDetailsOpen(isOpen)}
+                  onDropdownOpenChange={(isOpen: any) =>
+                    setIsDetailsOpen(isOpen)
+                  }
                 />
               </div>
             )}

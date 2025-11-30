@@ -12,8 +12,7 @@ import SubmitButton from "./SubmitButton";
 interface AddProductFormProps {}
 
 const AddProductForm = ({}: AddProductFormProps) => {
-  
-  const [priceInCents, setPriceInCents] = useState<number>();
+  const [priceInCents, setPriceInCents] = useState<number>(0);
   return (
     <form action={AddProductAction}>
       <div>
@@ -27,7 +26,9 @@ const AddProductForm = ({}: AddProductFormProps) => {
           id="priceInCents"
           name="priceInCents"
           value={priceInCents || ""}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPriceInCents(Number(e.target.value) || undefined)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPriceInCents(Number(e.target.value) || 0)
+          }
           required
         />
       </div>
@@ -49,7 +50,7 @@ const AddProductForm = ({}: AddProductFormProps) => {
           formatThousands: false,
         })}
       </div>
-        <SubmitButton />
+      <SubmitButton />
     </form>
   );
 };

@@ -86,7 +86,7 @@ const UploadBox = ({
             );
           }}
           content={{
-            button({ ready, isUploading, uploadProgress }) {
+            button({ ready, isUploading, uploadProgress }: any) {
               if (uploadProgress) return `${progress}%`;
               if (ready) return `Upload ${mediaType}`;
 
@@ -137,7 +137,7 @@ const UploadBox = ({
                 );
               }}
               content={{
-                button({ ready, isUploading, uploadProgress }) {
+                button({ ready, isUploading, uploadProgress }: any) {
                   if (ready) return `Upload ${mediaType}`;
                   if (uploadProgress) return `${progress}%`;
 

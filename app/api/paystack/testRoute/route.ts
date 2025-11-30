@@ -6,9 +6,10 @@ export async function POST(req: NextRequest) {
     const adData = await req.json();
     // const newAd = await createAd(adData);
     return NextResponse.json(adData, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Failed to create ad:', error);
-    return NextResponse.json({ message: 'Failed to create ad', error: error.message }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ message: 'Failed to create ad', error: errorMessage }, { status: 500 });
   }
 }
 

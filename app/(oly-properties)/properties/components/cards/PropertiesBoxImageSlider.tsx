@@ -7,9 +7,9 @@ import type SwiperType from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import Icon from "./Icon";
-import NavButtonRight from "./navButtonRight";
-import NavButtonLeft from "./navButtonLeft";
+import Icon from "@/components/Icon";
+import NavButtonRight from "@/components/navButtonRight";
+import NavButtonLeft from "@/components/navButtonLeft";
 import { normalizeImageSrc } from "@/utils/imageUtils";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -198,7 +198,9 @@ const ImageSlider = ({
           <div className={styles.buttonWrapper}>
             <div
               className={`${styles.button} ${styles.leftButton}`}
-              onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "prev")}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                handleNavButtonClick(e, "prev")
+              }
               style={{
                 display: slideConfig.isBeginning || !showNav ? "none" : "flex",
               }}
@@ -221,7 +223,9 @@ const ImageSlider = ({
         >
           <div
             className={styles.button}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "next")}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+              handleNavButtonClick(e, "next")
+            }
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}
@@ -233,7 +237,7 @@ const ImageSlider = ({
       <Swiper
         key="image-slider"
         className={styles.swiper}
-        onSwiper={(swiper) => setSwiper(swiper)}
+        onSwiper={(swiper: any) => setSwiper(swiper)}
         spaceBetween={50}
         slidesPerView={1}
         autoHeight

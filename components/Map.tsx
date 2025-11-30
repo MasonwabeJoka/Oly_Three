@@ -2,7 +2,7 @@
 import { useState, useCallback, memo } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
-const Map = ({ locations }) => {
+const Map = ({ locations }: { locations: any[] }) => {
   const [map, setMap] = useState(null);
 
   const containerStyles = {
@@ -28,13 +28,13 @@ const Map = ({ locations }) => {
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY || "",
   });
 
-  const onLoad = useCallback(function callback(map) {
+  const onLoad = useCallback(function callback(map: any) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback((map) => {
+  const onUnmount = useCallback((map: any) => {
     setMap(null);
   }, []);
 
@@ -47,7 +47,7 @@ const Map = ({ locations }) => {
       onUnmount={onUnmount}
     >
       {/* Add your Marker components here if needed */}
-      {locations.map((location, index) => (
+      {locations.map((location: any, index: number) => (
         <Marker
           key={index}
           position={{ lat: location.coordinates.lat, lng: location.coordinates.lng }}

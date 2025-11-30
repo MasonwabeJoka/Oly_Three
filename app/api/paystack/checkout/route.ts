@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
-import  createClient  from '@sanity/client';
+import { createClient } from '@sanity/client';
 import { z } from 'zod';
 import { fetchProducts } from '@/sanityTemp/actions/fetchProducts';
 
@@ -39,15 +39,15 @@ export async function POST(request: NextRequest) {
     //   { adIds }
     // );
 
-    const products = await fetchProducts(adIds);
+    const products = await fetchProducts();
 
     if (products.length === 0) {
       return NextResponse.json({ message: 'No valid products found' }, { status: 400 });
     }
 
     // Calculate total amount
-    const totalAmount = products.reduce((sum, product) => 
-      sum + calculateTotalAmount(product.price, 2.5, 2.9), 0);
+    const totalAmount = products.reduce((sum: number, product: any) => 
+      sum + calculateTotalAmount(product.price || 0, 2.5, 2.9), 0);
 
     // Create transaction in Sanity
     const transaction = await client.create({
@@ -84,11 +84,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: data.data.authorization_url });
 
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Checkout error:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ message: 'Invalid request', errors: error.errors }, { status: 400 });
     }
-    return NextResponse.json({ message: 'Internal Server Error', error: error.message }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ message: 'Internal Server Error', error: errorMessage }, { status: 500 });
   }
 }

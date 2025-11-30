@@ -89,7 +89,7 @@ const FilterTabs = ({
         return () => {
           console.log("FilterTabs: toggling more filters, current =", showMoreFilters);
           setShowMoreFilters(!showMoreFilters);
-          setActiveTabIndex(null);
+          // setActiveTabIndex(null);
         };
       }
       return () => handleTabClick(index);
@@ -121,7 +121,7 @@ const FilterTabs = ({
         collageViewWidth={currentScreenSize > 1025 ? collageViewWidth : 800}
         onClickHandlers={createFilterClickHandlers()}
         dashboard={false}
-        activeTabIndex={activeTabIndex}
+        activeTabIndex={activeTabIndex ?? undefined}
       />
       {renderFilterOptions()}
     </div>

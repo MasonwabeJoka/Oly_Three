@@ -57,7 +57,6 @@ const Price = ({ onNext }: Props) => {
               selectSize="large"
               label="Price Types"
               id="price-types"
-              name="pricingOption"
               ariaLabel="Price Types Select"
               autoFocus={false}
               disabled={false}
@@ -65,7 +64,9 @@ const Price = ({ onNext }: Props) => {
               dashboard
               {...register("price.pricingOption")}
               error={(errors.price as any)?.pricingOption?.message}
-              onDropdownOpenChange={(isOpen) => setIsPricingOptionsOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) =>
+                setIsPricingOptionsOpen(isOpen)
+              }
             />
           </div>
 
@@ -87,8 +88,11 @@ const Price = ({ onNext }: Props) => {
                   required={true}
                   dashboard
                   error={(errors.price as any)?.amount?.message}
-                  {...register("price.amount", { valueAsNumber: true })}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "amount")}
+                  {...register("price.amount", {
+                    valueAsNumber: true,
+                    onChange: (e: ChangeEvent<HTMLInputElement>) =>
+                      handlePriceChange(e, "amount"),
+                  })}
                 />
               </div>
             )}

@@ -1,7 +1,9 @@
 import styles from "./IndividualAccountVerification.module.scss";
 import Avatar from "@/components/Avatar";
 
-const IndividualAccountVerification = (props) => (
+interface IndividualAccountVerificationProps {}
+
+const IndividualAccountVerification = (props: IndividualAccountVerificationProps) => (
   <div className={styles.container}>
     <div className={styles.avatarContainer}>
       <Avatar

@@ -7,11 +7,11 @@ import { useState } from "react";
 import Input from "@/components/Input";
 import { useFormContext } from "react-hook-form";
 const VideoUploadsSection = () => {
-      const {
-        register,
-        setValue,
-        formState: { errors },
-      } = useFormContext();
+  const {
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
 
@@ -56,7 +56,6 @@ const VideoUploadsSection = () => {
           placeholder="Enter Video URL"
           label="Enter Video URL"
           id="video-url"
-          name="videoUrl"
           ariaLabel="Video URL Field"
           autoFocus={false}
           autoComplete="off"
@@ -73,7 +72,9 @@ const VideoUploadsSection = () => {
         modalContent={
           uploadedVideoUrl ? (
             <VideoUploadForm videoPath={uploadedVideoUrl} />
-          ) : null
+          ) : (
+            <div></div>
+          )
         }
       />
     </div>

@@ -52,7 +52,16 @@ const FeedbackDetails = ({
             </div>
           </div>
         </div>
-        <FeedbackChatComponent title={title} feedback={feedback} user={user} profilePicture={profilePicture} date={date} time={time} type={type} status={status} />
+        <FeedbackChatComponent
+          title={title || ""}
+          feedback={feedback}
+          user={user}
+          profilePicture={profilePicture}
+          date={date}
+          time={time}
+          type={type}
+          status={status}
+        />
       </div>
     </div>
   );

@@ -71,8 +71,8 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
     if (hasImageChanged) {
       const imageResponse = await startUpload(files);
 
-      if (imageResponse && imageResponse[0].fileUrl) {
-        values.profile_photo = imageResponse[0].fileUrl;
+      if (imageResponse && (imageResponse[0] as any).fileUrl) {
+        values.profile_photo = (imageResponse[0] as any).fileUrl;
       }
     }
 
@@ -109,7 +109,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
             className={styles.avatar}
             avatar={newImage}
             imageAlt="Profile Picture"
-            avatarSize="extraLargeDesktop"
+            avatarSize={"large" as any}
             priority
           />
         ) : (
@@ -117,7 +117,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
             className={styles.avatar}
             avatar="/missing_image.jpg"
             imageAlt="Profile Picture"
-            avatarSize="extraLargeDesktop"
+            avatarSize={"large" as any}
             priority={false}
           />
         )}
@@ -195,7 +195,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
         className={styles.submitButton}
         buttonChildren="Submit"
         buttonType="normal"
-        buttonSize="extraLargeDesktop"
+        buttonSize={"large" as any}
         name="submit-btn"
         type="submit"
         ariaLabel="Submit Button"

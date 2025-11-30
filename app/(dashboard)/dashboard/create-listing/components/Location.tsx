@@ -39,7 +39,7 @@ const Location = ({ onNext }: Props) => {
             dashboard
             error={errors.location?.province?.message}
             {...register("location.province")}
-            onDropdownOpenChange={(isOpen) => setIsLocationOpen(isOpen)}
+            onDropdownOpenChange={(isOpen: any) => setIsLocationOpen(isOpen)}
           />
         </div>
         {!isLocationOpen && (
@@ -57,7 +57,7 @@ const Location = ({ onNext }: Props) => {
               dashboard
               error={errors.location?.city?.message}
               {...register("location.city")}
-              onDropdownOpenChange={(isOpen) => setIsCityOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) => setIsCityOpen(isOpen)}
             />
           </div>
         )}
@@ -76,7 +76,7 @@ const Location = ({ onNext }: Props) => {
               dashboard
               error={errors.location?.suburb?.message}
               {...register("location.suburb")}
-              onDropdownOpenChange={(isOpen) => setIsSuburbOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) => setIsSuburbOpen(isOpen)}
             />
           </div>
         )}

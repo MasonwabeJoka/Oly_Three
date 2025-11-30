@@ -231,13 +231,14 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
         if (!isValid) {
           const { errors } = await trigger(fieldsToValidate, { shouldFocus: false });
           const errorMessages = Object.entries(errors || {})
-            .map(([field, error]) => `${field}: ${error.message}`)
+            .map(([field, error]) => `${field}: ${(error as any)?.message || 'Invalid field'}`)
             .join("; ");
           set({ message: `Please correct the following errors: ${errorMessages || "Invalid fields"}` });
           return; // Stop navigation if validation fails
         }
-      } catch (error) {
-        set({ message: "Validation error occurred. Please check your inputs." });
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Validation error occurred';
+        set({ message: `Validation error: ${errorMessage}` });
         return;
       }
     }
@@ -249,13 +250,13 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
         if (!isValid) {
           const { errors } = await trigger([], { shouldFocus: false });
           const errorMessages = Object.entries(errors || {})
-            .map(([field, error]) => `${field}: ${error.message}`)
+            .map(([field, error]) => `${field}: ${(error as any)?.message || 'Invalid field'}`)
             .join("; ");
           set({ message: `Please correct the following errors: ${errorMessages || "Invalid form data"}` });
           return; // Stop submission if validation fails
         }
         await handleSubmit(onSubmit)();
-      } catch (error) { // If submission fails
+      } catch (error: unknown) { // If submission fails
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
         set({ message: `Submission failed: ${errorMessage}` }); // Show what went wrong
         return;
@@ -297,7 +298,7 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
         if (!isValid) {
           const { errors } = await trigger(fieldsToValidate, { shouldFocus: false });
           const errorMessages = Object.entries(errors || {})
-            .map(([field, error]) => `${field}: ${error.message}`)
+            .map(([field, error]) => `${field}: ${(error as any)?.message || 'Invalid field'}`)
             .join("; ");
           set({ message: `Please correct the following errors: ${errorMessages || "Invalid fields"}` });
           return; // Stop navigation if validation fails
@@ -339,40 +340,40 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   // Useful for pre-filling the form with saved information
   transformAdData: (data: Ad): Partial<FormData> => ({
     category: {
-      main: data.category?.title || data.category?.mainCategory || "",
-      subcategory: data.category?.childrenCategories?.[0]?.title || "",
+      main: (data as any).category?.title || (data as any).category?.mainCategory || "",
+      subcategory: (data as any).category?.childrenCategories?.[0]?.title || "",
     }, // Use the ad’s category or empty string
-    details: { condition: data.condition || '' },
+    details: { condition: (data as any).condition || '' },
     price: {
-      pricingOption: data.pricingOption || '',
+      pricingOption: (data as any).pricingOption || '',
       amount: data.price || 0,
-      startingPrice: data.startingPrice,
-      buyNowPrice: data.buyNowPrice,
-      startTime: data.startTime,
+      startingPrice: (data as any).startingPrice,
+      buyNowPrice: (data as any).buyNowPrice,
+      startTime: (data as any).startTime,
     },
     createAccount: {
-      bankName: data.bankName || '',
-      accountHolder: data.accountHolder || '',
-      accountNumber: data.accountNumber || '0',
+      bankName: (data as any).bankName || '',
+      accountHolder: (data as any).accountHolder || '',
+      accountNumber: (data as any).accountNumber || '0',
     },
     titleAndDescription: {
       title: data.title || '',
       description: data.description // If there’s a description, combine all text parts
-        ? data.description.map(block => block.children.map(child => child.text).join(' ')).join(' ')
+        ? Array.isArray(data.description) ? data.description.map((block: any) => block.children?.map((child: any) => child.text).join(' ')).join(' ') : String(data.description)
         : '',
     },
     uploadMedia: {
-      uploadPhotos: !!data.images?.length, // True if there are images
-      uploadVideos: !!data.videos?.length, // True if there are videos
-      uploadAttachments: !!data.attachments?.length, // True if there are attachments
+      uploadPhotos: !!(data as any).images?.length, // True if there are images
+      uploadVideos: !!(data as any).videos?.length, // True if there are videos
+      uploadAttachments: !!(data as any).attachments?.length, // True if there are attachments
     },
     location: {
-      province: data.province || '',
-      city: data.city || '',
-      suburb: data.suburb || '',
-      customLocation: data.customLocation || '',
+      province: (data as any).province || '',
+      city: (data as any).city || '',
+      suburb: (data as any).suburb || '',
+      customLocation: (data as any).customLocation || '',
     },
-    promoteYourAd: { promotionDuration: data.promotionDuration || '' },
+    promoteYourAd: { promotionDuration: (data as any).promotionDuration || '' },
   }),
 }));
 

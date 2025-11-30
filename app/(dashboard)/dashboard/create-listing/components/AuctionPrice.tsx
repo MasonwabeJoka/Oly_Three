@@ -65,7 +65,9 @@ const AuctionPrice = ({ onNext }: Props) => {
                   dashboard
                   error={(errors as any)?.price?.startingPrice?.message}
                   {...register("price.startingPrice", { valueAsNumber: true })}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "startingPrice")}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handlePriceChange(e, "startingPrice")
+                  }
                 />
               </div>
 
@@ -86,7 +88,9 @@ const AuctionPrice = ({ onNext }: Props) => {
                     dashboard
                     error={(errors as any)?.price?.buyNowPrice?.message}
                     {...register("price.buyNowPrice", { valueAsNumber: true })}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => handlePriceChange(e, "buyNowPrice")}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handlePriceChange(e, "buyNowPrice")
+                    }
                   />
                 </div>
               )}
@@ -119,7 +123,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     dashboard
                     error={(errors as any)?.price?.startTime?.message}
                     {...register("price.startTime")}
-                    onDropdownOpenChange={(isOpen) =>
+                    onDropdownOpenChange={(isOpen: any) =>
                       setIsAuctionStartTimeOpen(isOpen)
                     }
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => {
@@ -163,7 +167,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     dashboard
                     error={(errors as any)?.price?.auctionDuration?.message}
                     {...register("price.auctionDuration")}
-                    onDropdownOpenChange={(isOpen) =>
+                    onDropdownOpenChange={(isOpen: any) =>
                       setIsAuctionDurationOpen(isOpen)
                     }
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => {

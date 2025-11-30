@@ -3,7 +3,7 @@ import styles from "./DetailsList.module.scss";
 import Image from "@/components/Image";
 import Button from "@/components/Buttons";
 import DetailsEditMode from "./DetailsEditMode";
-import type { DetailItem } from "./Details";
+import type { DetailItem } from "./DetailsClient";
 import Icon from "@/components/Icon";
 
 interface DetailsListProps {

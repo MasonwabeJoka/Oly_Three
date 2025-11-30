@@ -17,12 +17,12 @@ const Features = () => {
       <div className={styles.carousel}>
         {isMobile ? (
           <MobileCarouselOne
-            src={slides.src}
-            mobileSrc={slides.mobileSrc}
-            slideName={slides.slideName}
-            slideTitle={slides.slideTitle}
+            src={(slides as any).src}
+            mobileSrc={(slides as any).mobileSrc}
+            slideName={(slides as any).slideName}
+            slideTitle={(slides as any).slideTitle}
             currentValue={initialValue}
-            data={slides}
+            data={slides as any}
           />
         ) : (
           <FeaturesCarousel />

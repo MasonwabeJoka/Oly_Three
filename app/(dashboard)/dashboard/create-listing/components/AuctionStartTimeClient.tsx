@@ -7,7 +7,7 @@ import Select from "@/components/Select";
 
 const AuctionStartTimeClient = () => {
   const selectRef = useRef<HTMLDivElement | null>(null);
-  const [selected, setSelected] = useState<Date>();
+  const [selected, setSelected] = useState<Date>(new Date());
   const today = new Date();
   const threeMonthsAhead = new Date(
     today.getFullYear(),

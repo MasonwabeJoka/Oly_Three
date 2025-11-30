@@ -111,7 +111,9 @@ const ExpandedImageSlider = ({
         >
           <div
             className={`${styles.button} ${styles.leftButton}`}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "prev", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+              handleNavButtonClick(e, "prev", swiper)
+            }
             style={{
               display: slideConfig.isBeginning || !showNav ? "none" : "flex",
             }}
@@ -133,7 +135,9 @@ const ExpandedImageSlider = ({
         >
           <div
             className={`${styles.button} ${styles.rightButton}`}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "next", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+              handleNavButtonClick(e, "next", swiper)
+            }
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}
@@ -144,7 +148,7 @@ const ExpandedImageSlider = ({
       </div>
       <Swiper
         className={styles.swiper}
-        onSwiper={(swiper) => setSwiper(swiper)}
+        onSwiper={(swiper: any) => setSwiper(swiper)}
         spaceBetween={50}
         centeredSlides={true}
         slidesPerView={1}

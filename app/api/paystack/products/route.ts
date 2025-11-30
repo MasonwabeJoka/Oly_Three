@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import  createClient  from '@sanity/client';
+import { createClient } from '@sanity/client';
 import { z } from 'zod';
 import { postAd } from '@/sanityTemp/actions/postAd';
-import { AdSchema } from '@/sanityTemp/Types/Ad';
 
-
+// Initialize Sanity client
+const client = createClient({
+  projectId: process.env.SANITY_PROJECT_ID!,
+  dataset: process.env.SANITY_DATASET!,
+  useCdn: false,
+  apiVersion: '2023-08-05',
+  token: process.env.SANITY_API_TOKEN,
+});
 
 // Define the input schema for product operations
 const adSchema = z.object({
   adId: z.string().optional(),
-  ad: AdSchema,
+  ad: z.any(),
   operation: z.enum(['create', 'update']),
 });
 
@@ -37,7 +43,7 @@ export async function POST(request: NextRequest) {
       //   user: { _type: 'reference', _ref: userId },
       // });
 
-      const newAd = await postAd(ad, adId);
+      const newAd = await postAd(ad);
 
       // Integrate with Paystack for creating a new product (if required)
       // Example: Add product creation code for Paystack here

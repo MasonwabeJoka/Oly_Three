@@ -21,7 +21,7 @@ const ReviewPhotos = () => {
   const onClick = () => {
     setIsEditMode(true);
     goTo(5);
-    setUploadVideos(true);
+    setUploadVideos([]);
   };
   return (
     <MediaSectionWrapper title="Videos">

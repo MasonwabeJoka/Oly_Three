@@ -59,7 +59,9 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
         {errors && <p className={styles.errorMessage}>{errors?.message}</p>}
 
         <div className={styles.searchTerm}>
-          <p className={styles.errorMessage}>{errors.searchTerm?.message}</p>
+          <p className={styles.errorMessage}>
+            {(errors.searchTerm as any)?.message}
+          </p>
           <Controller
             name="searchTerm"
             control={control}
@@ -82,7 +84,7 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
                 ariaLabel="Search Term"
                 autoComplete="off"
                 required={false}
-                onSuggestionCountChange={(value) =>
+                onSuggestionCountChange={(value: any) =>
                   setSearchTermSuggestions(value)
                 }
               />
@@ -116,7 +118,7 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
                   ariaLabel="Location"
                   autoComplete="off"
                   required
-                  onSuggestionCountChange={(count) =>
+                  onSuggestionCountChange={(count: any) =>
                     setLocationSuggestions(count)
                   }
                 />

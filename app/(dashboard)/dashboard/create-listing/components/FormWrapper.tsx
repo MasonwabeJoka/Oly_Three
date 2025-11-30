@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import useEditStore from "../store/useEditStore";
-import useFormStore, { FormData } from "../store/useFormStore";
+import useFormStore, { FormData as CustomFormData } from "../store/useFormStore";
 import useUploadMediaStore, {
   resetMediaStates,
 } from "../store/useUploadMediaStore";
 import FormProgressBar from "./FormProgressBar";
 import styles from "./FormWrapper.module.scss";
 import Form from "next/form";
-import { CreateAListingAction } from "@/utils/FormServerActions/CreateAListingAction";
+import { createListingAction } from "@/utils/FormServerActions/CreateAListingAction";
 import { slugMap } from "../store/useFormStore";
 import { usePathname } from "next/navigation";
 
@@ -65,7 +65,7 @@ export const FormWrapper = ({
     categoryPreviouslySelected,
     setCurrentStepIndex,
   } = useFormStore();
-  const { trigger, handleSubmit } = useFormContext<FormData>();
+  const { trigger, handleSubmit } = useFormContext<CustomFormData>();
   const isClient = useIsClient();
   const stepRef = useRef<HTMLDivElement>(null);
 
@@ -103,18 +103,18 @@ export const FormWrapper = ({
 
   if (!isClient) return null;
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<CustomFormData> = async (data) => {
     console.log("Form data:", data);
     if (currentStepIndex === steps.length - 1) {
       try {
-        const result = await CreateAListingAction(data);
+        const result = await createListingAction(data as any);
         if (result.success) {
           router.push("/listings/countryside-farmhouse", { scroll: true });
           if (typeof window !== "undefined") {
             localStorage.removeItem("currentStepIndex");
           }
         } else {
-          setMessage(result.message || "Submission failed on server.");
+          setMessage("Submission failed on server.");
         }
       } catch (error) {
         setMessage(
@@ -208,7 +208,10 @@ export const FormWrapper = ({
         onSubmit={handleSubmit(onSubmit)}
         action={
           currentStepIndex === steps.length - 1
-            ? CreateAListingAction
+            ? async (formData: globalThis.FormData) => {
+                const result = await createListingAction(formData as any);
+                return result;
+              }
             : undefined
         }
         className={styles.form}

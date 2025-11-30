@@ -6,23 +6,30 @@ import BankAccountDetails from "./BankAccountDetails";
 import TitleAndDescription from "./TitleAndDescription";
 import UploadMedia from "./UploadMedia";
 import Location from "./Location";
-import PromoteYourAd from "./PromoteYourAd";
+import PromoteYourAds from "./PromoteYourAds";
 import Congratulations from "./ReviewListing";
 import ReviewAndSubmit from "./ReviewAndSubmit";
 import DashboardClient from "./DashboardClient";
 
-const Dashboard = ({ initialFormData, goTo, setCategory }) => {
+interface DashboardProps {
+  initialFormData: any;
+  goTo: () => void;
+  setCategory: (category: string) => void;
+}
+
+const Dashboard = ({ initialFormData, goTo, setCategory }: DashboardProps) => {
+  const onNext = () => {};
   const steps = [
-    <SelectACategory key="0" goTo={goTo} setCategory={setCategory} />,
-    <Details key="1" />,
-    <Price key="2" />,
-    <BankAccountDetails key="3" />,
-    <TitleAndDescription key="4" />,
-    <UploadMedia key="5" />,
-    <Location key="6" />,
-    <PromoteYourAd key="7" />,
-    <Congratulations key="8" />,
-    <ReviewAndSubmit key="9" />,
+    <SelectACategory key="0" />,
+    <Details key="1" onNext={onNext} />,
+    <Price key="2" onNext={onNext} />,
+    <BankAccountDetails key="3" onNext={onNext} />,
+    <TitleAndDescription key="4" onNext={onNext} />,
+    <UploadMedia key="5" onNext={onNext} />,
+    <Location key="6" onNext={onNext} />,
+    <PromoteYourAds key="7" onNext={onNext} />,
+    <Congratulations key="8" onNext={onNext} goTo={goTo} />,
+    <ReviewAndSubmit key="9" onNext={onNext} goTo={goTo} />,
   ];
 
   return (

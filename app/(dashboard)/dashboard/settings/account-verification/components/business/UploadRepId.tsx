@@ -10,11 +10,14 @@ interface UploadRepIdProps {
 const UploadRepId: React.FC<UploadRepIdProps> = ({ onNext }) => {
   const { setValue, formState: { errors }, trigger } = useFormContext();
 
-  const handleFileChange = async (file: File) => {
-    setValue('repIdFile', file, { shouldValidate: true });
-    await trigger('repIdFile');
-    if (!errors.repIdFile) {
-      onNext();
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setValue('repIdFile', file, { shouldValidate: true });
+      await trigger('repIdFile');
+      if (!errors.repIdFile) {
+        onNext();
+      }
     }
   };
 
@@ -32,7 +35,7 @@ const UploadRepId: React.FC<UploadRepIdProps> = ({ onNext }) => {
           onChange={handleFileChange}
         />
       </div>
-      {errors.repIdFile && <p className={styles.error}>{errors.repIdFile.message}</p>}
+      {errors.repIdFile && <p className={styles.error}>{String(errors.repIdFile.message || '')}</p>}
     </div>
   );
 };

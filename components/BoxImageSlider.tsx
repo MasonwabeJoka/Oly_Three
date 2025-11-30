@@ -82,14 +82,16 @@ const ImageSlider = ({
   }, [isCardHovered, swiper, activeIndex]);
 
   const swiperStyles = {
-    width: category === "property" || category === "vehicles" ? "24.21875rem" : "19.375rem",
+    width:
+      category === "property" || category === "vehicles"
+        ? "24.21875rem"
+        : "19.375rem",
   };
   const swiperSlideHeight = (index: number) => {
     if (category === "property" || category === "vehicles") {
       return "13.623046875rem";
     } else if (category === "shops") {
-     
-        if (aspectRatios && aspectRatios[index] >= 1) {
+      if (aspectRatios && aspectRatios[index] >= 1) {
         return "15.5rem";
       } else {
         return "27.5rem";
@@ -100,7 +102,9 @@ const ImageSlider = ({
   };
 
   const swiperSlideWidth =
-    category === "property" || category === "vehicles" ? "24.21875rem" : "19.375rem";
+    category === "property" || category === "vehicles"
+      ? "24.21875rem"
+      : "19.375rem";
 
   return (
     <div className={styles.container} style={swiperStyles}>
@@ -137,7 +141,9 @@ const ImageSlider = ({
           <div className={styles.buttonWrapper}>
             <div
               className={`${styles.button} ${styles.leftButton}`}
-              onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "prev", swiper)}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                handleNavButtonClick(e, "prev", swiper)
+              }
               style={{
                 display: slideConfig.isBeginning || !showNav ? "none" : "flex",
               }}
@@ -160,7 +166,9 @@ const ImageSlider = ({
         >
           <div
             className={styles.button}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavButtonClick(e, "next", swiper)}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+              handleNavButtonClick(e, "next", swiper)
+            }
             style={{
               display: slideConfig.isEnd || !showNav ? "none" : "flex",
             }}
@@ -172,7 +180,7 @@ const ImageSlider = ({
       <Swiper
         key="image-slider"
         className={styles.swiper}
-        onSwiper={(swiper) => setSwiper(swiper)}
+        onSwiper={(swiper: any) => setSwiper(swiper)}
         spaceBetween={50}
         slidesPerView={1}
         autoHeight

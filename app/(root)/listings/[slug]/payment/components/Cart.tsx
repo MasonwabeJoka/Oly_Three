@@ -3,7 +3,7 @@
 import styles from "./Cart.module.scss";
 import Button from "@/components/Buttons";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
-import CartItem from "@/app/[listing]/components/CartItem";
+import CartItem from "../../components/CartItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 import { useCart } from "../store/useCart";
@@ -28,12 +28,11 @@ const Cart = () => {
             <div className={styles.ItemsCount}>Items: {itemCount}</div>
             <ul className={styles.items}>
               <ScrollArea>
-                <li key={item.ad._id}>
-
                 {items.map((item) => (
-                  <CartItem  ad={item.ad} />
+                  <li key={item.ad._id}>
+                    <CartItem ad={item.ad} />
+                  </li>
                 ))}
-                </li>
               </ScrollArea>
             </ul>
             <div className={styles.transactionSummaryContainer}>

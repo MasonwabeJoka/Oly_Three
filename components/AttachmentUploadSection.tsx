@@ -3,11 +3,11 @@ import Icon from "./Icon";
 import ToggleButton from "./ToggleButton";
 import UploadButton from "./UploadButton";
 
-const AttachmentUploadSection = ({ attachments }) => {
+const AttachmentUploadSection = ({ attachments }: { attachments: any[] }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        {attachments?.map((attachment) => (
+        {attachments?.map((attachment: any) => (
           <div key={attachment.id} className={styles.attachmentContainer}>
             <div className={styles.iconContainer}></div>
             <div className={styles.text}>

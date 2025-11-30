@@ -121,8 +121,9 @@ export const ValidationUtils = {
     ranges.forEach((range, index) => {
       try {
         this.validatePriceRange(range);
-      } catch (error) {
-        throw new ValidationError(`Invalid price range at index ${index}: ${error.message}`);
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        throw new ValidationError(`Invalid price range at index ${index}: ${errorMessage}`);
       }
     });
 

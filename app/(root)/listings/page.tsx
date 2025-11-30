@@ -12,7 +12,7 @@ const Page = async ({
 
   const currentPage = Number(page) || 1;
 
-  let listings = [];
+  let listings: any[] = [];
   let totalCount = 0;
 
   try {
@@ -22,7 +22,7 @@ const Page = async ({
       page: currentPage,
       pageSize: listingsPerPage,
     });
-    listings = data.listings;
+    listings = data.listings || [];
     totalCount = data.totalCount;
   } catch (error) {
     console.error("Failed to fetch listings:", error);

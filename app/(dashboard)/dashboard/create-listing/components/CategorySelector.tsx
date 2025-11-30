@@ -4,7 +4,7 @@ import CategorySelectorClient from "./CategorySelectorClient";
     id: number;
     category: string;
     image: string;
-    subcategories: string[];
+    subcategories: { id: number; name: string; }[];
   }
 
 interface CategorySelectorServerProps {
@@ -18,7 +18,7 @@ const CategorySelector = ({
   goTo = () => {},
   setCategory = () => {},
 }: CategorySelectorServerProps) => {
-  const categoriesArray = (arr: string[], size: number) => {
+  const categoriesArray = (arr: { id: number; name: string; }[], size: number) => {
     if (!arr) return [];
     return Array.from({ length: Math.ceil(arr.length / size) }, (_, index) =>
       arr.slice(index * size, index * size + size)

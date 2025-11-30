@@ -5,7 +5,11 @@ import MyAdsCard from "@/components/cards/MyAdsCard";
 import styles from "./styles.module.scss";
 import { images } from "@/data/galleryImages";
 
-const MyAds = ({ listingsData }) => {
+interface MyAdsProps {
+  listingsData: any[];
+}
+
+const MyAds = ({ listingsData }: MyAdsProps) => {
   const avatars = useArticlesStore((state) => state.avatars);
   const getAvatars = useArticlesStore((state) => state.getAvatars);
 
@@ -15,13 +19,13 @@ const MyAds = ({ listingsData }) => {
 
   return (
     <>
-      {listingsData.map((listing, index) => {
+      {listingsData.map((listing: any, index: number) => {
         return (
           <div key={listing.id}>
             <MyAdsCard
               id={listing.id}
               key={listing.id}
-              images={images}
+              images={images.map(img => img.url)}
               userName={listing.userName}
               title={listing.title}
               price={listing.price}

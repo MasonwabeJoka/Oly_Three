@@ -2,7 +2,7 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./CartItem.module.scss";
 import Image from "@/components/Image";
 import { ImageIcon, X } from "lucide-react";
-import Button from "../../../components/Buttons";
+import Button from "@/components/Buttons";
 import { useCart } from "../payment/store/useCart";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 

@@ -12,6 +12,7 @@ interface AvatarProps {
   isVerified?: boolean;
   isBusiness?: boolean;
   onClick?: () => void;
+  priority?: boolean;
 }
 
 const AVATAR_SIZE = {

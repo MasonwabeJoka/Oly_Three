@@ -115,10 +115,12 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               required={true}
               multiple={false}
               dashboard
-              error={errors.promotionDuration?.message as string}
+              error={(errors as any).promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
-              onDropdownOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) =>
+                setIsDurationSelectOpen(isOpen)
+              }
             />
           </div>
 
@@ -153,7 +155,11 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               marginBottom: "1rem",
             }}
           >
-            <Checkbox className={styles.checkbox} label="" id={id} />
+            <Checkbox
+              className={styles.checkbox}
+              label=""
+              id={id?.toString() || ""}
+            />
           </div>
         </div>
       </div>
@@ -193,10 +199,12 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               disabled={false}
               required={true}
               dashboard={isDashboard}
-              error={errors.promotionDuration?.message as string}
+              error={(errors as any).promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
-              onDropdownOpenChange={(isOpen) => setIsDurationSelectOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) =>
+                setIsDurationSelectOpen(isOpen)
+              }
             />
           </div>
 
@@ -217,9 +225,15 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
         </div>
 
         <div className={styles.priceContainer}>
-          <h4 className={styles.price}>{`R${selectedPrice}`}</h4>
+          <h4
+            className={styles.price}
+          >{`R${selectedPrice?.toString() || ""}`}</h4>
         </div>
-        <Checkbox className={styles.checkbox} label="" id={id} />
+        <Checkbox
+          className={styles.checkbox}
+          label=""
+          id={id?.toString() || ""}
+        />
       </div>
     </div>
   );

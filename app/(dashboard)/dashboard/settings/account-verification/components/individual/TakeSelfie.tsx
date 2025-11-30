@@ -1,29 +1,33 @@
-'use client';
-import styles from './TakeSelfie.module.scss';
-import Webcam from 'react-webcam';
-import { useRef } from 'react';
-import Image from 'next/image';
-import Button from '@/components/Buttons';
-import { useFormContext } from 'react-hook-form';
+"use client";
+import styles from "./TakeSelfie.module.scss";
+import Webcam from "react-webcam";
+import { useRef } from "react";
+import Image from "next/image";
+import Button from "@/components/Buttons";
+import { useFormContext } from "react-hook-form";
 
 interface TakeSelfieProps {
   onNext: () => void;
 }
 
 const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
-  const webcamRef = useRef<Webcam>(null);
-  const { setValue, formState: { errors }, trigger } = useFormContext();
+  const webcamRef = useRef<any>(null);
+  const {
+    setValue,
+    formState: { errors },
+    trigger,
+  } = useFormContext();
 
   const capture = async () => {
     const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
-      setValue('selfie', imageSrc, { shouldValidate: true });
-      await trigger('selfie');
+      setValue("selfie", imageSrc, { shouldValidate: true });
+      await trigger("selfie");
     }
   };
 
   const handleSubmit = async () => {
-    const isValid = await trigger('selfie');
+    const isValid = await trigger("selfie");
     if (isValid) {
       onNext();
     }
@@ -32,7 +36,9 @@ const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
   return (
     <div className={styles.container}>
       <p className={styles.description}>
-        Take a live selfie and make sure you look directly at the camera, use good lighting, and remove any sunglasses or hats before taking the photo.
+        Take a live selfie and make sure you look directly at the camera, use
+        good lighting, and remove any sunglasses or hats before taking the
+        photo.
       </p>
       {!webcamRef.current?.getScreenshot() ? (
         <>
@@ -59,7 +65,7 @@ const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
       ) : (
         <>
           <Image
-            src={webcamRef.current?.getScreenshot() || ''}
+            src={webcamRef.current?.getScreenshot() || ""}
             alt="Captured selfie"
             className={styles.preview}
             width={320}
@@ -89,11 +95,13 @@ const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
             autoFocus={false}
             disabled={false}
             dashboard
-            onClick={() => setValue('selfie', '', { shouldValidate: true })}
+            onClick={() => setValue("selfie", "", { shouldValidate: true })}
           />
         </>
       )}
-      {errors.selfie && <p className={styles.error}>{errors.selfie.message}</p>}
+      {errors.selfie && (
+        <p className={styles.error}>{String(errors.selfie.message || "")}</p>
+      )}
     </div>
   );
 };

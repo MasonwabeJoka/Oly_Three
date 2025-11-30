@@ -27,7 +27,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
             <FeaturedListingsClient category={category} />
             <TempListingsCollage
               category={category}
-              // listings={ListingsData}
+              listings={listings || []}
               sortBy="postedOn"
               sortOrder="desc"
               isDeletable={false}

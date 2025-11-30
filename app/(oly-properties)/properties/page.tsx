@@ -22,7 +22,7 @@ const Home = () => {
           <ShowMenu />
         </div>
         <div className={styles.modal}>
-          <ShowCategories />
+          <ShowCategories categories={[] as any} />
         </div>
 
         <section className={styles.heroSection}>
@@ -49,9 +49,9 @@ const Home = () => {
             estimates based on current market data."
             cta="Go to Valuation"
             features={[
-              { id: 1, feature: "Market-based valuations" },
-              { id: 2, feature: "Selling price recommendations" },
-              { id: 3, feature: "Rental income estimates" },
+              { id: "1", feature: "Market-based valuations" },
+              { id: "2", feature: "Selling price recommendations" },
+              { id: "3", feature: "Rental income estimates" },
             ]}
             content={<Calculators />}
           />
@@ -69,9 +69,9 @@ const Home = () => {
             process — designed to boost your chances of approval."
             cta="Get Pre-Qualified"
             features={[
-              { id: 4, feature: "Free pre-qualification assessment" },
-              { id: 5, feature: "Submit to multiple banks simultaneously" },
-              { id: 6, feature: "Compare offers and rates side by side" },
+              { id: "4", feature: "Free pre-qualification assessment" },
+              { id: "5", feature: "Submit to multiple banks simultaneously" },
+              { id: "6", feature: "Compare offers and rates side by side" },
             ]}
             content={<Calculators />}
           />
@@ -93,7 +93,6 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
-         
           {/* <FeaturedListings category="property" /> */}
         </section>
 

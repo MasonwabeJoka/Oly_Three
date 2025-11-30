@@ -49,7 +49,7 @@ const AutoSearchHome = () => {
         <div className={`${styles.vehicleType} ${styles.field}`}>
           {/* <p className={styles.errorMessage}>{errors.searchTerm?.message}</p> */}
           <Controller
-            name="vehicleType"
+            name="categories"
             control={control}
             render={({ field }) => (
               <Select

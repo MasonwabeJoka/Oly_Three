@@ -37,13 +37,16 @@ const DesktopCarouselOne = ({
   const changeSlide = useCallback(
     (number: number) => {
       for (let i = 0; i < data.length; i++) {
-        slides.current[i].style.display = "none";
-        slideDescription.current[i].style.display = "none";
-        slideNames?.current[i]?.classList.remove(`${styles.active}`);
+        slides.current?.[i] && (slides.current[i].style.display = "none");
+        slideDescription.current?.[i] &&
+          (slideDescription.current[i].style.display = "none");
+        slideNames?.current?.[i]?.classList.remove(`${styles.active}`);
       }
-      slides.current[number].style.display = "block";
-      slideDescription.current[number].style.display = "block";
-      slideNames?.current[number]?.classList.add(`${styles.active}`);
+      slides.current?.[number] &&
+        (slides.current[number].style.display = "block");
+      slideDescription.current?.[number] &&
+        (slideDescription.current[number].style.display = "block");
+      slideNames?.current?.[number]?.classList.add(`${styles.active}`);
       setCurrentSlideNameIndex(number);
     },
     [data.length]
@@ -64,7 +67,7 @@ const DesktopCarouselOne = ({
   }, [slideIndex, changeSlide]);
 
   const nextSlideName = (number: number): void => {
-    slideNames?.current[number]?.classList.add(`${styles.active}`);
+    slideNames?.current?.[number]?.classList.add(`${styles.active}`);
   };
   useEffect(() => {
     const timer = setInterval(() => {
@@ -87,9 +90,10 @@ const DesktopCarouselOne = ({
           return (
             <li
               className={styles.slides}
-              ref={(element) =>
-                (slides.current[index] = element as HTMLDivElement)
-              }
+              ref={(element) => {
+                if (element && slides.current)
+                  slides.current[index] = element as any;
+              }}
               key={index}
             >
               <Image
@@ -133,9 +137,10 @@ const DesktopCarouselOne = ({
               <li
                 className={styles.description}
                 key={index}
-                ref={(element) =>
-                  (slideDescription.current[index] = element as HTMLDivElement)
-                }
+                ref={(element) => {
+                  if (element && slideDescription.current)
+                    slideDescription.current[index] = element as any;
+                }}
               >
                 <h2 className={styles.slideTitle}>{value.slideTitle}</h2>
               </li>

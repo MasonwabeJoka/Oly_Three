@@ -14,6 +14,9 @@ const client = sanityClient({
 export async function POST(request: Request) {
   const sig = request.headers.get('x-paystack-signature') as string;
   const secret = process.env.PAYSTACK_WEBHOOK_SECRET;
+  if (!secret) {
+    return NextResponse.json({ message: 'Webhook secret not configured' }, { status: 500 });
+  }
   const payload = await request.json();
 
   const hmac = crypto.createHmac('sha512', secret);

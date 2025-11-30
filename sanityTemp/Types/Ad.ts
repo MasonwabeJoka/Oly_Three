@@ -1,11 +1,12 @@
 // Temporary Ad type for build compatibility
 export interface Ad {
   id: string;
+  _id: string;
   title: string;
   description: string;
   price: number;
   category: string;
-  images: string[];
+  images: any[];
   createdAt: string;
   updatedAt: string;
 }

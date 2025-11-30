@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import styles from './TableDropdownMenu.module.scss'
+import * as React from "react";
+import styles from "./TableDropdownMenu.module.scss";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,16 +9,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Column } from "@tanstack/react-table"
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Column } from "@tanstack/react-table";
 
 interface TableDropdownMenuProps<TData, TValue> {
-  triggerText?: string
-  label?: string
-  columns: Column<TData, TValue>[]
-  triggerElement?: React.ReactNode
-  buttonSize?: "large" | "medium" | "small"
+  triggerText?: string;
+  label?: string;
+  columns: Column<TData, TValue>[];
+  triggerElement?: React.ReactNode;
+  buttonSize?: "large" | "medium" | "small";
 }
 
 export function TableDropdownMenu<TData, TValue>({
@@ -32,13 +32,13 @@ export function TableDropdownMenu<TData, TValue>({
     large: "h-12 px-6 text-lg",
     medium: "h-10 px-4 text-base",
     small: "h-8 px-3 text-sm",
-  }
+  };
 
   const defaultTrigger = (
     <Button variant="outline" className={sizeStyles[buttonSize]}>
       {triggerText}
     </Button>
-  )
+  );
 
   return (
     <DropdownMenu>
@@ -46,7 +46,9 @@ export function TableDropdownMenu<TData, TValue>({
         {triggerElement || defaultTrigger}
       </DropdownMenuTrigger>
       <DropdownMenuContent className={styles.dropdownMenuContent}>
-        <DropdownMenuLabel className={styles.dropdownMenuLabel}>{label}</DropdownMenuLabel>
+        <DropdownMenuLabel className={styles.dropdownMenuLabel}>
+          {label}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {columns
           .filter((column) => column.getCanHide())
@@ -55,12 +57,12 @@ export function TableDropdownMenu<TData, TValue>({
               key={column.id}
               className={styles.dropdownMenuItem}
               checked={column.getIsVisible()}
-              onCheckedChange={(value) => column.toggleVisibility(!!value)}
+              onCheckedChange={(value: any) => column.toggleVisibility(!!value)}
             >
               {column.id}
             </DropdownMenuCheckboxItem>
           ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

@@ -14,6 +14,7 @@ type Props = {
   index: number;
   cardType: "expanded" | "box";
   id?: string;
+  slug?: string;
   imageUrls?: string[];
   title?: string;
   vehicleVariant?: string;

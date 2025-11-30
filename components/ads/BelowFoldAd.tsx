@@ -7,7 +7,7 @@ const BelowFoldAd = () => {
     <div className={styles.container}>
       <div className={styles.adContainer}>
         Ad
-        <VideoAd />
+        <VideoAd path="/ads/below-fold" />
       </div>
     </div>
   );

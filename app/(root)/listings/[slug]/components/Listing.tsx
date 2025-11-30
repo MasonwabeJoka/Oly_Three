@@ -21,7 +21,11 @@ type ListingProps = {
   totalViews: number;
 };
 
-const Listing: React.FC<ListingProps> = ({ listing, similarListings, totalViews }) => {
+const Listing: React.FC<ListingProps> = ({
+  listing,
+  similarListings,
+  totalViews,
+}) => {
   const [showImages, setShowImages] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
@@ -30,7 +34,6 @@ const Listing: React.FC<ListingProps> = ({ listing, similarListings, totalViews 
   const similarAdsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
-
 
   useEffect(() => {
     setIsClient(true);
@@ -104,7 +107,7 @@ const Listing: React.FC<ListingProps> = ({ listing, similarListings, totalViews 
               modalContent={
                 listing && (
                   <AdCarousel
-                    images={listing.images}
+                    images={listing.images || []}
                     onClick={() => showImages && setShowImages(false)}
                   />
                 )

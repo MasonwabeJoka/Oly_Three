@@ -11,7 +11,7 @@ export async function searchAction(formData: FormData) {
   if (!parsed.success) {
     return {
       success: false,
-      errors: parsed.error.issues.map((issue) => ({
+      errors: parsed.error.issues.map((issue: any) => ({
         path: issue.path,
         message: issue.message,
       })),

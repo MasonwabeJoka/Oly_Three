@@ -4,7 +4,7 @@ import Button from "@/components/Buttons";
 import styles from "./PaymentFormWrapper.module.scss";
 import { useRouter } from "next/navigation";
 import FormProgressBar from "@/app/(dashboard)/dashboard/create-listing/components/FormProgressBar";
-import usePaymentProcessingStore from "./store/usePaymentProcessingStore";
+import usePaymentProcessingStore from "../payment/store/usePaymentProcessingStore";
 import { useEffect, useState } from "react";
 import usePaymentModalStore from "@/app/(dashboard)/dashboard/create-listing/store/usePaymentModalStore";
 // import useMessageStore from "@/features/messages/store/useMessageStore";
@@ -41,10 +41,10 @@ export const PaymentFormWrapper = ({ title, children }: FormWrapperProps) => {
     currentStepIndex === 0
       ? "Continue To Payment"
       : currentStepIndex === 1
-      ? "Finish Payment"
-      : currentStepIndex === 2
-      ? "Okay"
-      : "Proceed";
+        ? "Finish Payment"
+        : currentStepIndex === 2
+          ? "Okay"
+          : "Proceed";
 
   const bottomButtonText = currentStepIndex === 0 ? "Contact Seller" : "Cancel";
 

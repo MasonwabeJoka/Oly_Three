@@ -3,8 +3,7 @@ import Listing from "./components/Listing";
 import { getSimilarListings } from "@/sanity/lib/crud/similarListings/data";
 import { getListingViews } from "@/sanity/lib/crud/listingViews/data";
 import { updateListingView } from "@/sanity/lib/crud/listingViews/actions";
-import { after } from 'next/server'
-
+import { after } from "next/server";
 
 // export const experimental_ppr = true;
 type ParamsProp = {
@@ -26,10 +25,16 @@ const Page = async ({ params }: ParamsProp) => {
   const listing = await getListing(slug);
   const similarListings = await getSimilarListings(listing, 2);
   const viewsData = await getListingViews(listing._id);
-  const totalViews = viewsData.views;
-   after(async () => await updateListingView(listing._id, totalViews));
+  const totalViews = viewsData?.views ?? 0;
+  after(async () => await updateListingView(listing._id, totalViews));
 
-  return <Listing listing={listing} similarListings={similarListings} totalViews={totalViews} />;
+  return (
+    <Listing
+      listing={listing}
+      similarListings={similarListings}
+      totalViews={totalViews}
+    />
+  );
 };
 
 export default Page;

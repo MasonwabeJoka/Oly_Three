@@ -18,7 +18,7 @@ type BoxCardProps = {
   hoverColour?: string;
   checkedHovered?: string;
   title?: string;
-  description?: string | PortableTextBlock[] | null;
+  description?: string | PortableTextBlock[] | null | undefined;
   descriptionLength?: number;
   price?: number;
   postAge?: string;
@@ -53,40 +53,39 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
   return (
     <div
       onMouseEnter={
-        category === "property" || category === "vehicles" ? () => {} : () => setIsCardHovered(true)
+        category === "property" || category === "vehicles"
+          ? () => {}
+          : () => setIsCardHovered(true)
       }
       onMouseLeave={() => setIsCardHovered(isHeartClicked || isHeartHovered)}
-      style={{ position: "relative"}}
+      style={{ position: "relative" }}
     >
-   
-        <BoxImageContainer
-          category={category}
-          imageUrls={imageUrls}
-          aspectRatios={aspectRatios}
-          isHeartClicked={isHeartClicked}
-          isHeartHovered={isHeartHovered}
-          isCardHovered={isCardHovered}
-          isDeletable={isDeletable}
-          id={id}
-          isFeed={isFeed}
-          checkedColour={checkedColour}
-          hoverColour={hoverColour}
-          checkedHovered={checkedHovered}
-          onHeartClick={onHeartClick}
-          onHeartHover={onHeartHover}
-        />
-      
-     
-        <BoxCardDetails
-          category={category}
-          isCardHovered={isCardHovered}
-          title={title}
-          description={description}
-          descriptionLength={descriptionLength}
-          price={price}
-          postAge={postAge}
-        />
-     
+      <BoxImageContainer
+        category={category}
+        imageUrls={imageUrls}
+        aspectRatios={aspectRatios}
+        isHeartClicked={isHeartClicked}
+        isHeartHovered={isHeartHovered}
+        isCardHovered={isCardHovered}
+        isDeletable={isDeletable}
+        id={id}
+        isFeed={isFeed}
+        checkedColour={checkedColour}
+        hoverColour={hoverColour}
+        checkedHovered={checkedHovered}
+        onHeartClick={onHeartClick}
+        onHeartHover={onHeartHover}
+      />
+
+      <BoxCardDetails
+        category={category}
+        isCardHovered={isCardHovered}
+        title={title}
+        description={description as any}
+        descriptionLength={descriptionLength}
+        price={price}
+        postAge={postAge}
+      />
     </div>
   );
 };

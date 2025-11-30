@@ -2,7 +2,7 @@
 
 // import { trpc } from "@/trpc/client";
 import { Loader2, XCircle } from "lucide-react";
-import Image from "@/components/Image";
+import NextImage from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 
@@ -29,7 +29,7 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
     return (
       <div className="flex h-full flex-col items-center justify-center">
         <div className="relative mb-4 h-60 w-60 text-muted-foreground">
-          <Image
+          <NextImage
             src="/email-sent.png"
             alt="Email Sent"
             width={300}

@@ -41,8 +41,6 @@ const ListingsClient = ({
           listings={listings}
           isDeletable={false}
           isDashboard={false}
-          limit={limit}
-          page={page}
           sortBy={sortBy}
           sortOrder={sortOrder}
         />

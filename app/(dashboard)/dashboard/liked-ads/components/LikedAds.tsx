@@ -47,7 +47,7 @@ const LikedAds = () => {
           width={954}
           collageViewWidth={988}
           dashboard
-          onClickHandlers={[undefined, undefined, changeViews]}
+          onClickHandlers={[() => {}, () => {}, changeViews]}
         />
       </div>
       {!isMobile && <div className={styles.fixedDiv}></div>}
@@ -55,10 +55,8 @@ const LikedAds = () => {
         {expanded ? (
           <ListingsExpanded
             category="all"
-            images={[]}
-            avatars={avatars}
+            listings={[]}
             isDeletable={true}
-            isFeed={false}
             isDashboard={true}
             limit={10}
             sortBy="postedOn"
@@ -67,11 +65,9 @@ const LikedAds = () => {
         ) : (
           <ListingsCollage
             category="all"
-            images={[]}
+            listings={[]}
             isDeletable={true}
             isDashboard={true}
-            limit={10}
-            page={1}
             sortBy="postedOn"
             sortOrder="desc"
           />

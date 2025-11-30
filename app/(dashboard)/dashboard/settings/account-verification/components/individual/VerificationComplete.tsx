@@ -1,6 +1,6 @@
 import styles from "./VerificationComplete.module.scss";
 
-const Finish = (props) => (
+const Finish = (props: any) => (
   <div className={styles.container}>
     <h3 className={styles.title}>You're Verified!</h3>
     <p className={styles.description}>

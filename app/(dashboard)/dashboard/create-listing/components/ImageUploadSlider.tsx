@@ -31,7 +31,11 @@ const ImageUploadSlider = ({ uploadedFiles }: Props) => {
     if (!swiperInstance) return;
 
     // Only trigger for net new additions (not reorders)
-    if (uploadedFiles.length > prevCountRef.current && !isReordering.current) {
+    if (
+      prevCountRef.current !== null &&
+      uploadedFiles.length > prevCountRef.current &&
+      !isReordering.current
+    ) {
       swiperInstance.slideTo(uploadedFiles.length - 1);
     }
 
@@ -49,7 +53,8 @@ const ImageUploadSlider = ({ uploadedFiles }: Props) => {
 
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setDragImage(new Image(), 0, 0);
+    const dragImage = document.createElement("img");
+    e.dataTransfer.setDragImage(dragImage, 0, 0);
     swiperInstance?.disable();
   };
 

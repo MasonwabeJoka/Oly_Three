@@ -101,7 +101,7 @@ interface CardProps {
   avatar?: string;
 }
 
-const MyAdsCard = () => {
+const MyAdsCard = (props: CardProps) => {
   const [showAnalytics, setShowAnalytics] = useState(false);
   const analyticsRef = useRef<HTMLDivElement | null>(null);
   const statsIconRef = useRef<HTMLDivElement | null>(null);
@@ -122,10 +122,9 @@ const MyAdsCard = () => {
     unreadMessages,
     adStatus,
     expiryDate,
-    category,
-  } = adCardMockData;
+  } = props;
 
-  useOnClickOutside((analyticsRef, statsIconRef), () => {
+  useOnClickOutside([analyticsRef, statsIconRef] as any, () => {
     setShowAnalytics(false);
   });
 
@@ -141,19 +140,19 @@ const MyAdsCard = () => {
       <div className={styles.cardContainer}>
         <ListingCard
           category="all"
-          ad={adCardMockData}
+          listing={adCardMockData as any}
           id={id}
           index={0}
           aspectRatios={[16, 9]}
           width={310}
           height={248}
           cardType="expanded"
-          images={images}
+          imageUrls={images}
           title={title}
           description={description}
           descriptionLength={200}
           postAge={postAge}
-          price={price}
+          price={typeof price === "string" ? parseInt(price) || 0 : price}
           cardSize="standard"
           isFeed={false}
           isDashboard={true}
@@ -257,7 +256,12 @@ const MyAdsCard = () => {
                 href="/dashboard/my-listings/promote-your-ads"
                 className={styles.pill}
               >
-                <Pill child="Promote Ad" colour="#CCF6FF" />
+                <Pill
+                  child="Promote Ad"
+                  colour="#CCF6FF"
+                  shadow={false}
+                  boxShadow="0 2px 4px rgba(0,0,0,0.1)"
+                />
               </Link>
             </div>
           </div>

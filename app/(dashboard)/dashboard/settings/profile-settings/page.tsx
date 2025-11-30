@@ -57,18 +57,20 @@ const ProfileSettings = () => {
   const avatarFile = useWatch({ control, name: "avatarFile" });
   const avatarPreview = avatarFile
     ? URL.createObjectURL(avatarFile)
-    : user?.imageUrl || "";
+    : (user as any)?.imageUrl || "";
 
   // Set initial form values and clear social media fields
   useEffect(() => {
     if (isLoaded && user) {
       const defaultValues = {
-        name: user.firstName || "",
-        lastName: user.lastName || "",
-        email: user.emailAddresses?.[0]?.emailAddress || "",
-        phone: user.phoneNumbers?.[0]?.phoneNumber || "",
-        socialMediaName: user.publicMetadata?.socialMediaName || "",
-        socialMediaUrl: user.publicMetadata?.socialMediaUrl || "",
+        name: (user as any).firstName || "",
+        lastName: (user as any).lastName || "",
+        email: (user as any).emailAddresses?.[0]?.emailAddress || "",
+        phone: (user as any).phoneNumbers?.[0]?.phoneNumber || undefined,
+        socialMediaName:
+          (user as any).publicMetadata?.socialMediaName || undefined,
+        socialMediaUrl:
+          (user as any).publicMetadata?.socialMediaUrl || undefined,
         avatarFile: undefined,
       };
       reset(defaultValues);
@@ -107,55 +109,58 @@ const ProfileSettings = () => {
 
       if (data.socialMediaName || data.socialMediaUrl) {
         updateData.publicMetadata = {
-          socialMediaName: data.socialMediaName || "",
-          socialMediaUrl: data.socialMediaUrl || "",
+          socialMediaName: data.socialMediaName || undefined,
+          socialMediaUrl: data.socialMediaUrl || undefined,
         };
       }
 
       console.log("Sending update to Clerk:", updateData);
-      await user.update(updateData).catch((error: any) => {
+      await (user as any).update(updateData).catch((error: any) => {
         throw { ...error, field: "metadata" };
       });
 
       // Update email if changed
-      if (data.email && data.email !== user.emailAddresses?.[0]?.emailAddress) {
+      if (
+        data.email &&
+        data.email !== (user as any).emailAddresses?.[0]?.emailAddress
+      ) {
         console.log("Updating email:", data.email);
-        await user
+        await (user as any)
           .createEmailAddress({ email: data.email })
           .catch((error: any) => {
             throw { ...error, field: "email" };
           });
-        if (user.emailAddresses?.[0]?.id) {
-          await user.emailAddresses[0].destroy();
+        if ((user as any).emailAddresses?.[0]?.id) {
+          await (user as any).emailAddresses[0].destroy();
         }
       }
 
       // Update phone only if provided, valid, and different
       if (
         data.phone?.trim() &&
-        data.phone !== user.phoneNumbers?.[0]?.phoneNumber
+        data.phone !== (user as any).phoneNumbers?.[0]?.phoneNumber
       ) {
         console.log("Attempting to update phone:", data.phone);
-        await user
+        await (user as any)
           .createPhoneNumber({ phoneNumber: data.phone })
           .catch((error: any) => {
             throw { ...error, field: "phone" };
           });
-        if (user.phoneNumbers?.[0]?.id) {
-          await user.phoneNumbers[0].destroy();
+        if ((user as any).phoneNumbers?.[0]?.id) {
+          await (user as any).phoneNumbers[0].destroy();
         }
-      } else if (!data.phone?.trim() && user.phoneNumbers?.[0]?.id) {
+      } else if (!data.phone?.trim() && (user as any).phoneNumbers?.[0]?.id) {
         console.log("Removing existing phone number");
-        await user.phoneNumbers[0].destroy();
+        await (user as any).phoneNumbers[0].destroy();
       }
 
       // Update avatar if a new file is provided
       if (data.avatarFile) {
         console.log("Updating avatar:", data.avatarFile.name);
-        await user.setProfileImage({ file: data.avatarFile });
+        await (user as any).setProfileImage({ file: data.avatarFile });
       }
 
-      await user.reload();
+      await (user as any).reload();
       console.log("Profile updated successfully");
       setValue("avatarFile", undefined); // Clear file after successful update
     } catch (error: any) {
@@ -220,7 +225,6 @@ const ProfileSettings = () => {
           avatar={avatarPreview}
           isOnline={false}
           onClick={handleAvatarClick}
-          style={{ cursor: "pointer" }}
         />
         <input
           ref={fileInputRef}
@@ -243,7 +247,7 @@ const ProfileSettings = () => {
             ariaLabel="First Name Field"
             autoComplete="on"
             required
-            value={watch("name")}
+            value={watch("name") || ""}
             error={errors.name?.message}
             {...register("name", {
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -266,7 +270,7 @@ const ProfileSettings = () => {
             ariaLabel="Last Name Field"
             autoComplete="on"
             required
-            value={watch("lastName")}
+            value={watch("lastName") || ""}
             error={errors.lastName?.message}
             {...register("lastName", {
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -290,7 +294,7 @@ const ProfileSettings = () => {
               ariaLabel="Email Field"
               autoComplete="on"
               required
-              value={watch("email")}
+              value={watch("email") || ""}
               error={errors.email?.message || errorsByField.email}
               {...register("email", {
                 onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -315,7 +319,7 @@ const ProfileSettings = () => {
               ariaLabel="Phone Number Field"
               autoComplete="off"
               required={false}
-              value={watch("phone")}
+              value={watch("phone") || ""}
               error={errors.phone?.message || errorsByField.phone}
               {...register("phone", {
                 onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -358,7 +362,9 @@ const ProfileSettings = () => {
                 setValue("socialMediaUrl", "");
                 trigger(["socialMediaName", "socialMediaUrl"]);
               }}
-              onDropdownOpenChange={(isOpen) => setIsSocialMediaOpen(isOpen)}
+              onDropdownOpenChange={(isOpen: any) =>
+                setIsSocialMediaOpen(isOpen)
+              }
               dashboard
             />
             {selected && selected === "Other" ? (
@@ -375,7 +381,7 @@ const ProfileSettings = () => {
                   id="other"
                   ariaLabel="Other Social Media Field"
                   required={!!selected}
-                  value={watch("socialMediaName")}
+                  value={watch("socialMediaName") || ""}
                   error={
                     errors.socialMediaName?.message || errorsByField.metadata
                   }
@@ -401,7 +407,7 @@ const ProfileSettings = () => {
                   id="otherSocialMedia"
                   ariaLabel="Other Social Media Link Field"
                   required={!!selected}
-                  value={watch("socialMediaUrl")}
+                  value={watch("socialMediaUrl") || ""}
                   error={
                     errors.socialMediaUrl?.message || errorsByField.metadata
                   }
@@ -429,7 +435,7 @@ const ProfileSettings = () => {
                   id="selectedSocialMedia"
                   ariaLabel="Selected Social Media Link Field"
                   required={!!selected}
-                  value={watch("socialMediaUrl")}
+                  value={watch("socialMediaUrl") || ""}
                   error={
                     errors.socialMediaUrl?.message || errorsByField.metadata
                   }

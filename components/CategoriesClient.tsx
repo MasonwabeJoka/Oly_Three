@@ -10,7 +10,7 @@ import { useBreakpoint } from "@/store/useBreakpointStore";
 import { CategoriesQueryResult } from "@/sanity.types";
 
 export type CategoriesProps = {
-  categories:CategoriesQueryResult;
+  categories: CategoriesQueryResult;
 };
 
 const CategoriesClient = ({ categories }: CategoriesProps) => {
@@ -30,7 +30,9 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
     setIsClient(true);
   }, []);
 
-  const handleCategoriesContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleCategoriesContainerClick = (
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
     e.stopPropagation();
   };
 
@@ -44,7 +46,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
       const newCurrentlyVisible: Record<string, number> = {};
 
       // Reset all categories to default (SUBCATEGORIES_TO_SHOW)
-      categories?.forEach((category) => {
+      (categories as any)?.forEach((category: any) => {
         if (category._id !== id) {
           newCurrentlyVisible[category._id] = SUBCATEGORIES_TO_SHOW;
         }
@@ -84,7 +86,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
         onClick={() => setShowCategoriesModal(false)}
       >
         <ul className={styles.categoriesContainer}>
-          {categories?.map((categoryItem, index) => {
+          {(categories as any)?.map((categoryItem: any, index: any) => {
             const {
               _id: id,
               title,
@@ -100,14 +102,14 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
               <li
                 className={styles.mobileSubcategoriesContainer}
                 key={`subcategory-mobile-${index}`}
-                onClick={handleCategoriesContainerClick}
+                onClick={handleCategoriesContainerClick as any}
               >
                 <MobileSubcategories
                   options={subcategories || []}
-                  category={title || ''}
+                  category={title || ""}
                   id={id}
-                  name={title || ''}
-                  ariaLabel={title || ''}
+                  name={title || ""}
+                  ariaLabel={title || ""}
                 />
               </li>
             );
@@ -137,7 +139,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
               : "",
           }}
         >
-          {categories?.map((category, index) => {
+          {(categories as any)?.map((category: any, index: any) => {
             const {
               _id: id,
               title,
@@ -160,21 +162,24 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
                 <h4 className={styles.category}>{title}</h4>
                 {(subcategories?.length || 0) > 0 &&
                   subcategories?.slice(0, visibleCount).map(
-                    (subcategory, subIndex) => 
+                    (subcategory: any, subIndex: any) =>
                       subcategory && (
-                      <div
-                        key={`subcategory-${subIndex}`}
-                        className={styles.subcategoryContainer}
-                      >
-                        <Link href={`/category/${subcategory?.slug?.current}`}>
-                          <p className={styles.subcategory}>
-                            {subcategory?.title && subcategory.title.length > 20
-                              ? `${subcategory.title.slice(0, 60)}`
-                              : subcategory?.title}
-                          </p>
-                        </Link>
-                      </div>
-                    )
+                        <div
+                          key={`subcategory-${subIndex}`}
+                          className={styles.subcategoryContainer}
+                        >
+                          <Link
+                            href={`/category/${subcategory?.slug?.current}`}
+                          >
+                            <p className={styles.subcategory}>
+                              {subcategory?.title &&
+                              subcategory.title.length > 20
+                                ? `${subcategory.title.slice(0, 60)}`
+                                : subcategory?.title}
+                            </p>
+                          </Link>
+                        </div>
+                      )
                   )}
 
                 {!subcategories && (
@@ -182,7 +187,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
                     key={`subcategory-${index}`}
                     className={styles.subcategoryContainer}
                   >
-                    <Link href={`/category/${category?.slug?.current || ''}`}>
+                    <Link href={`/category/${category?.slug?.current || ""}`}>
                       <p className={styles.subcategory}>
                         {(category?.title?.length || 0) > 20
                           ? `${category?.title?.slice(0, 60)}`

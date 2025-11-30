@@ -5,10 +5,26 @@ import { Image as IKImage } from "@imagekit/next";
 import { ComponentProps } from "react";
 
 type IKImageProps = ComponentProps<typeof IKImage>;
+type NextImageProps = ComponentProps<typeof NextImage>;
 
-interface OlyImageProps extends Omit<IKImageProps, "src"> {
-  // src: string | null | undefined;
+// Simplified, permissive props for the shared Image component.
+// Many callsites only provide src/alt/width/height, so all other
+// common next/image and imagekit props are optional here.
+export interface OlyImageProps {
   src: string | { url(): string } | null | undefined;
+  alt?: string;
+  className?: string;
+  width?: number;
+  height?: number;
+  fill?: boolean;
+  sizes?: string;
+  priority?: boolean;
+  loading?: "lazy" | "eager";
+  unoptimized?: boolean;
+  transformation?: any[];
+  // Allow any additional props supported by next/image or imagekit
+  // without causing type errors.
+  [key: string]: any;
 }
 
 const Image = ({ src, transformation, ...props }: OlyImageProps) => {
@@ -20,7 +36,7 @@ const Image = ({ src, transformation, ...props }: OlyImageProps) => {
 
   // Convert Sanity image builder to string if needed
   let srcString: string;
-  if (typeof src === 'string') {
+  if (typeof src === "string") {
     srcString = src;
   } else {
     try {
@@ -29,7 +45,7 @@ const Image = ({ src, transformation, ...props }: OlyImageProps) => {
       return null;
     }
   }
-  
+
   if (!srcString) {
     return null;
   }
@@ -42,11 +58,12 @@ const Image = ({ src, transformation, ...props }: OlyImageProps) => {
   const finalSrc = isImageKitUrl ? srcString.replace(endpoint, "") : srcString;
 
   if (isImageKitUrl) {
-    return <IKImage src={finalSrc} transformation={transformation} {...props} />;
+    return (
+      <IKImage src={finalSrc} transformation={transformation} {...props} />
+    );
   } else {
     return <NextImage src={finalSrc} {...props} />;
   }
 };
-
 
 export default Image;

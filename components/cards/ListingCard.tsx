@@ -1,4 +1,3 @@
-
 import type { PortableTextBlock } from "sanity";
 import ListingCardClient from "./ListingCardClient";
 import ListingCardSkeleton from "../skeletons/ListingCardSkeleton";
@@ -12,6 +11,7 @@ type Props = {
   slug?: string;
   imageUrls: string[];
   title?: string;
+  vehicleVariant?: any;
   description?: string | PortableTextBlock[] | null;
   descriptionLength?: number;
   postAge?: string;
@@ -59,35 +59,34 @@ const ListingCard: React.FC<Props> = ({
 }) => {
   return (
     <div>
-   
-        <ListingCardClient
-          category={category}
-          listing={listing}
-          id={id}
-          slug={slug}
-          index={index}
-          aspectRatios={aspectRatios}
-          width={width}
-          height={height}
-          cardType={cardType}
-          imageUrls={imageUrls}
-          title={title}
-          vehicleVariant={vehicleVariant}
-          description={description}
-          descriptionLength={descriptionLength}
-          postAge={postAge}
-          price={price}
-          cardSize={cardSize}
-          isDashboard={isDashboard}
-          isDeletable={isDeletable}
-          checkedColour={checkedColour}
-          hoverColour={hoverColour}
-          checkedHovered={checkedHovered}
-          avatar={avatar}
-          city={city}
-          suburb={suburb}
-        />
-    
+      <ListingCardClient
+        category={category}
+        listing={listing}
+        id={id?.toString()}
+        slug={slug}
+        index={index}
+        aspectRatios={aspectRatios}
+        width={width}
+        height={height}
+        cardType={cardType}
+        imageUrls={imageUrls}
+        title={title}
+        vehicleVariant={vehicleVariant}
+        description={description}
+        descriptionLength={descriptionLength}
+        postAge={postAge}
+        price={price}
+        cardSize={cardSize}
+        isFeed={false}
+        isDashboard={isDashboard}
+        isDeletable={isDeletable}
+        checkedColour={checkedColour}
+        hoverColour={hoverColour}
+        checkedHovered={checkedHovered}
+        avatar={avatar}
+        city={city}
+        suburb={suburb}
+      />
     </div>
   );
 };

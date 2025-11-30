@@ -14,26 +14,18 @@ import { useModalStore } from "@/store/modalStore";
 import Button from "@/components/Buttons";
 
 // Server action (ideally in a separate server file)
-async function searchAction(formData: FormData) {
-  // "use server";
+async function searchAction(formData: FormData): Promise<void> {
   const searchTerm = formData.get("searchTerm")?.toString();
   const locationSearch = formData.get("locationSearch")?.toString();
-
-  // Simulate server-side validation or processing
   const schema = z.object({
     searchTerm: z.string().min(1, "Search term is required"),
     locationSearch: z.string().min(1, "Location is required"),
   });
-
   try {
     schema.parse({ searchTerm, locationSearch });
     console.log("Server received:", { searchTerm, locationSearch });
-    return { success: true };
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return { success: false, errors: error.errors };
-    }
-    return { success: false, errors: [{ message: "Server error" }] };
+    console.error("Validation error:", error);
   }
 }
 
@@ -63,23 +55,12 @@ const ShopsHeroSectionFields = () => {
   // Handle form submission with both client and server validation
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
-    formData.append("searchTerm", data.searchTerm);
-    formData.append("locationSearch", data.locationSearch);
+    formData.append("searchTerm", data.searchTerm || "");
+    formData.append("locationSearch", data.locationSearch || "");
 
-    const result = await searchAction(formData);
-    if (!result.success && result.errors) {
-      // Map server errors to React Hook Form
-      result.errors.forEach((err) => {
-        const field = err.path?.[0];
-        if (field) {
-          setError(field as keyof FormValues, { message: err.message });
-          setServerErrors((prev) => ({ ...prev, [field]: err.message }));
-        }
-      });
-    } else {
-      console.log("Form submitted successfully:", data);
-      setServerErrors({}); // Clear server errors on success
-    }
+    await searchAction(formData);
+    console.log("Form submitted successfully:", data);
+    setServerErrors({});
   };
 
   return (
@@ -128,7 +109,7 @@ const ShopsHeroSectionFields = () => {
         <div className={styles.searchFields}>
           <div className={styles.searchTerm}>
             <p className={styles.errorMessage}>
-              {errors.searchTerm?.message || serverErrors.searchTerm}
+              {(errors.searchTerm as any)?.message || serverErrors.searchTerm}
             </p>
             <Input
               className={styles.searchTermInput}
@@ -143,7 +124,6 @@ const ShopsHeroSectionFields = () => {
               label="Search"
               placeholder="What are you looking for?"
               id="searchTerm"
-              name="searchTerm" // Required for FormData
               ariaLabel="Search Term"
               autoComplete="off"
               required
@@ -154,7 +134,7 @@ const ShopsHeroSectionFields = () => {
                   shouldValidate: true,
                 })
               }
-              onSuggestionCountChange={(count) =>
+              onSuggestionCountChange={(count: any) =>
                 setSearchTermSuggestions(count)
               }
             />
@@ -163,7 +143,8 @@ const ShopsHeroSectionFields = () => {
           {searchTermSuggestions === 0 && (
             <div className={styles.searchLocation}>
               <p className={styles.errorMessage}>
-                {errors.locationSearch?.message || serverErrors.locationSearch}
+                {(errors.locationSearch as any)?.message ||
+                  serverErrors.locationSearch}
               </p>
               <Input
                 isSearchBar={true}
@@ -178,7 +159,6 @@ const ShopsHeroSectionFields = () => {
                 label="Location"
                 placeholder="Search by city, province, town..."
                 id="locationSearch"
-                name="locationSearch" // Required for FormData
                 ariaLabel="Location"
                 autoFocus={false}
                 autoComplete="off"
@@ -190,7 +170,7 @@ const ShopsHeroSectionFields = () => {
                     shouldValidate: true,
                   })
                 }
-                onSuggestionCountChange={(count) =>
+                onSuggestionCountChange={(count: any) =>
                   setLocationSuggestions(count)
                 }
               />

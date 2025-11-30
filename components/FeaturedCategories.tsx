@@ -32,7 +32,7 @@ const FeaturedCategories = () => {
     <div className={styles.categoriesSection}>
       <h2 className={styles.title}>Featured Categories</h2>
       <ul className={styles.categoriesContainer}>
-        {data?.slice(0, 12).map((category, index) => {
+        {data?.slice(0, 12).map((category: any, index: any) => {
           const { id, title, displayTitle, image } = category;
           return (
             <li key={id || `category-${index}`}>

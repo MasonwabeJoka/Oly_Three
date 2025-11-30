@@ -50,7 +50,6 @@ const EnterRepMobile = () => {
             ariaLabel="Representative's Phone Number Field"
             autoFocus={false}
             autoComplete="off"
-            disabled={codeSent}
             required={true}
             dashboard
             value={phoneNumber}

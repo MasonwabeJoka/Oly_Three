@@ -44,7 +44,6 @@ const BusinessAddressForm: React.FC = () => {
           iconHeight={32}
           label="Street Address"
           id="street"
-          name="street"
           placeholder="Enter Street Address"
           ariaLabel="Street Address"
           required
@@ -52,7 +51,7 @@ const BusinessAddressForm: React.FC = () => {
           {...register("street")}
         />
         {errors.street && (
-          <p className={styles.error}>{errors.street.message}</p>
+          <p className={styles.error}>{String(errors.street.message || 'Invalid field')}</p>
         )}
       </div>
       <div className={styles.formGroup}>
@@ -65,7 +64,6 @@ const BusinessAddressForm: React.FC = () => {
           iconHeight={32}
           label="Suburb"
           id="suburb"
-          name="suburb"
           placeholder="Enter Suburb"
           ariaLabel="Suburb"
           required
@@ -73,7 +71,7 @@ const BusinessAddressForm: React.FC = () => {
           {...register("suburb")}
         />
         {errors.suburb && (
-          <p className={styles.error}>{errors.suburb.message}</p>
+          <p className={styles.error}>{String(errors.suburb.message || 'Invalid field')}</p>
         )}
       </div>
       <div className={styles.formGroup}>
@@ -86,14 +84,13 @@ const BusinessAddressForm: React.FC = () => {
           iconHeight={32}
           label="City"
           id="city"
-          name="city"
           placeholder="Enter City"
           ariaLabel="City"
           required
           dashboard
           {...register("city")}
         />
-        {errors.city && <p className={styles.error}>{errors.city.message}</p>}
+        {errors.city && <p className={styles.error}>{String(errors.city.message || 'Invalid field')}</p>}
       </div>
       <div className={styles.formGroup}>
         <Select
@@ -104,15 +101,14 @@ const BusinessAddressForm: React.FC = () => {
           selectColourType="normal"
           label="Province"
           id="province"
-          name="province"
           ariaLabel="Province"
           dashboard
           required
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => register("province").onChange(e)}
+          {...register("province")}
           onDropdownOpenChange={handleSelectOpenChange}
         />
         {errors.province && (
-          <p className={styles.error}>{errors.province.message}</p>
+          <p className={styles.error}>{String(errors.province.message || 'Invalid field')}</p>
         )}
       </div>
       {!isSelectOpen && (
@@ -126,7 +122,6 @@ const BusinessAddressForm: React.FC = () => {
             iconHeight={32}
             label="Postal Code"
             id="postalCode"
-            name="postalCode"
             placeholder="Enter Your Postal Code"
             ariaLabel="Postal Code"
             required
@@ -134,7 +129,7 @@ const BusinessAddressForm: React.FC = () => {
             {...register("postalCode")}
           />
           {errors.postalCode && (
-            <p className={styles.error}>{errors.postalCode.message}</p>
+            <p className={styles.error}>{String(errors.postalCode.message || 'Invalid field')}</p>
           )}
         </div>
       )}

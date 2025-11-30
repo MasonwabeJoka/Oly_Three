@@ -14,7 +14,7 @@ import Button from "@/components/Buttons";
 import Select from "@/components/Select";
 
 // Server action (ideally in a separate server file)
-async function searchAction(formData: FormData) {
+async function searchAction(formData: FormData): Promise<void> {
   const searchTerm = formData.get("searchTerm")?.toString();
   const locationSearch = formData.get("locationSearch")?.toString();
   const schema = z.object({
@@ -23,12 +23,8 @@ async function searchAction(formData: FormData) {
   });
   try {
     schema.parse({ searchTerm, locationSearch });
-    return { success: true };
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return { success: false, errors: error.errors };
-    }
-    return { success: false, errors: [{ message: "Server error" }] };
+    console.error("Validation error:", error);
   }
 }
 
@@ -50,20 +46,10 @@ const PropertiesHeroSectionFields = () => {
   });
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
-    formData.append("searchTerm", data.searchTerm);
-    formData.append("locationSearch", data.locationSearch);
-    const result = await searchAction(formData);
-    if (!result.success && result.errors) {
-      result.errors.forEach((err) => {
-        const field = err.path?.[0];
-        if (field) {
-          setError(field as keyof FormValues, { message: err.message });
-          setServerErrors((prev) => ({ ...prev, [field]: err.message }));
-        }
-      });
-    } else {
-      setServerErrors({});
-    }
+    formData.append("searchTerm", data.searchTerm || "");
+    formData.append("locationSearch", data.locationSearch || "");
+    await searchAction(formData);
+    setServerErrors({});
   };
   return (
     <div className={styles.container}>
@@ -118,7 +104,7 @@ const PropertiesHeroSectionFields = () => {
               ariaLabel="Property Type Selector"
               autoFocus={false}
               required={false}
-              onDropdownOpenChange={(isOpen) => {
+              onDropdownOpenChange={(isOpen: any) => {
                 setIsPropertyTypeSelect(isOpen);
               }}
             />
@@ -139,7 +125,7 @@ const PropertiesHeroSectionFields = () => {
                 ariaLabel="Buy or Rent Selector"
                 autoFocus={false}
                 required={false}
-                onDropdownOpenChange={(isOpen) => {
+                onDropdownOpenChange={(isOpen: any) => {
                   setIsForSaleToLetOpen(isOpen);
                 }}
               />

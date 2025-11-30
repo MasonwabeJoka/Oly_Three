@@ -18,27 +18,27 @@ const steps = [
   {
     title: "Verify Your Account",
     content: <IndividualAccountVerification />,
-    fields: [] as const,
+    fields: [] as (keyof FormData)[],
   },
   {
     title: "ID/Passport",
-    content: <UploadId />,
-    fields: ["idFile"] as const,
+    content: <UploadId onNext={() => {}} />,
+    fields: ["idFile"] as (keyof FormData)[],
   },
   {
     title: "Selfie Verification",
-    content: <TakeSelfie />,
-    fields: ["selfie"] as const,
+    content: <TakeSelfie onNext={() => {}} />,
+    fields: ["selfie"] as (keyof FormData)[],
   },
   {
     title: "Mobile Verification",
-    content: <EnterMobileNumber />,
-    fields: ["phoneNumber", "verificationCode"] as const,
+    content: <EnterMobileNumber onNext={() => {}} />,
+    fields: ["phoneNumber", "verificationCode"] as (keyof FormData)[],
   },
   {
     title: "Finish",
     content: <Finish />,
-    fields: [] as const,
+    fields: [] as (keyof FormData)[],
   },
 ];
 

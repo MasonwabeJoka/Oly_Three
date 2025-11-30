@@ -54,7 +54,9 @@ const PasswordSettings = () => {
     >
       <h4 className={styles.title}>Password Settings</h4>
       <div className={styles.inputContainer}>
-        <p className={styles.errorMessage}>{errors.oldPassword?.message}</p>
+        <p className={styles.errorMessage}>
+          {(errors.oldPassword as any)?.message}
+        </p>
         <Input
           className={styles.oldPassword}
           inputType="password"
@@ -73,7 +75,9 @@ const PasswordSettings = () => {
       </div>
 
       <div className={styles.inputContainer}>
-        <p className={styles.errorMessage}>{errors.newPassword?.message}</p>
+        <p className={styles.errorMessage}>
+          {(errors.newPassword as any)?.message}
+        </p>
         <Input
           className={styles.newPassword}
           inputType="password"
@@ -93,7 +97,9 @@ const PasswordSettings = () => {
       <div
         className={`${styles.inputContainer} ${styles.reEnterPasswordContainer}`}
       >
-        <p className={styles.errorMessage}>{errors.reenterPassword?.message}</p>
+        <p className={styles.errorMessage}>
+          {(errors.reenterPassword as any)?.message}
+        </p>
         <Input
           className={styles.reEnterPassword}
           inputType="password"

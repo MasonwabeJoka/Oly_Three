@@ -87,7 +87,7 @@ const Home = () => {
         </div>
 
         <section className={styles.heroSection}>
-          <HeroSection />
+          <HeroSection category="services" mainTitle="Find and offer services in South Africa" />
         </section>
         <section className={styles.moreFromOly}>
           <h2 className={styles.title}>More from Oly</h2>
@@ -108,7 +108,7 @@ const Home = () => {
 
         <section className={styles.featuredListings}>
           <h2 className={styles.title}>Featured Listings</h2>
-          <FeaturedListings />
+          <FeaturedListings category="services" currentPage={1} />
         </section>
         <section className={styles.blog}>
           <h2 className={styles.title}>Oly Articles</h2>

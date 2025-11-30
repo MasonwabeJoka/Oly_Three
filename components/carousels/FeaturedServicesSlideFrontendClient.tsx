@@ -14,28 +14,38 @@ import NavButtons from "../NavButtons";
 import LoadingSpinner from "../LoadingSpinner";
 import useBreakpointStore from "@/store/useBreakpointStore";
 
-const FeaturedServicesSlideFrontendClient = ({ featuredServicesData }) => {
+const FeaturedServicesSlideFrontendClient = ({
+  featuredServicesData,
+}: {
+  featuredServicesData: any;
+}) => {
   const { isMobile, isTablet } = useBreakpointStore();
-  const [initialSlideIndex, setInitialSlideIndex] = useState(null);
+  const [initialSlideIndex, setInitialSlideIndex] = useState<number | null>(
+    null
+  );
   const { setIsMoreInfo } = useFeatureInfo();
   const { setCurrentSlideIndex } = useCurrentSlideIndex();
-  const services = featuredServicesData.services?.map(service => ({
-    ...service,
-    features: service.features?.map(f => ({ id: f.featureId, feature: f.featureText })) || []
-  })) || [];
+  const services =
+    featuredServicesData.services?.map((service: any) => ({
+      ...service,
+      features:
+        service.features?.map((f: any) => ({
+          id: f.featureId,
+          feature: f.featureText,
+        })) || [],
+    })) || [];
 
   useEffect(() => {
     setInitialSlideIndex(Math.floor(Math.random() * services.length));
   }, [featuredServicesData]);
 
-  const handleSlideChange = (swiper) => {
+  const handleSlideChange = (swiper: any) => {
     setCurrentSlideIndex(swiper.realIndex);
   };
 
   if (initialSlideIndex === null) {
     return <LoadingSpinner />;
   }
-
 
   return (
     <Swiper
@@ -47,7 +57,7 @@ const FeaturedServicesSlideFrontendClient = ({ featuredServicesData }) => {
       fadeEffect={{
         crossFade: true,
       }}
-      grabCursor={isMobile ? true: false}
+      grabCursor={isMobile ? true : false}
       pagination={isTablet ? { clickable: true } : false}
       loop={true}
       keyboard={{

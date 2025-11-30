@@ -13,7 +13,7 @@ import Modal from "@/components/Modal";
 import FAQs from "@/components/Faqs";
 import { auctionFAQs } from "@/data/auctionFAQs";
 
-const DashboardClient = ({ initialFormData, steps }) => {
+const DashboardClient = ({ initialFormData, steps }: any) => {
   const methods = useForm({
     resolver: zodResolver(formDataSchema),
     defaultValues: initialFormData,
@@ -23,15 +23,15 @@ const DashboardClient = ({ initialFormData, steps }) => {
   const { goToMediaType } = useUploadMediaStore();
   const { showFAQs, setShowFAQs } = useQAndAStore();
 
-  const getMediaComponent = (goToMediaType) => {
-    const mediaComponents = {
+  const getMediaComponent = (goToMediaType: string) => {
+    const mediaComponents: Record<string, React.JSX.Element> = {
       photos: <UploadPhotos />,
       reorder: <ReorderPhotos />,
       videos: <UploadVideos />,
       attachments: <UploadAttachments />,
       none: steps[5],
     };
-    return mediaComponents[goToMediaType];
+    return mediaComponents[goToMediaType] || steps[5];
   };
 
   const renderStep = () => {

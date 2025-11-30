@@ -11,8 +11,8 @@ const UploadPhotos = () => {
   const { uploadedImages } = useUploadFiles();
   const { setReorderPhotos, setUploadPhotos } = useUploadMediaStore();
   const reorderPhotos = () => {
-    setReorderPhotos(true);
-    setUploadPhotos(false);
+    setReorderPhotos([]);
+    setUploadPhotos([]);
   };
   return (
     <FormWrapper title="Upload Photos">
@@ -21,7 +21,7 @@ const UploadPhotos = () => {
           <UploadBox mediaType="photo" required={true} accept="image/*" />
         </div>
         <div className={styles.uploadedPhotos}>
-          <ImageSlider uploadedFiles={uploadedImages} />
+          <ImageUploadSection uploadedFiles={uploadedImages} isDashboard={true} />
         </div>
         <div className={styles.buttonContainer}>
           <Button

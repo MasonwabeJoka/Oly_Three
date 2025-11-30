@@ -59,14 +59,14 @@ const DetailsFormClient = (props: DetailsFormProps) => {
   let matchFound = false;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as any, e.target.value, {
       shouldDirty: true,
       shouldTouch: true,
     });
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setValue(e.target.name as keyof FormValues, e.target.value, {
+    setValue(e.target.name as any, e.target.value, {
       shouldTouch: true,
     });
   };
@@ -136,7 +136,6 @@ const DetailsFormClient = (props: DetailsFormProps) => {
               matchFound = true;
               return (
                 <SelectedDetail
-                  id={detail.id}
                   detail={detail.detail}
                   description={detail.description}
                   example={detail.example}
@@ -156,7 +155,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
 
           <ul className={styles.details}>
             {featuresData.map((detail) =>
-              detailId !== detail.id ? (
+              detailId !== (detail.id as any) ? (
                 <li key={detail.id} className={styles.detail}>
                   <div className={styles.detailButtons}>
                     <div className={styles.editButtonContainer}>
@@ -177,7 +176,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
                         ariaLabel="Edit Button"
                         autoFocus={false}
                         disabled={false}
-                        onClick={() => editDetail(detail.id)}
+                        onClick={() => editDetail(detail.id as any)}
                       />
                     </div>
                     <div className={styles.deleteButtonContainer}>
