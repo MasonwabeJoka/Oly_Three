@@ -41,10 +41,10 @@ export const message = defineType({
             title: 'Reactions',
             type: 'array',
             of: [
-                defineType({
+                {
+                    type: 'object',
                     name: 'reaction',
                     title: 'Reaction',
-                    type: 'object',
                     fields: [
                         defineField({
                             name: 'type',
@@ -61,7 +61,7 @@ export const message = defineType({
                         }),
                     ],
                     description: 'Reactions to this message by different users.',
-                }),
+                },
             ],
         }),
         defineField({
@@ -116,10 +116,8 @@ export const message = defineType({
                     type: 'number',
                     description: 'The number of direct interactions with the message.',
                 }),
-                // You can add more metrics fields if needed
             ],
             description: 'Analytics metrics for the message, like views and interactions.',
         }),
-       
     ],
 });

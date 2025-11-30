@@ -82,7 +82,7 @@ const TabsClient: React.FC<TabsProps> = ({
               }
             />
             {data && (
-              <TabOptions items={data[index]} visible={tabOptions === index} />
+              <TabOptions {...({ items: data[index], visible: tabOptions === index } as any)} />
             )}
           </div>
         );

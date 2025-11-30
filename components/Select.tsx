@@ -183,7 +183,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       () => onOptionsCountChange?.(filteredOptions.length),
       [filteredOptions.length, onOptionsCountChange]
     );
-    useOnClickOutside(rootRef, () => setIsOpen(false));
+    useOnClickOutside(rootRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
 
     // Change handlers
     const triggerChange = (values: any[]) => {
@@ -311,7 +311,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           )}
 
           <div
-            ref={setDropDownOpenerElement}
+            // ref={setDropDownOpenerElement}
             id={selectId}
             className={`${styles.selectContainer} ${selectClass}`}
             role="combobox"

@@ -34,7 +34,7 @@ const NavButtonLeft = ({
           />
         }
         buttonType="round"
-        buttonSize={size}
+        buttonSize={size || ""}
         name="left-arrow-btn"
         type="button"
         ariaLabel="Left Arrow Button"

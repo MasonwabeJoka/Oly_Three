@@ -58,7 +58,12 @@ const SiteSelection = ({ onSelect }: SiteSelectionProps) => {
 
   const handleSiteClick = (siteText: string) => {
     if (onSelect) {
-      onSelect(siteMap[siteText]);
+      const site = siteMap[siteText];
+      if (site) {
+        onSelect(site);
+      } else {
+        console.error(`Site "${siteText}" not found in siteMap`);
+      }
     }
   };
 

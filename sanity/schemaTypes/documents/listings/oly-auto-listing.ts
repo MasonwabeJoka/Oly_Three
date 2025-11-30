@@ -200,7 +200,7 @@ export const autoListing = defineType({
         list: [2, 3, 4, 5, 6],
       },
       description: 'Number of doors on the vehicle.',
-      hidden: ({ document }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
+      hidden: ({ document }: { document: any }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
     }),
     defineField({
       name: 'vin',
@@ -220,7 +220,7 @@ export const autoListing = defineType({
         list: ['FWD', 'RWD', 'AWD', '4WD'],
       },
       description: 'Front-Wheel Drive (FWD), Rear-Wheel Drive (RWD), All-Wheel Drive (AWD), or Four-Wheel Drive (4WD).',
-      hidden: ({ document }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
+      hidden: ({ document }: { document: any }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
     }),
     defineField({
       name: 'bodyStyle',
@@ -242,7 +242,7 @@ export const autoListing = defineType({
         ],
       },
       description: 'The body style of the vehicle.',
-      hidden: ({ document }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
+      hidden: ({ document }: { document: any }) => !['car', 'suv', 'truck', 'van'].includes(document?.vehicleType),
     }),
     defineField({
       name: 'seatingCapacity',

@@ -1,11 +1,12 @@
-import Messages from "@/features/messages/components/Messages";
+// import Messages from "@/features/messages/components/Messages";
 
-const Page = () => {
+const MessagesPage = () => {
   return (
-   
-      <Messages />
-   
+    <div>
+      {/* <Messages /> */}
+      Messages feature is currently disabled.
+    </div>
   );
 };
 
-export default Page;
+export default MessagesPage;

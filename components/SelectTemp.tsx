@@ -103,7 +103,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const selectRef = useRef<HTMLDivElement | null>(null);
     const [showOptions, setShowOptions] = useState<boolean>(false);
 
-    useOnClickOutside(selectRef, () => setShowOptions(false));
+    useOnClickOutside(selectRef as React.RefObject<HTMLElement>, () => setShowOptions(false));
 
     useEffect(() => {
       const useEscKey = (e: KeyboardEvent) => {
@@ -134,17 +134,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     let sizeClass = "";
 
     if (isSidebarOpen) {
-      sizeClass = SELECT_SIZE.feed[selectSize];
+      sizeClass = (SELECT_SIZE.feed as any)[selectSize];
     } else {
       if (dashboard) {
-        sizeClass = SELECT_SIZE.dashboard[selectSize];
+        sizeClass = (SELECT_SIZE.dashboard as any)[selectSize];
       } else {
-        sizeClass = SELECT_SIZE.regular[selectSize];
+        sizeClass = (SELECT_SIZE.regular as any)[selectSize];
       }
     }
 
     const selectClass = `${styles.select} ${sizeClass} ${
-      selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
+      selectColourType ? (SELECT_COLOUR_TYPE as any)[selectColourType] : ""
     } ${className}`;
 
     return (
@@ -187,7 +187,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         </div>
 
         <ul className={showOptions ? styles.options : styles.hideOptions}>
-          {options.map((option, index) => {
+          {options.map((option: any, index: number) => {
             const label = typeof option === "string" ? option : option.label;
             const value = typeof option === "string" ? option : option.value;
             return (

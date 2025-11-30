@@ -5,7 +5,7 @@ import "@uploadthing/react/styles.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
-import Layout from "../(articles)/layout";
+
 import LayoutWrapper from "../(dashboard)/dashboard/create-listing/components/LayoutWrapper";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 

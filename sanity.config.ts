@@ -6,7 +6,7 @@ import { deskTool } from "sanity/desk"
 
 import { apiVersion, dataset, projectId } from "./sanity/env"
 import { schema } from "./sanity/schemaTypes"
-import { structure } from "./sanity/structure"
+import { structure } from "./sanity/structure-config"
 import { initialValueTemplates } from "./sanity/initialValueTemplates"
 
 export default defineConfig({
@@ -14,14 +14,14 @@ export default defineConfig({
   projectId,
   dataset,
   schema,
-  
+
   plugins: [
-    deskTool({ 
-      structure,
+    deskTool({
+      structure: structure as any,
     }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
-  
+
   // Register templates globally
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
@@ -30,7 +30,7 @@ export default defineConfig({
     },
     actions: (prev, { schemaType }) => prev,
   },
-  
+
   // Add templates here
   templates: initialValueTemplates,
 })

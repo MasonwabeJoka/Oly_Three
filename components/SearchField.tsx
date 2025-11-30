@@ -32,7 +32,7 @@ const SearchField = ({
       className={styles.searchForm}
       autoComplete={autoComplete}
       name=""
-      target="self"
+
       action={mockServerAction}
     >
       <div className={styles.searchFieldContainer}>

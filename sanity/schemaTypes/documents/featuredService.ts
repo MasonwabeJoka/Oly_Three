@@ -29,9 +29,9 @@ export const featuredService = defineType({
       type: "string",
       description:
         "The URL path where this service should link to when the CTA is clicked.",
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.required().uri({ allowRelative: true }).error("Must be a valid path"),
-      initialValue: "", 
+      initialValue: "",
     }),
     defineField({
       name: "image",
@@ -49,7 +49,7 @@ export const featuredService = defineType({
           _ref: "",
           _type: "reference",
         },
-      }, 
+      },
     }),
     defineField({
       name: "title",
@@ -57,7 +57,7 @@ export const featuredService = defineType({
       type: "string",
       description: "The main title of the featured service.",
       validation: (Rule) => Rule.required().max(100),
-      initialValue: "", 
+      initialValue: "",
     }),
     defineField({
       name: "description",
@@ -66,7 +66,7 @@ export const featuredService = defineType({
       description: "A detailed description of the featured service.",
       rows: 4,
       validation: (Rule) => Rule.required().min(20).max(500),
-      initialValue: "", 
+      initialValue: "",
     }),
     defineField({
       name: "cta",
@@ -75,7 +75,7 @@ export const featuredService = defineType({
       description:
         "Text for the call-to-action button, e.g., 'Get Pre-Qualified'.",
       validation: (Rule) => Rule.required().max(50),
-      initialValue: "", 
+      initialValue: "",
     }),
     defineField({
       name: "features",
@@ -95,7 +95,7 @@ export const featuredService = defineType({
               type: "string",
               description: "Unique identifier for the feature.",
               validation: (Rule) => Rule.required(),
-              initialValue: "", 
+              initialValue: "",
             }),
             defineField({
               name: "featureText",
@@ -103,7 +103,7 @@ export const featuredService = defineType({
               type: "string",
               description: "Short descriptive text for the feature.",
               validation: (Rule) => Rule.required(),
-              initialValue: "", 
+              initialValue: "",
             }),
           ],
           preview: {
@@ -113,7 +113,7 @@ export const featuredService = defineType({
           },
         }),
       ],
-      initialValue: [],       validation: (Rule) => Rule.min(0), // Allow empty array but not null
+      initialValue: [], validation: (Rule) => Rule.min(0), // Allow empty array but not null
     }),
   ],
   preview: {

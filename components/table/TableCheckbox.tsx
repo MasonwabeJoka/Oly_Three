@@ -33,7 +33,7 @@ const TableCheckbox = ({
   disabled,
   onChange,
   type = "checkbox",
-}: TableCheckboxProps): JSX.Element => {
+}: TableCheckboxProps): React.ReactElement => {
   const [isChecked, setIsChecked] = useState(checked ?? false);
   const [isHovered, setIsHovered] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

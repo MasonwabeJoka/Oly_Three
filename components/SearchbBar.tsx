@@ -59,7 +59,7 @@ const SearchBar = () => {
         className={styles.searchBar}
         inputType="text"
         inputColourType="normal"
-        inputSize={""}
+        inputSize="medium"
         iconSrcRight="/icon.svg"
         iconPosition="right"
         iconWidth={32}

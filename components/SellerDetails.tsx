@@ -3,7 +3,7 @@ import styles from "./SellerDetails.module.scss";
 import Button from "./Buttons";
 import Avatar from "@/components/Avatar";
 import Image from "@/components/Image";
-import useMessageStore from "@/features/messages/store/useMessageStore";
+// import useMessageStore from "@/features/messages/store/useMessageStore";
 
 const socialMediaLogos = [
   {
@@ -29,7 +29,7 @@ const socialMediaLogos = [
 ];
 
 const SellerDetails = () => {
-  const { setChats } = useMessageStore();
+  // const { setChats } = useMessageStore();
 
   return (
     <div className={styles.container}>
@@ -58,7 +58,7 @@ const SellerDetails = () => {
             ariaLabel="Chat Button"
             autoFocus={false}
             disabled={false}
-            onClick={() => setChats(true)}
+            onClick={() => {}} // setChats(true)
           />
           <Button
             className={`${styles.button} ${styles.followButton}`}

@@ -20,9 +20,9 @@ export const transaction = {
             name: 'listings',
             title: 'Listings',
             type: 'array',
-            of: [{ type:'reference', to: [{ type: 'listing' }] }],
+            of: [{ type: 'reference', to: [{ type: 'listing' }] }],
             description: 'The listings related to the transaction, if applicable.',
-            validation: (Rule) => Rule.required()
+            validation: (Rule: any) => Rule.required()
         },
         {
             name: 'transactionType',
@@ -77,7 +77,7 @@ export const transaction = {
             description: 'The current payment status of the transaction.'
         },
 
-      
+
         {
             name: 'status',
             title: 'Status',
@@ -125,7 +125,7 @@ export const transaction = {
                     { title: 'Ad Purchase', value: 'adPurchase' },
                     { title: 'Subscription Fee', value: 'subscriptionFee' },
                     { title: 'Service Fee', value: 'serviceFee' },
-            
+
                 ],
             },
             description: 'The category of the transaction for better organization and reporting.'
@@ -161,7 +161,7 @@ export const transaction = {
                     type: 'string',
                     description: 'The tax identification number or code.'
                 },
-                
+
             ],
             description: 'Details about the tax applied to the transaction.'
         },
@@ -208,7 +208,7 @@ export const transaction = {
             of: [{ type: 'file' }],
             description: 'Attachments related to the transaction, such as invoices or contracts.'
         },
-       
+
         {
             name: 'invoiceNumber',
             title: 'Invoice Number',
@@ -276,7 +276,7 @@ export const transaction = {
             ],
             description: 'The reason for the cancellation of the transaction, if applicable.'
         },
-      
+
     ],
-    
+
 };

@@ -139,7 +139,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().undo().run();
+            (editor.chain().focus() as any).undo().run();
           }}
           className={getButtonClass(
             editor.isActive("undo"),
@@ -151,7 +151,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().redo().run();
+            (editor.chain().focus() as any).redo().run();
           }}
           className={getButtonClass(
             editor.isActive("redo"),

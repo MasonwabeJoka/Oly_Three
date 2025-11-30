@@ -1,6 +1,6 @@
 // https://www.sanity.io/docs/studio/structure-builder-cheat-sheet
 import React from "react";
-import type { StructureResolver, ComponentTool } from "sanity";
+import type { StructureResolver } from "sanity/structure";
 import { Card, Text, Stack } from "@sanity/ui";
 import {
   FaTachometerAlt,
@@ -24,11 +24,11 @@ import {
 
 // StructureResolver for OLY classifieds websites
 export const structure: StructureResolver = (S, context) => {
-  const isAdmin = context.currentUser.roles.some(
+  const isAdmin = context.currentUser?.roles.some(
     (role) => role.name === "administrator"
   );
 
-  const DashboardComponent: ComponentTool["component"] = () => (
+  const DashboardComponent = () => (
     <Card padding={4}>
       <Stack space={3}>
         <Text size={2} weight="semibold">

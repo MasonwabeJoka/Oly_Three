@@ -1,6 +1,6 @@
 import Button from "@/components/Buttons";
 import styles from "./ButtonsContainer.module.scss";
-import useMessageStore from "@/features/messages/store/useMessageStore";
+// import useMessageStore from "@/features/messages/store/useMessageStore";
 type ButtonsContainerProps = {
   isAuction: boolean;
   placeBid: () => void;

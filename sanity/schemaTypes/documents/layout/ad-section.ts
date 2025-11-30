@@ -258,7 +258,7 @@ export const adSection = defineType({
           },
         },
       ],
-      hidden: ({ document }) => !['sponsored', 'mixed'].includes(document?.adType),
+      hidden: ({ document }: { document: any }) => !['sponsored', 'mixed'].includes(document?.adType),
       validation: (Rule) => Rule.max(10),
       description: 'Sponsored business advertisements.',
     }),
@@ -364,7 +364,7 @@ export const adSection = defineType({
           description: 'Format of the ad content.',
         }),
       ],
-      hidden: ({ document }) => !['network', 'mixed'].includes(document?.adType),
+      hidden: ({ document }: { document: any }) => !['network', 'mixed'].includes(document?.adType),
       description: 'Configuration for third-party ad networks.',
     }),
 
@@ -601,17 +601,17 @@ export const adSection = defineType({
     prepare(selection) {
       const { title, isActive, adType, sponsoredCount, displayStyle } = selection;
       const count = Array.isArray(sponsoredCount) ? sponsoredCount.length : 0;
-      
+
       const typeEmoji = {
         sponsored: '💼',
         network: '🌐',
         mixed: '🔄',
       };
-      
+
       return {
         title: title || 'Ad Section Configuration',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${adType} (${count} sponsored ads) - ${displayStyle || 'single'}`,
-        media: typeEmoji[adType] || '📢',
+        media: (typeEmoji as any)[adType] || '📢',
       };
     },
   },

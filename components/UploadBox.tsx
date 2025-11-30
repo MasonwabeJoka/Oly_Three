@@ -34,7 +34,7 @@ const UploadBox = ({
   ...otherProps
 }: Props) => {
   const [file, setFile] = useState<File | null>(null);
-  const { addFile } = useUploadFiles();
+  const { addFile } = useUploadFiles() as any;
   const dropAreaRef = useRef<HTMLDivElement>(null);
   const dragTextRef = useRef<HTMLParagraphElement>(null);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ const UploadBox = ({
     }
   };
 
-  function capitalizeFirstLetter(string) {
+  function capitalizeFirstLetter(string: string) {
     return string?.charAt(0).toUpperCase() + string?.slice(1);
   }
 
@@ -155,7 +155,7 @@ const UploadBox = ({
               ariaLabel="Video URL Field"
               autoFocus={false}
               autoComplete="off"
-              disabled={false}
+              // disabled={false}
               required={required}
               value={value}
               onChange={onChange}

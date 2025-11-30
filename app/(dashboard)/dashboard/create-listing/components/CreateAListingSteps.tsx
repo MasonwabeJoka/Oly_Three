@@ -646,7 +646,7 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
           <>
             <Step
               step={steps[site][step!] as StepType}
-              key={steps[site][step!]}
+              key={`step-${step}`}
               onNext={handleNext}
               onBack={handleBack}
               isLastStep={step! === steps[site].length - 1}

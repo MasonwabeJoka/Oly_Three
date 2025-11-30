@@ -95,6 +95,7 @@ const AuctionStartTimeClient = () => {
             selectSize="large"
             label="Auction Start Time"
             id="startTime"
+            name="startTime"
             ariaLabel="Auction Start Time"
             autoFocus={false}
             disabled={false}
@@ -126,6 +127,7 @@ const AuctionStartTimeClient = () => {
               selectSize="large"
               label="Auction Duration"
               id="auctionDuration"
+              name="auctionDuration"
               ariaLabel="Auction Duration"
               autoFocus={false}
               disabled={false}

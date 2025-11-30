@@ -370,7 +370,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
             </div>
 
             {isEmojiPickerOpen && (
-              <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />
+              <Emojis {...({ onClickOutside: () => setIsEmojiPickerOpen(false) } as any)} />
             )}
 
             <div className={styles.buttons}>

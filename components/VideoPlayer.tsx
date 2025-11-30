@@ -16,7 +16,7 @@ export default function VideoPlayer({ videoPath }: Props) {
           "--media-secondary-color": "#14d6ff",
           "--media-accent-color": "#14d6ff",
           borderRadius: "2.5rem",
-        }}
+        } as React.CSSProperties}
       >
         <video
           slot="media"

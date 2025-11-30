@@ -170,7 +170,7 @@ export const servicesListing = defineType({
       title: 'Portfolio URL',
       type: 'url',
       description: 'Link to an external portfolio or gallery of work.',
-      hidden: ({ document }) => ['consulting', 'financial-services', 'legal-services'].includes(document?.serviceType),
+      hidden: ({ document }: { document: any }) => ['consulting', 'financial-services', 'legal-services'].includes(document?.serviceType),
     }),
     defineField({
       name: 'certifications',

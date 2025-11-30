@@ -257,7 +257,7 @@ export const jobListing = defineType({
       },
       initialValue: 'approved',
     }),
-      defineField({
+    defineField({
       name: 'isFeatured',
       title: 'Featured Listing',
       type: 'boolean',
@@ -281,7 +281,7 @@ export const jobListing = defineType({
           name: 'max',
           title: 'Maximum Salary',
           type: 'number',
-          validation: (Rule) => Rule.min(0).greaterThan(Rule.valueOf('min')),
+          validation: (Rule: any) => Rule.min(0),
         }),
         defineField({
           name: 'frequency',

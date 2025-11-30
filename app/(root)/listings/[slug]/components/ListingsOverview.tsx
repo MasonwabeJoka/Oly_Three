@@ -4,8 +4,8 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import { PortableText } from "@portabletext/react";
 import PriceSection from "./PriceSection";
 import ButtonsContainer from "./ButtonsContainer";
-import useMessageStore from "@/features/messages/store/useMessageStore";
-import Chat from "@/features/messages/components/Chat";
+// import useMessageStore from "@/features/messages/store/useMessageStore";
+// import Chat from "@/features/messages/components/Chat";
 import { useSingInCheckHook } from "@/hooks/useSingInCheckHook";
 import useAuctionModalStore from "../auction/store/useAuctionModalStore";
 import usePaymentModalStore from "../store/usePaymentModalStore";
@@ -16,7 +16,8 @@ interface Props {
 }
 
 const ListingOverview = ({ listing }: Props) => {
-  const { chats, setChats } = useMessageStore();
+  // const { chats, setChats } = useMessageStore();
+  const chats = false; // Placeholder
   const [isAuction, setIsAuction] = useState(true);
   const { showAuctionModal, setShowAuctionModal } = useAuctionModalStore();
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
@@ -26,7 +27,7 @@ const ListingOverview = ({ listing }: Props) => {
     queryParam: "openChat",
     onAction: () => {
       if (!chats) {
-        setChats(true);
+        // setChats(true);
       }
     },
   });
@@ -39,7 +40,7 @@ const ListingOverview = ({ listing }: Props) => {
   const handleContactSeller = () => {
     if (!isLoaded) return;
     if (!chats) {
-      setChats(true);
+      // setChats(true);
     }
     signInAndReturnUser();
   };
@@ -55,7 +56,7 @@ const ListingOverview = ({ listing }: Props) => {
   return (
     <>
       {chats ? (
-        <div className={styles.chatContainer}>{isSignedIn && <Chat />}</div>
+        <div className={styles.chatContainer}>{isSignedIn && null /* <Chat /> */}</div>
       ) : (
         <div className={styles.container}>
           <h1 className={styles.title}>

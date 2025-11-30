@@ -190,7 +190,7 @@ export const propertyListing = defineType({
       type: 'string',
       description: 'The name of the building, if applicable (e.g., for apartments, condos).',
       hidden: ({ document }) =>
-        !['apartment', 'condo', 'office-space', 'retail-space'].includes(document?.propertyType),
+        !['apartment', 'condo', 'office-space', 'retail-space'].includes((document as any)?.propertyType),
     }),
     defineField({
       name: 'floorNumber',
@@ -198,7 +198,7 @@ export const propertyListing = defineType({
       type: 'number',
       description: 'The floor number where the unit is located.',
       hidden: ({ document }) =>
-        !['apartment', 'condo', 'office-space'].includes(document?.propertyType),
+        !['apartment', 'condo', 'office-space'].includes((document as any)?.propertyType),
     }),
     defineField({
       name: 'amenities',
@@ -230,7 +230,7 @@ export const propertyListing = defineType({
       title: 'HOA Fees (Monthly)',
       type: 'number',
       description: 'Homeowner Association fees per month, if applicable.',
-      hidden: ({ document }) => !['apartment', 'condo', 'townhouse'].includes(document?.propertyType),
+      hidden: ({ document }: { document: any }) => !['apartment', 'condo', 'townhouse'].includes(document?.propertyType),
     }),
     defineField({
       name: 'propertyTaxes',
@@ -244,7 +244,7 @@ export const propertyListing = defineType({
       type: 'string',
       description: 'The zoning classification of the land/property (e.g., Residential, Commercial, Industrial).',
       hidden: ({ document }) =>
-        !['land', 'commercial', 'office-space', 'retail-space', 'warehouse'].includes(document?.propertyType),
+        !['land', 'commercial', 'office-space', 'retail-space', 'warehouse'].includes((document as any)?.propertyType),
     }),
     defineField({
       name: 'energyRating',
@@ -296,7 +296,7 @@ export const propertyListing = defineType({
       },
       initialValue: 'approved',
     }),
-   defineField({
+    defineField({
       name: 'isFeatured',
       title: 'Featured Listing',
       type: 'boolean',
@@ -634,9 +634,8 @@ export const propertyListing = defineType({
       const { title, subtitle, media, status, price, currency } = selection;
       return {
         title: title,
-        subtitle: `${subtitle || 'No Location'} - ${
-          price ? `${currency || ''} ${price.toLocaleString()}` : 'Price not set'
-        } (${status})`,
+        subtitle: `${subtitle || 'No Location'} - ${price ? `${currency || ''} ${price.toLocaleString()}` : 'Price not set'
+          } (${status})`,
         media: media,
       };
     },

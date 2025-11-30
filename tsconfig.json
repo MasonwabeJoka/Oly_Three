@@ -34,38 +34,14 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "./payload.config.ts",
     ".next/types/**/*.ts",
-    "app/(root)/Blog.tsx",
-    "app/(root)/Blog.tsx",
-    "app/Unsplash.jsx",
-    "app/api/temp.js",
-    "app/layouta.tsx",
-    "app/listings/layout.tsx",
-    "app/page.tsx",
-    "app/temp/page.jsx",
-    "components/Avatar.tsx",
-    "components/Checkbox.tsx",
-    "components/Features.tsx",
-    "components/cards/BoxAdCard.jsx",
-    "components/cards/LinkCard.tsx",
-    "components/ui/DropdownResults.tsx",
-    "data/unsplash.jsx",
-    "functions/page.ts",
-    "functions/src/index.ts",
-    "lib/unsplash.tsx",
-    "next-env.d.ts",
-    "next.config.js",
-    "store/unsplashStore.tsx",
-    "tailwind.config.js",
-    "video.d.ts",
-    "build/types/**/*.ts",
-    "utils/imageloader.ts",
-    "build\\dev/types/**/*.ts",
-    "build\\dev/types/**/*.ts",
     "build/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "features/messages"
   ]
 }

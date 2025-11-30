@@ -363,11 +363,11 @@ export const menuModalSection = defineType({
                 'home': '🏠',
                 'categories': '📋',
               };
-              
+
               return {
                 title: title || 'Unnamed Item',
                 subtitle: `${isActive ? '✅' : '❌'} ${url || 'No URL'}`,
-                media: iconEmoji[predefinedIcon] || '🔘',
+                media: (iconEmoji as any)[predefinedIcon] || '🔘',
               };
             },
           },
@@ -718,7 +718,7 @@ export const menuModalSection = defineType({
     prepare(selection) {
       const { title, isActive, itemsCount, gridColumns } = selection;
       const count = Array.isArray(itemsCount) ? itemsCount.length : 0;
-      
+
       return {
         title: title || 'Menu Modal Configuration',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} items (${gridColumns || 3} columns)`,

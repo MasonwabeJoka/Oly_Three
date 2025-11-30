@@ -364,7 +364,7 @@ export const navbarSection = defineType({
               return {
                 title: title || 'Unnamed Item',
                 subtitle: `${isActive ? '✅' : '❌'} ${type} - ${url || 'No URL'}`,
-                media: typeEmoji[type] || '🔗',
+                media: (typeEmoji as any)[type] || '🔗',
               };
             },
           },
@@ -796,7 +796,7 @@ export const navbarSection = defineType({
     prepare(selection) {
       const { title, isActive, navItemsCount } = selection;
       const count = Array.isArray(navItemsCount) ? navItemsCount.length : 0;
-      
+
       return {
         title: title || 'Navbar Configuration',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} nav items`,

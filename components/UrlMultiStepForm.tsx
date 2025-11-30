@@ -48,7 +48,7 @@ export default function UrlMultiStepForm<T extends Record<string, any>>({
       steps,
       basePath,
       onSubmit,
-      trigger,
+      trigger: trigger as any,
       getValues,
       setError,
       reset,

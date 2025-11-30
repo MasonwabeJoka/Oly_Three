@@ -45,7 +45,7 @@ const UploadButton = ({
 
     // Call onFileSelect when a video file is selected
     if (mediaType === "video" && onFileSelect) {
-      onFileSelect(selectedFile);
+      if (selectedFile) onFileSelect(selectedFile);
     }
   };
 

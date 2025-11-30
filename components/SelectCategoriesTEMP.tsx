@@ -3,12 +3,12 @@ import LinkCard from "@/components/cards/LinkCard";
 import { categories } from "@/data/CategoriesData";
 import Button from "@/components/Buttons";
 import useTitleStore from "@/store/titleStore";
-import { useCategoriesModalStore } from "@/store/modalStore";
+import { useModalStore } from "@/store/modalStore";
 
 
 const SelectCategories = () => {
   const Title = useTitleStore((state) => state.Title);
-  const setShowModal = useCategoriesModalStore((state) => state.setShowModal);
+  const setShowModal = useModalStore((state) => state.setShowCategoriesModal);
   return (
     <div className={styles.categoriesSection}>
       <div className={styles.titleContainer}>

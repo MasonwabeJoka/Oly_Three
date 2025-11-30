@@ -267,11 +267,11 @@ export const filtersSection = defineType({
                 radio: '🔘',
                 toggle: '🔄',
               };
-              
+
               return {
                 title: title || 'Unnamed Filter',
                 subtitle: `${isVisible ? '👁️' : '👁️‍🗨️'} ${type} ${sortOrder ? `(#${sortOrder})` : ''}`,
-                media: typeEmoji[type] || '🔘',
+                media: (typeEmoji as any)[type] || '🔘',
               };
             },
           },
@@ -705,7 +705,7 @@ export const filtersSection = defineType({
     prepare(selection) {
       const { title, isActive, filtersCount, layout } = selection;
       const count = Array.isArray(filtersCount) ? filtersCount.length : 0;
-      
+
       return {
         title: title || 'Filters Section Configuration',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} filters (${layout || 'horizontal'})`,

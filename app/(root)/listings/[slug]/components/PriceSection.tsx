@@ -2,7 +2,9 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./PriceSection.module.scss";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
-const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
+import { ListingQueryResult } from "@/sanity/types";
+
+const PriceSection = ({ listing, isAuction }: { listing: ListingQueryResult; isAuction: boolean }) => {
   return (
     <>
       <div className={styles.priceSection}>
@@ -10,7 +12,7 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
           <>
             <p className={styles.priceLabel}>Current Price</p>
             <p className={styles.price}>
-              {/* {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`} */}
+              {/* {listing?.price && `R${Formatter.formatLargeNumber(listing?.price)}`} */}
               R 50000
             </p>
             <div className={styles.countDown}>
@@ -26,9 +28,9 @@ const PriceSection = ({ ad, isAuction }: { ad: Ad; isAuction: boolean }) => {
           <>
             <p className={styles.priceLabel}>Price</p>
             <p className={styles.nonAuctionPrice}>
-              {/* {ad?.price && `R${Formatter.formatLargeNumber(ad?.price)}`} */}
-              {/* {ad?.price &&
-                Formatter.formatPrice(ad?.price, { showCents: false })} */}
+              {/* {listing?.price && `R${Formatter.formatLargeNumber(listing?.price)}`} */}
+              {/* {listing?.price &&
+                Formatter.formatPrice(listing?.price, { showCents: false })} */}
               R 50000
             </p>
           </>

@@ -395,11 +395,11 @@ export const resultsToolbarSection = defineType({
                 'multi-select': '☑️',
                 'range-selector': '📊',
               };
-              
+
               return {
                 title: title || 'Unnamed Item',
                 subtitle: `${isVisible ? '👁️' : '👁️‍🗨️'} ${type} ${sortOrder ? `(#${sortOrder})` : ''}`,
-                media: typeEmoji[type] || '🔘',
+                media: (typeEmoji as any)[type] || '🔘',
               };
             },
           },
@@ -787,7 +787,7 @@ export const resultsToolbarSection = defineType({
     prepare(selection) {
       const { title, isActive, itemsCount, alignment } = selection;
       const count = Array.isArray(itemsCount) ? itemsCount.length : 0;
-      
+
       return {
         title: title || 'Results Toolbar Configuration',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${count} items (${alignment || 'left'} aligned)`,

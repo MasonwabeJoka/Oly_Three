@@ -33,11 +33,11 @@ export const auction = defineType({
             options: {
                 dateFormat: 'YYYY-MM-DD',
                 timeFormat: 'HH:mm',
-                calendarTodayLabel: 'Today',
+                // calendarTodayLabel: 'Today',
             },
             validation: (Rule) => Rule.required().warning('Auction ending time must be set.'),
         }),
-  
+
         defineField({
             name: 'highestBid',
             title: 'Highest Bid',
@@ -158,6 +158,6 @@ export const auction = defineType({
             type: 'datetime',
             description: 'The date and time when the auction ends. Used to calculate the remaining time.',
         }),
-       
+
     ],
 });

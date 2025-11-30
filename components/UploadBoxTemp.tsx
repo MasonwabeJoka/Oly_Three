@@ -33,7 +33,7 @@ const UploadBox = ({
 }: Props) => {
   const [uploadType, setUploadType] = useState("");
 
-  function capitalizeFirstLetter(string) {
+  function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   return (
@@ -43,7 +43,7 @@ const UploadBox = ({
           <Input
             className={`${styles.uploadPhotoOrAttachment} ${styles.uploadBox} `}
             inputType="file"
-            inputSize=""
+            inputSize="medium"
             placeholder=""
             label={`Upload ${mediaType}`}
             id="upload-photo-attachment"
@@ -51,7 +51,6 @@ const UploadBox = ({
             ariaLabel="Upload Photo or Attachment Button"
             autoFocus={false}
             autoComplete="off"
-            disabled={false}
             required={required}
             accept={accept}
             onChange={onChange}
@@ -98,7 +97,7 @@ const UploadBox = ({
               ariaLabel="Video URL Field"
               autoFocus={false}
               autoComplete="off"
-              disabled={false}
+              // disabled={false}
               required={required}
               value={value}
               onChange={onChange}

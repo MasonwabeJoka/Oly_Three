@@ -255,7 +255,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
             {isEmojiPickerOpen && (
               <div role="dialog" aria-label="Emoji picker">
-                <Emojis onClickOutside={() => setIsEmojiPickerOpen(false)} />
+                <Emojis {...({ onClickOutside: () => setIsEmojiPickerOpen(false) } as any)} />
               </div>
             )}
 

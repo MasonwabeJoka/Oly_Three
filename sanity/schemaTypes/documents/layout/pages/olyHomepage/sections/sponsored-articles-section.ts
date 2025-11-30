@@ -403,19 +403,6 @@ export const sponsoredArticlesSection = defineType({
           initialValue: true,
           description: 'Whether the carousel should automatically advance (recommended for sponsored content).',
         }),
-
-        defineField({
-          name: 'autoplaySpeed',
-          title: 'Autoplay Speed (seconds)',
-          type: 'number',
-          options: {
-            range: { min: 3, max: 15, step: 1 },
-          },
-          initialValue: 8,
-          description: 'How long each article is displayed before advancing.',
-          hidden: ({ parent }) => !parent?.autoplay,
-        }),
-
         defineField({
           name: 'showNavigation',
           title: 'Show Navigation Arrows',
@@ -826,7 +813,7 @@ export const sponsoredArticlesSection = defineType({
       const { title, isActive, selectionMethod, maxArticles } = selection;
       const method = selectionMethod === 'manual' ? 'Manual' : 'Auto';
       const count = maxArticles || 'N/A';
-      
+
       return {
         title: title || 'Sponsored Articles Section',
         subtitle: `${isActive ? '✅ Active' : '❌ Inactive'} - ${method} (${count} max)`,
