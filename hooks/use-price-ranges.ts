@@ -13,4 +13,7 @@ export function usePriceRanges(searchParams: SearchParams, productType: ProductT
     // TODO: Implement price range fetching logic
     // This will be implemented in later tasks
     console.log('Fetching price ranges for:', { searchParams, productType });
-  }, [searchParam
+  }, [searchParams, productType]);
+
+  return { ranges, isLoading, error };
+}

@@ -8,7 +8,6 @@
       "esnext"
     ],
     "allowJs": true,
-    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -27,7 +26,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [

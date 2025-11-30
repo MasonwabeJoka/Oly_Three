@@ -9,6 +9,7 @@
     "serve": "node server.js",
     "extract-variables": "node ./extract-variables.js",
     "build": "npm run extract-variables && next build",
+    "vercel-build": "npm run extract-variables && next build",
     "sync-articles": "node --loader ts-node/esm scripts/sync-articles.ts",
     "sync-articles-cron": "node sync-articles-working.cjs",
     "sync-articles-now": "node sync-articles-working.cjs",

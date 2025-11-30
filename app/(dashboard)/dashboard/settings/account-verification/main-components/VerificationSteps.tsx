@@ -186,7 +186,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
   };
 
   const handleNext = async () => {
-    if (!userType) return;
+    if (!userType || step === null) return;
     const currentFields = steps[userType][step].fields;
     const isValid = await methods.trigger(currentFields);
     if (isValid && step < steps[userType].length - 1) {
@@ -214,7 +214,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
   };
 
   const handleBack = () => {
-    if (step > 0 && userType) {
+    if (step !== null && step > 0 && userType) {
       const prevStep = step - 1;
       setStep(prevStep);
       router.push(

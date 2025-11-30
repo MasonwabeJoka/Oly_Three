@@ -563,17 +563,17 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
   };
 
   const handleNext = async () => {
-    if (!site) return;
-    const currentFields = steps[site][step].fields;
+    if (!site || step === null) return;
+    const currentFields = steps[site][step!].fields;
     const isValid = await methods.trigger(currentFields);
-    if (isValid && step < steps[site].length - 1) {
-      const nextStep = step + 1;
+    if (isValid && step! < steps[site].length - 1) {
+      const nextStep = step! + 1;
 
       setStep(nextStep);
       router.push(
         `/dashboard/create-listing/${site}/${steps[site][nextStep].path}`
       );
-    } else if (isValid && step === steps[site].length - 1) {
+    } else if (isValid && step! === steps[site].length - 1) {
       router.push(`/dashboard/create-listing/${site}/published`); //temp
 
       // Submit form data to backend
@@ -594,25 +594,25 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
   };
 
   const handleBack = () => {
-    if (!site) return;
+    if (!site || step === null) return;
 
     // If on review-and-submit step (last step), skip review-message step
-    if (step === steps[site].length - 1) {
-      const prevStep = step - 2; // Skip review-message step
+    if (step! === steps[site].length - 1) {
+      const prevStep = step! - 2; // Skip review-message step
       setStep(prevStep);
       router.push(
         `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
       );
-    } else if (step > 1) {
-      const prevStep = step - 1;
+    } else if (step! > 1) {
+      const prevStep = step! - 1;
       setStep(prevStep);
       router.push(
         `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
       );
-    } else if (step === 1) {
+    } else if (step! === 1) {
       setStep(1);
       router.push(`/dashboard/create-listing/${site}/select-new-category`);
-    } else {
+      } else {
       setSite(null);
       methods.reset();
       router.push("/dashboard/create-listing/");
@@ -642,15 +642,15 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
           </div>
         ) : !site ? (
           <SiteSelection onSelect={handleSiteSelection} />
-        ) : site && steps[site] && steps[site][step] ? (
+        ) : site && steps[site] && step !== null && steps[site][step!] ? (
           <>
             <Step
-              step={steps[site][step ?? 0] as StepType}
-              key={steps[site][step]}
+              step={steps[site][step!] as StepType}
+              key={steps[site][step!]}
               onNext={handleNext}
               onBack={handleBack}
-              isLastStep={step === steps[site].length - 1}
-              isFirstStep={step === 0}
+              isLastStep={step! === steps[site].length - 1}
+              isFirstStep={step! === 0}
             />
             <FormProgressBar
               currentStepIndex={step ?? 0}

@@ -43,7 +43,25 @@ export const sites = [
 
 ];
 
-const SiteSelection = () => {
+interface SiteSelectionProps {
+  onSelect?: (site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services") => void;
+}
+
+const SiteSelection = ({ onSelect }: SiteSelectionProps) => {
+  const siteMap: Record<string, "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"> = {
+    "Oly": "oly",
+    "Oly Properties": "oly-properties",
+    "Oly Auto": "oly-auto",
+    "Oly Services": "oly-services",
+    "Oly Hiring": "oly-hiring"
+  };
+
+  const handleSiteClick = (siteText: string) => {
+    if (onSelect) {
+      onSelect(siteMap[siteText]);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Select Site</h1>
@@ -68,9 +86,15 @@ const SiteSelection = () => {
       >
         {sites.map((site) => (
           <SwiperSlide key={site.id}>
-            <Link href={site.link}>
-              <ClassifiedLink text={site.text} image={site.image} />
-            </Link>
+            {onSelect ? (
+              <div onClick={() => handleSiteClick(site.text)}>
+                <ClassifiedLink text={site.text} image={site.image} />
+              </div>
+            ) : (
+              <Link href={site.link}>
+                <ClassifiedLink text={site.text} image={site.image} />
+              </Link>
+            )}
           </SwiperSlide>
         ))}
 
