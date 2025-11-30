@@ -30,7 +30,9 @@ export const TaskActions = ({ task }: { task: Task }) => {
         <input
           type="text"
           value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setTitle(event.target.value)
+          }
         />
         <button onClick={handleUpdate} className={styles.saveBtn}>
           Save

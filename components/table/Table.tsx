@@ -80,10 +80,14 @@ export function Table<TData, TValue>({
       <>
         <div className={styles.searchInputContainer}>
           <Input
-            className= {styles.searchInput}
+            className={styles.searchInput}
             placeholder={placeholder}
-            value={(table.getColumn(`${searchColumn}`)?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
+            value={
+              (table
+                .getColumn(`${searchColumn}`)
+                ?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               table.getColumn(searchColumn)?.setFilterValue(event.target.value)
             }
             inputType="text"
@@ -102,8 +106,8 @@ export function Table<TData, TValue>({
           columns={table.getAllColumns()}
           triggerText="Columns"
           buttonSize="medium" // Example: Using medium size for the default button
-        /> 
-       
+        />
+
         <ShadcnTable className={styles.tableContainer}>
           <TableHeader className={styles.tableHeader}>
             {table.getHeaderGroups().map((headerGroup) => (

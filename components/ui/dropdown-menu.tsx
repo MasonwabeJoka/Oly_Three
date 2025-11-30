@@ -104,7 +104,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       className
     )}
     checked={checked}
-    onSelect={(e) => e.preventDefault()}
+    onSelect={(e: Event) => e.preventDefault()}
     {...props}
   >
     <div className={styles.checkboxContainer}>

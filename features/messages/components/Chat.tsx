@@ -11,24 +11,24 @@ import { useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Chat = () => {
-  const { 
-    messages, 
-    selectedChat, 
-    handleSendMessage, 
-    userMessages, 
+  const {
+    messages,
+    selectedChat,
+    handleSendMessage,
+    userMessages,
     setChats,
     isLoading,
     isInitialized,
-    initializeMessages
+    initializeMessages,
   } = useMessageStore();
-  
+
   // Initialize messages on component mount
   useEffect(() => {
     if (!isInitialized) {
       initializeMessages();
     }
   }, [isInitialized, initializeMessages]);
-  
+
   const shouldShowAvatar = (
     index: number,
     msg: MessageContent,
@@ -43,7 +43,9 @@ const Chat = () => {
       <div
         className={styles.exitButtonContainer}
         onClick={() => setChats(false)}
-        onKeyDown={(e) => e.key === "Enter" && setChats(false)}
+        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
+          e.key === "Enter" && setChats(false)
+        }
         role="button"
         tabIndex={0}
         aria-label="Close chat"

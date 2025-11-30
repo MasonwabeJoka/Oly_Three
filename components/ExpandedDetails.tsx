@@ -48,8 +48,8 @@ const propertyAttributes = [
   },
 ];
 
-const PreventLinkClick = ({ children }: any) => {
-  const handleClick = (event: any) => {
+const PreventLinkClick = ({ children }: { children: React.ReactNode }) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
   return (

@@ -41,7 +41,7 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   ariaLabel?: string;
   id: string;
-  name: string;
+  name?: string;
   dashboard?: boolean;
   submitButtonText?: string;
   submitButtonIcon?: string | React.ReactNode;
@@ -291,11 +291,11 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
       }
     };
 
-  const showShadow = {
-    boxShadow: hasShadow
-      ? "-5px -5px 10px 0px #fff, 5px 5px 10px 0px rgba(170, 186, 204, 0.5), 2px 2px 4px 0px rgba(120, 145, 171, 0.25), -2px -2px 4px 0px rgba(255, 255, 255, 0.5)"
-      : "none",
-  };
+    const showShadow = {
+      boxShadow: hasShadow
+        ? "-5px -5px 10px 0px #fff, 5px 5px 10px 0px rgba(170, 186, 204, 0.5), 2px 2px 4px 0px rgba(120, 145, 171, 0.25), -2px -2px 4px 0px rgba(255, 255, 255, 0.5)"
+        : "none",
+    };
 
     return (
       <>
@@ -304,20 +304,23 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
             {error || charCountError}
           </p>
         )}
-        <div className={`${styles.container} ${containerClassName}`} style={showShadow}>
+        <div
+          className={`${styles.container} ${containerClassName}`}
+          style={showShadow}
+        >
           {label && (
             <label className={styles.label} htmlFor={id}>
               {label}
             </label>
           )}
           <div
-            className={ `${styles.textareaWrapper} ${TextAreaClassName}`}
+            className={`${styles.textareaWrapper} ${TextAreaClassName}`}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
           >
             <Textarea
               id={`${id}-shadcn`}
-              name={name}
+              name={name || reactHookFormProps?.name}
               placeholder={placeholder}
               value={value || localValue}
               onChange={handleChange}
@@ -331,7 +334,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
                 isMaxHeight ? styles.atMaxHeight : ""
               } ${textareaClassName}`}
               id={id}
-              name={name}
+              name={name || reactHookFormProps?.name}
               placeholder={!isFocused ? placeholder : ""}
               value={value || localValue}
               aria-label={ariaLabel || placeholder || "Type a message"}
@@ -376,7 +379,9 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
                   className={styles.emojiIconContainer}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => handleIconKeyDown(e, "Emoji")}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
+                    handleIconKeyDown(e, "Emoji")
+                  }
                   onClick={() => setIsEmojiPickerOpen(true)}
                   aria-label="Insert emoji"
                 >
@@ -392,7 +397,9 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
                   className={styles.uploadIconContainer}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => handleIconKeyDown(e, "Upload")}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
+                    handleIconKeyDown(e, "Upload")
+                  }
                   onClick={() => console.log("Upload icon clicked")}
                   aria-label="Upload file"
                 >
@@ -421,7 +428,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
                   />
                 </div>
               )}
-            </div>    
+            </div>
           </div>
         </div>
         <div id={`${id}-description`} className="sr-only">

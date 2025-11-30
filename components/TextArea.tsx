@@ -17,7 +17,7 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   ariaLabel?: string;
   id: string;
-  name: string;
+  name?: string;
   dashboard?: boolean;
   submitButtonText?: string;
   submitButtonIcon?: string | React.ReactNode;
@@ -204,7 +204,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           >
             <ShadcnTextarea
               id={textareaId}
-              name={name}
+              name={name || reactHookFormProps?.name}
               placeholder={placeholder}
               value={localValue}
               onChange={handleChange}
@@ -218,7 +218,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
                 isMaxHeight ? styles.atMaxHeight : ""
               }`}
               id={textareaId}
-              name={name}
+              name={name || reactHookFormProps?.name}
               placeholder={!isFocused ? placeholder : ""}
               value={localValue}
               aria-label={accessibleLabel}

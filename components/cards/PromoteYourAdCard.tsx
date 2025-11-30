@@ -107,13 +107,10 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
-              selectPrompt="5 Days"
-              displayTextArray={["a", "b"]}
               label="Set PromotionDuration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
-              autoComplete="on"
               disabled={false}
               required={true}
               multiple={false}
@@ -193,7 +190,6 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
-              autoComplete="on"
               disabled={false}
               required={true}
               dashboard={isDashboard}

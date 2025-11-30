@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import styles from "./SetVehiclePrice.module.scss";
 import NumberInput from "./NumberInput";
 import { Slider } from "radix-ui";
@@ -20,7 +20,9 @@ const SetVehiclePrice = ({}: SetVehiclePriceProps) => {
         placeholder="Set Your Price"
         autoFocus={false}
         required={true}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          console.log(e.target.value)
+        }
       />
 
       <Slider.Root

@@ -204,7 +204,6 @@ const DetailsClient = ({
                   label="Choose a detail"
                   id="choose-detail"
                   ariaLabel="Choose Detail Select"
-                  autoComplete="off"
                   dashboard
                   error={errors.details?.selectDetail?.message as string}
                   {...register("details.selectDetail")}

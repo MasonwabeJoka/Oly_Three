@@ -95,7 +95,9 @@ export default function ModificationsSection() {
             <p>Please describe the modification(s)</p>
             <textarea
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setDescription(e.target.value)
+              }
             />
           </div>
 
@@ -344,7 +346,9 @@ export default function ModificationsSection() {
 
             <select
               value={recency}
-              onChange={(e) => setRecency(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                setRecency(e.target.value)
+              }
             >
               <option value="">Select...</option>
               <option value="0-6">Within the last 6 months</option>
@@ -385,7 +389,9 @@ export default function ModificationsSection() {
                 <p>Please describe the repair work</p>
                 <textarea
                   value={repairDescription}
-                  onChange={(e) => setRepairDescription(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    setRepairDescription(e.target.value)
+                  }
                 />
               </div>
             )}

@@ -23,7 +23,7 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   placeholder?: string;
   id: string;
-  name: string;
+  name?: string;
   ariaLabel: string;
   autoFocus?: boolean;
   iconWidth?: number;
@@ -404,7 +404,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             value={internalValue}
             onChange={handleInternalChange}
             onKeyUp={onKeyUp}
-            onFocus={(e) => {
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
               if (isMultiSelect) setIsDropdownOpen(true);
               if (onFocus) onFocus(e);
             }}
@@ -416,12 +416,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={inputClass}
             type={inputType}
             placeholder={placeholder}
-            name={name}
+            name={name || undefined}
             accept={accept}
             value={internalValue}
             onChange={handleInternalChange}
             onKeyUp={onKeyUp}
-            onFocus={(e) => {
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
               if (isMultiSelect) setIsDropdownOpen(true);
               if (onFocus) onFocus(e);
             }}
@@ -531,7 +531,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  onKeyDown={(e) => {
+                  onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) => {
                     if (e.key === "Enter") handleSuggestionClick(suggestion);
                   }}
                   tabIndex={0}
@@ -582,7 +582,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                       )
                     )
                   }
-                  onKeyDown={(e) => {
+                  onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
                       handleSelectAll(
@@ -632,7 +632,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                           !selectedItems.includes(suggestion)
                         )
                       }
-                      onKeyDown={(e) => {
+                      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
                         if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
                           handleMultiSelectChange(

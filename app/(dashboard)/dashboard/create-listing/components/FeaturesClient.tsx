@@ -88,7 +88,6 @@ const FeaturesClient = (props: FeaturesProps) => {
                 id="choose-detail"
                 ariaLabel="Choose Detail Select"
                 autoFocus={false}
-                autoComplete="off"
                 disabled={false}
                 required={false}
                 multiple={false}

@@ -68,7 +68,7 @@ const CategorySelectorClient = ({
     setHovered(null);
   };
 
-  const subcategoriesStyles = {
+  const subcategoriesStyles: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     width: "18rem",

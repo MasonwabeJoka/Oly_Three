@@ -110,12 +110,10 @@ const AuctionPrice = ({ onNext }: Props) => {
                     ]}
                     initialValue="Auction Start Time"
                     selectSize="large"
-                    selectPrompt="Start Time"
                     label="Auction Start Time"
                     id="startTime"
                     ariaLabel="Auction Start Time"
                     autoFocus={false}
-                    autoComplete="off"
                     disabled={false}
                     required={true}
                     dashboard
@@ -156,12 +154,10 @@ const AuctionPrice = ({ onNext }: Props) => {
                     ]}
                     initialValue="Auction Duration"
                     selectSize="large"
-                    selectPrompt="Auction Duration"
                     label="Auction Duration"
                     id="auctionDuration"
                     ariaLabel="Auction Duration"
                     autoFocus={false}
-                    autoComplete="off"
                     disabled={false}
                     required={true}
                     dashboard

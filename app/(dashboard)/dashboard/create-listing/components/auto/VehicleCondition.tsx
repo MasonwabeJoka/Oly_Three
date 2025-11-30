@@ -19,7 +19,9 @@ const VehicleCondition = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type, checked } = e.target;
+    const target = e.target;
+    const { name, value, type } = target;
+    const checked = target instanceof HTMLInputElement ? target.checked : false;
     setCondition((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,

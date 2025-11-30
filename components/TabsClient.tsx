@@ -77,7 +77,9 @@ const TabsClient: React.FC<TabsProps> = ({
                   : isActive === index
               }
               isMobile
-              onClick={(event) => handleClick(index, event)}
+              onClick={(event: React.MouseEvent<HTMLLIElement>) =>
+                handleClick(index, event)
+              }
             />
             {data && (
               <TabOptions items={data[index]} visible={tabOptions === index} />
@@ -97,7 +99,6 @@ const TabsClient: React.FC<TabsProps> = ({
       <ul
         className={styles.tabs}
         style={{
-       
           width: condition
             ? `${(collageViewWidth || width) / 16}rem`
             : `${width / 16}rem`,
@@ -119,7 +120,9 @@ const TabsClient: React.FC<TabsProps> = ({
               }
               style={{ flexBasis: tabWidth, flexShrink: tabWidth }}
               color={title === "Delete" ? "#ff3c14" : "#434b4d"}
-              onClick={(event) => handleClick(index, event)}
+              onClick={(event: React.MouseEvent<HTMLLIElement>) =>
+                handleClick(index, event)
+              }
             />
           );
         })}

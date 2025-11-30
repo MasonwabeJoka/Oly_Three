@@ -43,10 +43,10 @@ const Icon = ({
       tabIndex={isButton ? 0 : undefined}
       onKeyDown={
         isButton
-          ? (e) => {
+          ? (e: React.KeyboardEvent<HTMLImageElement>) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                onClick?.(e as any);
+                onClick?.(e as React.MouseEvent<HTMLImageElement>);
               }
             }
           : undefined

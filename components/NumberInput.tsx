@@ -252,7 +252,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               type="button"
               className={`${styles.upArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("up")}
-              onMouseDown={(e) => e.preventDefault()}
+              onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
+                e.preventDefault()
+              }
               aria-label="Increase value"
               tabIndex={-1}
             >
@@ -262,7 +264,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               type="button"
               className={`${styles.downArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("down")}
-              onMouseDown={(e) => e.preventDefault()}
+              onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
+                e.preventDefault()
+              }
               aria-label="Decrease value"
               tabIndex={-1}
             >

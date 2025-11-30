@@ -69,7 +69,9 @@ const AdCarousel = ({ images, onClick }: Props) => {
                     cursor: "auto",
                     position: "relative",
                   }}
-                  onClick={(event) => event.stopPropagation()}
+                  onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+                    event.stopPropagation()
+                  }
                 >
                   <Image
                     className={styles.image}
@@ -84,13 +86,17 @@ const AdCarousel = ({ images, onClick }: Props) => {
           ))}
           <div
             className={styles.leftButtonContainer}
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+              event.stopPropagation()
+            }
           >
             <NavButtonLeft size="medium" />
           </div>
           <div
             className={styles.rightButtonContainer}
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+              event.stopPropagation()
+            }
           >
             <NavButtonRight size="medium" />
           </div>

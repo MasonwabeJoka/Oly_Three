@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import ExitButton from "./ExitButton";
 import styles from "./Modal.module.scss";
 import { useEffect, useState } from "react";
@@ -12,28 +12,34 @@ type Props = {
   reload?: boolean; // Optional boolean to reload the page when modal is closed
 };
 
-const Modal = ({ showModal, setShowModal, modalContent, path, reload }: Props) => {
+const Modal = ({
+  showModal,
+  setShowModal,
+  modalContent,
+  path,
+  reload,
+}: Props) => {
   const [forceHide, setForceHide] = useState(false);
   const router = useRouter();
   // Close modal function
-const handleClose = () => {
-  if (reload) {
-    // Use React state to hide modal immediately
-    setForceHide(true);
-    // Update state to close current modal
-    setShowModal(false);
-    // Redirect if path is provided
-    path && router.push(path);
-    // Trigger full page reload
-    window.location.reload();
-  } else {
-    // Normal close behavior
-    setShowModal(false);
-    path && router.push(path);
-  }
-};
+  const handleClose = () => {
+    if (reload) {
+      // Use React state to hide modal immediately
+      setForceHide(true);
+      // Update state to close current modal
+      setShowModal(false);
+      // Redirect if path is provided
+      path && router.push(path);
+      // Trigger full page reload
+      window.location.reload();
+    } else {
+      // Normal close behavior
+      setShowModal(false);
+      path && router.push(path);
+    }
+  };
   // Prevents modal from closing when clicking inside the modal
-  const handleModalContentClick = (e) => {
+  const handleModalContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
@@ -53,7 +59,10 @@ const handleClose = () => {
   return (
     <>
       {showModal && (
-         <div className={`${styles.modalOverlay} ${forceHide ? styles.forceHide : ''}`} onClick={handleClose}>
+        <div
+          className={`${styles.modalOverlay} ${forceHide ? styles.forceHide : ""}`}
+          onClick={handleClose}
+        >
           <div className={styles.exitButtonContainer}>
             <ExitButton />
           </div>

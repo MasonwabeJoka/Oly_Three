@@ -24,7 +24,7 @@ interface SelectProps {
   reactHookFormProps?: UseFormRegisterReturn;
   error?: string;
   id: string;
-  name: string;
+  name?: string;
   ariaLabel: string;
   required?: boolean;
   selectDescription?: string;
@@ -162,15 +162,15 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const selectedLabels = selected.map(getLabelFromValue).filter(Boolean);
 
     const placeholderText =
-  typeof initialValue === "string" && initialValue.trim() !== ""
-    ? initialValue
-    : "Select an option";
+      typeof initialValue === "string" && initialValue.trim() !== ""
+        ? initialValue
+        : "Select an option";
 
-const displayText = isOpen
-  ? placeholderText
-  : selectedLabels.length > 0
-    ? selectedLabels.join(", ")
-    : placeholderText;
+    const displayText = isOpen
+      ? placeholderText
+      : selectedLabels.length > 0
+        ? selectedLabels.join(", ")
+        : placeholderText;
 
     const hasSelection = selected.length > 0;
 
@@ -324,7 +324,7 @@ const displayText = isOpen
             aria-required={required}
             tabIndex={0}
             onClick={() => setIsOpen((o) => !o)}
-            onKeyDown={(e) =>
+            onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
               (e.key === "Enter" || e.key === " ") &&
               (e.preventDefault(), setIsOpen((o) => !o))
             }
@@ -349,7 +349,7 @@ const displayText = isOpen
                     alt="Clear selection"
                     width={16}
                     height={16}
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent<HTMLImageElement>) => {
                       e.stopPropagation();
                       clearSelections();
                     }}
@@ -394,7 +394,7 @@ const displayText = isOpen
                   value={searchTerm}
                   placeholder="Search options..."
                   ariaLabel="Search options"
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSearchTerm(e.target.value);
                     setFocusedOptionIndex(-1);
                   }}
@@ -472,7 +472,9 @@ const displayText = isOpen
                       {isMultiSelect && (
                         <div
                           className={styles.checkboxContainer}
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                            e.stopPropagation()
+                          }
                         >
                           <Checkbox
                             checked={isSelected}

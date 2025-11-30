@@ -14,7 +14,7 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
   const text =
     "This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-  useOnClickOutside(replyRef, (event) => {
+  useOnClickOutside(replyRef, (event: MouseEvent | TouchEvent) => {
     const target = event.target as Element;
     if (target.closest(`.${styles.reply}`)) return;
     setIsReplying(false);
@@ -23,13 +23,13 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
   const handleReply = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsReplying(!isReplying);
-   
   };
 
-  const href = isPostOpen ? "#": "/articles/oly-shops/${articleId}/post"
+  const href = isPostOpen ? "#" : "/articles/oly-shops/${articleId}/post";
 
   return (
-    <Link href={href}
+    <Link
+      href={href}
       className={`${styles.container} ${isPostOpen ? styles.postOpenContainer : styles.standardContainer}`}
     >
       <div className={styles.wrapper}>
@@ -70,9 +70,11 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
             </span>
           </div>
         </div>
-        
       </div>
-      <div ref={replyRef} className={`${styles.replyContainer} ${isReplying ? styles.visible : ''}`}>
+      <div
+        ref={replyRef}
+        className={`${styles.replyContainer} ${isReplying ? styles.visible : ""}`}
+      >
         {isReplying && (
           <TextInputBar
             containerClassName={styles.commentInput}
@@ -83,7 +85,9 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
             placeholder="Reply..."
             submitButtonText="Reply"
             required
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => console.log(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              console.log(e.target.value)
+            }
             hasShadow={false}
           />
         )}
@@ -93,4 +97,3 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
 };
 
 export default Comment;
-

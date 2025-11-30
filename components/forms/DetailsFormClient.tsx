@@ -100,12 +100,11 @@ const DetailsFormClient = (props: DetailsFormProps) => {
               id="conditions"
               ariaLabel="Conditions"
               autoFocus={false}
-              autoComplete="off"
               disabled={false}
               required={true}
               multiple={false}
               {...register("condition")}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setValue("condition", e.target.value, {
                   shouldDirty: true,
                   shouldTouch: true,
@@ -125,7 +124,6 @@ const DetailsFormClient = (props: DetailsFormProps) => {
               id="choose-detail"
               ariaLabel="Choose Detail Select"
               autoFocus={false}
-              autoComplete="off"
               disabled={false}
               required={true}
               multiple={false}

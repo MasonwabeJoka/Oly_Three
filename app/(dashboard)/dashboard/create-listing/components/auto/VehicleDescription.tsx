@@ -1,8 +1,8 @@
-'use client'
-import  { useState } from "react";
+"use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const VehicleDescription = () =>{
+const VehicleDescription = () => {
   const router = useRouter();
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState<number | "">("");
@@ -17,7 +17,9 @@ const VehicleDescription = () =>{
         Description
         <textarea
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setDescription(e.target.value)
+          }
           placeholder="Include features, service history, upgrades..."
         />
       </label>
@@ -27,15 +29,21 @@ const VehicleDescription = () =>{
         <input
           type="number"
           value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPrice(Number(e.target.value))
+          }
         />
       </label>
 
-      <button type="button" onClick={handleNext} disabled={!description || !price}>
+      <button
+        type="button"
+        onClick={handleNext}
+        disabled={!description || !price}
+      >
         Next
       </button>
     </main>
   );
-}
+};
 
 export default VehicleDescription;

@@ -59,7 +59,6 @@ const Price = ({ onNext }: Props) => {
               id="price-types"
               ariaLabel="Price Types Select"
               autoFocus={false}
-              autoComplete="off"
               disabled={false}
               required={true}
               dashboard

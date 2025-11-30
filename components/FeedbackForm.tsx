@@ -22,8 +22,14 @@ async function feedbackAction(formData: FormData) {
   // Server-side validation
   const schema = z.object({
     name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address").min(1, "Email is required"),
-    message: z.string().min(1, "Message is required").max(500, "Message cannot exceed 500 characters"),
+    email: z
+      .string()
+      .email("Invalid email address")
+      .min(1, "Email is required"),
+    message: z
+      .string()
+      .min(1, "Message is required")
+      .max(500, "Message cannot exceed 500 characters"),
     attachment: z.any().optional(), // Handle file validation if needed
   });
 
@@ -112,7 +118,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           autoComplete="off"
           autoFocus={false}
           id="name"
-          name="name" // Required for FormData
           ariaLabel="Name Field"
           required={true}
           {...register("name")}
@@ -130,7 +135,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           {errors.email?.message || serverErrors.email}
         </p>
         <Input
-          legend=""
           label="Email"
           className={styles.email}
           inputType="email"
@@ -139,7 +143,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           autoComplete="off"
           autoFocus={false}
           id="email"
-          name="email" // Required for FormData
           ariaLabel="Email Field"
           required={true}
           {...register("email")}
@@ -156,7 +159,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           {errors.title?.message || serverErrors.title}
         </p>
         <Input
-          legend=""
           label="Title"
           className={styles.titleInput}
           inputType="text"
@@ -165,7 +167,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           autoComplete="off"
           autoFocus={false}
           id="title"
-          name="title" // Required for FormData
           ariaLabel="Title Field"
           required={true}
           {...register("title")}
@@ -187,7 +188,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           placeholder="Please enter your feedback here..."
           label="Message"
           id="message"
-          name="message" // Required for FormData
           size="large"
           required={true}
           onSubmit={() => {}}

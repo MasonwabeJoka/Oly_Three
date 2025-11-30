@@ -5,7 +5,7 @@ import styles from "./FeedbackDetailsCard.module.scss";
 import Reaction from "../Reaction";
 import TextInputBar from "../TextInputBar";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import {formatRelativeTime } from "@/utils/formatterFunctions/Formatter";
+import { formatRelativeTime } from "@/utils/formatterFunctions/Formatter";
 import Button from "../Buttons";
 
 interface FeedbackDetailsCardProps {
@@ -33,11 +33,15 @@ const FeedbackDetailsCard = ({
   const [isReplying, setIsReplying] = useState(false);
   const replyRef = useRef<HTMLElement>(null);
 
- useOnClickOutside(replyRef, (event) => {
-  const target = event.target as Element;
-  if (target.closest(`.${styles.chatButton}`) || target.closest(`.${styles.buttonContainer}`)) return;
-  setIsReplying(false);
-});
+  useOnClickOutside(replyRef, (event: MouseEvent | TouchEvent) => {
+    const target = event.target as Element;
+    if (
+      target.closest(`.${styles.chatButton}`) ||
+      target.closest(`.${styles.buttonContainer}`)
+    )
+      return;
+    setIsReplying(false);
+  });
 
   const handleReply = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -94,7 +98,9 @@ const FeedbackDetailsCard = ({
             placeholder="Reply..."
             submitButtonText="Reply"
             required
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              console.log(e.target.value)
+            }
             hasShadow={false}
           />
         )}

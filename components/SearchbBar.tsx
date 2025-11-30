@@ -35,7 +35,7 @@ const SearchBar = () => {
     "What does CSS stands for?",
   ];
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const typedValue = e.target.value;
     setInputValue(typedValue);
     if (typedValue) {

@@ -45,7 +45,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
   const isFeedOpen = useFeedStore((state) => state.isFeedOpen);
 
   const sizeClass = isFeedOpen ? SIZE.feed[size] : SIZE.regular[size];
- 
+
   if (!editor) {
     return null;
   }
@@ -55,10 +55,13 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
   };
 
   return (
-    <div className={`${sizeClass} ${className} ${styles.toolbar}`} style={style}>
+    <div
+      className={`${sizeClass} ${className} ${styles.toolbar}`}
+      style={style}
+    >
       <div className={`${styles.toolbarGroup} ${styles.toolbarGroupLg}`}>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleBold().run();
           }}
@@ -67,7 +70,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Bold className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleItalic().run();
           }}
@@ -76,7 +79,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Italic className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleUnderline().run();
           }}
@@ -88,7 +91,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Underline className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleStrike().run();
           }}
@@ -97,7 +100,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Strikethrough className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleHeading({ level: 2 }).run();
           }}
@@ -109,7 +112,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Heading2 className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleBulletList().run();
           }}
@@ -121,7 +124,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <List className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().toggleOrderedList().run();
           }}
@@ -134,7 +137,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         </button>
 
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().undo().run();
           }}
@@ -146,7 +149,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
           <Undo className="w-5 h-5" />
         </button>
         <button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             editor.chain().focus().redo().run();
           }}

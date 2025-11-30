@@ -349,15 +349,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               selectedItems.length > 0 ? selectedItems.join(", ") : placeholder
             }
             id={id}
-            name={name}
+            name={name || reactHookFormProps?.name}
             accept={accept}
             value={reactHookFormProps?.value ?? value}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               reactHookFormProps?.onChange?.(e);
               handleInternalChange(e);
             }}
             onKeyUp={onKeyUp}
-            onFocus={(e) => {
+            onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
               if (isMultiSelect) setIsDropdownOpen(true);
               if (onFocus) onFocus(e);
             }}
@@ -529,7 +529,7 @@ export default Input;
       autoComplete="off"
       required
       {...register("searchTerm")}
-      onChange={(e) => {
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValue("searchTerm", e.target.value, {
           shouldDirty: true,
           shouldTouch: true,

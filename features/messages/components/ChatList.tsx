@@ -70,7 +70,9 @@ const ChatList: React.FC = () => {
               className={styles.chat}
               key={message.id}
               onClick={() => handleChatClickLocal(message)}
-              onKeyDown={(e) => handleKeyDown(e, message)}
+              onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) =>
+                handleKeyDown(e, message)
+              }
               role="button"
               tabIndex={0}
               aria-label={`Open chat with ${message.name}`}

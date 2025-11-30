@@ -50,8 +50,8 @@ const CreateAListingClient = ({ initialFormData = {}, steps }: Props) => {
     setIsClient(true);
   }, []);
 
-  const getMediaComponent = (goToMediaType) => {
-    const mediaComponents = {
+  const getMediaComponent = (goToMediaType: string) => {
+    const mediaComponents: Record<string, React.ReactElement> = {
       photos: <UploadPhotos />,
       reorder: <ReorderPhotos />,
       videos: <UploadVideos />,

@@ -54,7 +54,7 @@ const AccountProfile = ({ user, buttonChildren }: Props) => {
 
       if (!file.type.includes("image")) return;
 
-      fileReader.onload = async (event) => {
+      fileReader.onload = async (event: ProgressEvent<FileReader>) => {
         const imageDataUrl = event.target?.result?.toString() || "";
         setNewImage(imageDataUrl);
       };
