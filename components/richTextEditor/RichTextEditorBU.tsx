@@ -79,7 +79,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ maxCharacters }) => {
         tag="textarea"
         config={config}
         model={content}
-        onModelChange={(model) => setValue("content", model)} // Update form state
+        onModelChange={(model: any) => setValue("content", model)} // Update form state
 
       />
     </div>

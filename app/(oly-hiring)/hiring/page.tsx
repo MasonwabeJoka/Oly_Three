@@ -1,4 +1,6 @@
 "use client";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Blogs from "@/components/OlyArticles";
 import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
@@ -14,9 +16,12 @@ import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 
 const Home = () => {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
+    <QueryClientProvider client={queryClient}>
+      <div className={styles.container}>
+        <div className={styles.main}>
         <nav className={styles.nav}>
           <Navbar />
         </nav>
@@ -73,8 +78,9 @@ const Home = () => {
           <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 };
 

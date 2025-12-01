@@ -8,8 +8,8 @@ interface CarouselProps {
   mobileSrc: string;
   slideName: string;
   slideTitle: string;
-  slideParagraph: string;
-  initialValue: number;
+  slideParagraph?: string;
+  initialValue?: number;
   data: Array<{
     src: string;
     slideName: string;
@@ -28,9 +28,10 @@ const MobileCarouselOne = ({
   data,
   ...otherProps
 }: CarouselProps): JSX.Element => {
-  const [slideIndex, setSlideIndex] = useState<number>(initialValue);
-  const [currentSlideNameIndex, setCurrentSlideNameIndex] =
-    useState<number>(initialValue);
+  const [slideIndex, setSlideIndex] = useState<number>(initialValue || 0);
+  const [currentSlideNameIndex, setCurrentSlideNameIndex] = useState<number>(
+    initialValue || 0
+  );
   const slides = useRef<HTMLDivElement[]>([]);
   const slideDescription = useRef<HTMLDivElement[]>([]);
   const slideNames = useRef<HTMLButtonElement[]>([]);

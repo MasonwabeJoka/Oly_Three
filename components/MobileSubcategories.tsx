@@ -32,7 +32,7 @@ const MobileSubcategories = ({
   const selectRef = useRef<HTMLDivElement | null>(null);
   const [showOptions, setShowOptions] = useState<boolean>(false);
 
-  useOnClickOutside(selectRef, () => setShowOptions(false));
+  useOnClickOutside(selectRef as any, () => setShowOptions(false));
 
   useEffect(() => {
     const useEscKey = (e: KeyboardEvent) => {
@@ -66,16 +66,16 @@ const MobileSubcategories = ({
         <div
           className={styles.selectContainer}
           onClick={() => setShowOptions(!showOptions)}
-          value={value}
-          onChange={onChange}
           ref={selectRef}
         >
           <div className={styles.select}>{category}</div>
-
         </div>
       </div>
       {showOptions && (
-        <ul className={showOptions ? styles.options : styles.hideOptions}  ref={selectRef}>
+        <ul
+          className={showOptions ? styles.options : styles.hideOptions}
+          ref={selectRef as any}
+        >
           {options.map((option, index) => (
             <li
               className={styles.option}

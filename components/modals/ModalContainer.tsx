@@ -1,5 +1,5 @@
 import styles from "./ModalContainer.module.scss";
-import Modal from "@/components/Modal.tsx";
+import Modal from "@/components/Modal";
 import Categories from "@/components/Categories";
 import { useEffect, useRef } from "react"; // Import useRef
 import { useCategoriesModalStore } from "@/store/modalStore";
@@ -73,16 +73,12 @@ const CategoriesModal = () => {
   };
 
   return (
-    <div 
-      ref={modalRef} 
+    <div
+      ref={modalRef}
       className={styles.container}
       onClick={parentClickHandler}
     >
-      <Modal 
-        modalContent={<Categories />} 
-        showModal={showModal} 
-        id="modal"
-      />
+      <Modal modalContent={<Categories />} showModal={showModal} id="modal" />
     </div>
   );
 };

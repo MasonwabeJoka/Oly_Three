@@ -7,7 +7,7 @@ import Button from '@/components/Buttons';
 import { useFormContext } from 'react-hook-form';
 
 interface EnterMobileNumberProps {
-  onNext: () => void;
+  onNext: () => void | Promise<void>;
 }
 
 const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {

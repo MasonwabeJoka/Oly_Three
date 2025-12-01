@@ -56,7 +56,9 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
 
       <div className={styles.searchFields}>
         {/* Display server errors from useActionState */}
-        {errors && <p className={styles.errorMessage}>{errors?.message}</p>}
+        {errors && (
+          <p className={styles.errorMessage}>{(errors as any)?.message}</p>
+        )}
 
         <div className={styles.searchTerm}>
           <p className={styles.errorMessage}>
@@ -94,7 +96,7 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
         {searchTermSuggestions === 0 && (
           <div className={styles.searchLocation}>
             <p className={styles.errorMessage}>
-              {errors.locationSearch?.message}
+              {(errors.locationSearch as any)?.message}
             </p>
             <Controller
               name="locationSearch"

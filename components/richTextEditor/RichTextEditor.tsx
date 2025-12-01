@@ -28,6 +28,7 @@ const RichTextEditor = ({
     // Only load CSS and plugins on the client side
     if (typeof window !== "undefined") {
       // Import CSS
+      // @ts-ignore - Dynamic import of SCSS module
       import("./richTextEditorGlobalStyles.scss");
       import("froala-editor/css/froala_style.min.css");
       import("froala-editor/css/froala_editor.pkgd.min.css");

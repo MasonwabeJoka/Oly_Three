@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import styles from "./NotificationsModal.module.scss";
-import Modal from "@/components/Modal.tsx";
+import Modal from "@/components/Modal";
 import Menu from "@/components/Menu";
 import { useEffect, useRef } from "react"; // Import useRef
 import { useNotificationsModalStore } from "@/store/modalStore";
@@ -80,13 +80,8 @@ const NotificationsModal = () => {
       ref={modalRef}
       className={styles.container}
       onClick={parentClickHandler}
-      
     >
-      <Modal
-        modalContent={<Menu />}
-        showModal={showModal}
-        id="modal"
-      />
+      <Modal modalContent={<Menu />} showModal={showModal} id="modal" />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 // app/thank-you/page.tsx
 import { notFound } from 'next/navigation';
-import sanityClient from '@sanity/client';
+import { createClient } from '@sanity/client';
 
-const client = sanityClient({
+const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
   dataset: process.env.SANITY_DATASET,
   useCdn: true,

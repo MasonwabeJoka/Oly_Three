@@ -30,19 +30,29 @@ const ResultsToolbar = ({
 }: ResultsToolbarProps) => {
   const [isMapView, setIsMapView] = useState(false); // Added for Map/List View toggle
 
-  const validSites = ["oly", "oly-properties", "oly-auto", "oly-hiring", "oly-services"];
+  const validSites = [
+    "oly",
+    "oly-properties",
+    "oly-auto",
+    "oly-hiring",
+    "oly-services",
+  ];
   const renderToolbarData = () => {
     if (!validSites.includes(site)) {
-      console.warn(`ResultsToolbar: Invalid site prop: ${site}. Expected one of: ${validSites.join(", ")}`);
+      console.warn(
+        `ResultsToolbar: Invalid site prop: ${site}. Expected one of: ${validSites.join(", ")}`
+      );
       return [];
     }
-    return {
-      oly: olyResultsToolbar,
-      "oly-properties": olyPropertiesResultsToolbar,
-      "oly-auto": olyAutoResultsToolbar,
-      "oly-hiring": olyHiringResultsToolbar,
-      "oly-services": olyServicesResultsToolbar,
-    }[site] || [];
+    return (
+      {
+        oly: olyResultsToolbar,
+        "oly-properties": olyPropertiesResultsToolbar,
+        "oly-auto": olyAutoResultsToolbar,
+        "oly-hiring": olyHiringResultsToolbar,
+        "oly-services": olyServicesResultsToolbar,
+      }[site] || []
+    );
   };
 
   const getToolbarOptions = (index: number) => {
@@ -67,7 +77,13 @@ const ResultsToolbar = ({
     return null;
   };
 
-  const { activeTabIndex, containerRef, handleTabClick, handleOptionSelect } = useTabsLogic({
+  const {
+    activeTabIndex,
+    setActiveTabIndex,
+    containerRef,
+    handleTabClick,
+    handleOptionSelect,
+  } = useTabsLogic({
     getOptions: getToolbarOptions,
   });
 
@@ -98,21 +114,34 @@ const ResultsToolbar = ({
       }
       if (label === "Map View" || label === "List View") {
         return () => {
-          console.log("ResultsToolbar: toggling map view, current =", isMapView);
+          console.log(
+            "ResultsToolbar: toggling map view, current =",
+            isMapView
+          );
           setIsMapView(!isMapView);
           setActiveTabIndex(null);
         };
       }
       return () => handleTabClick(index);
     });
-    console.log("ResultsToolbar: tabs =", currentTabs, "handlers =", handlers.map(h => h.name || "anonymous"));
+    console.log(
+      "ResultsToolbar: tabs =",
+      currentTabs,
+      "handlers =",
+      handlers.map((h) => h.name || "anonymous")
+    );
     return handlers;
   };
 
   const renderToolbarOptions = () => {
     if (activeTabIndex === null) return null;
     const options = getToolbarOptions(activeTabIndex);
-    console.log("ResultsToolbar: rendering options for index =", activeTabIndex, "options =", options);
+    console.log(
+      "ResultsToolbar: rendering options for index =",
+      activeTabIndex,
+      "options =",
+      options
+    );
     if (!options) return null;
     return (
       <TabOptions
@@ -132,7 +161,7 @@ const ResultsToolbar = ({
         collageViewWidth={currentScreenSize > 1025 ? collageViewWidth : 800}
         onClickHandlers={createToolbarClickHandlers()}
         dashboard={false}
-        activeTabIndex={activeTabIndex}
+        activeTabIndex={activeTabIndex ?? undefined}
       />
       {renderToolbarOptions()}
     </div>

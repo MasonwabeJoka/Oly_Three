@@ -53,9 +53,10 @@ const FeedbackDetails = ({
           </div>
         </div>
         <FeedbackChatComponent
+          id={id}
           title={title || ""}
           feedback={feedback}
-          user={user}
+          user={user || ""}
           profilePicture={profilePicture}
           date={date}
           time={time}

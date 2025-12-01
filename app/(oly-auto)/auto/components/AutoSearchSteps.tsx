@@ -5,40 +5,52 @@ import UploadId from "@/app/(dashboard)/dashboard/settings/account-verification/
 import Finish from "@/app/(dashboard)/dashboard/settings/account-verification/components/individual/VerificationComplete";
 import { verificationSchema } from "@/app/(dashboard)/dashboard/settings/account-verification/lib/validation-schema";
 import MultiStepForm from "@/components/MultiStepForm";
+import { z } from 'zod';
 
+export type FormData = z.infer<typeof verificationSchema>;
 
-export type FormData = {
-  phoneNumber: string;
-  verificationCode?: string;
-  idFile: File;
-  selfie: string;
-};
+// Define step type with proper typing for content
+interface FormStep {
+  title: string;
+  content: React.ReactNode;
+  fields: (keyof FormData)[];
+}
 
-const steps = [
+const steps: FormStep[] = [
   {
     title: "Verify Your Account",
     content: <IndividualAccountVerification />,
-    fields: [] as (keyof FormData)[],
+    fields: [],
   },
   {
-    title: "ID/Passport",
+    title: "Business Information",
+    content: <div>Business Information Form</div>,
+    fields: ["businessName", "regNumber", "taxNumber"],
+  },
+  {
+    title: "Address Information",
+    content: <div>Address Form</div>,
+    fields: ["street", "suburb", "city", "province", "postalCode"],
+  },
+  {
+    title: "Representative ID",
     content: <UploadId onNext={() => {}} />,
-    fields: ["idFile"] as (keyof FormData)[],
+    fields: ["repIdFile"],
   },
   {
-    title: "Selfie Verification",
+    title: "Representative Selfie",
     content: <TakeSelfie onNext={() => {}} />,
-    fields: ["selfie"] as (keyof FormData)[],
+    fields: ["repSelfie"],
   },
   {
     title: "Mobile Verification",
     content: <EnterMobileNumber onNext={() => {}} />,
-    fields: ["phoneNumber", "verificationCode"] as (keyof FormData)[],
+    fields: ["phoneNumber", "verificationCode", "repPhoneNumber", "repVerificationCode"],
   },
   {
     title: "Finish",
     content: <Finish />,
-    fields: [] as (keyof FormData)[],
+    fields: [],
   },
 ];
 

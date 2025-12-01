@@ -49,6 +49,15 @@ export const searchFormSchema = z.object({
   locationSearch: z.string().optional(),
 });
 
+export const passwordSchema = z.object({
+  currentPassword: z.string().min(8, "Current password is required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters"),
+  confirmPassword: z.string().min(8, "Please confirm your new password"),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
 export const feedbackFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
   feedback: z.string().min(1, "Feedback is required"),

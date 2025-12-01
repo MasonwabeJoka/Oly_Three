@@ -44,7 +44,9 @@ export default function ListingsSearchForm({
     <div className={styles.searchContainer}>
       <div className={styles.search}>
         <div className={styles.categories}>
-          <p className={styles.errorMessage}>{errors.categories?.message}</p>
+          <p className={styles.errorMessage}>
+            {(errors.categories as any)?.message}
+          </p>
           <Controller
             name="categories"
             control={control}
@@ -83,7 +85,9 @@ export default function ListingsSearchForm({
 
         {!isCategoriesOpen && (
           <div className={styles.searchTerm}>
-            <p className={styles.errorMessage}>{errors.searchTerm?.message}</p>
+            <p className={styles.errorMessage}>
+              {(errors.searchTerm as any)?.message}
+            </p>
             <div
               className={`${styles.breadcrumbs} ${styles.searchTermBreadcrumbs}`}
             >
@@ -129,7 +133,7 @@ export default function ListingsSearchForm({
         {!isCategoriesOpen && (
           <div className={styles.location}>
             <p className={styles.errorMessage}>
-              {errors.locationSearch?.message}
+              {(errors.locationSearch as any)?.message}
             </p>
             <div
               className={`${styles.breadcrumbs} ${styles.locationBreadcrumbs}`}

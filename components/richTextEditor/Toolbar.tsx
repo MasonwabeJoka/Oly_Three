@@ -63,7 +63,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleBold().run();
+            (editor.chain().focus() as any).toggleBold().run();
           }}
           className={getButtonClass(editor.isActive("bold"), styles.button)}
         >
@@ -72,7 +72,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleItalic().run();
+            (editor.chain().focus() as any).toggleItalic().run();
           }}
           className={getButtonClass(editor.isActive("italic"), styles.button)}
         >
@@ -81,7 +81,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleUnderline().run();
+            (editor.chain().focus() as any).toggleUnderline().run();
           }}
           className={getButtonClass(
             editor.isActive("underline"),
@@ -93,7 +93,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleStrike().run();
+            (editor.chain().focus() as any).toggleStrike().run();
           }}
           className={getButtonClass(editor.isActive("strike"), styles.button)}
         >
@@ -102,7 +102,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleHeading({ level: 2 }).run();
+            (editor.chain().focus() as any).toggleHeading({ level: 2 }).run();
           }}
           className={getButtonClass(
             editor.isActive("heading", { level: 2 }),
@@ -114,7 +114,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleBulletList().run();
+            (editor.chain().focus() as any).toggleBulletList().run();
           }}
           className={getButtonClass(
             editor.isActive("bulletList"),
@@ -126,7 +126,7 @@ const Toolbar = ({ editor, content, size, style, className = "" }: Props) => {
         <button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            editor.chain().focus().toggleOrderedList().run();
+            (editor.chain().focus() as any).toggleOrderedList().run();
           }}
           className={getButtonClass(
             editor.isActive("orderedList"),

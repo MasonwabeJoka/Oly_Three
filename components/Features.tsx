@@ -21,7 +21,6 @@ const Features = () => {
             mobileSrc={(slides as any).mobileSrc}
             slideName={(slides as any).slideName}
             slideTitle={(slides as any).slideTitle}
-            currentValue={initialValue}
             data={slides as any}
           />
         ) : (

@@ -22,6 +22,7 @@ type Props = {
   height?: number;
   isDashboard: boolean;
   isDeletable: boolean;
+  isFeed?: boolean;
   checkedColour?: string;
   hoverColour?: string;
   checkedHovered?: string;

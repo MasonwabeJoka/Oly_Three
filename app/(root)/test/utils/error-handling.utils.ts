@@ -34,6 +34,8 @@ export interface ErrorContext {
   productType?: ProductType;
   currency?: Currency;
   stackTrace?: string;
+  minRequired?: number;
+  [key: string]: any;
 }
 
 export const ErrorHandler = {

@@ -29,7 +29,6 @@ interface DashboardSidebarProps {
 
 const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   currentUser,
-  users,
 }) => {
   const [isActive, setIsActive] = useState<null | number>(null);
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
@@ -52,7 +51,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
       </div>
       <div>
         <div className={styles.mainMenu}>
-          {DashboardSidebarData.slice(0, -1).map((menuItem) => {
+          {DashboardSidebarData.slice(0, -1).map((menuItem: any) => {
             const { id, icon, active_icon, menu, link } = menuItem;
             const isActiveItem = pathname === link;
             const CreateAListing = menu === "Create A Listing";
@@ -85,14 +84,14 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
         <div className={`${styles.menu} ${styles.logout}`}>
           <Icon
             className={`${styles.logoutIcon} ${styles.icon}`}
-            src={DashboardSidebarData[DashboardSidebarData.length - 1].icon}
-            alt={DashboardSidebarData[DashboardSidebarData.length - 1].menu}
+            src={(DashboardSidebarData[DashboardSidebarData.length - 1] as any).icon}
+            alt={(DashboardSidebarData[DashboardSidebarData.length - 1] as any).menu}
             width={40}
             height={40}
           />
           <h4 className={styles.menuText}>
             {!isMobile &&
-              DashboardSidebarData[DashboardSidebarData.length - 1].menu}
+              (DashboardSidebarData[DashboardSidebarData.length - 1] as any).menu}
           </h4>
         </div>
       </div>

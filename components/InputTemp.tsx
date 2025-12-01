@@ -351,7 +351,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             name={name || reactHookFormProps?.name}
             accept={accept}
-            value={reactHookFormProps?.value ?? value}
+            value={(reactHookFormProps as any)?.value ?? value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               reactHookFormProps?.onChange?.(e);
               handleInternalChange(e);

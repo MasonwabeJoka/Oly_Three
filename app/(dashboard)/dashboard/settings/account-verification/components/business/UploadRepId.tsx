@@ -4,7 +4,7 @@ import UploadButton from '@/components/UploadButton';
 import { useFormContext } from 'react-hook-form';
 
 interface UploadRepIdProps {
-  onNext: () => void;
+  onNext: () => void | Promise<void>;
 }
 
 const UploadRepId: React.FC<UploadRepIdProps> = ({ onNext }) => {

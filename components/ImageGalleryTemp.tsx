@@ -46,26 +46,28 @@ const getGridPosition = (
   images: GalleryImage[]
 ): React.CSSProperties => {
   const current = images[index];
-  const isPortrait = current.aspectRatio < 1;
+  const isPortrait = (current.aspectRatio || 1) < 1;
 
   if (isPortrait) {
     // Portrait images get their own column
     const portraitIndex = images
       .slice(0, index + 1)
-      .filter((img) => img.aspectRatio < 1)?.length;
+      .filter((img) => (img.aspectRatio || 1) < 1)?.length;
 
     return {
       gridColumn: portraitIndex,
       gridRow: "1 / 3",
-      aspectRatio: `1/${1 / current.aspectRatio}`,
+      aspectRatio: `1/${1 / (current.aspectRatio || 1)}`,
     };
   }
 
   // Landscape positioning logic
-  const portraitCount = images.filter((img) => img.aspectRatio < 1).length;
+  const portraitCount = images.filter(
+    (img) => (img.aspectRatio || 1) < 1
+  ).length;
   const landscapeIndex = images
     .slice(0, index)
-    .filter((img) => img.aspectRatio >= 1)?.length;
+    .filter((img) => (img.aspectRatio || 1) >= 1)?.length;
 
   // Calculate position based on available columns
   const col = portraitCount + Math.floor(landscapeIndex / 2) + 1;
@@ -81,7 +83,10 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   const [isHeartHovered, setIsHeartHovered] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
-  const displayImages = useMemo(() => processImages({ images }), [images]);
+  const displayImages = useMemo(
+    () => processImages({ images } as any),
+    [images]
+  );
   const portraitsCount = displayImages.filter(
     (img) => img.aspectRatio < 1
   ).length;
@@ -169,7 +174,7 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
   ): React.CSSProperties => {
     // Get the aspect ratios of the remaining images
     const patterns = remainingImages
-      .map((img) => (img.aspectRatio >= 1 ? "L" : "P"))
+      .map((img) => ((img.aspectRatio || 1) >= 1 ? "L" : "P"))
       .join("");
     console.log("Pattern:", patterns);
     console.log("remainingImages:", remainingImages);

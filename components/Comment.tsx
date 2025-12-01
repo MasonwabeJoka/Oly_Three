@@ -72,7 +72,7 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
         </div>
       </div>
       <div
-        ref={replyRef}
+        ref={replyRef as any}
         className={`${styles.replyContainer} ${isReplying ? styles.visible : ""}`}
       >
         {isReplying && (

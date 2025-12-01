@@ -40,12 +40,12 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   };
 
   // Function to determine image orientation
-  const getOrientation = (image: ImageData): "portrait" | "landscape" => {
-    return image.width < image.height ? "portrait" : "landscape";
+  const getOrientation = (image: Image): "portrait" | "landscape" => {
+    return (image.width ?? 0) < (image.height ?? 0) ? "portrait" : "landscape";
   };
 
   // Function to swap landscape-portrait pairs within the first three images
-  const swapImages = (images: ImageData[]): ImageData[] => {
+  const swapImages = (images: Image[]): Image[] => {
     const result = [...images]; // Create a copy of the array
     const maxIndex = Math.min(2, images.length - 1); // Limit to first three images or less
     let swapped = true;
@@ -68,7 +68,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   };
 
   // Calculate minimum columns needed to fit content within max height
-  const calculateColumns = (images: ImageData[]): number => {
+  const calculateColumns = (images: Image[]): number => {
     // Return 1 column for empty input to avoid invalid layouts
     if (images.length === 0) return 1;
 

@@ -46,11 +46,10 @@ const Pagination: React.FC<PaginationProps> = ({
     <div className={styles.pagination}>
       <NavButtonLeft
         className={`${styles.arrows} ${styles.leftArrow}`}
-        size="standard"
+        size={"standard" as any}
         onClick={() => onPageChange(currentPage - 1)}
       />
 
-   
       {pages.map((page, index) =>
         typeof page === "number" ? (
           <button
@@ -69,11 +68,9 @@ const Pagination: React.FC<PaginationProps> = ({
         )
       )}
 
-
-    
       <NavButtonRight
         className={`${styles.arrows} ${styles.rightArrow}`}
-        size="standard"
+        size={"standard" as any}
         onClick={() => onPageChange(currentPage + 1)}
       />
     </div>

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  cacheComponents: true, 
+  cacheComponents: false, 
   serverExternalPackages: ["mongoose"],
   sassOptions: {
     api: "modern-compiler",

@@ -39,7 +39,7 @@ const FeaturedListingsClient = ({ category }: any) => {
     const result = await searchAction(formData);
     if (!result.success && result.errors) {
       result.errors.forEach((err) => {
-        const field = err.path?.[0];
+        const field = (err as any).path?.[0];
         if (field) {
           setError(field, { message: err.message });
           setServerErrors((prev) => ({ ...prev, [field]: err.message }));

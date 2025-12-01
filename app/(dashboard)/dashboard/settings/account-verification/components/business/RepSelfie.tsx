@@ -7,7 +7,7 @@ import Button from "@/components/Buttons";
 import { useFormContext } from "react-hook-form";
 
 interface RepSelfieProps {
-  onNext: () => void;
+  onNext: () => void | Promise<void>;
 }
 
 const RepSelfie: React.FC<RepSelfieProps> = ({ onNext }) => {

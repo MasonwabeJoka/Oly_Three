@@ -1,6 +1,6 @@
+"use client";
 import FeedbackDetails from "@/components/FeedbackDetails";
 import { feedbackData } from '@/data/feedbackData';
-
 
 interface PageProps {
   params: { id: string };
@@ -14,9 +14,7 @@ const Page = ({params}: PageProps) => {
     return <div>Feedback not found</div>;
   }
 
-  return (
-    <FeedbackDetails {...feedback} />
-  );
+  return <FeedbackDetails {...feedback} />;
 };
 
 export default Page;

@@ -40,7 +40,8 @@ const PaginatedListingsCollageClient = ({
   sortBy,
 }: PaginatedListingsCollageProps) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-  const { ads, fetchAds, imageUrls, hasMore } = useFetchAdStorePaginated();
+  const { ads, fetchAds, imageUrls, hasMore } =
+    useFetchAdStorePaginated() as any;
   const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
   const [adImages, setAdImages] = useState<SanityImage[]>([]);
   const [pageNumber, setPageNumber] = useState(page);
@@ -113,12 +114,13 @@ const PaginatedListingsCollageClient = ({
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
           <ListingCard
-            ad={ad}
+            listing={ad}
             id={ad._id}
             index={index}
             cardType="box"
             cardSize={cardSize}
-            images={urls}
+            imageUrls={urls}
+            category="all"
             title={ad.title}
             price={ad.price}
             aspectRatios={aspectRatios}

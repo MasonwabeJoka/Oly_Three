@@ -3,14 +3,23 @@ import { createClient } from '@sanity/client';
 import { z } from 'zod';
 import { postAd } from '@/sanityTemp/actions/postAd';
 
-// Initialize Sanity client
-const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID!,
-  dataset: process.env.SANITY_DATASET!,
-  useCdn: false,
-  apiVersion: '2023-08-05',
-  token: process.env.SANITY_API_TOKEN,
-});
+// Lazily initialize Sanity client so missing env vars don't crash the build
+function getSanityClient() {
+  const projectId = process.env.SANITY_PROJECT_ID;
+  const dataset = process.env.SANITY_DATASET;
+
+  if (!projectId || !dataset) {
+    return null;
+  }
+
+  return createClient({
+    projectId,
+    dataset,
+    useCdn: false,
+    apiVersion: '2023-08-05',
+    token: process.env.SANITY_API_TOKEN,
+  });
+}
 
 // Define the input schema for product operations
 const adSchema = z.object({
@@ -23,6 +32,14 @@ const adSchema = z.object({
 // Handler for product operations
 export async function POST(request: NextRequest) {
   try {
+    const client = getSanityClient();
+
+    if (!client) {
+      return NextResponse.json(
+        { message: 'Sanity client is not configured' },
+        { status: 500 }
+      );
+    }
     // Get authentication information
     // const { userId } = getAuth(request);
 

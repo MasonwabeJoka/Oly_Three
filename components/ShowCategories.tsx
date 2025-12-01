@@ -3,10 +3,24 @@ import styles from "./ShowCategories.module.scss";
 import Modal from "./Modal";
 import { useModalStore } from "@/store/modalStore";
 import CategoriesClient from "./CategoriesClient";
-import { CategoriesQueryResult } from "@/sanity.types";
+interface CategoryItem {
+  _id: string;
+  title: string | null;
+  slug: { current: string | null } | null;
+  secondLevelSubcategories?: Array<{
+    _id: string;
+    title: string | null;
+    slug: { current: string | null } | null;
+  }> | null;
+  thirdLevelSubcategories?: Array<{
+    _id: string;
+    title: string | null;
+    slug: { current: string | null } | null;
+  } | null> | null;
+}
 
 type ShowCategoriesProps = {
-  categories: CategoriesQueryResult;
+  categories: CategoryItem[] | null | undefined;
 };
 
 const ShowCategories = ({ categories }: ShowCategoriesProps) => {
@@ -17,13 +31,16 @@ const ShowCategories = ({ categories }: ShowCategoriesProps) => {
     (state) => state.setShowCategoriesModal
   );
 
+  // Only render the modal if categories are available
   return (
     <div className={styles.container}>
-      <Modal
-        showModal={showCategoriesModal}
-        setShowModal={setShowCategoriesModal}
-        modalContent={<CategoriesClient categories={categories} />}
-      />
+      {categories && categories.length > 0 && (
+        <Modal
+          showModal={showCategoriesModal}
+          setShowModal={setShowCategoriesModal}
+          modalContent={<CategoriesClient categories={categories} />}
+        />
+      )}
     </div>
   );
 };

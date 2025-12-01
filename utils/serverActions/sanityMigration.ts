@@ -17,48 +17,48 @@ const NEW_TYPE = 'category_archive';  // New type to assign to migrated document
 
 // Fetch documents of OLD_TYPE that haven't been migrated yet, in batches of 10.
 export const fetchDocuments = () =>
-  client.fetch(
+  (client as any).fetch(
     `*[_type == $category && !(_id in path("drafts.**") || _id match "*migrated")][0...10]`,
     { category: OLD_TYPE }
   );
 
-  async function updateOrRemoveReferences(docId: string, mutations: any[]) {
-    // Fetch all documents that reference the document with `docId`
-    const query = `*[_type in ['category', 'user'] && (references($docId) || 
+async function updateOrRemoveReferences(docId: string, mutations: any[]) {
+  // Fetch all documents that reference the document with `docId`
+  const query = `*[_type in ['category', 'user'] && (references($docId) || 
                   parentCategory._ref == $docId || 
                   childCategory._ref == $docId ||
                   createdBy._ref == $docId ||
                   relatedCategories[]._ref == $docId)]`;
-    const referencingDocs = await client.fetch(query, { docId }) as any[];
-  
-    for (const refDoc of referencingDocs) {
-      // Construct a patch object to unset or update each reference field.
-      let patch: any = {};
-  
-      if (refDoc.parentCategory?._ref === docId) {
-        patch.parentCategory = null; // Unsetting the parentCategory if it references docId
-      }
-      if (refDoc.childCategory?._ref === docId) {
-        patch.childCategory = null; // Unsetting the childCategory if it references docId
-      }
-      if (refDoc.createdBy?._ref === docId) {
-        patch.createdBy = null; // Unsetting the createdBy if it references docId
-      }
-      if (refDoc.relatedCategories?.some((cat: any) => cat._ref === docId)) {
-        // Filtering out the references to docId from relatedCategories array
-        patch.relatedCategories = refDoc.relatedCategories.filter((cat: any) => cat._ref !== docId);
-      }
-  
-      // If the patch object is not empty, push the patch mutation to the mutations array
-      if (Object.keys(patch).length > 0) {
-        mutations.push({
-          id: refDoc._id,
-          patch: { set: patch }
-        });
-      }
+  const referencingDocs = await (client as any).fetch(query, { docId }) as any[];
+
+  for (const refDoc of referencingDocs) {
+    // Construct a patch object to unset or update each reference field.
+    let patch: any = {};
+
+    if (refDoc.parentCategory?._ref === docId) {
+      patch.parentCategory = null; // Unsetting the parentCategory if it references docId
+    }
+    if (refDoc.childCategory?._ref === docId) {
+      patch.childCategory = null; // Unsetting the childCategory if it references docId
+    }
+    if (refDoc.createdBy?._ref === docId) {
+      patch.createdBy = null; // Unsetting the createdBy if it references docId
+    }
+    if (refDoc.relatedCategories?.some((cat: any) => cat._ref === docId)) {
+      // Filtering out the references to docId from relatedCategories array
+      patch.relatedCategories = refDoc.relatedCategories.filter((cat: any) => cat._ref !== docId);
+    }
+
+    // If the patch object is not empty, push the patch mutation to the mutations array
+    if (Object.keys(patch).length > 0) {
+      mutations.push({
+        id: refDoc._id,
+        patch: { set: patch }
+      });
     }
   }
-  
+}
+
 
 // Build a list of mutations to apply to these documents for migration.
 const buildMutations = async (docs: Doc[]) => {

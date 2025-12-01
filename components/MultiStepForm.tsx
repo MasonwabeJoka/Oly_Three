@@ -48,7 +48,7 @@ export default function MultiStepForm<T extends Record<string, any>>({
 
   const handleNext = async () => {
     const fields = steps[currentIdx].fields ?? [];
-    const isValid = fields.length ? await trigger(fields) : true;
+    const isValid = fields.length ? await trigger(fields as any) : true;
 
     if (!isValid) return;
 
@@ -73,8 +73,6 @@ export default function MultiStepForm<T extends Record<string, any>>({
     }
   };
 
-
-
   if (!isClient) {
     return (
       <div className={styles.container}>
@@ -82,8 +80,6 @@ export default function MultiStepForm<T extends Record<string, any>>({
       </div>
     );
   }
-
-
 
   const currentStep = steps[currentIdx];
   const isLastStep = currentIdx === steps.length - 1;
@@ -93,9 +89,7 @@ export default function MultiStepForm<T extends Record<string, any>>({
     <FormProvider {...methods}>
       <div className={styles.container}>
         {formState.errors.root && (
-          <p className={styles.error}>
-            {formState.errors.root.message}
-          </p>
+          <p className={styles.error}>{formState.errors.root.message}</p>
         )}
 
         <Step

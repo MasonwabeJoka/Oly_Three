@@ -41,9 +41,9 @@ const FeaturedServices = ({
           cta={cta}
           features={features}
         />
-      ) : (
+      ) : content ? (
         <FeaturedServicesBackend content={content} />
-      )}
+      ) : null}
     </>
   );
 };

@@ -4,13 +4,22 @@ import { createClient } from '@sanity/client';
 import { z } from 'zod';
 import { fetchProducts } from '@/sanityTemp/actions/fetchProducts';
 
-// Initialize Sanity client
-const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID!,
-  dataset: process.env.SANITY_DATASET!,
-  useCdn: true,
-  apiVersion: '2023-08-05',
-});
+// Lazily initialize Sanity client so missing env vars don't crash the build
+function getSanityClient() {
+  const projectId = process.env.SANITY_PROJECT_ID;
+  const dataset = process.env.SANITY_DATASET;
+
+  if (!projectId || !dataset) {
+    return null;
+  }
+
+  return createClient({
+    projectId,
+    dataset,
+    useCdn: true,
+    apiVersion: '2023-08-05',
+  });
+}
 
 // Define input schema for checkout
 const checkoutSchema = z.object({
@@ -29,11 +38,19 @@ const calculateTotalAmount = (price: number, olyFeePercent: number, payStackFeeP
 // Handle checkout POST request
 export async function POST(request: NextRequest) {
   try {
+    const client = getSanityClient();
+
+    if (!client) {
+      return NextResponse.json(
+        { error: 'Sanity client is not configured' },
+        { status: 500 }
+      );
+    }
     // Parse and validate request body
     const { adIds, email, userId } = checkoutSchema.parse(await request.json());
 
     // Fetch products from Sanity
-    
+
     // const products = await client.fetch(
     //   `*[_type == "ad" && _id in $adIds && defined(priceId)] { _id, title, price, priceId }`,
     //   { adIds }
@@ -46,7 +63,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Calculate total amount
-    const totalAmount = products.reduce((sum: number, product: any) => 
+    const totalAmount = products.reduce((sum: number, product: any) =>
       sum + calculateTotalAmount(product.price || 0, 2.5, 2.9), 0);
 
     // Create transaction in Sanity

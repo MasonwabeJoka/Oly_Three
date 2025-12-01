@@ -4,7 +4,7 @@ import UploadButton from '@/components/UploadButton';
 import { useFormContext } from 'react-hook-form';
 
 interface UploadIdProps {
-  onNext: () => void;
+  onNext: () => void | Promise<void>;
 }
 
 const UploadId: React.FC<UploadIdProps> = ({ onNext }) => {
@@ -24,7 +24,7 @@ const UploadId: React.FC<UploadIdProps> = ({ onNext }) => {
   return (
     <div className={styles.container}>
       <p className={styles.description}>
-        Upload a clear image of your national ID, passport, or driver’s license. Make sure the document is fully visible (with no cropped edges), the text is clear and readable, and the document is not expired.
+        Upload a clear image of your national ID, passport, or driver's license. Make sure the document is fully visible (with no cropped edges), the text is clear and readable, and the document is not expired.
       </p>
       <div className={styles.uploadContainer}>
         <UploadButton

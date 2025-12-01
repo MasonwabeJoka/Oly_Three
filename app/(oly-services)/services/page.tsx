@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Blogs from "@/components/OlyArticles";
 import styles from "./styles.module.scss";
 import FeaturedCategories from "@/components/FeaturedCategories";
@@ -21,6 +22,7 @@ import Navbar from "@/components/layouts/Navbar";
 import MoreFromOly from "@/components/MoreFromOly";
 
 const Home = () => {
+  const [queryClient] = useState(() => new QueryClient());
   const showMenuModal = useModalStore((state) => state.showMenuModal);
   const setShowMenuModal = useModalStore((state) => state.setShowMenuModal);
   const showCategoriesModal = useModalStore(
@@ -66,8 +68,9 @@ const Home = () => {
   }, [isMobile]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
+    <QueryClientProvider client={queryClient}>
+      <div className={styles.container}>
+        <div className={styles.main}>
         <nav className={styles.nav}>
           <Navbar />
         </nav>
@@ -122,8 +125,9 @@ const Home = () => {
           <h2 className={styles.title}>Sponsored Articles</h2>
           <SponsoredArticles />
         </section>
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 };
 

@@ -4,7 +4,11 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "@/components/Buttons";
 
-const EnterRepMobile = () => {
+interface EnterRepMobileProps {
+  onNext: () => void | Promise<void>;
+}
+
+const EnterRepMobile: React.FC<EnterRepMobileProps> = ({ onNext }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
   const [codeSent, setCodeSent] = useState(false);
@@ -27,7 +31,8 @@ const EnterRepMobile = () => {
         phoneNumber,
         code,
       });
-    //   nextStep();
+      // Call onNext to proceed to the next step
+      await onNext();
     } catch (error) {
       console.error("Error verifying code:", error);
     }

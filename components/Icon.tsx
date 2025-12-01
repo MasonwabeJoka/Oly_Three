@@ -46,7 +46,7 @@ const Icon = ({
           ? (e: React.KeyboardEvent<HTMLImageElement>) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                onClick?.(e as React.MouseEvent<HTMLImageElement>);
+                onClick?.(e as any);
               }
             }
           : undefined

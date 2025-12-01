@@ -7,10 +7,24 @@ import useSidebarStore from "@/store/useSidebarStore";
 import { useModalStore } from "@/store/modalStore";
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "@/store/useBreakpointStore";
-import { CategoriesQueryResult } from "@/sanity.types";
+interface CategoryItem {
+  _id: string;
+  title: string | null;
+  slug: { current: string | null } | null;
+  secondLevelSubcategories?: Array<{
+    _id: string;
+    title: string | null;
+    slug: { current: string | null } | null;
+  }> | null;
+  thirdLevelSubcategories?: Array<{
+    _id: string;
+    title: string | null;
+    slug: { current: string | null } | null;
+  } | null> | null;
+}
 
 export type CategoriesProps = {
-  categories: CategoriesQueryResult;
+  categories: CategoryItem[] | null | undefined;
 };
 
 const CategoriesClient = ({ categories }: CategoriesProps) => {
@@ -46,7 +60,7 @@ const CategoriesClient = ({ categories }: CategoriesProps) => {
       const newCurrentlyVisible: Record<string, number> = {};
 
       // Reset all categories to default (SUBCATEGORIES_TO_SHOW)
-      (categories as any)?.forEach((category: any) => {
+      categories?.forEach((category) => {
         if (category._id !== id) {
           newCurrentlyVisible[category._id] = SUBCATEGORIES_TO_SHOW;
         }
