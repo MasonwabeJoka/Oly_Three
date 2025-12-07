@@ -183,7 +183,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       () => onOptionsCountChange?.(filteredOptions.length),
       [filteredOptions.length, onOptionsCountChange]
     );
-    useOnClickOutside(rootRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
+    useOnClickOutside(rootRef as React.RefObject<HTMLElement>, () =>
+      setIsOpen(false)
+    );
 
     // Change handlers
     const triggerChange = (values: any[]) => {
@@ -293,7 +295,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         <div className={styles.selectMenu}>
           {label && hasSelection && !isOpen && (
             <label htmlFor={selectId} className={styles.label}>
-              {required && <span aria-label="required"></span>}
+              {required && " *"}
+              {label.length > 12 ? `${label.substring(0, 12)}...` : label}
               {label.length > 12 ? `${label.substring(0, 12)}...` : label}
             </label>
           )}

@@ -190,7 +190,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           hasSubmitButton={true}
           onChange={handleMessageChange}
           maxHeight={240}
-          // characterLimit={200}
         />
       </div>
 

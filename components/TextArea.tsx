@@ -48,7 +48,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       required = false,
       reactHookFormProps,
       error,
-      minHeight = "120px",
+      minHeight = 120,
       maxHeight,
       characterLimit,
       ariaDescribedBy,
@@ -85,7 +85,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           (localValue || placeholder || " ") + "\n";
 
         const height = mirrorRef.current.scrollHeight;
-        const max = maxHeight || 240;
+        const max = maxHeight ?? 240;
         const finalHeight = Math.min(height, max);
 
         const textarea = textareaRef.current;
@@ -205,7 +205,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
               style={{
                 ...parentStyle,
                 minHeight: `${minHeight}px`,
-                maxHeight: `${maxHeight}px`,
+                ...(maxHeight !== undefined && { maxHeight: `${maxHeight}px` }),
               }}
             />
 
