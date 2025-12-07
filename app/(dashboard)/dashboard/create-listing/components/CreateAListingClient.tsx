@@ -75,7 +75,6 @@ const CreateAListingClient = ({ initialFormData = {}, steps }: Props) => {
     if (currentStepIndex === 0 && categoryPreviouslySelected) {
       return steps[10]; // SelectNewCategory component
     }
-
     if (currentStepIndex === 5) return getMediaComponent(goToMediaType);
     if (currentStepIndex === 2 && showFAQs)
       return (

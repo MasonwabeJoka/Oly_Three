@@ -8,13 +8,13 @@
   width: fit-content;
   .label {
     position: absolute;
-    top: rem(20);
+    top: 50%; 
     left: rem(24);
+    transform: translateY(-50%);
     z-index: 1;
     color: $grey-four;
     text-transform: uppercase;
-    font-size: rem(12);
-    
+    font-size: rem(10);
   }
 
   .inputContainer {

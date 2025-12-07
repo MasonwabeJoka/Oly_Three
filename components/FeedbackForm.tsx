@@ -76,6 +76,21 @@ const FeedbackForm = ({ title }: { title: string }) => {
     });
   };
 
+  let label = "";
+  switch (title) {
+    case "General Feedback":
+      label = "Feedback";
+      break;
+    case "Feature Request":
+      label = "Feature Request";
+      break;
+    case "Bug Report":
+      label = "Bug Report";
+      break;
+    default:
+      label = "Feedback";
+  }
+
   return (
     <Form
       action={feedbackAction} // Native server action for non-JS fallback
@@ -166,18 +181,16 @@ const FeedbackForm = ({ title }: { title: string }) => {
         <TextArea
           className={styles.message}
           placeholder="Please enter your feedback here..."
-          label="Message"
+          label={label}
           id="message"
+          name="message"
           size="large"
           required={true}
           onSubmit={() => {}}
-          hasSubmitButton={false}
-          style={{
-            padding: "2rem 4rem 2rem 4rem",
-            textAlign: "left",
-          }}
-          {...register("message")}
+          hasSubmitButton={true}
           onChange={handleMessageChange}
+          maxHeight={240}
+          // characterLimit={200}
         />
       </div>
 

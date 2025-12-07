@@ -179,7 +179,7 @@ const DetailsClient = ({
                 initialValue="Choose a condition"
                 selectSize="large"
                 selectColourType="normal"
-                label="Choose a condition"
+                label="Condition"
                 id="conditions"
                 ariaLabel="Conditions"
                 dashboard
@@ -197,10 +197,9 @@ const DetailsClient = ({
                   options={detailsTitles}
                   className={styles.selectDetail}
                   initialValue="Add all product details"
-                  value="Add all product details"
                   selectSize="large"
                   selectColourType="normal"
-                  label="Choose a detail"
+                  label="Product Info"
                   id="choose-detail"
                   ariaLabel="Choose Detail Select"
                   dashboard

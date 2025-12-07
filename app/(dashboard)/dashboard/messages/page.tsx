@@ -1,10 +1,9 @@
-// import Messages from "@/features/messages/components/Messages";
+import Messages from "@/features/messages/components/Messages";
 
 const MessagesPage = () => {
   return (
     <div>
-      {/* <Messages /> */}
-      Messages feature is currently disabled.
+      <Messages />
     </div>
   );
 };

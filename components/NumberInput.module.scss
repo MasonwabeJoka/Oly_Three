@@ -173,12 +173,13 @@
   width: rem(267);
   height: rem(56);
   @include only(largeDesktop) {
-    width: rem(471);
+    width: rem(471) !important;
   }
 }
 
 .largeDashboard .option {
   @include option-width(rem(267));
+  
   @include only(largeDesktop) {
     @include option-width(rem(471));
   }

@@ -649,8 +649,8 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
               key={`step-${step}`}
               onNext={handleNext}
               onBack={handleBack}
-              isLastStep={step! === steps[site].length - 1}
-              isFirstStep={step! === 0}
+              isLastStep={step === steps[site].length - 1}
+              isFirstStep={step === 0}
             />
             <FormProgressBar
               currentStepIndex={step ?? 0}

@@ -6,10 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
-
-
 
 .selectMenu {
   position: relative;
@@ -19,12 +16,13 @@
   width: fit-content;
   .label {
     position: absolute;
-    top: rem(20);
+    top: 50%; 
     left: rem(24);
+    transform: translateY(-50%);
     z-index: 1;
     color: $grey-four;
     text-transform: uppercase;
-    font-size: rem(12);
+    font-size: rem(10);
   }
 
   // .labelHidden {
@@ -51,7 +49,6 @@
       outline: none;
       appearance: none;
       margin: 0 !important;
-   
 
       &:hover {
         background-color: $white-one !important;

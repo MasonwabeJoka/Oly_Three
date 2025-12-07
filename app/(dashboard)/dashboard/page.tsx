@@ -1,11 +1,9 @@
-import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import styles from "./styles.module.scss";
 import LinkCard from "@/components/cards/LinkCard";
 import Link from "next/link";
 
 const Dashboard = () => {
   return (
-    // <MaxWidthWrapper className={styles.maxWidthWrapper}>
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Dashboard</h1>
@@ -39,7 +37,6 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-    // </MaxWidthWrapper>
   );
 };
 

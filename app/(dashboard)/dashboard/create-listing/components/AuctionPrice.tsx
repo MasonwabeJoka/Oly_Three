@@ -8,6 +8,8 @@ import Button from "@/components/Buttons";
 import useFAQStore from "../store/useFAQStore";
 import Modal from "@/components/Modal";
 import AuctionStartTime from "./AuctionStartTime";
+import FAQs from "@/components/Faqs";
+import { auctionFAQs } from "@/data/auctionFAQs";
 
 interface Props {
   onNext: () => void;
@@ -22,7 +24,7 @@ const AuctionPrice = ({ onNext }: Props) => {
     trigger,
   } = useFormContext();
 
-  const { setShowFAQs } = useFAQStore();
+  const { showFAQs, setShowFAQs } = useFAQStore();
   const [isPricingOptionsOpen, setIsPricingOptionsOpen] = useState(false);
   const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
   const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
@@ -114,7 +116,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     ]}
                     initialValue="Auction Start Time"
                     selectSize="large"
-                    label="Auction Start Time"
+                    label="Start Time"
                     id="startTime"
                     ariaLabel="Auction Start Time"
                     autoFocus={false}
@@ -158,7 +160,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     ]}
                     initialValue="Auction Duration"
                     selectSize="large"
-                    label="Auction Duration"
+                    label="Duration"
                     id="auctionDuration"
                     ariaLabel="Auction Duration"
                     autoFocus={false}
@@ -185,7 +187,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                 !isAuctionDurationOpen && (
                   <div className={styles.faqs}>
                     <Button
-                      className={styles.proceedButton}
+                      className={styles.faqBtn}
                       buttonChildren="Auctions FAQs"
                       buttonType="info"
                       buttonSize="large"
@@ -206,6 +208,13 @@ const AuctionPrice = ({ onNext }: Props) => {
               showModal={showAuctionStartTime}
               setShowModal={setShowAuctionStartTime}
               modalContent={<AuctionStartTime />}
+            />
+          )}
+          {showFAQs && (
+            <Modal
+              showModal={showFAQs}
+              setShowModal={setShowFAQs}
+              modalContent={<FAQs faqs={auctionFAQs} />}
             />
           )}
         </div>

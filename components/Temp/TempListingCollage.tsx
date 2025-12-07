@@ -78,7 +78,6 @@ const TempListingsCollage = ({
   return width / height;
 });
 
-    console.log("aspectRatios:", aspectRatios);
 
     return (
       <div key={_id} className={styles.cardContainer}>

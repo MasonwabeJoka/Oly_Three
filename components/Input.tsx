@@ -7,6 +7,9 @@ import Button from "./Buttons";
 import Checkbox from "./Checkbox";
 import { Input as ShadcnInput } from "@/components/ui/input";
 
+//Todo: Check whether email is valid only after user has has finished typing their email
+//Todo: When the input is cleared, the error message should disappear
+
 interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   isSearchBar?: boolean;
   isMultiSelect?: boolean;

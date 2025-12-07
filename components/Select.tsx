@@ -293,8 +293,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         <div className={styles.selectMenu}>
           {label && hasSelection && !isOpen && (
             <label htmlFor={selectId} className={styles.label}>
+              {required && <span aria-label="required"></span>}
               {label.length > 12 ? `${label.substring(0, 12)}...` : label}
-              {required && <span aria-label="required"> *</span>}
             </label>
           )}
 

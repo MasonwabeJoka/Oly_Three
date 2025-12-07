@@ -41,6 +41,7 @@
     }
     .selectedDetailDescriptionContainer {
       text-align: center;
+      width: 85%;
 
       .selectedDetailTitle {
         color: $black-four;
@@ -54,6 +55,7 @@
         color: $grey-four;
         text-align: center;
         padding: 0 rem(16);
+        font-size: rem(14);
       }
 
       .selectedDetailExample {
