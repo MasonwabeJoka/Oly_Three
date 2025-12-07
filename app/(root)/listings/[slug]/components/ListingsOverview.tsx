@@ -4,7 +4,7 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import { PortableText } from "@portabletext/react";
 import PriceSection from "./PriceSection";
 import ButtonsContainer from "./ButtonsContainer";
-// import useMessageStore from "@/features/messages/store/useMessageStore";
+import useMessageStore from "@/features/messages/store/useMessageStore";
 // import Chat from "@/features/messages/components/Chat";
 import { useSingInCheckHook } from "@/hooks/useSingInCheckHook";
 import useAuctionModalStore from "../auction/store/useAuctionModalStore";
@@ -12,7 +12,7 @@ import usePaymentModalStore from "../store/usePaymentModalStore";
 import { ListingQueryResult } from "@/sanity/types";
 
 interface Props {
-   listing: ListingQueryResult;
+  listing: ListingQueryResult;
 }
 
 const ListingOverview = ({ listing }: Props) => {
@@ -56,7 +56,9 @@ const ListingOverview = ({ listing }: Props) => {
   return (
     <>
       {chats ? (
-        <div className={styles.chatContainer}>{isSignedIn && null /* <Chat /> */}</div>
+        <div className={styles.chatContainer}>
+          {isSignedIn && null /* <Chat /> */}
+        </div>
       ) : (
         <div className={styles.container}>
           <h1 className={styles.title}>

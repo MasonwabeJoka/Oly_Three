@@ -7,7 +7,7 @@ import FormProgressBar from "@/app/(dashboard)/dashboard/create-listing/componen
 import usePaymentProcessingStore from "../payment/store/usePaymentProcessingStore";
 import { useEffect, useState } from "react";
 import usePaymentModalStore from "@/app/(dashboard)/dashboard/create-listing/store/usePaymentModalStore";
-// import useMessageStore from "@/features/messages/store/useMessageStore";
+import useMessageStore from "@/features/messages/store/useMessageStore";
 
 type FormWrapperProps = {
   title: string;

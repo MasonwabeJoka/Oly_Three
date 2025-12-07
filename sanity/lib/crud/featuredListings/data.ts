@@ -39,7 +39,7 @@ export const featuredListingsCountQuery = defineQuery(`
 
 
 
-const listingsPerPage = 3; 
+const listingsPerPage = 15; 
 
 export const getFeaturedListings = async (page: number = 1) => {
   try {

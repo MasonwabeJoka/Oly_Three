@@ -3,7 +3,7 @@ import styles from "./SellerDetails.module.scss";
 import Button from "./Buttons";
 import Avatar from "@/components/Avatar";
 import Image from "@/components/Image";
-// import useMessageStore from "@/features/messages/store/useMessageStore";
+import useMessageStore from "@/features/messages/store/useMessageStore";
 
 const socialMediaLogos = [
   {

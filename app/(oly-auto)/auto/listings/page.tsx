@@ -1,7 +1,7 @@
 import ListingsPage from "@/components/ListingsPage";
 import { getListings } from "@/sanity/lib/crud/listings/data";
 
-const listingsPerPage = 2;
+const listingsPerPage = 10;
 
 const Page = async ({
   searchParams,

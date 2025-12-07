@@ -16,7 +16,6 @@ export const listing = defineType({
     expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
   },
   fields: [
-    // Core Metadata
     defineField({
       name: 'title',
       title: 'Title',
@@ -49,54 +48,7 @@ export const listing = defineType({
       description: 'The category under which the listing falls.',
     }),
 
-    // User and Status Information
-    defineField({
-      name: 'user',
-      title: 'User',
-      type: 'reference',
-      to: [{ type: 'user' }],
-      description: 'The user who posted the listing.',
-    }),
-    defineField({
-      name: 'site',
-      title: 'Site',
-      type: 'string',
-      options: {
-        list: ['oly', 'oly-properties', 'oly-auto', 'oly-hiring', 'oly-services'],
-      },
-      description: 'The website section this listing belongs to.',
-    }),
-    defineField({
-      name: 'isActive',
-      title: 'Active',
-      type: 'boolean',
-      initialValue: true,
-    }),
-
-    defineField({
-      name: 'isFeatured',
-      title: 'Featured Listing',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Whether this listing is featured.',
-    }),
-    defineField({
-      name: 'approvedForSale',
-      title: 'Approved For Sale',
-      type: 'string',
-      description: 'The status indicating whether the product is approved for sale.',
-      options: {
-        list: [
-          { title: 'Approved', value: 'approved' },
-          { title: 'Pending', value: 'pending' },
-          { title: 'Denied', value: 'denied' },
-        ],
-      },
-      initialValue: 'approved',
-    }),
-
-
-    // Pricing and Payment Details
+        // Pricing and Payment Details
     defineField({
       name: 'price',
       title: 'Price',
@@ -147,6 +99,55 @@ export const listing = defineType({
       description: 'The paystack ID associated with this product.',
       readOnly: true,
     }),
+
+    // User and Status Information
+    defineField({
+      name: 'user',
+      title: 'User',
+      type: 'reference',
+      to: [{ type: 'user' }],
+      description: 'The user who posted the listing.',
+    }),
+    defineField({
+      name: 'site',
+      title: 'Site',
+      type: 'string',
+      options: {
+        list: ['oly', 'oly-properties', 'oly-auto', 'oly-hiring', 'oly-services'],
+      },
+      description: 'The website section this listing belongs to.',
+    }),
+    defineField({
+      name: 'isActive',
+      title: 'Active',
+      type: 'boolean',
+      initialValue: true,
+    }),
+
+    defineField({
+      name: 'isFeatured',
+      title: 'Featured Listing',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Whether this listing is featured.',
+    }),
+    defineField({
+      name: 'approvedForSale',
+      title: 'Approved For Sale',
+      type: 'string',
+      description: 'The status indicating whether the product is approved for sale.',
+      options: {
+        list: [
+          { title: 'Approved', value: 'approved' },
+          { title: 'Pending', value: 'pending' },
+          { title: 'Denied', value: 'denied' },
+        ],
+      },
+      initialValue: 'approved',
+    }),
+
+
+
 
     // Media Fields
     defineField({

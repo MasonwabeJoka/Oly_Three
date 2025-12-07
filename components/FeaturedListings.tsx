@@ -25,7 +25,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
           <h2 className={styles.title}>Featured Listings</h2>
           <div className={styles.collage}>
             <FeaturedListingsClient category={category} />
-            <TempListingsCollage
+            {/* <TempListingsCollage
               category={category}
               listings={listings || []}
               sortBy="postedOn"
@@ -33,8 +33,8 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
               isDeletable={false}
               isDashboard={false}
               cardSize="standard"
-            />
-            {/* <ListingsCollage
+            /> */}
+            <ListingsCollage
               category={category}
               listings={listings}
               sortBy="postedOn"
@@ -42,7 +42,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
               isDeletable={false}
               isDashboard={false}
               cardSize="standard"
-            /> */}
+            />
             <div className={styles.pagination}>
               <Pagination totalPages={totalPages} currentPage={currentPage} />
             </div>

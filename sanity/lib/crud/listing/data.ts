@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 // Query
 
-const listingQuery = defineQuery(`*[_type == "listing" && slug.current == $slug][0]{
+const listingQuery = defineQuery(`*[_type == "listing" && slug.current == "apple-macbook-pro-14-m1-pro-2021"][0]{
     _id,
     title,
     slug,
