@@ -24,7 +24,7 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
         <div className={styles.listingsSection}>
           <h2 className={styles.title}>Featured Listings</h2>
           <div className={styles.collage}>
-            <FeaturedListingsClient category={category} />
+            {/* <FeaturedListingsClient category={category} /> */}
             {/* <TempListingsCollage
               category={category}
               listings={listings || []}

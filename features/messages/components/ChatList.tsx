@@ -30,7 +30,7 @@ const ChatList: React.FC = () => {
   };
 
   const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLDivElement>,
+    event: React.KeyboardEvent<HTMLLIElement>,
     message: Message
   ): void => {
     if (event.key === "Enter" || event.key === " ") {

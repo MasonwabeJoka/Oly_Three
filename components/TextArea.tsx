@@ -56,6 +56,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       onChange,
       onSubmit,
       style: parentStyle,
+      onFocus,
+      onBlur,
       ...rest
     },
     ref
@@ -178,10 +180,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
                   if (typeof reactHookFormProps.ref === "function")
                     reactHookFormProps.ref(node);
                   else if (reactHookFormProps.ref)
-                    reactHookFormProps.ref.current = node;
+                    (reactHookFormProps.ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
                 }
                 if (typeof ref === "function") ref(node);
-                else if (ref) ref.current = node;
+                else if (ref) (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
               }}
               id={textareaId}
               name={name || reactHookFormProps?.name}
@@ -195,11 +197,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
               onChange={handleChange}
               onFocus={(e) => {
                 setIsFocused(true);
-                rest.onFocus?.(e);
+                onFocus?.(e);
               }}
               onBlur={(e) => {
                 setIsFocused(false);
-                rest.onBlur?.(e);
+                onBlur?.(e);
               }}
               className={`${styles.textarea} ${sizeClass}`}
               style={{
