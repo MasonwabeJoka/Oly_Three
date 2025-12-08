@@ -64,7 +64,7 @@ export const getSimilarListings = async (currentListing: any, limit: number = 6)
 
     const similarListings = await client.fetch(similarListingsQuery, {
       currentListingId: currentListing._id,
-      categoryRef: currentListing.category?._ref || currentListing.category?._id,
+      categoryRef: currentListing.category?._id || currentListing.category?._ref,
       minPrice,
       maxPrice,
       userCity: currentListing.user?.city,

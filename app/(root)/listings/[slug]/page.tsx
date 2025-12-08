@@ -21,7 +21,7 @@ Ensure visibility → only increment when the main listing content is visible (I
 Per user/listing cooldown (e.g., only count 1 view per 24h per user/IP per listing).
 */
 const Page = async ({ params }: ParamsProp) => {
-  const slug = params.slug;
+  const { slug } = await params;
   const listing = await getListing(slug);
   const similarListings = await getSimilarListings(listing, 2);
   const viewsData = await getListingViews(listing._id);
