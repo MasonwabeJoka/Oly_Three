@@ -181,11 +181,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
                 if (reactHookFormProps?.ref) {
                   if (typeof reactHookFormProps.ref === "function")
                     reactHookFormProps.ref(node);
-                  else if (reactHookFormProps.ref)
-                    (reactHookFormProps.ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
+                  else if (reactHookFormProps.ref && 'current' in reactHookFormProps.ref)
+                    reactHookFormProps.ref.current = node;
                 }
                 if (typeof ref === "function") ref(node);
-                else if (ref) (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
+                else if (ref && typeof ref === 'object' && 'current' in ref) ref.current = node;
               }}
               id={textareaId}
               name={name || reactHookFormProps?.name}
