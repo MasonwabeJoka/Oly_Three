@@ -29,6 +29,8 @@ interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onSubmit?: (e: any) => void;
   style?: React.CSSProperties;
+  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, Props>(
