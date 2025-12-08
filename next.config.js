@@ -3,6 +3,7 @@
 const nextConfig = {
   cacheComponents: false, 
   serverExternalPackages: ["mongoose"],
+  turbopack: {},
   sassOptions: {
     api: "modern-compiler",
     silenceDeprecations: ["legacy-js-api"],
