@@ -11,6 +11,7 @@ import NavButtonRight from "./navButtonRight";
 import NavButtonLeft from "./navButtonLeft";
 import { normalizeImageSrc } from "@/utils/imageUtils";
 import { useLikeButton } from "./../hooks/useLikeButton";
+import LoadingSpinnerTwo from "./LoadingSpinnerTwo";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -41,6 +42,7 @@ const ImageSlider = ({
     isBeginning: true,
     isEnd: activeIndex === (imagesUrls?.length ?? 0) - 1,
   });
+  const [imageLoading, setImageLoading] = useState<Record<number, boolean>>({});
 
   const {
     showHeart,
@@ -196,6 +198,11 @@ const ImageSlider = ({
                 backgroundColor: "#e4e6e7",
               }}
             >
+              {imageLoading[index] !== false && (
+               <div className={styles.loadingSpinnerContainer}>
+                <LoadingSpinnerTwo size={3} loaderType="circle" speed={1} />
+               </div>
+              )}
               <Image
                 className={styles.image}
                 src={normalizeImageSrc(url)}
@@ -205,8 +212,10 @@ const ImageSlider = ({
                   verticalAlign: "top",
                   minHeight: 248,
                   objectFit: "cover",
+                  opacity: imageLoading[index] === false ? 1 : 0,
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onLoadingComplete={() => setImageLoading(prev => ({ ...prev, [index]: false }))}
               />
             </div>
           </SwiperSlide>

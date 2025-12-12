@@ -5,6 +5,7 @@ import Link from "next/link";
 const Dashboard = () => {
   return (
     <div className={styles.container}>
+      
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Dashboard</h1>
         <div className={styles.cards}>

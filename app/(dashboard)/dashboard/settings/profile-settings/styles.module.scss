@@ -54,6 +54,11 @@
     }
 
     .socialMediaLinks {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(20);
+      margin-top: rem(48);
       .otherSocialMedia {
         //
       }
@@ -63,7 +68,7 @@
         align-items: center;
 
         .link {
-          margin-bottom: rem(48);
+          // margin-bottom: rem(48);
         }
       }
       .otherSocialMediaContainer {
@@ -71,6 +76,7 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: rem(48);
+        
       }
     }
   }

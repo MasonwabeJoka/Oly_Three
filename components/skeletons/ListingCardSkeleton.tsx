@@ -1,70 +1,74 @@
+"use client";
 import styles from "./ListingCardSkeleton.module.scss";
 import useIsMobileStore from "@/store/useMobileStore";
 import useSidebarStore from "@/store/useSidebarStore";
 import useIsDashboardStore from "@/store/isDashboardStore";
 
-const PORTRAIT_CARD_SIZE= {
+const BOX_CARD_SIZE = {
   regular: {
-    large: `${styles.largePortrait}`,
-    standard: `${styles.standardPortrait}`,
-    small: `${styles.smallPortrait}`,
+    large: `${styles.largeBox}`,
+    standard: `${styles.standardBox}`,
+    small: `${styles.smallBox}`,
     "": "",
   },
 
   dashboard: {
-    large: `${styles.largeDashboardPortrait}`,
-    standard: `${styles.standardDashboardPortrait}`,
-    small: `${styles.smallDashboardPortrait}`,
+    large: `${styles.largeDashboardBox}`,
+    standard: `${styles.standardDashboardBox}`,
+    small: `${styles.smallDashboardBox}`,
     "": "",
   },
 };
-const LANDSCAPE_CARD_SIZE= {
+const EXPANDED_CARD_SIZE = {
   regular: {
-    large: `${styles.largeLandscape}`,
-    standard: `${styles.standardLandscape}`,
-    small: `${styles.smallLandscape}`,
+    large: `${styles.largeExpanded}`,
+    standard: `${styles.standardExpanded}`,
+    small: `${styles.smallExpanded}`,
     "": "",
   },
 
   dashboard: {
-    large: `${styles.largeDashboardLandscape}`,
-    standard: `${styles.standardDashboardLandscape}`,
-    small: `${styles.smallDashboardLandscape}`,
+    large: `${styles.largeDashboardExpanded}`,
+    standard: `${styles.standardDashboardExpanded}`,
+    small: `${styles.smallDashboardExpanded}`,
     "": "",
   },
 };
 
-type PortraitSizeProps = {
-  cardSize: keyof typeof PORTRAIT_CARD_SIZE.regular | keyof typeof PORTRAIT_CARD_SIZE.dashboard;
+type BoxSizeProps = {
+  cardSize:
+    | keyof typeof BOX_CARD_SIZE.regular
+    | keyof typeof BOX_CARD_SIZE.dashboard;
 };
-type LandscapeSizeProps = {
-  cardSize: keyof typeof LANDSCAPE_CARD_SIZE.regular | keyof typeof LANDSCAPE_CARD_SIZE.dashboard;
+type ExpandedSizeProps = {
+  cardSize:
+    | keyof typeof EXPANDED_CARD_SIZE.regular
+    | keyof typeof EXPANDED_CARD_SIZE.dashboard;
 };
 
 type SkeletonProps = {
-  orientation: "landscape" | "portrait";
+  orientation: "expanded" | "box";
   cardSize: "large" | "standard" | "small";
   isDashboard?: boolean;
 };
 
-const LandscapeListingCard: React.FC<LandscapeSizeProps> = ({ cardSize }) => {
-
+const ExpandedListingCard: React.FC<ExpandedSizeProps> = ({ cardSize }) => {
   const isDashboard = useIsDashboardStore((state) => state.isDashboard);
 
   const cardStyle = isDashboard
-    ? LANDSCAPE_CARD_SIZE.dashboard[cardSize]
-    : LANDSCAPE_CARD_SIZE.regular[cardSize];
+    ? EXPANDED_CARD_SIZE.dashboard[cardSize]
+    : EXPANDED_CARD_SIZE.regular[cardSize];
 
-  return <div className={`${cardStyle} ${styles.landscapeAdContainer}`}></div>;
+  return <div className={`${cardStyle} ${styles.expandedAdContainer}`}></div>;
 };
 
-const PortraitListingCard: React.FC<PortraitSizeProps> = ({ cardSize }) => {
+const BoxListingCard: React.FC<BoxSizeProps> = ({ cardSize }) => {
   const isDashboard = useIsDashboardStore((state) => state.isDashboard);
 
   const cardStyle = isDashboard
-    ? PORTRAIT_CARD_SIZE.dashboard[cardSize]
-    : PORTRAIT_CARD_SIZE.regular[cardSize];
-  return <div className={`${cardStyle} ${styles.portraitAdContainer}`}></div>;
+    ? BOX_CARD_SIZE.dashboard[cardSize]
+    : BOX_CARD_SIZE.regular[cardSize];
+  return <div className={`${cardStyle} ${styles.boxAdContainer}`}></div>;
 };
 
 const ListingCardSkeleton: React.FC<SkeletonProps> = ({
@@ -73,10 +77,10 @@ const ListingCardSkeleton: React.FC<SkeletonProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      {orientation === "landscape" ? (
-        <LandscapeListingCard cardSize={cardSize} />
+      {orientation === "expanded" ? (
+        <ExpandedListingCard cardSize={cardSize} />
       ) : (
-        <PortraitListingCard cardSize={cardSize} />
+        <BoxListingCard cardSize={cardSize} />
       )}
     </div>
   );

@@ -39,15 +39,7 @@ const NotificationsCard = ({
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.deleteButton}>
-        <Icon
-          className={styles.X}
-          src="/icons/X.png"
-          alt="X"
-          width={10}
-          height={10}
-        />
-      </div> */}
+      
       <section
         className={styles.mainSection}
         onMouseEnter={() => setShowButtons(true)}
@@ -86,13 +78,23 @@ const NotificationsCard = ({
             checkedHovered="#ccf6ff"
           />
         </div>
+        <div className={styles.deleteButton}>
+        <Icon
+          className={styles.X}
+          src="/icons/X.png"
+          alt="X"
+          width={10}
+          height={10}
+        />
+      </div>
       </section>
       {showButtons && (
         <section
           onMouseEnter={() => setShowButtons(true)}
           onMouseLeave={() => setShowButtons(false)}
         >
-          <ul className={styles.buttonsSection}></ul>
+          <ul className={styles.buttonsSection}>
+
           {buttons?.map((button: string, index: number) =>
             buttonLinks ? (
               <li
@@ -120,6 +122,8 @@ const NotificationsCard = ({
               </li>
             ) : null
           )}
+          
+          </ul>
         </section>
       )}
     </div>

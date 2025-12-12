@@ -64,7 +64,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
   const [step, setStep] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
   const methods = useForm<FormData>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(verificationSchema),
   });
 

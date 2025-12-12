@@ -68,7 +68,7 @@ export default function ListingsSearchForm({
                 ]}
                 initialValue={categories}
                 selectSize="large"
-                label="Categories"
+                label=""
                 id="categories"
                 name="categories"
                 ariaLabel="Categories"

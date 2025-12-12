@@ -1,11 +1,11 @@
 import VerificationSteps from "../../main-components/VerificationSteps";
 
-export default function VerifyStepPage({
+export default async function VerifyStepPage({
   params,
 }: {
-  params: { type: string; step: string };
+  params: Promise<{ type: string; step: string }>;
 }) {
-  const { type, step } = params;
+  const { type, step } = await params;
  
   return (
     <VerificationSteps

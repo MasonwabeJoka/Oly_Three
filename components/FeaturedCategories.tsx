@@ -36,7 +36,7 @@ const FeaturedCategories = () => {
           const { id, title, displayTitle, image } = category;
           return (
             <li key={id || `category-${index}`}>
-              <Link href={`/listings/?category=${title?.toLocaleLowerCase()}`}>
+              <Link href={`/listings/?category=${title?.toLocaleLowerCase()}#tabsContainer`}>
                 <LinkCard
                   label={displayTitle}
                   cardSize="large"

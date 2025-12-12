@@ -12,18 +12,6 @@
   background-color: $white-two;
   cursor: pointer;
 
-  .deleteButton {
-    position: absolute;
-    top: rem(8);
-    right: rem(8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: rem(24);
-    height: rem(24);
-    border-radius: 50%;
-    background-color: $white-three;
-  }
 
   .mainSection {
     display: flex;
@@ -42,22 +30,22 @@
     .avatar {
     }
     .info {
-      width: rem(460);
+      width: rem(400);
       .notificationType {
-        
+        font-weight: 300;
         margin-bottom: rem(20);
       }
       .message {
         margin-bottom: rem(20);
+        font-weight: 300;
         .title {
           margin-bottom: rem(16);
-          font-weight: thin;
           .name {
-            font-weight: 500;
+           font-weight: 500;
+           
           }
 
           .restOfTitle {
-            font-weight: 500;
           }
         }
 
@@ -65,11 +53,25 @@
         }
       }
       .time {
+        font-weight: 300 !important;
       }
     }
 
     .image {
     }
+    
+  .deleteButton {
+    // position: absolute;
+    // top: rem(8);
+    // right: rem(8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(24);
+    height: rem(24);
+    border-radius: 50%;
+    background-color: $white-four;
+  }
   }
 
   .buttonsSection {
@@ -79,7 +81,7 @@
     min-height: rem(148);
     padding-bottom: rem(32);
     border-radius: 0 0 rem(40) rem(40);
-    background-color: $white-one;
+    background-color: $white-two;
     .buttonContainer {
       margin-bottom: rem(20);
 

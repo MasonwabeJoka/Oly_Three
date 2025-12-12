@@ -18,7 +18,7 @@ interface Props {
 const ListingOverview = ({ listing }: Props) => {
   // const { chats, setChats } = useMessageStore();
   const chats = false; // Placeholder
-  const [isAuction, setIsAuction] = useState(true);
+  const [isAuction, setIsAuction] = useState(false);
   const { showAuctionModal, setShowAuctionModal } = useAuctionModalStore();
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
 
@@ -61,28 +61,19 @@ const ListingOverview = ({ listing }: Props) => {
         </div>
       ) : (
         <div className={styles.container}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit.
-          </h1>
-          <div className={styles.priceSection}>
-            <PriceSection listing={listing} isAuction={isAuction} />
-          </div>
-          <p className={styles.description}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
-            faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi
-            pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
-            tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
-            Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut
-            hendrerit semper vel class aptent taciti sociosqu. Ad litora
-            torquent per conubia nostra inceptos himenaeos.
-          </p>
-          <div className={styles.buttonsContainer}>
-            <ButtonsContainer
-              isAuction={isAuction}
-              placeBid={() => setShowAuctionModal(true)}
-              contactSeller={handleContactSeller}
-              buyNow={buyNowHandler}
-            />
+          <div className={styles.wrapper}>
+            <div className={styles.priceSection}>
+              <PriceSection listing={listing} isAuction={isAuction} />
+            </div>
+
+            <div className={styles.buttonsContainer}>
+              <ButtonsContainer
+                isAuction={isAuction}
+                placeBid={() => setShowAuctionModal(true)}
+                contactSeller={handleContactSeller}
+                buyNow={buyNowHandler}
+              />
+            </div>
           </div>
         </div>
       )}

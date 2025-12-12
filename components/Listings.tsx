@@ -41,6 +41,16 @@ export default function Listings({ listings, site }: ListingsClientProps) {
     getAvatars();
   }, [getAvatars]);
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [listings]);
+
   useScrollAdjustments({
     filtersRef: filtersRef as RefObject<HTMLDivElement>,
     tabsContainerRef: tabsContainerRef as RefObject<HTMLDivElement>,
@@ -56,7 +66,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
       <div className={styles.main}>
         <MenuModal showModal={false} setShowModal={() => {}} />
         <div className={styles.listingsContainer}>
-          <div className={styles.tabsContainer} ref={tabsContainerRef}>
+          <div className={styles.tabsContainer} ref={tabsContainerRef} id="tabsContainer">
             <div className={styles.filters}>
               <FilterTabs
                 site={site}

@@ -3,47 +3,32 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 0 rem(96);
-
-    .title {
-      margin-top: rem(56);
-      margin-bottom: rem(56);
-      text-align: center;
-      line-height: normal;
-      font-size: $h4;
-      text-transform: uppercase;
-      width: 65%;
-    }
-
+    width: rem(772);
+    margin-top: rem(48);
     .priceSection {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: rem(56);
+       margin-bottom: rem(56);
     }
 
-    .description {
-        margin-bottom: rem(56);
-        width: 65%;
-        text-align: center;
-      
-      }
     .buttonsContainer {
-      display: flex;
       display: flex;
       flex-direction: column;
       margin-bottom: rem(56);
     }
-
-    
-
   }
-  .chatContainer {
-  
-    width: 100%;
-    height: 100vh;
-  }
+}
+.chatContainer {
+  width: 100%;
+  height: 100vh;
+}

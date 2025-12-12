@@ -1,36 +1,45 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.priceSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: rem(56);
+  .container {
+      width: 70%;
+      margin-top:rem(48);
+     
+      .countDown {
+        margin-bottom: rem(20);
+        .countDownPeriod {
+          font-size: rem(14);
+          margin-right: rem(16);
+        }
+      }
+      .title {
+        margin-bottom: rem(20);
+        line-height: normal;
+        font-size: $body;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .priceSection {
+     
+        font-size: rem(12);
+        text-transform: uppercase;
+        margin-bottom: rem(20);
 
-  .priceLabel {
-    // margin-bottom: rem(-8);
-  }
-  .price {
-    margin-bottom: rem(16);
-    font-weight: 600;
-    font-size: $h2;
-  }
-
-  .nonAuctionPrice {
-    font-weight: 600;
-    font-size: $h2;
-  }
-
-  .countDown {
-    margin-bottom: rem(16);
-    .countDownPeriod {
-      font-size: rem(16);
-      margin-right: rem(16);
+        .currentPrice {
+           margin-bottom: rem(20);
+          span {
+            font-weight: 500;
+            font-size: $h4;
+          }
+        }
+        .buyNow {
+          span {
+            font-size: rem(14);
+          }
+        }
+        
+      }
+      .description {
+        
+      }
     }
-  }
-
-  .buyNowLabel {
-  }
-  .buyNow {
-  }
-}

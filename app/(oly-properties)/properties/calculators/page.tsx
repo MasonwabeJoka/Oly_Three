@@ -1,3 +1,4 @@
+"use client";
 import TransferCostCalculator from "../components/TransferCostCalculator";
 import styles from "./styles.module.scss";
 

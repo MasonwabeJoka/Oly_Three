@@ -9,6 +9,7 @@ import { useShowSidebarStore } from "../store/useShowSidebarStore";
 import { Toaster } from "sonner";
 import useBreakpointStore from "@/store/useBreakpointStore";
 import { ImageKitProvider } from "@imagekit/next";
+import BackButton from "@/components/BackButton";
 
 interface DashboardLayoutWrapperProps {
   children: React.ReactNode;
@@ -54,6 +55,7 @@ export default function DashboardLayoutWrapper({
         urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
       >
         <div className={styles.wrapper} style={flexStyles}>
+          <div className={styles.backButton}><BackButton /></div>
           {isVisible && <div className={styles.keepSidebarInPlace} />}
           {isVisible && (
             <aside className={styles.sidebar}>

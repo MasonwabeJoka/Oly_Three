@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import styles from "./ListingsCollage.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
 import { ListingsQueryResult } from "@/sanity.types";
+import ListingCardSkeletons from "./skeletons/ListingCardSkeletons";
 
 export type ListingsCollageProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -41,8 +42,6 @@ const ListingsCollage = ({
   isDashboard,
   cardSize,
 }: ListingsCollageProps) => {
-
-  const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -51,9 +50,8 @@ const ListingsCollage = ({
     setIsClient(true);
   }, []);
 
-
   if (!isClient) {
-    return null;
+    return <div className={styles.skeletons}><ListingCardSkeletons/></div>;
   }
 
   const breakpointColumnsObj = {
@@ -64,7 +62,6 @@ const ListingsCollage = ({
     1025: 2,
     650: 1,
   };
-
 
   const cards = listings?.map((listing, index) => {
     const { _id, slug, images, title, description, price, user } = listing;
@@ -80,53 +77,56 @@ const ListingsCollage = ({
       <div key={listing._id} className={styles.cardContainer}>
         <Link href={`/listings/${slugCurrent}`}>
           <div className={styles.card}>
-          {category === "all" && (
-            <ListingCard
-              category={category}
-              slug={slugCurrent}
-              listing={listing}
-              index={index}
-              id={_id}
-              cardType="box"
-              imageUrls={imageUrls}
-              aspectRatios={aspectRatios}
-              title={title || undefined}
-              price={price || undefined}
-              cardSize={cardSize}
-              description={text}
-              isDeletable={isDeletable}
-              isDashboard={isDashboard}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
-            />
-          )}
-          {category === "property" && (
-            <ListingCard
-              category={category}
-              slug={slugCurrent}
-              listing={listing}
-              index={index}
-              id={_id}
-              cardType="box"
-              imageUrls={imageUrls}
-              aspectRatios={aspectRatios}
-              title={title || undefined}
-              price={price || undefined}
-              cardSize={cardSize}
-              description={text}
-              isDeletable={isDeletable}
-              isDashboard={isDashboard}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
-            />
-          )}
+            {category === "all" && (
+              <ListingCard
+                category={category}
+                slug={slugCurrent}
+                listing={listing}
+                index={index}
+                id={_id}
+                cardType="box"
+                imageUrls={imageUrls}
+                aspectRatios={aspectRatios}
+                title={title || undefined}
+                price={price || undefined}
+                cardSize={cardSize}
+                description={text}
+                isDeletable={isDeletable}
+                isDashboard={isDashboard}
+                checkedColour={checkedColour}
+                hoverColour={hoverColour}
+                checkedHovered={checkedHovered}
+              />
+            )}
+            {category === "property" && (
+              <ListingCard
+                category={category}
+                slug={slugCurrent}
+                listing={listing}
+                index={index}
+                id={_id}
+                cardType="box"
+                imageUrls={imageUrls}
+                aspectRatios={aspectRatios}
+                title={title || undefined}
+                price={price || undefined}
+                cardSize={cardSize}
+                description={text}
+                isDeletable={isDeletable}
+                isDashboard={isDashboard}
+                checkedColour={checkedColour}
+                hoverColour={hoverColour}
+                checkedHovered={checkedHovered}
+              />
+            )}
           </div>
         </Link>
       </div>
     );
   });
+
+ 
+
 
   return (
     <>
@@ -142,10 +142,7 @@ const ListingsCollage = ({
           >
             {cards || []}
           </Masonry>
-          <div ref={ref} className={styles.loading}>
-            {loading ? <LoadingSpinner /> : null}
-            {/* {loading && hasMore ? <LoadingSpinner /> : null} */}
-          </div>
+          
         </>
       )}
       {category === "property" && (
@@ -159,9 +156,7 @@ const ListingsCollage = ({
           >
             {cards || []}
           </div>
-          <div ref={ref} className={styles.loading}>
-            {loading ? <LoadingSpinner /> : null}
-          </div>
+          
         </>
       )}
     </>

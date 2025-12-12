@@ -1,69 +1,70 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-.portraitAdContainer {
+.boxAdContainer {
   background-color: rgba(0, 0, 0, 0.041);
   border-radius: rem(40);
-}
-
-.landscapeAdContainer {
-  background-color: rgba(0, 0, 0, 0.041);
-  border-radius: rem(40);
-}
-
-.largePortrait {
  
 }
 
-.standardPortrait {
+.expandedAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(40);
+}
+
+.largeBox {
+ 
+}
+
+.standardBox {
   width: rem(310);
   min-height: rem(413);
 }
 
-.smallPortrait {
+.smallBox {
 }
 
 
 
 
-.largeDashboardPortrait {
+.largeDashboardBox {
   @include only(largeDesktop) {
   }
 }
-.standardDashboardPortrait {
+.standardDashboardBox {
   @include only(largeDesktop) {
     width: rem(310);
     min-height: rem(413);
   }
 }
-.smallDashboardPortrait {
+.smallDashboardBox {
 }
-.largeLandscape {
+.largeExpanded {
  
 }
 
-.standardLandscape {
+.standardExpanded {
   width: rem(310);
   min-height: rem(413);
 }
 
-.smallLandscape {
+.smallExpanded {
 }
 
 
 
 
-.largeDashboardLandscape {
+.largeDashboardExpanded {
   @include only(largeDesktop) {
     width: rem(918);
     min-height: rem(248);
   }
 }
-.standardDashboardLandscape {
+.standardDashboardExpanded {
   @include only(largeDesktop) {
     width: rem(918);
     min-height: rem(248);
   }
 }
-.smallDashboardLandscape {
+.smallDashboardExpanded {
 }

@@ -351,7 +351,7 @@ const ProfileSettings = () => {
               options={socialMediaOptions}
               initialValue="Social Media Links"
               selectSize="large"
-              label="Social Media Links"
+              label="Socials"
               name="social-media"
               id="social-media"
               ariaLabel="Social Media Links"

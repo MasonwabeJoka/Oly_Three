@@ -5,6 +5,7 @@
 .wrapper {
   width: rem(360);
   height: 100%;
+
   @include only(largeDesktop) {
     width: 80vw;
   }
@@ -28,6 +29,13 @@
       width: rem(342);
       width: rem(342);
     }
+  }
+
+  
+  .backButton {
+   position: fixed;
+    top: rem(20);
+    right: rem(20);
   }
   .sidebar {
     position: fixed;

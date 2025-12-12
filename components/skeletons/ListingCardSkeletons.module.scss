@@ -2,29 +2,17 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 
-
-
 .listingsContainer {
-  display: flex;
-  justify-content: center;
-  width: rem(1650);
-  gap: rem(32);
-
+ 
+  
 }
 
-.cardContainer {
+.skeletonContainer {
   display: flex;
   justify-content: center;
   width: rem(310) !important;
   pointer-events: auto;
-  .card {
+  .skeleton {
     width: fit-content;
-    margin-bottom: rem(44) !important;
   }
 }
-
-.skeletons {
- margin-bottom: rem(44);
-}
-
-

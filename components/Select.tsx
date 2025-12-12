@@ -297,7 +297,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             <label htmlFor={selectId} className={styles.label}>
               {required && " *"}
               {label.length > 12 ? `${label.substring(0, 12)}...` : label}
-              {label.length > 12 ? `${label.substring(0, 12)}...` : label}
             </label>
           )}
 

@@ -103,8 +103,8 @@ interface CardProps {
 
 const MyAdsCard = (props: CardProps) => {
   const [showAnalytics, setShowAnalytics] = useState(false);
-  const analyticsRef = useRef<HTMLDivElement | null>(null);
-  const statsIconRef = useRef<HTMLDivElement | null>(null);
+  const analyticsRef = useRef<HTMLDivElement>(null);
+  const statsIconRef = useRef<HTMLDivElement>(null);
   const {
     id,
     images,
@@ -124,7 +124,7 @@ const MyAdsCard = (props: CardProps) => {
     expiryDate,
   } = props;
 
-  useOnClickOutside([analyticsRef, statsIconRef] as any, () => {
+  useOnClickOutside([analyticsRef, statsIconRef], () => {
     setShowAnalytics(false);
   });
 

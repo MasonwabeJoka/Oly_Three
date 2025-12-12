@@ -30,7 +30,7 @@ export default function MultiStepForm<T extends Record<string, any>>({
   progressBar = true,
 }: MultiStepFormProps<T>) {
   const methods = useForm<T>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(schema),
   });
 

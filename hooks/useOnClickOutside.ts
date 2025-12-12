@@ -4,13 +4,14 @@ import { RefObject, useEffect } from "react";
 type Event = MouseEvent | TouchEvent;
 
 export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T> | RefObject<T>[],
   handler: (event: Event) => void
 ) => {
   useEffect(() => {
     const listener = (event: Event) => {
-      const el = ref?.current;
-      if (!el || el.contains((event?.target as Node) || null)) {
+      const refs = Array.isArray(ref) ? ref : [ref];
+      const isClickInside = refs.some(r => r?.current?.contains((event?.target as Node) || null));
+      if (isClickInside) {
         return;
       }
       

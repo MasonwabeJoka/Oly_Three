@@ -9,6 +9,7 @@ import Pagination from "./Pagination";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { featuredListingsQueryOptions } from "@/sanity/lib/crud/listings/queryOptions";
 import TempListingsCollage from "./Temp/TempListingCollage";
+import ListingCardSkeleton from "./skeletons/ListingCardSkeleton";
 
 type FeaturedListingsProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -16,8 +17,10 @@ type FeaturedListingsProps = {
 };
 
 const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
-  const { data } = useSuspenseQuery(featuredListingsQueryOptions(currentPage));
+  const { data, isPending } = useSuspenseQuery(featuredListingsQueryOptions(currentPage));
   const { listings, totalPages } = data;
+
+
   return (
     <>
       {category === "all" && (
@@ -34,15 +37,18 @@ const FeaturedListings = ({ category, currentPage }: FeaturedListingsProps) => {
               isDashboard={false}
               cardSize="standard"
             /> */}
-            <ListingsCollage
-              category={category}
-              listings={listings}
-              sortBy="postedOn"
-              sortOrder="desc"
-              isDeletable={false}
-              isDashboard={false}
-              cardSize="standard"
-            />
+            
+              <ListingsCollage
+                category={category}
+                listings={listings}
+                sortBy="postedOn"
+                sortOrder="desc"
+                isDeletable={false}
+                isDashboard={false}
+                cardSize="standard"
+              />
+         
+         
             <div className={styles.pagination}>
               <Pagination totalPages={totalPages} currentPage={currentPage} />
             </div>

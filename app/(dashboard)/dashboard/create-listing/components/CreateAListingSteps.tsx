@@ -114,7 +114,7 @@ const CreateAListingSteps: React.FC<CreateAListingStepsProps> = ({
   >(currentSite || null);
   const [step, setStep] = useState<number | null>(null);
   const methods = useForm<FormData>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(formDataSchema),
   });
   const steps: Record<

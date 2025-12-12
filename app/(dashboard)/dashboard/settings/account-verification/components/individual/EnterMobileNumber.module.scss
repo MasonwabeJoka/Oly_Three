@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   width: rem(600);
-.error {
+  .error {
     color: $danger;
     margin-bottom: rem(8);
   }
@@ -16,12 +16,20 @@
     margin-bottom: rem(32);
   }
   .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .input {
       margin-bottom: rem(20);
     }
   }
 
-  .button {
-    margin-bottom: rem(20);
+  .codeButtonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .button {
+      // margin-bottom: rem(20);
+    }
   }
 }
