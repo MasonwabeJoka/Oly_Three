@@ -1,20 +1,26 @@
+import AttachmentUploadSection from "@/components/AttachmentUploadSection";
 import styles from "./UploadAttachments.module.scss";
-import UploadBox from "@/components/UploadBox";
-import { FormWrapper } from "./FormWrapper";
-import { uploadAttachmentsValidations } from "../validations/multiStepFormValidations";
+import { attachments } from "@/data/attachments";
+import useUploadFiles from "../store/useUploadFiles";
+import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
+
 const UploadAttachments = () => {
+  const {uploadedAttachments } = useUploadFiles();
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    setValue("uploadAttachments", uploadedAttachments);
+  }, [uploadedAttachments, setValue]);
+
   return (
-    <FormWrapper title="Upload Attachments">
-      <div className={styles.container}>
-        <div className={styles.uploadBox}>
-          <UploadBox
-            mediaType="attachment"
-            required={true}
-            accept="application/*, text/*,image/*"
-          />
-        </div>
+    <div className={styles.container}>
+      <div
+        className={`${styles.mediaSection} ${styles.uploadedAttachmentsContainer}`}
+      >
+        <AttachmentUploadSection attachments={attachments} />
       </div>
-    </FormWrapper>
+    </div>
   );
 };
 

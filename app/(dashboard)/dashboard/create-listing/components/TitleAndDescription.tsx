@@ -1,13 +1,20 @@
 "use client";
 import styles from "./TitleAndDescription.module.scss";
 import Input from "@/components/Input";
-import RichTextEditor from "@/components/richTextEditor/RichTextEditor";
+import dynamic from "next/dynamic";
 import { useFormContext } from "react-hook-form";
-import { FormWrapper } from "./FormWrapper";
 import { debounce } from "lodash";
 import type { FormDataSchema } from "../validations/formDataSchema";
-import Form from "next/form";
-import Button from "@/components/Buttons";
+import LoadingSpinnerTwo from "@/components/LoadingSpinnerTwo";
+
+// Dynamically import RichTextEditor with a loading skeleton
+const RichTextEditor = dynamic(
+  () => import("@/components/richTextEditor/RichTextEditor"),
+  {
+    ssr: false,
+    loading: () => <LoadingSpinnerTwo size={3} />,
+  }
+);
 
 // Mock server action for demonstration
 async function mockServerAction(formData: FormData): Promise<void> {
@@ -109,9 +116,9 @@ const TitleAndDescription = ({ onNext }: Props) => {
             setValue={handleDescriptionChange}
             content={description}
             error={errors.titleAndDescription?.description?.message}
+            label="Description"
           />
         </div>
-      
       </div>
     </div>
   );

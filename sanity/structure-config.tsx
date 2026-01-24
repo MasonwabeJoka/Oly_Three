@@ -1,6 +1,5 @@
 // https://www.sanity.io/docs/studio/structure-builder-cheat-sheet
-import React from "react";
-import type { StructureResolver } from "sanity/structure";
+import type { StructureResolver } from "@/sanity/structure-config";
 import { Card, Text, Stack } from "@sanity/ui";
 import {
   FaTachometerAlt,
@@ -73,9 +72,11 @@ export const structure: StructureResolver = (S, context) => {
               S.documentTypeListItem("userLocationPreference").title(
                 "Location Preferences"
               ),
+
               ...(isAdmin
                 ? [S.documentTypeListItem("auditEntry").title("Audit Logs")]
                 : []),
+                
             ])
         ),
       // User Entities (stores, companies, content channels)
@@ -302,7 +303,7 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("featuredServicesSection").title(
                         "Featured Services Section"
                       ),
-                      S.documentTypeListItem("Features").title("Features"),
+                      S.documentTypeListItem("featuredService").title("Features Services"),
                       S.documentTypeListItem("FeaturedListings").title(
                         "Featured Listings"
                       ),
@@ -466,6 +467,22 @@ export const structure: StructureResolver = (S, context) => {
                       S.documentTypeListItem("socialMediaLink").title(
                         "Social Media Links"
                       ),
+                    ])
+                ),
+              // OLY Shops Content
+              S.listItem()
+                .title("OLY Shops")
+                .child(
+                  S.list()
+                    .title("OLY Shops Content")
+                    .items([
+                      S.documentTypeListItem("customer").title("Customers"),
+                      S.documentTypeListItem("order").title("Orders"),
+                      S.documentTypeListItem("shop-category").title("Categories"),
+                      S.documentTypeListItem("shop-product").title("Products"),
+                     
+                    
+                 
                     ])
                 ),
             ])

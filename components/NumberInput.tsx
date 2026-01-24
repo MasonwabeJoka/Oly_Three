@@ -223,6 +223,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         )}
 
         <div className={`${styles.wrapper}`}>
+         
           <Input
             type="text"
             inputMode="numeric"

@@ -20,7 +20,6 @@ _**Agent (model default, mode Agent)**_
 
 ---
 
-
 Searching for untyped event parameters in TypeScript/TSX files and fixing their types.
 
 
@@ -195,7 +194,6 @@ Output mode: content
 
 ---
 
-
 Searching TypeScript files as well:
 
 
@@ -292,7 +290,6 @@ Output mode: content
 
 ---
 
-
 Creating a todo list and fixing untyped event handlers. Reviewing key files to understand context:
 
 
@@ -340,7 +337,6 @@ Creating a todo list and fixing untyped event handlers. Reviewing key files to u
 
 ---
 
-
 Fixing untyped event handlers, starting with the most common files:
 
 
@@ -382,7 +378,6 @@ Fixing untyped event handlers, starting with the most common files:
 
 ---
 
-
 Fixing untyped event handlers, starting with the simpler files:
 
 
@@ -390,7 +385,7 @@ Fixing untyped event handlers, starting with the simpler files:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/ModalTemp.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/ModalTemp.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -413,7 +408,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/SearchbBar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/SearchbBar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -436,7 +431,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/NumberInput.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/NumberInput.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -444,10 +439,10 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -253,5 +253,5 @@
                 className={&#96;${styles.upArrow} ${styles.arrow}&#96;}
-                onClick={() =&gt; handleArrowClick(&quot;up&quot;)}
+                onClick={() =&gt; handleArrowClick("up")}
 -               onMouseDown={(e) =&gt; e.preventDefault()}
 +               onMouseDown={(e: React.MouseEvent&lt;HTMLButtonElement&gt;) =&gt; e.preventDefault()}
-                aria-label=&quot;Increase value&quot;
+                aria-label="Increase value"
                 tabIndex={-1}
 ```
 
@@ -457,10 +452,10 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -263,5 +263,5 @@
                 className={&#96;${styles.downArrow} ${styles.arrow}&#96;}
-                onClick={() =&gt; handleArrowClick(&quot;down&quot;)}
+                onClick={() =&gt; handleArrowClick("down")}
 -               onMouseDown={(e) =&gt; e.preventDefault()}
 +               onMouseDown={(e: React.MouseEvent&lt;HTMLButtonElement&gt;) =&gt; e.preventDefault()}
-                aria-label=&quot;Decrease value&quot;
+                aria-label="Decrease value"
                 tabIndex={-1}
 ```
 
@@ -472,7 +467,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Icon.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Icon.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -483,7 +478,7 @@ Lines added: 2, lines removed: 2
           isButton
 -           ? (e) =&gt; {
 +           ? (e: React.KeyboardEvent&lt;HTMLImageElement&gt;) =&gt; {
-                if (e.key === &quot;Enter&quot; || e.key === &quot; &quot;) {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
 -                 onClick?.(e as any);
 +                 onClick?.(e as React.MouseEvent&lt;HTMLImageElement&gt;);
@@ -499,7 +494,7 @@ Lines added: 2, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleDescription.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleDescription.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -510,7 +505,7 @@ Lines added: 1, lines removed: 1
             value={description}
 -           onChange={(e) =&gt; setDescription(e.target.value)}
 +           onChange={(e: React.ChangeEvent&lt;HTMLTextAreaElement&gt;) =&gt; setDescription(e.target.value)}
-            placeholder=&quot;Include features, service history, upgrades...&quot;
+            placeholder="Include features, service history, upgrades..."
           /&gt;
 ```
 
@@ -519,7 +514,7 @@ Lines added: 1, lines removed: 1
 
 ```diff
 @@ -28,5 +28,5 @@
-            type=&quot;number&quot;
+            type="number"
             value={price}
 -           onChange={(e) =&gt; setPrice(Number(e.target.value))}
 +           onChange={(e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; setPrice(Number(e.target.value))}
@@ -535,7 +530,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/ui/dropdown-menu.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/ui/dropdown-menu.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -558,7 +553,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Select.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Select.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -569,7 +564,7 @@ Lines added: 1, lines removed: 1
               onClick={() =&gt; setIsOpen((o) =&gt; !o)}
 -             onKeyDown={(e) =&gt;
 +             onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt;
-                (e.key === &quot;Enter&quot; || e.key === &quot; &quot;) &amp;&amp;
+                (e.key === "Enter" || e.key === " ") &amp;&amp;
                 (e.preventDefault(), setIsOpen((o) =&gt; !o))
 ```
 
@@ -581,7 +576,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Select.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Select.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -604,15 +599,15 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Select.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Select.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -395,5 +395,5 @@
-                    placeholder=&quot;Search options...&quot;
-                    ariaLabel=&quot;Search options&quot;
+                    placeholder="Search options..."
+                    ariaLabel="Search options"
 -                   onChange={(e) =&gt; {
 +                   onChange={(e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
                       setSearchTerm(e.target.value);
@@ -627,7 +622,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Select.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Select.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -651,7 +646,6 @@ Lines added: 1, lines removed: 1
 
 
 ---
-
 
 Continuing with more files:
 
@@ -710,7 +704,6 @@ Continuing with more files:
 
 ---
 
-
 Fixing more files:
 
 
@@ -718,7 +711,7 @@ Fixing more files:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -754,7 +747,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -765,7 +758,7 @@ Lines added: 1, lines removed: 1
                     onClick={() =&gt; handleSuggestionClick(suggestion)}
 -                   onKeyDown={(e) =&gt; {
 +                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLLIElement&gt;) =&gt; {
-                      if (e.key === &quot;Enter&quot;) handleSuggestionClick(suggestion);
+                      if (e.key === "Enter") handleSuggestionClick(suggestion);
                     }}
 ```
 
@@ -777,7 +770,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -788,7 +781,7 @@ Lines added: 1, lines removed: 1
                     }
 -                   onKeyDown={(e) =&gt; {
 +                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; {
-                      if (e.key === &quot;Enter&quot; || e.key === &quot; &quot;) {
+                      if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
 ```
 
@@ -800,7 +793,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -811,7 +804,7 @@ Lines added: 1, lines removed: 1
                         }
 -                       onKeyDown={(e) =&gt; {
 +                       onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; {
-                          if (e.key === &quot;Enter&quot; || e.key === &quot; &quot;) {
+                          if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
 ```
 
@@ -823,7 +816,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/InputTemp.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/InputTemp.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -846,7 +839,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/InputTemp.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/InputTemp.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -877,7 +870,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -900,7 +893,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -912,7 +905,7 @@ Lines added: 1, lines removed: 1
 -               onChange={(e) =&gt; setRecency(e.target.value)}
 +               onChange={(e: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; setRecency(e.target.value)}
               &gt;
-                &lt;option value=&quot;&quot;&gt;Select...&lt;/option&gt;
+                &lt;option value=""&gt;Select...&lt;/option&gt;
 ```
 
 </details>
@@ -923,7 +916,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleModifications.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -946,7 +939,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/SetVehiclePrice.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/SetVehiclePrice.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -969,14 +962,14 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/FeedbackDetailsCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/FeedbackDetailsCard.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -95,5 +95,5 @@
-              submitButtonText=&quot;Reply&quot;
+              submitButtonText="Reply"
               required
 -             onChange={(e) =&gt; console.log(e.target.value)}
 +             onChange={(e: React.ChangeEvent&lt;HTMLTextAreaElement&gt;) =&gt; console.log(e.target.value)}
@@ -1004,13 +997,11 @@ Lines added: 1, lines removed: 1
 
 
 
-
-
 ---
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/forms/DetailsFormClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/forms/DetailsFormClient.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1018,10 +1009,10 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -106,5 +106,5 @@
                 multiple={false}
-                {...register(&quot;condition&quot;)}
+                {...register("condition")}
 -               onChange={(e) =&gt; {
 +               onChange={(e: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
-                  setValue(&quot;condition&quot;, e.target.value, {
+                  setValue("condition", e.target.value, {
                     shouldDirty: true,
 ```
 
@@ -1033,7 +1024,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/InputTemp.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/InputTemp.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1041,10 +1032,10 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -530,5 +530,5 @@
         required
-        {...register(&quot;searchTerm&quot;)}
+        {...register("searchTerm")}
 -       onChange={(e) =&gt; {
 +       onChange={(e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
-          setValue(&quot;searchTerm&quot;, e.target.value, {
+          setValue("searchTerm", e.target.value, {
             shouldDirty: true,
 ```
 
@@ -1138,7 +1129,6 @@ Lines added: 1, lines removed: 1
 
 ---
 
-
 Fixing the remaining files:
 
 
@@ -1154,7 +1144,7 @@ Fixing the remaining files:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: features/messages/components/Chat.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: features/messages/components/Chat.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1163,9 +1153,9 @@ Lines added: 1, lines removed: 1
 @@ -44,5 +44,5 @@
           className={styles.exitButtonContainer}
           onClick={() =&gt; setChats(false)}
--         onKeyDown={(e) =&gt; e.key === &quot;Enter&quot; &amp;&amp; setChats(false)}
-+         onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; e.key === &quot;Enter&quot; &amp;&amp; setChats(false)}
-          role=&quot;button&quot;
+-         onKeyDown={(e) =&gt; e.key === "Enter" &amp;&amp; setChats(false)}
++         onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; e.key === "Enter" &amp;&amp; setChats(false)}
+          role="button"
           tabIndex={0}
 ```
 
@@ -1230,7 +1220,6 @@ Output mode: content
 
 ---
 
-
 Fixing the remaining files:
 
 
@@ -1238,7 +1227,7 @@ Fixing the remaining files:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: features/messages/components/ChatList.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: features/messages/components/ChatList.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1249,7 +1238,7 @@ Lines added: 1, lines removed: 1
                 onClick={() =&gt; handleChatClickLocal(message)}
 -               onKeyDown={(e) =&gt; handleKeyDown(e, message)}
 +               onKeyDown={(e: React.KeyboardEvent&lt;HTMLLIElement&gt;) =&gt; handleKeyDown(e, message)}
-                role=&quot;button&quot;
+                role="button"
                 tabIndex={0}
 ```
 
@@ -1269,19 +1258,19 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextInputBar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextInputBar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -377,5 +377,5 @@
-                    role=&quot;button&quot;
+                    role="button"
                     tabIndex={0}
--                   onKeyDown={(e) =&gt; handleIconKeyDown(e, &quot;Emoji&quot;)}
-+                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; handleIconKeyDown(e, &quot;Emoji&quot;)}
+-                   onKeyDown={(e) =&gt; handleIconKeyDown(e, "Emoji")}
++                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; handleIconKeyDown(e, "Emoji")}
                     onClick={() =&gt; setIsEmojiPickerOpen(true)}
-                    aria-label=&quot;Insert emoji&quot;
+                    aria-label="Insert emoji"
 ```
 
 </details>
@@ -1292,19 +1281,19 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextInputBar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextInputBar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -393,5 +393,5 @@
-                    role=&quot;button&quot;
+                    role="button"
                     tabIndex={0}
--                   onKeyDown={(e) =&gt; handleIconKeyDown(e, &quot;Upload&quot;)}
-+                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; handleIconKeyDown(e, &quot;Upload&quot;)}
-                    onClick={() =&gt; console.log(&quot;Upload icon clicked&quot;)}
-                    aria-label=&quot;Upload file&quot;
+-                   onKeyDown={(e) =&gt; handleIconKeyDown(e, "Upload")}
++                   onKeyDown={(e: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; handleIconKeyDown(e, "Upload")}
+                    onClick={() =&gt; console.log("Upload icon clicked")}
+                    aria-label="Upload file"
 ```
 
 </details>
@@ -1359,14 +1348,14 @@ Output mode: content
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/carousels/AdCarousel.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/carousels/AdCarousel.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -70,5 +70,5 @@
-                      position: &quot;relative&quot;,
+                      position: "relative",
                     }}
 -                   onClick={(event) =&gt; event.stopPropagation()}
 +                   onClick={(event: React.MouseEvent&lt;HTMLDivElement&gt;) =&gt; event.stopPropagation()}
@@ -1382,7 +1371,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/table/Table.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/table/Table.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1390,7 +1379,7 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -84,5 +84,5 @@
               placeholder={placeholder}
-              value={(table.getColumn(&#96;${searchColumn}&#96;)?.getFilterValue() as string) ?? &quot;&quot;}
+              value={(table.getColumn(&#96;${searchColumn}&#96;)?.getFilterValue() as string) ?? ""}
 -             onChange={(event) =&gt;
 +             onChange={(event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt;
                 table.getColumn(searchColumn)?.setFilterValue(event.target.value)
@@ -1405,14 +1394,14 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(root)/to-do/components/TaskActions.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(root)/to-do/components/TaskActions.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -31,5 +31,5 @@
-            type=&quot;text&quot;
+            type="text"
             value={title}
 -           onChange={(event) =&gt; setTitle(event.target.value)}
 +           onChange={(event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; setTitle(event.target.value)}
@@ -1436,7 +1425,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1459,7 +1448,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1482,7 +1471,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1505,7 +1494,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1528,7 +1517,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1551,7 +1540,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1574,7 +1563,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1597,7 +1586,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1620,7 +1609,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/richTextEditor/Toolbar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -1645,7 +1634,6 @@ Lines added: 1, lines removed: 1
 
 ---
 
-
 Fixing the AccountProfile file and checking for remaining issues:
 
 
@@ -1653,18 +1641,18 @@ Fixing the AccountProfile file and checking for remaining issues:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/forms/AccountProfile.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/forms/AccountProfile.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -55,5 +55,5 @@
-        if (!file.type.includes(&quot;image&quot;)) return;
+        if (!file.type.includes("image")) return;
   
 -       fileReader.onload = async (event) =&gt; {
 +       fileReader.onload = async (event: ProgressEvent&lt;FileReader&gt;) =&gt; {
-          const imageDataUrl = event.target?.result?.toString() || &quot;&quot;;
+          const imageDataUrl = event.target?.result?.toString() || "";
           setNewImage(imageDataUrl);
 ```
 
@@ -1742,7 +1730,6 @@ _No matches found_
 
 ---
 
-
 Checking remaining instances and verifying fixes:
 
 
@@ -1768,7 +1755,6 @@ Checking remaining instances and verifying fixes:
 
 ---
 
-
 Fixing the remaining instances in AdCarousel:
 
 
@@ -1776,7 +1762,7 @@ Fixing the remaining instances in AdCarousel:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/carousels/AdCarousel.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/carousels/AdCarousel.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -1788,14 +1774,14 @@ Lines added: 2, lines removed: 2
 -             onClick={(event) =&gt; event.stopPropagation()}
 +             onClick={(event: React.MouseEvent&lt;HTMLDivElement&gt;) =&gt; event.stopPropagation()}
             &gt;
-              &lt;NavButtonLeft size=&quot;medium&quot; /&gt;
+              &lt;NavButtonLeft size="medium" /&gt;
             &lt;/div&gt;
             &lt;div
               className={styles.rightButtonContainer}
 -             onClick={(event) =&gt; event.stopPropagation()}
 +             onClick={(event: React.MouseEvent&lt;HTMLDivElement&gt;) =&gt; event.stopPropagation()}
             &gt;
-              &lt;NavButtonRight size=&quot;medium&quot; /&gt;
+              &lt;NavButtonRight size="medium" /&gt;
 ```
 
 </details>
@@ -1887,7 +1873,6 @@ Lint errors for `components/InputTemp.tsx`
 
 ---
 
-
 The linter errors are mostly CSS syntax false positives. Running Codacy analysis on the edited files to check for TypeScript issues:
 
 
@@ -1902,12 +1887,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/ModalTemp.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/ModalTemp.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -1916,14 +1901,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -1931,8 +1916,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -1952,12 +1937,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/SearchbBar.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/SearchbBar.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -1966,14 +1951,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -1981,8 +1966,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2002,12 +1987,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/Select.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/Select.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2016,14 +2001,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2031,8 +2016,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2052,12 +2037,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/Input.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/Input.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2066,14 +2051,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2081,8 +2066,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2102,12 +2087,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/InputTemp.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/InputTemp.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2116,14 +2101,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2131,8 +2116,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2146,7 +2131,6 @@ Status: **completed**
 
 
 ---
-
 
 Codacy CLI isn't available. Verifying all untyped event handlers are fixed:
 
@@ -2204,7 +2188,6 @@ Output mode: content
 
 
 ---
-
 
 ## Summary
 

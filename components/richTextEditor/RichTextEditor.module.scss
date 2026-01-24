@@ -13,21 +13,51 @@
     margin-bottom: rem(8);
   }
 
-  .labelContainer {
-    position: absolute;
-    top: rem(80);
-    left: rem(10);
-    color: $grey-four;
-    text-transform: uppercase;
-    font-size: rem(12);
-    color: $black-four;
-    z-index: 10;
-  }
   .editorContainer {
+    position: relative;
+
+    .label {
+      position: absolute;
+      top: rem(80);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: rem(10);
+      text-transform: uppercase;
+      color: $grey-four;
+      margin-bottom: rem(18) !important;
+      z-index: 10;
+    }
+
+    .required {
+      position: absolute;
+      top: rem(96);
+      left: rem(32);
+      
+      font-size: rem(10);
+      text-transform: uppercase;
+      color: $grey-four;
+      margin-bottom: rem(18) !important;
+      z-index: 10;
+    }
+
     .fr-box,
     .fr-element,
     .fr-view {
       font-family: "Outfit", sans-serif !important;
     }
+
+    :global(.fr-element)  {
+      p {
+        margin-top: rem(8);
+       
+      }
+    }
   }
+}
+
+.skeleton {
+  width: rem(640);
+  height: rem(240);
+  background-color: $grey-three;
+  border-radius: rem(8);
 }

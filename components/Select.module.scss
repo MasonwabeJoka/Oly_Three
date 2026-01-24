@@ -6,6 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: rem(40);
+    
+
 }
 
 .selectMenu {
@@ -14,9 +17,14 @@
   flex-direction: column;
   align-items: center;
   width: fit-content;
- 
+  border-radius: rem(40);
+  box-shadow: $shadow-one;
+  isolation: isolate;
+
   .label {
     position: absolute;
+    display: flex;
+    gap: rem(4);
     top: 50%;
     left: rem(24);
     transform: translateY(-50%);
@@ -24,6 +32,14 @@
     color: $grey-four;
     text-transform: uppercase;
     font-size: rem(10);
+    .requiredStar {
+      display: block;
+      margin-top: rem(1);
+    }
+  }
+
+  .displayText {
+    color: $black-five;
   }
 
   // .labelHidden {
@@ -36,7 +52,6 @@
   .selectContainer {
     position: relative;
     cursor: pointer;
-
     .select {
       display: flex;
       justify-content: center;
@@ -44,13 +59,11 @@
       border-radius: rem(40);
       background-color: $white-three;
       height: rem(56);
-      box-shadow: $shadow-one;
       text-align: center;
       border: none;
       outline: none;
       appearance: none;
       margin: 0 !important;
-
       &:hover {
         background-color: $white-one !important;
       }
@@ -141,7 +154,7 @@
       border-radius: rem(40);
       background-color: $white-three;
       height: rem(56);
-      box-shadow: $shadow-one;
+      // box-shadow: $shadow-one;
       text-align: center;
       border: none;
       outline: none;
@@ -167,7 +180,7 @@
     .input {
       height: rem(56);
       border-radius: rem(40);
-      box-shadow: $shadow-two;
+      // box-shadow: $shadow-two;
     }
 
     .dropdownIconContainer {
@@ -251,7 +264,7 @@
       height: rem(56);
       margin: 0 auto;
       background-color: $white-two;
-        color: $black-three;
+      color: $black-five;
 
       box-shadow: $shadow-one;
       .checkboxContainer {

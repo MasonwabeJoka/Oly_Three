@@ -2,8 +2,8 @@ import styles from "./ClassifiedLink.module.scss";
 import Image from "@/components/Image";
 
 interface ClassifiedLinkProps {
-  text: string;
-  image: string;
+  text?: string;
+  image?: string;
 }
 const ClassifiedLink = ({
   text,

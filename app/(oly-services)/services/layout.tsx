@@ -2,6 +2,7 @@ import styles from "./layout.module.scss";
 import localFont from "next/font/local";
 
 import "@uploadthing/react/styles.css";
+import "../../globals.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 
@@ -26,10 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${outfit.className} ${styles.html}`}
+      data-scroll-behavior="smooth"
+    >
       <body className={styles.body}>
         <div className={styles.wrapper}>
-         
           <div className={styles.main}>
             <main className={styles.children}>
               {children}

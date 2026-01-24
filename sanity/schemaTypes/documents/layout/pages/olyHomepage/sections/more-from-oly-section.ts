@@ -44,13 +44,13 @@ export const moreFromOlySection = defineType({
 
     defineField({
       name: 'sites',
-      title: 'Network Sites',
+      title: 'Sites',
       type: 'array',
         of: [
         { type: 'reference', to: [{ type: 'olySite' }] },
       ],
-      validation: (Rule) => Rule.min(1).max(8).warning('Consider limiting to 4-6 sites for optimal display'),
-      description: 'The network of classified sites to display in this section.',
+      // validation: (Rule) => Rule.min(1).max(8).warning(),
+      description: 'The sites to display in this section.',
     }),
 
 

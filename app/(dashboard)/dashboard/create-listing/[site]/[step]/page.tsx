@@ -1,5 +1,4 @@
-import CreateAListingSteps from "../../components/CreateAListingSteps";
-
+import CreateListingSteps from "../../components/CreateListingSteps";
 
 export default async function CreateAListingStepPage({
   params,
@@ -8,9 +7,8 @@ export default async function CreateAListingStepPage({
 }) {
   const { site, step } = await params;
 
-
   return (
-    <CreateAListingSteps
+    <CreateListingSteps
       currentSite={
         site as
           | "oly"

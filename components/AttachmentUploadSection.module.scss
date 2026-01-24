@@ -53,6 +53,8 @@
       width: rem(700);
       padding: rem(8);
       border-radius: rem(50);
+    box-shadow: $shadow-one;
+
       cursor: pointer;
 
       .iconContainer {
@@ -101,6 +103,10 @@
         border-radius: 50%;
         margin-right: rem(32);
       }
+    }
+
+    .attachmentContainer:hover {
+      background-color: $white-one;
     }
   }
 }

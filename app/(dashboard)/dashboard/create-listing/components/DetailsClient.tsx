@@ -182,6 +182,7 @@ const DetailsClient = ({
                 label="Condition"
                 id="conditions"
                 ariaLabel="Conditions"
+                required
                 dashboard
                 error={(errors.details as any)?.condition?.message}
                 {...register("details.condition")}
@@ -196,10 +197,10 @@ const DetailsClient = ({
                 <Select
                   options={detailsTitles}
                   className={styles.selectDetail}
-                  initialValue="Add all product details"
+                  initialValue="Add Product Details"
                   selectSize="large"
                   selectColourType="normal"
-                  label="Product Info"
+                  label="Details"
                   id="choose-detail"
                   ariaLabel="Choose Detail Select"
                   dashboard
@@ -266,7 +267,7 @@ const DetailsClient = ({
               <div className={styles.addSpecificationsContainer}>
                 <Button
                   className={styles.addSpecifications}
-                  buttonChildren="Add product specifications"
+                  buttonChildren="Add Product Specifications"
                   buttonType="normal"
                   buttonSize="large"
                   name="addSpecification"
@@ -300,7 +301,7 @@ const DetailsClient = ({
                   description="Provide details such as dimensions, weight, or any other relevant technical specifications. Add a colon after details to make them bold."
                   boldTextExample="Screen size"
                   normalTextExample="6.1 inches"
-                  placeholder="Add product specification"
+                  placeholder="Add Product Specifications"
                   isFieldDirty={
                     !!dirtyFields.specifications?.selectSpecification
                   }

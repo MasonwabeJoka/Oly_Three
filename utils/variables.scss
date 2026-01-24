@@ -15,6 +15,7 @@ $black-one: #000000;
 $black-two: #12161f;
 $black-three: #1c2230;
 $black-four: #434b4d;
+$black-five: #67787c;
 
 $blue-one: #c9e5e8;
 $blue-one-complimentary: #e8ccc9;
@@ -91,10 +92,17 @@ $shadow-two:
   5px 5px 10px 0px rgba(170, 186, 204, 0.5) inset,
   2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset,
   -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset;
+
+// $shadow-three:
+//   -5px -5px 10px 0px #fff,
+//   5px 5px 10px 0px rgba(170, 186, 204, 0.5),
+//   2px 2px 4px 0px rgba(120, 145, 171, 0.25),
+//   -2px -2px 4px 0px rgba(255, 255, 255, 0.5);
+
 $shadow-three:
-  -5px -5px 10px 0px #fff,
-  5px 5px 10px 0px rgba(170, 186, 204, 0.5),
-  2px 2px 4px 0px rgba(120, 145, 171, 0.25),
+  -5px -5px 10px 0px #ffffffb7,
+  5px 5px 10px 0px rgba(170, 186, 204, 0.3),
+  2px 2px 4px 0px rgba(120, 145, 171, 0.12),
   -2px -2px 4px 0px rgba(255, 255, 255, 0.5);
 
 $shadow-four:

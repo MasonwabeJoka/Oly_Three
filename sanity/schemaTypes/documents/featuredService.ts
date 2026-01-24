@@ -43,13 +43,7 @@ export const featuredService = defineType({
         hotspot: true,
       },
       validation: (Rule) => Rule.required(),
-      initialValue: {
-        _type: "image",
-        asset: {
-          _ref: "",
-          _type: "reference",
-        },
-      },
+   
     }),
     defineField({
       name: "title",

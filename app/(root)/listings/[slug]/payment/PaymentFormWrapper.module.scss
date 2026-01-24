@@ -4,6 +4,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  
   align-items: center;
   width: rem(311);
   height: 100vh;
@@ -13,27 +14,15 @@
 
   @include only(largeDesktop) {
     width: rem(1098);
-    margin-left: rem(-48);
+    background-color: antiquewhite;
   }
 
-  .titleContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: rem(128);
-    margin-bottom: rem(64);
-    width: 100%;
-    .title {
-      color: $danger;
-      font-size: $h4;
-      font-weight: 500;
-    }
-  }
+
 
   .children {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: rem(64);
   }
 
   .buttons {
@@ -50,9 +39,8 @@
   }
 
   .progressBar {
-    position: fixed;
-    bottom: 0;
-    z-index: 5;
+    width: 100%;
+    background-color: yellow !important;
   }
 }
 

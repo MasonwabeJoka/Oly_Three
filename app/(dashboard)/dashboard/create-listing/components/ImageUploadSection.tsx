@@ -1,3 +1,4 @@
+"use client";
 import styles from "./ImageUploadSection.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -99,77 +100,77 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
 
   return (
     <div className={styles.container}>
-      <Masonry
-        className={styles.content}
-        breakpointCols={breakpointColumnsObj}
-        columnClassName={styles.listingsContainerColumns}
-      >
-        {uploadedFiles
-          .filter((imageUrl) => imageUrl && imageUrl.trim() !== "") // Filter out empty or invalid URLs
-          .map((imageUrl, index) => (
-            <div
-              key={`${imageUrl}-${index}`}
-              className={styles.fileContainer}
-              draggable
-              onDragStart={(e: React.DragEvent<HTMLDivElement>) =>
-                handleDragStart(e, index)
-              }
-              onDragOver={(e: React.DragEvent<HTMLDivElement>) =>
-                handleDragOver(e, index)
-              }
-              onDrop={(e: React.DragEvent<HTMLDivElement>) =>
-                handleDrop(e, index)
-              }
-              onDragEnd={handleDragEnd}
-              onDragLeave={(e: React.DragEvent<HTMLDivElement>) =>
-                e.currentTarget.classList.remove(styles.dragOver)
-              }
-            >
+         <Masonry
+          className={styles.content}
+          breakpointCols={breakpointColumnsObj}
+          columnClassName={styles.listingsContainerColumns}
+        >
+          {uploadedFiles
+            .filter((imageUrl) => imageUrl && imageUrl.trim() !== "") // Filter out empty or invalid URLs
+            .map((imageUrl, index) => (
               <div
-                className={styles.deleteButtonContainer}
-                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-                  e.stopPropagation();
-                  removeImage(imageUrl);
-                }}
-                draggable={false}
-                onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
+                key={`${imageUrl}-${index}`}
+                className={styles.fileContainer}
+                draggable
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) =>
+                  handleDragStart(e, index)
+                }
+                onDragOver={(e: React.DragEvent<HTMLDivElement>) =>
+                  handleDragOver(e, index)
+                }
+                onDrop={(e: React.DragEvent<HTMLDivElement>) =>
+                  handleDrop(e, index)
+                }
+                onDragEnd={handleDragEnd}
+                onDragLeave={(e: React.DragEvent<HTMLDivElement>) =>
+                  e.currentTarget.classList.remove(styles.dragOver)
+                }
               >
-                <Icon
-                  className={styles.deleteButton}
-                  src={"/icons/x.svg"}
-                  alt="delete"
-                  width={20}
-                  height={20}
-                />
+                <div
+                  className={styles.deleteButtonContainer}
+                  onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.stopPropagation();
+                    removeImage(imageUrl);
+                  }}
+                  draggable={false}
+                  onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                  }}
+                >
+                  <Icon
+                    className={styles.deleteButton}
+                    src={"/icons/x.svg"}
+                    alt="delete"
+                    width={20}
+                    height={20}
+                  />
+                </div>
+                <div className={styles.imageWrapper}>
+                  <div className={styles.imageNumber}>{index + 1}</div>
+                  <Image
+                    className={styles.image}
+                    src={imageUrl}
+                    alt="image"
+                    width={248}
+                    height={186.4}
+                  />
+                </div>
               </div>
-              <div className={styles.imageWrapper}>
-                <div className={styles.imageNumber}>{index + 1}</div>
-                <Image
-                  className={styles.image}
-                  src={imageUrl}
-                  alt="image"
-                  width={248}
-                  height={186.4}
-                />
-              </div>
-            </div>
-          ))}
-      </Masonry>
+            ))}
+        </Masonry>
 
-      <div
-        className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
-      >
-        <UploadButton
-          mediaType="photo"
-          colour="primary"
-          required={true}
-          accept="image/*"
-        />
+        <div
+          className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
+        >
+          <UploadButton
+            mediaType="photo"
+            colour="normal"
+            required={true}
+            accept="image/*"
+          />
+        </div> 
       </div>
-    </div>
   );
 };
 

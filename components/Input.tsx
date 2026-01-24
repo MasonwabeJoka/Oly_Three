@@ -367,14 +367,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={`${styles.container} ${className || ""}`} ref={inputRef}>
-        {label &&
-          (internalValue || selectedItems.length > 0) &&
-          internalValue.length < 30 && (
-            <label className={styles.label} htmlFor={id}>
-              {label.length > 12 ? `${label.substring(0, 12)}...` : label}
-            </label>
-          )}
-
         {inputDescription && (
           <p id={descriptionId} className={styles.description}>
             {inputDescription}
@@ -392,6 +384,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {error}
             </p>
           )}
+
           {iconPosition === "left" &&
             iconSrcLeft &&
             (value || selectedItems.length > 0) && (
@@ -414,90 +407,108 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             onBlur={onBlur}
             ref={ref}
           />
-          <input
-            id={inputId}
-            className={inputClass}
-            type={inputType}
-            placeholder={placeholder}
-            name={name || undefined}
-            accept={accept}
-            value={internalValue}
-            onChange={handleInternalChange}
-            onKeyUp={onKeyUp}
-            onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-              if (isMultiSelect) setIsDropdownOpen(true);
-              if (onFocus) onFocus(e);
-            }}
-            onBlur={onBlur}
-            autoFocus={autoFocus}
-            autoComplete={autoComplete}
-            readOnly={readonly}
-            required={required}
-            form={form}
-            aria-label={ariaLabel}
-            aria-describedby={ariaDescribedByIds || undefined}
-            aria-invalid={!!error}
-            aria-expanded={
-              isSearchBar || isMultiSelect
-                ? isDropdownOpen || revealedSuggestions.length > 0
-                : undefined
-            }
-            aria-controls={listboxId}
-            aria-autocomplete={isSearchBar ? "list" : undefined}
-            role={isSearchBar ? "combobox" : undefined}
-            {...otherProps}
-          />
-          {iconPosition && (
-            <>
-              {iconPosition === "right" ||
-              (iconPosition === "leftRight" &&
-                (internalValue || selectedItems.length > 0)) ? (
-                <div
-                  className={styles.rightIconContainer}
-                  onClick={clearInputAndSuggestions}
-                >
-                  {iconSrcRight ? (
-                    <Image
-                      className={styles.rightIcon}
-                      src={
-                        internalValue || selectedItems.length > 0
-                          ? "/icons/X.png"
-                          : iconSrcRight || "/icons/search.png"
-                      }
-                      alt={`${ariaLabel} Icon`}
-                      width={iconWidth}
-                      height={iconHeight}
-                    />
-                  ) : internalValue || selectedItems.length > 0 ? (
-                    <Image
-                      className={styles.rightIcon}
-                      src={"/icons/X.png"}
-                      alt={`${ariaLabel} Icon`}
-                      width={iconWidth}
-                      height={iconHeight}
-                    />
-                  ) : iconPosition === "right" && isSearchBar ? (
-                    <Image
-                      className={styles.rightIcon}
-                      src={"/icons/search.png"}
-                      alt={`${ariaLabel} Icon`}
-                      width={iconWidth}
-                      height={iconHeight}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {isMultiSelect && selectedItems.length > 0 && (
-                    <span className={styles.selectedCount}>
-                      {selectedItems.length}
-                    </span>
-                  )}
-                </div>
-              ) : (
-                <div className={styles.rightIconContainer}></div>
+
+          <div className={styles.inputWrapper}>
+            {label &&
+              (internalValue || selectedItems.length > 0) &&
+              internalValue.length < 30 && (
+                <label htmlFor={inputId} className={styles.label}>
+                  <span>
+                    {" "}
+                    {label.length > 12 ? `${label.substring(0, 12)}...` : label}
+                  </span>
+                </label>
               )}
-            </>
-          )}
+            {!internalValue && selectedItems.length === 0 && required && (
+              <label htmlFor={inputId} className={styles.label}>
+                Required
+              </label>
+            )}
+            <input
+              id={inputId}
+              className={inputClass}
+              type={inputType}
+              placeholder={placeholder}
+              name={name || undefined}
+              accept={accept}
+              value={internalValue}
+              onChange={handleInternalChange}
+              onKeyUp={onKeyUp}
+              onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
+                if (isMultiSelect) setIsDropdownOpen(true);
+                if (onFocus) onFocus(e);
+              }}
+              onBlur={onBlur}
+              autoFocus={autoFocus}
+              autoComplete={autoComplete}
+              readOnly={readonly}
+              required={required}
+              form={form}
+              aria-label={ariaLabel}
+              aria-describedby={ariaDescribedByIds || undefined}
+              aria-invalid={!!error}
+              aria-expanded={
+                isSearchBar || isMultiSelect
+                  ? isDropdownOpen || revealedSuggestions.length > 0
+                  : undefined
+              }
+              aria-controls={listboxId}
+              aria-autocomplete={isSearchBar ? "list" : undefined}
+              role={isSearchBar ? "combobox" : undefined}
+              {...otherProps}
+            />
+            {iconPosition && (
+              <>
+                {iconPosition === "right" ||
+                (iconPosition === "leftRight" &&
+                  (internalValue || selectedItems.length > 0)) ? (
+                  <div
+                    className={styles.rightIconContainer}
+                    onClick={clearInputAndSuggestions}
+                  >
+                    {iconSrcRight ? (
+                      <Image
+                        className={styles.rightIcon}
+                        src={
+                          internalValue || selectedItems.length > 0
+                            ? "/icons/X.png"
+                            : iconSrcRight || "/icons/search.png"
+                        }
+                        alt={`${ariaLabel} Icon`}
+                        width={iconWidth}
+                        height={iconHeight}
+                      />
+                    ) : internalValue || selectedItems.length > 0 ? (
+                      <Image
+                        className={styles.rightIcon}
+                        src={"/icons/X.png"}
+                        alt={`${ariaLabel} Icon`}
+                        width={iconWidth}
+                        height={iconHeight}
+                      />
+                    ) : iconPosition === "right" && isSearchBar ? (
+                      <Image
+                        className={styles.rightIcon}
+                        src={"/icons/search.png"}
+                        alt={`${ariaLabel} Icon`}
+                        width={iconWidth}
+                        height={iconHeight}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {isMultiSelect && selectedItems.length > 0 && (
+                      <span className={styles.selectedCount}>
+                        {selectedItems.length}
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <div className={styles.rightIconContainer}></div>
+                )}
+              </>
+            )}
+          </div>
         </div>
         {selectedItems.length > 0 && (
           <div className={styles.selectedTags}>

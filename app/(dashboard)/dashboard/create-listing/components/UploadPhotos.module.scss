@@ -2,10 +2,12 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
   @include only(largeDesktop) {
     width: rem(1098);
@@ -17,16 +19,19 @@
     width: rem(960);
   }
 
-  .uploadBox {
-    margin-bottom: rem(64);
-  }
+  .wrapper {
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    
+    .title {
+      font-size: $h4;
+      font-weight: 600;
 
-  .uploadedPhotos {
-    padding: 0 rem(100);
-    width: 100%;
-  }
-
-  .buttonContainer {
-    margin-bottom: rem(16);
+      color: $danger;
+      margin: 0 auto;
+    }
   }
 }

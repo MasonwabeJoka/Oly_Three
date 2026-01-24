@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useActionState } from "react"; // For state/errors
 import { useFormStatus } from "react-dom"; // Correct import for pending status
-import styles from "./HeroSectionClient.module.scss";
+import styles from "./HeroSectionFieldsClient.module.scss";
 import Button from "./Buttons";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";

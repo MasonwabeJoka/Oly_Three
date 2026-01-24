@@ -63,26 +63,27 @@ const Listing: React.FC<ListingProps> = ({
               <GallerySection images={images as any} totalViews={totalViews} />
             </div>
             <section className={styles.listingDetails}>
-              <div className={styles.mainSectionContainer}>
+              <div className={styles.wrapper}>
                 <div ref={sellerDetailsRef} className={styles.sellerDetails}>
                   <SellerDetailsContainer />
                 </div>
-                <div className={styles.mainSectionContainer}>
+                <div className={styles.contentContainer}>
                   <MainSection listing={listing} />
+                  <div
+                    className={`${styles.productSpecsContainer} ${styles.detailsContainer}`}
+                  >
+                    <h4 className={styles.title}>Product Specifications</h4>
+                    <ListingDetails details={listingDetails} />
+                  </div>
+                  <div
+                    className={`${styles.featuresContainer} ${styles.detailsContainer}`}
+                  >
+                    <h4 className={styles.title}>Features</h4>
+                    <ListingDetails details={listingDetails} />
+                  </div>
                 </div>
               </div>
-              <div
-                className={`${styles.productSpecsContainer} ${styles.detailsContainer}`}
-              >
-                <h4 className={styles.title}>Product Specifications</h4>
-                <ListingDetails details={listingDetails} />
-              </div>
-              <div
-                className={`${styles.featuresContainer} ${styles.detailsContainer}`}
-              >
-                <h4 className={styles.title}>Features</h4>
-                <ListingDetails details={listingDetails} />
-              </div>
+
               <div ref={similarAdsRef} className={styles.similarAdsContainer}>
                 <h4 className={`${styles.title} ${styles.similarAdsTitle}`}>
                   Similar Listings

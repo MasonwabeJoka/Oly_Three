@@ -5,6 +5,8 @@ import HeroSectionFieldsClient from "./HeroSectionFieldsClient";
 import Button from "./Buttons";
 import Form from "next/form";
 
+// Todo: Move the Create A Listing button to HeroSectionFieldsClient
+
 const HeroSectionFields = async ({
   searchParams,
 }: {

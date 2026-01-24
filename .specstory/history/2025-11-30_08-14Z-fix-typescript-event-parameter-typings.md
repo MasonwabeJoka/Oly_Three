@@ -182,7 +182,7 @@ Fixing all event parameter types:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/FeedbackDetailsCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/FeedbackDetailsCard.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -205,14 +205,14 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Comment.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Comment.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
 
 ```diff
 @@ -15,5 +15,5 @@
-      &quot;This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&quot;;
+      "This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. his is a sample comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
   
 -   useOnClickOutside(replyRef, (event) =&gt; {
 +   useOnClickOutside(replyRef, (event: MouseEvent | TouchEvent) =&gt; {
@@ -228,7 +228,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TabsClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TabsClient.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -249,7 +249,7 @@ Lines added: 1, lines removed: 1
 ```diff
 @@ -120,5 +120,5 @@
                 style={{ flexBasis: tabWidth, flexShrink: tabWidth }}
-                color={title === &quot;Delete&quot; ? &quot;#ff3c14&quot; : &quot;#434b4d&quot;}
+                color={title === "Delete" ? "#ff3c14" : "#434b4d"}
 -               onClick={(event) =&gt; handleClick(index, event)}
 +               onClick={(event: React.MouseEvent&lt;HTMLLIElement&gt;) =&gt; handleClick(index, event)}
               /&gt;
@@ -264,7 +264,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/ExpandedDetails.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/ExpandedDetails.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -289,7 +289,7 @@ Lines added: 2, lines removed: 2
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/BoxImageContainer.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/BoxImageContainer.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 2
@@ -414,12 +414,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/cards/FeedbackDetailsCard.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/cards/FeedbackDetailsCard.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -428,14 +428,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -443,8 +443,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -464,12 +464,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/Comment.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/Comment.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -478,14 +478,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -493,8 +493,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -514,12 +514,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/TabsClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/TabsClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -528,14 +528,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -543,8 +543,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -564,12 +564,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/ExpandedDetails.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/ExpandedDetails.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -578,14 +578,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -593,8 +593,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -614,12 +614,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/BoxImageContainer.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/BoxImageContainer.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -628,14 +628,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -643,8 +643,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2195,7 +2195,7 @@ Removing redundant `name` props where `register`/`reactHookFormProps` is used. S
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/FeedbackForm.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/FeedbackForm.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
@@ -2203,9 +2203,9 @@ Lines added: undefined, lines removed: 1
 ```diff
 @@ -140,5 +140,4 @@
             autoFocus={false}
-            id=&quot;email&quot;
--           name=&quot;email&quot; // Required for FormData
-            ariaLabel=&quot;Email Field&quot;
+            id="email"
+-           name="email" // Required for FormData
+            ariaLabel="Email Field"
             required={true}
 ```
 
@@ -2217,7 +2217,7 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/FeedbackForm.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/FeedbackForm.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
@@ -2225,9 +2225,9 @@ Lines added: undefined, lines removed: 1
 ```diff
 @@ -165,5 +165,4 @@
             autoFocus={false}
-            id=&quot;title&quot;
--           name=&quot;title&quot; // Required for FormData
-            ariaLabel=&quot;Title Field&quot;
+            id="title"
+-           name="title" // Required for FormData
+            ariaLabel="Title Field"
             required={true}
 ```
 
@@ -2239,17 +2239,17 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/FeedbackForm.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/FeedbackForm.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -186,5 +186,4 @@
-            label=&quot;Message&quot;
-            id=&quot;message&quot;
--           name=&quot;message&quot; // Required for FormData
-            size=&quot;large&quot;
+            label="Message"
+            id="message"
+-           name="message" // Required for FormData
+            size="large"
             required={true}
 ```
 
@@ -2360,7 +2360,7 @@ Lint errors for `components/FeedbackForm.tsx`
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2383,7 +2383,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Input.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Input.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2406,7 +2406,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextArea.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextArea.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2429,7 +2429,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextArea.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextArea.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2453,7 +2453,7 @@ Lines added: 1, lines removed: 1
                 id={textareaId}
 -               name={name}
 +               name={name || reactHookFormProps?.name}
-                placeholder={!isFocused ? placeholder : &quot;&quot;}
+                placeholder={!isFocused ? placeholder : ""}
                 value={localValue}
 ```
 
@@ -2465,7 +2465,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/Select.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/Select.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2488,7 +2488,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextInputBar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextInputBar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2511,7 +2511,7 @@ Lines added: 1, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/TextInputBar.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/TextInputBar.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2535,7 +2535,7 @@ Lines added: 1, lines removed: 1
                 id={id}
 -               name={name}
 +               name={name || reactHookFormProps?.name}
-                placeholder={!isFocused ? placeholder : &quot;&quot;}
+                placeholder={!isFocused ? placeholder : ""}
                 value={value || localValue}
 ```
 
@@ -2594,7 +2594,7 @@ Updating InputTemp to handle name correctly:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/InputTemp.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/InputTemp.tsx</summary>
 
 **Chunk 1**
 Lines added: 1, lines removed: 1
@@ -2842,12 +2842,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/FeedbackForm.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/FeedbackForm.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2856,14 +2856,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2871,8 +2871,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2892,12 +2892,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/Input.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/Input.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2906,14 +2906,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2921,8 +2921,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2942,12 +2942,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/TextArea.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/TextArea.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -2956,14 +2956,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -2971,8 +2971,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -2992,12 +2992,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/Select.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/Select.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3006,14 +3006,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3021,8 +3021,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3042,12 +3042,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/TextInputBar.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/TextInputBar.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3056,14 +3056,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3071,8 +3071,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3092,12 +3092,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/InputTemp.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/InputTemp.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3106,14 +3106,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3121,8 +3121,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3409,16 +3409,16 @@ Checking the `Select` component interface, then removing `autoComplete` from all
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -98,5 +98,4 @@
-              ariaLabel=&quot;Auction Start Time&quot;
+              ariaLabel="Auction Start Time"
               autoFocus={false}
--             autoComplete=&quot;off&quot;
+-             autoComplete="off"
               disabled={false}
               required={true}
 ```
@@ -3431,16 +3431,16 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -130,5 +130,4 @@
-                ariaLabel=&quot;Auction Duration&quot;
+                ariaLabel="Auction Duration"
                 autoFocus={false}
--               autoComplete=&quot;off&quot;
+-               autoComplete="off"
                 disabled={false}
                 required={true}
 ```
@@ -3497,16 +3497,16 @@ Fixing the remaining instances:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/Price.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/Price.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -60,5 +60,4 @@
-                ariaLabel=&quot;Price Types Select&quot;
+                ariaLabel="Price Types Select"
                 autoFocus={false}
--               autoComplete=&quot;off&quot;
+-               autoComplete="off"
                 disabled={false}
                 required={true}
 ```
@@ -3519,16 +3519,16 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/forms/DetailsFormClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/forms/DetailsFormClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -101,5 +101,4 @@
-                ariaLabel=&quot;Conditions&quot;
+                ariaLabel="Conditions"
                 autoFocus={false}
--               autoComplete=&quot;off&quot;
+-               autoComplete="off"
                 disabled={false}
                 required={true}
 ```
@@ -3541,16 +3541,16 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/forms/DetailsFormClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/forms/DetailsFormClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -125,5 +125,4 @@
-                ariaLabel=&quot;Choose Detail Select&quot;
+                ariaLabel="Choose Detail Select"
                 autoFocus={false}
--               autoComplete=&quot;off&quot;
+-               autoComplete="off"
                 disabled={false}
                 required={true}
 ```
@@ -3563,16 +3563,16 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/FeaturesClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/FeaturesClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -89,5 +89,4 @@
-                  ariaLabel=&quot;Choose Detail Select&quot;
+                  ariaLabel="Choose Detail Select"
                   autoFocus={false}
--                 autoComplete=&quot;off&quot;
+-                 autoComplete="off"
                   disabled={false}
                   required={false}
 ```
@@ -3699,16 +3699,16 @@ Fixing one more instance in DetailsClient.tsx:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/DetailsClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/DetailsClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -205,5 +205,4 @@
-                    id=&quot;choose-detail&quot;
-                    ariaLabel=&quot;Choose Detail Select&quot;
--                   autoComplete=&quot;off&quot;
+                    id="choose-detail"
+                    ariaLabel="Choose Detail Select"
+-                   autoComplete="off"
                     dashboard
                     error={errors.details?.selectDetail?.message as string}
 ```
@@ -3728,12 +3728,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3742,14 +3742,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3757,8 +3757,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3778,12 +3778,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/Price.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/Price.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3792,14 +3792,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3807,8 +3807,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3828,12 +3828,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/forms/DetailsFormClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/forms/DetailsFormClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3842,14 +3842,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3857,8 +3857,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3878,12 +3878,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/FeaturesClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/FeaturesClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3892,14 +3892,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3907,8 +3907,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -3928,12 +3928,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/DetailsClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/DetailsClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -3942,14 +3942,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -3957,8 +3957,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -4143,18 +4143,18 @@ Removing the `selectPrompt` prop from both files:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -125,5 +125,4 @@
-                initialValue=&quot;Auction Duration&quot;
-                selectSize=&quot;large&quot;
--               selectPrompt=&quot;Auction Duration&quot;
-                label=&quot;Auction Duration&quot;
-                id=&quot;auctionDuration&quot;
+                initialValue="Auction Duration"
+                selectSize="large"
+-               selectPrompt="Auction Duration"
+                label="Auction Duration"
+                id="auctionDuration"
 ```
 
 </details>
@@ -4165,18 +4165,18 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -108,5 +108,4 @@
-                selectSize=&quot;medium&quot;
-                selectColourType=&quot;normal&quot;
--               selectPrompt=&quot;5 Days&quot;
-                displayTextArray={[&quot;a&quot;, &quot;b&quot;]}
-                label=&quot;Set PromotionDuration&quot;
+                selectSize="medium"
+                selectColourType="normal"
+-               selectPrompt="5 Days"
+                displayTextArray={["a", "b"]}
+                label="Set PromotionDuration"
 ```
 
 </details>
@@ -4283,18 +4283,18 @@ Removing the invalid `displayTextArray` prop from `PromoteYourAdCard.tsx`:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -108,5 +108,4 @@
-                selectSize=&quot;medium&quot;
-                selectColourType=&quot;normal&quot;
--               displayTextArray={[&quot;a&quot;, &quot;b&quot;]}
-                label=&quot;Set PromotionDuration&quot;
-                id=&quot;set-promotion_duration&quot;
+                selectSize="medium"
+                selectColourType="normal"
+-               displayTextArray={["a", "b"]}
+                label="Set PromotionDuration"
+                id="set-promotion_duration"
 ```
 
 </details>
@@ -4394,16 +4394,16 @@ Output mode: content
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -112,5 +112,4 @@
-                ariaLabel=&quot;Set Promotion Duration&quot;
+                ariaLabel="Set Promotion Duration"
                 autoFocus={false}
--               autoComplete=&quot;on&quot;
+-               autoComplete="on"
                 disabled={false}
                 required={true}
 ```
@@ -4416,16 +4416,16 @@ Lines added: undefined, lines removed: 1
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: components/cards/PromoteYourAdCard.tsx</summary>
 
 **Chunk 1**
 Lines added: undefined, lines removed: 1
 
 ```diff
 @@ -191,5 +191,4 @@
-                ariaLabel=&quot;Set Promotion Duration&quot;
+                ariaLabel="Set Promotion Duration"
                 autoFocus={false}
--               autoComplete=&quot;on&quot;
+-               autoComplete="on"
                 disabled={false}
                 required={true}
 ```
@@ -4462,12 +4462,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/AuctionStartTimeClient.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -4476,14 +4476,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -4491,8 +4491,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -4512,12 +4512,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;components/cards/PromoteYourAdCard.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"components/cards/PromoteYourAdCard.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -4526,14 +4526,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -4541,8 +4541,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -4687,7 +4687,7 @@ Fixing the issue by safely accessing `checked` only when the target is an input:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
@@ -4802,7 +4802,7 @@ Improving the fix with a type guard for better type safety:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
 
 **Chunk 1**
 Lines added: 2, lines removed: 1
@@ -4861,12 +4861,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -4875,14 +4875,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -4890,8 +4890,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -4976,7 +4976,7 @@ Fixing the type narrowing issue: TypeScript isn't narrowing `e.target` after the
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx</summary>
 
 **Chunk 1**
 Lines added: 3, lines removed: 3
@@ -5027,12 +5027,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/auto/VehicleCondition.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -5041,14 +5041,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "Done",
+    "selectedOption": "run",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -5056,8 +5056,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -5473,7 +5473,7 @@ Verifying the bug and implementing a fix:
 
 <tool-use data-tool-type="write" data-tool-name="search_replace">
 
-<details><summary>Tool use: **code_edit** • Edit file: app/(dashboard)/dashboard/create-listing/components/SiteSelection.tsx</summary>
+<details><summary>Tool use: **search_replace** • Edit file: app/(dashboard)/dashboard/create-listing/components/SiteSelection.tsx</summary>
 
 **Chunk 1**
 Lines added: 6, lines removed: 1
@@ -5487,7 +5487,7 @@ Lines added: 6, lines removed: 1
 +       if (site) {
 +         onSelect(site);
 +       } else {
-+         console.error(&#96;Site &quot;${siteText}&quot; not found in siteMap&#96;);
++         console.error(&#96;Site "${siteText}" not found in siteMap&#96;);
 +       }
       }
     };
@@ -5525,12 +5525,12 @@ Parameters:
 
 ```json
 {
-  &quot;tools&quot;: [
+  "tools": [
     {
-      &quot;name&quot;: &quot;codacy_cli_analyze&quot;,
-      &quot;description&quot;: &quot;Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n&quot;,
-      &quot;parameters&quot;: &quot;{\&quot;rootPath\&quot;: \&quot;C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\&quot;, \&quot;file\&quot;: \&quot;app/(dashboard)/dashboard/create-listing/components/SiteSelection.tsx\&quot;}&quot;,
-      &quot;serverName&quot;: &quot;codacy&quot;
+      "name": "codacy_cli_analyze",
+      "description": "Run quality analysis locally using Codacy CLI. \n \n  Use this tool to analyze the quality of a repository using Codacy command line.\n\n  Common use cases: \n  - When the user asks for an analysis of a repository\n  - When the user asks to scan the code\n  - When the user wants to analyze based on Codacy configuration\n  - When the user wants to apply fixes based on Codacy configuration and analysis\n  - When the user wants Codacy results immediately without waiting for the next scheduled analysis\n\n  Common mistakes: \n  - Using this tool to know the status of a repository\n  - Using this tool without specifying the rootPath\n  - Using this tool to know current results from Codacy. Use codacy_get_repository_with_analysis instead.\n  - Filling the tool parameter when not asked specifically for it.\n  \n  - Using this tool for a organization other than the current one\n  - Using this tool with the wrong organization name (if you are not sure, use the codacy_list_organizations tool to validate the organization name)\n\n  \n  - Using this tool without specifying the repository name \n  - Using this tool for a repository other than the current one\n  - Using this tool with the wrong repository name (if you are not sure, use the codacy_list_organization_repositories tool to validate the repository name)\n\n",
+      "parameters": "{\"rootPath\": \"C:\\\\Users\\\\USER-PC\\\\Documents\\\\Web Development\\\\oly\", \"file\": \"app/(dashboard)/dashboard/create-listing/components/SiteSelection.tsx\"}",
+      "serverName": "codacy"
     }
   ]
 }
@@ -5539,14 +5539,14 @@ Additional data:
 
 ```json
 {
-  &quot;status&quot;: &quot;success&quot;,
-  &quot;reviewData&quot;: {
-    &quot;status&quot;: &quot;Done&quot;,
-    &quot;selectedOption&quot;: &quot;run&quot;,
-    &quot;isShowingInput&quot;: false,
-    &quot;approvalType&quot;: &quot;full_auto&quot;,
-    &quot;toolName&quot;: &quot;codacy_cli_analyze&quot;,
-    &quot;serverId&quot;: &quot;codacy&quot;
+  "status": "success",
+  "reviewData": {
+    "status": "None",
+    "selectedOption": "rejectAndTellWhatToDoDifferently",
+    "isShowingInput": false,
+    "approvalType": "full_auto",
+    "toolName": "codacy_cli_analyze",
+    "serverId": "codacy"
   }
 }
 ```
@@ -5554,8 +5554,8 @@ Result:
 
 ```json
 {
-  &quot;selectedTool&quot;: &quot;codacy_cli_analyze&quot;,
-  &quot;result&quot;: &quot;{\&quot;error\&quot;:\&quot;MCP error 50: Command failed: wsl --status\\n\&quot;}&quot;
+  "selectedTool": "codacy_cli_analyze",
+  "result": "{\"error\":\"MCP error 50: Command failed: wsl --status\\n\"}"
 }
 ```
 Status: **completed**
@@ -5581,6 +5581,35 @@ Status: **completed**
 ---
 
 
+Bug verified and fixed. Here's what I found and fixed:
+
+## Bug Analysis:
+
+**Location:** `app/(dashboard)/dashboard/create-listing/components/SiteSelection.tsx:59-63`
+
+**Issue:** The `handleSiteClick` function accesses `siteMap[siteText]` without checking if the key exists. If `siteText` doesn't exist in `siteMap`, it returns `undefined`, which is then passed to `onSelect()`. This causes a runtime error when `handleSiteSelection` tries to access `steps[undefined]` (line 562 in CreateAListingSteps.tsx).
+
+## Fix Applied:
+
+I've updated the `handleSiteClick` function to:
+1. Store the mapped site value in a variable
+2. Verify the site exists before calling `onSelect`
+3. Add error logging if the site is not found (for debugging)
+
+```typescript
+const handleSiteClick = (siteText: string) => {
+  if (onSelect) {
+    const site = siteMap[siteText];
+    if (site) {
+      onSelect(site);
+    } else {
+      console.error(`Site "${siteText}" not found in siteMap`);
+    }
+  }
+};
+```
+
+This prevents `undefined` from being passed to `onSelect`, avoiding the runtime error when accessing `steps[undefined]` later. The code now handles cases where the `sites` array and `siteMap` might be out of sync.
 
 ---
 

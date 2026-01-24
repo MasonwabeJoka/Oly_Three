@@ -2,7 +2,7 @@
 
 const nextConfig = {
   cacheComponents: false, 
-  serverExternalPackages: ["mongoose"],
+  serverExternalPackages: ["mongoose", "isomorphic-dompurify", "jsdom"],
   turbopack: {},
   sassOptions: {
     api: "modern-compiler",

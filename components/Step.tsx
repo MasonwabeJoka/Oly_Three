@@ -24,8 +24,8 @@ export default function Step<T>({
   lastStepButtonText = "Submit",
   isFirstStep,
   isLastStep,
-  hideBackButton = false,
-  hideNextButton = false,
+  hideBackButton,
+  hideNextButton,
 }: StepProps<T>) {
   return (
     <div className={styles.container}>

@@ -59,6 +59,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                   step={100}
                   debounceTime={500}
                   id="startingPrice"
+                  label="Starting"
                   value={watch("price.startingPrice") || 0}
                   inputSize="large"
                   placeholder="Starting Price"
@@ -82,6 +83,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     step={100}
                     debounceTime={500}
                     id="buyNowPrice"
+                    label="Buy Now"
                     value={watch("price.buyNowPrice") || 0}
                     inputSize="large"
                     placeholder="Buy Now Price"

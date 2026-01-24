@@ -16,7 +16,6 @@
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(-10px);
-
   background-color: $white-two;
   border-radius: rem(40) rem(40) rem(44) rem(44);
   width: rem(544);
@@ -25,7 +24,7 @@
     &.open {
     opacity: 1;
     transform: translateY(0);
-  margin-bottom: rem(20);
+  margin-bottom: rem(180);
 
   }
 

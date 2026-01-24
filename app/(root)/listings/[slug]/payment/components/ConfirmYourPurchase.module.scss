@@ -4,10 +4,11 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 60%;
-
-  .confirmTitle {
+  width: 70%;
+  height: 100vh;
+  .title {
     font-size: $h4;
     color: $danger;
     font-weight: 500;
@@ -15,39 +16,22 @@
     margin-bottom: rem(32);
   }
 
-  .paragraphTitle {
-    font-size: $h4;
-    margin-bottom: rem(16);
-  }
+
   p {
     text-align: center;
-    margin-bottom: rem(48);
+    margin-bottom: rem(16);
   }
   .link {
     cursor: pointer;
-    text-decoration: underline;
-  }
-  .link:hover {
-    color: $primary-hover;
-  }
-  .purchasingProcess {
-    margin-bottom: rem(16);
+    font-weight: 500;
   }
 
-  .fundsWithDrawalTitle {
-    font-size: $h4;
+
+  .termsAndConditions {
+    font-size: rem(14);
+    margin-top: rem(-12);
   }
 
-  .goToPaymentsBtn {
-    margin-top: rem(20);
-    margin-bottom: rem(20);
-  }
 
-  .contactSellerBtn {
-    margin-bottom: rem(48);
-    background-color: $white-four;
-  }
-  .contactSellerBtn:hover {
-    background-color: $primary;
-  }
+
 }

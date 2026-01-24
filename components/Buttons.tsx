@@ -36,17 +36,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   formTarget?: "_blank" | "_self" | "_parent" | "_top" | string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDoubleClick?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   onMouseDown?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   onMouseUp?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onMouseEnter?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   onMouseLeave?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   // onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
@@ -54,7 +54,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   onKeyPress?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   onContextMenu?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;
   onDragStart?: (event: React.DragEvent<HTMLButtonElement>) => void;
   onDragEnd?: (event: React.DragEvent<HTMLButtonElement>) => void;
@@ -65,7 +65,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onAnimationStart?: (event: React.AnimationEvent<HTMLButtonElement>) => void;
   onAnimationEnd?: (event: React.AnimationEvent<HTMLButtonElement>) => void;
   onAnimationIteration?: (
-    event: React.AnimationEvent<HTMLButtonElement>
+    event: React.AnimationEvent<HTMLButtonElement>,
   ) => void;
   onTransitionEnd?: (event: React.TransitionEvent<HTMLButtonElement>) => void;
 }
@@ -219,11 +219,6 @@ const Button: React.FC<ButtonProps> = ({
         style={{ fontSize: fontSize, ...style }}
         {...otherProps}
       >
-        <span className="sr-only">
-          {disabled && "Disabled "}
-          {buttonType === "primary" && "Primary "}
-          {buttonType === "danger" && "Warning: "}
-        </span>
         {buttonChildren}
       </button>
     </>

@@ -23,6 +23,7 @@ const formDataSchema = z.object({
     startingPrice: z.number().positive({ message: "Starting price must be a positive number" }).optional(),
     buyNowPrice: z.number().positive({ message: "Buy Now price must be a positive number" }).optional(),
     startTime: z.string().optional(),
+    auctionDuration: z.string().optional(),
   }),
   // Create Account section
   createAccount: z.object({
@@ -33,7 +34,8 @@ const formDataSchema = z.object({
   // Title and Description section
   titleAndDescription: z.object({
     title: z.string().min(1, { message: "Title is required" }),
-    description: z.string().min(1, { message: "Description is required" }),
+    description: z.string().optional(),
+    // description: z.string().min(1, { message: "Description is required" }),
   }),
   // Upload Media section
   uploadMedia: z.object({

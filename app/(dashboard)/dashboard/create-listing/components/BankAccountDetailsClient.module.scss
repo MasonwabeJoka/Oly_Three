@@ -2,13 +2,12 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .bankNameContainer {
-  position: relative;
-  z-index: 2;
-  margin-bottom: rem(20) !important;
+  
+  margin-bottom: rem(32) !important;
 }
 
 .accountHolderContainer {
-  margin-bottom: rem(20) !important;
+  margin-bottom: rem(32) !important;
 }
 
 .accountNumberContainer {

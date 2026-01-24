@@ -80,7 +80,16 @@ const Price = ({ onNext }: Props) => {
                   step={1}
                   debounceTime={500}
                   id="price"
+                  label="Price"
                   value={watch("price.amount") || 0}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    const numValue = parseFloat(e.target.value) || 0;
+                    setValue("price.amount", numValue, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    });
+                  }}
                   inputSize="large"
                   inputType="normal"
                   placeholder="Price"
@@ -88,10 +97,8 @@ const Price = ({ onNext }: Props) => {
                   required={true}
                   dashboard
                   error={(errors.price as any)?.amount?.message}
-                  {...register("price.amount", {
+                  reactHookFormProps={register("price.amount", {
                     valueAsNumber: true,
-                    onChange: (e: ChangeEvent<HTMLInputElement>) =>
-                      handlePriceChange(e, "amount"),
                   })}
                 />
               </div>

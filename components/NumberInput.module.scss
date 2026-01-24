@@ -29,6 +29,22 @@
       -moz-appearance: textfield;
     }
 
+     .label {
+        position: absolute;
+        top: 50%;
+        left: rem(24);
+        transform: translateY(-50%);
+        z-index: 1;
+        color: $grey-four;
+        text-transform: uppercase;
+        font-size: rem(10);
+        
+        .requiredStar {
+          display: block;
+          margin-top: rem(1);
+        }
+      }
+
     .input {
       display: flex;
       justify-content: center;

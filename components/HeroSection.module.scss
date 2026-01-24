@@ -4,11 +4,12 @@
 .star {
   display: none;
   position: absolute;
+  z-index: 10;
   top: 50px;
   left: 50px;
 
   @include only(smallDesktop) {
-    display: block;
+    display: none;
   }
   @include only(largeDesktop) {
     display: block;
@@ -17,8 +18,7 @@
     display: block;
   }
 }
-
-.mainSection {
+.mainContainer {
   position: relative;
   display: flex;
   justify-content: center;
@@ -27,24 +27,20 @@
   height: 95vh;
   border-radius: rem(150);
   gap: rem(24);
-  background-color: #c9e5e8;
+  
+
   @include only(largeDesktop) {
-    justify-content: space-between;
-    gap: rem(96);
-    background-color: $white-four;
+   
   }
 
   @include only(smallDesktop) {
-    justify-content: space-between;
-    // margin-right: rem(12) !important;
   }
 
   @include only(tablet) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: rem(16) !important;
-    height: 114vh;
+    width: 100vw;
+    padding: rem(0) rem(40) !important;
+  //  background-color: #c9e5e8;
+   border-radius: 0;
   }
 
   @include only(extraLargeDesktop) {
@@ -56,53 +52,48 @@
     right: 50%;
   }
 
-  .mainTitle {
-    width: rem(640) !important;
-    font-size: $h1 !important;
-    font-weight: 600;
-    line-height: 1;
-    text-align: center;
-    color: $black-four;
-    z-index: 1;
+  .titleContainer {
+    position: relative;
+    display: flex;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
 
-    @include only(largeDesktop) {
-      width: rem(740);
-      margin-top: rem(96);
-      margin-left: rem(112);
-      font-size: rem(64);
-      line-height: 1.2;
-    }
+    h1 {
+      width: rem(640) !important;
+      font-size: $h1;
+      font-weight: 600;
+       line-height: 1.2;
+      text-align: center;
+      color: $black-four;
+      z-index: 1;
+      @include only(largeDesktop) {
+        width: rem(740);
 
-    @include only(smallDesktop) {
-      margin-top: rem(100);
-      width: rem(500) !important;
-      margin-left: rem(80);
-      font-size: rem(44) !important;
-    }
-    @include only(tablet) {
-      position: absolute;
-      top: rem(190);
-      width: rem(500) !important;
-      font-size: rem(44) !important;
+        line-height: 1.2;
+      }
+
+      @include only(smallDesktop) {
+        width: rem(500) !important;
+        font-size: rem(36) !important;
+      }
+      @include only(tablet) {
+       width: rem(400) !important;
+        font-size: rem(30) !important;
+      }
     }
   }
-
   .HeroSectionFieldsContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: rem(8);
+    width: 50vw;
 
     @include only(smallDesktop) {
-      position: absolute;
-      right: 0;
-      justify-self: right !important;
     }
 
     @include only(tablet) {
-      position: absolute;
-      right: 0;
-      justify-self: right !important;
+     padding: rem(0) rem(340) !important;
     }
   }
 }

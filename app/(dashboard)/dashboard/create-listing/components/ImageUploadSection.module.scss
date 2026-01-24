@@ -3,22 +3,23 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
- gap: rem(16);
-  // width: 100%;
+  gap: rem(16);
+  width: rem(1060);
+  height: fit-content;
 
   .content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     // gap: rem(16);
-     width: rem(1060);
+    width: rem(1060);
     // padding: 0 rem(64);
-    
-  
-    margin-bottom: rem(48);
+
+    margin-top: rem(48);
     margin-left: rem(48);
     // background-color: green;
 
@@ -91,7 +92,7 @@
 
       .imageNumber {
         position: absolute;
-         top: rem(4);
+        top: rem(4);
         left: rem(6);
         background-color: rgba(0, 0, 0, 0.7);
         color: $white-four;
@@ -109,7 +110,5 @@
         border-radius: rem(20);
       }
     }
-
-
   }
 }

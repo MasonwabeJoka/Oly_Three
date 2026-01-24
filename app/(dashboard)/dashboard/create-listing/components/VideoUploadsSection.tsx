@@ -1,3 +1,4 @@
+"use client";
 import styles from "./VideoUploadsSection.module.scss";
 import VideoUploadCard from "@/components/VideoUploadCard";
 import UploadButton from "@/components/UploadButton";
@@ -6,23 +7,25 @@ import VideoUploadForm from "./VideoUploadForm";
 import { useState } from "react";
 import Input from "@/components/Input";
 import { useFormContext } from "react-hook-form";
+
 const VideoUploadsSection = () => {
-  const {
-    register,
-    setValue,
-    formState: { errors },
-  } = useFormContext();
+  const formContext = useFormContext();
+  const register = formContext?.register;
+  const errors = formContext?.formState?.errors;
+
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
+  const [videoUrl, setVideoUrl] = useState("");
 
   const openModal = () => {
     setShowVideoUploadModal(true);
   };
   const handleVideoUpload = (file: File) => {
-    const videoUrl = URL.createObjectURL(file); // Generate a temporary URL
-    setUploadedVideoUrl(videoUrl);
+    const url = URL.createObjectURL(file);
+    setUploadedVideoUrl(url);
     openModal();
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.uploadedVideosContainer}>
@@ -59,11 +62,14 @@ const VideoUploadsSection = () => {
           ariaLabel="Video URL Field"
           autoFocus={false}
           autoComplete="off"
-          disabled={false}
-          required
+          required={false}
           dashboard
-          {...register("uploadMedia.videoUrl")}
-          error={(errors.uploadMedia as any)?.videoUrl?.message}
+          {...(register ? register("uploadMedia.videoUrl") : {})}
+          value={videoUrl}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setVideoUrl(e.target.value)
+          }
+          error={(errors?.uploadMedia as any)?.videoUrl?.message}
         />
       </div>
       <Modal

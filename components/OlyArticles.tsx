@@ -10,7 +10,7 @@ const OlyArticles = () => {
       <h2 className={styles.title}>Oly Articles</h2>
       <ArticlesSlider />
       <div className={styles.buttons}>
-        <Link href="/articles">
+        <Link href="/articles/sports/?page=1">
           <Button
             className={styles.moreArticlesBtn}
             buttonType="normal"

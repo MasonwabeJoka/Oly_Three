@@ -12,8 +12,8 @@ export const user = defineType({
             description: 'The unique identifier for the user.',
         }),
         defineField({
-            name: 'clerkId',
-            title: 'Clerk ID',
+            name: 'workosId',
+            title: 'WorkOS ID',
             type: 'string',
             description: 'The unique identifier for the user.',
         }),

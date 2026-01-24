@@ -3,44 +3,59 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @include only(largeDesktop) {
-  
   }
   @include only(smallDesktop) {
-    width: rem(844);
-  
   }
   @include only(tablet) {
-    width: rem(844);
-  
   }
   @include only(mobile) {
-  
   }
-     .title {
-      display: flex;
-      justify-content: center;
-      font-size: $h3 !important;
-      font-weight: 600;
-      color: $black-four;
-      margin-bottom: rem(48);
-
-      @include only(largeDesktop) {
-      }
-
-      @include only(smallDesktop) {
-        margin-bottom: rem(20);
-      }
-    }
-
-  .classifieds {
+  .title {
     display: flex;
     justify-content: center;
+    font-size: $h3 !important;
+    font-weight: 600;
+    color: $black-four;
+    margin-bottom: rem(48);
+
+    @include only(largeDesktop) {
+    }
+
+    @include only(smallDesktop) {
+      margin-bottom: rem(20);
+    }
+  }
+
+.classifiedsWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+    .classifieds {
+    display: flex;
     flex-wrap: wrap;
     gap: rem(32);
+    width: fit-content;
+    
+    @include only(largeDesktop) {
+      
+    }
+    
+    @include only(smallDesktop) {
+   width: rem(972);
+
   }
+    
+    @include only(tablet) {
+   width: rem(972);
+      background-color: yellow;
+  }
+}
+}
 }

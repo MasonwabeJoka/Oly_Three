@@ -107,6 +107,11 @@ import { similarListingsSection } from './documents/layout/pages/listing/section
 import {olyArticle} from "./documents/oly-article"
 import {featuredService} from "./documents/featuredService"
 import { olySite } from "./documents/olySite"
+import {customerType} from "./documents/shops/customerType"
+import {orderType} from "./documents/shops/orderType"
+import {productType} from "./documents/shops/productType"
+import {categoryType} from "./documents/shops/categoryType"
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -218,5 +223,12 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     olyArticle,
     featuredService,
     olySite,
+
+    // Shops
+    customerType,
+    orderType,
+    productType,
+    categoryType,
+
   ],
 };

@@ -11,7 +11,6 @@
   border-radius: rem(40);
   margin-left: rem(6) !important;
   margin-bottom: rem(-24) !important;
-  background-color: $white-three;
 
   @include only(largeDesktop) {
     margin-bottom: unset !important;
@@ -20,36 +19,41 @@
     height: unset;
   }
 
-  .title {
-    margin-top: rem(24);
-    margin-bottom: rem(24);
-    text-align: center;
-  }
-
   .wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: center !important;
     width: 100%;
-
-    .iconContainer {
-      // box-shadow: $shadow-one;
-      border-radius: 100%;
+    .platformContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: rem(250);
+      height: rem(160);
+      .title {
+        margin-top: rem(24);
+        margin-bottom: rem(24);
+        text-align: center;
+        width: 80%;
+        font-size: rem(14);
+      }
     }
+
     .formControls {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: rem(400);
-      margin: 0 rem(64) rem(40) rem(64);
-
+      margin: 0 rem(64) 0 rem(64);
       .setPromotionDurationContainer {
         margin-bottom: rem(20);
+
         .setPromotionDuration {
+          box-shadow: $shadow-three;
         }
       }
       .moreInfoButton {
         background-color: $white-three;
+        box-shadow: $shadow-three;
 
         &:hover {
           background-color: $white-one;

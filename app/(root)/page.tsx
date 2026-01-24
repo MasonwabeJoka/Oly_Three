@@ -22,6 +22,7 @@ const Home = async ({
 }) => {
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
+
   const { categories: firstLevelCategories, title } = categories || {
     categories: null,
     title: null,

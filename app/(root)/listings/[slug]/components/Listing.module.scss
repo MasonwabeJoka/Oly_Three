@@ -34,11 +34,10 @@
       flex-direction: column;
       align-items: center;
 
-      .mainSectionContainer {
+      .wrapper {
         display: flex;
         justify-content: center;
         width: 100%;
-        background-color: $grey-one;
         .sellerDetails {
           display: flex;
           flex-direction: column;
@@ -53,45 +52,36 @@
             cursor: pointer;
           }
         }
-        .details {
-          position: relative;
+
+        .contentContainer {
           display: flex;
           flex-direction: column;
           align-items: center;
           width: 100%;
-          padding: 0 rem(96);
-          margin-bottom: rem(48);
 
-          .exitButtonContainer {
-            position: absolute;
-            top: 0;
-            right: 0;
+          .detailsContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+            min-height: rem(200);
+            margin-bottom: rem(96);
+
+            .title {
+              color: $danger;
+              font-weight: 500;
+              font-size: $h4;
+              margin-bottom: rem(48);
+            }
+          }
+
+          .productSpecsContainer {
+            margin-top: rem(32);
+          }
+
+          .featuresContainer {
           }
         }
-
-        .reportAdContainer {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .title {
-        color: $danger;
-        font-weight: 500;
-        font-size: $h4;
-        margin-bottom: rem(48);
-      }
-
-      .detailsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: auto;
-        min-height: rem(200);
-        margin-left: rem(364);
-        margin-bottom: rem(96);
-        background-color: aquamarine;
       }
 
       .similarAdsContainer {
@@ -99,9 +89,12 @@
         flex-direction: column;
         align-items: center;
         width: 100vw;
-
         .similarAdsTitle {
-          margin-left: rem(360);
+          margin-left: rem(390);
+          color: $danger;
+          font-weight: 500;
+          font-size: $h4;
+          margin-bottom: rem(48);
         }
       }
     }

@@ -37,6 +37,7 @@
   align-items: center;
   box-sizing: border-box;
   width: 100vw;
+  min-height: 100vh;
   background-color: $white-four;
   font-size: rem(16);
   -webkit-font-smoothing: antialiased;
@@ -49,7 +50,6 @@
   padding: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  min-height: 100vh;
   * {
     margin: 0;
     padding: 0;
@@ -141,10 +141,7 @@
   }
 
   footer {
-    margin-top: auto; /* push the footer to the bottom of the container */
+    margin-top: auto !important; 
   }
 }
 
-// :export {
-//   body: body;
-// }

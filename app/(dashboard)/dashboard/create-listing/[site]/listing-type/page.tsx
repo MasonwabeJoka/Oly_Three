@@ -3,7 +3,7 @@ import IsAuction from "../../components/IsAuction";
 
 const siteCopy = {
   oly: {
-    title: "Is this an auction?",
+    title: "Do you want to auction your item?",
     description:
       "Choose 'Yes' to auction your item or 'No' to sell at a fixed price.",
   },

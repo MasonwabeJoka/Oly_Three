@@ -64,10 +64,10 @@ export const getSimilarListings = async (currentListing: any, limit: number = 6)
 
     const similarListings = await client.fetch(similarListingsQuery, {
       currentListingId: currentListing._id,
-      categoryRef: currentListing.category?._id || currentListing.category?._ref,
+     categoryRef: currentListing.category?._ref || null,
       minPrice,
       maxPrice,
-      userCity: currentListing.user?.city,
+      userCity: currentListing.user?.city ?? null,
       limit
     });
 
@@ -125,7 +125,7 @@ export const getSimilarListings = async (currentListing: any, limit: number = 6)
 
     return similarListings;
   } catch (error) {
-    console.error("Error fetching similar listings:", error);
+    console.error("Error fetching similar listings:", error?.message ?? error);
     // Fallback to featured listings on error
     try {
       const featured = await getFeaturedListings(1);

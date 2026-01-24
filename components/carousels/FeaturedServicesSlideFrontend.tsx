@@ -6,6 +6,7 @@ import { featuredServicesSectionQueryOptions } from "@/sanity/lib/crud/featuredS
 
 const FeaturedServicesSlideFrontend = () => {
   const {data}= useSuspenseQuery(featuredServicesSectionQueryOptions)
+
   if(!data) return null;
 
   const services = data.services || [];

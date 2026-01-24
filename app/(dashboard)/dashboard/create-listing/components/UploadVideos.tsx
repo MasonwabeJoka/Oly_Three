@@ -1,17 +1,26 @@
-import { FormWrapper } from "./FormWrapper";
-import styles from "./UploadVideos.module.scss";
-import UploadBox from "@/components/UploadBox";
-import { uploadVideosValidations } from "../validations/multiStepFormValidations";
+'use client';
+import styles from "./styles.module.scss";
+import { useState, useEffect } from "react";
+import VideoUploadsSection from "./VideoUploadsSection";
 
 const UploadVideos = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
   return (
-    <FormWrapper title="Upload Videos">
-      <div className={styles.container}>
-        <div className={styles.uploadBox}>
-          <UploadBox mediaType="video" required={true} accept="video/*" />
-        </div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Upload Videos</h2>
+
+      <div className={`${styles.mediaSection} ${styles.uploadedVideos}`}>
+        <VideoUploadsSection />
       </div>
-    </FormWrapper>
+    </div>
   );
 };
 

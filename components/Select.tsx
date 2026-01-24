@@ -265,7 +265,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     // CSS classes
     const selectClass = `${dashboard ? styles.dashboardSelect : styles.select} ${sizeClass} ${
       selectColourType ? SELECT_COLOUR_TYPE[selectColourType] : ""
-    } ${className}`;
+    }`;
 
     const selectId = `select-${id}`;
     const listboxId = `listbox-${id}`;
@@ -274,7 +274,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const ariaDescribedBy = [errorId, descriptionId].filter(Boolean).join(" ");
 
     return (
-      <div ref={rootRef} className={`${className} ${styles.container}`}>
+      <div ref={rootRef} className={styles.container}>
         {/* Hidden native select for form accessibility */}
         <ShadcnSelect
           value={isMultiSelect ? undefined : (selected[0] ?? "")}
@@ -292,13 +292,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           </SelectContent>
         </ShadcnSelect>
 
-        <div className={styles.selectMenu}>
-          {label && hasSelection && !isOpen && (
-            <label htmlFor={selectId} className={styles.label}>
-              {required && " *"}
-              {label.length > 12 ? `${label.substring(0, 12)}...` : label}
-            </label>
-          )}
+        <div className={`${className} ${styles.selectMenu}`}>
+     
 
           {selectDescription && (
             <p id={descriptionId} className={styles.description}>
@@ -313,7 +308,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           )}
 
           <div
-            // ref={setDropDownOpenerElement}
             id={selectId}
             className={`${styles.selectContainer} ${selectClass}`}
             role="combobox"
@@ -337,6 +331,21 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               className={selectClass}
               style={{ backgroundColor: isOpen ? "#ffffff" : "#f3f7fa" }}
             >
+                   {label && hasSelection && !isOpen && (
+            <label htmlFor={selectId} className={styles.label}>
+              {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
+              <span>
+                {" "}
+                {label.length > 12 ? `${label.substring(0, 12)}...` : label}
+              </span>
+            </label>
+          )}
+          {!hasSelection && required && (
+            <label htmlFor={selectId} className={styles.label}>
+              {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
+              <span> Required</span>
+            </label>
+          )}
               {isMultiSelect && isOpen && selected.length > 0 && (
                 <div className={styles.selectCountContainer}>
                   <div className={styles.selectCount}>{selected.length}</div>
@@ -360,7 +369,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               )}
 
               <p
-                style={{ color: selected.length === 0 ? "#67787c" : "#434b4d" }}
+                className={styles.displayText}
               >
                 {displayText}
               </p>

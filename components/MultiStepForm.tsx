@@ -19,15 +19,19 @@ type StepConfig<T> = {
 type MultiStepFormProps<T extends Record<string, any>> = {
   steps: StepConfig<T>[];
   schema: z.ZodSchema<T>;
-  onSubmit?: (data: T) => Promise<void>;
-  progressBar?: boolean;
+  onSubmit?: (data: T) => Promise<void> | void;
+  progressBar: boolean;
+  hideNextButton?: boolean;
+  hideBackButton?: boolean;
 };
 
 export default function MultiStepForm<T extends Record<string, any>>({
   steps,
   schema,
   onSubmit = async () => {},
-  progressBar = true,
+  progressBar,
+  hideNextButton = true,
+  hideBackButton = true,
 }: MultiStepFormProps<T>) {
   const methods = useForm<T>({
     mode: "onBlur",
@@ -82,8 +86,8 @@ export default function MultiStepForm<T extends Record<string, any>>({
   }
 
   const currentStep = steps[currentIdx];
-  const isLastStep = currentIdx === steps.length - 1;
-  const isFirstStep = currentIdx === 0;
+  const isLastStep = currentIdx === steps.length - 1 && hideNextButton;
+  const isFirstStep = currentIdx === 0 && hideBackButton;
 
   return (
     <FormProvider {...methods}>
@@ -98,6 +102,8 @@ export default function MultiStepForm<T extends Record<string, any>>({
           onBack={handleBack}
           isFirstStep={isFirstStep}
           isLastStep={isLastStep}
+          hideBackButton={isFirstStep}
+          hideNextButton={isLastStep}
         />
 
         {progressBar && (

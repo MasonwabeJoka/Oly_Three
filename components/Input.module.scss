@@ -6,16 +6,6 @@
   margin: 0;
   padding: 0;
   width: fit-content;
-  .label {
-    position: absolute;
-    top: 50%; 
-    left: rem(24);
-    transform: translateY(-50%);
-    z-index: 1;
-    color: $grey-four;
-    text-transform: uppercase;
-    font-size: rem(10);
-  }
 
   .inputContainer {
     position: relative;
@@ -31,6 +21,21 @@
       margin-bottom: rem(8);
     }
 
+    .inputWrapper {
+      position: relative;
+
+      .label {
+        position: absolute;
+        top: rem(20);
+        left: rem(24);
+        z-index: 1;
+        color: $grey-four;
+        text-transform: uppercase;
+        font-size: rem(12);
+        pointer-events: none;
+      }
+    }
+
     .leftIconContainer {
       display: flex;
       justify-content: center;
@@ -39,7 +44,7 @@
       left: rem(0);
       height: 100%;
       width: rem(80);
-      
+
       .leftIcon {
       }
     }
@@ -77,27 +82,47 @@
       }
     }
 
-    .input {
-      border-radius: rem(40);
-      background-color: $white-one;
-      box-shadow: $shadow-two;
-      color: $black-four;
-      text-align: center;
-      border: none;
-      margin: 0;
-      padding: 0;
-      height: rem(56);
-      appearance: none;
-    }
+    .inputWrapper {
+      position: relative;
+      .label {
+        position: absolute;
+        display: flex;
+        // align-items: center !important;
+        gap: rem(4);
+        top: 50%;
+        left: rem(24);
+        transform: translateY(-50%);
+        z-index: 1;
+        color: $grey-four;
+        text-transform: uppercase;
+        font-size: rem(10);
+        .requiredStar {
+          display: block;
+          margin-top: rem(1);
+        }
+      }
 
-    .input:focus {
-      background-color: $white-one;
-    }
+      .input {
+        border-radius: rem(40);
+        background-color: $white-one;
+        box-shadow: $shadow-two;
+        color: $black-five;
+        text-align: center;
+        border: none;
+        margin: 0;
+        padding: 0;
+        height: rem(56);
+        appearance: none;
+      }
 
-    .error {
-      color: $danger;
-    }
+      .input:focus {
+        background-color: $white-one;
+      }
 
+      .error {
+        color: $danger;
+      }
+    }
   }
   .largeInput {
     width: rem(311);
@@ -227,9 +252,7 @@
   }
 
   .searchSuggestions {
-    // position: absolute;
-    // top: 100%;
-    // left: 0;
+    color: $black-five;
     width: 100%;
     max-height: rem(400);
     cursor: pointer;
@@ -240,9 +263,7 @@
   }
 
   .suggestionContainer {
-   
     .suggestion {
-
       display: flex;
       justify-content: center;
       align-items: center;
@@ -252,8 +273,6 @@
       background-color: $white-two;
     }
   }
-
- 
 
   .selectAll {
     background-color: $grey-one;
@@ -279,8 +298,6 @@
 @mixin suggestion-width($width) {
   width: calc(#{$width} * 0.96);
 }
-
-
 
 .primary:focus {
   outline: $primary-hover;

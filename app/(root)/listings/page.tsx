@@ -25,7 +25,7 @@ const Page = async ({
     listings = data.listings || [];
     totalCount = data.totalCount;
   } catch (error) {
-    console.error("Failed to fetch listings:", error);
+    console.error("Failed to fetch listings", error);
   }
 
   const totalPages = Math.ceil(totalCount / listingsPerPage);

@@ -11,11 +11,11 @@ import useMessageStore from "@/features/messages/store/useMessageStore";
 import usePaymentModalStore from "../store/usePaymentModalStore";
 
 type FormWrapperProps = {
-  title: string;
+
   children: React.ReactNode;
 };
 
-export const PaymentFormWrapper = ({ title, children }: FormWrapperProps) => {
+export const PaymentFormWrapper = ({ children }: FormWrapperProps) => {
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
   const { setChats } = useMessageStore();
   const router = useRouter();
@@ -65,10 +65,8 @@ export const PaymentFormWrapper = ({ title, children }: FormWrapperProps) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titleContainer}>
-        <h2 className={styles.title}>{title}</h2>
-      </div>
-      <div className={styles.children} style={{ overflowY: "clip" }}>
+     
+      <div className={styles.children} >
         {children}
       </div>
       <nav className={styles.buttons}>

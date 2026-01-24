@@ -15,7 +15,7 @@
   }
   @include only(smallDesktop) {
     
-    // background-color: blue;
+    background-color: blue;
   }
 
   @include only(tablet) {
@@ -73,6 +73,10 @@
       @include only(largeDesktop) {
         margin-bottom: rem(112);
       }
+      @include only(tablet) {
+        margin-bottom: rem(112);
+        margin-top: 0;
+      }
     }
     .title {
       display: flex;
@@ -98,12 +102,10 @@
 
       gap: rem(20);
       @include only(largeDesktop) {
-        margin-bottom: rem(112);
       }
       @include only(smallDesktop) {
         flex-wrap: wrap;
-        width: rem(844);
-        height: rem(980);
+      
       }
       @include only(tablet) {
       }
@@ -140,6 +142,7 @@
 
       @include only(largeDesktop) {
         margin-bottom: rem(192);
+       
       }
     }
 

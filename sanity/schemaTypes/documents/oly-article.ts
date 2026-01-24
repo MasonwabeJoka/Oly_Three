@@ -13,6 +13,13 @@ export const olyArticle = defineType({
       validation: Rule => Rule.required().error('Article ID is required'),
     }),
     defineField({
+      name: 'isFeatured',
+      title: 'Featured',
+      type: 'boolean',
+      description: 'Show this article in featured sections',
+      initialValue: false,
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'string',

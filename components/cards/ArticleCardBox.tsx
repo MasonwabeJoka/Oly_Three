@@ -2,6 +2,7 @@ import useArticlesStore from "@/store/articlesStore";
 import Avatar from "../Avatar";
 import styles from "./ArticleCardBox.module.scss";
 import Image, { ImageLoaderProps } from "next/image";
+import Link from "next/link";
 
 interface CardProps {
   images: string;
@@ -29,6 +30,7 @@ const ArticleCardBox = ({
   const imageSource = images || defaultImage;
 ;
   return (
+    <Link href="/articles/sports/?page=1">
     <article className={styles.articleCard}>
       <div className={styles.imageContainer}>
         {imageSource && (
@@ -62,6 +64,7 @@ const ArticleCardBox = ({
         </div>
       </div>
     </article>
+    </Link>
   );
 };
 

@@ -30,7 +30,7 @@ const Step: React.FC<StepProps> = ({
   let proceedButtonText = "";
 
   switch (step.path) {
-    case "review-message":
+    case "review-listing":
       proceedButtonText = "Review Listing";
       break;
     case "review-and-submit":
@@ -43,7 +43,7 @@ const Step: React.FC<StepProps> = ({
 
   let backButtonText = "";
   switch (step.path) {
-    case "review-message":
+    case "review-listing":
       backButtonText = "Publish Immediately";
       break;
     default:
@@ -56,6 +56,9 @@ const Step: React.FC<StepProps> = ({
       <div className={styles.formWrapper}>
         <div className={styles.content}>{step.content}</div>
         {!isSelectOpen && (
+          <div className={styles.buttonsContainer}>
+
+         
           <div className={styles.buttons}>
             {!isFirstStep && (
               <Button
@@ -87,6 +90,7 @@ const Step: React.FC<StepProps> = ({
                 onClick={onBack}
               />
             )}
+          </div>
           </div>
         )}
         

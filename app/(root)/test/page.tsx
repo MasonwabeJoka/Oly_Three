@@ -6,6 +6,7 @@ import VehicleListingsPublished from "@/app/(dashboard)/dashboard/create-listing
 import VehiclePhotoUploads from "@/app/(dashboard)/dashboard/create-listing/components/auto/VehiclePhotoUploads";
 import VehicleSellerDetails from "@/app/(dashboard)/dashboard/create-listing/components/auto/VehicleSellerDetails";
 import ListingCardSkeletons from "@/components/skeletons/ListingCardSkeletons";
+import { Button } from "@/components/ui/button";
 import { List } from "lucide-react";
 
 
@@ -13,6 +14,9 @@ import { List } from "lucide-react";
 const Page = () => {
   return (
     <div>
+     <Button>Button</Button>
+     <button>Button</button>
+     <h1 className="text-3xl text-red-500">Hello World</h1>
       <VehicleListingIntro/>  
       {/* <VehicleCondition/> */}
       {/* <VehiclePhotoUploads/> */}

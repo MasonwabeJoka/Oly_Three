@@ -1,46 +1,24 @@
-import { FormWrapper } from "./FormWrapper";
+"use client";
 import styles from "./UploadPhotos.module.scss";
-import UploadBox from "@/components/UploadBox";
-import ImageUploadSection from "./ImageUploadSection";
-import Button from "@/components/Buttons";
-import useUploadMediaStore from "../store/useUploadMediaStore";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import useUploadFiles from "../store/useUploadFiles";
-import { uploadPhotosValidations } from "../validations/multiStepFormValidations";
+import ImageUploadSection from "./ImageUploadSection";
 
 const UploadPhotos = () => {
   const { uploadedImages } = useUploadFiles();
-  const { setReorderPhotos, setUploadPhotos } = useUploadMediaStore();
-  const reorderPhotos = () => {
-    setReorderPhotos([]);
-    setUploadPhotos([]);
-  };
-  return (
-    <FormWrapper title="Upload Photos">
-      <div className={styles.container}>
-        <div className={styles.uploadBox}>
-          <UploadBox mediaType="photo" required={true} accept="image/*" />
-        </div>
-        <div className={styles.uploadedPhotos}>
-          <ImageUploadSection uploadedFiles={uploadedImages} isDashboard={true} />
-        </div>
-        <div className={styles.buttonContainer}>
-          <Button
-            className={styles.reorderButton}
-            buttonChildren="Reorder Photos"
-            buttonType="normal"
-            buttonSize="large"
-            name="reorder-btn"
-            type="button"
-            ariaLabel="Reorder Photos Button"
-            autoFocus={false}
-            disabled={false}
-            dashboard
-            onClick={reorderPhotos}
-          />
-        </div>
-      </div>
-    </FormWrapper>
-  );
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    setValue("uploadPhotos", uploadedImages);
+  }, [uploadedImages, setValue]);
+
+  return <div className={styles.container}>
+    <div className={styles.wrapper}>
+         <h1 className={styles.title}>Upload Photos</h1>
+     <ImageUploadSection isDashboard uploadedFiles={uploadedImages} />
+    </div>
+  </div>;
 };
 
-export default UploadPhotos;
+export default UploadPhotos;  

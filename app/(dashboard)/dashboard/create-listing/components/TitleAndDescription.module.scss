@@ -65,8 +65,8 @@
     justify-content: center;
     // background-color: $grey-one;
     border-radius: rem(40);
-     width: rem(640);
-      height: rem(348);
+    width: rem(640);
+    height: rem(348);
     .description {
       display: flex;
       flex-direction: column;
@@ -92,4 +92,13 @@
     text-align: center;
     margin-top: rem(16);
   }
+
+  .editorSkeleton {
+    width: rem(640);
+    height: rem(240);
+    border-radius: rem(40);
+    background-color: $white-three;
+   
+  }
+
 }

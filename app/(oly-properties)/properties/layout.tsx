@@ -2,6 +2,7 @@ import styles from "../../styles/layout.module.scss";
 import localFont from "next/font/local";
 
 import "@uploadthing/react/styles.css";
+import "../../globals.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 import LayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/LayoutWrapper";
@@ -27,31 +28,32 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const {user} = await withAuth()
+  const { user } = await withAuth();
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${outfit.className} ${styles.html}`}
+      data-scroll-behavior="smooth"
+    >
       <body className={styles.body}>
-         <LayoutWrapper
-          currentUser={user}
-        >
-        <div className={styles.wrapper}>
-         
-          <div className={styles.main}>
-            <main className={styles.children}>
-              {children}
-              <Toaster
-                richColors
-                toastOptions={{
-                  style: {
-                    height: "60px",
-                    padding: "32px 28px",
-                  },
-                  className: "class",
-                }}
-              />
-            </main>
+        <LayoutWrapper currentUser={user}>
+          <div className={styles.wrapper}>
+            <div className={styles.main}>
+              <main className={styles.children}>
+                {children}
+                <Toaster
+                  richColors
+                  toastOptions={{
+                    style: {
+                      height: "60px",
+                      padding: "32px 28px",
+                    },
+                    className: "class",
+                  }}
+                />
+              </main>
+            </div>
           </div>
-        </div>
         </LayoutWrapper>
         <footer className={styles.footer}>
           <Footer />

@@ -9,6 +9,8 @@ import styles from "./ListingsCollage.module.scss";
 import LoadingSpinner from "./LoadingSpinner";
 import { ListingsQueryResult } from "@/sanity.types";
 import ListingCardSkeletons from "./skeletons/ListingCardSkeletons";
+import useBreakpointStore from "@/store/useBreakpointStore";
+
 
 export type ListingsCollageProps = {
   category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
@@ -42,6 +44,7 @@ const ListingsCollage = ({
   isDashboard,
   cardSize,
 }: ListingsCollageProps) => {
+    const { isSmallDesktop, currentScreenSize} = useBreakpointStore();
   const [isClient, setIsClient] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -74,7 +77,7 @@ const ListingsCollage = ({
     const aspectRatios = images?.map((image: any) => image.aspectRatio);
 
     return (
-      <div key={listing._id} className={styles.cardContainer}>
+      <div key={listing._id} className={styles.cardContainer} >
         <Link href={`/listings/${slugCurrent}`}>
           <div className={styles.card}>
             {category === "all" && (
@@ -138,6 +141,7 @@ const ListingsCollage = ({
             columnClassName={styles.listingsContainerColumns}
             style={{
               maxWidth: isDashboard ? "59.625rem" : "95vw",
+              width: isSmallDesktop && currentScreenSize < 1383 ? "62rem" : "1650px",
             }}
           >
             {cards || []}

@@ -174,6 +174,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
                 {label.length > 36 ? `${label.substring(0, 36)}...` : label}
               </label>
             )}
+            {/* {label && !isFocused && required && (
+              <label className={styles.label} htmlFor={id}>
+                Required
+              </label>
+            )} */}
             <textarea
               {...reactHookFormProps}
               ref={(node) => {

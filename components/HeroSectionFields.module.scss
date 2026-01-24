@@ -6,44 +6,55 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50vw;
-  height: 93vh;
-  border-radius: rem(150) rem(150) rem(150) rem(150);
+  border-radius: rem(40);
 
   @include only(largeDesktop) {
     background-color: #c9e5e8;
+    border-radius: rem(150) rem(150) rem(150) rem(150);
   }
   @include only(smallDesktop) {
-    width: 95vw !important;
-    height: 93vh;
     background-color: #c9e5e8;
+    border-radius: rem(112);
   }
 
   @include only(tablet) {
-    width: 95vw;
-    height: 112vh;
+    
     background-color: #c9e5e8;
+    // background-color: #d dfcff6b;
+    height: 70vh;
+    width: 80vw !important;
+     border-radius: rem(112);
+     padding: rem(0) rem(40) !important;
   }
 
   .formContainer {
-    width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 90vh;
+    border-radius: rem(150);
 
+    @include only(largeDesktop) {
+      padding: rem(0) rem(240);
+    }
     @include only(smallDesktop) {
-      display: flex;
-      justify-content: flex-end;
+      padding: rem(0) rem(120);
+    }
+    @include only(tablet) {
+      padding: rem(0) rem(120);
+     
     }
 
     .formWrapper {
       display: flex;
       flex-direction: column;
-      margin-top: rem(120);
       align-items: center;
 
       @include only(largeDesktop) {
       }
       @include only(smallDesktop) {
-        margin-right: rem(144);
       }
     }
 
@@ -60,11 +71,10 @@
         height: "auto";
       }
       @include only(tablet) {
-        position: relative;
-        top: rem(-330);
-        width: rem(100);
+        width: rem(120);
         height: "auto";
       }
+     
       @include only(extraLargeDesktop) {
         width: rem(120);
         height: "auto";
@@ -81,7 +91,6 @@
       @include only(smallDesktop) {
       }
       @include only(tablet) {
-        margin-top: rem(230);
       }
 
       .buttons {

@@ -107,7 +107,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
-              label="Set PromotionDuration"
+              label="Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
@@ -170,10 +170,10 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
     <div
       className={styles.container}
       ref={containerRef}
-      style={{ backgroundColor: isDurationSelectOpen ? "#edf2f7" : "#f3f7fa" }}
+      style={{ backgroundColor: isDurationSelectOpen ? "#edf2f7" : "#edf2f7"}}
     >
       <div className={styles.wrapper} ref={wrapperRef}>
-        <div className={styles.iconContainer}>
+        <div className={styles.platformContainer}>
           <Icon
             className={styles.icon}
             src={src}
@@ -181,9 +181,10 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
             width={64}
             height={64}
           />
+          <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p>
         </div>
         <div className={styles.formControls}>
-          <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p>
+          {/* <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p> */}
 
           <div className={styles.setPromotionDurationContainer}>
             <Select
@@ -192,7 +193,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               className={styles.setPromotionDuration}
               selectSize="medium"
               selectColourType="normal"
-              label="Set Promotion Duration"
+              label="Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
               autoFocus={false}
