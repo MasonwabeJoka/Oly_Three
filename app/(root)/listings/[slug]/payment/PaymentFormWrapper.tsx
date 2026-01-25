@@ -11,11 +11,11 @@ import useMessageStore from "@/features/messages/store/useMessageStore";
 import usePaymentModalStore from "../store/usePaymentModalStore";
 
 type FormWrapperProps = {
-
   children: React.ReactNode;
+  title?: string;
 };
 
-export const PaymentFormWrapper = ({ children }: FormWrapperProps) => {
+export const PaymentFormWrapper = ({ children, title }: FormWrapperProps) => {
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();
   const { setChats } = useMessageStore();
   const router = useRouter();

@@ -10,7 +10,12 @@ import ExitButton from "@/components/ExitButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const SelectNewCategory = () => {
+interface SelectNewCategoryProps {
+  onNext?: () => void;
+  goTo?: () => void;
+}
+
+const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
   const { currentStepIndex, setCategoryPreviouslySelected, resetFormData } =
     useFormStore();
   const [showWarningModal, setShowWarningModal] = useState(false);

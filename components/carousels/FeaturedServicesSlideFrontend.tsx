@@ -10,7 +10,7 @@ const FeaturedServicesSlideFrontend = () => {
   if(!data) return null;
 
   const services = data.services || [];
-  const features = data.services.features || [];
+  // Remove the features line since it's not used and causes TypeScript error
   return (
     <div className={styles.container}>
       <div className={styles.featureContainer}>

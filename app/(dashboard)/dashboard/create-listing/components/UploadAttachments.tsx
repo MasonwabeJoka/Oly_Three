@@ -5,7 +5,11 @@ import useUploadFiles from "../store/useUploadFiles";
 import { useFormContext } from "react-hook-form";
 import { useEffect } from "react";
 
-const UploadAttachments = () => {
+interface UploadAttachmentsProps {
+  onNext?: () => void;
+}
+
+const UploadAttachments = ({ onNext }: UploadAttachmentsProps) => {
   const {uploadedAttachments } = useUploadFiles();
   const { setValue } = useFormContext();
 

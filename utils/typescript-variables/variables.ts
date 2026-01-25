@@ -9,6 +9,7 @@ export const variables = {
   blackTwo: "#",
   blackThree: "#",
   blackFour: "#",
+  blackFive: "#",
   blueOne: "#",
   blueOneComplimentary: "#",
   blueOneComplimentaryTwo: "#",

@@ -207,6 +207,7 @@ export type OlyArticle = {
   _updatedAt: string;
   _rev: string;
   articleId?: string;
+  isFeatured?: boolean;
   author?: string;
   title?: string;
   keywords?: Array<string>;
@@ -4102,41 +4103,9 @@ export type ImageFile = {
 };
 
 export type Details = {
-  _id: string;
   _type: "details";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  currentState?: string;
-  accessoriesIncluded?: Array<string>;
-  warrantyInformation?: string;
-  history?: string;
-  customizations?: string;
-  maintenanceHistory?: string;
-  compatibility?: string;
-  originalPackaging?: string;
-  usageHistory?: string;
-  storage?: string;
-  originalPurchaseDate?: string;
-  reasonForSelling?: string;
-  additionalFeatures?: string;
-  serviceRecords?: string;
-  userManualAvailability?: string;
-  manufacturerSupport?: string;
-  compatibilityWithAccessories?: string;
-  packagingCondition?: string;
-  productHistory?: string;
-  transferability?: string;
-  petSmokeExposure?: string;
-  regulatoryCompliance?: string;
-  specialFeatures?: string;
-  documentation?: string;
-  certification?: string;
-  age?: string;
-  ownership?: string;
-  environmentalImpact?: string;
-  knownIssues?: string;
-  upgrades?: string;
+  detailType?: "currentState" | "accessoriesIncluded" | "warrantyInformation" | "history" | "customizations" | "maintenanceHistory" | "compatibility" | "originalPackaging" | "usageHistory" | "storage" | "originalPurchaseDate" | "reasonForSelling" | "additionalFeatures" | "serviceRecords" | "userManualAvailability" | "manufacturerSupport" | "compatibilityWithAccessories" | "packagingCondition" | "productHistory" | "transferability" | "petSmokeExposure" | "regulatoryCompliance" | "specialFeatures" | "documentation" | "certification" | "age" | "ownership" | "environmentalImpact" | "knownIssues" | "upgrades";
+  value?: string;
 };
 
 export type Page = {
@@ -6100,7 +6069,7 @@ export type AllSanitySchemaTypes = Order | ShopProduct | SanityImageCrop | Sanit
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/crud/categories/data.ts
 // Variable: categoriesQuery
-// Query: *[_type == "category" && level == 0][1]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
+// Query: *[_type == "category" && level == 0][0]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
 export type CategoriesQueryResult = {
   title: string | null;
   categories: Array<{
@@ -7104,7 +7073,7 @@ export type UserQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"category\" && level == 0][1]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
+    "*[_type == \"category\" && level == 0][0]{\n  title,\n  \"categories\": subcategories[]->{\n    _id,\n    title,\n    slug {\n      current\n    },\n    \"secondLevelSubcategories\": subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    },\n    \n    \"thirdLevelSubcategories\": subcategories[]->subcategories[]->{\n      _id,\n      title,\n      slug {\n        current\n      }\n    }\n  },\n\n \n    \n  \n}": CategoriesQueryResult;
     "*[_type == \"olyArticlesSection\"][0] {\n  _id,\n  title,\n  \"articles\": *[_type == \"olyArticle\" && imageUrl != null && imageUrl != \"\"] | order(pubDate desc) [0...10] {\n    _id,\n    title,\n    content,\n    pubDate,\n    imageUrl,\n    \"creator\": domain[0],\n    sourceUrl,\n    sourceIcon\n  }\n}": FeaturedArticlesQueryResult;
     "*[_type == \"category\" && isFeatured == true] {\n  \"id\": _id,\n    title,\n    \"displayTitle\": coalesce(featuredTitle, title),// returns featuredTitle if it exists, otherwise title\n  \"image\": image\n}\n": FeaturedCategoriesQueryResult;
     "\n  *[_type == \"featuredCategoriesSection\" && isActive == true][0] {\n    _id,\n    title,\n    callToAction,\n    featuredCategories[]{\n        _key,\n        isActive,\n        sortOrder,\n        featuredPriority,\n        overrideTitle,\n        overrideUrl,\n        overrideImage,\n        \"category\": categoryRef->{\n        _id,\n        title,\n        slug,\n        path,\n        \"image\": image.asset->url,\n        isActive,\n        order\n        },\n        // computed displayTitle - prefer overrideTitle, then referenced title, else blank\n        \"displayTitle\": coalesce(overrideTitle, categoryRef->title),\n        // computed displayImage - prefer overrideImage, then referenced image\n        \"displayImage\": coalesce(overrideImage, categoryRef->image.asset->url)\n    }\n  }\n": FeaturedCategoriesSectionQueryResult;
@@ -7115,8 +7084,9 @@ declare module "@sanity/client" {
     "*[_type == \"listing\" && _id == $id][0]{\n    _id,\n  views,\n}": ListingViewsQueryResult;
     "\n  *[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ] | order(postedOn desc) [$offset...$limit]{\n    _id,\n    user->{\n      _id,\n      firstName,\n      lastName,\n      fullName,\n      \"profileImage\": profileImage.asset->url,\n      \"city\": address->city,\n      \"suburb\": address->suburb,\n      \"cityAbbr\": address->cityAbbreviation,\n    },\n    title,\n    slug,\n    description,\n    price,\n    priceOption,\n    postedOn,\n    \"images\": images[]->{\n      \"alt\": image.alt,\n      \"id\": image.asset->_id,\n      \"url\": image.asset->url,\n      \"width\": image.asset->metadata.dimensions.width,\n      \"height\": image.asset->metadata.dimensions.height,\n      \"aspectRatio\": image.asset->metadata.dimensions.aspectRatio\n    }\n  }\n": ListingsQueryResult;
     "\n  count(*[_type == \"listing\" && defined(slug.current)\n    && ($searchTerm == \"\" || title match $searchTerm || description match $searchTerm)\n    && ($locationSearch == \"\" || user->address->city match $locationSearch \n                              || user->address->suburb match $locationSearch \n                              || user->address->cityAbbreviation match $locationSearch)\n  ])\n": ListingsCountQueryResult;
-    "*[_type == \"moreFromOlySection\"][0] {\n  title,\n   sites[] -> {\n     _id,\n     _type,\n     path,\n     siteName,\n     \"imageUrl\": image.asset->url\n   }\n}": MoreFromOlyQueryResult;
-    "*[_type == \"olyHomepage\" && isActive == true][0] {\n  _id,\n  _type,\n  title,\n  publishedAt,\n  isActive,\n  adSection,\n  topAdSection,\n  bottomAdSection,\n  featuredCategoriesSection,\n  featuredListingsSection,\n  featuredServicesSection,\n  heroSection,\n  moreFromOlySection,\n  olyArticlesSection,\n  sponsoredArticlesSection,\n}": OlyHomepageQueryResult;
+    "*[_type == \"moreFromOlySection\"][0] {\n  title,\n   sites[] -> {\n     _id,\n     _type,\n     path,\n     siteName,\n     \"imageUrl\": image.asset->url\n   }\n}": 
+    MoreFromOlyQueryResult;
+    // "*[_type == \"olyHomepage\" && isActive == true][0] {\n  _id,\n  _type,\n  title,\n  publishedAt,\n  isActive,\n  adSection,\n  topAdSection,\n  bottomAdSection,\n  featuredCategoriesSection,\n  featuredListingsSection,\n  featuredServicesSection,\n  heroSection,\n  moreFromOlySection,\n  olyArticlesSection,\n  sponsoredArticlesSection,\n}": OlyHomepageQueryResult;
     "*[\n  _type == \"shop-category\"\n] | order(title asc) {\n  _id,\n  title,\n  \"slug\": slug.current,\n  \"image\": image{\n    asset->{\n      _id,\n      url\n    },\n    hotspot\n  }\n}": ALL_CATEGORIES_QUERYResult;
     "*[\n  _type == \"shop-category\"\n  && slug.current == $slug\n][0] {\n  _id,\n  title,\n  \"slug\": slug.current,\n  \"image\": image{\n    asset->{\n      _id,\n      url\n    },\n    hotspot\n  }\n}": CATEGORY_BY_SLUG_QUERYResult;
     "*[\n  _type == \"customer\"\n  && email == $email\n][0]{\n  _id,\n  email,\n  name,\n  clerkUserId,\n  stripeCustomerId,\n  createdAt\n}": CUSTOMER_BY_EMAIL_QUERYResult;

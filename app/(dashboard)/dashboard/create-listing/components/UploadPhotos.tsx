@@ -5,7 +5,11 @@ import { useFormContext } from "react-hook-form";
 import useUploadFiles from "../store/useUploadFiles";
 import ImageUploadSection from "./ImageUploadSection";
 
-const UploadPhotos = () => {
+interface UploadPhotosProps {
+  onNext?: () => void;
+}
+
+const UploadPhotos = ({ onNext }: UploadPhotosProps) => {
   const { uploadedImages } = useUploadFiles();
   const { setValue } = useFormContext();
 

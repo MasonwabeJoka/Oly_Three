@@ -2,8 +2,12 @@ import styles from "./UploadMediaTEMP.module.scss";
 import Button from "@/components/Buttons";
 import useUploadMediaStore from "../store/useUploadMediaStore";
 
+interface UploadMediaProps {
+  onNext?: () => void;
+}
+
 // Todo: Set validation so that at least one of the media types is selected.
-const UploadMedia = () => {
+const UploadMedia = ({ onNext }: UploadMediaProps) => {
   const { setUploadPhotos, setUploadVideos, setUploadAttachments } =
     useUploadMediaStore();
   return (

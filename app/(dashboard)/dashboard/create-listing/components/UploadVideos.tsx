@@ -3,7 +3,11 @@ import styles from "./styles.module.scss";
 import { useState, useEffect } from "react";
 import VideoUploadsSection from "./VideoUploadsSection";
 
-const UploadVideos = () => {
+interface UploadVideosProps {
+  onNext?: () => void;
+}
+
+const UploadVideos = ({ onNext }: UploadVideosProps) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

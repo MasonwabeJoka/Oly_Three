@@ -61,7 +61,7 @@ function FeaturedSlide({ product }: FeaturedSlideProps) {
         )}
 
         <p className="mt-6 text-3xl font-bold text-white lg:text-4xl">
-          {formatPrice(product.price)}
+          {product.price ? formatPrice(product.price) : "Price not available"}
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">

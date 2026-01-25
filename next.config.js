@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  output: 'standalone',
   cacheComponents: false, 
   serverExternalPackages: ["mongoose", "isomorphic-dompurify", "jsdom"],
   turbopack: {},

@@ -125,7 +125,7 @@ export const getSimilarListings = async (currentListing: any, limit: number = 6)
 
     return similarListings;
   } catch (error) {
-    console.error("Error fetching similar listings:", error?.message ?? error);
+    console.error("Error fetching similar listings:", error instanceof Error ? error.message : error);
     // Fallback to featured listings on error
     try {
       const featured = await getFeaturedListings(1);

@@ -47,7 +47,7 @@ type ExpandedSizeProps = {
 };
 
 type SkeletonProps = {
-  orientation: "expanded" | "box";
+  orientation: "expanded" | "box" | "portrait" | "landscape";
   cardSize: "large" | "standard" | "small";
   isDashboard?: boolean;
 };
@@ -75,9 +75,14 @@ const ListingCardSkeleton: React.FC<SkeletonProps> = ({
   orientation,
   cardSize,
 }) => {
+  // Map portrait/landscape to box/expanded for backward compatibility
+  const mappedOrientation = orientation === "portrait" || orientation === "landscape" 
+    ? "box" 
+    : orientation;
+
   return (
     <div className={styles.container}>
-      {orientation === "expanded" ? (
+      {mappedOrientation === "expanded" ? (
         <ExpandedListingCard cardSize={cardSize} />
       ) : (
         <BoxListingCard cardSize={cardSize} />

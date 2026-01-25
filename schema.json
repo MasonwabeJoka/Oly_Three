@@ -1188,6 +1188,13 @@
         },
         "optional": true
       },
+      "isFeatured": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "author": {
         "type": "objectAttribute",
         "value": {
@@ -30446,251 +30453,153 @@
   },
   {
     "name": "details",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "details"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "currentState": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "accessoriesIncluded": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "string"
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "details"
           }
         },
-        "optional": true
-      },
-      "warrantyInformation": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "detailType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "currentState"
+              },
+              {
+                "type": "string",
+                "value": "accessoriesIncluded"
+              },
+              {
+                "type": "string",
+                "value": "warrantyInformation"
+              },
+              {
+                "type": "string",
+                "value": "history"
+              },
+              {
+                "type": "string",
+                "value": "customizations"
+              },
+              {
+                "type": "string",
+                "value": "maintenanceHistory"
+              },
+              {
+                "type": "string",
+                "value": "compatibility"
+              },
+              {
+                "type": "string",
+                "value": "originalPackaging"
+              },
+              {
+                "type": "string",
+                "value": "usageHistory"
+              },
+              {
+                "type": "string",
+                "value": "storage"
+              },
+              {
+                "type": "string",
+                "value": "originalPurchaseDate"
+              },
+              {
+                "type": "string",
+                "value": "reasonForSelling"
+              },
+              {
+                "type": "string",
+                "value": "additionalFeatures"
+              },
+              {
+                "type": "string",
+                "value": "serviceRecords"
+              },
+              {
+                "type": "string",
+                "value": "userManualAvailability"
+              },
+              {
+                "type": "string",
+                "value": "manufacturerSupport"
+              },
+              {
+                "type": "string",
+                "value": "compatibilityWithAccessories"
+              },
+              {
+                "type": "string",
+                "value": "packagingCondition"
+              },
+              {
+                "type": "string",
+                "value": "productHistory"
+              },
+              {
+                "type": "string",
+                "value": "transferability"
+              },
+              {
+                "type": "string",
+                "value": "petSmokeExposure"
+              },
+              {
+                "type": "string",
+                "value": "regulatoryCompliance"
+              },
+              {
+                "type": "string",
+                "value": "specialFeatures"
+              },
+              {
+                "type": "string",
+                "value": "documentation"
+              },
+              {
+                "type": "string",
+                "value": "certification"
+              },
+              {
+                "type": "string",
+                "value": "age"
+              },
+              {
+                "type": "string",
+                "value": "ownership"
+              },
+              {
+                "type": "string",
+                "value": "environmentalImpact"
+              },
+              {
+                "type": "string",
+                "value": "knownIssues"
+              },
+              {
+                "type": "string",
+                "value": "upgrades"
+              }
+            ]
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "history": {
-        "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "customizations": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "maintenanceHistory": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "compatibility": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "originalPackaging": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "usageHistory": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "storage": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "originalPurchaseDate": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "reasonForSelling": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "additionalFeatures": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "serviceRecords": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "userManualAvailability": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "manufacturerSupport": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "compatibilityWithAccessories": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "packagingCondition": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "productHistory": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "transferability": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "petSmokeExposure": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "regulatoryCompliance": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "specialFeatures": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "documentation": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "certification": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "age": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "ownership": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "environmentalImpact": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "knownIssues": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "upgrades": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },
