@@ -63,3 +63,12 @@ public/_next-video
 #excecutable files
 *.exe
 *.dmg
+
+# OpenNext build output
+.open-next/
+
+# OpenNext build output
+.open-next/
+
+# OpenNext build output
+.open-next/

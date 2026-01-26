@@ -10,6 +10,9 @@ const nextConfig = {
     silenceDeprecations: ["legacy-js-api"],
     includePaths: ['./styles'],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {

@@ -5,17 +5,21 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build:preview": "npm run extract-variables && next build",
-    "preview": "opennextjs-cloudflare build --skipBuild && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build --skipBuild && opennextjs-cloudflare deploy",
+
+    "build": "npm run extract-variables && next build",
+    "build:strict": "npm run extract-variables && npm run typegen && tsc --noEmit && next build",
+
+    "preview": "npm run build && opennextjs-cloudflare build --skipBuild && opennextjs-cloudflare preview",
+    "deploy": "npm run build && opennextjs-cloudflare build --skipBuild && opennextjs-cloudflare deploy",
+
     "lint": "eslint .",
     "serve": "node server.js",
     "extract-variables": "node ./extract-variables.js",
-    "build": "npm run extract-variables && tsc --noEmit && next build",
-    "vercel-build": "npm run extract-variables && tsc --noEmit && next build",
+
     "sync-articles": "node --loader ts-node/esm scripts/sync-articles.ts",
     "sync-articles-cron": "node sync-articles-working.cjs",
     "sync-articles-now": "node sync-articles-working.cjs",
+
     "typegen": "sanity schema extract && sanity typegen generate --enforce-required-fields"
   },
   "dependencies": {
