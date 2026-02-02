@@ -87,21 +87,18 @@ const FilterTabs = ({
     const handlers = currentFilters.map((filterLabel: string, index: number) => {
       if (filterLabel === "More Filters +" || filterLabel === "Less Filters -") {
         return () => {
-          console.log("FilterTabs: toggling more filters, current =", showMoreFilters);
           setShowMoreFilters(!showMoreFilters);
           // setActiveTabIndex(null);
         };
       }
       return () => handleTabClick(index);
     });
-    console.log("FilterTabs: tabs =", currentFilters, "handlers =", handlers.map(h => h.name || "anonymous"));
     return handlers;
   };
 
   const renderFilterOptions = () => {
     if (activeTabIndex === null) return null;
     const options = getFilterOptions(activeTabIndex);
-    console.log("FilterTabs: rendering options for index =", activeTabIndex, "options =", options);
     if (!options) return null;
     return (
       <TabOptions

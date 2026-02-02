@@ -3,6 +3,9 @@
 @use "@/utils/breakpoints" as *;
 
 .wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between !important;
   width: rem(360);
   height: 100%;
 
@@ -10,10 +13,10 @@
     width: 80vw;
   }
   @include only(smallDesktop) {
-    width: 96vw;
+    width: 96vw !important;
   }
   @include only(tablet) {
-    width: 96vw;
+    width: 96vw !important;
   }
 
   .keepSidebarInPlace {
@@ -31,28 +34,30 @@
     }
   }
 
-  
   .backButton {
-   position: fixed;
+    position: fixed;
     top: rem(20);
     right: rem(20);
   }
-  .sidebar {
-    position: fixed;
-    top: rem(340);
-    transform: translate(0, -50%);
 
-    @include only(largeDesktop) {
-      display: unset;
-      top: 50%;
-    }
-    @include only(smallDesktop) {
-      display: unset;
-      top: 50%;
-    }
-    @include only(tablet) {
-      display: unset;
-      top: 50%;
+  .sidebarContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: rem(342);
+
+    .sidebar {
+      position: fixed;
+      
+    
+      @include only(largeDesktop) {
+      }
+      @include only(smallDesktop) {
+       
+      }
+      @include only(tablet) {
+       
+      }
     }
   }
 
@@ -60,17 +65,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: rem(100);
+    flex: 1;
+   
     @include only(largeDesktop) {
       width: rem(1098);
     }
     @include only(smallDesktop) {
       width: rem(1098) !important;
-      // margin-left: rem(16);
     }
     @include only(tablet) {
       width: rem(1098);
-      // margin-left: rem(16);
     }
   }
 }

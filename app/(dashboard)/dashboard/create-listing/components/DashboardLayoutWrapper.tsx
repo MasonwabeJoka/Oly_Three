@@ -10,6 +10,7 @@ import { Toaster } from "sonner";
 import useBreakpointStore from "@/store/useBreakpointStore";
 import { ImageKitProvider } from "@imagekit/next";
 import BackButton from "@/components/BackButton";
+import { useEffect } from "react";
 
 interface DashboardLayoutWrapperProps {
   children: React.ReactNode;
@@ -23,8 +24,18 @@ export default function DashboardLayoutWrapper({
   sidebarItems,
 }: DashboardLayoutWrapperProps) {
   const isVisible = useShowSidebarStore((state) => state.isVisible);
-  const { isLargeDesktop, isSmallDesktop, isTablet } = useBreakpointStore();
+  const { isLargeDesktop, isSmallDesktop, isTablet, currentScreenSize } =
+    useBreakpointStore();
   const [queryClient] = useState(() => new QueryClient());
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   let marginLeft = "";
   switch (true) {
@@ -54,20 +65,29 @@ export default function DashboardLayoutWrapper({
       <ImageKitProvider
         urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
       >
-        <div className={styles.wrapper} style={flexStyles}>
-          <div className={styles.backButton}><BackButton /></div>
-          {isVisible && <div className={styles.keepSidebarInPlace} />}
+        <div
+          className={styles.wrapper}
+          style={{
+            ...flexStyles,
+          }}
+        >
+          <div className={styles.backButton}>
+            <BackButton />
+          </div>
+          {/* {isVisible && <div className={styles.keepSidebarInPlace} />} */}
           {isVisible && (
-            <aside className={styles.sidebar}>
-              <DashboardSidebar
-                currentUser={currentUser}
-                sidebarItems={sidebarItems}
-              />
+            <aside className={styles.sidebarContainer}>
+              <div className={styles.sidebar}>
+                <DashboardSidebar
+                  currentUser={currentUser}
+                  sidebarItems={sidebarItems}
+                />
+              </div>
             </aside>
           )}
-          <main
+          <div
             className={styles.main}
-            style={{ marginLeft }}
+            // style={{ marginLeft }}
             suppressHydrationWarning
           >
             {children}
@@ -81,7 +101,7 @@ export default function DashboardLayoutWrapper({
                 className: "class",
               }}
             />
-          </main>
+          </div>
         </div>
       </ImageKitProvider>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -21,14 +21,17 @@ type PaymentProcessingStore = {
 
 const steps: Step[] = [
   { id: 'step1', name: 'Confirm Purchase' },
-  { id: 'step2', name: 'Payment' },
-  { id: 'step3', name: 'Payment Confirmation' },
+  { id: 'step2', name: 'Order Summary' },
+  // { id: 'step3', name: 'Choose Payment Method'},
+  // { id: 'step4', name: 'Payment Processing' },
+  // { id: 'step5', name: 'Payment Confirmation' },
 ];
 
 const getInitialStepIndex = () => {
   if (typeof window === 'undefined') return 0;
-  const stored = localStorage.getItem('PaymentProcessingStepIndex');
-  return stored ? parseInt(stored, 10) : 0;
+  // const stored = localStorage.getItem('PaymentProcessingStepIndex');
+  // return stored ? parseInt(stored, 10) : 0;
+  return 0;
 };
 
 const usePaymentProcessingStore = create<PaymentProcessingStore>((set, get) => ({
@@ -48,9 +51,9 @@ const usePaymentProcessingStore = create<PaymentProcessingStore>((set, get) => (
     const { currentStepIndex, steps } = get();
     if (currentStepIndex < steps.length - 1) {
       const newIndex = currentStepIndex + 1;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('PaymentProcessingStepIndex', newIndex.toString());
-      }
+      // if (typeof window !== 'undefined') {
+      //   localStorage.setItem('PaymentProcessingStepIndex', newIndex.toString());
+      // }
       set({
         currentStepIndex: newIndex,
         isFirstStep: newIndex === 0,
@@ -65,9 +68,9 @@ const usePaymentProcessingStore = create<PaymentProcessingStore>((set, get) => (
     const { currentStepIndex, steps } = get();
     if (currentStepIndex > 0) {
       const newIndex = currentStepIndex - 1;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('PaymentProcessingStepIndex', newIndex.toString());
-      }
+      // if (typeof window !== 'undefined') {
+      //   localStorage.setItem('PaymentProcessingStepIndex', newIndex.toString());
+      // }
       set({
         currentStepIndex: newIndex,
         isFirstStep: newIndex === 0,
@@ -81,9 +84,9 @@ const usePaymentProcessingStore = create<PaymentProcessingStore>((set, get) => (
   goTo: (index) => {
     const { steps } = get();
     if (index >= 0 && index < steps.length) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('PaymentProcessingStepIndex', index.toString());
-      }
+        // if (typeof window !== 'undefined') {
+        //   localStorage.setItem('PaymentProcessingStepIndex', index.toString());
+        // }
       set({
         currentStepIndex: index,
         isFirstStep: index === 0,

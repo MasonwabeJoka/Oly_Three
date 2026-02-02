@@ -142,7 +142,6 @@
 .large {
   width: rem(311);
   height: rem(56);
-  // background-color: yellow;
   @include only(largeDesktop) {
     width: rem(514);
     height: rem(56);

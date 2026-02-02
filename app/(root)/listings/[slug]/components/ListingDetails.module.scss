@@ -23,7 +23,6 @@
       align-items: flex-start;
       width: rem(400);
       gap: rem(32);
-      // background-color: yellow;
       .bulletContainer {
         .bullet {
           margin-top: rem(1);
@@ -36,7 +35,6 @@
       }
     
       .textContainer {
-        // background-color: yellowgreen;
         p {
           font-size: $body;
         }

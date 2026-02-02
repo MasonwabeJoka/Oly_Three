@@ -7,13 +7,14 @@ import { debounce } from "lodash";
 import type { FormDataSchema } from "../validations/formDataSchema";
 import LoadingSpinnerTwo from "@/components/LoadingSpinnerTwo";
 
+// Todo: Autofocus on title input
 // Dynamically import RichTextEditor with a loading skeleton
 const RichTextEditor = dynamic(
   () => import("@/components/richTextEditor/RichTextEditor"),
   {
     ssr: false,
     loading: () => <LoadingSpinnerTwo size={3} />,
-  }
+  },
 );
 
 // Mock server action for demonstration
@@ -51,7 +52,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
       });
       trigger("titleAndDescription.title");
     },
-    300
+    300,
   );
 
   // Handle description changes without debouncing
@@ -68,7 +69,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
   const description = watch("titleAndDescription.description") || "";
 
   const { onChange: titleOnChange, ...restTitleRegister } = register(
-    "titleAndDescription.title"
+    "titleAndDescription.title",
   );
 
   return (
@@ -93,7 +94,6 @@ const TitleAndDescription = ({ onNext }: Props) => {
                 ? "title-error"
                 : undefined
             }
-            autoFocus={false}
             autoComplete="off"
             iconPosition="right"
             iconWidth={32}

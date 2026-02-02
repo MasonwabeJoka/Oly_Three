@@ -7,7 +7,7 @@ import CartItem from "../../components/CartItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 import { useCart } from "../store/useCart";
-import { PaymentFormWrapper } from "../PaymentFormWrapper";
+import { PaymentFormWrapper } from "./PaymentFormWrapper";
 // TODO: If cart is empty change button form Proceed To Payments to a Back button for example
 const Cart = () => {
   const { items } = useCart();

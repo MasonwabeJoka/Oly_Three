@@ -47,7 +47,7 @@ const ReviewPhotos = () => {
         })}
 
         <div className={styles.buttonsContainer}>
-          <NavButtons />
+          <NavButtons className={styles.navButtons} />
           <Button
             className={styles.editButton}
             buttonChildren="Edit"

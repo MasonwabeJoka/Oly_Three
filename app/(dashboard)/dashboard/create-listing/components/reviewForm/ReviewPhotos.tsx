@@ -9,7 +9,6 @@ import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
 import Image from "@/components/Image";
 import { imagesData } from "@/data/galleryImages";
-import { SectionWrapper } from "./SectionWrapper";
 import Button from "@/components/Buttons";
 import useEditStore from "../../store/useEditStore";
 import useFormStore from "../../store/useFormStore";
@@ -50,7 +49,7 @@ const ReviewPhotos = () => {
           })}
 
           <div className={styles.buttonsContainer}>
-            <NavButtons />
+            <NavButtons className={styles.navButtons} />
             <Button
               className={styles.editButton}
               buttonChildren="Edit"

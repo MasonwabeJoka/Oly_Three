@@ -50,29 +50,7 @@
     .categoriesContainer {
       width: 100%;
       margin-left: rem(24);
-      
-
-      .subcategories {
-        height: auto;
-        padding-bottom: rem(16);
-        display: none;
-
-        @include only(largeDesktop) {
-          display: block;
-        }
-        @include only(smallDesktop) {
-          display: block;
-        }
-        @include only(tablet) {
-          display: block;
-        }
-
-        .subcategoriesWrapper {
-          margin-left: rem(48);
-          width: 150%;
-        }
-      }
-
+  
       .mobileSubcategoriesContainer {
         display: block;
         margin-bottom: rem(20);
@@ -91,10 +69,6 @@
           display: none;
         }
       }
-
-    
-
-      
     }
   }
 }

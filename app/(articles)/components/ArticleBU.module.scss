@@ -5,15 +5,13 @@
 .container {
   display: flex;
   gap: rem(50);
-  // width: 80vw;
-  // background-color: yellow;
+  
     .leftSideBar {
         display: flex;
         flex-direction: column;
         width: 20%;
         padding: rem(12);
         margin-top: rem(660);
-        // background-color: cadetblue;
         .categories {
           display: flex;
           justify-content: center;

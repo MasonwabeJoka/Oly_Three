@@ -1,17 +1,11 @@
 "use client";
 import { categories } from "@/data/CategoriesData";
-import { FormWrapper } from "./FormWrapper";
 import styles from "./SelectACategory.module.scss";
-import CategorySelector from "./CategorySelector";
-import MobileCategorySelector from "./MobileCategorySelector";
-import useFormStore from "../store/useFormStore";
 import { useBreakpoint } from "@/store/useBreakpointStore";
 import CategoryCarousel from "./CategoryCarousel";
 import { useState } from "react";
 import SubcategoryCarousel from "./SubcategoryCarousel";
-interface UploadIdProps {
-  onNext: () => void;
-}
+
 
 const SelectACategory = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<

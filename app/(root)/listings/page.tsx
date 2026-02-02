@@ -8,7 +8,11 @@ const Page = async ({
 }: {
   searchParams: { searchTerm?: string; locationSearch?: string; page?: string };
 }) => {
-  const { searchTerm = "", locationSearch = "", page = "1" } = searchParams;
+
+
+  const resolvedSearchParams = await searchParams;
+  const { searchTerm = "", locationSearch = "", page = "1" } = resolvedSearchParams;
+
 
   const currentPage = Number(page) || 1;
 

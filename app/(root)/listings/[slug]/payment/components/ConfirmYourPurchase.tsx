@@ -1,16 +1,16 @@
 import Link from "next/link";
 import styles from "./ConfirmYourPurchase.module.scss";
-import { PaymentFormWrapper } from "../PaymentFormWrapper";
+import { PaymentFormWrapper } from "./PaymentFormWrapper";
 
 // Todo: Create an Oly Secure Payment page, explain the payment process.
 const ConfirmYourPurchase = () => {
   return (
-    <PaymentFormWrapper >
+    <PaymentFormWrapper>
       <div className={styles.container}>
         <h2 className={styles.title}>Confirm Your Purchase</h2>
         <p>
-          Funds will be withdrawn after the seller has accepted the purchase.
-          Proceed to the payment section or contact seller.
+          Proceed to payment or contact the seller for more information. Your
+          funds will only be charged once the seller accepts your purchase.
         </p>
 
         <p className={styles.purchasingProcess}>
@@ -18,7 +18,6 @@ const ConfirmYourPurchase = () => {
           <Link href="/payment/oly-secure-payment" className={styles.link}>
             Oly Secure Payment
           </Link>
-          
         </p>
         <p className={styles.termsAndConditions}>
           By proceeding, you agree to our{" "}

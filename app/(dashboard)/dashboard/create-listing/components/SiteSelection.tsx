@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import styles from "./SiteSelection.module.scss";
 import ClassifiedLink from "@/components/cards/ClassifiedLink";
 import Link from "next/link";
@@ -8,6 +7,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
+import useBreakpointStore from "@/store/useBreakpointStore";
 
 export const sites = [
   {
@@ -28,7 +28,7 @@ export const sites = [
     image: "/auto.jpg",
     link: "/dashboard/create-listing/oly-auto/listing-type",
   },
-    {
+  {
     id: 4,
     text: "Oly Services",
     image: "/services.jpg",
@@ -40,20 +40,26 @@ export const sites = [
     image: "/hiring.jpg",
     link: "/dashboard/create-listing/oly-hiring/select-category",
   },
-
 ];
 
 interface SiteSelectionProps {
-  onSelect?: (site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services") => void;
+  onSelect?: (
+    site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services",
+  ) => void;
 }
 
 const SiteSelection = ({ onSelect }: SiteSelectionProps) => {
-  const siteMap: Record<string, "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"> = {
-    "Oly": "oly",
+  const { isLargeDesktop, isSmallDesktop, currentScreenSize } =
+    useBreakpointStore();
+  const siteMap: Record<
+    string,
+    "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"
+  > = {
+    Oly: "oly",
     "Oly Properties": "oly-properties",
     "Oly Auto": "oly-auto",
     "Oly Services": "oly-services",
-    "Oly Hiring": "oly-hiring"
+    "Oly Hiring": "oly-hiring",
   };
 
   const handleSiteClick = (siteText: string) => {
@@ -67,46 +73,53 @@ const SiteSelection = ({ onSelect }: SiteSelectionProps) => {
     }
   };
 
+  let marginRight = "";
+  switch (true) {
+    case isLargeDesktop:
+      marginRight = currentScreenSize < 1570 ? "20rem" : "12.5rem";
+      break;
+    case isSmallDesktop:
+      marginRight = currentScreenSize < 1340 ? "27rem" : "18.75rem";
+      break;
+    default:
+      marginRight = "12.5rem";
+      break;
+  }
+
+
+
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Select Site</h1>
-      <Swiper
-        className={styles.sitesContainer}
-        slidesPerView={1}
-        spaceBetween={20}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 32,
-          },
-          1199: {
-            slidesPerView: 4,
-            spaceBetween: 32,
-          },
-          1439: {
-            slidesPerView: 6,
-            spaceBetween: 32,
-          },
-        }}
+      <div className={styles.swiperContainer} 
+   
       >
-        {sites.map((site) => (
-          <SwiperSlide key={site.id}>
-            {onSelect ? (
-              <div onClick={() => handleSiteClick(site.text)}>
-                <ClassifiedLink text={site.text} image={site.image} />
-              </div>
-            ) : (
-              <Link href={site.link}>
-                <ClassifiedLink text={site.text} image={site.image} />
-              </Link>
-            )}
-          </SwiperSlide>
-        ))}
+        <Swiper
+          className={styles.sitesContainer}
+            slidesPerView={'auto'}
+          spaceBetween={30}
+          
+        >
+          {sites.map((site) => (
+            <SwiperSlide key={site.id} className={styles.swiperSlide}>
+              {onSelect ? (
+                <div onClick={() => handleSiteClick(site.text)}>
+                  <ClassifiedLink text={site.text} image={site.image} />
+                </div>
+              ) : (
+                <Link href={site.link}>
+                  <ClassifiedLink text={site.text} image={site.image} />
+                </Link>
+              )}
+            </SwiperSlide>
+          ))}
 
-        <div className={styles.navButtons}>
-          <NavButtons />
-        </div>
-      </Swiper>
+          <div className={styles.navButtons} style={{ marginRight }}>
+            <NavButtons />
+          </div>
+        </Swiper>
+      </div>
     </div>
   );
 };

@@ -6,14 +6,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   height: 100vh;
 
+  width: 100%;
   @include only(largeDesktop) {
-    width: rem(1098);
+    // width: rem(1098);
   }
   @include only(smallDesktop) {
-    width: rem(960);
+    // width: rem(960);
   }
   @include only(tablet) {
     width: rem(960);

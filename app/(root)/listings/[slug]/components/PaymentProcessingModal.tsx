@@ -3,6 +3,7 @@ import usePaymentModalStore from "../store/usePaymentModalStore";
 import PaymentProcessing from "../payment/components/PaymentProcessing";
 import { useSingInCheckHook } from "@/hooks/useSingInCheckHook";
 import { useEffect } from "react";
+import Payment from "../payment/page";
 
 const PaymentProcessingModal = () => {
   const { showPaymentModal, setShowPaymentModal } = usePaymentModalStore();

@@ -20,25 +20,25 @@ const SubcategoryCarousel = ({ subcategories }: SubcategoryCarouselProps) => {
   for (let i = 0; i < subcategories.length; i += itemsPerColumn) {
     columnsArr.push(subcategories.slice(i, i + itemsPerColumn));
   }
-  const slidesPerView = 6;
+  const slidesPerView = 5;
   return (
     <div className={styles.subcategories}>
       <div className={styles.subcategoriesWrapper}>
         <Swiper
           className={styles.swipper}
-          spaceBetween={20}
-          slidesPerView={slidesPerView}
+          spaceBetween={-150}
+          slidesPerView={4}
           direction="horizontal"
           freeMode={true}
           scrollbar={false}
           mousewheel={true}
           modules={[FreeMode, Scrollbar, Mousewheel]}
-          breakpoints={{
-            0: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            900: { slidesPerView: 3 },
-            1200: { slidesPerView: slidesPerView },
-          }}
+          // breakpoints={{
+          //   0: { slidesPerView: 1 },
+          //   640: { slidesPerView: 2 },
+          //   900: { slidesPerView: 3 },
+          //   1200: { slidesPerView: slidesPerView },
+          // }}
         >
           {columnsArr.map((column, index) => (
             <SwiperSlide className={styles.subcategorySlide} key={index}>

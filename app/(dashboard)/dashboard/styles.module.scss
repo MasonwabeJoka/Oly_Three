@@ -49,7 +49,7 @@
       flex-direction: column;
       align-items: center;
       margin-top: 16vh;
-      gap: rem(24);
+      gap: rem(32);
      
       @include only(largeDesktop) {
         margin-top: 0;

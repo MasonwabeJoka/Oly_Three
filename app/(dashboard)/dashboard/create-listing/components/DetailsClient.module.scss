@@ -7,16 +7,16 @@
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
-  width: rem(311);
+  width: 100%;
 
   @include only(largeDesktop) {
-    width: rem(1098);
+    // width: rem(1098);
   }
   @include only(smallDesktop) {
-    width: rem(960);
+    // width: rem(960);
   }
   @include only(tablet) {
-    width: rem(960);
+    // width: rem(960);
   }
 
   .title {

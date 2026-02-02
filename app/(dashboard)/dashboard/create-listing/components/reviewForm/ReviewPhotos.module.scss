@@ -5,6 +5,8 @@
   .swipper {
     display: flex;
     flex-direction: column;
+    z-index: -1;
+   
     .photoContainer {
       height: auto;
       width: rem(310);
@@ -19,6 +21,10 @@
       align-items: center;
       margin-right: 14.6%;
       gap: rem(240);
+
+      .navButtons {
+        background-color: $white-three;
+      }
     }
   }
 }

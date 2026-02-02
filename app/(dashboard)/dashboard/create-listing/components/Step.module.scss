@@ -8,14 +8,12 @@
   align-items: center;
   width: rem(311);
   height: 100vh;
+  width: 100%;
   @include only(largeDesktop) {
-    width: rem(1098);
   }
   @include only(smallDesktop) {
-    width: rem(960);
   }
   @include only(tablet) {
-    width: rem(1098);
   }
 
   .formWrapper {
@@ -49,23 +47,25 @@
     .buttonsContainer {
       position: fixed;
       bottom: 0;
+    
       @include only(largeDesktop) {
-        width: rem(1098 * 0.95);
+          width: 58%;
       }
       @include only(smallDesktop) {
-        width: rem(960 * 0.95);
+         width: 68%;
       }
       @include only(tablet) {
-        width: rem(960 * 0.95);
+          width: 70%;
       }
 
       .buttons {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: rem(20);
+        // padding-top: rem(20);
         padding-bottom: rem(48);
         background-color: $white-four;
+    
         .proceedButton {
           margin-bottom: rem(20);
         }

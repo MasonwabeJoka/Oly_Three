@@ -5,14 +5,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   @include only(largeDesktop) {
-    width: rem(1098);
+    // width: rem(1098);
   }
   @include only(smallDesktop) {
-    width: rem(1098);
+    // width: rem(1098);
   }
   @include only(tablet) {
-    width: rem(1098);
+    // width: rem(1098);
   }
 
   .title {

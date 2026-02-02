@@ -21,6 +21,7 @@ const MainSection = ({ listing }: Props) => {
         <>
           <ListingOverview listing={listing} />
           <AuctionModal />
+        
           <PaymentProcessingModal />
         </>
       ) : (

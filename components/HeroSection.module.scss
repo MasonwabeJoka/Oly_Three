@@ -27,10 +27,8 @@
   height: 95vh;
   border-radius: rem(150);
   gap: rem(24);
-  
 
   @include only(largeDesktop) {
-   
   }
 
   @include only(smallDesktop) {
@@ -39,8 +37,8 @@
   @include only(tablet) {
     width: 100vw;
     padding: rem(0) rem(40) !important;
-  //  background-color: #c9e5e8;
-   border-radius: 0;
+    //  background-color: #c9e5e8;
+    border-radius: 0;
   }
 
   @include only(extraLargeDesktop) {
@@ -63,23 +61,26 @@
       width: rem(640) !important;
       font-size: $h1;
       font-weight: 600;
-       line-height: 1.2;
+      line-height: 1.2;
       text-align: center;
+      text-wrap: balance;
+      hyphens: auto;
       color: $black-four;
       z-index: 1;
       @include only(largeDesktop) {
-        width: rem(740);
+        width: rem(900) !important;
 
         line-height: 1.2;
       }
 
       @include only(smallDesktop) {
-        width: rem(500) !important;
-        font-size: rem(36) !important;
+        width: rem(600) !important;
+        font-size: rem(40) !important;
+        
       }
       @include only(tablet) {
-       width: rem(400) !important;
-        font-size: rem(30) !important;
+        width: rem(400) !important;
+        font-size: rem(36) !important;
       }
     }
   }
@@ -93,7 +94,7 @@
     }
 
     @include only(tablet) {
-     padding: rem(0) rem(340) !important;
+      padding: rem(0) rem(340) !important;
     }
   }
 }

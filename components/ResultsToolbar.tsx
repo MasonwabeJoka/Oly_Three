@@ -58,7 +58,6 @@ const ResultsToolbar = ({
   const getToolbarOptions = (index: number) => {
     const toolbarData = renderToolbarData();
     const item = toolbarData[index];
-    console.log("ResultsToolbar: index =", index, "item =", item);
     if (!item || !item.values) return null;
 
     const { values } = item;
@@ -98,7 +97,6 @@ const ResultsToolbar = ({
       }
       return item.label;
     });
-    console.log("ResultsToolbar: tabs =", labels);
     return labels;
   };
 
@@ -107,41 +105,27 @@ const ResultsToolbar = ({
     const handlers = currentTabs.map((label: string, index: number) => {
       if (label === "Collage View" || label === "Expanded View") {
         return () => {
-          console.log("ResultsToolbar: toggling view, current =", expanded);
           toggleExpanded();
           setActiveTabIndex(null);
         };
       }
       if (label === "Map View" || label === "List View") {
         return () => {
-          console.log(
-            "ResultsToolbar: toggling map view, current =",
-            isMapView
-          );
+       
           setIsMapView(!isMapView);
           setActiveTabIndex(null);
         };
       }
       return () => handleTabClick(index);
     });
-    console.log(
-      "ResultsToolbar: tabs =",
-      currentTabs,
-      "handlers =",
-      handlers.map((h) => h.name || "anonymous")
-    );
+
     return handlers;
   };
 
   const renderToolbarOptions = () => {
     if (activeTabIndex === null) return null;
     const options = getToolbarOptions(activeTabIndex);
-    console.log(
-      "ResultsToolbar: rendering options for index =",
-      activeTabIndex,
-      "options =",
-      options
-    );
+   
     if (!options) return null;
     return (
       <TabOptions

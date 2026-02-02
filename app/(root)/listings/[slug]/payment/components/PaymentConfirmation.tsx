@@ -1,4 +1,4 @@
-import { PaymentFormWrapper } from "../PaymentFormWrapper";
+import { PaymentFormWrapper } from "./PaymentFormWrapper";
 import styles from "./PaymentConfirmation.module.scss";
 const PaymentConfirmation = () => {
   return (

@@ -24,7 +24,7 @@ const ListingsPage = async ({
     currentPage,
     site,
 }: ListingsPageProps) => {
-  
+ 
 
   return (
     <div className={styles.container}>
@@ -34,11 +34,12 @@ const ListingsPage = async ({
             <TopNotification
               key={`${searchTerm}-${locationSearch}`}
               type="success"
+              showHomeButton
               message={
                 <div className={styles.resultsTextContainer}>
+            
                   <h1 className={styles.resultsText}>
-                    Showing results for <span>{searchTerm} </span> in{" "}
-                    <span>{locationSearch}</span>
+                    Showing results for&nbsp;&nbsp;<span>{searchTerm}</span>&emsp;in&emsp;<span>{locationSearch}</span>
                   </h1>
                 </div>
               }

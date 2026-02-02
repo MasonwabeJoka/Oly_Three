@@ -18,14 +18,14 @@
   }
 
   .subcategoriesWrapper {
-    width: 150%;
-
     .swipper {
       padding-top: rem(8);
       padding-left: rem(8);
       display: none;
       background-color: #d0d3d615;
       border-radius: rem(40);
+      padding-right: rem(48);
+      width: 120%;
       @include only(largeDesktop) {
         display: block;
       }
@@ -39,13 +39,11 @@
       .subcategorySlide {
         display: flex;
         flex-direction: column;
-        // width: rem(288);
         height: auto;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         padding-bottom: rem(16);
-
         .subcategoryList {
           list-style: none;
           padding: 0;
@@ -55,26 +53,44 @@
           gap: rem(16);
 
           .subcategory {
-            display: flex;
-            align-items: center;
-            background-color: $white-three;
-            height: rem(56);
-            width: rem(256);
-            border-radius: rem(40);
             cursor: pointer;
+            width: fit-content;
 
             .subcategoryLink {
-              width: rem(256);
-              text-overflow: ellipsis;
-              padding-left: rem(18);
-              margin: rem(2);
-              line-height: 1.7;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              width: rem(200);
+              height: rem(56);
+              border-radius: rem(40);
+              background-color: $white-three;
+              padding: 0 rem(32);
+              margin: rem(2) 0;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+              white-space: normal;
+              font-size: rem(14);
+              @include only(largeDesktop) {
+                width: rem(256);
+                padding: 0 rem(32);
+              }
+              @include only(smallDesktop) {
+                width: rem(212);
+                padding: 0 rem(16);
+                line-height: 1.3;
+              }
+              @include only(tablet) {
+                  width: rem(212);
+                padding: 0 rem(16);
+                line-height: 1.3;
+              }
             }
-          }
 
-          .subcategory:hover {
-            cursor: pointer;
-            background-color: $white-one;
+            .subcategoryLink:hover {
+              cursor: pointer;
+              background-color: $white-one;
+            }
           }
         }
       }

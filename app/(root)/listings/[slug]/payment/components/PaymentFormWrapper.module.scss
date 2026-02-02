@@ -4,20 +4,17 @@
 .container {
   display: flex;
   flex-direction: column;
-  
+  justify-content: center;
   align-items: center;
   width: rem(311);
   height: 100vh;
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
-
+  width: 100%;
   @include only(largeDesktop) {
-    width: rem(1098);
-    background-color: antiquewhite;
+    // width: rem(1098);
   }
-
-
 
   .children {
     display: flex;
@@ -40,7 +37,6 @@
 
   .progressBar {
     width: 100%;
-    background-color: yellow !important;
   }
 }
 

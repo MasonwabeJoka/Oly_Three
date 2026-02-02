@@ -147,7 +147,7 @@ const RichTextEditor = ({
         },
       },
     }),
-    []
+    [],
   );
 
   // Only render on client side (skeleton is handled by dynamic import in parent)
