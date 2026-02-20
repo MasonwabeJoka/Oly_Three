@@ -4,16 +4,17 @@ import styles from "./Modal.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "./LoadingSpinner";
+import { ReactNode } from "react";
 // Todo: Consider adding logo that takes you to home screen to modal
 type Props = {
   showModal: boolean; // Boolean to show or hide the modal
   setShowModal?: (value: boolean) => void; // Function to close the modal
-  modalContent: JSX.Element; // JSX element to render inside the modal
+  modalContent: ReactNode | (() => JSX.Element) | null; // JSX element to render inside the modal
   path?: string; // Optional path to redirect to when modal is closed
   reload?: boolean; // Optional boolean to reload the page when modal is closed
   refresh?: boolean; // Optional boolean to refresh the page when modal is closed
   closeAllModals?: boolean; // Optional boolean to close the current modal
-  contentMoreThanScreenHeight?: boolean; // Optional boolean to determine if the modal content is more than the screen height
+  contentGreaterThanScreenHeight?: boolean; // Optional boolean to determine if the modal content is more than the screen height
   id?: string; // Optional id for the modal
 };
 
@@ -25,7 +26,7 @@ const Modal = ({
   reload,
   refresh,
   closeAllModals,
-  contentMoreThanScreenHeight,
+  contentGreaterThanScreenHeight,
 }: Props) => {
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
@@ -72,7 +73,7 @@ const Modal = ({
     <>
       {showModal && (
         <div
-          className={`${styles.modalOverlay} ${contentMoreThanScreenHeight ? styles.moreThanScreenHeight : styles.lessThanScreenHeight}`}
+          className={`${styles.modalOverlay} ${contentGreaterThanScreenHeight ? styles.moreThanScreenHeight : styles.lessThanScreenHeight}`}
           onClick={handleClose}
         >
           <div className={styles.exitButtonContainer} onClick={handleClose}>

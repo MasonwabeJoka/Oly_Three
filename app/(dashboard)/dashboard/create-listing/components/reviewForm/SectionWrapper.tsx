@@ -4,22 +4,24 @@ import styles from "./SectionWrapper.module.scss";
 import Button from "@/components/Buttons";
 import useEditStore from "../../store/useEditStore";
 import useFormStore from "../../store/useFormStore";
+import { useRouter } from "next/navigation";
 type SectionWrapperProps = {
   title: string;
-  pageNumber: number;
+  path: string;
   children: React.ReactNode;
 };
 export const SectionWrapper = ({
   title,
-  pageNumber,
+  path,
   children,
 }: SectionWrapperProps) => {
   const { setIsEditMode } = useEditStore();
   const { goTo } = useFormStore();
+  const router = useRouter();
   
   const onClick = () => {
     setIsEditMode(true);
-    goTo(pageNumber);
+    router.push(`${path}?edit=true`);
   };
   return (
     <div className={styles.container}>

@@ -5,7 +5,7 @@ import "@uploadthing/react/styles.css";
 import "../../globals.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
-import LayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/LayoutWrapper";
+import LayoutWrapper from "@/components/LayoutWrapper";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export const metadata = {

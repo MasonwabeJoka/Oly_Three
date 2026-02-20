@@ -3,7 +3,7 @@ import { mileageData } from "@/data/vehicleMileageData";
 
 interface VehicleMileageProps {}
 
-const VehicleMileage = (): VehicleMileageProps => {
+const VehicleMileage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.cards}>

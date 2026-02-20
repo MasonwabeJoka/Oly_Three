@@ -24,7 +24,6 @@
     height: rem(688);
   }
 
-
   .profileSection {
     display: flex;
     flex-direction: column;
@@ -45,7 +44,7 @@
       }
 
       .phoneNumber {
-        font-size: rem(14);
+        font-size: $small;
       }
 
       .email {
@@ -57,7 +56,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: rem(-72);;
+    margin-top: rem(-72);
     .button {
       margin-bottom: rem(12);
     }

@@ -1,0 +1,73 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+   .logo {
+  margin-top: rem(108);
+  margin-bottom: rem(48);
+
+  @include only(largeDesktop) {
+    width: rem(120);
+    height: "auto";
+  }
+  @include only(smallDesktop) {
+    width: rem(120);
+    height: "auto";
+  }
+  @include only(tablet) {
+    width: rem(120);
+    height: "auto";
+  }
+
+  @include only(extraLargeDesktop) {
+    width: rem(120);
+    height: "auto";
+  }
+}
+.priceRangeSelectContainer {
+  // price range specific styles
+}
+
+.searchLocation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .searchLocationInput {
+    // margin-bottom: rem(10);
+  }
+}
+
+.searchButton {
+  .search {
+    // background-color: $white-two;
+    // box-shadow: none;
+  }
+
+  .search:hover {
+  
+  }
+}
+.backButtonContainer {
+  .backButton {
+    background-color: $white-two;
+    // box-shadow: none;
+  }
+
+  .backButton:hover {
+    background-color: $white-one;
+  }
+}
+
+.errorMessage {
+  color: $danger;
+  margin-bottom: rem(8);
+}
+
+}
+

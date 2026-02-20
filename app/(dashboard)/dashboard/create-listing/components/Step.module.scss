@@ -47,6 +47,7 @@
     .buttonsContainer {
       position: fixed;
       bottom: 0;
+      z-index: 10;
     
       @include only(largeDesktop) {
           width: 58%;

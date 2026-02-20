@@ -6,6 +6,7 @@ import axios from "axios";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useFormContext } from "react-hook-form";
 import type { FormDataSchema } from "../validations/formDataSchema";
+import useIsSelectOpen from "../store/useIsSelectOpen";
 
 const fetchBanks = async () => {
   try {
@@ -42,6 +43,11 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isBankNameOpen, setIsBankNameOpen] = useState(false);
+  const { setIsSelectOpen } = useIsSelectOpen();
+
+  useEffect(() => {
+    setIsSelectOpen(isBankNameOpen);
+  }, [isBankNameOpen, setIsSelectOpen]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,

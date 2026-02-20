@@ -36,14 +36,14 @@
       }
 
       .handle {
-        font-size: rem(14);
+        font-size: $small;
         font-weight: 300;
       }
     }
 
     .bio {
       text-align: center;
-      font-size: rem(14);
+      font-size: $small;
       font-weight: 300;
       line-height: 1.2;
       margin-bottom: rem(16);
@@ -51,27 +51,25 @@
     .locationSection {
       margin-bottom: rem(16);
       line-height: 1.2;
-      font-size: rem(14);
+      font-size: $small;
       font-weight: 300;
     }
-  
+
     .bottomSection {
-    
       margin-top: auto;
       line-height: 1.5;
-       margin-bottom: rem(20);
+      margin-bottom: rem(20);
       .joinDate,
       .following {
         display: flex;
         align-items: center;
         gap: rem(8);
-       
-        font-size: rem(14);
+
+        font-size: $small;
         font-weight: 300;
-        
+
         margin-top: auto;
       }
     }
   }
-
 }

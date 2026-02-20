@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ReviewAndSubmit = ({ onNext }: Props) => {
-  // https://chatgpt.com/share/45cb30a0-a739-4224-bea5-82b0c352dd28
+ 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Review Your Listing</h2>

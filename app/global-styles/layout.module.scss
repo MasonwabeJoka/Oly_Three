@@ -5,7 +5,13 @@
 .html {
   scroll-behavior: smooth;
   height: 100%;
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-outfit),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  scrollbar-color: $warning-hover transparent;
+  scrollbar-width: auto;
 }
 .html::-webkit-scrollbar {
   width: rem(12);
@@ -22,6 +28,12 @@
 }
 .html::-webkit-scrollbar-thumb:hover {
   background-color: $warning-hover;
+}
+
+.html::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 @supports (scrollbar-color: $warning-hover transparent) {
@@ -141,7 +153,6 @@
   }
 
   footer {
-    margin-top: auto !important; 
+    margin-top: auto !important;
   }
 }
-

@@ -4,92 +4,64 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 50vw;
-  height: 93vh;
-  border-radius: rem(150) rem(150) rem(150) rem(150);
+  border-radius: rem(40);
   background-color: $grey-one;
-  // background-color: #c9e5e8;
 
-  .logo {
-    margin-top: rem(80);
-    margin-bottom: rem(24);
+  @include only(largeDesktop) {
+    border-radius: rem(150) rem(150) rem(150) rem(150);
   }
-  .buttonsAndSearch {
+  @include only(smallDesktop) {
+    border-radius: rem(112);
+  }
+
+  @include only(tablet) {
+    height: 70vh;
+    width: 80vw !important;
+    border-radius: rem(112);
+    padding: rem(0) rem(40) !important;
+  }
+
+  .formContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: rem(48);
+    width: 50vw;
+    height: 90vh;
+    border-radius: rem(150);
 
-    .buttons {
+    @include only(largeDesktop) {
+      padding: rem(0) rem(240);
+    }
+    @include only(smallDesktop) {
+      padding: rem(0) rem(120);
+    }
+    @include only(tablet) {
+      padding: rem(0) rem(120);
+    }
+
+    .formWrapper {
       display: flex;
       flex-direction: column;
-      margin-bottom: rem(64);
-
-      .link {
+      align-items: center;
+      @include only(largeDesktop) {
       }
-
-      .createAListingBtn {
-        margin-bottom: rem(20);
-        background-color: $danger-hover;
-        color: $white-one;
+      @include only(smallDesktop) {
       }
-
-      .createAListingBtn:hover {
-        background-color: #f83710;
-      }
-
-      .propertyTypeSelectContainer {
-        margin-bottom: rem(20);
-      }
-      .forSaleToLetSelectContainer {
-        margin-bottom: rem(20);
-        .forSaleToLetSelect {
-        }
-      }
-
-      .priceRangeSelectContainer {
-      }
-      .categoriesBtn:hover {
-        background-color: $white-one;
-      }
-    }
-
-    .searchFields {
-      margin-bottom: rem(30);
-      .searchTerm {
+  
+      .buttonsAndSearch {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin-bottom: rem(20);
-
-        .searchTermInput {
-        }
-      }
-      .searchLocation {
-        display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
 
-        .searchLocationInput {
-          // margin-bottom: rem(10);
+        @include only(largeDesktop) {
         }
-      }
-
-      .errorMessage {
-        color: $danger;
-        margin-bottom: rem(8);
-      }
-    }
-    .searchButton {
-      .search {
-        // background-color: $white-two;
-        // box-shadow: none;
-      }
-
-      .search:hover {
-        background-color: $white-one;
+        @include only(smallDesktop) {
+        }
+        @include only(tablet) {
+        }
       }
     }
   }

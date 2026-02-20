@@ -7,30 +7,25 @@
   justify-content: center;
   align-items: center;
   border-radius: rem(40);
+  background-color: #c9e5e8;
 
   @include only(largeDesktop) {
-    background-color: #c9e5e8;
     border-radius: rem(150) rem(150) rem(150) rem(150);
   }
   @include only(smallDesktop) {
-    background-color: #c9e5e8;
-    border-radius: rem(112);
+        border-radius: rem(112);
   }
 
   @include only(tablet) {
-    
-    background-color: #c9e5e8;
-    // background-color: #d dfcff6b;
     height: 70vh;
     width: 80vw !important;
-     border-radius: rem(112);
-     padding: rem(0) rem(40) !important;
+    border-radius: rem(112);
+    padding: rem(0) rem(40) !important;
   }
 
   .formContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 50vw;
     height: 90vh;
@@ -44,7 +39,6 @@
     }
     @include only(tablet) {
       padding: rem(0) rem(120);
-     
     }
 
     .formWrapper {
@@ -56,77 +50,43 @@
       }
       @include only(smallDesktop) {
       }
-    }
 
-    .logo {
-      margin-top: rem(48);
-      margin-bottom: rem(48);
+      .logo {
+        margin-top: rem(160);
+        margin-bottom: rem(48);
 
-      @include only(largeDesktop) {
-        width: rem(120);
-        height: "auto";
-      }
-      @include only(smallDesktop) {
-        width: rem(120);
-        height: "auto";
-      }
-      @include only(tablet) {
-        width: rem(120);
-        height: "auto";
-      }
-     
-      @include only(extraLargeDesktop) {
-        width: rem(120);
-        height: "auto";
-      }
-    }
-    .buttonsAndSearch {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+        @include only(largeDesktop) {
+          width: rem(120);
+          height: "auto";
+        }
+        @include only(smallDesktop) {
+          width: rem(120);
+          height: "auto";
+        }
+        @include only(tablet) {
+          width: rem(120);
+          height: "auto";
+        }
 
-      @include only(largeDesktop) {
+        @include only(extraLargeDesktop) {
+          width: rem(120);
+          height: "auto";
+        }
       }
-      @include only(smallDesktop) {
-      }
-      @include only(tablet) {
-      }
-
-      .buttons {
+      .buttonsAndSearch {
         display: flex;
         flex-direction: column;
-        margin-bottom: rem(64);
+        justify-content: center;
+        align-items: center;
 
-        .link {
+        @include only(largeDesktop) {
+        }
+        @include only(smallDesktop) {
+        }
+        @include only(tablet) {
         }
 
-        .createAListingBtn {
-          margin-bottom: rem(20);
-          background-color: $danger-hover;
-          color: $white-one;
-        }
-
-        .createAListingBtn:hover {
-          background-color: #f83710;
-        }
-
-        .createAListingBtn:focus {
-          outline-offset: rem(1);
-          outline-style: solid;
-          outline-color: $danger-hover;
-          outline-width: rem(2);
-          border-radius: rem(40);
-        }
-
-        .categoriesBtn {
-          background-color: $white-two;
-          box-shadow: none;
-        }
-
-        .categoriesBtn:hover {
-          background-color: $white-one;
-        }
+        
       }
     }
   }

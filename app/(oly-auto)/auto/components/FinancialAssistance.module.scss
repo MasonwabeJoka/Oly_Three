@@ -17,7 +17,6 @@
       font-size: $h3;
       font-weight: 500;
       margin-bottom: rem(20);
-
     }
 
     .message {
@@ -25,15 +24,13 @@
       font-size: $body;
       margin-bottom: rem(20);
     }
-
   }
-  
+
   .disclaimer {
     text-align: center;
-    font-size: rem(12);
+    font-size: $tiny;
     width: 30%;
     margin-bottom: rem(48);
-
   }
   .button {
     margin-bottom: rem(20);

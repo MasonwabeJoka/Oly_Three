@@ -1,10 +1,16 @@
 import { SectionWrapper } from "./SectionWrapper";
 import styles from "./ReviewCategories.module.scss";
 import Select from "@/components/Select";
+import { useParams } from "next/navigation";
 
 const ReviewCategories = () => {
+  const params = useParams();
+  const site = params.site as string;
   return (
-    <SectionWrapper title="Categories" pageNumber={0}>
+    <SectionWrapper
+      title="Categories"
+      path={`/dashboard/create-listing/${site}/select-category`}
+    >
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

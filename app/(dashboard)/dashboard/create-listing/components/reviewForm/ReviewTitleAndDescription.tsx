@@ -1,9 +1,13 @@
 import styles from "./ReviewTitleAndDescription.module.scss";
 import { SectionWrapper } from "./SectionWrapper";
+import { useParams } from "next/navigation";
+
 
 const ReviewTitleAndDescription = () => {
+   const params = useParams();
+    const site = params.site as string;
   return (
-    <SectionWrapper title="Title and Description" pageNumber={5}>
+    <SectionWrapper title="Title and Description" path={`/dashboard/create-listing/${site}/title-and-description`}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

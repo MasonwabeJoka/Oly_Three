@@ -223,13 +223,13 @@
     justify-content: flex-end;
     align-items: center;
     gap: rem(8);
-    font-size: rem(14);
+    font-size: $small;
     span {
       text-transform: uppercase;
       padding-top: rem(8);
     }
     .charCountLabel {
-      font-size: rem(12);
+      font-size: $tiny;
     }
     .charCount {
       margin-right: rem(32);

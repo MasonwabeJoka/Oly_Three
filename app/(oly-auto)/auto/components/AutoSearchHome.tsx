@@ -78,6 +78,7 @@ const AutoSearchHome = () => {
         <div className={`${styles.totalPrice} ${styles.field}`}>
           <NumberInput
             className={styles.totalPriceInput}
+            label="Budget"
             min={0}
             max={9999999999}
             step={100}
@@ -85,7 +86,7 @@ const AutoSearchHome = () => {
             id="totalPrice"
             value={0}
             inputSize="large"
-            placeholder="What’s your budget (total amount)"
+            placeholder="What’s your budget"
             autoFocus={false}
             required={true}
             onChange={(e : React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
@@ -94,6 +95,7 @@ const AutoSearchHome = () => {
         <div className={`${styles.totalPrice} ${styles.field}`}>
           <NumberInput
             className={styles.totalPriceInput}
+            label="Installment"
             min={0}
             max={9999999999}
             step={100}
@@ -101,7 +103,7 @@ const AutoSearchHome = () => {
             id="totalPrice"
             value={0}
             inputSize="large"
-            placeholder="What's your target monthly payment"
+            placeholder="Target monthly payment"
             autoFocus={false}
             required={true}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
@@ -110,6 +112,7 @@ const AutoSearchHome = () => {
         <div className={`${styles.totalPrice} ${styles.field}`}>
           <NumberInput
             className={styles.totalPriceInput}
+            label="Deposit"       
             min={0}
             max={9999999999}
             step={100}

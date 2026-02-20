@@ -6,6 +6,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 import Button from "./Buttons";
 import Checkbox from "./Checkbox";
 import { Input as ShadcnInput } from "@/components/ui/input";
+import { React } from "next/dist/server/route-modules/app-page/vendored/rsc/entrypoints";
 
 //Todo: Check whether email is valid only after user has has finished typing their email
 //Todo: When the input is cleared, the error message should disappear
@@ -18,11 +19,11 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   inputType: keyof typeof INPUT_TYPE;
   accept?: string;
   error?: string;
-  inputSize: "xLarge" | "large" | "medium";
+  inputSize: "xLarge" | "large" | "medium" | "small";
   inputColourType?: keyof typeof INPUT_COLOUR_TYPE;
   iconPosition?: "left" | "right" | "leftRight";
-  iconSrcLeft?: string;
-  iconSrcRight?: string;
+  iconSrcLeft?: string | React.ReactNode;
+  iconSrcRight?: string | React.ReactNode;
   label: string;
   placeholder?: string;
   id: string;
@@ -105,14 +106,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       iconPosition,
       iconSrcLeft,
       iconSrcRight,
+        iconWidth,
+      iconHeight,
       label,
       placeholder,
       id,
       name,
       ariaLabel,
       autoFocus,
-      iconWidth,
-      iconHeight,
       autoComplete = "off",
       readonly,
       required = false,
@@ -151,6 +152,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         sizeClass = !dashboard
           ? styles.mediumInput
           : styles.mediumDashboardInput;
+        break;
+      case "small":
+        sizeClass = !dashboard
+          ? styles.smallInput
+          : styles.smallDashboardInput;
         break;
       case "xLarge":
         sizeClass = !dashboard
@@ -377,7 +383,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {error && (
             <p
               id={errorId}
-              className={styles.errorMessage}
+              className={`${styles.errorMessage}`}
               role="alert"
               aria-live="polite"
             >
@@ -388,12 +394,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {iconPosition === "left" &&
             iconSrcLeft &&
             (value || selectedItems.length > 0) && (
-              <Image
-                src={iconSrcLeft}
-                alt={`${ariaLabel} Icon Left`}
-                width={iconWidth}
-                height={iconHeight}
-              />
+              typeof iconSrcLeft === "string" ? (
+                <Image
+                  src={iconSrcLeft}
+                  alt={`${ariaLabel} Icon Left`}
+                  width={iconWidth}
+                  height={iconHeight}
+                />
+              ) : (
+                iconSrcLeft
+              )
             )}
           <ShadcnInput
             style={{ display: "none" }}
@@ -412,7 +422,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {label &&
               (internalValue || selectedItems.length > 0) &&
               internalValue.length < 30 && (
-                <label htmlFor={inputId} className={styles.label}>
+                <label htmlFor={inputId} className={`${styles.label} ${inputSize === "small" ? styles.smallInputLabel : ""
+                }`}
+                >
                   <span>
                     {" "}
                     {label.length > 12 ? `${label.substring(0, 12)}...` : label}

@@ -3,7 +3,7 @@ import Button from "./Buttons";
 import styles from "./Step.module.scss";
 
 type StepProps<T> = {
-  step: { title: string; content: React.ReactNode };
+  step: { title?: string; content: React.ReactNode };
   onNext: () => void;
   onBack: () => void;
   isFirstStep?: boolean;
@@ -43,7 +43,6 @@ export default function Step<T>({
             ariaLabel="Proceed Button"
             autoFocus={false}
             disabled={false}
-            dashboard
             onClick={onNext}
           />
         )}
@@ -58,7 +57,6 @@ export default function Step<T>({
             ariaLabel="Back Button"
             autoFocus={false}
             disabled={false}
-            dashboard
             onClick={onBack}
           />
         )}

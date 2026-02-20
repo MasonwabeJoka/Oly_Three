@@ -1,0 +1,66 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+
+  .link {
+    .createAListingBtn {
+      background-color: $danger-hover;
+      color: $white-one;
+    }
+  }
+
+  .propertyTypeSelectContainer {
+  }
+  .forSaleToLetSelectContainer {
+    .forSaleToLetSelect {
+    }
+  }
+
+  .priceRangeSelectContainer {
+  }
+  .categoriesBtn:hover {
+    background-color: $white-one;
+  }
+
+  .searchFields {
+    margin-bottom: rem(30);
+    .searchTerm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: rem(20);
+
+      .searchTermInput {
+      }
+    }
+    .searchLocation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .searchLocationInput {
+        // margin-bottom: rem(10);
+      }
+    }
+
+    .errorMessage {
+      color: $danger;
+      margin-bottom: rem(8);
+    }
+  }
+  .searchButton {
+    .search {
+      // background-color: $white-two;
+      // box-shadow: none;
+    }
+
+    .search:hover {
+      background-color: $white-one;
+    }
+  }
+}

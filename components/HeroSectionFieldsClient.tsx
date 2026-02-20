@@ -1,8 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useActionState } from "react"; // For state/errors
-import { useFormStatus } from "react-dom"; // Correct import for pending status
 import styles from "./HeroSectionFieldsClient.module.scss";
+import { useState } from "react";
+import { useFormStatus } from "react-dom";
 import Button from "./Buttons";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
@@ -11,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import { useModalStore } from "@/store/modalStore";
+import Link from "next/link";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
@@ -23,7 +23,7 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
   const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
   const [locationSuggestions, setLocationSuggestions] = useState(0);
   const setShowCategoriesModal = useModalStore(
-    (state) => state.setShowCategoriesModal
+    (state) => state.setShowCategoriesModal,
   );
 
   const {
@@ -38,7 +38,20 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
   const { pending } = useFormStatus() || { pending: isSubmitting };
 
   return (
-    <>
+    <div className={styles.container}>
+      <Link href="/dashboard/create-listing" className={styles.link}>
+        <Button
+          buttonChildren="Create A Listing"
+          className={styles.createAListingBtn}
+          buttonType="danger"
+          buttonSize="large"
+          name="Create A Listing Button"
+          type="button"
+          ariaLabel="Create A Listing Button"
+          autoFocus={false}
+          disabled={false}
+        />
+      </Link>
       <div className={styles.categoriesBtnContainer}>
         <Button
           buttonChildren="See All Categories"
@@ -54,11 +67,8 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
         />
       </div>
 
-      <div className={styles.searchFields}>
-        {/* Display server errors from useActionState */}
-        {errors && (
-          <p className={styles.errorMessage}>{(errors as any)?.message}</p>
-        )}
+   
+      
 
         <div className={styles.searchTerm}>
           <p className={styles.errorMessage}>
@@ -143,8 +153,8 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
             />
           </div>
         )}
-      </div>
-    </>
+      
+    </div>
   );
 };
 

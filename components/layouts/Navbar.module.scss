@@ -10,8 +10,8 @@
   align-items: center;
   z-index: 12;
   transition: transform 0.5s ease-in-out;
-  // pointer-events: none; /* Make the div click-through */
   width: 95vw;
+   pointer-events: none;
   @include only(largeDesktop) {
     top: rem(8);
   }
@@ -28,5 +28,9 @@
   .visible {
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .rightButton {
+    margin-left: auto;
   }
 }

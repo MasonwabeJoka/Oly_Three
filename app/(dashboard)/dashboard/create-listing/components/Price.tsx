@@ -3,8 +3,9 @@ import styles from "./Price.module.scss";
 import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
 import NumberInput from "@/components/NumberInput";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import useFAQStore from "../store/useFAQStore";
+import useIsSelectOpen from "../store/useIsSelectOpen";
 
 interface Props {
   onNext: () => void;
@@ -21,6 +22,11 @@ const Price = ({ onNext }: Props) => {
 
   const priceType = watch("price.pricingOption");
   const [isPricingOptionsOpen, setIsPricingOptionsOpen] = useState(false);
+  const { setIsSelectOpen } = useIsSelectOpen();
+
+  useEffect(() => {
+    setIsSelectOpen(isPricingOptionsOpen);
+  }, [isPricingOptionsOpen, setIsSelectOpen]);
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,

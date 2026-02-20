@@ -1,8 +1,12 @@
 import styles from "./ReviewFeatures.module.scss";
 import { SectionWrapper } from "./SectionWrapper";
+import { useParams } from "next/navigation";
+
 const ReviewFeatures = () => {
+  const params = useParams();
+  const site = params.site as string;
   return (
-    <SectionWrapper title="Features" pageNumber={2}>
+    <SectionWrapper title="Features" path={`/dashboard/create-listing/${site}/features`}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

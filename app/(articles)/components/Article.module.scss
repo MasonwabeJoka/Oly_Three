@@ -44,7 +44,6 @@
           padding: rem(4) rem(16);
           border-radius: rem(40);
           .copyArticleIcon {
-            
           }
           &:hover {
             background-color: $primary-hover;
@@ -149,7 +148,7 @@
           .articleMetadata {
             display: flex;
             gap: rem(56);
-            font-size: rem(14);
+            font-size: $small;
             font-weight: 300;
             color: $primary;
           }
@@ -269,12 +268,12 @@
             gap: rem(4);
             padding: rem(4) rem(16);
             border-radius: rem(40);
-          background-color: $primary;
+            background-color: $primary;
 
-           &:hover {
-            background-color: $primary-hover;
-            // color: $white-one;
-          }
+            &:hover {
+              background-color: $primary-hover;
+              // color: $white-one;
+            }
 
             .copyArticleIcon {
             }
@@ -295,10 +294,10 @@
               background-color: $primary;
               cursor: pointer;
 
-               &:hover {
-            background-color: $primary-hover;
-            // color: $white-one;
-          }
+              &:hover {
+                background-color: $primary-hover;
+                // color: $white-one;
+              }
 
               img {
                 width: rem(12);

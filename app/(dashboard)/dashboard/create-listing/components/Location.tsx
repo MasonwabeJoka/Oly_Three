@@ -6,7 +6,8 @@ import { locations } from "@/data/LocationData";
 import { FormWrapper } from "./FormWrapper";
 import { useFormContext } from "react-hook-form";
 import { FormDataSchema } from "../validations/formDataSchema";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useIsSelectOpen from "../store/useIsSelectOpen";
 
 interface Props {
   onNext: () => void;
@@ -15,10 +16,15 @@ const Location = ({ onNext }: Props) => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [isSuburbOpen, setIsSuburbOpen] = useState(false);
+  const { setIsSelectOpen } = useIsSelectOpen();
   const {
     register,
     formState: { errors },
   } = useFormContext<FormDataSchema>();
+
+  useEffect(() => {
+    setIsSelectOpen(isLocationOpen || isCityOpen || isSuburbOpen);
+  }, [isLocationOpen, isCityOpen, isSuburbOpen, setIsSelectOpen]);
 
   return (
     <div className={styles.container}>

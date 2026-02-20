@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
-    position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,8 +14,6 @@
     font-size: $h4;
     color: $danger;
     font-weight: 500;
-    // margin-top: rem(48);
-    // margin-bottom: rem(20);
   }
 
   .featuresContainer {
@@ -29,15 +27,16 @@
       flex-direction: column;
       align-items: center;
       width: 75%;
-      margin-bottom: rem(54);
-      padding: rem(56) rem(100) rem(72) rem(100);
+      padding: rem(0) rem(50);
       border-radius: rem(48);
-      background-color: $white-three;
+      margin-bottom: rem(48);
+      // background-color: $white-three;
       .category {
-        font-size: $body;
-        font-weight: 500;
+        font-size: $tiny;
+        text-transform: uppercase;
+        // font-weight: 500;
         color: $danger;
-        margin-bottom: rem(48);
+        margin-bottom: rem(32);
       }
 
       .features {
@@ -52,8 +51,8 @@
           align-items: center;
           width: 30%;
           gap: rem(32);
-          font-size: rem(14);
-        //   margin-bottom: rem(32);
+          font-size: rem(13);
+          //   margin-bottom: rem(32);
         }
       }
     }
@@ -65,11 +64,10 @@
     bottom: 0;
     background-color: $white-four;
     width: 100vw;
-  
 
     .button {
-     margin-top: rem(20);
-     margin-bottom: rem(48);
+      margin-top: rem(20);
+      margin-bottom: rem(48);
     }
   }
 }

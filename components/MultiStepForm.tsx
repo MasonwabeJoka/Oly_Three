@@ -11,14 +11,14 @@ import Step from "./Step";
 import FormProgressBar from "@/app/(dashboard)/dashboard/create-listing/components/FormProgressBar";
 
 type StepConfig<T> = {
-  title: string;
+  title?: string;
   content: React.ReactNode;
   fields?: (keyof T)[];
 };
 
 type MultiStepFormProps<T extends Record<string, any>> = {
   steps: StepConfig<T>[];
-  schema: z.ZodSchema<T>;
+  schema?: z.ZodSchema<T>;
   onSubmit?: (data: T) => Promise<void> | void;
   progressBar: boolean;
   hideNextButton?: boolean;
@@ -35,7 +35,7 @@ export default function MultiStepForm<T extends Record<string, any>>({
 }: MultiStepFormProps<T>) {
   const methods = useForm<T>({
     mode: "onBlur",
-    resolver: zodResolver(schema),
+    resolver: schema && zodResolver(schema),
   });
 
   const { trigger, getValues, setError, reset, formState } = methods;

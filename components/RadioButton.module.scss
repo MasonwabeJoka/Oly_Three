@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  
+
   // Hide the native radio input
   input[type="radio"] {
     position: absolute;
@@ -104,5 +104,5 @@
 
 .labelLeft,
 .labelRight {
-  font-size: rem(14);
+  font-size: $small;
 }

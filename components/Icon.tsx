@@ -1,4 +1,4 @@
-import Image from "@/components/Image";
+import Image from "./Image";
 
 interface IconProps {
   className?: string;
@@ -6,8 +6,9 @@ interface IconProps {
   alt: string;
   width?: number;
   height?: number;
+  fill?: boolean;               // ← new
   boxShadow?: string;
-  onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
   isButton?: boolean;
   ariaLabel?: string;
   ariaHidden?: boolean;
@@ -19,31 +20,33 @@ const Icon = ({
   alt,
   width = 20,
   height = 20,
+  fill = false,                 
   boxShadow = "none",
   onClick,
   isButton = false,
   ariaLabel,
   ariaHidden = false,
 }: IconProps) => {
-  // Don't render if src is empty or invalid
-  if (!src || src.trim() === "") {
-    return null;
-  }
+  if (!src || src.trim() === "") return null;
 
   return (
     <Image
       className={className}
       src={src}
       alt={ariaHidden ? "" : alt}
-      width={width}
-      height={height}
-      style={{ objectFit: "contain", boxShadow: boxShadow }}
+      width={fill ? undefined : width}
+      height={fill ? undefined : height}
+      fill={fill}                   
+      style={{
+        objectFit: fill ? "contain" : "cover",   
+        boxShadow,
+      }}
       onClick={onClick}
       role={isButton ? "button" : undefined}
       tabIndex={isButton ? 0 : undefined}
       onKeyDown={
         isButton
-          ? (e: React.KeyboardEvent<HTMLImageElement>) => {
+          ? (e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 onClick?.(e as any);

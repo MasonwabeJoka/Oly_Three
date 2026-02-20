@@ -5,7 +5,7 @@
 .container {
   position: relative;
   margin-bottom: rem(48);
-  
+
   .cardContainer {
     position: relative;
     margin-bottom: rem(48);
@@ -162,7 +162,7 @@
 
 //                 .locationText {
 //                   padding-bottom: rem(1);
-//                   font-size: rem(12);
+//                   font-size: $tiny;
 //                 }
 //               }
 //             }
@@ -209,11 +209,11 @@
 //     }
 //     .whiteOne {
 //       background-color: $white-one;
-//       font-size: rem(14);
+//       font-size: $small;
 //     }
 //     .whiteTwo {
 //       background-color: $white-three;
-//       font-size: rem(14);
+//       font-size: $small;
 //     }
 //   }
 //   .analyticsItemsContainer {

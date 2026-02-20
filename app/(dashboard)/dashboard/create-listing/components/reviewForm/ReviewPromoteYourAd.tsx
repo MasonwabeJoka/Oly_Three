@@ -1,8 +1,12 @@
 import styles from "./ReviewPromoteYourAd.module.scss";
 import { SectionWrapper } from "./SectionWrapper";
-const ReviewLocation = () => {
+import { useParams } from "next/navigation";
+
+const ReviewPromoteYourAd = () => {
+  const params = useParams();
+  const site = params.site as string;
   return (
-    <SectionWrapper title="Location" pageNumber={11}>
+    <SectionWrapper title="Promote Your Ad" path={`/dashboard/create-listing/${site}/promote-your-ad`}>
       <div className={styles.container}>
         
       </div>
@@ -10,4 +14,4 @@ const ReviewLocation = () => {
   );
 };
 
-export default ReviewLocation;
+export default ReviewPromoteYourAd;

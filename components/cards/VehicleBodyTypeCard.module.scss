@@ -54,31 +54,28 @@
       align-items: center;
       gap: rem(20);
       .button {
-      position: relative;
-   
+        position: relative;
+
         background-color: $white-one;
         width: rem(280);
 
         .buttonChildren {
-          font-size: rem(14);
+          font-size: $small;
           .count {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: rem(0);
-          font-size: rem(12);
-          // font-weight: 600;
-          margin-right: rem(12);
-          padding: rem(4) rem(8);
-          border-radius: rem(20);
-          background-color: $grey-one;
-          color: $black-one;
-        }
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: rem(0);
+            font-size: $tiny;
+            // font-weight: 600;
+            margin-right: rem(12);
+            padding: rem(4) rem(8);
+            border-radius: rem(20);
+            background-color: $grey-one;
+            color: $black-one;
+          }
         }
       }
-
-      
-      
     }
   }
 }

@@ -2,102 +2,102 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .contactChatBubbleContainer {
+  display: flex;
+  margin-bottom: rem(8);
+  align-items: flex-start;
+
+  .avatarContainer {
     display: flex;
-    margin-bottom: rem(8);
+    flex-direction: column;
+    align-items: center;
+    margin-right: rem(36);
+    .avatar {
+      margin-bottom: rem(8);
+    }
+    .contactTime {
+      font-size: $small;
+    }
+  }
+
+  .chatBubblesWrapper {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
 
-    .avatarContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-right: rem(36);
-      .avatar {
-        margin-bottom: rem(8);
-      }
-      .contactTime {
-        font-size: rem(14);
-      }
-    }
+    .bubbleWidthSetter {
+      display: inline-flex;
+      max-width: rem(456);
 
-    .chatBubblesWrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      .contactChatBubble {
+        padding: rem(12) rem(24) rem(24) rem(24) !important;
+        width: fit-content;
+        border-radius: 0 rem(40) rem(40) rem(40);
+        margin-bottom: rem(16);
+        background-color: $white-two;
+        box-shadow: $shadow-one;
 
-      .bubbleWidthSetter {
-        display: inline-flex;
-        max-width: rem(456);
-
-        .contactChatBubble {
-          padding: rem(12) rem(24) rem(24) rem(24) !important;
-          width: fit-content;
-          border-radius: 0 rem(40) rem(40) rem(40);
-          margin-bottom: rem(16);
-          background-color: $white-two;
-          box-shadow: $shadow-one;
-
-          .contactName {
-            font-weight: 600;
-            font-size: rem(14);
-          }
+        .contactName {
+          font-weight: 600;
+          font-size: $small;
         }
       }
     }
   }
+}
 
-  .userChatBubbleContainer {
+.userChatBubbleContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: rem(8);
+
+  .avatarContainer {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: rem(8);
-
-    .avatarContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .avatar {
-        margin-bottom: rem(8);
-      }
-      .contactTime {
-        font-size: rem(14);
-      }
+    flex-direction: column;
+    align-items: center;
+    .avatar {
+      margin-bottom: rem(8);
     }
+    .contactTime {
+      font-size: $small;
+    }
+  }
 
-    .chatBubblesWrapper {
-      display: flex;
+  .chatBubblesWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .bubbleWidthSetter {
+      display: inline-flex;
       flex-direction: column;
       align-items: flex-end;
+      max-width: rem(456);
 
-      .bubbleWidthSetter {
-        display: inline-flex;
+      .userTime {
+        font-size: $small;
+        margin-bottom: rem(8);
+      }
+
+      .userChatBubble {
+        display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        max-width: rem(456);
+        align-items: flex-start;
+        padding: rem(12) rem(24) rem(24) rem(24) !important;
+        border-radius: rem(40) 0 rem(40) rem(40);
+        margin-right: rem(32);
+        margin-bottom: rem(16);
+        background-color: $white-five;
+        box-shadow: $shadow-one;
 
-        .userTime {
-          font-size: rem(14);
-          margin-bottom: rem(8);
-        }
-
-        .userChatBubble {
+        .userName {
           display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          padding: rem(12) rem(24) rem(24) rem(24) !important;
-          border-radius: rem(40) 0 rem(40) rem(40);
-          margin-right: rem(32);
-          margin-bottom: rem(16);
-          background-color: $white-five;
-          box-shadow: $shadow-one;
-
-          .userName {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-            font-weight: 600;
-            font-size: rem(14);
-            text-align: left;
-          }
+          justify-content: flex-end;
+          width: 100%;
+          font-weight: 600;
+          font-size: $small;
+          text-align: left;
         }
       }
     }
   }
+}

@@ -123,7 +123,7 @@
             align-items: center;
             color: $white-one;
             background: $grey-four;
-            font-size: rem(12);
+            font-size: $tiny;
           }
         }
       }
@@ -146,7 +146,6 @@
     width: rem(800);
     margin-left: rem(32);
     z-index: 10;
-    
 
     .mainSectionWrapper {
       margin-top: rem(96);
@@ -173,7 +172,7 @@
             margin-bottom: rem(8);
           }
           .contactTime {
-            font-size: rem(14);
+            font-size: $small;
           }
         }
         .chatBubblesWrapper {
@@ -209,7 +208,7 @@
             margin-bottom: rem(8);
           }
           .contactTime {
-            font-size: rem(14);
+            font-size: $small;
           }
         }
 
@@ -241,7 +240,7 @@
               box-shadow: $shadow-one;
 
               .userTime {
-                font-size: rem(14);
+                font-size: $small;
               }
             }
           }

@@ -12,7 +12,7 @@ interface Props {
   onNext: () => void;
 }
 
-const UploadMedia= ({ onNext }: Props) => {
+const UploadMedia = ({ onNext }: Props) => {
   const { uploadedImages, uploadedVideos } = useUploadFiles();
 
   const [isClient, setIsClient] = useState(false);
@@ -26,7 +26,7 @@ const UploadMedia= ({ onNext }: Props) => {
     setValue("uploadMedia.images", uploadedImages);
     setValue("uploadMedia.videos", uploadedVideos);
   }, [uploadedImages, uploadedVideos, setValue]);
-  
+
   useEffect(() => {
     setIsClient(true);
   }, []);

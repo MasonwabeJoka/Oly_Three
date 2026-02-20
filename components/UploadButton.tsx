@@ -35,19 +35,21 @@ const UploadButton = ({
     attachment: ".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar",
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    if (selectedFile) {
+const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const selectedFiles = event.target.files;
+  if (selectedFiles) {
+    Array.from(selectedFiles).forEach((selectedFile) => {
       setFile(selectedFile);
-      dropAreaRef.current?.classList.add("active");
       processFile(selectedFile);
-    }
+      
+      if (mediaType === "video" && onFileSelect) {
+        onFileSelect(selectedFile);
+      }
+    });
+    dropAreaRef.current?.classList.add("active");
+  }
+};
 
-    // Call onFileSelect when a video file is selected
-    if (mediaType === "video" && onFileSelect) {
-      if (selectedFile) onFileSelect(selectedFile);
-    }
-  };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -105,6 +107,7 @@ const UploadButton = ({
         <input
           type="file"
           hidden
+          multiple
           accept={accept || fileTypes[mediaType]}
           onChange={handleFileChange}
         />

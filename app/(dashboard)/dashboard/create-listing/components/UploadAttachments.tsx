@@ -5,12 +5,9 @@ import useUploadFiles from "../store/useUploadFiles";
 import { useFormContext } from "react-hook-form";
 import { useEffect } from "react";
 
-interface UploadAttachmentsProps {
-  onNext?: () => void;
-}
 
-const UploadAttachments = ({ onNext }: UploadAttachmentsProps) => {
-  const {uploadedAttachments } = useUploadFiles();
+const UploadAttachments = () => {
+  const { uploadedAttachments } = useUploadFiles();
   const { setValue } = useFormContext();
 
   useEffect(() => {
@@ -19,11 +16,8 @@ const UploadAttachments = ({ onNext }: UploadAttachmentsProps) => {
 
   return (
     <div className={styles.container}>
-      <div
-        className={`${styles.mediaSection} ${styles.uploadedAttachmentsContainer}`}
-      >
-        <AttachmentUploadSection attachments={attachments} />
-      </div>
+      <h1 className={styles.title}>Upload Attachments</h1>
+      <AttachmentUploadSection attachments={attachments} />
     </div>
   );
 };

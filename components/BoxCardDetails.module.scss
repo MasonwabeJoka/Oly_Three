@@ -41,7 +41,7 @@
     margin-top: rem(-12);
   }
 
-  .titleAndPrice {  
+  .titleAndPrice {
     display: flex;
     justify-content: space-between;
     align-items: center !important;
@@ -67,7 +67,7 @@
     gap: rem(8);
     width: 100%;
     padding: 0 rem(20);
-    font-size: rem(12);
+    font-size: $tiny;
     margin-bottom: rem(4);
   }
 
@@ -85,7 +85,7 @@
       gap: rem(8);
 
       p {
-        font-size: rem(12);
+        font-size: $tiny;
       }
 
       .featureValue {
@@ -93,7 +93,6 @@
       }
     }
   }
-
 
   &.vehicles,
   &.property {
@@ -107,13 +106,11 @@
     display: flex;
     justify-content: space-between;
     // gap: rem(32);
-    font-size: rem(12);
+    font-size: $tiny;
     padding: 0 rem(28);
     // text-transform: uppercase;
     margin-top: rem(40);
-    
   }
-  
 }
 
 .detailsHovered {

@@ -38,6 +38,8 @@ interface SelectProps {
   onOptionsCountChange?: (count: number) => void;
   disabled?: boolean;
   autoFocus?: boolean; // ← Added
+  showSelectAll?: boolean;
+  useRadioButtons?: boolean;
 }
 
 const SELECT_COLOUR_TYPE = {
@@ -78,9 +80,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       onOptionsCountChange,
       disabled = false,
       autoFocus = false,
+      showSelectAll = true,
+      useRadioButtons = false,
       ...rest
     },
-    refFromForwardRef
+    refFromForwardRef,
   ) => {
     // Refs
     const rootRef = useRef<HTMLDivElement>(null);
@@ -127,7 +131,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           }
         }
       },
-      [refFromForwardRef]
+      [refFromForwardRef],
     );
 
     // Size class
@@ -150,7 +154,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       typeof opt === "string" ? opt : opt.value;
 
     const filteredOptions = options.filter((opt) =>
-      getOptionLabel(opt).toLowerCase().includes(searchTerm.toLowerCase())
+      getOptionLabel(opt).toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     const getLabelFromValue = (val: any): string => {
@@ -177,14 +181,14 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     // Effects
     useEffect(
       () => onDropdownOpenChange?.(isOpen),
-      [isOpen, onDropdownOpenChange]
+      [isOpen, onDropdownOpenChange],
     );
     useEffect(
       () => onOptionsCountChange?.(filteredOptions.length),
-      [filteredOptions.length, onOptionsCountChange]
+      [filteredOptions.length, onOptionsCountChange],
     );
     useOnClickOutside(rootRef as React.RefObject<HTMLElement>, () =>
-      setIsOpen(false)
+      setIsOpen(false),
     );
 
     // Change handlers
@@ -201,6 +205,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     };
 
     const handleMultiSelect = (val: any, checked: boolean) => {
+      // If using radio buttons, only allow one selection and close dropdown
+      if (useRadioButtons) {
+        if (!hasControlledValue) setInternalSelected([val]);
+        triggerChange([val]);
+        setIsOpen(false);
+        return;
+      }
       const updated = checked
         ? [...selected, val]
         : selected.filter((v) => v !== val);
@@ -236,13 +247,13 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           case "ArrowDown":
             e.preventDefault();
             setFocusedOptionIndex((i) =>
-              i < filteredOptions.length - 1 ? i + 1 : 0
+              i < filteredOptions.length - 1 ? i + 1 : 0,
             );
             break;
           case "ArrowUp":
             e.preventDefault();
             setFocusedOptionIndex((i) =>
-              i > 0 ? i - 1 : filteredOptions.length - 1
+              i > 0 ? i - 1 : filteredOptions.length - 1,
             );
             break;
           case "Enter":
@@ -293,8 +304,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         </ShadcnSelect>
 
         <div className={`${className} ${styles.selectMenu}`}>
-     
-
           {selectDescription && (
             <p id={descriptionId} className={styles.description}>
               {selectDescription}
@@ -331,26 +340,29 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               className={selectClass}
               style={{ backgroundColor: isOpen ? "#ffffff" : "#f3f7fa" }}
             >
-                   {label && hasSelection && !isOpen && (
-            <label htmlFor={selectId} className={styles.label}>
-              {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
-              <span>
-                {" "}
-                {label.length > 12 ? `${label.substring(0, 12)}...` : label}
-              </span>
-            </label>
-          )}
-          {!hasSelection && required && (
-            <label htmlFor={selectId} className={styles.label}>
-              {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
-              <span> Required</span>
-            </label>
-          )}
-              {isMultiSelect && isOpen && selected.length > 0 && (
-                <div className={styles.selectCountContainer}>
-                  <div className={styles.selectCount}>{selected.length}</div>
-                </div>
+              {label && hasSelection && !isOpen && !isMultiSelect && (
+                <label htmlFor={selectId} className={styles.label}>
+                  {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
+                  <span>
+                    {" "}
+                    {label.length > 12 ? `${label.substring(0, 12)}...` : label}
+                  </span>
+                </label>
               )}
+              {!hasSelection && required && (
+                <label htmlFor={selectId} className={styles.label}>
+                  {/* <div className={styles.requiredStar}>{required && "* "}</div> */}
+                  <span> Required</span>
+                </label>
+              )}
+              {isMultiSelect &&
+                !useRadioButtons &&
+                isOpen &&
+                selected.length > 0 && (
+                  <div className={styles.selectCountContainer}>
+                    <div className={styles.selectCount}>{selected.length}</div>
+                  </div>
+                )}
 
               {isMultiSelect && selected.length > 0 && !isOpen && (
                 <div className={styles.clearIconContainer}>
@@ -368,11 +380,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 </div>
               )}
 
-              <p
-                className={styles.displayText}
-              >
-                {displayText}
-              </p>
+              <p className={styles.displayText}>{displayText}</p>
             </div>
 
             <span className={styles.dropdownIconContainer}>
@@ -421,7 +429,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               role="listbox"
               aria-multiselectable={isMultiSelect}
             >
-              {isMultiSelect && filteredOptions.length > 0 && (
+              {isMultiSelect && showSelectAll && filteredOptions.length > 0 && (
                 <li
                   className={`${sizeClass} ${
                     dashboard && selectSize === "medium"
@@ -434,8 +442,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     onClick={() =>
                       handleSelectAll(
                         !filteredOptions.every((o) =>
-                          selected.includes(getOptionValue(o))
-                        )
+                          selected.includes(getOptionValue(o)),
+                        ),
                       )
                     }
                     tabIndex={0}
@@ -444,7 +452,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     <div className={styles.checkboxContainer}>
                       <Checkbox
                         checked={filteredOptions.every((o) =>
-                          selected.includes(getOptionValue(o))
+                          selected.includes(getOptionValue(o)),
                         )}
                         onChange={handleSelectAll}
                       />
@@ -480,7 +488,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                       }
                       tabIndex={0}
                     >
-                      {isMultiSelect && (
+                      {isMultiSelect && !useRadioButtons && (
                         <div
                           className={styles.checkboxContainer}
                           onClick={(e: React.MouseEvent<HTMLDivElement>) =>
@@ -493,6 +501,25 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                           />
                         </div>
                       )}
+                      {isMultiSelect && useRadioButtons && (
+                        <div
+                          className={styles.radioContainer}
+                          onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                            e.stopPropagation()
+                          }
+                        >
+                          <label className={styles.radioInput}>
+                            <input
+                              type="radio"
+                              name={`${id}-radio`}
+                              checked={isSelected}
+                              onChange={() => handleMultiSelect(value, true)}
+                            />
+                            <span></span>
+                          </label>
+                        </div>
+                      )}
+
                       <span className={styles.optionText}>{label}</span>
                     </div>
                   </li>
@@ -503,7 +530,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Select.displayName = "Select";

@@ -93,6 +93,23 @@ declare module "react-webcam" {
 	export default Webcam;
 }
 
+declare module "react-custom-scrollbars-2" {
+	import { ComponentType, CSSProperties, ReactNode } from 'react';
+
+	interface ScrollbarsProps {
+		style?: CSSProperties;
+		children?: ReactNode;
+		renderTrackVertical?: (props: { style: CSSProperties; [key: string]: any }) => ReactNode;
+		renderThumbVertical?: (props: { style: CSSProperties; [key: string]: any }) => ReactNode;
+		renderTrackHorizontal?: (props: { style: CSSProperties; [key: string]: any }) => ReactNode;
+		renderThumbHorizontal?: (props: { style: CSSProperties; [key: string]: any }) => ReactNode;
+		renderView?: (props: { style: CSSProperties; [key: string]: any }) => ReactNode;
+		[key: string]: any;
+	}
+
+	export const Scrollbars: ComponentType<ScrollbarsProps>;
+}
+
 declare module "@react-google-maps/api" {
 	export const GoogleMap: any;
 	export const Marker: any;

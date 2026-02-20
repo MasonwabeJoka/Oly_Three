@@ -3,11 +3,9 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
-
   .analyticsItemsContainer {
     border-radius: rem(40);
     margin-bottom: rem(12);
-    
 
     .analyticsItems {
       display: flex;
@@ -31,11 +29,11 @@
 
     .whiteOne {
       background-color: $white-one;
-      font-size: rem(14);
+      font-size: $small;
     }
     .whiteTwo {
       background-color: $white-three;
-      font-size: rem(14);
+      font-size: $small;
     }
   }
 }

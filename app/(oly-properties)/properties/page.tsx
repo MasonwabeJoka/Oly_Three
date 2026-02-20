@@ -11,6 +11,7 @@ import ShowCategories from "@/components/ShowCategories";
 import FeaturedServices from "@/components/FeaturedServices";
 import ExternalAd from "@/components/ExternalAd";
 // Todo: Fix cards arrow buttons don't appear when hovering the bottom of the card
+// Todo: Improve on the hero section copy
 const Home = () => {
   return (
     <div className={styles.container}>
@@ -28,7 +29,7 @@ const Home = () => {
         <section className={styles.heroSection}>
           <HeroSection
             category="property"
-            mainTitle="South Africa's premier destination for property listings. Oly Properties is a modern real estate marketplace—your gateway to buying, selling, and renting with ease"
+            mainTitle="Oly Properties is a modern real estate marketplace for easy buying and selling in South Africa"
           />
         </section>
 
@@ -93,7 +94,7 @@ const Home = () => {
         </section>
 
         <section className={styles.featuredListings}>
-          {/* <FeaturedListings category="property" /> */}
+          <FeaturedListings category="property" currentPage={1} />
         </section>
 
         <section className={styles.belowFoldAd}>

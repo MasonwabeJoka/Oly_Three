@@ -94,26 +94,20 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
       }
     });
 
-    let columns = 0;
-    let currentHeight = 0;
-
-    // Iterate through image heights, limiting to at most 2 columns
-    for (let height of itemHeights) {
-      const addedHeight = currentHeight > 0 ? height + margin : height;
-      // Only start a new column if we haven't reached 2 columns yet
-      if (currentHeight + addedHeight > maxHeight && columns < 1) {
-        columns++;
-        currentHeight = height;
-      } else {
-        currentHeight += addedHeight;
+    // Calculate total height needed for first column
+    let firstColumnHeight = 0;
+    for (let i = 0; i < itemHeights.length; i++) {
+      const addedHeight =
+        firstColumnHeight > 0 ? itemHeights[i] + margin : itemHeights[i];
+      if (firstColumnHeight + addedHeight > maxHeight) {
+        // Content overflows, need 2 columns
+        return 2;
       }
+      firstColumnHeight += addedHeight;
     }
 
-    // Increment columns if there are images in the current column, but cap at 2
-    if (currentHeight > 0 && columns < 1) columns++;
-
-    // Return 1 if no columns were needed (e.g., all images fit in one column), otherwise 2
-    return columns === 0 ? 1 : 2;
+    // All content fits in one column
+    return 1;
   };
 
   // Apply the swapping logic
@@ -185,7 +179,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             <div className={styles.buttonContainer}>
               <Button
                 className={styles.showAllImagesButton}
-                buttonChildren="Show All Images"
+                buttonChildren="Full Screen"
                 buttonType="normal"
                 buttonSize="small"
                 name="show-all-images-btn"

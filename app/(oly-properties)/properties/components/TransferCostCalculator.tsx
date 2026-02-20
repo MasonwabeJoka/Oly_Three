@@ -6,6 +6,8 @@ import Button from "@/components/Buttons";
 import ShareCalculator from "./shareCalculator";
 import NumberInput from "@/components/NumberInput";
 
+// Todo: Double check the styles
+
 const TransferCostCalculator = () => {
   const [purchasePrice, setPurchasePrice] = useState<number>(0);
   const [bondAmount, setBondAmount] = useState<number>(0);
@@ -135,6 +137,7 @@ const TransferCostCalculator = () => {
           <div className={styles.control}>
             <NumberInput
               className={styles.purchasePrice}
+              label="Price"
               min={0}
               max={9999999999}
               step={1}
@@ -153,15 +156,16 @@ const TransferCostCalculator = () => {
 
           <div className={styles.control}>
             <NumberInput
-              className={styles.bondAmount}
+              className={styles.deposit}
+              label="Deposit"
               min={0}
               max={9999999999}
               step={1}
               debounceTime={500}
-              id="bondAmount"
+              id="deposit"
               value={bondAmount}
               inputSize="large"
-              placeholder="Purchase Price - Deposit"
+              placeholder="Enter The Deposit Amount"
               autoFocus={false}
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

@@ -9,6 +9,7 @@ import ProductSpecification from "./ProductSpecification";
 import { FormWrapper } from "./FormWrapper";
 import ItemsList from "./ItemsList";
 import Form from "next/form";
+import useIsSelectOpen from "../store/useIsSelectOpen";
 
 export interface DetailItem {
   selectDetail: string;
@@ -47,6 +48,7 @@ const DetailsClient = ({
   const [isConditionsOpen, setIsConditionsOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { setIsSelectOpen } = useIsSelectOpen();
 
   const {
     register,
@@ -164,6 +166,10 @@ const DetailsClient = ({
 
     await trigger("specifications.list");
   };
+
+  useEffect(() => {
+    setIsSelectOpen(isConditionsOpen || isDetailsOpen);
+  }, [isConditionsOpen, isDetailsOpen, setIsSelectOpen]);
 
   return (
     <div>

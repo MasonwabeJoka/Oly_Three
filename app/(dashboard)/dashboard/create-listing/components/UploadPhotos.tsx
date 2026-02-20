@@ -17,12 +17,14 @@ const UploadPhotos = ({ onNext }: UploadPhotosProps) => {
     setValue("uploadPhotos", uploadedImages);
   }, [uploadedImages, setValue]);
 
-  return <div className={styles.container}>
-    <div className={styles.wrapper}>
-         <h1 className={styles.title}>Upload Photos</h1>
-     <ImageUploadSection isDashboard uploadedFiles={uploadedImages} />
+  return (
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <h1 className={styles.title}>Upload Photos</h1>
+        <ImageUploadSection isDashboard uploadedFiles={uploadedImages} />
+      </div>
     </div>
-  </div>;
+  );
 };
 
-export default UploadPhotos;  
+export default UploadPhotos;

@@ -1,5 +1,5 @@
-'use client';
-import styles from "./styles.module.scss";
+"use client";
+import styles from "./UploadVideos.module.scss";
 import { useState, useEffect } from "react";
 import VideoUploadsSection from "./VideoUploadsSection";
 

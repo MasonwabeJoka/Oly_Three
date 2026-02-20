@@ -48,14 +48,14 @@
             align-items: center;
 
             .locationText {
-              font-size: rem(12);
+              font-size: $tiny;
               font-weight: 300;
             }
           }
 
           .postAge {
             margin-right: rem(32);
-            font-size: rem(12);
+            font-size: $tiny;
             font-weight: 300;
           }
         }
@@ -99,7 +99,7 @@
               gap: rem(8);
 
               p {
-                font-size: rem(12);
+                font-size: $tiny;
               }
 
               .featureValue {

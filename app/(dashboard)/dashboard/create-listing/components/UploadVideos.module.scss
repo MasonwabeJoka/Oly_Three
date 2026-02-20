@@ -6,13 +6,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
   .title {
-    margin-bottom: rem(48);
-    color: $danger;
-    font-weight: 500;
     font-size: $h4;
+    font-weight: 500;
+    color: $danger;
+    margin-top: rem(300);
+    margin-bottom: rem(48);
   }
 
   .buttons {

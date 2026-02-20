@@ -101,7 +101,7 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
   return (
     <div className={styles.container}>
          <Masonry
-          className={styles.content}
+          className={`${styles.content} ${uploadedFiles.length > 0 ? styles.hasImages : ''}`}
           breakpointCols={breakpointColumnsObj}
           columnClassName={styles.listingsContainerColumns}
         >

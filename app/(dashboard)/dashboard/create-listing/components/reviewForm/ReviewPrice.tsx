@@ -1,8 +1,12 @@
 import styles from "./ReviewPrice.module.scss";
 import { SectionWrapper } from "./SectionWrapper";
+import { useParams } from "next/navigation";
+
 const ReviewPrice = () => {
+  const params = useParams();
+  const site = params.site as string;
   return (
-    <SectionWrapper title="Price" pageNumber={3}>
+    <SectionWrapper title="Price" path={`/dashboard/create-listing/${site}/price`}>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

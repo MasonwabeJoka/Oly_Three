@@ -78,8 +78,7 @@
         &[data-orientation="portrait"] {
           height: rem(570);
         }
-              background-color: $grey-one;
-
+        background-color: $grey-one;
 
         @include only(smallDesktop) {
           width: rem(298);
@@ -93,7 +92,7 @@
       .buttonContainer {
         position: absolute;
         bottom: 110;
-        right: 102;
+        right: 98.5;
         z-index: 10;
       }
     }

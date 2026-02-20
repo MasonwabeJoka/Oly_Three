@@ -1,114 +1,19 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import styles from "./CreateListingSteps.module.scss";
 import Step from "./Step";
-import SelectACategory from "./SelectACategory";
-import Details from "./Details";
-import Price from "./Price";
-import BankAccountDetails from "./BankAccountDetails";
-import TitleAndDescription from "./TitleAndDescription";
-import UploadMedia from "./UploadMediaTEMP";
-import Location from "./Location";
-import PromoteYourAd from "./PromoteYourAds";
-import ReviewAndSubmit from "./ReviewAndSubmit";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import SiteSelection from "./SiteSelection";
-import ReviewListing from "./ReviewListing";
 import { formDataSchema } from "../validations/formDataSchema";
-import AuctionPrice from "./AuctionPrice";
 import { useIsAuctionStore } from "../store/useIsAuction";
 import FormProgressBar from "./FormProgressBar";
-import UploadPhotos from "./UploadPhotos";
-import { Upload } from "lucide-react";
-import UploadVideos from "./UploadVideos";
-import UploadAttachments from "./UploadAttachments";
+import { FormData, CreateListingStepsProps, StepType, SiteType } from "../types/listing.types";
+import { getStepDefinitions } from "../config/stepDefinitions";
 
-type FormDataFields =
-  | "category.main"
-  | "category.subcategory"
-  | "details.condition"
-  | "titleAndDescription.title"
-  | "titleAndDescription.description"
-  | "listingType"
-  | "price.pricingOption"
-  | "price.amount"
-  | "price.startingPrice"
-  | "price.buyNowPrice"
-  | "price.startTime"
-  | "price.auctionDuration"
-  | "createAccount.bankName"
-  | "createAccount.accountHolder"
-  | "createAccount.accountNumber"
-  | "uploadPhotos"
-  | "uploadVideos"
-  | "uploadAttachments"
-  | "uploadMedia.uploadPhotos"
-  | "uploadMedia.uploadVideos"
-  | "uploadMedia.uploadAttachments"
-  | "location.province"
-  | "location.city"
-  | "location.suburb"
-  | "location.customLocation"
-  | "promoteYourAd.promotionDuration"
-  | "reviewYourAd";
-interface StepType {
-  title: string;
-  content: React.ReactNode;
-  path: string;
-  fields: FormDataFields[];
-}
-
-export type FormData = {
-  category: { main: string; subcategory: string };
-  details: { condition: string };
-  listingType: "sale" | "auction";
-  price: {
-    pricingOption: string;
-    amount: number;
-    startingPrice?: number;
-    buyNowPrice?: number;
-    startTime?: string;
-    auctionDuration?: string;
-  };
-  createAccount: {
-    bankName: string;
-    accountHolder: string;
-    accountNumber: string;
-  };
-  titleAndDescription: {
-    title: string;
-    description: string;
-  };
-  uploadPhotos: boolean;
-  uploadVideos: boolean;
-  uploadAttachments: boolean;
-  uploadMedia: {
-    uploadPhotos: boolean;
-    uploadVideos: boolean;
-    uploadAttachments: boolean;
-  };
-  location: {
-    province: string;
-    city: string;
-    suburb: string;
-    customLocation?: string;
-  };
-  promoteYourAd: { promotionDuration: string };
-  reviewYourAd?: string;
-};
-
-interface CreateListingStepsProps {
-  currentSite?:
-    | "oly"
-    | "oly-properties"
-    | "oly-auto"
-    | "oly-hiring"
-    | "oly-services";
-  currentStep?: string;
-}
+export type { FormData };
 
 const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
   currentSite,
@@ -121,436 +26,31 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
   useEffect(() => {
     setIsClient(true);
   }, []);
-  const [site, setSite] = useState<
-    "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services" | null
-  >(currentSite || null);
+
+  const [site, setSite] = useState<SiteType | null>(currentSite || null);
   const [step, setStep] = useState<number | null>(null);
   const methods = useForm<FormData>({
     mode: "onBlur",
     resolver: zodResolver(formDataSchema),
   });
-  const steps: Record<
-    "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services",
-    StepType[]
-  > = {
-    oly: [
-      {
-        title: "Select A Category",
-        content: <SelectACategory />,
-        path: "select-category",
-        fields: ["category.main", "category.subcategory"],
-      },
-      {
-        title: "Listing Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
-      isAuction
-        ? {
-            title: "Auction Price",
-            content: <AuctionPrice onNext={() => handleNext()} />,
-            path: "auction-price",
-            fields: ["price.startingPrice", "price.buyNowPrice", "price.startTime", "price.auctionDuration"],
-          }
-        : {
-            title: "Price",
-            content: <Price onNext={() => handleNext()} />,
-            path: "price",
-            fields: ["price.pricingOption", "price.amount"],
-          },
 
-      {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
-      },
-
-      {
-        title: "Bank Account Details",
-        content: <BankAccountDetails onNext={() => handleNext()} />,
-        path: "create-account",
-        fields: [
-          "createAccount.bankName",
-          "createAccount.accountHolder",
-          "createAccount.accountNumber",
-        ],
-      },
-
-      {
-        title: "Upload Photos",
-        content: <UploadPhotos onNext={() => handleNext()} />,
-        path: "upload-photos",
-        fields: ["uploadPhotos"],
-      },
-      {
-        title: "Upload Videos",
-        content: <UploadVideos onNext={() => handleNext()} />,
-        path: "upload-videos",
-        fields: ["uploadVideos"],
-      },
-      {
-        title: "Upload Attachments",
-        content: <UploadAttachments onNext={() => handleNext()} />,
-        path: "upload-attachments",
-        fields: ["uploadAttachments"],
-      },
-      // {
-      //   title: "Upload Media",
-      //   content: <UploadMedia onNext={() => handleNext()} />,
-      //   path: "upload-media",
-      //   fields: [
-      //     "uploadMedia.uploadPhotos",
-      //     "uploadMedia.uploadVideos",
-      //     "uploadMedia.uploadAttachments",
-      //   ],
-      // },
-      {
-        title: "Location",
-        content: <Location onNext={() => handleNext()} />,
-        path: "location",
-        fields: [
-          "location.province",
-          "location.city",
-          "location.suburb",
-          "location.customLocation",
-        ],
-      },
-      {
-        title: "Promote Your Ad",
-        content: <PromoteYourAd onNext={() => handleNext()} />,
-        path: "promote-your-ad",
-        fields: ["promoteYourAd.promotionDuration"],
-      },
-      {
-        title: "Review Listing",
-        content: <ReviewListing onNext={() => handleNext()} />,
-        path: "review-listing",
-        fields: [],
-      },
-      {
-        title: "Review Your Listing",
-        content: <ReviewAndSubmit onNext={() => handleNext()} />,
-        path: "review-and-submit",
-        fields: [],
-      },
-    ],
-    "oly-properties": [
-      {
-        title: "Select A Category",
-        content: <SelectACategory />,
-        path: "select-category",
-        fields: ["category.main", "category.subcategory"],
-      },
-      {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
-      },
-      {
-        title: "Price",
-        content: <Price onNext={() => handleNext()} />,
-        path: "price",
-        fields: ["price.pricingOption", "price.amount"],
-      },
-      {
-        title: "Bank Account Details",
-        content: <BankAccountDetails onNext={() => handleNext()} />,
-        path: "create-account",
-        fields: [
-          "createAccount.bankName",
-          "createAccount.accountHolder",
-          "createAccount.accountNumber",
-        ],
-      },
-      {
-        title: "Ad Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
-      {
-        title: "Upload Media",
-        content: <UploadMedia onNext={() => handleNext()} />,
-        path: "upload-media",
-        fields: [
-          "uploadMedia.uploadPhotos",
-          "uploadMedia.uploadVideos",
-          "uploadMedia.uploadAttachments",
-        ],
-      },
-      {
-        title: "Location",
-        content: <Location onNext={() => handleNext()} />,
-        path: "location",
-        fields: [
-          "location.province",
-          "location.city",
-          "location.suburb",
-          "location.customLocation",
-        ],
-      },
-      {
-        title: "Promote Your Ad",
-        content: <PromoteYourAd onNext={() => handleNext()} />,
-        path: "promote-your-ad",
-        fields: ["promoteYourAd.promotionDuration"],
-      },
-      {
-        title: "Review Listing",
-        content: <ReviewListing onNext={() => handleNext()} />,
-        path: "review-message",
-        fields: [],
-      },
-      {
-        title: "Review Your Listing",
-        content: <ReviewAndSubmit onNext={() => handleNext()} />,
-        path: "review-and-submit",
-        fields: [],
-      },
-    ],
-    "oly-auto": [
-      {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
-      },
-      {
-        title: "Price",
-        content: <Price onNext={() => handleNext()} />,
-        path: "price",
-        fields: ["price.pricingOption", "price.amount"],
-      },
-      {
-        title: "Bank Account Details",
-        content: <BankAccountDetails onNext={() => handleNext()} />,
-        path: "create-account",
-        fields: [
-          "createAccount.bankName",
-          "createAccount.accountHolder",
-          "createAccount.accountNumber",
-        ],
-      },
-      {
-        title: "Ad Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
-      {
-        title: "Upload Media",
-        content: <UploadMedia onNext={() => handleNext()} />,
-        path: "upload-media",
-        fields: [
-          "uploadMedia.uploadPhotos",
-          "uploadMedia.uploadVideos",
-          "uploadMedia.uploadAttachments",
-        ],
-      },
-      {
-        title: "Location",
-        content: <Location onNext={() => handleNext()} />,
-        path: "location",
-        fields: [
-          "location.province",
-          "location.city",
-          "location.suburb",
-          "location.customLocation",
-        ],
-      },
-      {
-        title: "Promote Your Ad",
-        content: <PromoteYourAd onNext={() => handleNext()} />,
-        path: "promote-your-ad",
-        fields: ["promoteYourAd.promotionDuration"],
-      },
-      {
-        title: "Review Listing",
-        content: <ReviewListing onNext={() => handleNext()} />,
-        path: "review-message",
-        fields: [],
-      },
-      {
-        title: "Review Your Listing",
-        content: <ReviewAndSubmit onNext={() => handleNext()} />,
-        path: "review-and-submit",
-        fields: [],
-      },
-    ],
-    "oly-hiring": [
-      {
-        title: "Select A Category",
-        content: <SelectACategory />,
-        path: "select-category",
-        fields: ["category.main", "category.subcategory"],
-      },
-      {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
-      },
-      {
-        title: "Price",
-        content: <Price onNext={() => handleNext()} />,
-        path: "price",
-        fields: ["price.pricingOption", "price.amount"],
-      },
-      {
-        title: "Bank Account Details",
-        content: <BankAccountDetails onNext={() => handleNext()} />,
-        path: "create-account",
-        fields: [
-          "createAccount.bankName",
-          "createAccount.accountHolder",
-          "createAccount.accountNumber",
-        ],
-      },
-      {
-        title: "Ad Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
-      {
-        title: "Upload Media",
-        content: <UploadMedia onNext={() => handleNext()} />,
-        path: "upload-media",
-        fields: [
-          "uploadMedia.uploadPhotos",
-          "uploadMedia.uploadVideos",
-          "uploadMedia.uploadAttachments",
-        ],
-      },
-      {
-        title: "Location",
-        content: <Location onNext={() => handleNext()} />,
-        path: "location",
-        fields: [
-          "location.province",
-          "location.city",
-          "location.suburb",
-          "location.customLocation",
-        ],
-      },
-      {
-        title: "Promote Your Ad",
-        content: <PromoteYourAd onNext={() => handleNext()} />,
-        path: "promote-your-ad",
-        fields: ["promoteYourAd.promotionDuration"],
-      },
-      {
-        title: "Review Listing",
-        content: <ReviewListing onNext={() => handleNext()} />,
-        path: "review-message",
-        fields: [],
-      },
-      {
-        title: "Review Your Listing",
-        content: <ReviewAndSubmit onNext={() => handleNext()} />,
-        path: "review-and-submit",
-        fields: [],
-      },
-    ],
-    "oly-services": [
-      {
-        title: "Select A Category",
-        content: <SelectACategory />,
-        path: "select-category",
-        fields: ["category.main", "category.subcategory"],
-      },
-      {
-        title: "Product Details",
-        content: <Details onNext={() => handleNext()} />,
-        path: "details",
-        fields: ["details.condition"],
-      },
-      {
-        title: "Price",
-        content: <Price onNext={() => handleNext()} />,
-        path: "price",
-        fields: ["price.pricingOption", "price.amount"],
-      },
-      {
-        title: "Bank Account Details",
-        content: <BankAccountDetails onNext={() => handleNext()} />,
-        path: "create-account",
-        fields: [
-          "createAccount.bankName",
-          "createAccount.accountHolder",
-          "createAccount.accountNumber",
-        ],
-      },
-      {
-        title: "Ad Description",
-        content: <TitleAndDescription onNext={() => handleNext()} />,
-        path: "title-and-description",
-        fields: [
-          "titleAndDescription.title",
-          "titleAndDescription.description",
-        ],
-      },
-      {
-        title: "Upload Media",
-        content: <UploadMedia onNext={() => handleNext()} />,
-        path: "upload-media",
-        fields: [
-          "uploadMedia.uploadPhotos",
-          "uploadMedia.uploadVideos",
-          "uploadMedia.uploadAttachments",
-        ],
-      },
-      {
-        title: "Location",
-        content: <Location onNext={() => handleNext()} />,
-        path: "location",
-        fields: [
-          "location.province",
-          "location.city",
-          "location.suburb",
-          "location.customLocation",
-        ],
-      },
-      {
-        title: "Promote Your Ad",
-        content: <PromoteYourAd onNext={() => handleNext()} />,
-        path: "promote-your-ad",
-        fields: ["promoteYourAd.promotionDuration"],
-      },
-      {
-        title: "Review Listing",
-        content: <ReviewListing onNext={() => handleNext()} />,
-        path: "review-message",
-        fields: [],
-      },
-      {
-        title: "Review Your Listing",
-        content: <ReviewAndSubmit onNext={() => handleNext()} />,
-        path: "review-and-submit",
-        fields: [],
-      },
-    ],
+  const handleNext = async () => {
+    if (!site || step === null) return;
+    const currentFields = steps[site][step!].fields;
+    const isValid = await methods.trigger(currentFields);
+    if (isValid && step! < steps[site].length - 1) {
+      const nextStep = step! + 1;
+      router.push(
+        `/dashboard/create-listing/${site}/${steps[site][nextStep].path}`
+      );
+    } else if (isValid && step! === steps[site].length - 1) {
+      router.push(`/dashboard/create-listing/${site}/published`);
+    }
   };
 
-  const stepPaths: Record<
-    "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services",
-    string[]
-  > = {
+  const steps = useMemo(() => getStepDefinitions(isAuction, handleNext), [isAuction]);
+
+  const stepPaths: Record<SiteType, string[]> = {
     oly: steps.oly.map((step) => step.path),
     "oly-properties": steps["oly-properties"].map((step) => step.path),
     "oly-auto": steps["oly-auto"].map((step) => step.path),
@@ -560,13 +60,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
 
   useEffect(() => {
     if (currentSite && currentStep && isClient) {
-      const validTypes = [
-        "oly",
-        "oly-properties",
-        "oly-auto",
-        "oly-hiring",
-        "oly-services",
-      ];
+      const validTypes: SiteType[] = ["oly", "oly-properties", "oly-auto", "oly-hiring", "oly-services"];
       if (!validTypes.includes(currentSite)) {
         router.push("/dashboard/create-listing/oly/select-category");
         return;
@@ -579,66 +73,27 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
         setStep(stepIndex);
       }
     }
-  }, [currentSite, currentStep, router, isAuction, isClient]);
+  }, [currentSite, currentStep, router, isAuction, isClient, stepPaths]);
 
-  const handleSiteSelection = (
-    site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"
-  ) => {
-    setSite(site);
-    setStep(0);
+  const handleSiteSelection = (selectedSite: SiteType) => {
     methods.reset();
-    router.push(`/dashboard/create-listing/${site}/${steps[site][0].path}`);
-  };
-
-  const handleNext = async () => {
-    if (!site || step === null) return;
-    const currentFields = steps[site][step!].fields;
-    const isValid = await methods.trigger(currentFields);
-    if (isValid && step! < steps[site].length - 1) {
-      const nextStep = step! + 1;
-
-      setStep(nextStep);
-      router.push(
-        `/dashboard/create-listing/${site}/${steps[site][nextStep].path}`
-      );
-    } else if (isValid && step! === steps[site].length - 1) {
-      router.push(`/dashboard/create-listing/${site}/published`); //temp
-
-      // Submit form data to backend
-      // try {
-      //   const formData = methods.getValues();
-      //   await axios.post(
-      //     "https://api.example.com/submit-verification",
-      //     formData
-      //   );
-      //   router.push(`/dashboard/create-listing/${site}/published`);
-      // } catch (error) {
-      //   console.error("Submission failed:", error);
-      //   methods.setError("root", {
-      //     message: "Submission failed. Please try again.",
-      //   });
-      // }
-    }
+    router.push(`/dashboard/create-listing/${selectedSite}/${steps[selectedSite][0].path}`);
   };
 
   const handleBack = () => {
     if (!site || step === null) return;
 
-    // If on review-and-submit step (last step), skip review-message step
     if (step! === steps[site].length - 1) {
-      const prevStep = step! - 2; // Skip review-message step
-      setStep(prevStep);
+      const prevStep = step! - 2;
       router.push(
         `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
       );
     } else if (step! > 1) {
       const prevStep = step! - 1;
-      setStep(prevStep);
       router.push(
         `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
       );
     } else if (step! === 1) {
-      setStep(1);
       router.push(`/dashboard/create-listing/${site}/select-new-category`);
     } else {
       setSite(null);
@@ -651,7 +106,6 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
     if (!site) return;
     const stepIndex = steps[site].findIndex((s) => s.path === path);
     if (stepIndex !== -1) {
-      setStep(stepIndex);
       router.push(`/dashboard/create-listing/${site}/${path}`);
     }
   };
@@ -674,7 +128,6 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
           <>
             <Step
               step={steps[site][step!] as StepType}
-              key={`step-${step}`}
               onNext={handleNext}
               onBack={handleBack}
               isLastStep={step! === steps[site].length - 1}

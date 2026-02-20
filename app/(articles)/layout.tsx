@@ -3,7 +3,7 @@ import styles from "./../global-styles/layout.module.scss";
 
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
-import LayoutWrapper from "../(dashboard)/dashboard/create-listing/components/LayoutWrapper";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 export const metadata = {
   title: "Oly Dashboard",
@@ -22,7 +22,11 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${outfit.className} ${styles.html}`}
+      data-scroll-behavior="smooth"
+    >
       <body className={styles.body}>
         <LayoutWrapper>
           <div className={styles.wrapper}>

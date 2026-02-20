@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   width: rem(656);
- 
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
     background-color: $white-three;
     border-radius: rem(40);
     width: 100%;
-     min-height: rem(270);
+    min-height: rem(270);
 
     .userContainer {
       display: flex;
@@ -50,7 +50,7 @@
 
           .commentAge {
             font-weight: 300;
-            font-size: rem(14);
+            font-size: $small;
           }
 
           &:hover {
@@ -73,7 +73,6 @@
 
       .chatButton {
         background-color: $white-two;
-        
       }
     }
   }

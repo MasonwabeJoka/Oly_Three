@@ -15,7 +15,7 @@
   }
 
   .sub {
-    font-size: rem(14);
+    font-size: $small;
     margin-bottom: rem(56);
   }
   .buttonsContainer {
@@ -34,11 +34,11 @@
     }
 
     .buttonChildren {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: rem(8);
-        padding-left: 0 rem(96);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(8);
+      padding-left: 0 rem(96);
 
       .buttonLabel {
         font-size: $h4;
@@ -46,22 +46,20 @@
       }
 
       .buttonLabelSub {
-        font-size: rem(14);
+        font-size: $small;
         font-weight: 300;
         width: 70%;
         color: $grey-four;
       }
-
-     
     }
   }
-  
+
   .disclaimer {
     text-align: center;
-    font-size: rem(14);
+    font-size: $small;
     font-weight: 300;
     width: 70%;
     color: $grey-four;
     margin-top: rem(16);
-  } 
+  }
 }

@@ -5,11 +5,35 @@ import Image from "@/components/Image";
 import MenuButton from "../MenuButton";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import useBreakpointStore from "@/store/useBreakpointStore";
 
-const Navbar = () => {
+interface NavbarProps {
+  rightButton?: React.ReactNode | null;
+  homeButton?: boolean;
+  logoSrc?: string;
+  logoAlt?: string;
+  logoPath?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+  mobileLogoWidth?: number;
+  mobileLogoHeight?: number;
+}
+
+const Navbar = ({
+  rightButton = <MenuButton />,
+  homeButton = true,
+  logoSrc = "/logo.png",
+  logoAlt = "logo",
+  logoPath = "/",
+  logoWidth = 70.14,
+  logoHeight = 32,
+  mobileLogoWidth = 61.372,
+  mobileLogoHeight = 28,
+}: NavbarProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isMobile } = useBreakpointStore();
 
   useEffect(() => {
     // Only add scroll listener if on the homepage
@@ -38,14 +62,22 @@ const Navbar = () => {
 
   return (
     <div className={styles.container}>
-      <Link
-        href="/"
-        className={`${styles.logo} ${isHomePage ? (isScrolled ? styles.visible : styles.hidden) : styles.visible}`}
-      >
-        <Image src="/logo.png" alt="Logo" width={70.14} height={32} />
-      </Link>
+      {homeButton && (
+        <Link
+          href={logoPath}
+          className={`${styles.logo} ${isHomePage ? (isScrolled ? styles.visible : styles.hidden) : styles.visible}`}
+        >
+          <Image
+            src={logoSrc}
+            alt={logoAlt}
+            width={isMobile ? mobileLogoWidth : logoWidth}
+            height={isMobile ? mobileLogoHeight : logoHeight}
+            className={isScrolled ? styles.logo : styles.logoHidden}
+          />
+        </Link>
+      )}
 
-      <MenuButton />
+      {rightButton && <div className={styles.rightButton}>{rightButton}</div>}
     </div>
   );
 };

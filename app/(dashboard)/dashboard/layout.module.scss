@@ -3,7 +3,10 @@
 @use "@/utils/breakpoints" as *;
 // Note: globals.css should be imported in root layout, not in CSS modules
 .html {
-  scroll-behavior: smooth;
+   height: 100%;
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+   scrollbar-color: $warning-hover transparent;
+    scrollbar-width: auto;
 }
 .html ::-webkit-scrollbar {
   width: rem(12);

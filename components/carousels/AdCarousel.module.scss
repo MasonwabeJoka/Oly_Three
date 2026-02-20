@@ -6,8 +6,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85vw;
-  height: 90vh;
+  width: 98vw;
+  height: 98vh;
   border-radius: rem(40);
   cursor: url("/icons/X.png"), auto;
 
@@ -53,24 +53,28 @@
           justify-content: center;
           border-radius: rem(40);
           pointer-events: visible;
-          width: 85vw;
-          height: 85vh;
-
+          width: 100vw;
+          height: 100vh;
           .imageContainer {
             position: relative;
             top: 50%;
             transform: translateY(-50%);
-            border-radius: rem(40);
+            border-radius: rem(8) ;
 
             box-shadow: $shadow-one;
             overflow: hidden;
 
             .image {
-              object-fit: fit;
-              border-radius: rem(40);
+              object-fit: cover;
+              border-radius: rem(8);
             }
           }
         }
+      }
+
+      .navButton {
+        background-color: $white-two !important;
+        box-shadow: $shadow-one !important;
       }
     }
   }

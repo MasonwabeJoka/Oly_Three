@@ -98,7 +98,7 @@
       .textContainer {
         .name {
           font-weight: 600;
-          font-size: rem(14);
+          font-size: $small;
         }
         .message {
           font-size: rem(16);
@@ -122,13 +122,12 @@
           align-items: center;
           color: $white-one;
           background: $grey-four;
-          font-size: rem(12);
+          font-size: $tiny;
         }
         .time {
           margin-bottom: rem(2);
-          font-size: rem(12);
+          font-size: $tiny;
         }
-
       }
     }
 

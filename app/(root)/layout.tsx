@@ -7,8 +7,8 @@ import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
 
-import LayoutWrapper from "../(dashboard)/dashboard/create-listing/components/LayoutWrapper";
 import { withAuth } from "@workos-inc/authkit-nextjs";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",

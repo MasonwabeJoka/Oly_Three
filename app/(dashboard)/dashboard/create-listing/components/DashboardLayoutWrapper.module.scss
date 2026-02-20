@@ -10,7 +10,7 @@
   height: 100%;
 
   @include only(largeDesktop) {
-    width: 80vw;
+    width: rem(1527);
   }
   @include only(smallDesktop) {
     width: 96vw !important;
@@ -22,14 +22,11 @@
   .keepSidebarInPlace {
     @include only(largeDesktop) {
       width: rem(342);
-      width: rem(342);
     }
     @include only(smallDesktop) {
       width: rem(342);
-      width: rem(342);
     }
     @include only(tablet) {
-      width: rem(342);
       width: rem(342);
     }
   }

@@ -2,10 +2,9 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .container {
-  
   padding: rem(50);
-.selectedDetailContainer {
-  position: relative;
+  .selectedDetailContainer {
+    position: relative;
     padding: rem(16) rem(32);
     display: flex;
     flex-direction: column;
@@ -14,8 +13,8 @@
     opacity: 0;
     transform: translateY(-10px);
     &.open {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
     background-color: $white-two;
     border-radius: rem(40) rem(40) rem(44) rem(44);
@@ -55,7 +54,7 @@
         color: $grey-four;
         text-align: center;
         padding: 0 rem(16);
-        font-size: rem(14);
+        font-size: $small;
       }
 
       .selectedDetailExample {
@@ -76,7 +75,5 @@
 
   .submitButtonContainer {
     margin-bottom: rem(40);
-
-   
   }
 }

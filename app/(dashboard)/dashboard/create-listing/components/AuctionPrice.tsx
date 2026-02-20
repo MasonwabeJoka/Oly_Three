@@ -3,13 +3,14 @@ import styles from "./AuctionPrice.module.scss";
 import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
 import NumberInput from "@/components/NumberInput";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import Button from "@/components/Buttons";
 import useFAQStore from "../store/useFAQStore";
 import Modal from "@/components/Modal";
 import AuctionStartTime from "./AuctionStartTime";
 import FAQs from "@/components/Faqs";
 import { auctionFAQs } from "@/data/auctionFAQs";
+import useIsSelectOpen from "../store/useIsSelectOpen";
 
 interface Props {
   onNext: () => void;
@@ -29,6 +30,11 @@ const AuctionPrice = ({ onNext }: Props) => {
   const [isAuctionDurationOpen, setIsAuctionDurationOpen] = useState(false);
   const [isAuctionStartTimeOpen, setIsAuctionStartTimeOpen] = useState(false);
   const [showAuctionStartTime, setShowAuctionStartTime] = useState(false);
+  const { setIsSelectOpen } = useIsSelectOpen();
+
+  useEffect(() => {
+    setIsSelectOpen(isPricingOptionsOpen || isAuctionDurationOpen || isAuctionStartTimeOpen);
+  }, [isPricingOptionsOpen, isAuctionDurationOpen, isAuctionStartTimeOpen, setIsSelectOpen]);
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,

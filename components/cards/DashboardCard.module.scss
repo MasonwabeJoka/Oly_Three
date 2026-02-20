@@ -25,7 +25,7 @@
   .subtitle {
     display: flex;
     justify-content: center;
-    font-size: rem(12);
+    font-size: $tiny;
   }
 
   .value {
@@ -38,9 +38,9 @@
   }
 
   .stat {
-    font-size: rem(12);
+    font-size: $tiny;
     margin-top: rem(16);
-     display: flex;
+    display: flex;
     justify-content: center;
 
     .icon {

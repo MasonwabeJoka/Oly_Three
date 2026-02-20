@@ -31,7 +31,6 @@
       }
 
       .subItems {
-       
         margin-top: rem(-32);
         margin-bottom: rem(32);
 
@@ -43,16 +42,14 @@
       }
 
       .note {
-        font-size: rem(12);
+        font-size: $tiny;
         color: $black-four;
         margin-bottom: rem(16);
       }
 
       .share {
         margin-top: rem(32);
-        font-size: rem(12);
-       
-      
+        font-size: $tiny;
       }
     }
   }

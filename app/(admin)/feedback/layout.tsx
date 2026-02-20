@@ -2,7 +2,7 @@ import styles from "./../../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
-import LayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/LayoutWrapper";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 export const metadata = {
   title: "OLY: Better than Gumtree and Olx",
@@ -26,7 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.className} ${styles.html}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${outfit.className} ${styles.html}`}
+      data-scroll-behavior="smooth"
+    >
       <body className={`${outfit.variable} ${styles.body}`}>
         <LayoutWrapper>
           <div className={styles.wrapper}>

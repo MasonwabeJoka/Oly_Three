@@ -6,12 +6,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: rem(6); 
-  font-size: rem(14);
+  gap: rem(6);
+  font-size: $small;
   width: fit-content;
   height: fit-content;
   border-radius: rem(40);
- 
 
   .cancelButton {
     display: flex;
@@ -21,7 +20,7 @@
     height: rem(22);
     border-radius: 50%;
     background-color: $grey-one;
-    margin-right: rem(-10);   // NEGATIVE: pulls dot flush to right edge
+    margin-right: rem(-10); // NEGATIVE: pulls dot flush to right edge
   }
 
   .cancelButton:hover {

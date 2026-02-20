@@ -2,7 +2,6 @@ import styles from "./AdCarousel.module.scss";
 import Image from "@/components/Image";
 import { Ad } from "@/sanityTemp/Types/Ad";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { featuresData } from "@/data/FeaturesData";
 import { Keyboard, Autoplay } from "swiper/modules";
 import NavButtonRight from "../navButtonRight";
 import NavButtonLeft from "../navButtonLeft";
@@ -11,40 +10,26 @@ import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
-import { useEffect, useState } from "react";
-import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
   images: Ad["images"];
   onClick: any;
 };
 const AdCarousel = ({ images, onClick }: Props) => {
-  const [initialSlideIndex, setInitialSlideIndex] = useState<number | null>(
-    null
-  );
-  const { setIsMoreInfo } = useFeatureInfo();
   const { setCurrentSlideIndex } = useCurrentSlideIndex();
-
-  useEffect(() => {
-    setInitialSlideIndex(Math.floor(Math.random() * featuresData.length));
-  }, []);
 
   const handleSlideChange = (swiper: any) => {
     setCurrentSlideIndex(swiper.realIndex);
   };
 
-  if (initialSlideIndex === null) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <div className={styles.adCarouselContainer} onClick={onClick}>
       <div className={styles.imagesContainer}>
         <Swiper
-          initialSlide={initialSlideIndex}
+          initialSlide={0}
           slidesPerView={1}
           spaceBetween={30}
-          loop={true}
+          loop={false}
           keyboard={{
             enabled: true,
           }}
@@ -63,7 +48,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
                 <div
                   className={styles.imageContainer}
                   style={{
-                    maxHeight: "85vh",
+                    maxHeight: "100vh",
                     width: "100%",
                     maxWidth: `calc(85vh * ${image.aspectRatio})`,
                     cursor: "auto",
@@ -90,7 +75,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
               event.stopPropagation()
             }
           >
-            <NavButtonLeft size="medium" />
+            <NavButtonLeft size="medium" className={styles.navButton} />
           </div>
           <div
             className={styles.rightButtonContainer}
@@ -98,7 +83,7 @@ const AdCarousel = ({ images, onClick }: Props) => {
               event.stopPropagation()
             }
           >
-            <NavButtonRight size="medium" />
+            <NavButtonRight size="medium" className={styles.navButton} />
           </div>
         </Swiper>
       </div>
