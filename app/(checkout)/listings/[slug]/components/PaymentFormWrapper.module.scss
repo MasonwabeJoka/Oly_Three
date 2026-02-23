@@ -1,0 +1,45 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: rem(311);
+  height: 100vh;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+  width: 100%;
+  @include only(largeDesktop) {
+    // width: rem(1098);
+  }
+
+  .children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttons {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+
+    margin-bottom: rem(48);
+    .proceedButton {
+      margin-bottom: rem(20);
+    }
+  }
+
+  .progressBar {
+    width: 100%;
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari */
+}

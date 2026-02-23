@@ -1,0 +1,8 @@
+# Export your current dataset
+sanity dataset export oly-dataset backup.tar.gz
+
+# Create a new dataset
+sanity dataset create new-dataset-name
+
+# Import the data to the new dataset
+sanity dataset import backup.tar.gz new-dataset-name

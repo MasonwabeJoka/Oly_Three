@@ -1,0 +1,21 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.listingImages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .galleryContainer {
+    width: auto;
+    .breadcrumbsContainer {
+      margin: rem(0) rem(0) rem(16) rem(32);
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(12);
+    }
+  }
+}

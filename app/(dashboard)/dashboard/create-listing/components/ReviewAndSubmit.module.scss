@@ -1,0 +1,61 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include only(largeDesktop) {
+    width: rem(1098);
+  }
+
+  @include only(largeDesktop) {
+    width: rem(960);
+  }
+
+  @include only(largeDesktop) {
+    width: rem(960);
+  }
+
+  .title {
+    margin-top: rem(48);
+    margin-bottom: rem(48);
+    color: $danger;
+    font-weight: 500;
+    font-size: $h4;
+  }
+
+  .reviewSectionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin-bottom: rem(64);
+    .descriptionContainer {
+      margin-bottom: rem(64);
+
+      .description {
+        text-align: center;
+        padding: 0 rem(120);
+        margin-bottom: rem(16);
+      }
+    }
+
+    .reviewSection {
+      .section {
+        margin-bottom: rem(64);
+      }
+    }
+  }
+
+  .confirmation {
+    text-align: center;
+    padding: 0 rem(120);
+    margin-bottom: rem(64);
+    .link {
+      text-decoration: underline;
+    }
+  }
+}

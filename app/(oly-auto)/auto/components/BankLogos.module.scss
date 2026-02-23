@@ -1,0 +1,14 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+  .logos {
+    display:flex;
+    align-items: center;
+
+    .logo {
+      margin-right: rem(24);
+    }
+  }
+

@@ -1,0 +1,80 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between !important;
+  width: rem(360);
+  // height: 100%;
+
+  @include only(largeDesktop) {
+    width: rem(1527);
+  }
+  @include only(smallDesktop) {
+    width: 96vw !important;
+  }
+  @include only(tablet) {
+    width: 96vw !important;
+  }
+
+  .keepSidebarInPlace {
+    @include only(largeDesktop) {
+      width: rem(342);
+    }
+    @include only(smallDesktop) {
+      width: rem(342);
+    }
+    @include only(tablet) {
+      width: rem(342);
+    }
+  }
+
+  .backButton {
+    position: fixed;
+    top: rem(20);
+    right: rem(20);
+  }
+
+  .sidebarContainer {
+    position: sticky;
+    top: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: rem(342);
+    height: 100vh;
+
+    .sidebar {
+      position: fixed;
+      
+    
+      @include only(largeDesktop) {
+      }
+      @include only(smallDesktop) {
+       
+      }
+      @include only(tablet) {
+       
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+   
+    @include only(largeDesktop) {
+      width: rem(1098);
+    }
+    @include only(smallDesktop) {
+      width: rem(1098) !important;
+    }
+    @include only(tablet) {
+      width: rem(1098);
+    }
+  }
+}

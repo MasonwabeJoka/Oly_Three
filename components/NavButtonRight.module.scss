@@ -1,0 +1,14 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.rightArrowContainer {
+  .rightArrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white-four;
+    box-shadow: none;
+    .right {
+    }
+  }
+}

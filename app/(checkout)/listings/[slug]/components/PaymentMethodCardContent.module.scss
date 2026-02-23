@@ -1,0 +1,61 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: 100%;
+  .content {
+    margin: 0 rem(32);
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+    .paymentTypeContainer {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: rem(8);
+      .text {
+        .title {
+          font-size: rem(20);
+          font-weight: 500;
+        }
+
+        .subtitle {
+          font-size: $body;
+          font-weight: 400;
+          font-size: $tiny;
+          margin-top: rem(-2);
+        }
+      }
+
+      .icons {
+        display: flex;
+        gap: rem(4);
+        .iconContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: rem(2);
+          width: rem(35);
+          height: rem(35);
+          border-radius: 50%;
+
+          background-color: $white-two;
+          .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: rem(24);
+            height: rem(20);
+          }
+        }
+      }
+    }
+
+    .descriptions {
+      display: flex;
+      flex-direction: column;
+      font-size: $small;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *; /* Notes.module.css */
+.container {
+  max-width: 72rem; /* max-w-6xl */
+  margin: 0 auto; /* mx-auto */
+  padding: 0 1.25rem; /* px-5 */
+}
+
+.noteContainer {
+  color: var(--note-color); /* This will be set dynamically in style */
+}
+
+.noteHeader {
+  padding: 0.75rem 1rem; /* px-4 py-3 */
+  font-weight: bold; /* font-bold */
+  color: #1e293b; /* text-slate-950 */
+}
+
+.noteContent {
+  white-space: pre-line; /* whitespace-pre-line */
+  border: 1px solid #334155; /* border-slate-700 */
+  padding: 1.5rem; /* px-6 py-4 */
+  border-radius: 0.5rem; /* rounded-lg */
+}

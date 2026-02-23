@@ -1,0 +1,107 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  align-items: center;
+  width: rem(920);
+  height: rem(180);
+  padding: rem(32);
+  border-radius: rem(40);
+  background-color: $white-three;
+  box-shadow: $shadow-one;
+  cursor: pointer;
+  @include only(largeDesktop) {
+  }
+  @include only(smallDesktop) {
+    display: flex;
+    flex-direction: column;
+    width: rem(360);
+    height: rem(480);
+  }
+  @include only(tablet) {
+  }
+  .video {
+    width: rem(320);
+    height: inherit;
+    // border-radius: rem(40);
+    background-color: $grey-one;
+    @include only(largeDesktop) {
+    }
+
+    @include only(smallDesktop) {
+      width: 100%;
+      height: rem(202);
+    }
+    @include only(tablet) {
+    }
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    height: inherit;
+    margin-left: rem(32);
+    @include only(largeDesktop) {
+    }
+
+    @include only(smallDesktop) {
+      width: 100%;
+      height: fit-content;
+      margin-left: 0;
+      justify-content: unset;
+      padding: rem(20) rem(20) rem(0);
+    }
+    @include only(tablet) {
+    }
+
+    .titleContainer {
+      display: flex;
+      align-items: flex-start;
+      .title {
+        font-size: $small;
+        margin-bottom: rem(8);
+        text-transform: uppercase;
+
+        @include only(smallDesktop) {
+          margin-bottom: rem(0);
+          width: 80% !important;
+           margin-bottom: rem(16);
+        }
+        @include only(tablet) {
+        }
+      }
+
+      .publishButtonContainer {
+ 
+    margin-left: rem(0);
+
+    .publishButton {
+    }
+
+    .publishButtonText {
+      
+    }
+  }
+    }
+    .description {
+      font-weight: 300;
+    }
+  }
+
+  .publishButtonContainer {
+    display: flex;
+    align-items: center;
+    margin-left: rem(48);
+
+    .publishButton {
+    }
+
+    .publishButtonText {
+      margin-left: rem(8);
+      font-weight: 300;
+    }
+  }
+}

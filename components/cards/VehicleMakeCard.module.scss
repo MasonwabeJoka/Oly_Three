@@ -1,0 +1,31 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey-one;
+  width: rem(302);
+  height: rem(378);
+  border-radius: rem(40);
+  box-shadow: $shadow-one;
+  cursor: pointer;
+
+  .checkboxContainer {
+    position: absolute;
+    top: rem(20);
+    left: rem(240);
+  }
+
+  .text {
+    position: absolute;
+    bottom: rem(20);
+    font-size: $h4;
+    font-weight: 500;
+    color: $black-four;
+  }
+}

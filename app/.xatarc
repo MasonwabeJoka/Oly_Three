@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://oly-001-sgstp3.eu-central-1.xata.sh/db/xata",
+  "codegen": {
+    "output": "lib/xata.codegen.ts"
+  }
+}

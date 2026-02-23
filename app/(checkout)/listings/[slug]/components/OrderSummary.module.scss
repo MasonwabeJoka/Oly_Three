@@ -1,0 +1,36 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+
+  .itemTitle {
+  }
+
+  .priceContainer {
+    .totalPrice {
+      font-weight: 500;
+    }
+    .price {
+      font-size: $tiny;
+      font-weight: 350;
+    }
+  }
+
+  .sellerInfo {
+    font-size: $small;
+
+    .sellerName {
+    }
+
+    .phoneNumber {
+      font-size: rem(13);
+    }
+  }
+  .notesContainer {
+    font-size: $small;
+  }
+}

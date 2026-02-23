@@ -1,0 +1,42 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+  .logo {
+    margin-top: rem(196);
+    margin-bottom: rem(48);
+
+    @include only(largeDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+    @include only(smallDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+    @include only(tablet) {
+      width: rem(120);
+      height: "auto";
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+  }
+
+  .propertyTypeSelectContainer {
+    // styles specific to property type select if any
+  }
+
+  .buyRentContainer {
+    .buyRent {
+      // specific overrides if needed
+    }
+  }
+}

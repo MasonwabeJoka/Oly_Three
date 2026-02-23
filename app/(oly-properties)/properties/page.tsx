@@ -1,0 +1,121 @@
+import Blogs from "@/components/OlyArticles";
+import styles from "./styles.module.scss";
+import FeaturedListings from "@/components/FeaturedListings";
+import SponsoredArticles from "@/components/SponsoredArticles";
+import BelowFoldAd from "@/components/ads/BelowFoldAd";
+import Navbar from "@/components/layouts/Navbar";
+import Calculators from "./components/Calculators";
+import HeroSection from "@/components/HeroSection";
+import ShowMenu from "@/components/ShowMenu";
+import ShowCategories from "@/components/ShowCategories";
+import FeaturedServices from "@/components/FeaturedServices";
+import ExternalAd from "@/components/ExternalAd";
+// Todo: Fix cards arrow buttons don't appear when hovering the bottom of the card
+// Todo: Improve on the hero section copy
+const Home = () => {
+  return (
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <nav className={styles.nav}>
+          <Navbar />
+        </nav>
+        <div className={styles.modal}>
+          <ShowMenu />
+        </div>
+        <div className={styles.modal}>
+          <ShowCategories categories={[] as any} />
+        </div>
+
+        <section className={styles.heroSection}>
+          <HeroSection
+            category="property"
+            mainTitle="Oly Properties is a modern real estate marketplace for easy buying and selling in South Africa"
+          />
+        </section>
+
+        <section className={styles.aboveFoldAd}>
+          <ExternalAd
+            adType="image"
+            path="https://fastly.picsum.photos/id/830/1300/200.jpg?hmac=m8fdkf3QoO94k44M5vVpB1h-qZKOb46CuIJl43h9QDQ"
+          />
+        </section>
+        <section className={styles.featured}>
+          <FeaturedServices
+            layout="textLeft"
+            path="/properties/valuation"
+            image="/houses/house9.jpg"
+            title="Property Valuation"
+            description=" Get a valuation of your property in minutes. Whether you're looking
+            to sell or rent, our advanced valuation tool provides reliable
+            estimates based on current market data."
+            cta="Go to Valuation"
+            features={[
+              { id: "1", feature: "Market-based valuations" },
+              { id: "2", feature: "Selling price recommendations" },
+              { id: "3", feature: "Rental income estimates" },
+            ]}
+            content={<Calculators />}
+          />
+        </section>
+
+        <section className={styles.featured}>
+          <FeaturedServices
+            layout="textRight"
+            path="/properties/pre-qualification"
+            image="/houses/house12.jpg"
+            title="Oly Home Loan"
+            description="We handle your home loan application by
+            submitting it to all major banks on your behalf. Get pre-qualified
+            and understand your buying power with our streamlined, hassle-free
+            process — designed to boost your chances of approval."
+            cta="Get Pre-Qualified"
+            features={[
+              { id: "4", feature: "Free pre-qualification assessment" },
+              { id: "5", feature: "Submit to multiple banks simultaneously" },
+              { id: "6", feature: "Compare offers and rates side by side" },
+            ]}
+            content={<Calculators />}
+          />
+        </section>
+
+        <section className={styles.featured}>
+          <FeaturedServices
+            layout="textLeft"
+            path="/properties/find-agent"
+            image="/agent/3.jpg"
+            title="Find Your Perfect Agent"
+            description="Connect with experienced real estate agents in your area who can
+            help you buy, sell, or rent property. Our database includes verified
+            professionals with proven track records."
+            cta="Find an Agent"
+            features={[]}
+            content={<Calculators />}
+          />
+        </section>
+
+        <section className={styles.featuredListings}>
+          <FeaturedListings category="property" currentPage={1} />
+        </section>
+
+        <section className={styles.belowFoldAd}>
+          <ExternalAd
+            adType="video"
+            path="//https://developers.google.com/youtube/player_parameters"
+          />
+        </section>
+        <section className={styles.calculators}>
+          <Calculators />
+        </section>
+        <section className={styles.blog}>
+          <Blogs />
+        </section>
+
+        <section className={styles.sponsoredArticles}>
+          <SponsoredArticles />
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default Home;

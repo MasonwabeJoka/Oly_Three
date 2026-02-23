@@ -1,0 +1,39 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: rem(1440);
+
+  .exitButton {
+    margin-left: auto;
+    width: 0;
+    margin-bottom: rem(32);
+    margin-top: rem(20);
+  }
+  .wrapper {
+    display: flex;
+    height: 100vh;
+
+    .profileSectionContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20%;
+    }
+
+    .postsSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60%;
+    }
+    .rightSideBar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20%;
+      background-color: $white-two;
+    }
+  }
+}

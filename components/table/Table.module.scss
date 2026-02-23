@@ -1,0 +1,29 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  width: rem(1080);
+
+  .searchInputContainer {
+  }
+
+  .tableContainer {
+    .tableHeader {
+      .tableRow {
+        height: rem(100);
+        .tableHead {
+            font-size: $body;
+        }
+      }
+    }
+
+    .tableBody {
+      .tableRow {
+        height: rem(80);
+        .tableCell {
+        }
+      }
+    }
+  }
+}

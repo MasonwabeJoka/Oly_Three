@@ -1,0 +1,45 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.videoAdContainer {
+  width: rem(311);
+  height: rem(175);
+  padding: 0;
+  margin: rem(100) auto;
+
+  @include only(largeDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+  @include only(smallDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+  @include only(tablet) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+  @include only(extraLargeDesktop) {
+    width: rem(628);
+    height: rem(353.25);
+  }
+
+  .titleContainer {
+    display: flex;
+    text-align: center;
+    height: fit-content;
+    margin: 0 auto;
+    background-color: white;
+    .title {
+      flex-basis: 87%;
+    }
+  }
+
+  .button {
+    width: auto;
+    height: fit-content;
+  }
+
+  .video {
+  }
+}

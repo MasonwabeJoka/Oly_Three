@@ -1,0 +1,17 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.boxCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: rem(40);
+  min-width: rem(310);
+  background: $grey-one;
+  cursor: pointer;
+  box-shadow: $shadow-six;
+  // min-height: rem(248);
+  height: fit-content;
+  margin-top: rem(-8);
+}

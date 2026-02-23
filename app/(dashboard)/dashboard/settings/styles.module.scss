@@ -1,0 +1,75 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+
+  .title {
+    margin-top: rem(56);
+    margin-bottom: rem(32);
+    font-size: $h4;
+    color: $danger;
+    font-weight: 500;
+    @include only(largeDesktop) {
+      margin-top: rem(64);
+      font-size: $h4;
+      margin-bottom: rem(24);
+    }
+    @include only(smallDesktop) {
+      margin-top: rem(64);
+      font-size: $h4;
+      margin-bottom: rem(24);
+    }
+    @include only(tablet) {
+      margin-top: rem(64);
+      font-size: $h4;
+      margin-bottom: rem(24);
+    }
+  }
+
+  .cards {
+    width: rem(800);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    @include only(largeDesktop) {
+      justify-content: center;
+      flex-direction: row;
+    }
+    @include only(smallDesktop) {
+      justify-content: center;
+      flex-direction: row;
+    }
+    @include only(tablet) {
+      justify-content: center;
+      flex-direction: row;
+    }
+    .card {
+      margin-bottom: rem(24);
+
+      @include only(largeDesktop) {
+        margin-right: rem(24);
+      }
+      @include only(smallDesktop) {
+        margin-right: rem(24);
+      }
+      @include only(tablet) {
+        margin-right: rem(24);
+      }
+    }
+  }
+  .deleteButton {
+    margin-top: rem(8);
+    color: $danger;
+  }
+
+  .deleteButton:hover {
+    color: $danger-hover;
+  }
+}

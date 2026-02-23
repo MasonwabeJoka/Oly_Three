@@ -1,0 +1,34 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  @include only(largeDesktop) {
+  }
+  @include only(smallDesktop) {
+  }
+  @include only(tablet) {
+    }
+  .title {
+    margin-top: rem(240);
+    margin-bottom: rem(48);
+    color: $danger;
+    font-weight: 500;
+    font-size: $h4;
+  }
+
+  .selects {
+    // margin-bottom: rem(48);
+
+    .select {
+      margin-bottom: rem(20);
+    }
+  }
+
+
+
+
+}

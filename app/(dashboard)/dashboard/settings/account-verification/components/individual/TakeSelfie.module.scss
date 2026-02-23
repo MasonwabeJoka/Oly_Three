@@ -1,0 +1,27 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: rem(600);
+    margin-top: rem(100);
+.error {
+    color: $danger;
+    margin-bottom: rem(8);
+  }
+    .description {
+        text-align: center;
+    }
+
+    .button {
+        margin-bottom: rem(20);
+    }
+   
+}

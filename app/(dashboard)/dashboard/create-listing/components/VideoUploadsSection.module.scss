@@ -1,0 +1,55 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include only(largeDesktop) {
+  }
+  @include only(smallDesktop) {
+  }
+  @include only(tablet) {
+  }
+
+  .uploadedVideosContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: rem(20);
+    width: rem(975);
+
+    &.hasVideos {
+      margin-bottom: rem(148);
+    }
+
+    @include only(largeDesktop) {
+    }
+    @include only(smallDesktop) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: unset;
+      gap: rem(32);
+    }
+    @include only(tablet) {
+    }
+
+    .uploadedVideo {
+    }
+  }
+
+  .buttonContainer {
+    position: sticky;
+    bottom: rem(180);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(20);
+    z-index: 20;
+    background-color: $white-four;
+    width: 100%;
+    padding-bottom: rem(20);
+  }
+}

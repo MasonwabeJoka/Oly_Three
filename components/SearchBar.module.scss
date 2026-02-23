@@ -1,0 +1,10 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  margin-top: rem(48);
+  .searchBar {
+    width: rem(500);
+    height: rem(56);
+  }
+}

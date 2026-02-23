@@ -1,0 +1,31 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: rem(20);
+  span {
+    margin-top: rem(-2);
+  }
+  .checkbox {
+    outline: #57dffa rem(0.2) solid;
+    outline-offset: rem(2);
+    border-radius: rem(4);
+    width: rem(12);
+    height: rem(12);
+     box-shadow:
+      -2px -2px 10px 0px #fff inset,
+      2px 2px 10px 0px rgba(170, 186, 204, 0.5) inset,
+      2px 2px 4px 0px rgba(120, 145, 171, 0.25) inset,
+      -2px -2px 4px 0px rgba(255, 255, 255, 0.5) inset;
+
+    .checkboxBackground {
+      background-color: $primary-hover;
+      width: rem(12);
+      height: rem(12);
+      border-radius: rem(4);
+      outline: $white-one rem(4) solid;
+    }
+  }
+}

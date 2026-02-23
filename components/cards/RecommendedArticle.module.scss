@@ -1,0 +1,112 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .article {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: rem(280);
+    height: rem(350);
+    border-radius: rem(40);
+    box-shadow: $shadow-one;
+
+    .titleContainer {
+      position: relative;
+      top: 100%;
+      transform: translateY(-100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border-radius: rem(40);
+      background-color: $grey-one;
+
+      .contentWrapper {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: rem(20);
+
+        .title {
+          text-align: center;
+          padding: 0 rem(16);
+          margin-bottom: rem(16);
+          font-size: $h4;
+          line-height: 1.2;
+          letter-spacing: rem(1);
+          font-weight: 450;
+       
+        }
+
+        .author {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: rem(16);
+
+          .authorAvatar {
+            margin-bottom: rem(8);
+
+            .avatar {
+              
+            }
+          }
+          .authorName {
+            font-size: 14px;
+            font-weight: 400;
+            
+          }
+        }
+      }
+    }
+
+    .titleContainerWithImage {
+      background: linear-gradient(
+        to top,
+        rgba($black-one, 0.8),
+        rgba($black-one, 0.3)
+      );
+
+      .contentWrapper {
+        .title {
+          color: $primary;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .author {
+          .authorAvatar {
+            .avatar {
+              outline: rem(2) solid $primary !important;
+            }
+          }
+          .authorName {
+            color: $primary;
+          }
+        }
+      }
+    }
+    .titleContainerNoImage {
+      .contentWrapper {
+        .title {
+          
+        }
+
+        .author {
+          .authorAvatar {
+            .avatar {
+            }
+          }
+          .authorName {
+          }
+        }
+      }
+    }
+  }
+}

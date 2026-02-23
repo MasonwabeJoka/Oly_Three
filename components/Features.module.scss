@@ -1,0 +1,19 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    margin-bottom: rem(56);
+    font-weight: 600;
+  }
+
+  .carousel {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

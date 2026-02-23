@@ -1,0 +1,74 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+
+  
+      .link {
+      }
+
+
+  .categoriesContainer {
+  }
+
+  .searchTerm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .searchTermInput {
+    }
+  }
+  .searchLocation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .searchLocationInput {
+    }
+    .errorMessage {
+      height: 0 !important;
+    }
+  }
+
+  .errorMessage {
+    color: $danger;
+  }
+}
+
+
+  .searchTerm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .searchTermInput {
+    }
+  }
+  .searchLocation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .searchLocationInput {
+    }
+  }
+
+  .errorMessage {
+    color: $danger;
+  }
+
+.searchButton {
+  .search {
+    background-color: $white-two;
+  }
+
+  .search:hover {
+    background-color: $white-one;
+  }
+}

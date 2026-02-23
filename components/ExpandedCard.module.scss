@@ -1,0 +1,10 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.expandedCard {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  cursor: pointer;
+}

@@ -1,0 +1,51 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  .chatList {
+    margin-top: rem(52);
+  }
+
+  .mainSection {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: rem(800);
+    margin-left: rem(32);
+    z-index: 10;
+
+    .exitButtonContainer {
+      position: fixed;
+      left: 95%;
+      top: 3%;
+      gap: rem(16);
+      cursor: pointer;
+      width: 100%;
+      z-index: 500;
+
+      &:focus {
+        outline: 2px solid $primary-hover;
+        outline-offset: 2px;
+      }
+    }
+
+    .mainSectionWrapper {
+      margin-top: rem(96);
+      margin-bottom: rem(360);
+      width: 100%;
+    }
+  }
+
+  .bottomSection {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: rem(56);
+  }
+}

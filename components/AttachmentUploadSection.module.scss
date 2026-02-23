@@ -1,0 +1,34 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: rem(40);
+    gap: rem(20);
+    height: rem(420);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 rem(50);
+    margin-bottom: rem(48);
+
+  }
+  .buttonContainer {
+    position: sticky;
+    bottom: rem(180);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:rem(20);
+    z-index: 20;
+   background-color: $white-four;
+    width: 110%;
+    padding-bottom: rem(20);
+  }
+}

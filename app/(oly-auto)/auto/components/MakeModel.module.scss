@@ -1,0 +1,14 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  .field {
+    margin-bottom: rem(20);
+  }
+
+  .wrapper {
+       margin-bottom: rem(56);
+
+  }
+}

@@ -1,0 +1,177 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  position: relative;
+
+  .errorMessage {
+    text-align: right;
+    white-space: nowrap;
+    color: $danger;
+    margin-bottom: rem(8);
+    padding: 0 rem(20);
+  }
+  .wrapper {
+    background-color: $white-three;
+    border-radius: rem(40);
+  }
+
+  .largeInput {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+  .mediumInput {
+    width: rem(202);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(424) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(381);
+      height: rem(56);
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(424);
+      height: rem(56);
+    }
+  }
+  .smallInput {
+    width: rem(202);
+    height: rem(56);
+    text-align: right !important;
+    padding-right: rem(32) !important;
+
+    &::placeholder {
+      text-align: center;
+      padding-left: rem(32) !important;
+    }
+
+    @include only(largeDesktop) {
+      width: rem(180) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(180) !important;
+      height: rem(56) !important;
+    }
+    @include only(tablet) {
+      width: rem(180) !important;
+      height: rem(56) !important;
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(180) !important;
+      height: rem(56) !important;
+    }
+  }
+
+  .xLargeDashboardInput {
+    width: rem(311);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(1000);
+      height: rem(56);
+    }
+
+    @include only(smallDesktop) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(tablet) {
+      width: rem(462);
+      height: rem(56);
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(514);
+      height: rem(56);
+    }
+  }
+
+  .largeDashboardInput {
+    width: rem(267);
+    height: rem(56);
+
+    @include only(largeDesktop) {
+      width: rem(471);
+    }
+    @include only(smallDesktop) {
+      width: rem(424);
+    }
+    @include only(tablet) {
+      width: rem(424);
+    }
+  }
+
+  .mediumDashboardInput {
+    width: rem(240);
+    height: rem(48);
+    @include only(largeDesktop) {
+      width: rem(326);
+      height: rem(56);
+    }
+    @include only(smallDesktop) {
+      width: rem(293);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(293);
+      height: rem(56);
+    }
+  }
+  .smallDashboardInput {
+    width: rem(160) !important;
+    height: rem(56) !important;
+    text-align: right !important;
+    padding-right: rem(20) !important;
+
+    &::placeholder {
+      text-align: center;
+      padding-left: rem(20) !important;
+    }
+    @include only(largeDesktop) {
+      width: rem(160) !important;
+      height: rem(56) !important;
+    }
+    @include only(smallDesktop) {
+      width: rem(160);
+      height: rem(56);
+    }
+    @include only(tablet) {
+      width: rem(160) !important;
+      height: rem(56) !important;
+    }
+    @include only(extraLargeDesktop) {
+      width: rem(160) !important;
+      height: rem(56) !important;
+    }
+  }
+}

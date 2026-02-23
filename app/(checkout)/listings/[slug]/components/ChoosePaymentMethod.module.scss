@@ -1,0 +1,44 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: rem(12);
+    width: 100%;
+    height: 100%;
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(12);
+      width: fit-content;
+      background-color: $white-three;
+      padding: rem(12) !important;
+      border-radius: rem(40);
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: rem(12);
+        cursor: pointer;
+        width: rem(600);
+        height: rem(160);
+        padding: 0 rem(60);
+        border-radius: rem(40);
+        background-color: $white-four;
+        box-shadow: $shadow-one;
+      }
+
+      .card:hover {
+        background-color: $white-three;
+      }
+    }
+  }
+

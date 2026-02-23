@@ -1,0 +1,77 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(16);
+  padding: rem(20);
+}
+
+.pageButton {
+  width: rem(48);
+  height: rem(48);
+  border-radius: 50%;
+  border: none;
+  background-color: $white-three !important;
+  box-shadow: $shadow-one !important;
+  font-size: rem(16);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background-color: #f0f0f0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &.active {
+    background-color: $primary-hover !important;
+    color: $white-one;
+  }
+
+  &.ellipsis {
+    cursor: default;
+  }
+}
+.arrowContainer {
+  transition: opacity 0.5s ease; 
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; // prevents clicks when invisible
+}
+
+.arrowButton {
+  width: rem(48);
+  height: rem(48);
+  border-radius: 50%;
+  border: none;
+  background-color: $white-three !important;
+  font-size: rem(20);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow-one !important;
+  &:hover:not(:disabled) {
+    background-color: #f0f0f0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

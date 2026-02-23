@@ -1,0 +1,30 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.container {
+  .swipper {
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+   
+    .photoContainer {
+      height: auto;
+      width: rem(310);
+      scroll-snap-align: start;
+      transition: transform 0.3s ease-in-out;
+      margin-bottom: rem(24);
+    }
+
+    .buttonsContainer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-right: 14.6%;
+      gap: rem(240);
+
+      .navButtons {
+        background-color: $white-three;
+      }
+    }
+  }
+}

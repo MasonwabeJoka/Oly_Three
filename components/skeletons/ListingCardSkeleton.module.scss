@@ -1,0 +1,70 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.boxAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(40);
+ 
+}
+
+.expandedAdContainer {
+  background-color: rgba(0, 0, 0, 0.041);
+  border-radius: rem(40);
+}
+
+.largeBox {
+ 
+}
+
+.standardBox {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.smallBox {
+}
+
+
+
+
+.largeDashboardBox {
+  @include only(largeDesktop) {
+  }
+}
+.standardDashboardBox {
+  @include only(largeDesktop) {
+    width: rem(310);
+    min-height: rem(413);
+  }
+}
+.smallDashboardBox {
+}
+.largeExpanded {
+ 
+}
+
+.standardExpanded {
+  width: rem(310);
+  min-height: rem(413);
+}
+
+.smallExpanded {
+}
+
+
+
+
+.largeDashboardExpanded {
+  @include only(largeDesktop) {
+    width: rem(918);
+    min-height: rem(248);
+  }
+}
+.standardDashboardExpanded {
+  @include only(largeDesktop) {
+    width: rem(918);
+    min-height: rem(248);
+  }
+}
+.smallDashboardExpanded {
+}

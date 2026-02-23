@@ -1,0 +1,70 @@
+@use "sass:map";
+@use "@/utils/variables" as *;
+
+$breakpoints: (
+  "mobile": (
+    min: $min-mobile,    
+    max: $max-mobile, 
+  ),
+  "tablet": (
+    min: $min-tablet,    
+    max: $max-tablet, 
+  ),
+  "smallDesktop": (
+    min: $min-small-desktop,    
+    max: $max-small-desktop, 
+  ),
+  "largeDesktop": (
+    min: $min-large-desktop,  
+    max: $max-large-desktop, 
+  ),
+  "extraLargeDesktop": (
+    min: $min-extra-large-desktop,   
+    max: $max-extra-large-desktop,    
+  ),
+) !default;
+
+// min-width
+@mixin larger-than($size) {
+  $min: map.get(map.get($breakpoints, $size), min);
+  @media (min-width: #{$min}) {
+    @content;
+  }
+}
+
+// max-width
+@mixin smaller-than($size) {
+  $max: map.get(map.get($breakpoints, $size), max);
+  @media (max-width: #{$max}) {
+    @content;
+  }
+}
+
+// between two breakpoints
+@mixin between($from, $to) {
+  $min: map.get(map.get($breakpoints, $from), min);
+  $max: map.get(map.get($breakpoints, $to), max);
+  @media (min-width: #{$min}) and (max-width: #{$max}) {
+    @content;
+  }
+}
+
+// only — for a single named breakpoint range
+@mixin only($size) {
+  @if not map.has-key($breakpoints, $size) {
+    @error "Breakpoint `#{$size}` does not exist in `$breakpoints` map.";
+  }
+
+  $min: map.get(map.get($breakpoints, $size), min);
+  $max: map.get(map.get($breakpoints, $size), max);
+
+  @if $max != null {
+    @media (min-width: #{$min}) and (max-width: #{$max}) {
+      @content;
+    }
+  } @else {
+    @media (min-width: #{$min}) {
+      @content;
+    }
+  }
+}

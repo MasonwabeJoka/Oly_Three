@@ -1,0 +1,80 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.modalOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 100vw;
+  height: 102vh;
+  z-index: 100;
+  cursor:
+    url("/icons/X.png") 16 0,
+    auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: $white-four;
+
+  .forceHide {
+    display: none !important;
+  }
+
+  &::-webkit-scrollbar {
+    cursor: auto !important;
+    // width: rem(16) !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    cursor: auto !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    cursor: auto !important;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: auto !important;
+  }
+}
+
+.exitButtonContainer {
+  position: absolute;
+  left: 95%;
+  top: 3%;
+  gap: rem(16);
+  cursor: pointer;
+  width: 100%;
+  z-index: 10;
+}
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+
+.lessThanScreenHeight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.moreThanScreenHeight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .exitButtonContainer {
+    position: sticky;
+    right: 5%;
+    top: 3%;
+    gap: rem(16);
+    cursor: pointer;
+    width: fit-content;
+    z-index: 20;
+  }
+}

@@ -1,0 +1,16 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.header {
+  margin-bottom: rem(32);
+  padding: rem(24) 0;
+  border-bottom: 1px solid $grey-one;
+}
+
+.title {
+  font-size: rem(32);
+  font-weight: 600;
+  color: $black-one;
+  margin: 0;
+}

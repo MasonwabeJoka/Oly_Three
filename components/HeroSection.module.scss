@@ -1,0 +1,101 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.star {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  left: 50px;
+
+  @include only(smallDesktop) {
+    display: none;
+  }
+  @include only(largeDesktop) {
+    display: block;
+  }
+  @include only(tablet) {
+    display: block;
+  }
+}
+.mainContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 96vw;
+  height: 95vh;
+  border-radius: rem(150);
+  gap: rem(24);
+
+  @include only(largeDesktop) {
+  }
+
+  @include only(smallDesktop) {
+  }
+
+  @include only(tablet) {
+    width: 100vw;
+    padding: rem(0) rem(40) !important;
+    //  background-color: #c9e5e8;
+    border-radius: 0;
+  }
+
+  @include only(extraLargeDesktop) {
+  }
+
+  .logo {
+    position: absolute;
+    top: 0;
+    right: 50%;
+  }
+
+  .titleContainer {
+    position: relative;
+    display: flex;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
+    padding: rem(0) rem(48) !important;
+
+    h1 {
+      width: rem(640) !important;
+      font-size: $h1;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: center;
+      text-wrap: balance;
+      hyphens: auto;
+      color: $black-four;
+      z-index: 1;
+      @include only(largeDesktop) {
+        width: rem(900) !important;
+
+        line-height: 1.2;
+      }
+
+      @include only(smallDesktop) {
+        width: rem(600) !important;
+        font-size: rem(40) !important;
+        
+      }
+      @include only(tablet) {
+        width: rem(400) !important;
+        font-size: rem(36) !important;
+      }
+    }
+  }
+  .HeroSectionFieldsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+
+    @include only(smallDesktop) {
+    }
+
+    @include only(tablet) {
+      padding: rem(0) rem(340) !important;
+    }
+  }
+}

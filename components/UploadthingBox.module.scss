@@ -1,0 +1,108 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+
+.container {
+  .uploadMediaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $white-three;
+    color: #67787c;
+    // https://kovart.github.io/dashed-border-generator/
+    // background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%23C9CECF' stroke-width='6' stroke-dasharray='32%2c32' stroke-dashoffset='19' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: rem(40);
+    border: none;
+    box-shadow:
+      0px -3px 3px 0px rgba(0, 94, 117, 0.1) inset,
+      0px 5px 5px 0px rgba(0, 94, 117, 0.09) inset,
+      0px 12px 7px 0px rgba(0, 94, 117, 0.05) inset,
+      0px 21px 8px 0px rgba(0, 94, 117, 0.01) inset,
+      1px 33px 9px 0px rgba(0, 94, 117, 0) inset;
+
+    .uploadVideoContainer {
+      margin-bottom: rem(24);
+
+      .uploadVideo {
+        display: none;
+      }
+    }
+
+    .or {
+      margin-bottom: rem(24);
+    }
+
+    .videoURL {
+    }
+
+    .label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $body;
+      border-radius: rem(40);
+      cursor: pointer;
+      background-color: $primary;
+      box-shadow:
+        10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+        5px 5px 10px 0px rgba(169, 196, 203, 0.25);
+    }
+
+    .label:hover {
+      background-color: $primary-hover;
+    }
+  }
+
+  .button {
+    width: rem(471);
+    height: rem(56);
+    border-radius: rem(40);
+    background-color: $primary;
+    color: $black-four;
+    box-shadow: $shadow-one;
+    margin-top: rem(32);
+  }
+
+  .buttonLoading {
+    background-color: $primary;
+  }
+
+  .buttonUploading {
+    background-color: $primary-disabled;
+  }
+  .buttonUploading {
+    background-color: $primary-disabled;
+  }
+  .buttonUploading::after {
+    background-color: $primary;
+  }
+  .buttonUploadProgress {
+    position: relative;
+    z-index: 20;
+  }
+
+  .allowed {
+    font-size: $body;
+    margin-bottom: rem(32);
+    width: rem(300);
+  }
+
+  .boxLarge {
+    width: rem(664);
+    height: rem(440);
+  }
+
+  .boxMedium {
+    width: rem(514);
+    height: rem(360);
+  }
+
+  .labelLarge {
+    width: rem(471);
+    height: rem(56);
+  }
+  .labelMedium {
+    width: rem(336.4285);
+    height: rem(56);
+  }
+}

@@ -1,0 +1,19 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+
+.sellerDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    will-change: transform;
+    transition: none;
+    height: fit-content;
+  
+    .report {
+      margin-top: rem(20);
+      color: $danger;
+      cursor: pointer;
+    }
+  }

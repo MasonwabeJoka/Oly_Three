@@ -1,0 +1,9 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+.tabs {
+  display: flex;
+  border-radius: rem(40);
+  width: 100%;
+  column-gap: rem(8);
+}
