@@ -105,6 +105,7 @@ type FormStore = {
   formData: FormData;
   updateFormData: (formData: Partial<FormData>) => void;
   resetFormData: () => void;
+  resetKey: number;
 };
 
 // Define the part of the store that controls the form’s steps and navigation
@@ -193,6 +194,8 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
   isLastStep: false,
   categoryPreviouslySelected: false,
 
+  resetKey: 0,
+
   // Function to update parts of the form data as the user fills it out
   updateFormData: (newData) => set((state) => ({
     formData: { ...state.formData, ...newData }, // Combine old data with new data
@@ -210,7 +213,8 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
       location: { province: '', city: '', suburb: '', customLocation: '' },
       promoteYourAd: { promotionDuration: '' },
     },
-    categoryPreviouslySelected: false, // Reset category selection flag
+    categoryPreviouslySelected: false,
+    resetKey: get().resetKey + 1,
   }),
 
   // Function to move to the next step or submit the form if it’s the last step

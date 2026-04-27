@@ -11,9 +11,16 @@ import { ListingsQueryResult } from "@/sanity.types";
 import ListingCardSkeletons from "./skeletons/ListingCardSkeletons";
 import useBreakpointStore from "@/store/useBreakpointStore";
 
-
 export type ListingsCollageProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   listings: ListingsQueryResult;
   isDeletable: boolean;
   checkedColour?: string;
@@ -35,7 +42,7 @@ type Image = {
 };
 
 const ListingsCollage = ({
-  category,
+  site,
   listings,
   isDeletable,
   checkedColour,
@@ -44,7 +51,7 @@ const ListingsCollage = ({
   isDashboard,
   cardSize,
 }: ListingsCollageProps) => {
-    const { isSmallDesktop, currentScreenSize} = useBreakpointStore();
+  const { isSmallDesktop, currentScreenSize } = useBreakpointStore();
   const [isClient, setIsClient] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -54,7 +61,11 @@ const ListingsCollage = ({
   }, []);
 
   if (!isClient) {
-    return <div className={styles.skeletons}><ListingCardSkeletons/></div>;
+    return (
+      <div className={styles.skeletons}>
+        <ListingCardSkeletons />
+      </div>
+    );
   }
 
   const breakpointColumnsObj = {
@@ -77,12 +88,12 @@ const ListingsCollage = ({
     const aspectRatios = images?.map((image: any) => image.aspectRatio);
 
     return (
-      <div key={listing._id} className={styles.cardContainer} >
+      <div key={listing._id} className={styles.cardContainer}>
         <Link href={`/listings/${slugCurrent}`}>
           <div className={styles.card}>
-            {category === "all" && (
+            {site === "oly" && (
               <ListingCard
-                category={category}
+                site={site}
                 slug={slugCurrent}
                 listing={listing}
                 index={index}
@@ -101,9 +112,9 @@ const ListingsCollage = ({
                 checkedHovered={checkedHovered}
               />
             )}
-            {category === "property" && (
+            {site === "oly-properties" && (
               <ListingCard
-                category={category}
+                site={site}
                 slug={slugCurrent}
                 listing={listing}
                 index={index}
@@ -128,12 +139,9 @@ const ListingsCollage = ({
     );
   });
 
- 
-
-
   return (
     <>
-      {category === "all" && (
+      {site === "oly" && (
         <>
           <Masonry
             className={styles.listingsContainer}
@@ -141,15 +149,15 @@ const ListingsCollage = ({
             columnClassName={styles.listingsContainerColumns}
             style={{
               maxWidth: isDashboard ? "59.625rem" : "95vw",
-              width: isSmallDesktop && currentScreenSize < 1383 ? "62rem" : "1650px",
+              width:
+                isSmallDesktop && currentScreenSize < 1383 ? "62rem" : "1650px",
             }}
           >
             {cards || []}
           </Masonry>
-          
         </>
       )}
-      {category === "property" && (
+      {site === "oly-properties" && (
         <>
           <div
             style={{
@@ -160,7 +168,6 @@ const ListingsCollage = ({
           >
             {cards || []}
           </div>
-          
         </>
       )}
     </>

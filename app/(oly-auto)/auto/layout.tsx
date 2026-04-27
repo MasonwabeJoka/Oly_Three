@@ -1,4 +1,4 @@
-import styles from "../../styles/layout.module.scss";
+import styles from "./../../global-styles/layout.module.scss";
 import localFont from "next/font/local";
 
 import "@uploadthing/react/styles.css";
@@ -28,7 +28,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = await withAuth();
+  const auth = await withAuth();
+  const { accessToken, ...initialAuth } = auth;
   return (
     <html
       lang="en"
@@ -36,7 +37,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className={styles.body}>
-        <LayoutWrapper currentUser={user}>
+        <LayoutWrapper currentUser={auth.user} initialAuth={initialAuth}>
           <div className={styles.wrapper}>
             <div className={styles.main}>
               <main className={styles.children}>

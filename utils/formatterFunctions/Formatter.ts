@@ -22,48 +22,97 @@ export function formatName(name: string): string {
     return name.split(' ').map((n) => n.charAt(0).toUpperCase() + n.slice(1).toLowerCase()).join(' ');
 }
 
-export function formatRelativeTime(input: Date | string, locale: string = 'en-ZA'): string {
 
-      // Check for null or invalid input
-      if (!input) {
+export function formatRelativeTime(input: Date | string | number, locale: string = 'en-ZA'): string {
+
+    // Check for null or invalid input
+    if (!input && input !== 0) {
         console.error('Invalid input to formatRelativeTime:', input);
-        return 'Invalid date'; // or any other default/error message
+        return 'Invalid date';
     }
 
-    // Convert input to a Date object if it's a string
-    const inputDate = typeof input === 'string' ? new Date(input) : input;
+    // Convert input to a Date object
+    const inputDate = typeof input === 'number' ? new Date(input)
+        : typeof input === 'string' ? new Date(input)
+        : input;
 
-      // Additional check if conversion results in an invalid date
-      if (isNaN(inputDate.getTime())) {
+    // Additional check if conversion results in an invalid date
+    if (isNaN(inputDate.getTime())) {
         console.error('Invalid date provided to formatRelativeTime:', input);
-        return 'Invalid date'; // or any other default/error message
+        return 'Invalid date';
     }
 
     const now = new Date();
     const diffInSeconds = (now.getTime() - inputDate.getTime()) / 1000;
+    const diffInDays = Math.floor(diffInSeconds / 86400);
 
-    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+    // Today → show time (e.g., "14:20")
+    if (inputDate.toDateString() === now.toDateString()) {
+        return inputDate.toLocaleTimeString(locale, {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    }
 
-    // Define time intervals in seconds
+    // Yesterday
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (inputDate.toDateString() === yesterday.toDateString()) {
+        return 'Yesterday';
+    }
+
+    // 2-6 days ago → abbreviated day name (Mon, Tue, Wed...)
+    if (diffInDays < 7) {
+        return inputDate.toLocaleDateString(locale, { weekday: 'short' });
+    }
+
+    // 7+ days → relative time (1 week, 2 months, 1 year...)
     const intervals = [
         { label: 'year', seconds: 31536000 },
         { label: 'month', seconds: 2592000 },
         { label: 'week', seconds: 604800 },
-        { label: 'day', seconds: 86400 },
-        { label: 'hour', seconds: 3600 },
-        { label: 'minute', seconds: 60 },
-        { label: 'second', seconds: 1 }
     ];
 
-    for (let i = 0; i < intervals.length; i++) {
-        const interval = intervals[i];
+    for (const interval of intervals) {
         if (diffInSeconds >= interval.seconds) {
             const count = Math.floor(diffInSeconds / interval.seconds);
-            return rtf.format(-count, interval.label as Intl.RelativeTimeFormatUnit);
+            const plural = count === 1 ? '' : 's';
+            return `${count} ${interval.label}${plural}`;
         }
     }
 
-    return 'just now'; // For times less than a second
+    return 'just now';
+}
+
+export function formatTime(input: Date | string | number, locale: string = 'en-ZA'): string {
+    // Check for null or invalid input
+    if (!input && input !== 0) {
+        console.error('Invalid input to formatTime:', input);
+        return 'Invalid date';
+    }
+
+    // Convert input to a Date object
+    const date = typeof input === 'number' ? new Date(input)
+        : typeof input === 'string' ? new Date(input)
+        : input;
+
+    // Additional check if conversion results in an invalid date
+    if (isNaN(date.getTime())) {
+        console.error('Invalid date provided to formatTime:', input);
+        return 'Invalid date';
+    }
+
+    const now = new Date();
+    const isToday = date.toDateString() === now.toDateString();
+
+    if (isToday) {
+        return date.toLocaleTimeString(locale, {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    }
+
+    return date.toLocaleDateString(locale);
 }
 
 export function formatPercentage(value: number, locale: string = 'en-ZA'): string {

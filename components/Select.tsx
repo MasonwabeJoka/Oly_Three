@@ -37,9 +37,11 @@ interface SelectProps {
   onDropdownOpenChange?: (isOpen: boolean) => void;
   onOptionsCountChange?: (count: number) => void;
   disabled?: boolean;
-  autoFocus?: boolean; // ← Added
+  autoFocus?: boolean; 
   showSelectAll?: boolean;
   useRadioButtons?: boolean;
+  overlayDropdown?: boolean;
+  overlayOptionsClass?: string;
 }
 
 const SELECT_COLOUR_TYPE = {
@@ -82,6 +84,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       autoFocus = false,
       showSelectAll = true,
       useRadioButtons = false,
+      overlayDropdown = false,
+      overlayOptionsClass = "",
       ...rest
     },
     refFromForwardRef,
@@ -285,7 +289,10 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     const ariaDescribedBy = [errorId, descriptionId].filter(Boolean).join(" ");
 
     return (
-      <div ref={rootRef} className={styles.container}>
+      <div
+        ref={rootRef}
+        className={`${styles.container} ${overlayDropdown ? styles.overlayDropdown : ""}`}
+      >
         {/* Hidden native select for form accessibility */}
         <ShadcnSelect
           value={isMultiSelect ? undefined : (selected[0] ?? "")}
@@ -396,7 +403,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
         </div>
 
         {isOpen && (
-          <div className={`${styles.searchInputContainer} ${styles.options}`}>
+          <div
+            className={`${styles.searchInputContainer} ${styles.options} ${
+              overlayDropdown ? styles.overlayOptions : ""
+            } ${overlayOptionsClass}`}
+          >
             {isMultiSelect && showSearchOptions && (
               <div className={styles.searchContainer}>
                 <Input

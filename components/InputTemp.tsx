@@ -46,7 +46,6 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onSuggestionCountChange?: (count: number) => void;
 }
 
 const INPUT_TYPE = {
@@ -147,7 +146,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onBlur,
       children,
       dashboard,
-      onSuggestionCountChange,
       ...otherProps
     },
     ref
@@ -202,15 +200,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       if (isMultiSelect) {
         // Initialize revealed suggestions with all suggestions
         setRevealedSuggestions(suggestions || []);
-      } else {
-        onSuggestionCountChange?.(revealedSuggestions.length);
       }
-    }, [
-      suggestions,
-      isMultiSelect,
-      onSuggestionCountChange,
-      revealedSuggestions.length,
-    ]);
+    }, [suggestions, isMultiSelect]);
 
     const applyFilter = (filter: string) => {
       if (filter.trim() === "") {

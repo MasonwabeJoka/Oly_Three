@@ -1,6 +1,6 @@
 "use client";
 import styles from "./DetailsClient.module.scss";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
 import Button from "@/components/Buttons";
@@ -49,6 +49,8 @@ const DetailsClient = ({
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const { setIsSelectOpen } = useIsSelectOpen();
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const specRef = useRef<HTMLDivElement | null>(null);
 
   const {
     register,
@@ -60,6 +62,28 @@ const DetailsClient = ({
 
   const selectDetailValue = watch("details.selectDetail");
   const formDetails = watch("details.list") || [];
+
+  useEffect(() => {
+    if (matchFound && selectDetailValue) {
+      setTimeout(() => {
+        if (bottomRef.current) {
+          const top = bottomRef.current.getBoundingClientRect().top + window.scrollY - 200;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 50);
+    }
+  }, [matchFound, selectDetailValue]);
+
+  useEffect(() => {
+    if (showSpecificationForm) {
+      setTimeout(() => {
+        if (specRef.current) {
+          const top = specRef.current.getBoundingClientRect().top + window.scrollY - 200;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 50);
+    }
+  }, [showSpecificationForm]);
 
   useEffect(() => {
     if (formDetails.length > 0 && details.length === 0) {
@@ -225,7 +249,7 @@ const DetailsClient = ({
                   selectDetailValue === detail.detail &&
                   !isConditionsOpen &&
                   !isDetailsOpen && (
-                    <li key={detail.id} className={styles.detail}>
+                    <li className={styles.detail} key={detail.id}>
                       <SelectedDetail
                         id={detail.id}
                         initialValue="See a list of details you can include"
@@ -247,9 +271,10 @@ const DetailsClient = ({
                         handleSubmit={() => {}}
                       />
                     </li>
-                  )
+                  ),
               )}
             </ul>
+            <div ref={bottomRef} />
             {!isConditionsOpen && !isDetailsOpen && (
               <div className={styles.detailsListContainer}>
                 <ItemsList
@@ -300,6 +325,7 @@ const DetailsClient = ({
 
             {showSpecificationForm && !isConditionsOpen && !isDetailsOpen && (
               <>
+                <div ref={specRef} />
                 <ProductSpecification
                   id="custom-spec"
                   initialValue="Select a product specification to add"

@@ -7,30 +7,30 @@
   background-color: $white-three;
   justify-content: space-between;
   align-items: center;
-  width: rem(700);
-  padding: rem(8) !important;
+  width: rem(600);
+  height: rem(76);
   border-radius: rem(50);
   box-shadow: $shadow-one;
+
 
   cursor: pointer;
 
   .iconContainer {
-    width: rem(75);
+    width: rem(60);
     height: rem(60);
     margin-left: rem(8);
-
     border-radius: 50%;
     background-color: $grey-one;
+
   }
 
   .text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 54%;
+    width: 40%;
     height: inherit;
-    margin-left: rem(48);
-
+   
     .title {
       font-size: $h4;
     }
@@ -39,9 +39,7 @@
   .publishButtonContainer {
     display: flex;
     align-items: center;
-    margin-left: rem(48);
-    margin-right: rem(64);
-
+ 
     .publishButton {
     }
 
@@ -58,7 +56,7 @@
     width: rem(24);
     height: rem(24);
     border-radius: 50%;
-    margin-right: rem(32);
+    margin-right: rem(20);
   }
 }
 

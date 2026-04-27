@@ -1,162 +1,162 @@
-import { create } from 'zustand';
-import { messages as initialMessages } from "@/data/MessagesData";
-export interface Message {
-    id: number;
-    name: string;
-    contactName: string;
-    profilePicture: string;
-    createdAt: string;
-    messages: MessageContent[];
-  }
-  
-  export interface MessageContent {
-    text: string;
-    senderType: "user" | "contact";
-    time: string;
-  }
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { chats as initialChats } from "@/data/MessagesData";
 
-interface MessageState {
-  chats: boolean;
-  selectedChat: Message | null;
-  userMessages: MessageContent[];
-  messages: Message[];
-  isLoading: boolean;
-  isInitialized: boolean;
-  setChats: (value: boolean) => void;
-  setSelectedChat: (chat: Message | null) => void;
-  setUserMessages: (messages: MessageContent[]) => void;
-  setMessages: (messages: Message[]) => void;
-  handleChatClick: (message: Message) => void;
-  handleSendMessage: (text: string) => void;
-  resetLocalStorage: () => void;
-  initializeMessages: () => void;
+export type MessageStatus = "sending" | "delivered" | "seen" | "failed";
+
+export interface MessageContent {
+  id: string;
+  text: string;
+  senderType: "user" | "contact";
+  status: MessageStatus;
+  createdAt: number;
 }
 
-// Helper function to safely access localStorage
-const safeLocalStorage = {
-  getItem: (key: string): string | null => {
-    try {
-      if (typeof window !== 'undefined') {
-        return localStorage.getItem(key);
-      }
-      return null;
-    } catch (error) {
-      console.error(`Error reading from localStorage with key "${key}":`, error);
-      return null;
-    }
-  },
-  setItem: (key: string, value: string): void => {
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(key, value);
-      }
-    } catch (error) {
-      console.error(`Error writing to localStorage with key "${key}":`, error);
-    }
-  },
-  removeItem: (key: string): void => {
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem(key);
-      }
-    } catch (error) {
-      console.error(`Error removing from localStorage with key "${key}":`, error);
-    }
-  },
-};
+export interface Chat {
+  id: number;
+  name: string;
+  contact: {
+    id: string;
+    name: string;
+    avatar: string;
+  };
+  createdAt: number;
+  messages: MessageContent[];
+  opened: boolean;
+}
 
-const useMessageStore = create<MessageState>((set, get) => ({
-  chats: false,
-  selectedChat: null,
-  userMessages: [],
-  messages: [], // Start with empty array, will be populated by initializeMessages
-  isLoading: false,
-  isInitialized: false,
 
-  initializeMessages: () => {
-    if (get().isInitialized) return;
-    
-    set({ isLoading: true });
-    
-    // Simulate loading delay to show spinner (optional)
-    setTimeout(() => {
-      const saved = safeLocalStorage.getItem('messages');
-      const loadedMessages = saved ? JSON.parse(saved) : initialMessages;
-      
-      set({ 
-        messages: loadedMessages, 
-        isLoading: false, 
-        isInitialized: true 
-      });
-    }, 300); // Small delay to show loading state
-  },
 
-  setChats: (value) => set({ chats: value }),
+interface MessageState {
+  selectedChatId: number | null;
+  chats: Chat[];
+  markOpened: (id: number) => void;
+  sendMessage: (text: string, chatId: number) => void;
+  updateMessageStatus: (chatId: number, messageId: string, status: MessageStatus) => void;
+  reset: () => void;
+  isTyping: boolean;
+}
 
-  setSelectedChat: (chat) => set({ selectedChat: chat }),
+const useMessageStore = create<MessageState>()(
+  persist(
+    (set, get) => ({
+      selectedChatId: null,
+      chats: initialChats,
+      isTyping: false,
 
-  setUserMessages: (messages) => set({ userMessages: messages }),
+          markOpened: (id) => {
+        set((state) => ({
+          selectedChatId: id,
+          chats: state.chats.map((chat) =>
+            chat.id === id ? { ...chat, opened: true } : chat
+          ),
+        }));
+      },
 
-  setMessages: (messages) => {
-    set({ messages });
-    safeLocalStorage.setItem('messages', JSON.stringify(messages));
-  },
+      updateMessageStatus: (chatId: number, messageId: string, status: MessageStatus) => {
+        set((state) => ({
+          chats: state.chats.map((chat) =>
+            chat.id === chatId
+              ? {
+                  ...chat,
+                  messages: chat.messages.map((msg) =>
+                    msg.id === messageId ? { ...msg, status } : msg
+                  ),
+                }
+              : chat
+          ),
+        }));
+      },
 
-  handleChatClick: (message) => {
-    set({
-      selectedChat: message,
-      chats: true,
-    });
-    const savedUserMessages = safeLocalStorage.getItem(`userMessages_${message.id}`);
-    try {
-      set({
-        userMessages: savedUserMessages ? JSON.parse(savedUserMessages) : [],
-      });
-    } catch (error) {
-      console.error('Error parsing user messages:', error);
-      set({ userMessages: [] });
-    }
-  },
+      sendMessage: (text, chatId) => {
+        if (!text.trim()) return;
 
-  handleSendMessage: (text) => {
-    const { selectedChat, userMessages, messages } = get();
-    if (text.trim() && selectedChat) {
+        const { chats } = get();
+        if (!chatId) return;
+
       const newMessage: MessageContent = {
+        id: crypto.randomUUID(),
         text,
-        senderType: 'user',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        senderType: "user",
+        status: "sending",
+        createdAt: Date.now(),
       };
-      const updatedUserMessages = [...userMessages, newMessage];
-      set({ userMessages: updatedUserMessages });
-      safeLocalStorage.setItem(`userMessages_${selectedChat.id}`, JSON.stringify(updatedUserMessages));
 
-      const updatedMessages = messages.map((msg) =>
-        msg.id === selectedChat.id
+      const updatedMessages  = chats.map((chat) =>
+        chat.id === chatId
           ? {
-              ...msg,
-              messages: [...msg.messages, newMessage],
-              createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              ...chat,
+              messages: [...chat.messages, newMessage],
             }
-          : msg
+          : chat
       );
-      
-      set({ messages: updatedMessages });
-      safeLocalStorage.setItem('messages', JSON.stringify(updatedMessages));
-    }
-  },
 
-  resetLocalStorage: () => {
-    safeLocalStorage.removeItem('messages');
-    const { messages } = get();
-    messages.forEach((msg) => safeLocalStorage.removeItem(`userMessages_${msg.id}`));
-    set({
-      messages: initialMessages,
-      userMessages: [],
-      selectedChat: null,
-      chats: false,
-      isInitialized: false,
-    });
-  },
-}));
+      set({ chats: updatedMessages  });
+
+      // 👇 simulate message status progression: sending → sent → delivered → seen
+      setTimeout(() => {
+        get().updateMessageStatus(chatId, newMessage.id, "sending");
+      }, 200);
+
+      setTimeout(() => {
+        get().updateMessageStatus(chatId, newMessage.id, "delivered");
+      }, 400);
+
+      setTimeout(() => {
+        get().updateMessageStatus(chatId, newMessage.id, "seen");
+      }, 600);
+
+      set({ isTyping: true })
+
+        // 👇 simulate reply (mock backend)
+        setTimeout(() => {
+          const reply: MessageContent = {
+            id: crypto.randomUUID(),
+            text: "Got it 👍",
+            senderType: "contact",
+            status: "delivered",
+            createdAt: Date.now(),
+          };
+
+          set((state) => ({
+            chats: state.chats.map((chat) =>
+              chat.id === chatId 
+                ? {
+                    ...chat,
+                    messages: [...chat.messages, reply],
+                  }
+                : chat
+            ),
+            isTyping: false,
+          }));
+        }, 1000);
+
+
+      },
+
+      reset: () =>
+        set({
+          chats: initialChats,
+          selectedChatId: null,
+          isTyping: false,
+        }),
+    }),
+    {
+      name: "message-storage", // 👈 localStorage key
+
+      // 👇 OPTIONAL but recommended
+      
+      partialize: (state) => ({
+        chats: state.chats,
+        selectedChatId: state.selectedChatId,
+      }),
+    }
+  )
+);
 
 export default useMessageStore;
+
+// 🔧 DEV ONLY: Reset persisted state on page load
+if (typeof window !== "undefined") {
+  localStorage.removeItem("message-storage");
+}

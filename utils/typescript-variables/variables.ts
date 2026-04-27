@@ -45,6 +45,7 @@ export const variables = {
   h4: 18,
   small: "rem(14)",
   tiny: "rem(12)",
+  extraTiny: "rem(10)",
   minMobile: 320,
   maxMobile: 767,
   minTablet: 768,

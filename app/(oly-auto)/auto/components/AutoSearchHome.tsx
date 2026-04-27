@@ -10,10 +10,13 @@ import { z } from "zod";
 import Select from "../../../../components/Select";
 import NumberInput from "../../../../components/NumberInput";
 import Link from "next/link";
+import { useState } from "react";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
 const AutoSearchHome = () => {
+  const [isVehicleTypeOpen, setIsVehicleTypeOpen] = useState(false);
+
   const {
     formState: { errors, isSubmitting },
     control,
@@ -27,7 +30,11 @@ const AutoSearchHome = () => {
 
   return (
     <>
-      <div className={styles.searchFields}>
+      <div
+        className={`${styles.searchFields} ${
+          isVehicleTypeOpen ? styles.hideFieldsBelowVehicleType : ""
+        }`}
+      >
         <Link
           href="/dashboard/create-listing"
           className={`${styles.link} ${styles.field}`}
@@ -46,7 +53,11 @@ const AutoSearchHome = () => {
           />
         </Link>
 
-        <div className={`${styles.vehicleType} ${styles.field}`}>
+        <div
+          className={`${styles.vehicleType} ${styles.field} ${
+            isVehicleTypeOpen ? styles.dropdownOpen : ""
+          }`}
+        >
           {/* <p className={styles.errorMessage}>{errors.searchTerm?.message}</p> */}
           <Controller
             name="categories"
@@ -58,18 +69,19 @@ const AutoSearchHome = () => {
                   "Motorcycles",
                   "Farm & Construction Vehicles",
                   "Buses",
+               
                 ]}
                 initialValue="Select Vehicle Type"
                 selectSize="large"
-                label="Property Type"
+                label="Type"
                 id="propertyType"
                 name="propertyType"
                 ariaLabel="Property Type Selector"
                 autoFocus={false}
                 required={false}
-                //   onDropdownOpenChange={(isOpen) => {
-                //     setIsPropertyTypeSelect(isOpen);
-                //   }}
+                overlayDropdown
+                overlayOptionsClass={styles.vehicleTypeOverlay}
+                onDropdownOpenChange={setIsVehicleTypeOpen}
               />
             )}
           />

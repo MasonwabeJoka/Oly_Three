@@ -1,0 +1,50 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .buyRentContainer {
+    margin-bottom: rem(20);
+  }
+
+  .dropdownOpen {
+    position: relative;
+    z-index: 20;
+  }
+
+  .buyRentOverlay {
+  }
+
+  .searchLocationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(20);
+    .breadcrumbs {
+      margin-bottom: rem(8);
+    }
+
+    .searchLocation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .moreFiltersButtonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(20);
+  }
+}
+
+.hideBelowBuyRent {
+  .buyRentContainer ~ * {
+    visibility: hidden;
+  }
+}

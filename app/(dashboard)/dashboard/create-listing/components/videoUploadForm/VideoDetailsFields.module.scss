@@ -1,0 +1,41 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+ .detailsContainer {
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+
+    .videoTitleContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+       margin-bottom: rem(20);
+      .errorMessage {
+        margin-bottom: rem(8);
+        color: $danger;
+      }
+      .videoTitle {
+        width: rem(540);
+      }
+    }
+
+    .descriptionContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: rem(48);
+       margin-bottom: rem(20);
+      .errorMessage {
+        margin-bottom: rem(8);
+        color: $danger;
+      }
+      .description {
+        width: rem(540);
+        
+      }
+    }
+  }

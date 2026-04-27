@@ -3,17 +3,17 @@ import Image from "@/components/Image";
 import styles from "./HeroSection.module.scss";
 import HeroSectionFields from "./HeroSectionFields";
 import ShopsHeroSectionFields from "@/app/(oly-shops)/oly-shops/components/ShopsHeroSectionFields";
-import PropertiesHeroSectionFields from "@/app/(oly-properties)/properties/components/PropertiesHeroSectionFields";
+import PropertiesHeroSectionFields from "@/app/(oly-properties)/property/components/PropertiesHeroSectionFields";
 import AutoHeroSectionFields from "../app/(oly-auto)/auto/components/AutoHeroSectionFields";
 import useBreakpointStore from "@/store/useBreakpointStore";
 import { variables } from "@/utils/typescript-variables/variables";
 
 interface HeroSectionProps {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services" | "oly-shops";
   mainTitle?: string;
 }
 
-const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
+const HeroSection = ({ site, mainTitle }: HeroSectionProps) => {
   const { isLargeDesktop, isSmallDesktop, isTablet, currentScreenSize} = useBreakpointStore();
   return (
     <>
@@ -27,10 +27,10 @@ const HeroSection = ({ category, mainTitle }: HeroSectionProps) => {
           <h1 style={{fontSize: isLargeDesktop && (currentScreenSize < 1590 && currentScreenSize === variables.minLargeDesktop) ? "2.625rem" : "3rem"}}>{mainTitle}</h1>
         </div>
         <div className={styles.HeroSectionFieldsContainer}>
-          {category === "all" && <HeroSectionFields />}
-          {category === "property" && <PropertiesHeroSectionFields />}
-          {category === "vehicles" && <AutoHeroSectionFields />}
-          {category === "shops" && <ShopsHeroSectionFields />}
+          {site === "oly" && <HeroSectionFields />}
+          {site === "oly-properties" && <PropertiesHeroSectionFields />}
+          {site === "oly-auto" && <AutoHeroSectionFields />}
+          {site === "oly-shops" && <ShopsHeroSectionFields />}
         </div>
       </div>
     </>

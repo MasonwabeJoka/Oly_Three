@@ -28,13 +28,17 @@
 
     .mainSectionWrapper {
       margin-top: rem(96);
-      margin-bottom: rem(360);
-      width: 100%;
+      margin-bottom: rem(240);
+      width: 96%;
     }
   }
 
-  .bottomSection {
+  .textInputContainer {
     position: fixed;
     bottom: rem(56);
     
+    .textInputBar {
+      width: rem(600);
+      
+    }
   }

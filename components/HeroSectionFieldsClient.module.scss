@@ -16,6 +16,17 @@
   .categoriesContainer {
   }
 
+  .dropdownOpen {
+    position: relative;
+    z-index: 20;
+  }
+
+  .searchTermOverlay {
+  }
+
+  .searchLocationOverlay {
+  }
+
   .searchTerm {
     display: flex;
     flex-direction: column;
@@ -38,6 +49,18 @@
 
   .errorMessage {
     color: $danger;
+  }
+}
+
+.hideBelowSearchTerm {
+  .searchTerm ~ * {
+    visibility: hidden;
+  }
+}
+
+.hideBelowLocation {
+  .searchLocation ~ * {
+    visibility: hidden;
   }
 }
 

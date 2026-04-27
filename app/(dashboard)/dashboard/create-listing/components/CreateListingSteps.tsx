@@ -12,6 +12,7 @@ import { useIsAuctionStore } from "../store/useIsAuction";
 import FormProgressBar from "./FormProgressBar";
 import { FormData, CreateListingStepsProps, StepType, SiteType } from "../types/listing.types";
 import { getStepDefinitions } from "../config/stepDefinitions";
+import { useAuth } from "@workos-inc/authkit-nextjs/components";
 
 export type { FormData };
 
@@ -20,6 +21,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
   currentStep,
 }) => {
   const router = useRouter();
+  const { user } = useAuth();
   const { isAuction } = useIsAuctionStore();
   const [isClient, setIsClient] = useState(false);
 
@@ -37,7 +39,8 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
   const handleNext = async () => {
     if (!site || step === null) return;
     const currentFields = steps[site][step!].fields;
-    const isValid = await methods.trigger(currentFields);
+    const isValid =
+      currentFields.length > 0 ? await methods.trigger(currentFields) : true;
     if (isValid && step! < steps[site].length - 1) {
       const nextStep = step! + 1;
       router.push(
@@ -48,7 +51,10 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
     }
   };
 
-  const steps = useMemo(() => getStepDefinitions(isAuction, handleNext), [isAuction]);
+  const steps = useMemo(
+    () => getStepDefinitions(isAuction, handleNext, user),
+    [isAuction, user, handleNext]
+  );
 
   const stepPaths: Record<SiteType, string[]> = {
     oly: steps.oly.map((step) => step.path),
@@ -101,6 +107,17 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
       router.push("/dashboard/create-listing/");
     }
   };
+
+  useEffect(() => {
+    if (step !== 1 || !site) return;
+    // Push a dummy entry so the browser has something to pop before reaching step 0
+    window.history.pushState(null, "", window.location.href);
+    const handlePopState = () => {
+      router.push(`/dashboard/create-listing/${site}/select-new-category`);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [step, site, router]);
 
   const goTo = (path: string) => {
     if (!site) return;

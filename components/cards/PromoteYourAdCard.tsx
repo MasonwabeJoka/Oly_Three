@@ -98,7 +98,9 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
           </div>
 
           <div
-            className={styles.setPromotionDurationContainer}
+            className={`${styles.setPromotionDurationContainer} ${
+              isDurationSelectOpen ? styles.dropdownOpen : ""
+            }`}
             style={{ marginBottom: "1rem" }}
           >
             <Select
@@ -118,6 +120,8 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={(errors as any).promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
+              overlayDropdown
+              overlayOptionsClass={styles.durationOverlay}
               onDropdownOpenChange={(isOpen: any) =>
                 setIsDurationSelectOpen(isOpen)
               }
@@ -181,12 +185,20 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
             width={64}
             height={64}
           />
-          <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p>
+          <p className={styles.title}>{title}</p>
         </div>
-        <div className={styles.formControls}>
+        <div
+          className={`${styles.formControls} ${
+            isDurationSelectOpen ? styles.hideBelowDuration : ""
+          }`}
+        >
           {/* <p className={styles.title}>{isDurationSelectOpen ? "" : title}</p> */}
 
-          <div className={styles.setPromotionDurationContainer}>
+          <div
+            className={`${styles.setPromotionDurationContainer} ${
+              isDurationSelectOpen ? styles.dropdownOpen : ""
+            }`}
+          >
             <Select
               options={options()}
               initialValue={selectedDuration}
@@ -203,26 +215,26 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               error={(errors as any).promotionDuration?.message as string}
               {...register("promoteYourAd.promotionDuration")}
               onChange={handleSelectChange}
+              overlayDropdown
+              overlayOptionsClass={styles.durationOverlay}
               onDropdownOpenChange={(isOpen: any) =>
                 setIsDurationSelectOpen(isOpen)
               }
             />
           </div>
 
-          {!isDurationSelectOpen && (
-            <Button
-              className={styles.moreInfoButton}
-              buttonChildren="More Info"
-              buttonType="normal"
-              buttonSize="medium"
-              name="more-info-btn"
-              type="button"
-              ariaLabel="More Info Button"
-              autoFocus={false}
-              disabled={false}
-              dashboard={isDashboard}
-            />
-          )}
+          <Button
+            className={styles.moreInfoButton}
+            buttonChildren="More Info"
+            buttonType="normal"
+            buttonSize="medium"
+            name="more-info-btn"
+            type="button"
+            ariaLabel="More Info Button"
+            autoFocus={false}
+            disabled={false}
+            dashboard={isDashboard}
+          />
         </div>
 
         <div className={styles.priceContainer}>

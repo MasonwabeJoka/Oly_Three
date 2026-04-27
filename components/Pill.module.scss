@@ -7,10 +7,12 @@
   justify-content: center;
   align-items: center;
   gap: rem(6);
-  font-size: $small;
+  font-size: $extra-tiny;
+  letter-spacing: rem(0.3 );
   width: fit-content;
   height: fit-content;
   border-radius: rem(40);
+  border: rem(1) solid $grey-one;
 
   .cancelButton {
     display: flex;

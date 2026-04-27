@@ -224,7 +224,7 @@ export const FormWrapper = ({
             <Button
               className={styles.proceedButton}
               buttonChildren={topText}
-              buttonType={currentStepIndex === 5 ? "normal" : "primary"}
+              buttonType={pathname.includes("upload-photos") || pathname.includes("upload-videos") ? "normal" : "primary"}
               buttonSize="large"
               name="proceed-btn"
               type="button"

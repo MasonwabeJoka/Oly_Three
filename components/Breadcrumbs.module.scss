@@ -2,9 +2,11 @@
 @use "@/utils/functions" as *;
 
 .breadcrumbs {
-  color: $grey-two;
+  color: $grey-four;
   width: fit-content;
-  font-size: $tiny;
+  font-size: rem(9);
+  text-transform: uppercase;
+  letter-spacing: rem(0.5);
 
   li {
     display: inline;

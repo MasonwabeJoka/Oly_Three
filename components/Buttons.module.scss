@@ -2,6 +2,9 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $normal;
   border: none;
   color: #10d3ff;
@@ -17,7 +20,7 @@
 .largeButton {
   width: rem(311);
   height: rem(56);
-
+  
   @include only(largeDesktop) {
     width: rem(514);
     height: rem(56);

@@ -1,9 +1,7 @@
 "use client";
 import styles from "./CategoriesClient.module.scss";
 import Link from "next/link";
-import { useResponsive } from "@/store/useResponsive";
 import MobileSubcategories from "@/components/MobileSubcategories";
-import useSidebarStore from "@/store/useSidebarStore";
 import { useModalStore } from "@/store/modalStore";
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "@/store/useBreakpointStore";

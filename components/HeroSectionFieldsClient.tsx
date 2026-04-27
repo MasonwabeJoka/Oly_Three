@@ -20,8 +20,8 @@ interface Props {
 }
 
 const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
-  const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
-  const [locationSuggestions, setLocationSuggestions] = useState(0);
+  const [isSearchTermOpen, setIsSearchTermOpen] = useState(false);
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
   const setShowCategoriesModal = useModalStore(
     (state) => state.setShowCategoriesModal,
   );
@@ -38,7 +38,15 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
   const { pending } = useFormStatus() || { pending: isSubmitting };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        isSearchTermOpen
+          ? styles.hideBelowSearchTerm
+          : isLocationOpen
+            ? styles.hideBelowLocation
+            : ""
+      }`}
+    >
       <Link href="/dashboard/create-listing" className={styles.link}>
         <Button
           buttonChildren="Create A Listing"
@@ -70,7 +78,11 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
    
       
 
-        <div className={styles.searchTerm}>
+        <div
+          className={`${styles.searchTerm} ${
+            isSearchTermOpen ? styles.dropdownOpen : ""
+          }`}
+        >
           <p className={styles.errorMessage}>
             {(errors.searchTerm as any)?.message}
           </p>
@@ -96,63 +108,63 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
                 ariaLabel="Search Term"
                 autoComplete="off"
                 required={false}
-                onSuggestionCountChange={(value: any) =>
-                  setSearchTermSuggestions(value)
-                }
+                overlayDropdown
+                overlaySuggestionsClass={styles.searchTermOverlay}
+                onDropdownOpenChange={setIsSearchTermOpen}
               />
             )}
           />
         </div>
-        {searchTermSuggestions === 0 && (
-          <div className={styles.searchLocation}>
-            <p className={styles.errorMessage}>
-              {(errors.locationSearch as any)?.message}
-            </p>
-            <Controller
-              name="locationSearch"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  isSearchBar={true}
-                  suggestions={suggestions}
-                  className={styles.searchLocationInput}
-                  inputType="text"
-                  inputSize="large"
-                  iconSrcRight="/icons/search.png"
-                  iconPosition="right"
-                  iconWidth={32}
-                  iconHeight={32}
-                  label="Location"
-                  placeholder="Search by city, province, town..."
-                  id="locationSearch"
-                  error={errors.locationSearch?.message}
-                  ariaLabel="Location"
-                  autoComplete="off"
-                  required
-                  onSuggestionCountChange={(count: any) =>
-                    setLocationSuggestions(count)
-                  }
-                />
-              )}
-            />
-          </div>
-        )}
-        {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-          <div className={styles.searchButton}>
-            <Button
-              buttonChildren="Search"
-              className={styles.search}
-              buttonType="normal"
-              buttonSize="large"
-              name="Search Button"
-              type="submit"
-              ariaLabel="Search Button"
-              autoFocus={false}
-              disabled={pending} // Disables during submission
-            />
-          </div>
-        )}
+        <div
+          className={`${styles.searchLocation} ${
+            isLocationOpen ? styles.dropdownOpen : ""
+          }`}
+        >
+          <p className={styles.errorMessage}>
+            {(errors.locationSearch as any)?.message}
+          </p>
+          <Controller
+            name="locationSearch"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                isSearchBar={true}
+                suggestions={suggestions}
+                className={styles.searchLocationInput}
+                inputType="text"
+                inputSize="large"
+                iconSrcRight="/icons/search.png"
+                iconPosition="right"
+                iconWidth={32}
+                iconHeight={32}
+                label="Location"
+                placeholder="Search by city, province, town..."
+                id="locationSearch"
+                error={errors.locationSearch?.message}
+                ariaLabel="Location"
+                autoComplete="off"
+                required
+                overlayDropdown
+                overlaySuggestionsClass={styles.searchLocationOverlay}
+                onDropdownOpenChange={setIsLocationOpen}
+              />
+            )}
+          />
+        </div>
+        <div className={styles.searchButton}>
+          <Button
+            buttonChildren="Search"
+            className={styles.search}
+            buttonType="normal"
+            buttonSize="large"
+            name="Search Button"
+            type="submit"
+            ariaLabel="Search Button"
+            autoFocus={false}
+            disabled={pending}
+          />
+        </div>
       
     </div>
   );

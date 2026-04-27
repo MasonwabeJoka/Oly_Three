@@ -184,10 +184,16 @@ export const olyPropertiesResultsToolbar = [
   },
   {
     id: "03",
-    label: "Map",
+    label: "More Filters",
     values: ["List View", "Map View"],
     default: "List View",
   },
+  // {
+  //   id: "03",
+  //   label: "Map",
+  //   values: ["List View", "Map View"],
+  //   default: "List View",
+  // },
   {
     id: "04",
     label: "View",

@@ -77,7 +77,7 @@ const Home = async ({
               }
             >
               <HeroSection
-                category="all"
+                site="oly"
                 mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
         modern marketplace. The future of classifieds."
               />
@@ -152,7 +152,7 @@ const Home = async ({
                 </div>
               }
             >
-              <FeaturedListings category="all" currentPage={currentPage} />
+              <FeaturedListings site="oly" currentPage={currentPage} />
             </Suspense>
           </section>
         )}

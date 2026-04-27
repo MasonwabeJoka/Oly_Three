@@ -7,6 +7,7 @@ import "swiper/css/scrollbar";
 import styles from "./SubcategoryCarousel.module.scss";
 import NavButtons from "@/components/NavButtons";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Subcategory = { id: number; name: string };
 interface SubcategoryCarouselProps {
@@ -14,6 +15,8 @@ interface SubcategoryCarouselProps {
 }
 
 const SubcategoryCarousel = ({ subcategories }: SubcategoryCarouselProps) => {
+  const pathname = usePathname();
+  const site = pathname.split('/')[3] || 'oly';
   const itemsPerColumn = 4;
   // create columns array of arrays (length = columns), some may be empty
   const columnsArr: Subcategory[][] = [];
@@ -46,7 +49,7 @@ const SubcategoryCarousel = ({ subcategories }: SubcategoryCarouselProps) => {
                 {column.map((subcategory) => (
                   <li key={subcategory.id} className={styles.subcategory}>
                     <Link
-                      href="/dashboard/create-listing/oly/title-and-description"
+                      href={`/dashboard/create-listing/${site}/title-and-description`}
                       className={styles.subcategoryLink}
                     >
                       {subcategory.name}

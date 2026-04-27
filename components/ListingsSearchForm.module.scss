@@ -14,6 +14,14 @@
       margin-bottom: rem(20);
     }
 
+    .dropdownOpen {
+      position: relative;
+      z-index: 20;
+    }
+
+    .categoriesOverlay {
+    }
+
     .breadcrumbs {
       margin-bottom: rem(8);
     }
@@ -72,5 +80,11 @@
 
   .searchButton {
     margin-bottom: rem(20);
+  }
+}
+
+.hideBelowCategories {
+  .categories ~ * {
+    visibility: hidden;
   }
 }

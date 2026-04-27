@@ -1,0 +1,34 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: rem(772);
+    margin-top: rem(48);
+    .priceSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+       margin-bottom: rem(56);
+    }
+
+    .buttonsContainer {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: rem(56);
+    }
+  }
+}
+.chatContainer {
+  width: 100%;
+  height: 100vh;
+}

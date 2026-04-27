@@ -92,9 +92,12 @@
 
       .category {
         color: $danger;
+        font-size: $tiny;
         font-weight: 500;
-        font-size: $h4;
-        margin-bottom: rem(32);
+        letter-spacing: rem(1.05);
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: rem(20);
       }
 
       .subcategoryContainer {
@@ -112,6 +115,7 @@
           padding-left: rem(18);
           margin: rem(2);
           line-height: 1.7;
+          font-size: $small;
         }
       }
       .subcategoryContainer:hover {

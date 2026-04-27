@@ -26,13 +26,24 @@
     font-weight: 500;
     font-size: $h4;
   }
-
+  .descriptionContainer {
+    margin-bottom: rem(48);
+width: 70%;
+    .description {
+      text-align: center;
+      padding: 0 rem(120);
+      margin-bottom: rem(16);
+    }
+  }
   .reviewSectionContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 108%;
+    padding: rem(48) rem(64);
+    border-radius: rem(40);
     margin-bottom: rem(64);
+    background: rgba(255, 255, 255, 0.253);
     .descriptionContainer {
       margin-bottom: rem(64);
 

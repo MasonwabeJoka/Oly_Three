@@ -17,10 +17,16 @@ interface Props {
 }
 
 const ReviewAndSubmit = ({ onNext }: Props) => {
- 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Review Your Listing</h2>
+      <div className={styles.descriptionContainer}>
+        <p className={styles.description}>
+          Your listing is ready to go live. Please review all the details you’ve
+          entered, and when you’re ready, click “Continue”
+        </p>
+   
+      </div>
       <div className={styles.reviewSectionContainer}>
         <div className={styles.reviewSection}>
           <div className={styles.section}>

@@ -10,38 +10,43 @@ import Navbar from "@/components/layouts/Navbar";
 import ExitButton from "@/components/ExitButton";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { AuthKitProvider } from "@workos-inc/authkit-nextjs/components";
 interface CheckoutLayoutWrapperProps {
   children: React.ReactNode;
   className?: string;
   currentUser?: any;
+  initialAuth?: any;
 }
 
 const CheckoutLayoutWrapper = ({
   children,
   className,
+  initialAuth,
 }: CheckoutLayoutWrapperProps) => {
   const [queryClient] = useState(() => new QueryClient());
     const params = useParams<{slug: string}>();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ImageKitProvider
-        urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
-      >
-        <Link href={`/listings/${params.slug}`} className={styles.nav}>
-          <Navbar rightButton={<ExitButton />} homeButton={false} />
-        </Link>
-        <div className={`${styles.container} ${className}`}>
-          <div className={styles.form}>
-            <div className={styles.sellerDetails}>
-              <SellerDetails />
+    <AuthKitProvider initialAuth={initialAuth}>
+      <QueryClientProvider client={queryClient}>
+        <ImageKitProvider
+          urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
+        >
+          <Link href={`/listings/${params.slug}`} className={styles.nav}>
+            <Navbar rightButton={<ExitButton />} homeButton={false} />
+          </Link>
+          <div className={`${styles.container} ${className}`}>
+            <div className={styles.form}>
+              <div className={styles.sellerDetails}>
+                <SellerDetails />
+              </div>
+              <div className={styles.content}>{children}</div>
             </div>
-            <div className={styles.content}>{children}</div>
           </div>
-        </div>
-      </ImageKitProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+        </ImageKitProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </AuthKitProvider>
   );
 };
 

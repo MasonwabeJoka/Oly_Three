@@ -8,6 +8,9 @@
   outline: rem(4) solid $white-one;
 
   .skeleton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: $grey-one;
     border-radius: 50%;
     outline: rem(4) solid $white-one;

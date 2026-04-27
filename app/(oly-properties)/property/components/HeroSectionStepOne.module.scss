@@ -1,0 +1,65 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+  .logo {
+    margin-top: rem(212);
+    margin-bottom: rem(32);
+
+    @include only(largeDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+    @include only(smallDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+    @include only(tablet) {
+      width: rem(120);
+      height: "auto";
+    }
+
+    @include only(extraLargeDesktop) {
+      width: rem(120);
+      height: "auto";
+    }
+  }
+
+  .propertyTypeSelectContainer {
+    // styles specific to property type select if any
+  }
+
+  .buyRentContainer {
+    .buyRent {
+      // specific overrides if needed
+    }
+  }
+
+  .dropdownOpen {
+    position: relative;
+    z-index: 20;
+  }
+
+  .buyRentOverlay {
+  }
+
+  .locationOverlay {
+  }
+}
+
+.hideBelowBuyRent {
+  .byRentContainer ~ * {
+    visibility: hidden;
+  }
+}
+
+.hideBelowLocation {
+  .searchLocation ~ * {
+    visibility: hidden;
+  }
+}

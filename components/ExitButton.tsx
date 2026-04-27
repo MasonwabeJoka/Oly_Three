@@ -8,7 +8,7 @@ const ExitButton = () => {
       className={styles.container}
       role="button"
       tabIndex={0}
-      aria-label="Close chat"
+      aria-label="Exit"
       onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -16,7 +16,7 @@ const ExitButton = () => {
         }
       }}
     >
-      <Icon src="/icons/x.png" alt="Close chat icon" width={16} height={16} />
+      <Icon src="/icons/x.png" alt="Exit" width={16} height={16} />
     </div>
   );
 };

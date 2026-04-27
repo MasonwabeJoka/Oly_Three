@@ -24,7 +24,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const {user} = await withAuth()
+  const auth = await withAuth();
+  const { accessToken, ...initialAuth } = auth;
   return (
     <html
       lang="en"
@@ -33,7 +34,8 @@ export default async function RootLayout({
     >
       <body className={`${outfit.variable} ${styles.body}`}>
         <ListingsLayoutWrapper
-          currentUser={user}
+          currentUser={auth.user}
+          initialAuth={initialAuth}
         >
           <div className={styles.wrapper}>
             <div className={styles.main}>

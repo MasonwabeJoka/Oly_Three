@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import styles from "./Step.module.scss";
 import Button from "@/components/Buttons";
-import useIsSelectOpen from "../store/useIsSelectOpen";
 import useEditStore from "../store/useEditStore";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -40,7 +39,7 @@ const Step: React.FC<StepProps> = ({
     }
   }, [isEditFromUrl, isEditMode, setIsEditMode]);
 
-  const handleAcceptChanges = () => {
+  const handleBackToReview = () => {
     const pathParts = window.location.pathname.split('/');
     const site = pathParts[3];
     setIsEditMode(false);
@@ -53,10 +52,10 @@ const Step: React.FC<StepProps> = ({
     proceedButtonText = "Accept Changes";
   } else {
     switch (step.path) {
-      case "review-listing":
-        proceedButtonText = "Review Listing";
-        break;
       case "review-and-submit":
+        proceedButtonText = "Looks Good, Continue";
+        break;
+      case "create-account":
         proceedButtonText = "Publish My Listing";
         break;
       default:
@@ -65,42 +64,36 @@ const Step: React.FC<StepProps> = ({
     }
   }
 
-  let backButtonText = "";
-  if (effectiveEditMode) {
-    backButtonText = "Cancel";
-  } else {
-    switch (step.path) {
-      case "review-listing":
-        backButtonText = "Publish Immediately";
-        break;
-      default:
-        backButtonText = "Back";
-        break;
-    }
-  }
+  const backButtonText = effectiveEditMode ? "Cancel" : "Back";
+  const isUpdateProfileStep = step.path === "update-profile";
 
   return (
     <div className={styles.container}>
       <div className={styles.formWrapper}>
         <div className={styles.content}>{step.content}</div>
-      
-          <div className={styles.buttonsContainer}>
 
-         
+        <div className={styles.buttonsContainer}>
           <div className={styles.buttons}>
             {(!isFirstStep || effectiveEditMode) && (
               <Button
                 className={styles.proceedButton}
                 buttonChildren={proceedButtonText}
-                buttonType="primary"
+                buttonType={step.path === "create-account" ? "success" : "primary"}
                 buttonSize="large"
                 name="proceed-btn"
-                type="button"
+                type={isUpdateProfileStep ? "submit" : "button"}
                 ariaLabel="Proceed Button"
                 autoFocus={false}
                 disabled={false}
                 dashboard
-                onClick={effectiveEditMode ? handleAcceptChanges : onNext}
+                form={isUpdateProfileStep ? "update-profile-form" : undefined}
+                onClick={
+                  isUpdateProfileStep
+                    ? undefined
+                    : effectiveEditMode
+                    ? handleBackToReview
+                    : onNext
+                }
               />
             )}
             {(!isFirstStep || effectiveEditMode) && (
@@ -115,13 +108,11 @@ const Step: React.FC<StepProps> = ({
                 autoFocus={false}
                 disabled={false}
                 dashboard
-                onClick={effectiveEditMode ? handleAcceptChanges : onBack}
+                onClick={effectiveEditMode ? handleBackToReview : onBack}
               />
             )}
           </div>
-          </div>
-        
-        
+        </div>
       </div>
     </div>
   );

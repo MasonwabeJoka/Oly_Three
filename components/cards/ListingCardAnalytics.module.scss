@@ -29,11 +29,20 @@
 
     .whiteOne {
       background-color: $white-one;
-      font-size: $small;
+      
     }
     .whiteTwo {
       background-color: $white-three;
-      font-size: $small;
+      
+    }
+
+    .label {
+      font-size: rem(10);
+      text-transform: uppercase;
+    }
+
+    .value {
+font-size: $tiny;
     }
   }
 }

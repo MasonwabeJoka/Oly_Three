@@ -1,3 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+
+ .video {
+      margin-bottom: rem(20);
+    }

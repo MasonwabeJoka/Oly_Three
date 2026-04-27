@@ -8,16 +8,14 @@ import Select from "@/components/Select";
 import Button from "@/components/Buttons";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./ListingsSearchForm.module.scss";
-import Form from "next/form";
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { suggestions } from "@/data/SuggestionsData";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
 interface ListingsSearchFormProps {
-  searchTerm: string;
-  locationSearch: string;
+  searchTerm?: string;
+  locationSearch?: string;
   categories: string;
 }
 
@@ -42,8 +40,16 @@ export default function ListingsSearchForm({
 
   return (
     <div className={styles.searchContainer}>
-      <div className={styles.search}>
-        <div className={styles.categories}>
+      <div
+        className={`${styles.search} ${
+          isCategoriesOpen ? styles.hideBelowCategories : ""
+        }`}
+      >
+        <div
+          className={`${styles.categories} ${
+            isCategoriesOpen ? styles.dropdownOpen : ""
+          }`}
+        >
           <p className={styles.errorMessage}>
             {(errors.categories as any)?.message}
           </p>
@@ -75,6 +81,8 @@ export default function ListingsSearchForm({
                 autoFocus={false}
                 required={false}
                 error={errors.categories?.message}
+                overlayDropdown
+                overlayOptionsClass={styles.categoriesOverlay}
                 onDropdownOpenChange={(isOpen: any) =>
                   setIsCategoriesOpen(isOpen)
                 }
@@ -83,113 +91,107 @@ export default function ListingsSearchForm({
           />
         </div>
 
-        {!isCategoriesOpen && (
-          <div className={styles.searchTerm}>
-            <p className={styles.errorMessage}>
-              {(errors.searchTerm as any)?.message}
-            </p>
-            <div
-              className={`${styles.breadcrumbs} ${styles.searchTermBreadcrumbs}`}
-            >
-              <Breadcrumbs
-                homeBreadcrumb={{ id: 1, name: "All Categories", href: "#" }}
-                firstBreadcrumb={{
-                  id: 2,
-                  name: "Electronics & Computers",
-                  href: "#",
-                }}
-                searchResult={{ id: 3, name: "Computer", href: "#" }}
-              />
-            </div>
-            <div className={styles.searchTermInputContainer}>
-              <Controller
-                name="searchTerm"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    className={styles.searchTermInput}
-                    isSearchBar={true}
-                    suggestions={suggestions}
-                    iconSrcRight="/icons/search.png"
-                    iconPosition="right"
-                    iconWidth={32}
-                    iconHeight={32}
-                    inputType="text"
-                    inputSize="large"
-                    label="Search"
-                    placeholder="What are you looking for?"
-                    id="searchTerm"
-                    error={errors.searchTerm?.message}
-                    ariaLabel="Search Term"
-                    autoComplete="off"
-                    required={false}
-                  />
-                )}
-              />
-            </div>
+        <div className={styles.searchTerm}>
+          <p className={styles.errorMessage}>
+            {(errors.searchTerm as any)?.message}
+          </p>
+          <div
+            className={`${styles.breadcrumbs} ${styles.searchTermBreadcrumbs}`}
+          >
+            <Breadcrumbs
+              homeBreadcrumb={{ id: 1, name: "All Categories", href: "#" }}
+              firstBreadcrumb={{
+                id: 2,
+                name: "Electronics & Computers",
+                href: "#",
+              }}
+              searchResult={{ id: 3, name: "Computer", href: "#" }}
+            />
           </div>
-        )}
-        {!isCategoriesOpen && (
-          <div className={styles.location}>
-            <p className={styles.errorMessage}>
-              {(errors.locationSearch as any)?.message}
-            </p>
-            <div
-              className={`${styles.breadcrumbs} ${styles.locationBreadcrumbs}`}
-            >
-              <Breadcrumbs
-                homeBreadcrumb={{ id: 4, name: "South Africa", href: "#" }}
-                firstBreadcrumb={{ id: 5, name: "Gauteng", href: "#" }}
-                secondBreadcrumb={{ id: 6, name: "Johannesburg", href: "#" }}
-                searchResult={{ id: 7, name: "Sandton", href: "#" }}
-              />
-            </div>
-            <div className={styles.locationInputContainer}>
-              <Controller
-                name="locationSearch"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    className={styles.searchLocationInput}
-                    isSearchBar={true}
-                    suggestions={suggestions}
-                    iconSrcRight="/icons/search.png"
-                    iconPosition="right"
-                    iconWidth={32}
-                    iconHeight={32}
-                    inputType="text"
-                    inputSize="large"
-                    label="Location"
-                    placeholder="Search by city, province, town..."
-                    id="locationSearch"
-                    error={errors.locationSearch?.message}
-                    ariaLabel="Location"
-                    autoComplete="off"
-                    // required
-                  />
-                )}
-              />
-            </div>
+          <div className={styles.searchTermInputContainer}>
+            <Controller
+              name="searchTerm"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  className={styles.searchTermInput}
+                  isSearchBar={true}
+                  suggestions={suggestions}
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  inputType="text"
+                  inputSize="large"
+                  label="Search"
+                  placeholder="What are you looking for?"
+                  id="searchTerm"
+                  error={errors.searchTerm?.message}
+                  ariaLabel="Search Term"
+                  autoComplete="off"
+                  required={false}
+                />
+              )}
+            />
           </div>
-        )}
+        </div>
+        <div className={styles.location}>
+          <p className={styles.errorMessage}>
+            {(errors.locationSearch as any)?.message}
+          </p>
+          <div
+            className={`${styles.breadcrumbs} ${styles.locationBreadcrumbs}`}
+          >
+            <Breadcrumbs
+              homeBreadcrumb={{ id: 4, name: "South Africa", href: "#" }}
+              firstBreadcrumb={{ id: 5, name: "Gauteng", href: "#" }}
+              secondBreadcrumb={{ id: 6, name: "Johannesburg", href: "#" }}
+              searchResult={{ id: 7, name: "Sandton", href: "#" }}
+            />
+          </div>
+          <div className={styles.locationInputContainer}>
+            <Controller
+              name="locationSearch"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  className={styles.searchLocationInput}
+                  isSearchBar={true}
+                  suggestions={suggestions}
+                  iconSrcRight="/icons/search.png"
+                  iconPosition="right"
+                  iconWidth={32}
+                  iconHeight={32}
+                  inputType="text"
+                  inputSize="large"
+                  label="Location"
+                  placeholder="Search by city, province, town..."
+                  id="locationSearch"
+                  error={errors.locationSearch?.message}
+                  ariaLabel="Location"
+                  autoComplete="off"
+                  // required
+                />
+              )}
+            />
+          </div>
+        </div>
       </div>
 
-      {!isCategoriesOpen && (
-        <div className={styles.searchButton}>
-          <Button
-            buttonChildren="Search"
-            className={styles.search}
-            buttonType="primary"
-            buttonSize="large"
-            name="search"
-            autoFocus={false}
-            type="submit"
-            disabled={isSubmitting}
-          />
-        </div>
-      )}
+      <div className={styles.searchButton}>
+        <Button
+          buttonChildren="Search"
+          className={styles.search}
+          buttonType="primary"
+          buttonSize="large"
+          name="search"
+          autoFocus={false}
+          type="submit"
+          disabled={isSubmitting}
+        />
+      </div>
     </div>
   );
 }

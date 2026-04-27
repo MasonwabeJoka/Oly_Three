@@ -21,7 +21,7 @@
       top: rem(80);
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: rem(10);
+      font-size: $extra-tiny;
       text-transform: uppercase;
       color: $grey-four;
       margin-bottom: rem(18) !important;
@@ -32,8 +32,8 @@
       position: absolute;
       top: rem(96);
       left: rem(32);
-      
-      font-size: rem(10);
+
+      font-size: $extra-tiny;
       text-transform: uppercase;
       color: $grey-four;
       margin-bottom: rem(18) !important;
@@ -46,10 +46,9 @@
       font-family: "Outfit", sans-serif !important;
     }
 
-    :global(.fr-element)  {
+    :global(.fr-element) {
       p {
         margin-top: rem(8);
-       
       }
     }
   }

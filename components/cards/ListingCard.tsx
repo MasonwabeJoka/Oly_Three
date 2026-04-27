@@ -3,7 +3,15 @@ import ListingCardClient from "./ListingCardClient";
 import ListingCardSkeleton from "../skeletons/ListingCardSkeleton";
 
 type Props = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   listing: any | null;
   index: number;
   cardType: "expanded" | "box";
@@ -32,7 +40,7 @@ type Props = {
 };
 
 const ListingCard: React.FC<Props> = ({
-  category,
+  site,
   listing,
   id,
   slug,
@@ -61,7 +69,7 @@ const ListingCard: React.FC<Props> = ({
   return (
     <div>
       <ListingCardClient
-        category={category}
+        site={site}
         listing={listing}
         id={id?.toString()}
         slug={slug}

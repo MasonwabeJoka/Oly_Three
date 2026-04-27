@@ -1,109 +1,102 @@
-import styles from "./Chat.module.scss";
+"use client";
 
-import useMessageStore, {
-  Message,
-  MessageContent,
-} from "../store/useMessageStore";
+import styles from "./Chat.module.scss";
+import { Chat as ChatType, MessageContent } from "../store/useMessageStore";
+import useMessageStore from "../store/useMessageStore";
+import { useEffect, useRef, useState } from "react";
 import ExitButton from "@/components/ExitButton";
 import ChatBubble from "./ChatBubble";
 import TextInputBar from "@/components/TextInputBar";
-import { useEffect } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import TypingIndicator from "./TypingIndicator";
+import { useRouter } from "next/navigation";
 
-const Chat = () => {
-  const {
-    messages,
-    selectedChat,
-    handleSendMessage,
-    userMessages,
-    setChats,
-    isLoading,
-    isInitialized,
-    initializeMessages,
-  } = useMessageStore();
+type Props = {
+  chat: ChatType;
+  chatId: number;
+};
 
-  // Initialize messages on component mount
+const Chat = ({ chat, chatId }: Props) => {
+  const router = useRouter();
+  const sendMessage = useMessageStore((state) => state.sendMessage);
+  const isTyping = useMessageStore((state) => state.isTyping);
+  const [text, setText] = useState("");
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    if (!isInitialized) {
-      initializeMessages();
-    }
-  }, [isInitialized, initializeMessages]);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat.messages, isTyping]);
+
+  const handleSend = () => {
+    if (!text.trim()) return;
+    sendMessage(text, chatId);
+    setText("");
+  };
 
   const shouldShowAvatar = (
     index: number,
     msg: MessageContent,
-    allMessages: MessageContent[]
+    allMessages: MessageContent[],
   ): boolean => {
     if (index === 0) return true;
     const prevMsg = allMessages[index - 1];
     return prevMsg.senderType !== msg.senderType;
   };
+
   return (
     <div className={styles.container}>
-      <div
-        className={styles.exitButtonContainer}
-        onClick={() => setChats(false)}
-        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
-          e.key === "Enter" && setChats(false)
-        }
-        role="button"
-        tabIndex={0}
-        aria-label="Close chat"
-      >
-        <ExitButton />
-      </div>
-      <ul className={styles.mainSectionWrapper} aria-live="polite">
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          messages
-            .filter((message: Message) => message.id === selectedChat?.id)
-            .map((message: Message) => {
-              const allMessages: MessageContent[] = [
-                ...message.messages,
-                ...userMessages,
-              ];
-              return (
-                <li key={message.name}>
-                  {allMessages.map((msg: MessageContent, index: number) => (
-                    <ChatBubble
-                      key={`${msg.text}-${index}`}
-                      contactName={message.contactName}
-                      message={msg.text}
-                      profilePicture={
-                        msg.senderType === "contact"
-                          ? message.profilePicture
-                          : "/profilePic.jpg"
-                      }
-                      time={msg.time}
-                      isContact={msg.senderType === "contact"}
-                      showAvatar={shouldShowAvatar(index, msg, allMessages)}
-                    />
-                  ))}
-                </li>
-              );
-            })
-        )}
-      </ul>
-      <div className={styles.bottomSection}>
-        <div className={styles.typingArea}>
-          <div className={styles.textInputContainer}>
-            <TextInputBar
-              id="textInput"
-              name="textInput"
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                console.log(e.target.value)
-              }
-              onSubmit={(e: React.FormEvent<HTMLTextAreaElement>) =>
-                handleSendMessage(e.currentTarget.value)
-              }
-              className={styles.textInput}
-              placeholder="Type a message"
-              ariaLabel="Type and send a message"
-              disabled={isLoading}
-            />
-          </div>
+
+      <div className={styles.mainSectionWrapper}>
+        <div className={styles.messages}>
+          {chat.messages.map((msg, index) => {
+            const isUser = msg.senderType === "user";
+
+            return (
+              <div
+                key={index}
+                className={`${styles.message} ${
+                  isUser ? styles.user : styles.contact
+                }`}
+              >
+                <ChatBubble
+                  contactName={chat.contact.name}
+                  message={msg.text}
+                  profilePicture={
+                    msg.senderType === "contact"
+                      ? chat.contact.avatar
+                      : "/profilePic.jpg"
+                  }
+                  time={msg.time}
+                  isContact={msg.senderType === "contact"}
+                  showAvatar={shouldShowAvatar(index, msg, chat.messages)}
+                  status={msg.status}
+                />
+              </div>
+            );
+          })}
+          <div ref={bottomRef} />
         </div>
+        {isTyping && (
+          <div className={`${styles.message} ${styles.contact}`}>
+            <TypingIndicator />
+          </div>
+        )}
+      </div>
+
+      <div className={styles.textInputContainer}>
+        <TextInputBar
+          id="textInput"
+          name="textInput"
+          value={text}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setText(e.target.value)
+          }
+          onSubmit={() => handleSend()}
+          containerClassName={styles.textInput}
+          placeholder="Type a message"
+          ariaLabel="Type and send a message"
+          clearOnSubmit
+          className={styles.textInputBar}
+        />
       </div>
     </div>
   );

@@ -54,6 +54,17 @@ background-color: red;
 
     .searchFields {
       margin-bottom: rem(30);
+      .dropdownOpen {
+        position: relative;
+        z-index: 20;
+      }
+
+      .searchTermOverlay {
+      }
+
+      .searchLocationOverlay {
+      }
+
       .searchTerm {
         display: flex;
         flex-direction: column;
@@ -88,5 +99,25 @@ background-color: red;
         background-color: $white-one;
       }
     }
+  }
+}
+
+.hideBelowSearchTerm {
+  .searchTerm ~ * {
+    visibility: hidden;
+  }
+
+  .searchFields ~ .searchButton {
+    visibility: hidden;
+  }
+}
+
+.hideBelowLocation {
+  .searchLocation ~ * {
+    visibility: hidden;
+  }
+
+  .searchFields ~ .searchButton {
+    visibility: hidden;
   }
 }

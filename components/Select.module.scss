@@ -9,6 +9,11 @@
   // border-radius: rem(40);
 }
 
+.overlayDropdown {
+  position: relative;
+  z-index: 20;
+}
+
 .selectMenu {
   position: relative;
   display: flex;
@@ -29,7 +34,7 @@
     z-index: 1;
     color: $grey-four;
     text-transform: uppercase;
-    font-size: rem(10);
+    font-size: $extra-tiny;
     .requiredStar {
       display: block;
       margin-top: rem(1);
@@ -249,11 +254,11 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1000;
-  padding: 0 rem(8) rem(16) rem(8) !important;
+  padding: 0 rem(8) rem(2) rem(8) !important;
   margin-top: rem(8) !important;
   scrollbar-width: thin;
   background-color: $white-four;
-  border-radius: rem(40);
+  border-radius: rem(0) rem(0) rem(40) rem(40);
 
   &::-webkit-scrollbar {
     width: rem(4) !important;
@@ -458,6 +463,15 @@
     outline-color: $white-one;
     outline-width: rem(2);
   }
+}
+
+.overlayOptions {
+  position: absolute;
+  top: calc(100% + rem(8));
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0 !important;
+  z-index: 30;
 }
 
 .options::-webkit-scrollbar-track {

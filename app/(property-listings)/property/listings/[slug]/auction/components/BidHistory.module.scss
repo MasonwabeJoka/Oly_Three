@@ -1,0 +1,45 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: rem(471);
+  max-height: rem(360);
+  padding: rem(24);
+  gap: rem(20);
+  overflow-y: auto;
+  position: relative; /* Ensure sticky positioning works within container */
+
+  .bid {
+    display: flex;
+    align-items: center;
+    background-color: $white-four; /* Default background for other bids */
+    padding: rem(10);
+    border-radius: rem(40);
+
+    &.firstBid {
+      background-color: $grey-one; /* Different background for first bid */
+      position: sticky;
+      top: rem(0); /* Align with container padding */
+      z-index: 10; /* Ensure it stays above other bids */
+     
+    }
+
+    .bidder {
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+      width: 50%;
+    }
+
+    .bidAmount {
+      width: 25%;
+    }
+
+    .time {
+      width: 25%;
+    }
+  }
+}

@@ -51,6 +51,21 @@
           box-shadow: $shadow-three;
         }
       }
+
+      .dropdownOpen {
+        position: relative;
+        z-index: 20;
+      }
+
+      .durationOverlay {
+      }
+
+      .hideBelowDuration {
+        .setPromotionDurationContainer ~ * {
+          visibility: hidden;
+        }
+      }
+
       .moreInfoButton {
         background-color: $white-three;
         box-shadow: $shadow-three;

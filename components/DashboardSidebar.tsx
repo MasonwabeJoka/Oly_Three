@@ -6,7 +6,7 @@ import { MainMenuItem, LogoutMenuItem } from "./DashboardMenuItem";
 import Image from "@/components/Image";
 import { useResponsive } from "@/store/useResponsive";
 import useSidebarStore from "@/store/useSidebarStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { signOutAction } from "@/app/actions/signOut";
 import { User } from "@workos-inc/node";
@@ -16,6 +16,65 @@ interface DashboardSidebarProps {
   sidebarItems?: any;
 }
 
+type ProfileUpdatedEventDetail = {
+  firstName?: string | null;
+  lastName?: string | null;
+  avatarUrl?: string;
+  profilePictureUrl?: string | null;
+};
+
+const isGeneratedInitialsAvatar = (avatarUrl?: string | null) => {
+  if (!avatarUrl) {
+    return false;
+  }
+
+  const normalized = avatarUrl.toLowerCase();
+  if (
+    normalized.includes("ui-avatars.com") ||
+    normalized.includes("avatar.vercel.sh") ||
+    normalized.includes("dicebear") ||
+    normalized.includes("gravatar.com/avatar") ||
+    normalized.includes("/initials") ||
+    normalized.includes("default-avatar") ||
+    normalized.includes("placeholder") ||
+    normalized.includes("default-user") ||
+    normalized.includes("name=") ||
+    normalized.includes("background=")
+  ) {
+    return true;
+  }
+
+  try {
+    const parsedUrl = new URL(avatarUrl);
+    const host = parsedUrl.hostname.toLowerCase();
+    const path = parsedUrl.pathname.toLowerCase();
+    const params = parsedUrl.searchParams;
+
+    if (
+      path.includes("/avatar") ||
+      path.includes("/initial") ||
+      path.includes("default") ||
+      params.has("name") ||
+      params.has("background") ||
+      params.has("color")
+    ) {
+      return true;
+    }
+
+    if (
+      host.includes("googleusercontent.com") &&
+      (path.includes("/a/default-user") || path.includes("/avatar"))
+    ) {
+      return true;
+    }
+
+  } catch {
+    return normalized.includes("avatar") || normalized.includes("initial");
+  }
+
+  return false;
+};
+
 const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   currentUser,
   sidebarItems,
@@ -23,8 +82,43 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   const [isOpen, setIsOpen] = useState(false);
+  const [sidebarUser, setSidebarUser] = useState<User>(currentUser);
   const pathname = usePathname();
-  const user = currentUser.profilePictureUrl ?? "";
+
+  useEffect(() => {
+    setSidebarUser(currentUser);
+  }, [currentUser]);
+
+  useEffect(() => {
+    const handleProfileUpdated = (event: Event) => {
+      const detail = (event as CustomEvent<ProfileUpdatedEventDetail>).detail;
+      if (!detail) {
+        return;
+      }
+
+      setSidebarUser((prev) => ({
+        ...prev,
+        firstName:
+          detail.firstName !== undefined ? detail.firstName : prev.firstName,
+        lastName: detail.lastName !== undefined ? detail.lastName : prev.lastName,
+        profilePictureUrl:
+          detail.profilePictureUrl !== undefined
+            ? detail.profilePictureUrl
+            : prev.profilePictureUrl,
+        metadata: {
+          ...(prev.metadata ?? {}),
+          ...(detail.avatarUrl !== undefined
+            ? { avatarUrl: detail.avatarUrl }
+            : {}),
+        },
+      }));
+    };
+
+    window.addEventListener("oly:profile-updated", handleProfileUpdated);
+    return () => {
+      window.removeEventListener("oly:profile-updated", handleProfileUpdated);
+    };
+  }, []);
 
   const itemsWithActiveState = sidebarItems?.map((item: any, index: any) => ({
     ...item,
@@ -43,6 +137,11 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
     marginTop: isMobile ? "1rem" : "1.5rem",
     marginBottom: isMobile ? "2rem" : "0rem",
   };
+  const providerAvatar = isGeneratedInitialsAvatar(
+    sidebarUser?.profilePictureUrl
+  )
+    ? ""
+    : sidebarUser?.profilePictureUrl || "";
 
   return (
     <div className={styles.container}>
@@ -58,7 +157,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
       >
         <Avatar
           className={styles.avatar}
-          avatar={currentUser}
+          avatar={sidebarUser?.metadata?.avatarUrl || providerAvatar}
           avatarSize={isMobile ? "regular" : "large"}
         />
 
@@ -66,12 +165,12 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           <p
             className={styles.name}
             style={{
-              visibility: currentUser?.firstName ? "visible" : "hidden",
+              visibility: sidebarUser?.firstName ? "visible" : "hidden",
             }}
           >
             {/* The \u00A0 is a non-breaking space to maintain height when there's no text*/}
-            <span>{currentUser?.firstName || "\u00A0"}</span> {""}
-            <span>{currentUser?.lastName || "\u00A0"}</span>
+            <span>{sidebarUser?.firstName || "\u00A0"}</span> {""}
+            <span>{sidebarUser?.lastName || "\u00A0"}</span>
           </p>
         )}
       </Link>

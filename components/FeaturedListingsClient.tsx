@@ -18,8 +18,6 @@ const FeaturedListingsClient = ({ category }: any) => {
   const Title = useTitleStore((state) => state.Title);
   const [searchTermClicked, setSearchTermClicked] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
-  const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
-  const [locationSuggestions, setLocationSuggestions] = useState(0);
 
   const {
     register,
@@ -121,9 +119,6 @@ const FeaturedListingsClient = ({ category }: any) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionCountChange={(count: any) =>
-                setLocationSuggestions(count)
-              }
             />
           </div>
         </>
@@ -176,9 +171,6 @@ const FeaturedListingsClient = ({ category }: any) => {
               autoFocus={false}
               autoComplete="off"
               required
-              onSuggestionCountChange={(count: any) =>
-                setLocationSuggestions(count)
-              }
             />
           </div>
         </>

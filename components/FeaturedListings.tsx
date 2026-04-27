@@ -7,24 +7,32 @@ import Pagination from "./Pagination";
 import { getFeaturedListings } from "@/sanity/lib/crud/featuredListings/data";
 
 type FeaturedListingsProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+   site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   currentPage: number;
 };
 
-const FeaturedListings = async ({ category, currentPage }: FeaturedListingsProps) => {
+const FeaturedListings = async ({ site, currentPage }: FeaturedListingsProps) => {
   const data = await getFeaturedListings(currentPage);
   const { listings, totalPages } = data;
 
 
   return (
     <>
-      {category === "all" && (
+      {site === "oly" && (
         <div className={styles.listingsSection}>
           <h2 className={styles.title}>Featured Listings</h2>
           <div className={styles.collage}>
-            {/* <FeaturedListingsClient category={category} /> */}
+            <FeaturedListingsClient site={site} />
             {/* <TempListingsCollage
-              category={category}
+              site={site}
               listings={listings || []}
               sortBy="postedOn"
               sortOrder="desc"
@@ -34,7 +42,7 @@ const FeaturedListings = async ({ category, currentPage }: FeaturedListingsProps
             /> */}
             
               <ListingsCollage
-                category={category}
+                site={site}
                 listings={listings}
                 sortBy="postedOn"
                 sortOrder="desc"
@@ -65,12 +73,12 @@ const FeaturedListings = async ({ category, currentPage }: FeaturedListingsProps
           </div>
         </div>
       )}
-      {category === "property" && (
+      {site === "oly-properties" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
-            <FeaturedListingsClient category={category} />
+            <FeaturedListingsClient site={site} />
             <ListingsCollage
-              category={category}
+              site={site}
               listings={listings}
               isDeletable={false}
               isDashboard={false}
@@ -96,13 +104,13 @@ const FeaturedListings = async ({ category, currentPage }: FeaturedListingsProps
           </div>
         </div>
       )}
-      {category === "shops" && (
+      {site === "oly-shops" && (
         <div className={styles.listingsSection}>
           <div className={styles.collage}>
-            <FeaturedListingsClient category={category} />
+            <FeaturedListingsClient site={site} />
             <div className={styles.collage}>
               <ListingsCollage
-                category={category}
+                site={site}
                 listings={listings}
                 isDeletable={false}
                 isDashboard={false}

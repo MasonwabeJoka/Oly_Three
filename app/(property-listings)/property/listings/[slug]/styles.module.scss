@@ -1,0 +1,119 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: rem(1552);
+
+  .listingContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .listingImagesContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .listingDetails {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .mainSectionContainer {
+        display: flex;
+        justify-content: center;
+        // align-items: center;
+        width: 100%;
+
+        .sellerDetails {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          will-change: transform; // Optimize for animations
+          transition: none; // Prevent CSS transitions from interfering with GSAP
+          height: fit-content;
+
+          .report {
+            margin-top: rem(20);
+            color: $danger;
+            cursor: pointer;
+          }
+        }
+        .mainSectionContainer {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          padding: 0 rem(96);
+          margin-bottom: rem(48);
+
+          .exitButtonContainer {
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+        }
+
+       
+      }
+      .title {
+        color: $danger;
+        font-weight: 500;
+        font-size: $h4;
+        margin-bottom: rem(48);
+      }
+
+      .detailsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+        min-height: rem(200);
+        margin-left: rem(364);
+        margin-bottom: rem(96);
+      }
+
+      .similarAdsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+
+        .similarAdsTitle {
+          margin-left: rem(360);
+        }
+      }
+    }
+
+    .allImagesContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: rem(72);
+      margin-bottom: rem(128);
+
+      .imageContainer {
+        height: rem(800);
+        position: relative;
+
+        border-radius: rem(40);
+        margin-bottom: rem(64);
+
+        .image {
+          margin-bottom: rem(16);
+        }
+      }
+    }
+  }
+}

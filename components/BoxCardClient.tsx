@@ -4,7 +4,15 @@ import { BoxCardDetails } from "./BoxCardDetails";
 import type { PortableTextBlock } from "sanity";
 
 type BoxCardProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   sizeClass: string;
   imageUrls?: string[];
   aspectRatios?: number[];
@@ -28,7 +36,7 @@ type BoxCardProps = {
 };
 
 const BoxCardClient: React.FC<BoxCardProps> = ({
-  category,
+  site,
   sizeClass,
   imageUrls,
   aspectRatios,
@@ -53,7 +61,7 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
   return (
     <div
       onMouseEnter={
-        category === "property" || category === "vehicles"
+        site === "oly-properties" || site === "oly-auto"
           ? () => {}
           : () => setIsCardHovered(true)
       }
@@ -61,7 +69,7 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
       style={{ position: "relative" }}
     >
       <BoxImageContainer
-        category={category}
+        site={site}
         imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         isHeartClicked={isHeartClicked}
@@ -78,7 +86,7 @@ const BoxCardClient: React.FC<BoxCardProps> = ({
       />
 
       <BoxCardDetails
-        category={category}
+        site={site}
         isCardHovered={isCardHovered}
         title={title}
         description={description as any}

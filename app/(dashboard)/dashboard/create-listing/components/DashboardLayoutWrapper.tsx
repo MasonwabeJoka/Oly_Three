@@ -11,17 +11,20 @@ import useBreakpointStore from "@/store/useBreakpointStore";
 import { ImageKitProvider } from "@imagekit/next";
 import BackButton from "@/components/BackButton";
 import { useEffect } from "react";
+import { AuthKitProvider } from "@workos-inc/authkit-nextjs/components";
 
 interface DashboardLayoutWrapperProps {
   children: React.ReactNode;
   currentUser?: any;
   sidebarItems?: any;
+  initialAuth?: any;
 }
 
 export default function DashboardLayoutWrapper({
   currentUser,
   children,
   sidebarItems,
+  initialAuth,
 }: DashboardLayoutWrapperProps) {
   const isVisible = useShowSidebarStore((state) => state.isVisible);
   const { isLargeDesktop, isSmallDesktop, isTablet, currentScreenSize } =
@@ -61,50 +64,52 @@ export default function DashboardLayoutWrapper({
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ImageKitProvider
-        urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
-      >
-        <div
-          className={styles.wrapper}
-          style={{
-            ...flexStyles,
-          }}
+    <AuthKitProvider initialAuth={initialAuth}>
+      <QueryClientProvider client={queryClient}>
+        <ImageKitProvider
+          urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
         >
-          <div className={styles.backButton}>
-            <BackButton />
-          </div>
-          {/* {isVisible && <div className={styles.keepSidebarInPlace} />} */}
-          {isVisible && (
-            <aside className={styles.sidebarContainer}>
-              <div className={styles.sidebar}>
-                <DashboardSidebar
-                  currentUser={currentUser}
-                  sidebarItems={sidebarItems}
-                />
-              </div>
-            </aside>
-          )}
           <div
-            className={styles.main}
-            // style={{ marginLeft }}
-            suppressHydrationWarning
+            className={styles.wrapper}
+            style={{
+              ...flexStyles,
+            }}
           >
-            {children}
-            <Toaster
-              richColors
-              toastOptions={{
-                style: {
-                  height: "60px",
-                  padding: "32px 28px",
-                },
-                className: "class",
-              }}
-            />
+            <div className={styles.backButton}>
+              <BackButton />
+            </div>
+            {/* {isVisible && <div className={styles.keepSidebarInPlace} />} */}
+            {isVisible && (
+              <aside className={styles.sidebarContainer}>
+                <div className={styles.sidebar}>
+                  <DashboardSidebar
+                    currentUser={currentUser}
+                    sidebarItems={sidebarItems}
+                  />
+                </div>
+              </aside>
+            )}
+            <div
+              className={styles.main}
+              // style={{ marginLeft }}
+              suppressHydrationWarning
+            >
+              {children}
+              <Toaster
+                richColors
+                toastOptions={{
+                  style: {
+                    height: "60px",
+                    padding: "32px 28px",
+                  },
+                  className: "class",
+                }}
+              />
+            </div>
           </div>
-        </div>
-      </ImageKitProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+        </ImageKitProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </AuthKitProvider>
   );
 }

@@ -96,7 +96,7 @@ const SIZE = {
 const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
-      containerClassName,
+      className,
       textareaClassName,
       TextAreaClassName,
       hasSubmitButton = true,
@@ -305,7 +305,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
           </p>
         )}
         <div
-          className={`${styles.container} ${containerClassName}`}
+          className={`${styles.container} ${className}`}
           style={showShadow}
         >
           {label && (
@@ -346,6 +346,12 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
               onClick={onClick}
               onFocus={onFocus}
               onBlur={onBlur}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit();
+                }
+              }}
               ref={(node) => {
                 textareaRef.current = node;
                 if (typeof ref === "function") {

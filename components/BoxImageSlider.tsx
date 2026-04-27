@@ -14,7 +14,7 @@ import { useLikeButton } from "./../hooks/useLikeButton";
 import LoadingSpinnerTwo from "./LoadingSpinnerTwo";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"| "oly-shops" | "oly-agents" | "oly-dealerships";
   imagesUrls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
@@ -26,7 +26,7 @@ interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ImageSlider = ({
-  category,
+  site,
   imagesUrls,
   hasLikeButton = false,
   aspectRatios,
@@ -85,14 +85,14 @@ const ImageSlider = ({
 
   const swiperStyles = {
     width:
-      category === "property" || category === "vehicles"
+      site === "oly-properties" || site === "oly-auto"
         ? "24.21875rem"
         : "19.375rem",
   };
   const swiperSlideHeight = (index: number) => {
-    if (category === "property" || category === "vehicles") {
+    if (site === "oly-properties" || site === "oly-auto") {
       return "13.623046875rem";
-    } else if (category === "shops") {
+    } else if (site === "oly-shops") {
       if (aspectRatios && aspectRatios[index] >= 1) {
         return "15.5rem";
       } else {
@@ -104,7 +104,7 @@ const ImageSlider = ({
   };
 
   const swiperSlideWidth =
-    category === "property" || category === "vehicles"
+    site === "oly-properties" || site === "oly-auto"
       ? "24.21875rem"
       : "19.375rem";
 
@@ -134,7 +134,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: category === "property" ? "21rem" : "16rem",
+            marginRight: site === "oly-properties" ? "21rem" : "16rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
@@ -160,7 +160,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: category === "property" ? "21rem" : "16rem",
+            marginLeft: site === "oly-properties" ? "21rem" : "16rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}

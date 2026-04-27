@@ -20,12 +20,16 @@
   }
 
   .resultsText {
-    font-size: $small;
+    font-size: $extra-tiny;
+    text-transform: uppercase;
+    font-weight: 300;
     text-align: center;
+    letter-spacing: rem(0.5);
     span {
-      font-size: $body;
+      font-size: $tiny;
       font-weight: 500;
-      text-transform: capitalize;
+      text-transform: uppercase;
+      letter-spacing: rem(0.5);
     }
   }
 

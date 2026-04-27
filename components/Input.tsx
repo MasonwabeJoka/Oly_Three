@@ -1,20 +1,31 @@
 "use client";
 import styles from "./Input.module.scss";
 import Image from "@/components/Image";
-import { useState, forwardRef, Ref, useEffect, useRef } from "react";
-import useSidebarStore from "@/store/useSidebarStore";
-import Button from "./Buttons";
+import { useState, forwardRef, useEffect, useRef } from "react";
 import Checkbox from "./Checkbox";
 import { Input as ShadcnInput } from "@/components/ui/input";
 import { React } from "next/dist/server/route-modules/app-page/vendored/rsc/entrypoints";
-
-//Todo: Check whether email is valid only after user has has finished typing their email
-//Todo: When the input is cleared, the error message should disappear
+import Pill from "./Pill";
+type Suggestion =
+  | string
+  | {
+      suggestion: string;
+      label?: string;
+      pillText?: string;
+    };
 
 interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   isSearchBar?: boolean;
   isMultiSelect?: boolean;
-  suggestions?: string[];
+  suggestions?: Suggestion[];
+  suggestionLabel?: string;
+  suggestionPill?: string;
+  pillColour?: string;
+  isPillWithBorder?: boolean;
+  pillBorderStyle?: string;
+  pillShadow?: boolean;
+  pillBoxShadow?: string;
+  pillTextCase?: "uppercase" | "lowercase" | "capitalize" | "none";
   className?: string;
   inputType: keyof typeof INPUT_TYPE;
   accept?: string;
@@ -44,10 +55,11 @@ interface InputProps extends React.HTMLAttributes<HTMLDivElement> {
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onSuggestionCountChange?: (count: number) => void;
   selectedItems?: string[];
   onSelectedItemsChange?: (selectedItems: string[]) => void;
   onDropdownOpenChange?: (isOpen: boolean) => void;
+  overlayDropdown?: boolean;
+  overlaySuggestionsClass?: string;
   ariaDescribedBy?: string;
   ariaExpanded?: boolean;
   ariaControls?: string;
@@ -97,6 +109,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       isSearchBar,
       isMultiSelect,
       suggestions,
+      suggestionLabel,
+      suggestionPill,
+      pillColour,
+      isPillWithBorder = true,
+      pillBorderStyle,
+      pillShadow = false,
+      pillBoxShadow = "none",
+      pillTextCase = "uppercase",
       className,
       inputType,
       accept,
@@ -106,7 +126,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       iconPosition,
       iconSrcLeft,
       iconSrcRight,
-        iconWidth,
+      iconWidth,
       iconHeight,
       label,
       placeholder,
@@ -126,20 +146,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onKeyUp,
       onFocus,
       onBlur,
-      onSuggestionCountChange,
       selectedItems = [],
       onSelectedItemsChange,
       onDropdownOpenChange,
+      overlayDropdown = false,
+      overlaySuggestionsClass = "",
       ...otherProps
     },
-    ref
+    ref,
   ) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [filterValue, setFilterValue] = useState("");
-    const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
-    const [revealedSuggestions, setRevealedSuggestions] = useState<string[]>(
-      []
-    );
+    const [revealedSuggestions, setRevealedSuggestions] = useState<
+      Suggestion[]
+    >([]);
     const [focusedSuggestionIndex, setFocusedSuggestionIndex] =
       useState<number>(-1);
     const inputRef = useRef<HTMLDivElement>(null);
@@ -154,9 +174,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           : styles.mediumDashboardInput;
         break;
       case "small":
-        sizeClass = !dashboard
-          ? styles.smallInput
-          : styles.smallDashboardInput;
+        sizeClass = !dashboard ? styles.smallInput : styles.smallDashboardInput;
         break;
       case "xLarge":
         sizeClass = !dashboard
@@ -227,13 +245,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           case "ArrowDown":
             e.preventDefault();
             setFocusedSuggestionIndex((prev) =>
-              prev < revealedSuggestions.length - 1 ? prev + 1 : 0
+              prev < revealedSuggestions.length - 1 ? prev + 1 : 0,
             );
             break;
           case "ArrowUp":
             e.preventDefault();
             setFocusedSuggestionIndex((prev) =>
-              prev > 0 ? prev - 1 : revealedSuggestions.length - 1
+              prev > 0 ? prev - 1 : revealedSuggestions.length - 1,
             );
             break;
           case "Enter":
@@ -241,12 +259,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             if (focusedSuggestionIndex >= 0) {
               const suggestion = revealedSuggestions[focusedSuggestionIndex];
               if (isMultiSelect) {
-                handleMultiSelectChange(
-                  suggestion,
-                  !selectedItems.includes(suggestion)
-                );
+                if (typeof suggestion === "string") {
+                  handleMultiSelectChange(
+                    suggestion,
+                    !selectedItems.includes(suggestion),
+                  );
+                }
               } else {
-                handleSuggestionClick(suggestion);
+                handleSuggestionClick(getSuggestionText(suggestion));
               }
             }
             break;
@@ -267,24 +287,42 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     useEffect(() => {
       if (isMultiSelect) {
-        setRevealedSuggestions(suggestions || []);
-      } else {
-        onSuggestionCountChange?.(revealedSuggestions.length);
+        setRevealedSuggestions(
+          suggestions?.filter((s): s is string => typeof s === "string") || [],
+        );
       }
-    }, [
-      suggestions,
-      isMultiSelect,
-      onSuggestionCountChange,
-      revealedSuggestions.length,
-    ]);
+    }, [suggestions, isMultiSelect]);
+
+    function getSuggestionText(suggestion: Suggestion): string {
+      if (typeof suggestion === "string") return suggestion;
+      return suggestion.suggestion;
+    }
 
     const applyFilter = (filter: string) => {
+      if (isMultiSelect) {
+        if (filter.trim() === "") {
+          setRevealedSuggestions(
+            suggestions?.filter((s): s is string => typeof s === "string") ||
+              [],
+          );
+        } else {
+          const filtered =
+            suggestions?.filter(
+              (s): s is string =>
+                typeof s === "string" &&
+                s.toLowerCase().startsWith(filter.toLowerCase()),
+            ) || [];
+          setRevealedSuggestions(filtered);
+        }
+        return;
+      }
+
       if (filter.trim() === "") {
         setRevealedSuggestions(suggestions || []);
       } else {
         const filtered =
-          suggestions?.filter((suggestion) =>
-            suggestion.toLowerCase().startsWith(filter.toLowerCase())
+          suggestions?.filter((s) =>
+            getSuggestionText(s).toLowerCase().startsWith(filter.toLowerCase()),
           ) || [];
         setRevealedSuggestions(filtered);
       }
@@ -328,15 +366,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const handleSelectAll = (checked: boolean) => {
+      const visibleStringSuggestions = revealedSuggestions.filter(
+        (suggestion): suggestion is string => typeof suggestion === "string",
+      );
       let updatedItems: string[];
       if (checked) {
-        const itemsToAdd = revealedSuggestions.filter(
-          (suggestion) => !selectedItems.includes(suggestion)
+        const itemsToAdd = visibleStringSuggestions.filter(
+          (suggestion) => !selectedItems.includes(suggestion),
         );
         updatedItems = [...selectedItems, ...itemsToAdd];
       } else {
         updatedItems = selectedItems.filter(
-          (item) => !revealedSuggestions.includes(item)
+          (item) => !visibleStringSuggestions.includes(item),
         );
       }
       onSelectedItemsChange?.(updatedItems);
@@ -370,9 +411,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const ariaDescribedByIds = [errorId, descriptionId]
       .filter(Boolean)
       .join(" ");
+    const revealedStringSuggestions = revealedSuggestions.filter(
+      (suggestion): suggestion is string => typeof suggestion === "string",
+    );
 
     return (
-      <div className={`${styles.container} ${className || ""}`} ref={inputRef}>
+      <div
+        className={`${styles.container} ${className || ""} ${
+          overlayDropdown ? styles.overlayInput : ""
+        }`}
+        ref={inputRef}
+      >
         {inputDescription && (
           <p id={descriptionId} className={styles.description}>
             {inputDescription}
@@ -393,18 +442,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
           {iconPosition === "left" &&
             iconSrcLeft &&
-            (value || selectedItems.length > 0) && (
-              typeof iconSrcLeft === "string" ? (
-                <Image
-                  src={iconSrcLeft}
-                  alt={`${ariaLabel} Icon Left`}
-                  width={iconWidth}
-                  height={iconHeight}
-                />
-              ) : (
-                iconSrcLeft
-              )
-            )}
+            (value || selectedItems.length > 0) &&
+            (typeof iconSrcLeft === "string" ? (
+              <Image
+                src={iconSrcLeft}
+                alt={`${ariaLabel} Icon Left`}
+                width={iconWidth}
+                height={iconHeight}
+              />
+            ) : (
+              iconSrcLeft
+            ))}
           <ShadcnInput
             style={{ display: "none" }}
             value={internalValue}
@@ -422,8 +470,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {label &&
               (internalValue || selectedItems.length > 0) &&
               internalValue.length < 30 && (
-                <label htmlFor={inputId} className={`${styles.label} ${inputSize === "small" ? styles.smallInputLabel : ""
-                }`}
+                <label
+                  htmlFor={inputId}
+                  className={`${styles.label} ${
+                    inputSize === "small" ? styles.smallInputLabel : ""
+                  }`}
                 >
                   <span>
                     {" "}
@@ -543,11 +594,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <ul
             id={listboxId}
             role="listbox"
-            className={styles.searchSuggestions}
+            className={`${styles.searchSuggestions} ${
+              overlayDropdown ? styles.overlaySuggestions : ""
+            } ${overlaySuggestionsClass}`}
             aria-label={`${label} suggestions`}
           >
             {revealedSuggestions.map((suggestion, index) => {
-              const isSelected = value === suggestion;
+              const suggestionText = getSuggestionText(suggestion);
+              const suggestionObj =
+                typeof suggestion === "string" ? undefined : suggestion;
+              const isSelected = value === suggestionText;
               const isFocused = focusedSuggestionIndex === index;
 
               return (
@@ -556,17 +612,46 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   id={`${id}-option-${index}`}
                   role="option"
                   aria-selected={isSelected}
-                  onClick={() => handleSuggestionClick(suggestion)}
+                  onClick={() => handleSuggestionClick(suggestionText)}
                   onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) => {
-                    if (e.key === "Enter") handleSuggestionClick(suggestion);
+                    if (e.key === "Enter")
+                      handleSuggestionClick(suggestionText);
                   }}
                   tabIndex={0}
                   className={`${styles.suggestionContainer} ${sizeClass} ${isFocused ? styles.focused : ""}`}
                   style={{ marginBottom: "0.5rem" }}
                 >
                   <div className={styles.suggestion}>
-                    <span>{suggestion}</span>
+                    {suggestionObj?.label && (
+                      <span
+                        className={`${styles.suggestionLabel} ${inputSize === "small" ? styles.smallSuggestionLabel : ""}`}
+                      >
+                        {" "}
+                        {suggestionObj.label.length > 12
+                          ? `${suggestionObj.label.substring(0, 12)}...`
+                          : suggestionObj.label}
+                      </span>
+                    )}
+                    <span>{suggestionText}</span>
                     {isSelected && <span className="sr-only">Selected</span>}
+
+                    {suggestionObj?.pillText ? (
+                      <span className={styles.suggestionPill}>
+                        {
+                          <Pill
+                            child={suggestionObj?.pillText}
+                            colour={pillColour}
+                            shadow={false}
+                            boxShadow={pillBoxShadow}
+                            withBorder={isPillWithBorder}
+                            borderStyle={pillBorderStyle}
+                            textCase={pillTextCase}
+                          />
+                        }
+                      </span>
+                    ) : (
+                      <div style={{ width: "100px" }} />
+                    )}
                   </div>
                 </li>
               );
@@ -575,65 +660,73 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         {isMultiSelect && isDropdownOpen && (
           <div
-            className={styles.multiSelectDropdown}
+            className={`${styles.multiSelectDropdown} ${
+              overlayDropdown ? styles.overlaySuggestions : ""
+            } ${overlaySuggestionsClass}`}
             ref={dropdownRef}
             role="region"
             aria-label="Multi-select options"
           >
-            <ul
+            <div
               id={listboxId}
               className={styles.searchSuggestions}
               role="listbox"
               aria-label={`${label} options`}
               aria-multiselectable="true"
             >
-              <li
-                className={
-                  !dashboard
-                    ? styles.suggestionContainer
-                    : styles.suggestionContainerDashboard
-                }
-                style={{ marginBottom: "0.5rem" }}
-                role="option"
-                aria-selected={revealedSuggestions.every((suggestion) =>
-                  selectedItems.includes(suggestion)
-                )}
+              <ul
+                role="listbox"
+                aria-label={`${label} options`}
+                aria-multiselectable="true"
               >
-                <div
-                  className={`${styles.suggestion} ${styles.selectAll}`}
-                  onClick={() =>
-                    handleSelectAll(
-                      !revealedSuggestions.every((suggestion) =>
-                        selectedItems.includes(suggestion)
-                      )
-                    )
+                <li
+                  className={
+                    !dashboard
+                      ? styles.suggestionContainer
+                      : styles.suggestionContainerDashboard
                   }
-                  onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      handleSelectAll(
-                        !revealedSuggestions.every((suggestion) =>
-                          selectedItems.includes(suggestion)
-                        )
-                      );
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-label="Select all options"
+                  style={{ marginBottom: "0.5rem" }}
+                  role="option"
+                  aria-selected={revealedStringSuggestions.every((suggestion) =>
+                    selectedItems.includes(suggestion),
+                  )}
                 >
-                  <Checkbox
-                    id={`${id}-select-all`}
-                    type="checkbox"
-                    checked={revealedSuggestions.every((suggestion) =>
-                      selectedItems.includes(suggestion)
-                    )}
-                    onChange={(checked) => handleSelectAll(checked)}
-                  />
-                  <span>Select All</span>
-                </div>
-              </li>
-              {revealedSuggestions.map((suggestion, index) => {
+                  <div
+                    className={`${styles.suggestion} ${styles.selectAll}`}
+                    onClick={() =>
+                      handleSelectAll(
+                        !revealedStringSuggestions.every((suggestion) =>
+                          selectedItems.includes(suggestion),
+                        ),
+                      )
+                    }
+                    onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleSelectAll(
+                          !revealedStringSuggestions.every((suggestion) =>
+                            selectedItems.includes(suggestion),
+                          ),
+                        );
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label="Select all options"
+                  >
+                    <Checkbox
+                      id={`${id}-select-all`}
+                      type="checkbox"
+                      checked={revealedStringSuggestions.every((suggestion) =>
+                        selectedItems.includes(suggestion),
+                      )}
+                      onChange={(checked) => handleSelectAll(checked)}
+                    />
+                    <span>Select All</span>
+                  </div>
+                </li>
+              </ul>
+              {revealedStringSuggestions.map((suggestion, index) => {
                 const isSelected = selectedItems.includes(suggestion);
                 const isFocused = focusedSuggestionIndex === index;
 
@@ -655,7 +748,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                       onClick={() =>
                         handleMultiSelectChange(
                           suggestion,
-                          !selectedItems.includes(suggestion)
+                          !selectedItems.includes(suggestion),
                         )
                       }
                       onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -663,7 +756,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                           e.preventDefault();
                           handleMultiSelectChange(
                             suggestion,
-                            !selectedItems.includes(suggestion)
+                            !selectedItems.includes(suggestion),
                           );
                         }
                       }}
@@ -684,20 +777,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   </li>
                 );
               })}
-            </ul>
+            </div>
 
             <div className="sr-only" aria-live="polite" aria-atomic="true">
               {selectedItems.length > 0 &&
                 `${selectedItems.length} option${selectedItems.length === 1 ? "" : "s"} selected`}
               {focusedSuggestionIndex >= 0 &&
                 revealedSuggestions[focusedSuggestionIndex] &&
-                `Focused on ${revealedSuggestions[focusedSuggestionIndex]}`}
+                `Focused on ${getSuggestionText(revealedSuggestions[focusedSuggestionIndex])}`}
             </div>
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

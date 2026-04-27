@@ -32,8 +32,8 @@ async function searchAction(formData: FormData): Promise<void> {
 type FormValues = z.infer<typeof searchFormSchema>;
 
 const ShopsHeroSectionFields = () => {
-  const [searchTermSuggestions, setSearchTermSuggestions] = useState(0);
-  const [locationSuggestions, setLocationSuggestions] = useState(0);
+  const [isSearchTermOpen, setIsSearchTermOpen] = useState(false);
+  const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   const showCategoriesModal = useModalStore(
     (state) => state.showCategoriesModal
@@ -73,7 +73,13 @@ const ShopsHeroSectionFields = () => {
       <Form
         action={searchAction} // Native server action for non-JS fallback
         onSubmit={handleSubmit(onSubmit)} // React Hook Form's enhanced submission
-        className={styles.buttonsAndSearch}
+        className={`${styles.buttonsAndSearch} ${
+          isSearchTermOpen
+            ? styles.hideBelowSearchTerm
+            : isLocationOpen
+              ? styles.hideBelowLocation
+              : ""
+        }`}
         id="buttonsAndSearch"
         noValidate
       >
@@ -107,7 +113,11 @@ const ShopsHeroSectionFields = () => {
         </div>
 
         <div className={styles.searchFields}>
-          <div className={styles.searchTerm}>
+          <div
+            className={`${styles.searchTerm} ${
+              isSearchTermOpen ? styles.dropdownOpen : ""
+            }`}
+          >
             <p className={styles.errorMessage}>
               {(errors.searchTerm as any)?.message || serverErrors.searchTerm}
             </p>
@@ -134,65 +144,65 @@ const ShopsHeroSectionFields = () => {
                   shouldValidate: true,
                 })
               }
-              onSuggestionCountChange={(count: any) =>
-                setSearchTermSuggestions(count)
-              }
+              overlayDropdown
+              overlaySuggestionsClass={styles.searchTermOverlay}
+              onDropdownOpenChange={setIsSearchTermOpen}
             />
           </div>
 
-          {searchTermSuggestions === 0 && (
-            <div className={styles.searchLocation}>
-              <p className={styles.errorMessage}>
-                {(errors.locationSearch as any)?.message ||
-                  serverErrors.locationSearch}
-              </p>
-              <Input
-                isSearchBar={true}
-                suggestions={suggestions}
-                className={styles.searchLocationInput}
-                inputType="text"
-                inputSize="large"
-                iconSrcRight="/icons/search.png"
-                iconPosition="right"
-                iconWidth={32}
-                iconHeight={32}
-                label="Location"
-                placeholder="Search by city, province, town..."
-                id="locationSearch"
-                ariaLabel="Location"
-                autoFocus={false}
-                autoComplete="off"
-                required
-                {...register("locationSearch")}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setValue("locationSearch", e.target.value, {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
-                }
-                onSuggestionCountChange={(count: any) =>
-                  setLocationSuggestions(count)
-                }
-              />
-            </div>
-          )}
+          <div
+            className={`${styles.searchLocation} ${
+              isLocationOpen ? styles.dropdownOpen : ""
+            }`}
+          >
+            <p className={styles.errorMessage}>
+              {(errors.locationSearch as any)?.message ||
+                serverErrors.locationSearch}
+            </p>
+            <Input
+              isSearchBar={true}
+              suggestions={suggestions}
+              className={styles.searchLocationInput}
+              inputType="text"
+              inputSize="large"
+              iconSrcRight="/icons/search.png"
+              iconPosition="right"
+              iconWidth={32}
+              iconHeight={32}
+              label="Location"
+              placeholder="Search by city, province, town..."
+              id="locationSearch"
+              ariaLabel="Location"
+              autoFocus={false}
+              autoComplete="off"
+              required
+              {...register("locationSearch")}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setValue("locationSearch", e.target.value, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                })
+              }
+              overlayDropdown
+              overlaySuggestionsClass={styles.searchLocationOverlay}
+              onDropdownOpenChange={setIsLocationOpen}
+            />
+          </div>
         </div>
 
-        {searchTermSuggestions === 0 && locationSuggestions === 0 && (
-          <div className={styles.searchButton}>
-            <Button
-              buttonChildren={"Search"}
-              className={styles.search}
-              buttonType="normal"
-              buttonSize="large"
-              name="Search Button"
-              type="submit"
-              ariaLabel="Search Button"
-              autoFocus={false}
-              disabled={isSubmitting}
-            />
-          </div>
-        )}
+        <div className={styles.searchButton}>
+          <Button
+            buttonChildren={"Search"}
+            className={styles.search}
+            buttonType="normal"
+            buttonSize="large"
+            name="Search Button"
+            type="submit"
+            ariaLabel="Search Button"
+            autoFocus={false}
+            disabled={isSubmitting}
+          />
+        </div>
       </Form>
     </div>
   );

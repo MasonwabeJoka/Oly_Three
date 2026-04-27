@@ -4,10 +4,13 @@ import Icon from "./Icon";
 
 // Assuming these props are passed to your component
 interface Props {
-  colour: string;
+  colour?: string;
   textColour?: string;
+  textCase?: "uppercase" | "lowercase" | "capitalize" | "none";
   shadow: boolean;
   boxShadow?: string;
+  withBorder?: boolean;
+  borderStyle?: string;
   child: React.ReactNode;
   hoverColour?: string; // Optional hover background color
   hoverTextColour?: string; // Optional hover text color
@@ -22,10 +25,13 @@ const shadowOne =
   "0px 30px 9px 0px rgba(180, 191, 203, 0)";
 
 const Pill = ({
-  colour,
+  colour = "#f9fcfd",
   textColour,
+  textCase = "uppercase",
   shadow = false,
   boxShadow = shadowOne,
+  withBorder = false,
+  borderStyle = "1px solid #e4e6e7",
   child,
   hoverColour = "#14d6ff",
   hoverTextColour = "#ffffff",
@@ -40,8 +46,10 @@ const Pill = ({
         backgroundColor: isHovered ? hoverColour : colour,
         cursor: "pointer",
         color: isHovered ? hoverTextColour : textColour,
+        textTransform: textCase,
         boxShadow: shadow ? boxShadow : "none",
-        padding: "0.4rem 1rem",
+        border: withBorder ? borderStyle : "none",
+        padding: "0.6rem 0.8rem",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

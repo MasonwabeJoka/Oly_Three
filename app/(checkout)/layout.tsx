@@ -17,7 +17,8 @@ export default async function CheckoutLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = await withAuth();
+  const auth = await withAuth();
+  const { accessToken, ...initialAuth } = auth;
 
   return (
     <html
@@ -26,7 +27,7 @@ export default async function CheckoutLayout({
       data-scroll-behavior="smooth"
     >
       <body className={`${outfit.variable} ${styles.body}`}>
-        <LayoutWrapper currentUser={user}>
+        <LayoutWrapper currentUser={auth.user} initialAuth={initialAuth}>
           <div className={styles.wrapper}>
             <div className={styles.main}>
               <div className={styles.children}>

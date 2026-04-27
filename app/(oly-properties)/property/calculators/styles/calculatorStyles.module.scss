@@ -1,0 +1,60 @@
+@use "@/utils/variables" as *;
+@use "@/utils/functions" as *;
+@use "@/utils/breakpoints" as *;
+
+.container {
+  .calculator {
+    display: flex;
+    gap: rem(112);
+    .inputSection {
+      .control {
+        margin-bottom: rem(20);
+      }
+    }
+
+    .resultSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: rem(514);
+      height: fit-content;
+      background-color: $white-three;
+      padding: rem(32);
+      border-radius: rem(40);
+
+      .title {
+        font-size: $extra-tiny !important;
+        text-transform: uppercase;
+        letter-spacing: rem(1.1);
+        // font-weight: 600;
+      }
+
+      .resultValue {
+        font-size: $h4;
+        margin-bottom: rem(48);
+      }
+
+      .subItems {
+        margin-top: rem(-32);
+        margin-bottom: rem(32);
+        .subItem {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: rem(16);
+        }
+      }
+
+      .note {
+        font-size: $tiny;
+        color: $black-four;
+        margin-bottom: rem(16);
+        width: 90%;
+      }
+
+      .share {
+        margin-top: rem(32);
+        font-size: $tiny;
+      }
+    }
+  }
+}

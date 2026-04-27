@@ -4,10 +4,11 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import ExternalAd from "@/components/ExternalAd";
 import HeroSection from "@/components/HeroSection";
 import FeaturedServices from "@/components/FeaturedServicesFrontend";
-import Calculators from "@/app/(oly-properties)/properties/components/Calculators";
+// import Calculators from "@/app/(oly-properties)/properties/components/Calculators";
 import FeaturedListings from "@/components/FeaturedListings";
 import OlyArticles from "@/components/OlyArticles";
 import SponsoredArticles from "@/components/SponsoredArticles";
+import Calculators from "@/app/(oly-properties)/property/components/Calculators";
 const Page = () => {
   return (
     <div className={styles.container}>
@@ -22,7 +23,7 @@ const Page = () => {
             }
           >
             <HeroSection
-              category="vehicles"
+              site="oly-auto"
               mainTitle=" South Africa’s leading car marketplace. Oly Auto a modern approach — it's easier to buy, sell, and discover your next ride"
             />
           </Suspense>

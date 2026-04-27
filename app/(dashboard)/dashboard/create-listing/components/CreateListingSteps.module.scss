@@ -3,10 +3,18 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: rem(1185);
   width: 100%;
-  min-height: 100vh;
+min-height: 100vh;
+
+
+  .progressBar {
+    width: 100%;
+  
+  }
 }

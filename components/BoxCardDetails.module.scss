@@ -12,19 +12,19 @@
   background-color: $grey-one;
   color: $black-three;
   width: rem(310);
-  min-height: rem(96);
   z-index: 1;
   border-radius: rem(0) rem(0) rem(40) rem(40);
   padding: 0 rem(8) rem(8) rem(8);
-
+  
   .titleAndDescription {
+    min-height: rem(96);
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 80%;
 
     .title {
-      padding: rem(8) rem(0) rem(4) rem(20);
+      padding: rem(0) rem(0) rem(4) rem(20);
       line-height: 1.2;
       text-transform: uppercase;
     }
@@ -34,11 +34,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: rem(96);
     padding: rem(16);
     text-align: center;
     font-size: $h4 !important;
     font-weight: 600;
-    margin-top: rem(-12);
   }
 
   .titleAndPrice {

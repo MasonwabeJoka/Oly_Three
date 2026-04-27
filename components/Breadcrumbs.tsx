@@ -41,7 +41,11 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
               {breadcrumb.name}
             </Link>
             {index !== breadcrumbs.length - 1 && (
-              <span style={{ margin: "0 1rem" }}>{` > `}</span>
+              //https://www.madeintext.com/bullet-point/
+              // <span style={{ margin: "0 1rem" }}>{` ≫ `}</span>
+              // <span style={{ margin: "0 1rem" }}>{` » `}</span>
+              // <span style={{ margin: "0 1rem" }}>{` ∷ `}</span>
+              <span style={{ margin: "0 1rem" }}>{` ➜ `}</span>
               // <span style={{ margin: "0 1rem" }}>{` • `}</span>
             )}
           </li>

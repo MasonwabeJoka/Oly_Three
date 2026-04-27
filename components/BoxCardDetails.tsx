@@ -4,7 +4,15 @@ import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import Icon from "./Icon";
 
 type DetailsProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+    site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   isCardHovered: boolean;
   title?: string;
   description?: string;
@@ -38,7 +46,7 @@ const FEATURES = [
 ];
 
 export const BoxCardDetails: React.FC<DetailsProps> = ({
-  category,
+  site,
   isCardHovered,
   title,
   description,
@@ -49,15 +57,15 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
 
   const getDetailsClass = () => {
     let className = styles.details;
-    if ((category === "all" || category === "shops") && isCardHovered)
+    if ((site === "oly" || site === "oly-shops") && isCardHovered)
       className += ` ${styles.detailsHovered}`;
-    if (category === "property") className += ` ${styles.property}`;
-    if (category === "vehicles") className += ` ${styles.vehicles}`;
+    if (site === "oly-properties") className += ` ${styles.property}`;
+    if (site === "oly-auto") className += ` ${styles.vehicles}`;
     return className;
   };
 
   const renderContent = () => {
-    if (category === "all" || category === "shops") {
+    if (site === "oly" || site === "oly-shops") {
       const titleLength = isCardHovered ? 96 : 64;
       const PriceTag = isCardHovered ? "h3" : "p";
 
@@ -85,7 +93,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
       );
     }
 
-    if (category === "property") {
+    if (site === "oly-properties") {
       return (
         <>
           <div className={styles.titleAndPrice}>
@@ -121,7 +129,7 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
         </>
       );
     }
-    if (category === "vehicles") {
+    if (site === "oly-auto") {
       return (
         <>
           <div className={styles.titleAndPrice}>
@@ -169,10 +177,10 @@ export const BoxCardDetails: React.FC<DetailsProps> = ({
     return null;
   };
 
-  return category === "all" ||
-    category === "shops" ||
-    category === "property" ||
-    category === "vehicles" ? (
+  return site === "oly" ||
+    site === "oly-shops" ||
+    site === "oly-properties" ||
+    site === "oly-auto" ? (
     <div className={getDetailsClass()}>{renderContent()}</div>
   ) : null;
 };

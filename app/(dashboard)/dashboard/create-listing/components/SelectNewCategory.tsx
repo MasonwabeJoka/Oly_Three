@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Button from "@/components/Buttons";
-import Modal from "@/components/Modal";
-import useFormStore from "../store/useFormStore";
-import CategoryChangeWarning from "./CategoryChangeWarning";
 import styles from "./SelectNewCategory.module.scss";
 import ExitButton from "@/components/ExitButton";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface SelectNewCategoryProps {
   onNext?: () => void;
@@ -16,34 +13,21 @@ interface SelectNewCategoryProps {
 }
 
 const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
-  const { currentStepIndex, setCategoryPreviouslySelected, resetFormData } =
-    useFormStore();
-  const [showWarningModal, setShowWarningModal] = useState(false);
   const router = useRouter();
-
-  const handleSelectNewCategoryClick = () => {
-    // Show the warning modal instead of immediately proceeding
-    setShowWarningModal(true);
-  };
-
-  const handleCancelCategoryChange = () => {
-    // Close the modal and stay on current step
-    setShowWarningModal(false);
-  };
+  const pathname = usePathname();
+  const site = pathname.split('/')[3] || 'oly';
+  const continueUrl = `/dashboard/create-listing/${site}/title-and-description`;
 
   const handleContainerClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      router.push("/dashboard/create-listing/oly/title-and-description");
+      router.push(continueUrl);
     }
   };
 
   return (
     <div className={styles.container} onClick={handleContainerClick}>
       <div className={styles.wrapper}>
-        <Link
-          href="/dashboard/create-listing/oly/title-and-description"
-          className={styles.exitButtonContainer}
-        >
+        <Link href={continueUrl} className={styles.exitButtonContainer}>
           <ExitButton />
         </Link>
         <p className={styles.description}>
@@ -52,10 +36,7 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
         </p>
 
         <div className={styles.buttonContainer}>
-          <Link
-            href="/dashboard/create-listing"
-            className={styles.continueButtonContainer}
-          >
+          <Link href={continueUrl} className={styles.continueButtonContainer}>
             <Button
               buttonChildren="Complete Current Listing"
               buttonType="primary"
@@ -75,23 +56,11 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
             type="button"
             ariaLabel="Select new category"
             autoFocus={false}
-            onClick={handleSelectNewCategoryClick}
+            onClick={() => router.push(`/dashboard/create-listing/${site}/confirm-new-listing`)}
             dashboard
           />
         </div>
       </div>
-
-      {/* Warning Modal */}
-      <Modal
-        showModal={showWarningModal}
-        setShowModal={setShowWarningModal}
-        path="/dashboard/create-listing/oly/title-and-description"
-        modalContent={
-          <CategoryChangeWarning
-          // onCancel={handleCancelCategoryChange}
-          />
-        }
-      />
     </div>
   );
 };

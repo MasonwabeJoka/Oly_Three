@@ -23,10 +23,11 @@ export default async function CheckoutLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = await withAuth();
+  const auth = await withAuth();
+  const { accessToken, ...initialAuth } = auth;
   return (
     <div className={styles.container}>
-      <CheckoutLayoutWrapper currentUser={user}>
+      <CheckoutLayoutWrapper currentUser={auth.user} initialAuth={initialAuth}>
         <div className={styles.main}>
           <main className={styles.children}>
             {children}

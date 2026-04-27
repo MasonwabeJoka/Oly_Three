@@ -1,5 +1,6 @@
 import styles from "./ChatBubble.module.scss";
 import Avatar from "@/components/Avatar";
+import { MessageStatus } from "@/features/messages/store/useMessageStore";
 
 interface ChatBubbleProps {
   isContact: boolean;
@@ -8,6 +9,7 @@ interface ChatBubbleProps {
   profilePicture: string;
   time: string;
   showAvatar: boolean;
+  status?: MessageStatus;
 }
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({
@@ -17,6 +19,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
   profilePicture,
   time,
   showAvatar,
+  status,
 }) => {
   return (
     <div
@@ -54,8 +57,18 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             {isContact && showAvatar && (
               <p className={styles.contactName}>{contactName}</p>
             )}
-            {!isContact && showAvatar && <p className={styles.userName}>Me</p>}
-            <p style={{ marginTop: !showAvatar ? "8px" : undefined }}>
+            {!isContact && showAvatar && (
+              <p className={styles.userName}>
+                {status === "sending" && (
+                  <span className={styles.tick}>✓</span>
+                )}
+                {status === "delivered" && "unread"}
+                {status === "seen" && (
+                  <span className={styles.tickSeen}>✓✓</span>
+                )}
+              </p>
+            )}
+            <p className={styles.message} style={{ marginTop: !showAvatar ? "8px" : undefined }}>
               {message}
             </p>
           </div>

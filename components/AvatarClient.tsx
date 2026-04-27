@@ -1,7 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "@/components/Image";
+import NextImage from "next/image";
 import styles from "./Avatar.module.scss";
+import Loading from "@/app/(oly-auto)/auto/loading";
+import LoadingSpinnerTwo from "./LoadingSpinnerTwo";
 
 interface AvatarClientProps {
   avatar: any;
@@ -30,6 +33,12 @@ const AvatarClient = ({
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(!!avatar);
 
+  useEffect(() => {
+    // Reset image state whenever the avatar source changes.
+    setHasError(false);
+    setIsLoading(!!avatar);
+  }, [avatar]);
+
   // Placeholder component
   const Placeholder = () => (
     <div
@@ -52,12 +61,15 @@ const AvatarClient = ({
       {!hasError && avatar ? (
         <>
           {isLoading && (
-            <div className={`${styles.skeleton} ${AVATAR_SIZE[avatarSize]}`} />
+            <div className={`${styles.skeleton} ${AVATAR_SIZE[avatarSize]}`}>
+              <LoadingSpinnerTwo size={2}/>
+            </div>
           )}
-          <Image
+          <NextImage
+            key={`avatar-${String(avatar)}`}
             src={avatar}
             alt={imageAlt}
-            fill={true}
+            fill
             sizes="(max-width: 768px) 100vw"
             style={{ width: "100%", objectFit: "cover", borderRadius: "50%" }}
             onLoad={() => setIsLoading(false)}

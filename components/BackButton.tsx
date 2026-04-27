@@ -1,44 +1,33 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import styles from "./ExitButton.module.scss";
 import Icon from "./Icon";
+import Button from "./Buttons";
 
 const BackButton = () => {
-    const router = useRouter();
+  const router = useRouter();
 
-    useEffect(() => {
-        const path = window.location.pathname;
-        if (!path.includes('/login') && !path.includes('/signup')) {
-            sessionStorage.setItem('lastNonAuthPage', path);
-        }
-    }, []);
+  const handleBack = () => {
+    router.back();
+  };
 
-    const handleBack = () => {
-        const lastPage = sessionStorage.getItem('lastNonAuthPage');
-        if (lastPage && lastPage !== window.location.pathname) {
-            router.push(lastPage);
-        } else {
-            router.push('/');
-        }
-    };
-    
   return (
-    <div
-      className={styles.container}
-      role="button"
-      tabIndex={0}
-      aria-label="Close chat"
+    <Button
+      buttonType="round"
+      buttonSize="medium"
+      name="back"
+      type="button"
+      ariaLabel="Go back"
+      autoFocus={false}
       onClick={handleBack}
-      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleBack();
-        }
-      }}
-    >
-      <Icon src="/icons/left-arrow.png" alt="Close chat icon" width={20} height={20} />
-    </div>
+      buttonChildren={
+        <Icon
+          src="/icons/left-arrow.png"
+          alt="Go back"
+          width={20}
+          height={20}
+        />
+      }
+    />
   );
 };
 

@@ -34,6 +34,7 @@ const AutoHeroSectionFields = async ({
             </div>
             <div className={styles.buttons}>
               <AutoSearchHome/>
+              {/* <AutoSearchByBudget/> */}
               {/* <AutoSearchByPrice/> */}
               {/* <FinancialAssistance/> */}
               {/* <MakeModel/> */}

@@ -12,12 +12,23 @@ import UploadVideos from "../components/UploadVideos";
 import UploadAttachments from "../components/UploadAttachments";
 import Location from "../components/Location";
 import PromoteYourAd from "../components/PromoteYourAds";
-import ReviewListing from "../components/ReviewListing";
 import ReviewAndSubmit from "../components/ReviewAndSubmit";
+
+// Step order (all sites):
+// 0. Select A Category
+// 1. Title & Description
+// 2. Price
+// 3. Product Details
+// 4. Location
+// 5. Upload Media
+// 6. Review Your Listing
+// 7. Promote Your Ad
+// 8. Bank Account Details
 
 export const getStepDefinitions = (
   isAuction: boolean,
-  handleNext: () => void
+  handleNext: () => void,
+  currentUser: any
 ): Record<SiteType, StepType[]> => ({
   oly: [
     {
@@ -52,10 +63,10 @@ export const getStepDefinitions = (
       fields: ["details.condition"] as FormDataFields[],
     },
     {
-      title: "Bank Account Details",
-      content: <BankAccountDetails onNext={handleNext} />,
-      path: "create-account",
-      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
+      title: "Location",
+      content: <Location onNext={handleNext} />,
+      path: "location",
+      fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
     },
     {
       title: "Upload Photos",
@@ -71,15 +82,15 @@ export const getStepDefinitions = (
     },
     {
       title: "Upload Attachments",
-      content: <UploadAttachments onNext={handleNext} />,
+      content: <UploadAttachments />,
       path: "upload-attachments",
       fields: ["uploadAttachments"] as FormDataFields[],
     },
     {
-      title: "Location",
-      content: <Location onNext={handleNext} />,
-      path: "location",
-      fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
+      title: "Review Your Listing",
+      content: <ReviewAndSubmit onNext={handleNext} />,
+      path: "review-and-submit",
+      fields: [] as FormDataFields[],
     },
     {
       title: "Promote Your Ad",
@@ -88,16 +99,10 @@ export const getStepDefinitions = (
       fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
     },
     {
-      title: "Review Listing",
-      content: <ReviewListing onNext={handleNext} />,
-      path: "review-listing",
-      fields: [] as FormDataFields[],
-    },
-    {
-      title: "Review Your Listing",
-      content: <ReviewAndSubmit onNext={handleNext} />,
-      path: "review-and-submit",
-      fields: [] as FormDataFields[],
+      title: "Bank Account Details",
+      content: <BankAccountDetails onNext={handleNext} />,
+      path: "create-account",
+      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
     },
   ],
   "oly-properties": [
@@ -108,10 +113,10 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Product Details",
-      content: <Details onNext={handleNext} />,
-      path: "details",
-      fields: ["details.condition"] as FormDataFields[],
+      title: "Ad Description",
+      content: <TitleAndDescription onNext={handleNext} />,
+      path: "title-and-description",
+      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
     },
     {
       title: "Price",
@@ -120,22 +125,10 @@ export const getStepDefinitions = (
       fields: ["price.pricingOption", "price.amount"] as FormDataFields[],
     },
     {
-      title: "Bank Account Details",
-      content: <BankAccountDetails onNext={handleNext} />,
-      path: "create-account",
-      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
-    },
-    {
-      title: "Ad Description",
-      content: <TitleAndDescription onNext={handleNext} />,
-      path: "title-and-description",
-      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
-    },
-    {
-      title: "Upload Media",
-      content: <UploadMedia onNext={handleNext} />,
-      path: "upload-media",
-      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
+      title: "Product Details",
+      content: <Details onNext={handleNext} />,
+      path: "details",
+      fields: ["details.condition"] as FormDataFields[],
     },
     {
       title: "Location",
@@ -144,42 +137,36 @@ export const getStepDefinitions = (
       fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
-      content: <PromoteYourAd onNext={handleNext} />,
-      path: "promote-your-ad",
-      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
-    },
-    {
-      title: "Review Listing",
-      content: <ReviewListing onNext={handleNext} />,
-      path: "review-message",
-      fields: [] as FormDataFields[],
+      title: "Upload Media",
+      content: <UploadMedia onNext={handleNext} />,
+      path: "upload-media",
+      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
     },
     {
       title: "Review Your Listing",
       content: <ReviewAndSubmit onNext={handleNext} />,
       path: "review-and-submit",
       fields: [] as FormDataFields[],
+    },
+    {
+      title: "Promote Your Ad",
+      content: <PromoteYourAd onNext={handleNext} />,
+      path: "promote-your-ad",
+      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
+    },
+    {
+      title: "Bank Account Details",
+      content: <BankAccountDetails onNext={handleNext} />,
+      path: "create-account",
+      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
     },
   ],
   "oly-auto": [
     {
-      title: "Product Details",
-      content: <Details onNext={handleNext} />,
-      path: "details",
-      fields: ["details.condition"] as FormDataFields[],
-    },
-    {
-      title: "Price",
-      content: <Price onNext={handleNext} />,
-      path: "price",
-      fields: ["price.pricingOption", "price.amount"] as FormDataFields[],
-    },
-    {
-      title: "Bank Account Details",
-      content: <BankAccountDetails onNext={handleNext} />,
-      path: "create-account",
-      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
+      title: "Select A Category",
+      content: <SelectACategory />,
+      path: "select-category",
+      fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
       title: "Ad Description",
@@ -188,10 +175,16 @@ export const getStepDefinitions = (
       fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
     },
     {
-      title: "Upload Media",
-      content: <UploadMedia onNext={handleNext} />,
-      path: "upload-media",
-      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
+      title: "Price",
+      content: <Price onNext={handleNext} />,
+      path: "price",
+      fields: ["price.pricingOption", "price.amount"] as FormDataFields[],
+    },
+    {
+      title: "Product Details",
+      content: <Details onNext={handleNext} />,
+      path: "details",
+      fields: ["details.condition"] as FormDataFields[],
     },
     {
       title: "Location",
@@ -200,22 +193,28 @@ export const getStepDefinitions = (
       fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
-      content: <PromoteYourAd onNext={handleNext} />,
-      path: "promote-your-ad",
-      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
-    },
-    {
-      title: "Review Listing",
-      content: <ReviewListing onNext={handleNext} />,
-      path: "review-message",
-      fields: [] as FormDataFields[],
+      title: "Upload Media",
+      content: <UploadMedia onNext={handleNext} />,
+      path: "upload-media",
+      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
     },
     {
       title: "Review Your Listing",
       content: <ReviewAndSubmit onNext={handleNext} />,
       path: "review-and-submit",
       fields: [] as FormDataFields[],
+    },
+    {
+      title: "Promote Your Ad",
+      content: <PromoteYourAd onNext={handleNext} />,
+      path: "promote-your-ad",
+      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
+    },
+    {
+      title: "Bank Account Details",
+      content: <BankAccountDetails onNext={handleNext} />,
+      path: "create-account",
+      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
     },
   ],
   "oly-hiring": [
@@ -226,10 +225,10 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Product Details",
-      content: <Details onNext={handleNext} />,
-      path: "details",
-      fields: ["details.condition"] as FormDataFields[],
+      title: "Ad Description",
+      content: <TitleAndDescription onNext={handleNext} />,
+      path: "title-and-description",
+      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
     },
     {
       title: "Price",
@@ -238,22 +237,10 @@ export const getStepDefinitions = (
       fields: ["price.pricingOption", "price.amount"] as FormDataFields[],
     },
     {
-      title: "Bank Account Details",
-      content: <BankAccountDetails onNext={handleNext} />,
-      path: "create-account",
-      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
-    },
-    {
-      title: "Ad Description",
-      content: <TitleAndDescription onNext={handleNext} />,
-      path: "title-and-description",
-      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
-    },
-    {
-      title: "Upload Media",
-      content: <UploadMedia onNext={handleNext} />,
-      path: "upload-media",
-      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
+      title: "Product Details",
+      content: <Details onNext={handleNext} />,
+      path: "details",
+      fields: ["details.condition"] as FormDataFields[],
     },
     {
       title: "Location",
@@ -262,22 +249,28 @@ export const getStepDefinitions = (
       fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
-      content: <PromoteYourAd onNext={handleNext} />,
-      path: "promote-your-ad",
-      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
-    },
-    {
-      title: "Review Listing",
-      content: <ReviewListing onNext={handleNext} />,
-      path: "review-message",
-      fields: [] as FormDataFields[],
+      title: "Upload Media",
+      content: <UploadMedia onNext={handleNext} />,
+      path: "upload-media",
+      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
     },
     {
       title: "Review Your Listing",
       content: <ReviewAndSubmit onNext={handleNext} />,
       path: "review-and-submit",
       fields: [] as FormDataFields[],
+    },
+    {
+      title: "Promote Your Ad",
+      content: <PromoteYourAd onNext={handleNext} />,
+      path: "promote-your-ad",
+      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
+    },
+    {
+      title: "Bank Account Details",
+      content: <BankAccountDetails onNext={handleNext} />,
+      path: "create-account",
+      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
     },
   ],
   "oly-services": [
@@ -288,10 +281,10 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Product Details",
-      content: <Details onNext={handleNext} />,
-      path: "details",
-      fields: ["details.condition"] as FormDataFields[],
+      title: "Ad Description",
+      content: <TitleAndDescription onNext={handleNext} />,
+      path: "title-and-description",
+      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
     },
     {
       title: "Price",
@@ -300,22 +293,10 @@ export const getStepDefinitions = (
       fields: ["price.pricingOption", "price.amount"] as FormDataFields[],
     },
     {
-      title: "Bank Account Details",
-      content: <BankAccountDetails onNext={handleNext} />,
-      path: "create-account",
-      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
-    },
-    {
-      title: "Ad Description",
-      content: <TitleAndDescription onNext={handleNext} />,
-      path: "title-and-description",
-      fields: ["titleAndDescription.title", "titleAndDescription.description"] as FormDataFields[],
-    },
-    {
-      title: "Upload Media",
-      content: <UploadMedia onNext={handleNext} />,
-      path: "upload-media",
-      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
+      title: "Product Details",
+      content: <Details onNext={handleNext} />,
+      path: "details",
+      fields: ["details.condition"] as FormDataFields[],
     },
     {
       title: "Location",
@@ -324,22 +305,28 @@ export const getStepDefinitions = (
       fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
-      content: <PromoteYourAd onNext={handleNext} />,
-      path: "promote-your-ad",
-      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
-    },
-    {
-      title: "Review Listing",
-      content: <ReviewListing onNext={handleNext} />,
-      path: "review-message",
-      fields: [] as FormDataFields[],
+      title: "Upload Media",
+      content: <UploadMedia onNext={handleNext} />,
+      path: "upload-media",
+      fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] as FormDataFields[],
     },
     {
       title: "Review Your Listing",
       content: <ReviewAndSubmit onNext={handleNext} />,
       path: "review-and-submit",
       fields: [] as FormDataFields[],
+    },
+    {
+      title: "Promote Your Ad",
+      content: <PromoteYourAd onNext={handleNext} />,
+      path: "promote-your-ad",
+      fields: ["promoteYourAd.promotionDuration"] as FormDataFields[],
+    },
+    {
+      title: "Bank Account Details",
+      content: <BankAccountDetails onNext={handleNext} />,
+      path: "create-account",
+      fields: ["createAccount.bankName", "createAccount.accountHolder", "createAccount.accountNumber"] as FormDataFields[],
     },
   ],
 });

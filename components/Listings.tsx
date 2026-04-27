@@ -14,7 +14,15 @@ import { useScrollAdjustments } from "@/hooks/useScrollAdjustments";
 
 interface ListingsClientProps {
   listings: ListingsQueryResult;
-  site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
 }
 
 export default function Listings({ listings, site }: ListingsClientProps) {
@@ -46,7 +54,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
       const hash = window.location.hash.substring(1);
       const element = document.getElementById(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [listings]);
@@ -66,16 +74,22 @@ export default function Listings({ listings, site }: ListingsClientProps) {
       <div className={styles.main}>
         <MenuModal showModal={false} setShowModal={() => {}} />
         <div className={styles.listingsContainer}>
-          <div className={styles.tabsContainer} ref={tabsContainerRef} id="tabsContainer">
-            <div className={styles.filters}>
-              <FilterTabs
-                site={site}
-                currentScreenSize={currentScreenSize}
-                collageViewWidth={collageViewWidth}
-                expanded={expanded}
-                optionsWidth={optionsWidth}
-              />
-            </div>
+          <div
+            className={styles.tabsContainer}
+            ref={tabsContainerRef}
+            id="tabsContainer"
+          >
+            {site !== "oly-properties" && (
+              <div className={styles.filters}>
+                <FilterTabs
+                  site={site}
+                  currentScreenSize={currentScreenSize}
+                  collageViewWidth={collageViewWidth}
+                  expanded={expanded}
+                  optionsWidth={optionsWidth}
+                />
+              </div>
+            )}
             <div className={styles.resultsToolbar}>
               <ResultsToolbar
                 site={site}

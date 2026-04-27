@@ -5,8 +5,8 @@ import UploadButton from "@/components/UploadButton";
 import Modal from "@/components/Modal";
 import VideoUploadForm from "./VideoUploadForm";
 import { useState } from "react";
-import Input from "@/components/Input";
 import { useFormContext } from "react-hook-form";
+
 
 const VideoUploadsSection = () => {
   const formContext = useFormContext();
@@ -15,7 +15,7 @@ const VideoUploadsSection = () => {
 
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
-  const [videoUrl, setVideoUrl] = useState("");
+ 
 
   const openModal = () => {
     setShowVideoUploadModal(true);
@@ -44,31 +44,13 @@ const VideoUploadsSection = () => {
       <div className={styles.buttonContainer}>
         <UploadButton
           mediaType="video"
-          colour="normal"
+          colour="primary"
           required={true}
           accept="video/*"
           onFileSelect={handleVideoUpload}
         />
 
-        <Input
-          className={styles.videoURL}
-          inputType="text"
-          inputSize="large"
-          placeholder="Enter Video URL"
-          label="Enter Video URL"
-          id="video-url"
-          ariaLabel="Video URL Field"
-          autoFocus={false}
-          autoComplete="off"
-          required={false}
-          dashboard
-          {...(register ? register("uploadMedia.videoUrl") : {})}
-          value={videoUrl}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setVideoUrl(e.target.value)
-          }
-          error={(errors?.uploadMedia as any)?.videoUrl?.message}
-        />
+    
       </div>
 
       <Modal

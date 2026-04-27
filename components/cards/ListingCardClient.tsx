@@ -9,7 +9,15 @@ import type { PortableTextBlock } from "sanity";
 import ListingCardSkeleton from "../skeletons/ListingCardSkeleton";
 
 type Props = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   listing: any | null;
   index: number;
   cardType: "expanded" | "box";
@@ -61,7 +69,7 @@ const CARD_SIZE = {
 };
 
 const ListingCardClient: React.FC<Props> = ({
-  category,
+  site,
   listing,
   id,
   index,
@@ -111,7 +119,7 @@ const ListingCardClient: React.FC<Props> = ({
     ? CARD_SIZE.feed[cardSize]
     : isDashboard
       ? CARD_SIZE.dashboard[cardSize]
-      : category === "property"
+      : site === "oly-properties"
         ? CARD_SIZE.property[cardSize]
         : CARD_SIZE.regular[cardSize];
 
@@ -125,7 +133,7 @@ const ListingCardClient: React.FC<Props> = ({
   return cardType === "box" ? (
     listing ? (
       <BoxCard
-        category={category}
+        site={site}
         sizeClass={sizeClass}
         imageUrls={imageUrls}
         aspectRatios={aspectRatios}
@@ -156,7 +164,7 @@ const ListingCardClient: React.FC<Props> = ({
   ) : cardType === "expanded" ? (
     listing ? (
       <ExpandedCard
-        category={category}
+        site={site}
         imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         isCardHovered={isCardHovered}

@@ -13,7 +13,24 @@
   margin-top: rem(-7);
   padding-bottom: rem(16);
   gap: rem(16);
+  
+  &::-webkit-scrollbar {
+    width: rem(4) !important;
+  }
 
+  &::-webkit-scrollbar-track {
+    margin-block: rem(80) !important;
+  }
+  @supports (scrollbar-width: thin) {
+    & {
+      scrollbar-width: thin;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-hover;
+    border-radius: rem(4);
+  }
   .option {
     display: flex;
     flex-direction: column;

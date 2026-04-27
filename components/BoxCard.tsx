@@ -1,9 +1,17 @@
 import styles from "./BoxCard.module.scss";
 import type { PortableTextBlock } from "sanity";
-import  BoxCardClient from "./BoxCardClient";
+import BoxCardClient from "./BoxCardClient";
 
 type BoxCardProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   sizeClass: string;
   imageUrls?: string[];
   aspectRatios?: number[];
@@ -27,7 +35,7 @@ type BoxCardProps = {
 };
 
 const BoxCard: React.FC<BoxCardProps> = ({
-  category,
+  site,
   sizeClass,
   imageUrls,
   aspectRatios,
@@ -51,10 +59,10 @@ const BoxCard: React.FC<BoxCardProps> = ({
 }) => {
   return (
     <>
-      {(category === "all" || category === "shops") && (
+      {(site === "oly" || site === "oly-shops") && (
         <article className={`${sizeClass} ${styles.boxCard}`}>
           <BoxCardClient
-            category={category}
+            site={site}
             sizeClass={sizeClass}
             imageUrls={imageUrls}
             aspectRatios={aspectRatios}
@@ -78,10 +86,10 @@ const BoxCard: React.FC<BoxCardProps> = ({
           />
         </article>
       )}
-      {category === "property" && (
+      {site === "oly-properties" && (
         <article className={`${sizeClass} ${styles.boxCard}`}>
           <BoxCardClient
-            category={category}
+            site={site}
             sizeClass={sizeClass}
             imageUrls={imageUrls}
             aspectRatios={aspectRatios}
@@ -105,10 +113,10 @@ const BoxCard: React.FC<BoxCardProps> = ({
           />
         </article>
       )}
-      {category === "vehicles" && (
+      {site === "oly-auto" && (
         <article className={`${sizeClass} ${styles.boxCard}`}>
           <BoxCardClient
-            category={category}
+            site={site}
             sizeClass={sizeClass}
             imageUrls={imageUrls}
             aspectRatios={aspectRatios}

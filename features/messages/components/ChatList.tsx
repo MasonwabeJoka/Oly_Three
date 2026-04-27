@@ -1,46 +1,49 @@
-import Avatar from "@/components/Avatar";
+"use client";
+
 import Input from "@/components/Input";
 import styles from "./ChatList.module.scss";
-import { Message } from "../store/useMessageStore";
-import useMessageStore from "../store/useMessageStore";
-import { useEffect } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import useMessageStore, { Chat } from "../store/useMessageStore";
+import { useMemo, useState } from "react";
+import ChatItem from "./ChatItem";
+import { useRouter } from "next/navigation";
 
 const ChatList: React.FC = () => {
-  const {
-    messages,
-    setSelectedChat,
-    setChats,
-    setUserMessages,
-    isLoading,
-    isInitialized,
-    initializeMessages,
-    handleChatClick,
-  } = useMessageStore();
+  const chats = useMessageStore((state) => state.chats);
+  const router = useRouter();
 
-  // Initialize messages on component mount
-  useEffect(() => {
-    if (!isInitialized) {
-      initializeMessages();
-    }
-  }, [isInitialized, initializeMessages]);
+  const [search, setSearch] = useState("");
 
-  const handleChatClickLocal = (message: Message): void => {
-    handleChatClick(message);
-  };
+  // ✅ filter chats
+  const filteredChats = useMemo(() => {
+    const query = search.toLowerCase().trim();
 
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLLIElement>,
-    message: Message
-  ): void => {
-    if (event.key === "Enter" || event.key === " ") {
-      handleChatClickLocal(message);
-    }
-  };
+    if (!query) return chats;
+
+    return chats.filter((chat) => {
+      const lastMessage = chat.messages[chat.messages.length - 1]?.text || "";
+
+      return (
+        chat.name.toLowerCase().includes(query) ||
+        lastMessage.toLowerCase().includes(query)
+      );
+    });
+  }, [chats, search]);
+
+  const sortedChats = useMemo(() => {
+    // sort compares 2 chats at a time based on last message timestamp
+    return [...filteredChats].sort((chatOne, chatTwo) => {
+      const lastMsgInChatOne =
+        chatOne.messages[chatOne.messages.length - 1]?.createdAt || 0;
+      const lastMsgInChatTwo =
+        chatTwo.messages[chatTwo.messages.length - 1]?.createdAt || 0;
+      return lastMsgInChatTwo - lastMsgInChatOne; // newer messages appear on top
+    });
+  }, [filteredChats]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerDiv} style={{ height: "96px" }}></div>
+      <div className={styles.headerDiv}></div>
+
       <div className={styles.searchBar}>
         <Input
           className={styles.search}
@@ -59,70 +62,19 @@ const ChatList: React.FC = () => {
           ariaLabel="Search chats"
           autoFocus={false}
           required={false}
+          value={search} 
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
         />
       </div>
+
       <ul className={styles.chats} role="list" aria-label="Recent chats">
-        {isLoading ? (
-          <LoadingSpinner />
+        {sortedChats.length === 0 ? (
+          <p className={styles.empty}>No chats found</p>
         ) : (
-          messages.map((message: Message) => (
-            <li
-              className={styles.chat}
-              key={message.id}
-              onClick={() => handleChatClickLocal(message)}
-              onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) =>
-                handleKeyDown(e, message)
-              }
-              role="button"
-              tabIndex={0}
-              aria-label={`Open chat with ${message.name}`}
-            >
-              <div className={styles.avatarContainer}>
-                <Avatar
-                  className={styles.avatar}
-                  avatar={message.profilePicture}
-                  avatarSize="regular"
-                  imageAlt={`${message.name}'s profile picture`}
-                />
-              </div>
-              <div className={styles.textContainer}>
-                <p className={styles.name}>
-                  {message.name.length > 15
-                    ? message.name.slice(0, 15) + "..."
-                    : message.name}
-                </p>
-                <p className={styles.message}>
-                  {message.messages[0].text.length > 48
-                    ? message.messages[0].text.slice(0, 48) + "..."
-                    : message.messages[0].text}
-                </p>
-              </div>
-              <div className={styles.timeContainer}>
-                <p
-                  className={styles.messageCount}
-                  style={
-                    message.messages.length > 9
-                      ? {
-                          width: "auto",
-                          height: "1rem",
-                          borderRadius: "0.5rem",
-                          padding: "0 0.7rem",
-                        }
-                      : {
-                          width: "1rem",
-                          height: "1rem",
-                          borderRadius: "50%",
-                          padding: "0",
-                        }
-                  }
-                >
-                  {message.messages.length > 10
-                    ? "9+"
-                    : message.messages.length}
-                </p>
-                <div className={styles.time}>{message.createdAt}</div>
-              </div>
-            </li>
+          sortedChats.map((chat: Chat) => (
+            <ChatItem key={chat.id} chat={chat} onSelect={(id) => router.push(`/dashboard/messages/${id}`)} />
           ))
         )}
       </ul>
