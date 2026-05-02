@@ -12,22 +12,24 @@ interface UploadPhotosProps {
 const UploadPhotos = ({ onNext }: UploadPhotosProps) => {
   const { uploadedImages } = useUploadFiles();
   const { setValue } = useFormContext();
-  const bottomRef = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     setValue("uploadPhotos", uploadedImages);
   }, [uploadedImages, setValue]);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [uploadedImages]);
+
 
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Upload Photos</h1>
+        <p className={styles.description}>
+          Add clear photos of your item so buyers can quickly understand what
+          you are offering.
+        </p>
         <ImageUploadSection isDashboard uploadedFiles={uploadedImages} />
-        <div ref={bottomRef} />
+     
       </div>
     </div>
   );

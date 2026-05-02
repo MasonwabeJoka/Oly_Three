@@ -145,11 +145,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
 
   return (
     <div className={styles.container}>
-      {!isMobile && (
-        <Link href="/" className={styles.logo} style={logoStyles}>
-          <Image src="/logo.png" width={80} height={33.3} alt="logo" />
-        </Link>
-      )}
+    
 
       <Link
         href="/dashboard/settings/profile-settings"

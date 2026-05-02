@@ -33,7 +33,8 @@ const PromoteYourAd = ({ onNext }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper} style={{ marginLeft }}>
-        <h4 className={styles.title}>Promote Your Ads</h4>
+        <h2 className={styles.title}>Promote Your Ads</h2>
+        <p className={styles.description}>Boost your ad’s visibility to reach more buyers. Choose from different promotion options to help your listing stand out.</p>
         <ul className={styles.cards}>
           {PromoteYourAdData[1].map((promotion) => {
             const { id, promotionChannel, title, promotionPrice, icon } =

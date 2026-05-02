@@ -4,7 +4,7 @@
 
 .container {
   padding: rem(50);
-  overflow: hidden;
+  overflow: auto;
 }
 
 .productSpecificationContainer {
@@ -24,7 +24,7 @@
     &.open {
     opacity: 1;
     transform: translateY(0);
-  margin-bottom: rem(180);
+  margin-bottom: rem(32);
 
   }
 

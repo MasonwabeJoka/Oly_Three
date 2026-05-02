@@ -32,6 +32,7 @@ export interface StepType {
   content: React.ReactNode;
   path: string;
   fields: FormDataFields[];
+  alignContentToBottom?: boolean;
 }
 
 export type FormData = {

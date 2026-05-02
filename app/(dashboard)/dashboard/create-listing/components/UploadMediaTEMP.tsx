@@ -12,6 +12,11 @@ const UploadMedia = ({ onNext }: UploadMediaProps) => {
     useUploadMediaStore();
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>Upload Media</h2>
+      <p className={styles.description}>
+        Choose which media types you want to add to your listing: images,
+        videos, and attachments.
+      </p>
       <div className={styles.mediaType}>
         <div className={styles.buttonContainer}>
           <Button

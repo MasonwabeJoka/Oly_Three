@@ -4,54 +4,80 @@ import VideoUploadCard from "@/components/cards/VideoUploadCard";
 import UploadButton from "@/components/UploadButton";
 import Modal from "@/components/Modal";
 import VideoUploadForm from "./VideoUploadForm";
-import { useState } from "react";
-import { useFormContext } from "react-hook-form";
-
+import useUploadFiles from "@/app/(dashboard)/dashboard/create-listing/store/useUploadFiles";
+import { useCallback, useEffect, useState } from "react";
+import { DropZone, Text } from "react-aria-components";
 
 const VideoUploadsSection = () => {
-  const formContext = useFormContext();
-  const register = formContext?.register;
-  const errors = formContext?.formState?.errors;
-
+  const uploadedVideos = useUploadFiles((state) => state.uploadedVideos);
+  const addVideo = useUploadFiles((state) => state.addVideo);
+  const cleanupEmptyFiles = useUploadFiles((state) => state.cleanupEmptyFiles);
   const [showVideoUploadModal, setShowVideoUploadModal] = useState(false);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState<string | null>(null);
- 
 
-  const openModal = () => {
-    setShowVideoUploadModal(true);
-  };
-  const handleVideoUpload = (file: File) => {
-    const url = URL.createObjectURL(file);
-    setUploadedVideoUrl(url);
-    openModal();
-  };
+  useEffect(() => {
+    cleanupEmptyFiles();
+  }, [cleanupEmptyFiles]);
 
-  const videoPaths = [
-    "https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4",
-    "https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4",
-    "https://stream.mux.com/fXNzVtmtWuyz00xnSrJg4OJH6PyNo6D02UzmgeKGkP5YQ/low.mp4",
-  ];
+  const handleVideoDrop = useCallback(
+    (file: File) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const url = reader.result as string;
+        if (!url?.trim()) return;
+        addVideo(url);
+        setUploadedVideoUrl(url);
+        setShowVideoUploadModal(true);
+      };
+      reader.readAsDataURL(file);
+    },
+    [addVideo],
+  );
+
+  const handleVideoUpload = useCallback((file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = reader.result as string;
+      if (!url?.trim()) return;
+      setUploadedVideoUrl(url);
+      setShowVideoUploadModal(true);
+    };
+    reader.readAsDataURL(file);
+  }, []);
+  const hasUploadedVideos =
+    uploadedVideos.filter((videoUrl) => videoUrl && videoUrl.trim() !== "").length > 0;
 
   return (
     <div className={styles.container}>
-      <div
-        className={`${styles.uploadedVideosContainer} ${videoPaths.length > 0 ? styles.hasVideos : ""}`}
+      <DropZone
+        className={`${styles.dropzone} ${uploadedVideos.length > 0 ? styles.hasVideos : ""}`}
+        onDrop={async (e: any) => {
+          for (const item of e.items) {
+            if (item.kind !== "file") continue;
+            const file = await item.getFile();
+            if (file.type.startsWith("video/")) {
+              handleVideoDrop(file);
+            }
+          }
+        }}
       >
-        {videoPaths.map((videoPath, index) => (
+        {!hasUploadedVideos && <Text className={styles.text}>Drop Video Here</Text>}
+        {uploadedVideos.map((videoPath, index) => (
           <VideoUploadCard key={index} videoPath={videoPath} index={index} />
         ))}
-      </div>
-      <div className={styles.buttonContainer}>
-        <UploadButton
-          mediaType="video"
-          colour="primary"
-          required={true}
-          accept="video/*"
-          onFileSelect={handleVideoUpload}
-        />
+        <div className={styles.buttonContainer}>
+          <UploadButton
+            mediaType="video"
+            colour="primary"
+            size="small"
+            required={true}
+            accept="video/*"
+            className={styles.uploadButton}
+            onFileSelect={handleVideoUpload}
+          />
+        </div>
+      </DropZone>
 
-    
-      </div>
 
       <Modal
         showModal={showVideoUploadModal}

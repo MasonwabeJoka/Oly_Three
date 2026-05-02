@@ -4,7 +4,6 @@ import ImageUploadSection from "./ImageUploadSection";
 import useUploadFiles from "../store/useUploadFiles";
 import { useEffect, useState } from "react";
 import AttachmentUploadSection from "@/components/AttachmentUploadSection";
-import { attachments } from "@/data/attachments";
 import { useFormContext } from "react-hook-form";
 import VideoUploadsSection from "./VideoUploadsSection";
 
@@ -53,7 +52,7 @@ const UploadMedia = ({ onNext }: Props) => {
       <div
         className={`${styles.mediaSection} ${styles.uploadedAttachmentsContainer}`}
       >
-        <AttachmentUploadSection attachments={attachments} />
+        <AttachmentUploadSection />
       </div>
     </div>
   );

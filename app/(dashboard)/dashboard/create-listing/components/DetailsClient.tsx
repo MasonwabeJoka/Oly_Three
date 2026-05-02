@@ -11,6 +11,8 @@ import ItemsList from "./ItemsList";
 import Form from "next/form";
 import useIsSelectOpen from "../store/useIsSelectOpen";
 
+
+// Todo: Make sure Add Product Details select always shows "Add Product Details" when closed 
 export interface DetailItem {
   selectDetail: string;
   value: string;
@@ -199,7 +201,7 @@ const DetailsClient = ({
     <div>
       <div className={styles.container}>
         <h2 className={styles.title}>Product Details</h2>
-
+<p className={styles.description}>Add key details about your item, such as its condition and important attributes. You can include multiple details and specifications to help buyers better understand what you’re selling.</p>
         <div className={styles.form}>
           <div className={styles.formElements}>
             <div className={styles.conditionsContainer}>

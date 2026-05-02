@@ -1,16 +1,12 @@
 "use client";
 import styles from "./ImageUploadSection.module.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/scrollbar";
-import NavButtons from "@/components/NavButtons";
 import Image from "@/components/Image";
 import Icon from "@/components/Icon";
 import useUploadFiles from "@/app/(dashboard)/dashboard/create-listing/store/useUploadFiles";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import UploadButton from "@/components/UploadButton";
 import Masonry from "react-masonry-css";
+import { DropZone, Text } from "react-aria-components";
 
 type Props = {
   uploadedFiles: string[];
@@ -18,33 +14,16 @@ type Props = {
 };
 
 const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
-  const { removeImage, reorderFiles, cleanupEmptyFiles } = useUploadFiles();
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const addImage = useUploadFiles((state) => state.addImage);
+  const removeImage = useUploadFiles((state) => state.removeImage);
+  const reorderFiles = useUploadFiles((state) => state.reorderFiles);
+  const cleanupEmptyFiles = useUploadFiles((state) => state.cleanupEmptyFiles);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const prevCountRef = useRef(uploadedFiles.length);
   const isReordering = useRef(false);
 
-  // Cleanup empty files on mount
   useEffect(() => {
     cleanupEmptyFiles();
   }, [cleanupEmptyFiles]);
-
-  // Handle slide navigation
-  useEffect(() => {
-    if (!swiperInstance) return;
-
-    // Only trigger for net new additions (not reorders)
-    if (
-      prevCountRef.current !== null &&
-      uploadedFiles.length > prevCountRef.current &&
-      !isReordering.current
-    ) {
-      swiperInstance.slideTo(uploadedFiles.length - 1);
-    }
-
-    prevCountRef.current = uploadedFiles.length;
-    isReordering.current = false;
-  }, [uploadedFiles.length, swiperInstance]);
 
   // Drag handlers
   const handleDragStart = (e: React.DragEvent, index: number) => {
@@ -58,7 +37,6 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
     e.dataTransfer.effectAllowed = "move";
     const dragImage = document.createElement("img");
     e.dataTransfer.setDragImage(dragImage, 0, 0);
-    swiperInstance?.disable();
   };
 
   const handleDragOver = (e: React.DragEvent, index: number) => {
@@ -71,9 +49,6 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
 
   const handleDragEnd = () => {
     setDraggedIndex(null);
-
-    // Re-enable Swiper
-    if (swiperInstance) swiperInstance.enable();
 
     // Remove all drag-over styles
     document.querySelectorAll(`.${styles.dragOver}`).forEach((el) => {
@@ -91,22 +66,48 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
     newFiles.splice(targetIndex, 0, movedFile);
     reorderFiles(newFiles);
     setDraggedIndex(null);
-    swiperInstance?.enable();
   };
 
   const breakpointColumnsObj = {
     default: isDashboard ? 4 : 5,
   };
+  const hasUploadedImages =
+    uploadedFiles.filter((imageUrl) => imageUrl && imageUrl.trim() !== "").length > 0;
+
+  const processFile = useCallback(
+    (file: File) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const url = reader.result as string;
+        if (url?.trim()) addImage(url);
+      };
+      reader.readAsDataURL(file);
+    },
+    [addImage],
+  );
 
   return (
     <div className={styles.container}>
-         <Masonry
-          className={`${styles.content} ${uploadedFiles.length > 0 ? styles.hasImages : ''}`}
+      <DropZone
+        className={`${styles.dropzone} ${uploadedFiles.length > 0 ? styles.hasImages : ""}`}
+        onDrop={async (e: any) => {
+          for (const item of e.items) {
+            if (item.kind !== "file") continue;
+            const file = await item.getFile();
+            if (file.type.startsWith("image/")) {
+              processFile(file);
+            }
+          }
+        }}
+      >
+        {!hasUploadedImages && <Text className={styles.text}>Drop Photos Here</Text>}
+        <Masonry
+          className={styles.masonry}
           breakpointCols={breakpointColumnsObj}
           columnClassName={styles.listingsContainerColumns}
         >
           {uploadedFiles
-            .filter((imageUrl) => imageUrl && imageUrl.trim() !== "") // Filter out empty or invalid URLs
+            .filter((imageUrl) => imageUrl && imageUrl.trim() !== "")
             .map((imageUrl, index) => (
               <div
                 key={`${imageUrl}-${index}`}
@@ -159,18 +160,18 @@ const ImageUploadSection = ({ uploadedFiles, isDashboard }: Props) => {
               </div>
             ))}
         </Masonry>
-
-        <div
-          className={`${styles.buttonContainer} ${styles.photosButtonContainer}`}
-        >
+        <div className={styles.buttonContainer}>
           <UploadButton
             mediaType="photo"
-            colour="normal"
+            colour="primary"
+            size="small"
             required={true}
             accept="image/*"
+            className={styles.uploadButton}
           />
-        </div> 
-      </div>
+        </div>
+      </DropZone>
+    </div>
   );
 };
 

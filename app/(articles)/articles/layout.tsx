@@ -1,9 +1,10 @@
 import Footer from "@/components/layouts/Footer";
-import styles from "./../global-styles/layout.module.scss";
+import styles from "./../../global-styles/layout.module.scss";
 
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
-import LayoutWrapper from "@/components/LayoutWrapper";
+import ArticleLayoutWrapper from "../components/ArticleLayoutWrapper";
+import Navbar from "@/components/layouts/Navbar";
 
 export const metadata = {
   title: "Oly Dashboard",
@@ -11,7 +12,7 @@ export const metadata = {
 };
 
 const outfit = localFont({
-  src: "../../public/fonts/Outfit-VariableFont_wght.ttf",
+  src: "../../../public/fonts/Outfit-VariableFont_wght.ttf",
   display: "swap",
   fallback: ["roboto", "system-ui", "arial"],
 });
@@ -28,8 +29,13 @@ export default async function Layout({
       data-scroll-behavior="smooth"
     >
       <body className={styles.body}>
-        <LayoutWrapper>
+        <ArticleLayoutWrapper>
           <div className={styles.wrapper}>
+           <Navbar
+              homeButton
+              
+
+           />
             <div className={styles.main}>
               {children}
               <Toaster
@@ -47,7 +53,7 @@ export default async function Layout({
           <footer className={styles.footer}>
             <Footer />
           </footer>
-        </LayoutWrapper>
+        </ArticleLayoutWrapper>
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ const FeaturedServicesSlideFrontend = () => {
 
   if(!data) return null;
 
-  const services = data.services || [];
+ 
   return (
     <div className={styles.container}>
       <div className={styles.featureContainer}>

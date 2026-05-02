@@ -74,12 +74,9 @@ const TitleAndDescription = ({ onNext }: Props) => {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.form}
-
-        // onSubmit={handleSubmit(onSubmitDetail)} // If you have a submit handler, add it here
-      >
-        <div className={styles.pageTitle}>Title & Description</div>
+    
+        <h2 className={styles.pageTitle}>Title & Description</h2>
+        <p className={styles.pageDescription}>Add a title and description to clearly explain your ad.</p>
         <div className={styles.titleContainer}>
           <Input
             className={styles.title}
@@ -119,7 +116,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
             label="Description"
           />
         </div>
-      </div>
+      
     </div>
   );
 };

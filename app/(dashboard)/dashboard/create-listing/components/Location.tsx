@@ -29,6 +29,7 @@ const Location = ({ onNext }: Props) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Location</h2>
+      <p className={styles.description}>Tell us where you’re located. Choose your province, city, and suburb, and add extra details if needed.</p>
       <div className={styles.selects}>
         <div className={styles.select}>
           <Select

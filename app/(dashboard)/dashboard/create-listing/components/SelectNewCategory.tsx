@@ -15,7 +15,7 @@ interface SelectNewCategoryProps {
 const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
   const router = useRouter();
   const pathname = usePathname();
-  const site = pathname.split('/')[3] || 'oly';
+  const site = pathname.split("/")[3] || "oly";
   const continueUrl = `/dashboard/create-listing/${site}/title-and-description`;
 
   const handleContainerClick = (e: React.MouseEvent) => {
@@ -27,9 +27,7 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
   return (
     <div className={styles.container} onClick={handleContainerClick}>
       <div className={styles.wrapper}>
-        <Link href={continueUrl} className={styles.exitButtonContainer}>
-          <ExitButton />
-        </Link>
+      
         <p className={styles.description}>
           Hold on! You haven't finished creating your listing. Do you want to
           complete it, or start over from scratch?
@@ -56,9 +54,25 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
             type="button"
             ariaLabel="Select new category"
             autoFocus={false}
-            onClick={() => router.push(`/dashboard/create-listing/${site}/confirm-new-listing`)}
+            onClick={() =>
+              router.push(
+                `/dashboard/create-listing/${site}/confirm-new-listing`,
+              )
+            }
             dashboard
           />
+          <Link href='/' className={styles.cancelContainer}>
+            <Button
+              buttonChildren="Cancel"
+              buttonType="normal"
+              buttonSize="large"
+              name="cancel"
+              type="button"
+              ariaLabel="Cancel"
+              autoFocus={false}
+              dashboard
+            />
+          </Link>
         </div>
       </div>
     </div>

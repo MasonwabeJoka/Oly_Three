@@ -43,12 +43,8 @@ const Price = ({ onNext }: Props) => {
   return (
     <div>
       <div className={styles.container}>
-        <h2
-          className={styles.title}
-          style={{ marginTop: priceType === "auction" ? "4rem" : "" }}
-        >
-          Price
-        </h2>
+        <h2 className={styles.title}>Price</h2>
+          <p className={styles.description}>Choose how you want to price your item. You can set a fixed price, allow negotiation, offer it for free, or ask buyers to contact you.</p>
         <div className={styles.mainSection}>
           <div className={styles.controls}>
             <Select

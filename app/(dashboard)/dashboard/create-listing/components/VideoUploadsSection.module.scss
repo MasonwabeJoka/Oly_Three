@@ -13,15 +13,31 @@
   @include only(tablet) {
   }
 
-  .uploadedVideosContainer {
+  .dropzone {
+ position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: rem(20);
-    width: rem(975);
+    justify-content: flex-end;
+    width: rem(420);
+    height: rem(360);
+    border-radius: rem(60);
+    background: $white-two;
+    box-shadow: $shadow-one;
 
     &.hasVideos {
       margin-bottom: rem(148);
+      box-shadow: none;
+      max-width: rem(1060);
+      width: 100%;
+      height: auto;
+      background: $white-four;
+    }
+
+      .text {
+      margin: auto;
+      font-size: $small;
+      text-transform: uppercase;
     }
 
     @include only(largeDesktop) {
@@ -42,14 +58,18 @@
 
   .buttonContainer {
     position: sticky;
-    bottom: rem(180);
+    bottom: rem(200);
+    z-index: 10;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: rem(20);
-    z-index: 20;
-    background-color: $white-four;
+    justify-content: center;
     width: 100%;
-    padding: rem(20) 0;
+    margin-bottom: rem(20);
+
+    .uploadButton {
+      background: $primary-hover;
+      color: white;
+      font-size: $tiny;
+        text-transform: uppercase;
+    }
   }
 }

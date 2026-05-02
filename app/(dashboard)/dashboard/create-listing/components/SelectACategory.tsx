@@ -21,6 +21,10 @@ const SelectACategory = () => {
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>Select a category</h2>
         </div>
+        <p className={styles.description}>
+          Choose the category that best matches your listing to help buyers find
+          it faster.
+        </p>
         <div className={styles.categoriesContainer}>
           {!isMobile && (
             <>
@@ -32,8 +36,8 @@ const SelectACategory = () => {
 
               {selectedCategoryId && (
                 <>
-                  <div className={styles.titleContainer}>
-                    <h2 className={styles.title}>
+                  <div className={styles.subcategoriesTitleContainer}>
+                    <h2 className={styles.subcategoriesTitle}>
                       {selectedCategory?.category}
                     </h2>
                   </div>

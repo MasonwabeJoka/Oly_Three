@@ -20,6 +20,10 @@ const UploadVideos = ({ onNext }: UploadVideosProps) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Upload Videos</h2>
+      <p className={styles.description}>
+        Add videos that highlight important details and demonstrate your item in
+        use.
+      </p>
 
       <div className={`${styles.mediaSection} ${styles.uploadedVideos}`}>
         <VideoUploadsSection />

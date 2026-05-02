@@ -125,47 +125,66 @@
     }
   }
 
-  .topBar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
-    padding: rem(72) 0;
-  }
+ 
 
   .wrapper {
     display: flex;
     justify-content: center;
     width: inherit;
 
-    .leftSideBar {
-      width: 20%;
+     .leftSideBar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: rem(280);
       padding: rem(12);
-      margin-left: rem(24);
+
       .categories {
         display: flex;
-        justify-content: center;
+        justify-content: left;
         flex-wrap: wrap;
         gap: rem(16);
-        .category {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: $white-one;
-          width: rem(232);
-          height: rem(56);
-          border-radius: rem(40);
-          box-shadow: $shadow-one;
-          cursor: pointer;
+        width: rem(300);
+        padding-top: rem(20);
+      }
+
+      .stickyCategories {
+        position: sticky;
+        top: rem(0);
+        z-index: 20;
+        background-color: $white-four;
+        padding-top: rem(20);
+        padding-bottom: rem(8);
+      }
+
+      .articleRecommendations {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        margin-top: rem(56);
+        .title {
+          font-size: $h3 !important;
+          font-weight: 600;
+          margin: 0 auto;
+          margin-bottom: rem(20);
         }
 
-        .category:hover {
-          background-color: $white-two;
+        .articles {
+          display: flex;
+          flex-direction: column;
+          gap: rem(32);
         }
       }
     }
     .main {
       width: 100%;
+       .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin-bottom: rem(32);
+  }
       .articlesContainer {
         display: flex;
         justify-content: center;

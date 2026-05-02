@@ -1,25 +1,25 @@
 "use client";
-import { use, Suspense } from "react";
+import { useParams } from "next/navigation";
 import CreateListingSteps from "../../components/CreateListingSteps";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useFormStore from "../../store/useFormStore";
 import { SiteType } from "../../types/listing.types";
 
-export default function CreateAListingStepPage({
-  params,
-}: {
-  params: Promise<{ site: string; step: string }>;
-}) {
-  const { site, step } = use(params);
+export default function CreateAListingStepPage() {
+  const params = useParams<{ site: string; step: string }>();
+  const site = params?.site;
+  const step = params?.step;
   const resetKey = useFormStore((state) => state.resetKey);
 
+  if (!site || !step) {
+    return <LoadingSpinner />;
+  }
+
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <CreateListingSteps
-        key={resetKey}
-        currentSite={site as SiteType}
-        currentStep={step}
-      />
-    </Suspense>
+    <CreateListingSteps
+      key={resetKey}
+      currentSite={site as SiteType}
+      currentStep={step}
+    />
   );
 }

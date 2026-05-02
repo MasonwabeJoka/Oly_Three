@@ -4,6 +4,7 @@ const TempArticle = () => {
   return (
     <article className={styles.article}>
       <div className={styles.articleContent}>
+        <p className={styles.articleDate}>28 Jan 25</p>
         <p className={styles.articleIntro}>
           In today's fast-paced world, productivity is more important than ever.
           Whether you're a student, professional, or entrepreneur, mastering

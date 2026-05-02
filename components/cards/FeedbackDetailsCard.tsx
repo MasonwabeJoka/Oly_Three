@@ -91,7 +91,7 @@ const FeedbackDetailsCard = ({
         {isReplying && (
           <TextInputBar
             containerClassName={styles.commentInput}
-            textareaClassName={styles.textarea}
+            className={styles.textarea}
             id="reply-textarea"
             name="reply-textarea"
             maxHeight={240}

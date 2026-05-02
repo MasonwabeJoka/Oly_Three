@@ -12,20 +12,32 @@
   &.open {
     opacity: 1;
     transform: translateY(0);
+
+    border-radius: rem(40);
+    padding: rem(32);
+    margin-bottom: rem(20);
   }
 
   .detail {
     display: flex;
-    align-items: center;
-    gap: rem(16);
+    align-items: flex-start;
     margin-bottom: rem(20);
-    width: rem(480);
+    width: rem(580);
+
+    .bulletPoint {
+        margin-right: rem(32);
+    }
+
+    .detailText {
+      font-weight: normal;
+      margin-right: rem(20);
+    }
 
     .detailButtons {
       display: flex;
       gap: rem(16);
       margin-left: auto;
-      margin-right: rem(24);
+      
       height: rem(30);
 
       .deleteButtonContainer,
@@ -39,11 +51,6 @@
         border-radius: 50%;
         cursor: pointer;
       }
-    }
-
-    .detailText {
-      font-weight: normal;
-      margin-left: rem(24);
     }
   }
 
@@ -73,7 +80,8 @@
       z-index: 10;
       background-color: $white-one;
       cursor: pointer;
-      box-shadow: 10px 10px 20px 0px rgba(169, 196, 203, 0.5),
+      box-shadow:
+        10px 10px 20px 0px rgba(169, 196, 203, 0.5),
         5px 5px 10px 0px rgba(169, 196, 203, 0.25);
 
       .iconContainer {

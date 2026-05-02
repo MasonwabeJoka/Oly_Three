@@ -34,7 +34,6 @@ interface ValidationRules {
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
   containerClassName?: string;
   textareaClassName?: string;
-  TextAreaClassName?: string;
   hasSubmitButton?: boolean;
   placeholder?: string;
   value?: string;
@@ -98,7 +97,6 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
     {
       className,
       textareaClassName,
-      TextAreaClassName,
       hasSubmitButton = true,
       placeholder = "",
       value = "",
@@ -314,7 +312,7 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
             </label>
           )}
           <div
-            className={`${styles.textareaWrapper} ${TextAreaClassName}`}
+            className={`${styles.textareaWrapper} `}
             onFocus={handleWrapperFocus}
             onBlur={handleWrapperBlur}
           >

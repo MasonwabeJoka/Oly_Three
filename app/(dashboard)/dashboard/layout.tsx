@@ -5,6 +5,8 @@ import "@uploadthing/react/styles.css";
 import DashboardLayoutWrapper from "./create-listing/components/DashboardLayoutWrapper";
 import DashboardSidebarData from "@/data/DashboardSidebarData";
 import { getWorkOS, withAuth } from "@workos-inc/authkit-nextjs";
+import Navbar from "@/components/layouts/Navbar";
+import BackButton from "@/components/BackButton";
 
 export const metadata = {
   title: "Oly Dashboard",
@@ -33,11 +35,16 @@ export default async function Layout({
   return (
     <html lang="en" className={`${outfit.className} ${styles.html}`} >
       <body className={styles.body}>
+        <Navbar
+            homeButton
+            rightButton={<BackButton />}
+          />
         <DashboardLayoutWrapper
           currentUser={currentUser}
           initialAuth={initialAuth}
           sidebarItems={sidebarItems}
         >
+          
           {children}
         </DashboardLayoutWrapper>
       </body>

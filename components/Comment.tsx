@@ -77,7 +77,7 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
       >
         {isReplying && (
           <TextInputBar
-            containerClassName={styles.commentInput}
+            className={styles.commentInput}
             textareaClassName={styles.textarea}
             id="reply-textarea"
             name="reply-textarea"

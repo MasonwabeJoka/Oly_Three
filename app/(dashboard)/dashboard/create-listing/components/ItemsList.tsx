@@ -1,7 +1,8 @@
 "use client";
-import styles from "./DetailsList.module.scss";
+import styles from "./ItemsList.module.scss";
 import DetailsEditMode from "./DetailsEditMode";
 import Icon from "@/components/Icon";
+import BulletPoint from "@/components/BulletPoint";
 
 interface Item {
   selectDetail?: string;
@@ -84,6 +85,9 @@ const ItemsList = ({
       {items.map((item, index) =>
         editIndex !== index ? (
           <li key={index} className={styles.detail}>
+            <div className={styles.bulletPoint}>
+              <BulletPoint/>
+            </div>
             <p className={styles.detailText}>{renderItemText(item)}</p>
             <div className={styles.detailButtons}>
               <div

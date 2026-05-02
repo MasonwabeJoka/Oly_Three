@@ -6,13 +6,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: rem(6);
+  gap: rem(12);
   font-size: $extra-tiny;
-  letter-spacing: rem(0.3 );
+  letter-spacing: rem(0.3);
+
   width: fit-content;
   height: fit-content;
   border-radius: rem(40);
   border: rem(1) solid $grey-one;
+
+  .child {
+    padding: 0 rem(8);
+  }
 
   .cancelButton {
     display: flex;

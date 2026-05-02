@@ -1,7 +1,9 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+@use "@/utils/mixins" as *;
 .container {
+  // position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,20 +22,41 @@
   }
 
   .title {
-    margin-top: rem(48);
-    margin-bottom: rem(48);
+    margin-top: rem(52);
+    margin-bottom: rem(32);
     color: $danger;
     font-weight: 500;
-    font-size: $h4;
-  }
-  .descriptionContainer {
-    margin-bottom: rem(48);
-width: 70%;
-    .description {
-      text-align: center;
-      padding: 0 rem(120);
-      margin-bottom: rem(16);
+    font-size: $small;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include only(largeDesktop) {
+      font-weight: 500;
+      margin-top: rem(96);
+      margin-bottom: rem(48);
     }
+    @include only(smallDesktop) {
+      font-weight: 500;
+      margin-top: rem(96);
+      margin-bottom: rem(48);
+    }
+    @include only(tablet) {
+      font-weight: 500;
+      margin-top: rem(96);
+      margin-bottom: rem(48);
+    }
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(48);
+    width: rem(360);
+    text-align: center;
+    font-size: $h4;
+    font-weight: bold;
+    color: $grey-four;
   }
   .reviewSectionContainer {
     display: flex;
@@ -43,7 +66,7 @@ width: 70%;
     padding: rem(48) rem(64);
     border-radius: rem(40);
     margin-bottom: rem(64);
-    background: rgba(255, 255, 255, 0.253);
+    background: $white-six;
     .descriptionContainer {
       margin-bottom: rem(64);
 
@@ -62,9 +85,21 @@ width: 70%;
   }
 
   .confirmation {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: rem(180);
+    padding-top: rem(32);
+    padding-bottom: rem(20);
+    z-index: 50;
     text-align: center;
-    padding: 0 rem(120);
-    margin-bottom: rem(64);
+    background: $white-four;
+    width: rem(1080);
+
+    p {
+      width: rem(640);
+    }
     .link {
       text-decoration: underline;
     }

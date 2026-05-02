@@ -9,16 +9,36 @@
   width: rem(1060);
   margin-bottom: auto;
 
-  .content {
+  .dropzone {
     position: relative;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    width: rem(1060);
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: rem(420);
+    height: rem(360);
+    border-radius: rem(60);
+    background: $white-two;
+    box-shadow: $shadow-one;
     &.hasImages {
       margin-bottom: rem(148);
+      box-shadow: none;
+      max-width: rem(1060);
+      width: 100%;
+      height: auto;
+      background: $white-four;
+    }
+
+    .text {
+      margin: auto;
+      font-size: $small;
+      text-transform: uppercase;
+    }
+
+    .masonry {
+      display: flex;
+      max-width: rem(1060);
+      width: 100%;
     }
     .fileContainer {
       position: relative;
@@ -32,7 +52,6 @@
       cursor: grab;
       overflow-y: auto;
       transition: transform 0.2s;
-
       touch-action: none; // Prevent conflicting touch events
       user-select: none; // Prevent text selection during drag
 
@@ -107,16 +126,22 @@
         border-radius: rem(20);
       }
     }
-  }
 
-  .buttonContainer {
-    position: sticky;
-    bottom: rem(180);
-    display: flex;
-    justify-content: center;
-    z-index: 20;
-    background-color: $white-four;
-    width: 110%;
-    padding-bottom: rem(20);
+    .buttonContainer {
+      position: sticky;
+      bottom: rem(200);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: rem(48);
+
+      .uploadButton {
+        background: $primary-hover;
+        color: white;
+        font-size: $tiny;
+        text-transform: uppercase;
+      }
+    }
   }
 }

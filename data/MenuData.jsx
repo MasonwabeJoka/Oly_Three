@@ -1,18 +1,19 @@
 export const MenuData = [
   {
     id: 1,
-    icon: "/icons/dashboard-sidebar/dashboard.png",
-    active_icon: "/icons/dashboard-sidebar/dashboard-hovered.png",
-    text: "Dashboard",
-    path: "/dashboard",
-  },
-  {
-    id: 2,
     icon: "/icons/dashboard-sidebar/create-listing.png",
     active_icon: "/icons/dashboard-sidebar/create-listing-hovered.png",
     text: "Create A Listing",
     path: "/dashboard/create-listing",
   },
+  {
+    id: 2,
+    icon: "/icons/dashboard-sidebar/dashboard.png",
+    active_icon: "/icons/dashboard-sidebar/dashboard-hovered.png",
+    text: "Dashboard",
+    path: "/dashboard",
+  },
+
   {
     id: 3,
     icon: "/icons/dashboard-sidebar/my-listings.png",

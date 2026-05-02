@@ -6,10 +6,12 @@ import Button from "@/components/Buttons";
 
 interface Props {
   mediaType: "photo" | "video" | "attachment";
+  size: "large" | "medium" | "small";
   required: boolean;
   value?: any;
   accept?: string;
   colour?: "normal" | "primary";
+  className?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFileSelect?: (file: File) => void;
 }
@@ -19,9 +21,11 @@ const UploadButton = ({
   colour = "normal",
   required,
   // value,
+  size="large",
   accept,
   onChange,
   onFileSelect,
+  className,
   ...otherProps
 }: Props) => {
   const [file, setFile] = useState<File | null>(null);
@@ -113,10 +117,10 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         />
 
         <Button
-          className={styles.uploadButton}
+          className={`${styles.uploadButton} ${className}`}
           buttonChildren={`Upload ${capitalizeFirstLetter(mediaType)}`}
           buttonType={colour}
-          buttonSize="large"
+          buttonSize={size}
           name="upload-btn"
           type="button"
           ariaLabel="Upload Button"

@@ -9,7 +9,8 @@
     margin-right: auto;
     margin-left: rem(32);
     margin-bottom: rem(20);
-    font-size: $body !important;
+    font-size: $tiny !important;
+    text-transform: uppercase;
 
     .count {
       margin-right: rem(8);

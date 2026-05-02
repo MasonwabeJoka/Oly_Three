@@ -38,9 +38,14 @@ const AuctionPrice = ({ onNext }: Props) => {
 
   const handlePriceChange = (
     event: ChangeEvent<HTMLInputElement>,
-    field: string
+    field: "startingPrice" | "buyNowPrice"
   ) => {
-    const valueAsNumber = parseFloat(event.target.value) || 0;
+    const rawValue = event.target.value.trim();
+    const valueAsNumber =
+      rawValue === "" ? undefined : Number.parseFloat(rawValue);
+
+    if (rawValue !== "" && Number.isNaN(valueAsNumber)) return;
+
     setValue(`price.${field}`, valueAsNumber, {
       shouldValidate: true,
       shouldDirty: true,
@@ -51,9 +56,11 @@ const AuctionPrice = ({ onNext }: Props) => {
   return (
     <div>
       <div className={styles.container}>
-        <h2 className={styles.title} style={{ marginTop: "4rem" }}>
-          Auction Price
-        </h2>
+        <h2 className={styles.title}>Auction Price</h2>
+        <p className={styles.description}>
+          Set your starting and buy-now prices, then choose when the auction
+          starts and how long it runs.
+        </p>
         <div className={styles.mainSection}>
           {!isPricingOptionsOpen && (
             <>
@@ -94,7 +101,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     inputSize="large"
                     placeholder="Buy Now Price"
                     autoFocus={false}
-                    required={true}
+                    required={false}
                     dashboard
                     error={(errors as any)?.price?.buyNowPrice?.message}
                     {...register("price.buyNowPrice", { valueAsNumber: true })}

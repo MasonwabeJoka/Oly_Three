@@ -20,13 +20,9 @@ const ReviewAndSubmit = ({ onNext }: Props) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Review Your Listing</h2>
-      <div className={styles.descriptionContainer}>
-        <p className={styles.description}>
-          Your listing is ready to go live. Please review all the details you’ve
-          entered, and when you’re ready, click “Continue”
-        </p>
-   
-      </div>
+      <p className={styles.description}>
+        Your listing is ready to go live. Review all details before you continue.
+      </p>
       <div className={styles.reviewSectionContainer}>
         <div className={styles.reviewSection}>
           <div className={styles.section}>
@@ -59,11 +55,11 @@ const ReviewAndSubmit = ({ onNext }: Props) => {
         </div>
       </div>
       <div className={styles.confirmation}>
-        By clicking the "Publish My Listing" button below, you confirm that all
+        <p>By clicking the "Proceed" button, you confirm that all
         the information provided is accurate and that you agree to our{" "}
         <Link href="#" className={styles.link}>
           terms and conditions.
-        </Link>
+        </Link></p>
       </div>
     </div>
   );

@@ -45,8 +45,8 @@ export const MainMenuItem: React.FC<Props> = ({
         className={styles.icon}
         src={active ? active_icon : icon}
         alt="Edit Icon"
-        width={isMobile ? 32 : 40}
-        height={isMobile ? 32 : 40}
+        width={isMobile ? 24 : 32}
+        height={isMobile ? 24 : 32}
       />
       {isMobile ? (
         <span className="sr-only">{label}</span>
@@ -66,17 +66,17 @@ export const LogoutMenuItem: React.FC<Props> = ({ data, onClick }) => {
   const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen);
   const isMobile = useResponsive("mobile", isSidebarOpen);
   return (
-    <div 
+    <div
       className={`${styles.menu} ${styles.logout}`}
       onClick={onClick}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: "pointer" }}
     >
       <Icon
         className={`${styles.logoutIcon} ${styles.icon}`}
         src={data[data.length - 1].icon}
         alt={data[data.length - 1].label}
-        width={isMobile ? 32 : 40}
-        height={isMobile ? 32 : 40}
+        width={isMobile ? 24 : 32}
+        height={isMobile ? 24 : 32}
       />
       {isMobile ? (
         <span className="sr-only">{data[data.length - 1].label}</span>

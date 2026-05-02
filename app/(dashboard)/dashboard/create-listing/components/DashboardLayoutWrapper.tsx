@@ -75,10 +75,8 @@ export default function DashboardLayoutWrapper({
               ...flexStyles,
             }}
           >
-            <div className={styles.backButton}>
-              <BackButton />
-            </div>
-            {/* {isVisible && <div className={styles.keepSidebarInPlace} />} */}
+        
+           
             {isVisible && (
               <aside className={styles.sidebarContainer}>
                 <div className={styles.sidebar}>

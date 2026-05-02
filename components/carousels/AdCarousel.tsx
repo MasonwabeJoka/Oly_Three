@@ -5,9 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard, Autoplay } from "swiper/modules";
 import NavButtonRight from "../navButtonRight";
 import NavButtonLeft from "../navButtonLeft";
-import "swiper/scss";
-import "swiper/scss/navigation";
-import "swiper/scss/pagination";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 

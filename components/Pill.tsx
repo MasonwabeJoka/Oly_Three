@@ -54,7 +54,7 @@ const Pill = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {child}
+      <div>{child}</div>
       {cancelButton && (
         <div
           className={styles.cancelButton}

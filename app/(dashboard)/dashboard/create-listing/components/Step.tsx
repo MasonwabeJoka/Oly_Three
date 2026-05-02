@@ -4,12 +4,7 @@ import styles from "./Step.module.scss";
 import Button from "@/components/Buttons";
 import useEditStore from "../store/useEditStore";
 import { useRouter, useSearchParams } from "next/navigation";
-
-interface StepType {
-  title: string;
-  content: React.ReactNode;
-  path: string;
-}
+import { StepType } from "../types/listing.types";
 
 interface StepProps {
   step: StepType;
@@ -46,23 +41,7 @@ const Step: React.FC<StepProps> = ({
     router.push(`/dashboard/create-listing/${site}/review-and-submit`);
   };
 
-  let proceedButtonText = "";
-
-  if (effectiveEditMode) {
-    proceedButtonText = "Accept Changes";
-  } else {
-    switch (step.path) {
-      case "review-and-submit":
-        proceedButtonText = "Looks Good, Continue";
-        break;
-      case "create-account":
-        proceedButtonText = "Publish My Listing";
-        break;
-      default:
-        proceedButtonText = "Proceed";
-        break;
-    }
-  }
+  const proceedButtonText = effectiveEditMode ? "Accept Changes" : "Proceed";
 
   const backButtonText = effectiveEditMode ? "Cancel" : "Back";
   const isUpdateProfileStep = step.path === "update-profile";
@@ -70,7 +49,13 @@ const Step: React.FC<StepProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.formWrapper}>
-        <div className={styles.content}>{step.content}</div>
+        <div
+          className={`${styles.content} ${
+            step.alignContentToBottom ? styles.contentPinnedBottom : ""
+          }`}
+        >
+          {step.content}
+        </div>
 
         <div className={styles.buttonsContainer}>
           <div className={styles.buttons}>
@@ -78,7 +63,7 @@ const Step: React.FC<StepProps> = ({
               <Button
                 className={styles.proceedButton}
                 buttonChildren={proceedButtonText}
-                buttonType={step.path === "create-account" ? "success" : "primary"}
+                buttonType="primary"
                 buttonSize="large"
                 name="proceed-btn"
                 type={isUpdateProfileStep ? "submit" : "button"}
