@@ -13,7 +13,7 @@ export const userStatusEnum = pgEnum("user_status", [
   "deleted",
 ]);
 
-export const listingDomainEnum = pgEnum("listing_domain", [
+export const listingSiteEnum = pgEnum("listing_site", [
   "auto",
   "property",
   "job",
@@ -76,4 +76,45 @@ export const promotionTypeEnum = pgEnum("promotion_type", [
   "bump",
   "urgent",
   "top",
+]);
+
+export const appSiteEnum = pgEnum("app_site", [
+  "oly",
+  "auto",
+  "properties",
+  "shops",
+  "hiring",
+  "services",
+]);
+
+export const siteAccessStatusEnum = pgEnum("site_access_status", [
+  "active",
+  "suspended",
+  "revoked",
+]);
+
+export const siteRoleEnum = pgEnum("site_role", [
+  "viewer",
+  "seller",
+  "manager",
+  "admin",
+  "owner",
+  "dealer",
+  "agent",
+  "recruiter",
+  "provider",
+]);
+
+export const shopStatusEnum = pgEnum("shop_status", [
+  "draft",
+  "active",
+  "suspended",
+  "closed",
+]);
+
+export const shopMemberRoleEnum = pgEnum("shop_member_role", [
+  "owner",
+  "admin",
+  "manager",
+  "staff",
 ]);

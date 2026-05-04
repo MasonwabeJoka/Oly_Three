@@ -7,7 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { id, timestamps } from "../common";
 import {
-  listingDomainEnum,
+  listingSiteEnum,
   listingStatusEnum,
   currencyEnum,
 } from "../enums";
@@ -19,7 +19,7 @@ export const listings = pgTable("listings", {
     .references(() => users.id)
     .notNull(),
   categoryId: varchar("category_id", { length: 36 }),
-  domain: listingDomainEnum("domain").notNull(),
+  domain: listingSiteEnum("domain").notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description").notNull(),
   price: integer("price"),

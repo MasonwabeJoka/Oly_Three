@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "npm run extract-variables && next build",
@@ -15,7 +18,8 @@
     "sync-articles": "node --loader ts-node/esm scripts/sync-articles.ts",
     "sync-articles-cron": "node sync-articles-working.cjs",
     "sync-articles-now": "node sync-articles-working.cjs",
-    "typegen": "sanity schema extract && sanity typegen generate --enforce-required-fields"
+    "typegen": "sanity schema extract && sanity typegen generate --enforce-required-fields",
+    "preinstall": "npx only-allow bun"
   },
   "dependencies": {
     "@adobe/css-tools": "^4.4.4",
@@ -196,6 +200,7 @@
     "jest": "^30.0.4",
     "node-loader": "^2.0.0",
     "nodemon": "^3.0.3",
+    "only-allow": "^1.2.2",
     "postcss": "^8.4.33",
     "postcss-loader": "^7.3.4",
     "sass": "^1.93.2",
