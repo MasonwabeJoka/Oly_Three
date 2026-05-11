@@ -1,6 +1,6 @@
 import {
   pgTable,
-  uuid,
+  text,
   boolean,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
@@ -12,7 +12,7 @@ export const userSiteMemberships = pgTable(
   "user_site_memberships",
   {
     id,
-    userId: uuid("user_id")
+    userId: text("user_id")
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
     site: appSiteEnum("site").notNull(),

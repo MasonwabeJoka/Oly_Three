@@ -1,8 +1,19 @@
 /** @type {import('next').NextConfig} */
 
+const allowedDevOrigins = (process.env.NEXT_PUBLIC_ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+  .map((origin) =>
+    origin.startsWith('http://') || origin.startsWith('https://')
+      ? origin
+      : `https://${origin}`
+  )
+
 const nextConfig = {
   output: 'standalone',
   cacheComponents: true,
+  allowedDevOrigins,
   serverExternalPackages: ["mongoose", "isomorphic-dompurify", "jsdom"],
   turbopack: {},
   sassOptions: {

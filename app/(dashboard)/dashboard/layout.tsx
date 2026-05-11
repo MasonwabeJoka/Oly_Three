@@ -27,9 +27,10 @@ export default async function Layout({
   const sidebarItems = DashboardSidebarData;
   const auth = await withAuth();
   const workos = getWorkOS();
-  const currentUser = auth.user
-    ? await workos.userManagement.getUser(auth.user.id)
-    : auth.user;
+  // const currentUser = auth.user
+  //   ? await workos.userManagement.getUser(auth.user.id)
+  //   : auth.user;
+  const currentUser = auth.user;
   const { accessToken, ...initialAuth } = auth;
   
   return (

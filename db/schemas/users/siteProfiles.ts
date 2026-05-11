@@ -1,6 +1,6 @@
 import {
   pgTable,
-  uuid,
+  text,
   jsonb,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
@@ -13,7 +13,7 @@ export const siteProfiles = pgTable(
   {
     id,
 
-    userId: uuid("user_id")
+    userId: text("user_id")
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
 

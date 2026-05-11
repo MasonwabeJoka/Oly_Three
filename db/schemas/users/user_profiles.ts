@@ -1,10 +1,10 @@
-import { pgTable, uuid, varchar, text } from "drizzle-orm/pg-core";
+import { pgTable, varchar, text } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { id, timestamps } from "../common";
 
 export const userProfiles = pgTable("user_profiles", {
   id,
-  userId: uuid("user_id")
+  userId: text("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .unique()
     .notNull(),

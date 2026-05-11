@@ -4,6 +4,7 @@ import {
   text,
   integer,
   index,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import { id, timestamps } from "../common";
 import {
@@ -11,11 +12,11 @@ import {
   listingStatusEnum,
   currencyEnum,
 } from "../enums";
-import { users } from "../user/user";
+import { users } from "../users/users";
 
 export const listings = pgTable("listings", {
   id,
-  ownerId: varchar("owner_id", { length: 36 })
+  ownerId: text("owner_id")
     .references(() => users.id)
     .notNull(),
   categoryId: varchar("category_id", { length: 36 }),

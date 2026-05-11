@@ -1,10 +1,10 @@
-import { pgTable, varchar, integer, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, varchar, integer, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { id, timestamps } from "../common";
 import { listings } from "./listing";
 
 export const listingAutoDetails = pgTable("listing_auto_details", {
   id,
-  listingId: varchar("listing_id", { length: 36 })
+  listingId: uuid("listing_id")
     .references(() => listings.id)
     .notNull(),
   make: varchar("make", { length: 100 }).notNull(),

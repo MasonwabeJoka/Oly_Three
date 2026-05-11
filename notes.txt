@@ -1,0 +1,8 @@
+ngrok url: https://29e9-102-66-142-172.ngrok-free.app/
+
+bun run dev:webhook or grok http 3000
+
+
+- DrizzleKit Studio
+
+bunx drizzle-kit studio

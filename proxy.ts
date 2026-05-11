@@ -1,12 +1,26 @@
 import { authkitMiddleware } from '@workos-inc/authkit-nextjs';
+import { NextResponse, type NextRequest } from 'next/server';
 
 
-export default authkitMiddleware({
+const authkit = authkitMiddleware({
   middlewareAuth: {
     enabled: true,
-    unauthenticatedPaths: ['/', '/listings', '/listings/:slug'],
+    unauthenticatedPaths: [
+      '/',
+      '/listings',
+      '/listings/:slug',
+      '/api/webhooks/workos/users',
+    ],
   },
 });
+
+export default async function proxy(req: NextRequest) {
+  if (req.nextUrl.pathname === '/api/webhooks/workos/users') {
+    return NextResponse.next();
+  }
+
+  return authkit(req);
+}
 
 export const config = {
   matcher: [

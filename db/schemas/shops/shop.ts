@@ -7,7 +7,7 @@ export const shops = pgTable(
   "shops",
   {
     id,
-    ownerUserId: uuid("owner_user_id")
+    ownerUserId: text("owner_user_id")
       .references(() => users.id, { onDelete: "restrict" })
       .notNull(),
     name: varchar("name", { length: 255 }).notNull(),
@@ -30,7 +30,7 @@ export const shopMembers = pgTable(
     shopId: uuid("shop_id")
       .references(() => shops.id, { onDelete: "cascade" })
       .notNull(),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
     role: shopMemberRoleEnum("role").default("staff").notNull(),

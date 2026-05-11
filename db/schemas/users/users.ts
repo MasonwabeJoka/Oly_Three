@@ -1,32 +1,18 @@
 import {
   pgTable,
   varchar,
-  uuid,
   text,
-  timestamp,
-  pgEnum,
 } from "drizzle-orm/pg-core";
 import { id, timestamps } from "../common";
-
-export const userRoleEnum = pgEnum("user_role", [
-  "buyer",
-  "seller",
-  "admin",
-]);
-
-export const userStatusEnum = pgEnum("user_status", [
-  "active",
-  "suspended",
-  "deleted",
-]);
+import { userRoleEnum, userStatusEnum } from "../enums";
 
 export const users = pgTable("users", {
-  id,
+  id: id,
   workosId: text("workos_id").unique().notNull(),
   firstName: varchar("first_name", { length: 255 }).notNull(),
   lastName: varchar("last_name", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).unique().notNull(),
-  phone: varchar("phone", { length: 20 }),
+  phoneNumber: varchar("phone", { length: 20 }),
   role: userRoleEnum("role").default("buyer").notNull(),
   status: userStatusEnum("status").default("active").notNull(),
   createdAt: timestamps.createdAt,

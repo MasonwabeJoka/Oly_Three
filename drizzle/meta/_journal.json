@@ -8,6 +8,27 @@
       "when": 1771769037389,
       "tag": "0000_motionless_rocket_racer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777892282543,
+      "tag": "0001_watery_william_stryker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777897779922,
+      "tag": "0002_brief_genesis",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1778498430826,
+      "tag": "0003_harsh_dazzler",
+      "breakpoints": true
     }
   ]
 }
