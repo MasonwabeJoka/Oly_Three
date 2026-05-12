@@ -9,6 +9,7 @@ export const userProfiles = pgTable("user_profiles", {
     .unique()
     .notNull(),
   displayName: varchar("display_name", { length: 255 }).notNull(),
+  phoneNumber: varchar("phone", { length: 20 }),
   avatarUrl: text("avatar_url"),
   bio: text("bio"),
   socialMediaName: varchar("social_media_name", { length: 100 }),
