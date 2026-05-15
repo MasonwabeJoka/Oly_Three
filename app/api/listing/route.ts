@@ -1,11 +1,15 @@
 import { createClient } from '@sanity/client';
-
 import ClientConfig from '@/sanityTemp/config/client-config';
 import { NextRequest, NextResponse } from 'next/server';
+import { ratelimit } from '@/lib/upstash/rate-limit';
 
 const client = createClient(ClientConfig);
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+
   const body = await req.json();
   // Authentication removed - no longer using Clerk
   const user: { id?: string } | null = { id: undefined };

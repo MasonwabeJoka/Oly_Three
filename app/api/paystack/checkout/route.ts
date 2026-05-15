@@ -3,6 +3,7 @@ import axios from 'axios';
 import { createClient } from '@sanity/client';
 import { z } from 'zod';
 import { fetchProducts } from '@/sanityTemp/actions/fetchProducts';
+import { ratelimit } from '@/lib/upstash/rate-limit';
 
 // Lazily initialize Sanity client so missing env vars don't crash the build
 function getSanityClient() {
@@ -37,6 +38,10 @@ const calculateTotalAmount = (price: number, olyFeePercent: number, payStackFeeP
 
 // Handle checkout POST request
 export async function POST(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+
   try {
     const client = getSanityClient();
 

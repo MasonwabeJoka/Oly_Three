@@ -1,17 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import ImageKit from "imagekit";
+import { ratelimit } from "@/lib/upstash/rate-limit";
 
-const imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC_KEY || "",
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY || "",
-  urlEndpoint:
-    process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT ||
-    process.env.IMAGEKIT_URL_ENDPOINT ||
-    "",
-});
+export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return NextResponse.json({ message: 'Too many requests' }, { status: 429 });
 
-export async function POST() {
   try {
     if (
       !process.env.IMAGEKIT_PUBLIC_KEY ||
@@ -29,6 +25,15 @@ export async function POST() {
     if (!user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+
+    const imagekit = new ImageKit({
+      publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+      privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+      urlEndpoint:
+        process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT ||
+        process.env.IMAGEKIT_URL_ENDPOINT ||
+        "",
+    });
 
     const authParams = imagekit.getAuthenticationParameters();
 

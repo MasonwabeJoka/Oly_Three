@@ -1,7 +1,12 @@
 // app/api/image/route.js
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { ratelimit } from '@/lib/upstash/rate-limit';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return new NextResponse('Too many requests', { status: 429 });
+
   const { searchParams } = new URL(request.url);
   const imageUrl = searchParams.get('url');
   

@@ -1,9 +1,15 @@
 import { fetchArticles } from '@/app/(articles)/articles/utils/newsdata';
 import { NextRequest } from 'next/server';
+import { ratelimit } from '@/lib/upstash/rate-limit';
+import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const options: Record<string, any> = {};

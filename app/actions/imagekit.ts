@@ -2,6 +2,8 @@
 
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import ImageKit from "imagekit";
+import { ratelimit } from "@/lib/upstash/rate-limit";
+import { headers } from "next/headers";
 
 type ImageKitAuthResult =
   | {
@@ -17,6 +19,10 @@ type ImageKitAuthResult =
     };
 
 export async function getImageKitAuthAction(): Promise<ImageKitAuthResult> {
+  const ip = (await headers()).get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return { success: false, message: 'Too many requests' };
+
   if (
     !process.env.IMAGEKIT_PUBLIC_KEY ||
     !process.env.IMAGEKIT_PRIVATE_KEY ||

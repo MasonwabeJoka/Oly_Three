@@ -2,6 +2,8 @@
 
 import { getWorkOS, refreshSession, withAuth } from "@workos-inc/authkit-nextjs";
 import { profileSchema } from "@/lib/validations/formValidations";
+import { ratelimit } from "@/lib/upstash/rate-limit";
+import { headers } from "next/headers";
 
 const updateProfileSchema = profileSchema.pick({
   name: true,
@@ -34,6 +36,10 @@ export type UpdateProfileResult = {
 export async function updateProfileAction(
   input: UpdateProfileInput
 ): Promise<UpdateProfileResult> {
+  const ip = (await headers()).get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return { success: false, field: 'general', message: 'Too many requests' };
+
   const parsed = updateProfileSchema.safeParse(input);
 
   if (!parsed.success) {

@@ -1,8 +1,14 @@
 
 "use server";
 import { z } from "zod";
+import { ratelimit } from "@/lib/upstash/rate-limit";
+import { headers } from "next/headers";
 
 export async function feedbackAction(formData: FormData) {
+  const ip = (await headers()).get('x-forwarded-for') ?? 'anonymous';
+  const { success } = await ratelimit.limit(ip);
+  if (!success) return { success: false, errors: [{ message: 'Too many requests' }] };
+
   const name = formData.get("name")?.toString();
   const email = formData.get("email")?.toString();
   const message = formData.get("message")?.toString();
