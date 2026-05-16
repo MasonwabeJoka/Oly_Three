@@ -7,11 +7,11 @@ import TempArticle from "../../../components/TempArticle";
 import RecommendedArticle from "../../../components/cards/RecommendedArticle";
 import CommentsSection from "../../../components/CommentsSection";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { featuredServicesSectionQueryOptions } from "@/sanity/lib/crud/featuredServicesSection/queryOptions";
+import { featuredServicesSectionQueryOptions } from "@/server/sanity/query-options/homepage";
 import { useEffect, useRef, useState } from "react";
 import ArticleHeader from "./ArticleHeader";
 import { listingsData } from "@/data/ListingsData";
-import { listing } from "@/sanity/schemaTypes/documents/listings/oly-listing";
+import { listing } from "@/server/sanity/schemaTypes/documents/listings/oly-listing";
 import ListingCard from "@/components/cards/ListingCard";
 
 interface SocialMedia {

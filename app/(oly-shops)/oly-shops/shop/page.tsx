@@ -1,8 +1,8 @@
 import {
   getFeaturedProducts,
   getFilteredProducts,
-} from "@/sanity/lib/crud/shops/products/data";
-import { getShopCategories } from "@/sanity/lib/crud/shops/categories/data";
+  getShopCategories,
+} from "@/server/sanity/services/shops/products";
 import styles from "./styles.module.scss";
 import { Suspense } from "react";
 import { FeaturedProductsCarousel } from "./components/FeaturedProductsCarousel";

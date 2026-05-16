@@ -11,7 +11,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn} from "@/lib/utils";
-import { type FEATURED_PRODUCTS_QUERYResult } from "@/sanity/types";
+import { type FEATURED_PRODUCTS_QUERYResult } from "@/server/sanity/types";
 import FeaturedSlide from "./FeaturedSlide";
 
 

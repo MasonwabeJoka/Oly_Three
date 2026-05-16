@@ -1,7 +1,7 @@
 import { WorkOS } from '@workos-inc/node'
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/db/db' 
-import { users } from '@/db/schemas/users/users' 
+import { drizzleDb } from '@/server/db/db' 
+import { users } from '@/server/db/schemas/users/users' 
 import { eq } from 'drizzle-orm'
 import { randomUUID } from 'crypto'
 const workos = new WorkOS(process.env.WORKOS_API_KEY!)
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     switch (event.event) {
       case 'user.created':
 
-        await db
+        await drizzleDb
         .insert(users)
         .values({
             id: randomUUID(),
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
 
       case 'user.updated':
 
-       await db
+       await drizzleDb
       .update(users)
       .set({
         firstName: event.data.firstName ?? '',
@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
 
       case 'user.deleted':
 
-       await db
+       await drizzleDb
       .delete(users)
       .where(eq(users.workosId, event.data.id))
         break

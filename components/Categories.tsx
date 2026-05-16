@@ -1,4 +1,4 @@
-import { getCategories } from "@/sanity/lib/crud/categories/data";
+import { getCategories } from "@/server/sanity/lib/crud/categories/data";
 import CategoriesClient from "./CategoriesClient";
 import { CategoriesQueryResult } from "@/sanity.types";
 

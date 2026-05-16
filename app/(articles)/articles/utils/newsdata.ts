@@ -1,4 +1,4 @@
-import { NewsDataArticle } from '@/sanity/lib/articles';
+import { NewsDataArticle } from '@/server/sanity/lib/articles';
 
 const API_BASE_URL = 'https://newsdata.io/api/1';
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_DATA_API_KEY; 

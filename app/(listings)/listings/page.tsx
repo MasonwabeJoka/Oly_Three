@@ -1,5 +1,5 @@
 import ListingsPage from "@/components/ListingsPage";
-import { getListings } from "@/sanity/lib/crud/listings/data";
+import { getListings } from "@/server/sanity/services/listings";
 
 const listingsPerPage = 10;
 

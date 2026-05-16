@@ -11,11 +11,11 @@ export default defineCliConfig({
   api: { projectId, dataset },
   typegen: {
      path: [
-      "./sanity/lib/**/*.ts",
+      "./server/sanity/lib/**/*.ts",
       "./app/**/*.{ts,tsx}",
       "./components/**/*.{ts,tsx}"
     ],
     schema: "./schema.json", 
-    generates: "./sanity/types.ts"
+    generates: "./server/sanity/types.ts"
   }
 })

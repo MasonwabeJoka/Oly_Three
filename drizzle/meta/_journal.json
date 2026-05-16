@@ -29,6 +29,20 @@
       "when": 1778498430826,
       "tag": "0003_harsh_dazzler",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1778600000000,
+      "tag": "0004_move_phone_to_user_profiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1778762141527,
+      "tag": "0005_stiff_grandmaster",
+      "breakpoints": true
     }
   ]
 }

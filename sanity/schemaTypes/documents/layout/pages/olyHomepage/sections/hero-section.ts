@@ -147,6 +147,36 @@ export const heroSection = defineType({
     }),
 
     defineField({
+      name: 'displayOptions',
+      title: 'Display Options',
+      type: 'object',
+      fields: [
+        {
+          name: 'showBadge',
+          title: 'Show Brand New Badge',
+          type: 'boolean',
+          initialValue: true,
+          description: 'Display the decorative "Brand New" badge/star.',
+        },
+        {
+          name: 'showTitle',
+          title: 'Show Main Title',
+          type: 'boolean',
+          initialValue: true,
+          description: 'Display the main heading/title.',
+        },
+        {
+          name: 'showFields',
+          title: 'Show Search Fields',
+          type: 'boolean',
+          initialValue: true,
+          description: 'Display the search inputs and action buttons.',
+        },
+      ],
+      description: 'Control which parts of the hero section are visible.',
+    }),
+
+    defineField({
       name: 'secondaryButton',
       title: 'Secondary Button',
       type: 'object',

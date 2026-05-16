@@ -1,4 +1,4 @@
-import { getFeaturedCategories } from "@/sanity/lib/crud/featuredCategories/data";
+import { getFeaturedCategories } from "@/server/sanity/lib/crud/featuredCategories/data";
 import FeaturedCategoriesClient from "./FeaturedCategoriesClient";
 
 const FeaturedCategories = async () => {

@@ -5,6 +5,7 @@ export const variables = {
   whiteThree: "#",
   whiteFour: "#",
   whiteFive: "#",
+  whiteSix: "rgba(255, 255, 255, 0.25)",
   blackOne: "#",
   blackTwo: "#",
   blackThree: "#",

@@ -5,7 +5,7 @@ import { PanelLeftClose, PanelLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 // import { ProductFilters } from "./ProductFilters";
 // import { ProductGrid } from "./ProductGrid";
-import { ALL_CATEGORIES_QUERYResult, FILTER_PRODUCTS_BY_NAME_QUERYResult } from "@/sanity/types";
+import { ALL_CATEGORIES_QUERYResult, FILTER_PRODUCTS_BY_NAME_QUERYResult } from "@/server/sanity/types";
 
 
 interface ProductSectionProps {

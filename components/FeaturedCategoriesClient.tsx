@@ -5,7 +5,7 @@ import Button from "@/components/Buttons";
 import { useModalStore } from "@/store/modalStore";
 import LinkCard from "@/components/cards/LinkCard";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "@/server/sanity/lib/image";
 
 type FeaturedCategory = {
   id?: string;

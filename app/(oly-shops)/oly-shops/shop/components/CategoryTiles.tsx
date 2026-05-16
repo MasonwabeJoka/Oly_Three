@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Grid2x2 } from "lucide-react";
-import { ALL_CATEGORIES_QUERYResult } from "@/sanity/types";
+import { ALL_CATEGORIES_QUERYResult } from "@/server/sanity/types";
 
 interface CategoryTilesProps {
   categories: ALL_CATEGORIES_QUERYResult;

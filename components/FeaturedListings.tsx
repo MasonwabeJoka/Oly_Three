@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "@/components/Buttons";
 import FeaturedListingsClient from "./FeaturedListingsClient";
 import Pagination from "./Pagination";
-import { getFeaturedListings } from "@/sanity/lib/crud/featuredListings/data";
+import { getFeaturedListings } from "@/server/sanity/lib/crud/featuredListings/data";
 
 type FeaturedListingsProps = {
    site:

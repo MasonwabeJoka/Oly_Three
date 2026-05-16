@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import NavButtons from "./NavButtons";
 import { useQuery } from "@tanstack/react-query";
-import { featuredArticlesQueryOptions } from "@/sanity/lib/crud/featuredArticles/queryOptions";
+import { featuredArticlesQueryOptions } from "@/server/sanity/lib/crud/featuredArticles/queryOptions";
 import { useEffect, useState } from "react";
 
 const ArticleSlider = () => {

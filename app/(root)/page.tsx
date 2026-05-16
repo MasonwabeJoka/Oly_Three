@@ -7,9 +7,9 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
-import { getOlyHomepage } from "@/sanity/lib/crud/pages/oly-homepage/data";
-import { getCategories } from "@/sanity/lib/crud/categories/data";
-import { getFeaturedCategoriesSection } from "@/sanity/lib/crud/featuredCategoriesSection/data";
+import { getOlyHomepage } from "@/server/sanity/services/homepage";
+import { getCategories } from "@/server/sanity/services/categories";
+import { getFeaturedCategoriesSection } from "@/server/sanity/services/categories";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import OlyArticles from "@/components/OlyArticles";
@@ -80,6 +80,7 @@ const Home = async ({
                 site="oly"
                 mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
         modern marketplace. The future of classifieds."
+                displayOptions={heroSection?.reference?.displayOptions}
               />
             </Suspense>
           </section>

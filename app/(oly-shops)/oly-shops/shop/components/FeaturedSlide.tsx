@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { formatPrice } from "@/utils/formatterFunctions/Formatter";
-import { FEATURED_PRODUCTS_QUERYResult } from "@/sanity/types";
+import { FEATURED_PRODUCTS_QUERYResult } from "@/server/sanity/types";
 
 type FeaturedProduct = FEATURED_PRODUCTS_QUERYResult[number];
 

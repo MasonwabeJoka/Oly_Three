@@ -1,7 +1,7 @@
 import styles from "./MoreFromOly.module.scss";
 import ClassifiedLink from "./cards/ClassifiedLink";
 import Link from "next/link";
-import { getMoreFromOly } from "@/sanity/lib/crud/moreFromOly/data";
+import { getMoreFromOly } from "@/server/sanity/lib/crud/moreFromOly/data";
 
 // Types
 interface SanityOlySite {

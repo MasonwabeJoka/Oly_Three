@@ -1,15 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from "./FeaturedServicesSlideFrontend.module.scss";
-import { FeaturedServicesData } from "@/data/FeaturedServicesData";
 import FeaturedServicesSlideFrontendClient from "./FeaturedServicesSlideFrontendClient";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { featuredServicesSectionQueryOptions } from "@/sanity/lib/crud/featuredServicesSection/queryOptions";
+import { useQuery } from "@tanstack/react-query";
+import { featuredServicesSectionQueryOptions } from "@/server/sanity/lib/crud/featuredServicesSection/queryOptions";
 
-const FeaturedServicesSlideFrontend = () => {
-  const {data}= useSuspenseQuery(featuredServicesSectionQueryOptions)
-
-  if(!data) return null;
-
+export default function FeaturedServicesSlideFrontend() {
  
+  const [isMounted, setIsMounted] = useState(false);
+
+
+  const { data, isLoading, isError } = useQuery({
+    ...featuredServicesSectionQueryOptions,
+    enabled: isMounted,
+    staleTime: Infinity,
+  });
+
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+
+  if (isLoading || !data) return null;
+  if (isError) return null;
+
   return (
     <div className={styles.container}>
       <div className={styles.featureContainer}>
@@ -19,6 +35,4 @@ const FeaturedServicesSlideFrontend = () => {
       </div>
     </div>
   );
-};
-
-export default FeaturedServicesSlideFrontend;
+}

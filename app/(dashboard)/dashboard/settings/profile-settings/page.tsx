@@ -1,10 +1,12 @@
-import { getWorkOS, withAuth } from "@workos-inc/authkit-nextjs";
 import ProfileSettingsForm from "../components/ProfileSettingsForm";
+import { getProfileSettingsForCurrentUser } from "@/server/db/services/users";
 
 export default async function ProfileSettingsPage() {
-  const { user } = await withAuth({ ensureSignedIn: true });
-  const workos = getWorkOS();
-  const freshUser = await workos.userManagement.getUser(user.id);
+  const userProfile = await getProfileSettingsForCurrentUser();
 
-  return <ProfileSettingsForm initialUser={freshUser} />;
+  return (
+    <ProfileSettingsForm
+      initialUserProfile={userProfile}
+    />
+  );
 }

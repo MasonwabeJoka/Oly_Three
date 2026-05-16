@@ -27,7 +27,7 @@ declare const useMessageStore: any;
 declare const trpc: any;
 declare const client: any;
 
-declare module '@/sanity/client' {
+declare module '@/server/sanity/client' {
 	const client: {
 		fetch: <T>(query: string, params?: Record<string, any>) => Promise<T>;
 		// Add other client methods as needed

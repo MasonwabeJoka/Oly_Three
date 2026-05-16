@@ -1,8 +1,7 @@
-import { getListing } from "@/sanity/lib/crud/listing/data";
+import { getListing } from "@/sanity/services/listings";
 import Listing from "./components/Listing";
-import { getSimilarListings } from "@/sanity/lib/crud/similarListings/data";
-import { getListingViews } from "@/sanity/lib/crud/listingViews/data";
-import { updateListingView } from "@/sanity/lib/crud/listingViews/actions";
+import { getSimilarListings } from "@/sanity/services/listings";
+import { getListingViews, updateListingView } from "@/sanity/services/listings";
 import { after } from "next/server";
 
 // export const experimental_ppr = true;

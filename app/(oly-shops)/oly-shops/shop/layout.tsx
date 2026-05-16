@@ -1,4 +1,4 @@
-import { SanityLive } from "@/sanity/lib/live";
+import { SanityLive } from "@/server/sanity/lib/live";
 // import "../gl
 // ";
 

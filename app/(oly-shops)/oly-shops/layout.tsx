@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
 import ShopsLayoutWrapper from "./components/ShopsLayoutWrapper";
-import { SanityLive } from "@/sanity/lib/live";
+import { SanityLive } from "@/server/sanity/lib/live";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 
 export const metadata = {

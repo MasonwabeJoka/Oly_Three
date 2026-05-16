@@ -1,108 +1,53 @@
 "use client";
 
 import styles from "./ProfileSettingsForm.module.scss";
+
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
 import Input from "@/components/Input";
 import Select from "@/components/Select";
 import Avatar from "@/components/Avatar";
 import Button from "@/components/Buttons";
-import Link from "next/link";
-import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { profileSchema } from "@/lib/validations/formValidations";
-import { z } from "zod";
+
+import { profileSchema } from "@/server/db/schemas/users/validations";
+
 import {
   socialMediaOptions,
   otherSocialMediaPlatforms,
 } from "@/data/socialMediaPlatforms";
-import { User } from "@workos-inc/node";
-import { updateProfileAction } from "@/app/actions/updateProfile";
-import { useRouter } from "next/navigation";
-import { getImageKitAuthAction } from "@/app/actions/imagekit";
+import { updateProfileSettingsAction } from "@/server/db/actions/users";
 
-const profileSettingsSchema = profileSchema
-  .pick({
-    name: true,
-    lastName: true,
-    email: true,
-  })
-  .extend({
-    phone: z.string().optional(),
-    socialMediaName: z.string().optional(),
-    socialMediaUrl: z.string().optional(),
-    avatarFile: z.instanceof(File).optional(),
-  });
 
-type FormValues = z.infer<typeof profileSettingsSchema>;
+
+
+
+type FormValues = z.infer<typeof profileSchema>;
+
+type ProfileSettingsFormUser = {
+  firstName: string | null;
+  lastName: string | null;
+  email: string;
+  phoneNumber: string | null;
+  socialMediaName: string | null;
+  socialMediaUrl: string | null;
+  avatarUrl: string | null;
+};
 
 interface ProfileSettingsFormProps {
-  initialUser: User;
+  initialUserProfile: ProfileSettingsFormUser;
   hideButtons?: boolean;
   formId?: string;
   onSuccess?: () => void;
   requireAvatar?: boolean;
 }
 
-type ProfileUpdatedEventDetail = {
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string;
-  profilePictureUrl?: string | null;
-};
-
-const isGeneratedInitialsAvatar = (avatarUrl?: string | null) => {
-  if (!avatarUrl) {
-    return false;
-  }
-
-  const normalized = avatarUrl.toLowerCase();
-  if (
-    normalized.includes("ui-avatars.com") ||
-    normalized.includes("avatar.vercel.sh") ||
-    normalized.includes("dicebear") ||
-    normalized.includes("gravatar.com/avatar") ||
-    normalized.includes("/initials") ||
-    normalized.includes("default-avatar") ||
-    normalized.includes("placeholder") ||
-    normalized.includes("default-user") ||
-    normalized.includes("name=") ||
-    normalized.includes("background=")
-  ) {
-    return true;
-  }
-
-  try {
-    const parsedUrl = new URL(avatarUrl);
-    const host = parsedUrl.hostname.toLowerCase();
-    const path = parsedUrl.pathname.toLowerCase();
-    const params = parsedUrl.searchParams;
-
-    if (
-      path.includes("/avatar") ||
-      path.includes("/initial") ||
-      path.includes("default") ||
-      params.has("name") ||
-      params.has("background") ||
-      params.has("color")
-    ) {
-      return true;
-    }
-
-    if (
-      host.includes("googleusercontent.com") &&
-      (path.includes("/a/default-user") || path.includes("/avatar"))
-    ) {
-      return true;
-    }
-
-  } catch {
-    return normalized.includes("avatar") || normalized.includes("initial");
-  }
-
-  return false;
-};
-
-const getSelectedPlatform = (socialMediaName?: string) => {
+const getSelectedPlatform = (socialMediaName?: string | null) => {
   if (!socialMediaName) {
     return "";
   }
@@ -117,26 +62,41 @@ const getSelectedPlatform = (socialMediaName?: string) => {
   return "Other";
 };
 
+const fileToDataUrl = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () =>
+      reject(new Error("Failed to read avatar file"));
+    reader.readAsDataURL(file);
+  });
+
 const ProfileSettingsForm = ({
-  initialUser,
+  initialUserProfile,
   hideButtons = false,
   formId,
   onSuccess,
   requireAvatar = false,
 }: ProfileSettingsFormProps) => {
-  const [currentUser, setCurrentUser] = useState<User>(initialUser);
-  const [isAvatarUpdating, setIsAvatarUpdating] = useState(false);
+  const [currentUser, setCurrentUser] =
+    useState<ProfileSettingsFormUser>(initialUserProfile);
+
   const [selected, setSelected] = useState<string>(
-    getSelectedPlatform(initialUser.metadata?.socialMediaName)
+    getSelectedPlatform(initialUserProfile.socialMediaName)
   );
-  const [isSocialMediaOpen, setIsSocialMediaOpen] = useState(false);
+
+  const [isSocialMediaOpen, setIsSocialMediaOpen] =
+    useState(false);
+
   const [errorsByField, setErrorsByField] = useState({
     general: null as string | null,
     email: null as string | null,
     phone: null as string | null,
     metadata: null as string | null,
   });
+
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   const router = useRouter();
 
   const {
@@ -147,43 +107,29 @@ const ProfileSettingsForm = ({
     watch,
     reset,
     trigger,
-    control,
   } = useForm<FormValues>({
-    resolver: zodResolver(profileSettingsSchema),
+    resolver: zodResolver(profileSchema),
     mode: "onSubmit",
     defaultValues: {
       name: currentUser.firstName ?? "",
       lastName: currentUser.lastName ?? "",
       email: currentUser.email ?? "",
-      phone: currentUser.metadata?.phone ?? "",
-      socialMediaName: currentUser.metadata?.socialMediaName ?? "",
-      socialMediaUrl: currentUser.metadata?.socialMediaUrl ?? "",
+      phone: currentUser.phoneNumber ?? "",
+      socialMediaName: currentUser.socialMediaName ?? "",
+      socialMediaUrl: currentUser.socialMediaUrl ?? "",
       avatarFile: undefined,
     },
   });
 
-  const avatarFile = useWatch({ control, name: "avatarFile" });
+  const avatarFile = watch("avatarFile");
 
   const avatarPreview = useMemo(() => {
-    if (!avatarFile) {
-      const providerAvatar = isGeneratedInitialsAvatar(
-        currentUser.profilePictureUrl
-      )
-        ? ""
-        : currentUser.profilePictureUrl || "";
-
-      return isAvatarUpdating
-        ? ""
-        : currentUser.metadata?.avatarUrl || providerAvatar;
+    if (avatarFile) {
+      return URL.createObjectURL(avatarFile);
     }
 
-    return URL.createObjectURL(avatarFile);
-  }, [
-    avatarFile,
-    currentUser.metadata?.avatarUrl,
-    currentUser.profilePictureUrl,
-    isAvatarUpdating,
-  ]);
+    return currentUser.avatarUrl || "";
+  }, [avatarFile, currentUser.avatarUrl]);
 
   useEffect(() => {
     if (!avatarFile) {
@@ -200,13 +146,15 @@ const ProfileSettingsForm = ({
       name: currentUser.firstName ?? "",
       lastName: currentUser.lastName ?? "",
       email: currentUser.email ?? "",
-      phone: currentUser.metadata?.phone ?? "",
-      socialMediaName: currentUser.metadata?.socialMediaName ?? "",
-      socialMediaUrl: currentUser.metadata?.socialMediaUrl ?? "",
+      phone: currentUser.phoneNumber ?? "",
+      socialMediaName: currentUser.socialMediaName ?? "",
+      socialMediaUrl: currentUser.socialMediaUrl ?? "",
       avatarFile: undefined,
     });
 
-    setSelected(getSelectedPlatform(currentUser.metadata?.socialMediaName));
+    setSelected(
+      getSelectedPlatform(currentUser.socialMediaName)
+    );
   }, [currentUser, reset]);
 
   const handleAvatarClick = () => {
@@ -215,6 +163,7 @@ const ProfileSettingsForm = ({
 
   const clearAvatarSelection = () => {
     setValue("avatarFile", undefined);
+
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -227,170 +176,84 @@ const ProfileSettingsForm = ({
       phone: null,
       metadata: null,
     });
-    const applyUserResult = (resultUser: {
-      firstName: string | null;
-      lastName: string | null;
-      email: string;
-      metadata: Record<string, string>;
-    }) => {
-      setCurrentUser((prev) => ({
-        ...prev,
-        ...resultUser,
-        metadata: {
-          ...(prev.metadata ?? {}),
-          ...(resultUser.metadata ?? {}),
-        },
-      }));
-    };
 
     const selectedAvatarFile =
-      fileInputRef.current?.files?.[0] ?? avatarFile ?? data.avatarFile;
-    const providerAvatar = isGeneratedInitialsAvatar(
-      currentUser.profilePictureUrl
-    )
-      ? ""
-      : currentUser.profilePictureUrl || "";
-    const existingAvatar = currentUser.metadata?.avatarUrl || providerAvatar;
+      fileInputRef.current?.files?.[0] ??
+      data.avatarFile;
 
-    if (requireAvatar && !selectedAvatarFile && !existingAvatar) {
+    if (
+      requireAvatar &&
+      !selectedAvatarFile &&
+      !currentUser.avatarUrl
+    ) {
       setErrorsByField((prev) => ({
         ...prev,
         general: "Profile picture is required.",
       }));
+
       return;
     }
 
-    let uploadedAvatarUrl: string | undefined;
+    const result =
+      await updateProfileSettingsAction({
+        name: data.name,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone || undefined,
+        socialMediaName:
+          data.socialMediaName || undefined,
+        socialMediaUrl:
+          data.socialMediaUrl || undefined,
+        avatarUrl: selectedAvatarFile
+          ? await fileToDataUrl(selectedAvatarFile)
+          : currentUser.avatarUrl ?? undefined,
+      });
 
-    if (selectedAvatarFile) {
-      setIsAvatarUpdating(true);
-      try {
-        const authData = await getImageKitAuthAction();
-        if (!authData.success) {
-          throw new Error(
-            authData.message || "Unable to authorize avatar upload."
-          );
-        }
-
-        const uploadData = new FormData();
-        uploadData.append("file", selectedAvatarFile);
-        uploadData.append("fileName", selectedAvatarFile.name);
-        uploadData.append("token", authData.token);
-        uploadData.append("signature", authData.signature);
-        uploadData.append("expire", String(authData.expire));
-        uploadData.append("publicKey", authData.publicKey);
-        uploadData.append("folder", "/oly/avatars");
-        uploadData.append("useUniqueFileName", "true");
-
-        const imageKitResponse = await fetch(
-          "https://upload.imagekit.io/api/v1/files/upload",
-          {
-            method: "POST",
-            body: uploadData,
-          }
-        );
-
-        if (!imageKitResponse.ok) {
-          const uploadError = await imageKitResponse
-            .json()
-            .catch(() => ({ message: "Avatar upload failed." }));
-          throw new Error(uploadError?.message || "Avatar upload failed.");
-        }
-
-        const imageKitResult: { url?: string } = await imageKitResponse.json();
-        if (!imageKitResult.url) {
-          throw new Error("Avatar upload response did not include a URL.");
-        }
-
-        uploadedAvatarUrl = imageKitResult.url;
-      } catch (error: any) {
-        setErrorsByField((prev) => ({
-          ...prev,
-          general:
-            error?.message ||
-            "Profile details were updated, but avatar upload failed.",
-        }));
-        setIsAvatarUpdating(false);
-        return;
-      }
-    }
-
-    const result = await updateProfileAction({
-      name: data.name,
-      lastName: data.lastName,
-      email: data.email,
-      phone: data.phone,
-      socialMediaName: data.socialMediaName,
-      socialMediaUrl: data.socialMediaUrl,
-      avatarUrl: uploadedAvatarUrl,
-    });
-
-    if (!result.success) {
-      const field = result.field ?? "general";
+    if (!result.success || !result.user) {
       setErrorsByField((prev) => ({
         ...prev,
-        [field]:
-          result.message ||
-          "Profile update failed.",
+        general:
+          result.message || "Profile update failed.",
       }));
-      setIsAvatarUpdating(false);
+
       return;
     }
 
-    const mergedUser = {
-      ...currentUser,
-      ...result.user,
-      metadata: {
-        ...(currentUser.metadata ?? {}),
-        ...(result.user?.metadata ?? {}),
-      },
-    } as User;
+    setCurrentUser(result.user);
 
-    applyUserResult(result.user!);
-
-    if (typeof window !== "undefined") {
-      const detail: ProfileUpdatedEventDetail = {
-        firstName: mergedUser.firstName,
-        lastName: mergedUser.lastName,
-        avatarUrl:
-          typeof mergedUser.metadata?.avatarUrl === "string"
-            ? mergedUser.metadata.avatarUrl
-            : undefined,
-        profilePictureUrl: mergedUser.profilePictureUrl ?? null,
-      };
-
-      window.dispatchEvent(
-        new CustomEvent<ProfileUpdatedEventDetail>("oly:profile-updated", {
-          detail,
-        })
-      );
-    }
-
-    setIsAvatarUpdating(false);
     clearAvatarSelection();
+
     router.refresh();
+
     onSuccess?.();
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (
+    e: React.FormEvent
+  ) => {
     e.preventDefault();
-    const selectedAvatarFile = fileInputRef.current?.files?.[0] ?? avatarFile;
-    const providerAvatar = isGeneratedInitialsAvatar(
-      currentUser.profilePictureUrl
-    )
-      ? ""
-      : currentUser.profilePictureUrl || "";
-    const existingAvatar = currentUser.metadata?.avatarUrl || providerAvatar;
 
-    if (requireAvatar && !selectedAvatarFile && !existingAvatar) {
+    const selectedAvatarFile =
+      fileInputRef.current?.files?.[0] ?? avatarFile;
+
+    if (
+      requireAvatar &&
+      !selectedAvatarFile &&
+      !currentUser.avatarUrl
+    ) {
       setErrorsByField((prev) => ({
         ...prev,
         general: "Profile picture is required.",
       }));
+
       return;
     }
 
-    const isValid = await trigger(["name", "lastName", "email"]);
+    const isValid = await trigger([
+      "name",
+      "lastName",
+      "email",
+    ]);
 
     if (!isValid) {
       return;
@@ -399,11 +262,19 @@ const ProfileSettingsForm = ({
     await handleSubmit(onSubmit)();
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setValue("avatarFile", file, { shouldDirty: true, shouldTouch: true });
+
+    if (!file) {
+      return;
     }
+
+    setValue("avatarFile", file, {
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   return (
@@ -413,15 +284,23 @@ const ProfileSettingsForm = ({
       className={styles.container}
       noValidate
     >
-      <h4 className={styles.title}>Profile Settings</h4>
+      <h4 className={styles.title}>
+        Profile Settings
+      </h4>
+
       {errorsByField.general && (
-        <p className={styles.errorMessage}>{errorsByField.general}</p>
+        <p className={styles.errorMessage}>
+          {errorsByField.general}
+        </p>
       )}
+
       {errorsByField.metadata && (
-        <p className={styles.errorMessage}>{errorsByField.metadata}</p>
+        <p className={styles.errorMessage}>
+          {errorsByField.metadata}
+        </p>
       )}
+
       <div className={styles.avatarContainer}>
-   
         <Avatar
           className={styles.avatar}
           avatarSize="large"
@@ -429,6 +308,7 @@ const ProfileSettingsForm = ({
           isOnline={false}
           onClick={handleAvatarClick}
         />
+
         <input
           ref={fileInputRef}
           type="file"
@@ -437,6 +317,7 @@ const ProfileSettingsForm = ({
           style={{ display: "none" }}
         />
       </div>
+
       <div className={styles.wrapper}>
         <div className={styles.controls}>
           <Input
@@ -452,16 +333,10 @@ const ProfileSettingsForm = ({
             required
             value={watch("name") || ""}
             error={errors.name?.message}
-            {...register("name", {
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setValue("name", e.target.value, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                });
-              },
-            })}
+            {...register("name")}
             dashboard
           />
+
           <Input
             key="input-last-name"
             className={`${styles.lastName} ${styles.control}`}
@@ -475,16 +350,10 @@ const ProfileSettingsForm = ({
             required
             value={watch("lastName") || ""}
             error={errors.lastName?.message}
-            {...register("lastName", {
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                setValue("lastName", e.target.value, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                });
-              },
-            })}
+            {...register("lastName")}
             dashboard
           />
+
           <div className={styles.emailContainer}>
             <Input
               key="input-email"
@@ -498,18 +367,15 @@ const ProfileSettingsForm = ({
               autoComplete="on"
               required
               value={watch("email") || ""}
-              error={errors.email?.message || errorsByField.email}
-              {...register("email", {
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue("email", e.target.value, {
-                    shouldDirty: true,
-                    shouldTouch: true,
-                  });
-                },
-              })}
+              error={
+                errors.email?.message ||
+                errorsByField.email
+              }
+              {...register("email")}
               dashboard
             />
           </div>
+
           <div className={styles.phoneContainer}>
             <Input
               key="input-phone-number"
@@ -523,18 +389,15 @@ const ProfileSettingsForm = ({
               autoComplete="off"
               required={false}
               value={watch("phone") || ""}
-              error={errors.phone?.message || errorsByField.phone}
-              {...register("phone", {
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue("phone", e.target.value, {
-                    shouldDirty: true,
-                    shouldTouch: true,
-                  });
-                },
-              })}
+              error={
+                errors.phone?.message ||
+                errorsByField.phone
+              }
+              {...register("phone")}
               dashboard
             />
           </div>
+
           <Link href="/dashboard/settings/password-settings">
             <Button
               className={`${styles.changePasswordButton} ${styles.control}`}
@@ -549,6 +412,7 @@ const ProfileSettingsForm = ({
               dashboard
             />
           </Link>
+
           <div className={styles.socialMediaLinks}>
             <Select
               options={socialMediaOptions}
@@ -558,53 +422,69 @@ const ProfileSettingsForm = ({
               name="social-media"
               id="social-media"
               ariaLabel="Social Media Links"
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              onChange={(
+                e: React.ChangeEvent<HTMLSelectElement>
+              ) => {
                 const newValue = e.target.value;
+
                 setSelected(newValue);
 
                 if (newValue === "Other") {
                   setValue("socialMediaName", "");
                   setValue("socialMediaUrl", "");
                 } else {
-                  setValue("socialMediaName", newValue);
+                  setValue(
+                    "socialMediaName",
+                    newValue
+                  );
+
                   setValue("socialMediaUrl", "");
                 }
 
-                trigger(["socialMediaName", "socialMediaUrl"]);
+                trigger([
+                  "socialMediaName",
+                  "socialMediaUrl",
+                ]);
               }}
               onDropdownOpenChange={(isOpen: boolean) =>
                 setIsSocialMediaOpen(isOpen)
               }
               dashboard
             />
+
             {selected && selected === "Other" ? (
-              <div className={styles.otherSocialMediaContainer}>
+              <div
+                className={
+                  styles.otherSocialMediaContainer
+                }
+              >
                 <Input
                   key="input-social-media-name"
                   className={styles.socialMediaName}
                   isSearchBar={true}
-                  suggestions={otherSocialMediaPlatforms}
+                  suggestions={
+                    otherSocialMediaPlatforms
+                  }
                   inputType="text"
                   inputSize="large"
                   label="Other"
                   placeholder="Social media platform"
                   id="other"
                   ariaLabel="Other Social Media Field"
-                  value={watch("socialMediaName") || ""}
+                  value={
+                    watch("socialMediaName") || ""
+                  }
                   error={
-                    errors.socialMediaName?.message || errorsByField.metadata
+                    errors.socialMediaName?.message ||
+                    errorsByField.metadata
                   }
                   {...register("socialMediaName", {
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                      setValue("socialMediaName", e.target.value, {
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      trigger("socialMediaUrl");
-                    },
+                    onChange: () =>
+                      trigger("socialMediaUrl"),
                   })}
                   dashboard
                 />
+
                 <Input
                   key="input-social-media-url"
                   className={styles.link}
@@ -614,24 +494,27 @@ const ProfileSettingsForm = ({
                   placeholder="Paste link here"
                   id="otherSocialMedia"
                   ariaLabel="Other Social Media Link Field"
-                  value={watch("socialMediaUrl") || ""}
+                  value={
+                    watch("socialMediaUrl") || ""
+                  }
                   error={
-                    errors.socialMediaUrl?.message || errorsByField.metadata
+                    errors.socialMediaUrl?.message ||
+                    errorsByField.metadata
                   }
                   {...register("socialMediaUrl", {
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                      setValue("socialMediaUrl", e.target.value, {
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      trigger("socialMediaName");
-                    },
+                    onChange: () =>
+                      trigger("socialMediaName"),
                   })}
                   dashboard
                 />
               </div>
-            ) : selected && selected !== "Other" ? (
-              <div className={styles.selectedSocialMediaContainer}>
+            ) : selected &&
+              selected !== "Other" ? (
+              <div
+                className={
+                  styles.selectedSocialMediaContainer
+                }
+              >
                 <Input
                   key="input-selected-social-media-url"
                   className={styles.link}
@@ -641,19 +524,16 @@ const ProfileSettingsForm = ({
                   placeholder={`Paste ${selected} link here`}
                   id="selectedSocialMedia"
                   ariaLabel="Selected Social Media Link Field"
-                  // required={!!selected}
-                  value={watch("socialMediaUrl") || ""}
+                  value={
+                    watch("socialMediaUrl") || ""
+                  }
                   error={
-                    errors.socialMediaUrl?.message || errorsByField.metadata
+                    errors.socialMediaUrl?.message ||
+                    errorsByField.metadata
                   }
                   {...register("socialMediaUrl", {
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                      setValue("socialMediaUrl", e.target.value, {
-                        shouldDirty: true,
-                        shouldTouch: true,
-                      });
-                      trigger("socialMediaName");
-                    },
+                    onChange: () =>
+                      trigger("socialMediaName"),
                   })}
                   dashboard
                 />
@@ -662,11 +542,16 @@ const ProfileSettingsForm = ({
           </div>
         </div>
       </div>
+
       {!hideButtons && !isSocialMediaOpen && (
         <div className={styles.buttonsContainer}>
           <Button
             className={styles.updateProfileSettings}
-            buttonChildren={isSubmitting ? "Updating..." : "Update Profile"}
+            buttonChildren={
+              isSubmitting
+                ? "Updating..."
+                : "Update Profile"
+            }
             buttonType="primary"
             buttonSize="large"
             name="update-profile"
@@ -676,6 +561,7 @@ const ProfileSettingsForm = ({
             disabled={isSubmitting}
             dashboard
           />
+
           <Link href="/dashboard/settings">
             <Button
               className={styles.backButton}
