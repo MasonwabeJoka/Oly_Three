@@ -1,0 +1,541 @@
+// https://www.sanity.io/docs/studio/structure-builder-cheat-sheet
+import type { StructureResolver } from "sanity/desk";
+import { Card, Text, Stack } from "@sanity/ui";
+import {
+  FaTachometerAlt,
+  FaUsers,
+  FaAd,
+  FaGavel,
+  FaMapMarkerAlt,
+  FaMoneyBill,
+  FaFileAlt,
+  FaHome,
+  FaBlog,
+  FaFlag,
+  FaChartLine,
+  FaUpload,
+  FaList,
+  FaTag,
+  FaBuilding,
+  FaStar,
+} from "react-icons/fa";
+
+// StructureResolver for OLY classifieds websites
+export const structure: StructureResolver = (S, context) => {
+  const isAdmin = context.currentUser?.roles.some(
+    (role) => role.name === "administrator"
+  );
+
+  const DashboardComponent = () => (
+    <Card padding={4}>
+      <Stack space={3}>
+        <Text size={2} weight="semibold">
+          Classifieds Dashboard
+        </Text>
+        <Text>
+          View trends, user engagement, and key metrics across OLY, Oly
+          Properties, Oly Auto, and Oly Hiring.
+        </Text>
+      </Stack>
+    </Card>
+  );
+
+  return S.list()
+    .title("Classifieds Content")
+    .items([
+      // Admin Dashboard (visible to admins only)
+      ...(isAdmin
+        ? [
+            S.listItem()
+              .title("Dashboard")
+              .icon(FaTachometerAlt)
+              .child(
+                S.component().title("Dashboard").component(DashboardComponent)
+              ),
+            S.divider(),
+          ]
+        : []),
+
+      // User Management (shared across all sites)
+      S.listItem()
+        .title("Users")
+        .icon(FaUsers)
+        .child(
+          S.list()
+            .title("User Management")
+            .items([
+              S.documentTypeListItem("user").title("User Profiles"),
+              S.documentTypeListItem("userLocationConsent").title(
+                "Location Consent"
+              ),
+              S.documentTypeListItem("userLocationPreference").title(
+                "Location Preferences"
+              ),
+
+              ...(isAdmin
+                ? [S.documentTypeListItem("auditEntry").title("Audit Logs")]
+                : []),
+                
+            ])
+        ),
+      // User Entities (stores, companies, content channels)
+      S.listItem()
+        .title("User Entities")
+        .icon(FaBuilding)
+        .child(
+          S.list()
+            .title("User Entities")
+            .items([
+              S.documentTypeListItem("store").title("Stores"),
+              S.documentTypeListItem("carDealership").title("Car Dealerships"),
+              S.documentTypeListItem("recruitmentAgency").title(
+                "Recruitment Agencies"
+              ),
+              S.documentTypeListItem("serviceProvider").title(
+                "Service Providers"
+              ),
+              S.documentTypeListItem("company").title("Companies"),
+            ])
+        ),
+      // Listings
+      S.listItem()
+        .title("Listings")
+        .icon(FaAd)
+        .child(
+          S.list()
+            .title("Listings")
+            .items([
+              S.listItem()
+                .title("OLY Listings")
+                .child(
+                  S.documentList()
+                    .title("OLY Listings")
+                    .schemaType("listing")
+                    .filter('_type == "listing" && site == "oly"')
+                ),
+              S.listItem()
+                .title("Oly Properties Listings")
+                .child(
+                  S.documentList()
+                    .title("Oly Properties Listings")
+                    .schemaType("propertyListing")
+                    .filter(
+                      '_type == "propertyListing" && site == "oly-properties"'
+                    )
+                ),
+              S.listItem()
+                .title("Oly Auto Listings")
+                .child(
+                  S.documentList()
+                    .title("Oly Auto Listings")
+                    .schemaType("autoListing")
+                    .filter('_type == "autoListing" && site == "oly-auto"')
+                ),
+              S.listItem()
+                .title("Oly Hiring Listings")
+                .child(
+                  S.documentList()
+                    .title("Oly Hiring Listings")
+                    .schemaType("jobListing")
+                    .filter('_type == "autoListing" && site == "oly-hiring"')
+                ),
+              S.listItem()
+                .title("Oly Services Listings")
+                .child(
+                  S.documentList()
+                    .title("Oly Services Listings")
+                    .schemaType("servicesListing")
+                    .filter(
+                      '_type == "servicesListing" && site == "oly-hiring"'
+                    )
+                ),
+            ])
+        ),
+
+      // Categories
+      S.listItem()
+        .title("Categories")
+        .icon(FaList)
+        .child(
+          S.list()
+            .title("Categories")
+            .items([
+             
+              S.documentTypeListItem("category").title("Categories"),
+
+           
+              S.listItem()
+                .title("Featured Categories")
+                .icon(FaStar)
+                .child(
+                  S.documentList()
+                    .title("Featured Categories")
+                    .schemaType("category")
+                    .filter('_type == "category" && isFeatured == true')
+                    .params({})
+                    .defaultOrdering([
+                      { field: "featuredOrder", direction: "asc" },
+                      { field: "title", direction: "asc" },
+                    ])
+                ),
+            ])
+        ),
+      // Auctions (shared across all sites)
+      S.listItem()
+        .title("Auctions")
+        .icon(FaGavel)
+        .child(
+          S.list()
+            .title("Auctions")
+            .items([
+              S.documentTypeListItem("auction").title("Auctions"),
+              S.documentTypeListItem("auctionLot").title("Auction Lots"),
+              S.documentTypeListItem("bid").title("Bids"),
+              S.documentTypeListItem("bidderHistory").title("Bidder History"),
+              S.documentTypeListItem("auctionTest").title("Auction Tests"),
+            ])
+        ),
+
+      // Location-Based Features (shared)
+      S.listItem()
+        .title("Location Features")
+        .icon(FaMapMarkerAlt)
+        .child(
+          S.list()
+            .title("Location Features")
+            .items([
+              S.documentTypeListItem("address").title("Addresses"),
+              S.documentTypeListItem("locationAlertSettings").title(
+                "Alert Settings"
+              ),
+              S.documentTypeListItem("locationBasedListingTargeting").title(
+                "Listing Targeting"
+              ),
+              S.documentTypeListItem("locationBasedSearch").title(
+                "Search Settings"
+              ),
+              S.documentTypeListItem("locationHistory").title(
+                "Location History"
+              ),
+              S.documentTypeListItem(
+                "locationBasedRecommendationSettings"
+              ).title("Recommendations"),
+              S.documentTypeListItem("regionalTrends").title("Regional Trends"),
+            ])
+        ),
+
+      // Payments & Subscriptions (shared, admin-only)
+      ...(isAdmin
+        ? [
+            S.listItem()
+              .title("Payments")
+              .icon(FaMoneyBill)
+              .child(
+                S.list()
+                  .title("Payments & Subscriptions")
+                  .items([
+                    S.documentTypeListItem("paymentMethod").title(
+                      "Payment Methods"
+                    ),
+                    S.documentTypeListItem("subscription").title(
+                      "Subscriptions"
+                    ),
+                    S.documentTypeListItem("transaction").title("Transactions"),
+                    S.documentTypeListItem("bankDetails").title("Bank Details"),
+                  ])
+              ),
+            S.listItem()
+              .title("Listing Packages")
+              .icon(FaTag)
+              .child(
+                S.list()
+                  .title("Listing Packages")
+                  .items([
+                    S.documentTypeListItem("listingPackage").title(
+                      "Listing Packages"
+                    ),
+                  ])
+              ),
+            S.divider(),
+          ]
+        : []),
+
+      // Site-Specific Content
+      S.documentTypeListItem("siteLogo").title("Logos"),
+      S.documentTypeListItem("page").title("Pages"),
+      S.documentTypeListItem("Footer").title("Footer"),
+      S.documentTypeListItem("socialMediaLink").title("Social Media Links"),
+      S.listItem()
+        .title("Oly")
+        .child(
+          S.list()
+            .title("Oly Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.documentTypeListItem("moreFromOlySection").title(
+                "More from Oly Section"
+              ),
+              S.documentTypeListItem("featuredServicesSection").title(
+                "Featured Services Section"
+              ),
+              S.documentTypeListItem("featuredService").title(
+                "Features Services"
+              ),
+              S.documentTypeListItem("FeaturedListings").title(
+                "Featured Listings"
+              ),
+              S.documentTypeListItem("featuredCategoriesSection").title(
+                "Featured Categories Section"
+              ),
+              S.documentTypeListItem("olyArticlesSection").title(
+                "Oly Articles Section"
+              ),
+              S.listItem()
+                .title("Sections & Layouts")
+                .child(
+                  S.list()
+                    .title("Sections & Layouts")
+                    .items([
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
+                    ])
+                ),
+              S.documentTypeListItem("siteLogo").title("OLY Logo"),
+              S.documentTypeListItem("socialMediaLink").title(
+                "Social Media Links"
+              ),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Properties")
+        .child(
+          S.list()
+            .title("Oly Properties Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("propertyDetails").title(
+                "Property Details"
+              ),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.listItem()
+                .title("Sections & Layouts")
+                .child(
+                  S.list()
+                    .title("Sections & Layouts")
+                    .items([
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
+                    ])
+                ),
+              S.documentTypeListItem("siteLogo").title("Oly Properties Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Auto")
+        .child(
+          S.list()
+            .title("Oly Auto Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              // S.documentTypeListItem("olyAutoHomepage").title("Homepage"),
+              S.documentTypeListItem("vehicleDetails").title("Vehicle Details"),
+              S.documentTypeListItem("makeModel").title("Makes & Models"),
+              S.documentTypeListItem("inspectionReport").title(
+                "Inspection Reports"
+              ),
+              S.documentTypeListItem("dealerProfile").title("Dealer Profiles"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.listItem()
+                .title("Sections & Layouts")
+                .child(
+                  S.list()
+                    .title("Sections & Layouts")
+                    .items([
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
+                    ])
+                ),
+              S.documentTypeListItem("siteLogo").title("Oly Auto Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Hiring")
+        .child(
+          S.list()
+            .title("Oly Hiring Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("jobDetails").title("Job Details"),
+              S.documentTypeListItem("serviceDetails").title("Service Details"),
+              S.documentTypeListItem("professionalServiceProvider").title(
+                "Professional Service Providers"
+              ),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.listItem()
+                .title("Sections & Layouts")
+                .child(
+                  S.list()
+                    .title("Sections & Layouts")
+                    .items([
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
+                    ])
+                ),
+              S.documentTypeListItem("siteLogo").title("Oly Hiring Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Services")
+        .child(
+          S.list()
+            .title("Oly Services Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.documentTypeListItem("Features").title("Features"),
+              S.documentTypeListItem("FeaturedListings").title(
+                "Featured Listings"
+              ),
+              S.listItem()
+                .title("Sections & Layouts")
+                .child(
+                  S.list()
+                    .title("Sections & Layouts")
+                    .items([
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
+                    ])
+                ),
+              S.documentTypeListItem("siteLogo").title("OLY Services Logo"),
+              S.documentTypeListItem("socialMediaLink").title(
+                "Social Media Links"
+              ),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Shops")
+        .child(
+          S.list()
+            .title("OLY Shops Content")
+            .items([
+              S.documentTypeListItem("customer").title("Customers"),
+              S.documentTypeListItem("order").title("Orders"),
+              S.documentTypeListItem("shop-category").title("Categories"),
+              S.documentTypeListItem("shop-product").title("Products"),
+            ])
+        ),
+
+      // Blog & Sponsored Content (shared)
+      S.listItem()
+        .title("Articles")
+        .icon(FaBlog)
+        .child(
+          S.list()
+            .title("Articles")
+            .items([
+              S.documentTypeListItem("olyArticle").title("Oly Articles"),
+              S.documentTypeListItem("sponsoredArticle").title(
+                "Sponsored Articles"
+              ),
+              S.documentTypeListItem("slide").title("Slides"),
+            ])
+        ),
+
+      // Reviews & Community (shared)
+      S.listItem()
+        .title("Community")
+        .icon(FaUsers)
+        .child(
+          S.list()
+            .title("Community")
+            .items([
+              S.documentTypeListItem("review").title("Reviews"),
+              S.documentTypeListItem("group").title("Groups"),
+              S.documentTypeListItem("conversation").title("Conversations"),
+              S.documentTypeListItem("message").title("Messages"),
+              S.documentTypeListItem("messageFlag").title("Flagged Messages"),
+            ])
+        ),
+
+      // Media Uploads (shared)
+      S.listItem()
+        .title("Media")
+        .icon(FaUpload)
+        .child(
+          S.list()
+            .title("Media Uploads")
+            .items([
+              S.documentTypeListItem("imageFile").title("Images"),
+              S.documentTypeListItem("videoFile").title("Videos"),
+              S.documentTypeListItem("attachment").title("Attachments"),
+              S.documentTypeListItem("upload").title("Uploads"),
+            ])
+        ),
+
+      // Analytics & Moderation (admin-only)
+      ...(isAdmin
+        ? [
+            S.listItem()
+              .title("Analytics & Moderation")
+              .icon(FaChartLine)
+              .child(
+                S.list()
+                  .title("Analytics & Moderation")
+                  .items([
+                    S.documentTypeListItem("trendData").title("Trend Data"),
+                    S.documentTypeListItem("userEngagement").title(
+                      "User Engagement"
+                    ),
+                    S.documentTypeListItem("listingPerformance").title(
+                      "Listing Performance"
+                    ),
+                    S.documentTypeListItem("moderationLog").title(
+                      "Moderation Logs"
+                    ),
+                    S.documentTypeListItem("flaggedContent").title(
+                      "Flagged Content"
+                    ),
+                    S.documentTypeListItem("moderationComment").title(
+                      "Moderation Comments"
+                    ),
+                  ])
+              ),
+            S.divider(),
+          ]
+        : []),
+
+      // SEO & Promotions (shared)
+      S.listItem()
+        .title("SEO & Promotions")
+        .icon(FaFileAlt)
+        .child(
+          S.list()
+            .title("SEO & Promotions")
+            .items([
+              S.documentTypeListItem("seoMetadata").title("SEO Metadata"),
+              S.documentTypeListItem("promotion").title("Promotions"),
+              S.documentTypeListItem("coupon").title("Coupons"),
+            ])
+        ),
+
+      // Notifications (shared)
+      S.listItem()
+        .title("Notifications")
+        .icon(FaFlag)
+        .child(
+          S.list()
+            .title("Notifications")
+            .items([
+              S.documentTypeListItem("notification").title("Notifications"),
+              S.documentTypeListItem("notificationSettings").title(
+                "Notification Settings"
+              ),
+            ])
+        ),
+    ]);
+};
