@@ -24,14 +24,14 @@ const DashboardSidebarData = [
     id: 4,
     icon: '/icons/dashboard-sidebar/my-listings.png',
     active_icon: '/icons/dashboard-sidebar/my-listings-hovered.png',
-    label: 'My Ads',
+    label: 'My Listings',
     link: '/dashboard/my-listings'
   },
   {
     id: 5,
     icon: '/icons/dashboard-sidebar/liked-ads.png',
     active_icon: '/icons/dashboard-sidebar/liked-ads-hovered.png',
-    label: 'Liked Ads',
+    label: 'Liked Listings',
     link: '/dashboard/liked-ads'
   },
   {

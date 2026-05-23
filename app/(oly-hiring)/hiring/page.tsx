@@ -34,7 +34,7 @@ const Home = () => {
 
         <section className={styles.heroSection}>
           <HeroSection
-            category="all"
+            site="oly"
             mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
         modern marketplace. The future of classifieds."
           />
@@ -61,7 +61,7 @@ const Home = () => {
 
         <section className={styles.featuredListings}>
           <h2 className={styles.title}>Featured Listings</h2>
-          <FeaturedListings category="all" currentPage={1} />
+          <FeaturedListings site="oly" currentPage={1} />
         </section>
         <section className={styles.blog}>
           <h2 className={styles.title}>Oly Articles</h2>

@@ -5,7 +5,7 @@ import ExitButton from "@/components/ExitButton";
 import ReportAd from "@/components/ReportAd";
 import useReportStore from "../store/useReportStore";
 import AuctionModal from "./AuctionModal";
-import { ListingQueryResult } from "@/sanity/types";
+import { ListingQueryResult } from "@/server/sanity/types";
 import ConfirmPurchaseModal from "./ConfirmPurchaseModal";
 
 
@@ -42,3 +42,4 @@ const MainSection = ({ listing }: Props) => {
 };
 
 export default MainSection;
+

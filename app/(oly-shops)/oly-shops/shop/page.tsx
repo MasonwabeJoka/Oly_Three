@@ -1,8 +1,8 @@
 import {
   getFeaturedProducts,
   getFilteredProducts,
-  getShopCategories,
-} from "@/server/sanity/services/shops/products";
+} from "@/server/sanity/read-write/shops/products/read";
+import { getShopCategories } from "@/server/sanity/read-write/shops/categories/read";
 import styles from "./styles.module.scss";
 import { Suspense } from "react";
 import { FeaturedProductsCarousel } from "./components/FeaturedProductsCarousel";
@@ -57,7 +57,7 @@ const Home = async ({ searchParams }: PageProps) => {
         <FeaturedProductsCarousel products={featuredProducts} />
       </Suspense>
 
-        {/* Page Banner */}
+      {/* Page Banner */}
       <div className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
@@ -85,8 +85,8 @@ const Home = async ({ searchParams }: PageProps) => {
         />
       </div> */}
     </div>
-  
   );
 };
 
 export default Home;
+

@@ -24,7 +24,7 @@ const ListingCardAnalytics = ({
         <div
           className={`${styles.analyticsItems} ${styles.adId} ${styles.whiteOne} ${styles.value}`}
         >
-          <div className={styles.label}>Ad Id</div>
+          <div className={styles.label}>Listing Id</div>
           <div>{id}</div>
         </div>
         <div className={`${styles.analyticsItems} ${styles.whiteTwo} ${styles.value}`}>
@@ -65,3 +65,4 @@ const ListingCardAnalytics = ({
 };
 
 export default ListingCardAnalytics;
+

@@ -18,9 +18,10 @@ export const submit = async (data: Ad) => {
       }
 
       const result = await response.json();
-      setMessage("Ad created successfully");
+      setMessage("Listing created successfully");
     } catch (error) {
       console.error("Error creating ad:", error);
       setMessage("Error creating ad");
     }
 };
+

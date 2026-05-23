@@ -54,7 +54,7 @@ const LikedAds = () => {
       <div className={styles.listings}>
         {expanded ? (
           <ListingsExpanded
-            category="all"
+            site="oly"
             listings={[]}
             isDeletable={true}
             isDashboard={true}
@@ -64,7 +64,7 @@ const LikedAds = () => {
           />
         ) : (
           <ListingsCollage
-            category="all"
+            site="oly"
             listings={[]}
             isDeletable={true}
             isDashboard={true}

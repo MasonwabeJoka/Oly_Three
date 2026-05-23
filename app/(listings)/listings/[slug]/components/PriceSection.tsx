@@ -2,7 +2,7 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./PriceSection.module.scss";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
-import { ListingQueryResult } from "@/sanity/types";
+import { ListingQueryResult } from "@/server/sanity/types";
 
 const PriceSection = ({ listing, isAuction }: { listing: ListingQueryResult; isAuction: boolean }) => {
   return (
@@ -69,3 +69,4 @@ const PriceSection = ({ listing, isAuction }: { listing: ListingQueryResult; isA
 };
 
 export default PriceSection;
+

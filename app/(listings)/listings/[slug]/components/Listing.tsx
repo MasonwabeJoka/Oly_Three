@@ -13,7 +13,7 @@ import SellerDetailsContainer from "./SellerDetailsContainer";
 import ListingDetails from "./ListingDetails";
 import { usePathname } from "next/navigation";
 import GallerySection from "./GallerySection";
-import { ListingQueryResult } from "@/sanity/types";
+import { ListingQueryResult } from "@/server/sanity/types";
 
 type ListingProps = {
   listing: ListingQueryResult;
@@ -89,7 +89,7 @@ const Listing: React.FC<ListingProps> = ({
                   Similar Listings
                 </h4>
                 <ListingsCollage
-                  category="all"
+                  site="oly"
                   listings={similarListings}
                   isDeletable={false}
                   isDashboard={false}
@@ -122,3 +122,4 @@ const Listing: React.FC<ListingProps> = ({
 };
 
 export default Listing;
+

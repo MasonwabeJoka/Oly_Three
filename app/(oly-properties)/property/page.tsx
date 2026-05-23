@@ -102,7 +102,7 @@ const Home = () => {
         </section> */}
 
         <section className={styles.featuredListings}>
-          <FeaturedListings category="property" currentPage={1} />
+          <FeaturedListings site="oly-properties" currentPage={1} />
         </section>
 
         <section className={styles.belowFoldAd}>

@@ -85,7 +85,7 @@ const TitleAndDescription = ({ onNext }: Props) => {
             placeholder="Write a title for your ad."
             label="Title"
             id="titleAndDescription.title"
-            ariaLabel="Ad title input field"
+            ariaLabel="Listing title input field"
             aria-describedby={
               errors.titleAndDescription?.title?.message
                 ? "title-error"
@@ -122,3 +122,4 @@ const TitleAndDescription = ({ onNext }: Props) => {
 };
 
 export default TitleAndDescription;
+

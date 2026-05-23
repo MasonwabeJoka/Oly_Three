@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 import { ratelimit } from '@/lib/upstash/rate-limit';
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function GET(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';

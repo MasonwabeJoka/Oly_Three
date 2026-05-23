@@ -6067,7 +6067,7 @@ export type SanityImageAsset = {
 
 export type AllSanitySchemaTypes = Order | ShopProduct | SanityImageCrop | SanityImageHotspot | ShopCategory | Slug | Customer | OlySite | FeaturedService | OlyArticle | SimilarListingsSection | SellerSection | ProductSpecificationsSection | ProductDetailsSection | ListingPage | FeaturesSection | MessageReply | ServiceProvider | RecruitmentAgency | CarDealership | ContentChannel | Company | Geopoint | Store | ServicesListing | Location | ServicesCategory | JobListing | JobCategory | AutoListing | VehicleCategory | PropertyListing | PropertyCategory | ArticleCard | ArticlePage | CommentsSection | ArticleSidebar | ArticleCategory | Author | OlyHomepage | SponsoredArticlesSection | Sponsor | SponsoredArticle | OlyArticlesSection | BottomAdSection | TopAdSection | AdSection | FeaturedListingsSection | FeaturedCategoriesSection | FeaturedServicesSection | MoreFromOlySection | HeroSection | SiteLogo | NotificationSettings | Notification | Coupon | Promotion | SeoMetadata | FlaggedContent | ModerationLog | ModerationComment | MakeModel | ListingPerformance | UserEngagement | ServiceDetails | ProfessionalServiceProvider | StoreOwner | JobDetails | DealerProfile | PropertyDetails | BankDetails | AuctionTest | Attachment | VideoFile | InspectionReport | VehicleDetails | ImageFile | Details | Page | Slide | FeaturedListings | Features | SocialMediaLink | Footer | Upload | AuditEntry | MessageFlag | Message | Conversation | Group | Review | Transaction | Subscription | PaymentMethod | AuctionLot | UserLocationConsent | RegionalTrends | TrendData | LocationBasedRecommendationSettings | LocationHistory | LocationBasedSearch | LocationBasedListingTargeting | ListingPackage | BidderHistory | Listing | Auction | Bid | Category | User | LocationAlertSettings | UserLocationPreference | Address | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./sanity/lib/crud/categories/data.ts
+// Source: ./server/sanity/lib/crud/categories/data.ts
 // Variable: categoriesQuery
 // Query: *[_type == "category" && level == 0][0]{  title,  "categories": subcategories[]->{    _id,    title,    slug {      current    },    "secondLevelSubcategories": subcategories[]->{      _id,      title,      slug {        current      }    },        "thirdLevelSubcategories": subcategories[]->subcategories[]->{      _id,      title,      slug {        current      }    }  },       }
 export type CategoriesQueryResult = {
@@ -6095,7 +6095,7 @@ export type CategoriesQueryResult = {
   }> | null;
 } | null;
 
-// Source: ./sanity/lib/crud/featuredArticles/data.ts
+// Source: ./server/sanity/lib/crud/featuredArticles/data.ts
 // Variable: featuredArticlesQuery
 // Query: *[_type == "olyArticlesSection"][0] {  _id,  title,  "articles": *[_type == "olyArticle" && imageUrl != null && imageUrl != ""] | order(pubDate desc) [0...10] {    _id,    title,    content,    pubDate,    imageUrl,    "creator": domain[0],    sourceUrl,    sourceIcon  }}
 export type FeaturedArticlesQueryResult = {
@@ -6130,7 +6130,7 @@ export type FeaturedArticlesQueryResult = {
   }>;
 } | null;
 
-// Source: ./sanity/lib/crud/featuredCategories/data.ts
+// Source: ./server/sanity/lib/crud/featuredCategories/data.ts
 // Variable: featuredCategoriesQuery
 // Query: *[_type == "category" && isFeatured == true] {  "id": _id,    title,    "displayTitle": coalesce(featuredTitle, title),// returns featuredTitle if it exists, otherwise title  "image": image}
 export type FeaturedCategoriesQueryResult = Array<{
@@ -6151,7 +6151,7 @@ export type FeaturedCategoriesQueryResult = Array<{
   } | null;
 }>;
 
-// Source: ./sanity/lib/crud/featuredCategoriesSection/data.ts
+// Source: ./server/sanity/lib/crud/featuredCategoriesSection/data.ts
 // Variable: featuredCategoriesSectionQuery
 // Query: *[_type == "featuredCategoriesSection" && isActive == true][0] {    _id,    title,    callToAction,    featuredCategories[]{        _key,        isActive,        sortOrder,        featuredPriority,        overrideTitle,        overrideUrl,        overrideImage,        "category": categoryRef->{        _id,        title,        slug,        path,        "image": image.asset->url,        isActive,        order        },        // computed displayTitle - prefer overrideTitle, then referenced title, else blank        "displayTitle": coalesce(overrideTitle, categoryRef->title),        // computed displayImage - prefer overrideImage, then referenced image        "displayImage": coalesce(overrideImage, categoryRef->image.asset->url)    }  }
 export type FeaturedCategoriesSectionQueryResult = {
@@ -6161,7 +6161,7 @@ export type FeaturedCategoriesSectionQueryResult = {
   featuredCategories: null;
 } | null;
 
-// Source: ./sanity/lib/crud/featuredListings/data.ts
+// Source: ./server/sanity/lib/crud/featuredListings/data.ts
 // Variable: featuredListingsQuery
 // Query: *[_type == "listing" && defined(slug.current) && isFeatured == true]  | order(postedOn desc) [$offset...$limit]{    _id,    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation,    },    title,    slug,    description,    price,    priceOption,    postedOn,    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    },  }
 export type FeaturedListingsQueryResult = Array<{
@@ -6212,7 +6212,7 @@ export type FeaturedListingsQueryResult = Array<{
 // Query: count(*[_type == "listing" && defined(slug.current) && isFeatured == true])
 export type FeaturedListingsCountQueryResult = number;
 
-// Source: ./sanity/lib/crud/featuredServicesSection/data.ts
+// Source: ./server/sanity/lib/crud/featuredServicesSection/data.ts
 // Variable: featuredServicesSectionQuery
 // Query: *[_type == "featuredServicesSection"][0] {  _id,    _type,    title,    services[]-> {      title,      "serviceId": _id,      cta,      description,      features[] {        "featureId": _key,        _type,        featureText,      },      layout,      path,      "image": image.asset->url       }}
 export type FeaturedServicesSectionQueryResult = {
@@ -6235,7 +6235,7 @@ export type FeaturedServicesSectionQueryResult = {
   }> | null;
 } | null;
 
-// Source: ./sanity/lib/crud/listing/data.ts
+// Source: ./server/sanity/lib/crud/listing/data.ts
 // Variable: listingQuery
 // Query: *[_type == "listing" && slug.current == $slug][0]{    _id,    title,    slug,    price,    pricingOption,    description,    site,    postedOn,    expiresAt,    location,    details,    category->{      _id,      title,      slug    },    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation    },    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    },  }
 export type ListingQueryResult = {
@@ -6294,7 +6294,7 @@ export type ListingQueryResult = {
   }> | null;
 } | null;
 
-// Source: ./sanity/lib/crud/listingViews/data.ts
+// Source: ./server/sanity/lib/crud/listingViews/data.ts
 // Variable: listingViewsQuery
 // Query: *[_type == "listing" && _id == $id][0]{    _id,  views,}
 export type ListingViewsQueryResult = {
@@ -6302,7 +6302,7 @@ export type ListingViewsQueryResult = {
   views: null;
 } | null;
 
-// Source: ./sanity/lib/crud/listings/data.ts
+// Source: ./server/sanity/lib/crud/listings/data.ts
 // Variable: listingsQuery
 // Query: *[_type == "listing" && defined(slug.current)    && ($searchTerm == "" || title match $searchTerm || description match $searchTerm)    && ($locationSearch == "" || user->address->city match $locationSearch                               || user->address->suburb match $locationSearch                               || user->address->cityAbbreviation match $locationSearch)  ] | order(postedOn desc) [$offset...$limit]{    _id,    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation,    },    title,    slug,    description,    price,    priceOption,    postedOn,    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    }  }
 export type ListingsQueryResult = Array<{
@@ -6353,7 +6353,7 @@ export type ListingsQueryResult = Array<{
 // Query: count(*[_type == "listing" && defined(slug.current)    && ($searchTerm == "" || title match $searchTerm || description match $searchTerm)    && ($locationSearch == "" || user->address->city match $locationSearch                               || user->address->suburb match $locationSearch                               || user->address->cityAbbreviation match $locationSearch)  ])
 export type ListingsCountQueryResult = number;
 
-// Source: ./sanity/lib/crud/moreFromOly/data.ts
+// Source: ./server/sanity/lib/crud/moreFromOly/data.ts
 // Variable: moreFromOlyQuery
 // Query: *[_type == "moreFromOlySection"][0] {  title,   sites[] -> {     _id,     _type,     path,     siteName,     "imageUrl": image.asset->url   }}
 export type MoreFromOlyQueryResult = {
@@ -6367,7 +6367,7 @@ export type MoreFromOlyQueryResult = {
   }> | null;
 } | null;
 
-// Source: ./sanity/lib/crud/pages/oly-homepage/data.ts
+// Source: ./server/sanity/lib/crud/pages/oly-homepage/data.ts
 // Variable: olyHomepageQuery
 // Query: *[_type == "olyHomepage" && isActive == true][0] {  _id,  _type,  title,  publishedAt,  isActive,  adSection,  topAdSection,  bottomAdSection,  featuredCategoriesSection,  featuredListingsSection,  featuredServicesSection,  heroSection,  moreFromOlySection,  olyArticlesSection,  sponsoredArticlesSection,}
 export type OlyHomepageQueryResult = {
@@ -6488,7 +6488,7 @@ export type OlyHomepageQueryResult = {
   } | null;
 } | null;
 
-// Source: ./sanity/lib/crud/shops/categories/data.ts
+// Source: ./server/sanity/lib/crud/shops/categories/data.ts
 // Variable: ALL_CATEGORIES_QUERY
 // Query: *[  _type == "shop-category"] | order(title asc) {  _id,  title,  "slug": slug.current,  "image": image{    asset->{      _id,      url    },    hotspot  }}
 export type ALL_CATEGORIES_QUERYResult = Array<{
@@ -6518,7 +6518,7 @@ export type CATEGORY_BY_SLUG_QUERYResult = {
   } | null;
 } | null;
 
-// Source: ./sanity/lib/crud/shops/customers/data.ts
+// Source: ./server/sanity/lib/crud/shops/customers/data.ts
 // Variable: CUSTOMER_BY_EMAIL_QUERY
 // Query: *[  _type == "customer"  && email == $email][0]{  _id,  email,  name,  clerkUserId,  stripeCustomerId,  createdAt}
 export type CUSTOMER_BY_EMAIL_QUERYResult = {
@@ -6540,7 +6540,7 @@ export type CUSTOMER_BY_STRIPE_ID_QUERYResult = {
   createdAt: string | null;
 } | null;
 
-// Source: ./sanity/lib/crud/shops/orders/data.ts
+// Source: ./server/sanity/lib/crud/shops/orders/data.ts
 // Variable: ORDERS_BY_USER_QUERY
 // Query: *[  _type == "order"  && clerkUserId == $clerkUserId] | order(createdAt desc) {  _id,  orderNumber,  total,  status,  createdAt,  "itemCount": count(items),  "itemNames": items[].product->name,  "itemImages": items[].product->images[0].asset->url}
 export type ORDERS_BY_USER_QUERYResult = Array<{
@@ -6605,7 +6605,7 @@ export type ORDER_BY_STRIPE_PAYMENT_ID_QUERYResult = {
   _id: string;
 } | null;
 
-// Source: ./sanity/lib/crud/shops/products/data.ts
+// Source: ./server/sanity/lib/crud/shops/products/data.ts
 // Variable: ALL_PRODUCTS_QUERY
 // Query: *[_type == "shop-product"] | order(name asc) { _id, name, "slug": slug.current, description, price, "images": images[]{ _key, asset->{ _id, url }, hotspot }, category->{ _id, title, "slug": slug.current }, material, colour, dimensions, stock, featured, assemblyRequired }
 export type ALL_PRODUCTS_QUERYResult = Array<{
@@ -6894,7 +6894,7 @@ export type AI_SEARCH_PRODUCTS_QUERYResult = Array<{
   assemblyRequired: boolean | null;
 }>;
 
-// Source: ./sanity/lib/crud/shops/stats/data.ts
+// Source: ./server/sanity/lib/crud/shops/stats/data.ts
 // Variable: PRODUCT_COUNT_QUERY
 // Query: count(*[_type == "product"])
 export type PRODUCT_COUNT_QUERYResult = number;
@@ -6958,7 +6958,7 @@ export type REVENUE_BY_PERIOD_QUERYResult = {
   previousOrderCount: number;
 };
 
-// Source: ./sanity/lib/crud/similarListings/data.ts
+// Source: ./server/sanity/lib/crud/similarListings/data.ts
 // Variable: similarListingsQuery
 // Query: *[_type == "listing" &&     defined(slug.current) &&     isActive == true &&     approvedForSale == "approved" &&    _id != $currentListingId &&    (      category._ref == $categoryRef ||      (price >= $minPrice && price <= $maxPrice) ||      user->address->city == $userCity    )  ] | order(postedOn desc) [0...$limit]{    _id,    user->{      _id,      firstName,      lastName,      fullName,      "profileImage": profileImage.asset->url,      "city": address->city,      "suburb": address->suburb,      "cityAbbr": address->cityAbbreviation,    },    title,    slug,    description,    price,    priceOption,    postedOn,    category->{      _id,      title,      slug    },    "images": images[]->{      "alt": image.alt,      "id": image.asset->_id,      "url": image.asset->url,      "width": image.asset->metadata.dimensions.width,      "height": image.asset->metadata.dimensions.height,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio    },  }
 export type SimilarListingsQueryResult = Array<{
@@ -7057,7 +7057,7 @@ export type RecentListingsQueryResult = Array<{
   }> | null;
 }>;
 
-// Source: ./sanity/lib/crud/user/data.ts
+// Source: ./server/sanity/lib/crud/user/data.ts
 // Variable: userQuery
 // Query: *[_type == "user"] {  _id,  email,  firstName,  lastName,  fullName,  "profileImage": profileImage.asset->url}
 export type UserQueryResult = Array<{
@@ -7121,3 +7121,4 @@ declare module "@sanity/client" {
     "*[_type == \"user\"] {\n  _id,\n  email,\n  firstName,\n  lastName,\n  fullName,\n  \"profileImage\": profileImage.asset->url\n}": UserQueryResult;
   }
 }
+

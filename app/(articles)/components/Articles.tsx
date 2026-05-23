@@ -17,12 +17,12 @@ import Select from "@/components/Select";
 import { formatRelativeTime } from "@/utils/formatterFunctions/Formatter";
 import Link from "next/link";
 import { articleCategories } from "@/data/articlesCategories";
-import { OlyArticle } from "@/server/sanity/lib/articles";
+import { OlyArticle } from "@/server/sanity/articles";
 import RecommendedArticle from "@/components/cards/RecommendedArticle";
 import Image from "@/components/Image";
 import ArticlesHeader from "./ArticlesHeader";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { featuredServicesSectionQueryOptions } from "@/server/sanity/query-options/homepage";
+import { featuredServicesSectionQueryOptions } from "@/server/sanity/read-write/featuredServicesSection/queryOptions";
 
 type ArticlesProps = {
   articles: OlyArticle[];
@@ -144,3 +144,4 @@ const Articles = ({
 };
 
 export default Articles;
+

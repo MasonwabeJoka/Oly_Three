@@ -14,7 +14,7 @@ import { searchAction } from "./../utils/featuredListingSearchAction";
 
 type FormValues = z.infer<typeof searchFormSchema>;
 
-const FeaturedListingsClient = ({ category }: any) => {
+const FeaturedListingsClient = ({ site }: any) => {
   const Title = useTitleStore((state) => state.Title);
   const [searchTermClicked, setSearchTermClicked] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
@@ -51,7 +51,7 @@ const FeaturedListingsClient = ({ category }: any) => {
 
   return (
     <div className={styles.controlContainer}>
-      {category === "all" && (
+      {site === "oly" && (
         <div className={styles.control}>
           <Select
             options={[
@@ -72,7 +72,7 @@ const FeaturedListingsClient = ({ category }: any) => {
           />
         </div>
       )}
-      {category === "property" && (
+      {site === "oly-properties" && (
         <>
           <div className={styles.control}>
             <Select
@@ -123,7 +123,7 @@ const FeaturedListingsClient = ({ category }: any) => {
           </div>
         </>
       )}
-      {category === "shops" && (
+      {site === "oly-shops" && (
         <>
           <div className={styles.control}>
             <Select

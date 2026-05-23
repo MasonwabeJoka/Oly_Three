@@ -9,7 +9,7 @@ import useMessageStore from "@/features/messages/store/useMessageStore";
 import { useSingInCheckHook } from "@/hooks/useSingInCheckHook";
 import useAuctionModalStore from "../auction/store/useAuctionModalStore";
 import usePaymentModalStore from "../store/usePaymentModalStore";
-import { ListingQueryResult } from "@/sanity/types";
+import { ListingQueryResult } from "@/server/sanity/types";
 
 interface Props {
   listing: ListingQueryResult;
@@ -82,3 +82,4 @@ const ListingOverview = ({ listing }: Props) => {
 };
 
 export default ListingOverview;
+

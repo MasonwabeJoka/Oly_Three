@@ -83,7 +83,7 @@ const Page = () => {
                 </div>
               }
             >
-              <FeaturedListings category="all" currentPage={1} />
+              <FeaturedListings site="oly" currentPage={1} />
             </Suspense>
           </section>
            <section className={styles.calculators}>

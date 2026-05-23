@@ -80,7 +80,7 @@ const steps: Step[] = [
   { id: "step4", name: "Title and Description", fields: ["titleAndDescription.title", "titleAndDescription.description"] },
   { id: "step5", name: "Upload Media", fields: ["uploadMedia.uploadPhotos", "uploadMedia.uploadVideos", "uploadMedia.uploadAttachments"] },
   { id: "step6", name: "Location", fields: ["location.province", "location.city", "location.suburb", "location.customLocation"] },
-  { id: "step7", name: "Promote Your Ad", fields: ["promoteYourAd.promotionDuration"] },
+  { id: "step7", name: "Promote Your Listing", fields: ["promoteYourAd.promotionDuration"] },
   { id: "step8", name: "Congratulations", fields: [] },
   { id: "step9", name: "Review and Submit", fields: [] },
   { id: "step10", name: "Select New Category", fields: [] }, // Add the new step
@@ -383,3 +383,4 @@ const useFormStore = create<FormState & FormStore>((set, get) => ({
 
 // Export the store so it can be used in other parts of the app
 export default useFormStore;
+

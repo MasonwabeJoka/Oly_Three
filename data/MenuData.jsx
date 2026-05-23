@@ -18,7 +18,7 @@ export const MenuData = [
     id: 3,
     icon: "/icons/dashboard-sidebar/my-listings.png",
     active_icon: "/icons/dashboard-sidebar/my-listings-hovered.png",
-    text: "My Ads",
+    text: "My Listings",
     path: "/dashboard/my-listings",
   },
 
@@ -26,7 +26,7 @@ export const MenuData = [
     id: 4,
     icon: "/icons/dashboard-sidebar/liked-ads.png",
     active_icon: "public/icons/dashboard-sidebar/liked-ads-hovered.png",
-    text: "Liked Ads",
+    text: "Liked Listings",
     path: "/dashboard/liked-ads",
   },
   {

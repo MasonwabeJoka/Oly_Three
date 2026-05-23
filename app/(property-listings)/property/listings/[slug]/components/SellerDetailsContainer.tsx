@@ -12,7 +12,7 @@ const SellerDetailsContainer = () => {
     <div className={styles.sellerDetails}>
       <SellerDetails />
       <p className={styles.report} onClick={() => setReport(true)}>
-        Report Ad
+        Report Listing
       </p>
     </div>
   );

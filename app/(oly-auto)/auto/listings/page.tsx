@@ -1,5 +1,5 @@
 import ListingsPage from "@/components/ListingsPage";
-import { getListings } from "@/server/sanity/services/listings";
+import { getListings } from "@/server/sanity/read-write/listings/read";
 
 const listingsPerPage = 10;
 
@@ -43,3 +43,4 @@ const Page = async ({
 };
 
 export default Page;
+

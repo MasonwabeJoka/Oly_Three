@@ -23,7 +23,9 @@ const ArticleLayoutWrapper = ({ children, initialAuth }: ArticleLayoutWrapperPro
         >
           {children}
         </ImageKitProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {process.env.NODE_ENV === "development" ? (
+          <ReactQueryDevtools initialIsOpen={false} />
+        ) : null}
       </QueryClientProvider>
     </AuthKitProvider>
   );

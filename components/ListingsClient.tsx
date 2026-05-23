@@ -3,7 +3,15 @@ import ListingsCollage from "./ListingsCollage";
 import ListingsExpanded from "./ListingsExpanded";
 
 interface ListingsProps {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   expanded: boolean;
   listings: ListingsQueryResult;
   limit: number;
@@ -13,7 +21,7 @@ interface ListingsProps {
 }
 
 const ListingsClient = ({
-  category,
+  site,
   expanded,
   listings,
 
@@ -26,7 +34,7 @@ const ListingsClient = ({
     <>
       {expanded ? (
         <ListingsExpanded
-          category={category}
+          site={site}
           listings={listings}
           isDeletable={false}
           isDashboard={false}
@@ -37,7 +45,7 @@ const ListingsClient = ({
         />
       ) : (
         <ListingsCollage
-          category={category}
+          site={site}
           listings={listings}
           isDeletable={false}
           isDashboard={false}

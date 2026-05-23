@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:sanity/populate-categories.ts
 import { client } from "@/server/sanity/lib/client"
+========
+import { client } from "@/server/sanity/client"
+>>>>>>>> 217c2b9 (Save current workspace changes):server/sanity/populate-categories.ts
 import {categoryData} from "@/data/categoryData"
 
 

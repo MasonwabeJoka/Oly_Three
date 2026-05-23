@@ -103,7 +103,7 @@ export default function Listings({ listings, site }: ListingsClientProps) {
           </div>
           <div className={styles.listings} ref={listingsRef}>
             <ListingsClient
-              category="all"
+              site="oly"
               listings={listings}
               expanded={expanded}
               limit={4}

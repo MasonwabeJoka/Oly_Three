@@ -5,6 +5,23 @@ export const page = defineType({
     title: 'Page',
     type: 'document',
     fields: [
+            defineField({
+              name: 'site',
+              title: 'Site',
+              type: 'string',
+              description: 'e.g., oly, oly-auto, oly-properties, oly-services',
+              validation: (Rule) => Rule.required(),
+              options: {
+                list: [
+                  { title: 'Oly', value: 'oly' },
+                  { title: 'Oly Auto', value: 'oly-auto' },
+                  { title: 'Oly Properties', value: 'oly-properties' },
+                  { title: 'Oly Services', value: 'oly-services' },
+                  { title: 'Oly Hiring', value: 'oly-hiring' },
+                ],
+                layout: 'dropdown',
+              },
+            }),
         defineField({
             name: 'slug',
             title: 'Slug',

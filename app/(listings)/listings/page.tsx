@@ -1,5 +1,5 @@
 import ListingsPage from "@/components/ListingsPage";
-import { getListings } from "@/server/sanity/services/listings";
+import { getListings } from "@/server/sanity/read-write/listings/read";
 
 const listingsPerPage = 10;
 
@@ -8,11 +8,12 @@ const Page = async ({
 }: {
   searchParams: { searchTerm?: string; locationSearch?: string; page?: string };
 }) => {
-
-
   const resolvedSearchParams = await searchParams;
-  const { searchTerm = "", locationSearch = "", page = "1" } = resolvedSearchParams;
-
+  const {
+    searchTerm = "",
+    locationSearch = "",
+    page = "1",
+  } = resolvedSearchParams;
 
   const currentPage = Number(page) || 1;
 
@@ -47,3 +48,4 @@ const Page = async ({
 };
 
 export default Page;
+

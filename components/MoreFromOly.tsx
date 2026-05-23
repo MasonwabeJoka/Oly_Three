@@ -1,7 +1,7 @@
 import styles from "./MoreFromOly.module.scss";
 import ClassifiedLink from "./cards/ClassifiedLink";
 import Link from "next/link";
-import { getMoreFromOly } from "@/server/sanity/lib/crud/moreFromOly/data";
+import { getMoreFromOly } from "@/server/sanity/read-write/moreFromOly/read";
 
 // Types
 interface SanityOlySite {
@@ -26,24 +26,25 @@ const MoreFromOly = async () => {
 
       <div className={styles.classifiedsWrapper}>
         <ul className={styles.classifieds}>
-        {sites.map((site, index: number) => (
-          <li key={site?._id || `fallback-${index}`}>
-            <Link
-              href={site.path ?? "#"}
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <ClassifiedLink
-                text={site?.siteName ?? undefined}
-                image={site?.imageUrl ?? undefined}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-        </div>
+          {sites.map((site, index: number) => (
+            <li key={site?._id || `fallback-${index}`}>
+              <Link
+                href={site.path ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ClassifiedLink
+                  text={site?.siteName ?? undefined}
+                  image={site?.imageUrl ?? undefined}
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
 export default MoreFromOly;
+

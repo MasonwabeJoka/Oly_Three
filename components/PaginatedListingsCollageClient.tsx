@@ -114,13 +114,13 @@ const PaginatedListingsCollageClient = ({
       <Link href={`/${ad.slug}`} key={ad._id} className={styles.cardContainer}>
         <div className={styles.card}>
           <ListingCard
+            site="oly"
             listing={ad}
             id={ad._id}
             index={index}
             cardType="box"
             cardSize={cardSize}
             imageUrls={urls}
-            category="all"
             title={ad.title}
             price={ad.price}
             aspectRatios={aspectRatios}

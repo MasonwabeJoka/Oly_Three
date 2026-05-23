@@ -13,7 +13,7 @@ const Published = () => {
   }, []);
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>🎉 Your ad is live!</h1>
+      <h1 className={styles.title}>🎉 Your listing is live!</h1>
       <p className={styles.description}>
         Buyers can now view your listing. You can manage it anytime in your
         dashboard.
@@ -21,12 +21,12 @@ const Published = () => {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.viewButton}
-          buttonChildren="View Your Ad"
+          buttonChildren="View Your Listing"
           buttonType="primary"
           buttonSize="large"
           name="view-btn"
           type="button"
-          ariaLabel="View Your Ad"
+          ariaLabel="View Your Listing"
           autoFocus={false}
           disabled={false}
           dashboard
@@ -37,3 +37,4 @@ const Published = () => {
 };
 
 export default Published;
+

@@ -7,13 +7,15 @@ import ShowMenu from "@/components/ShowMenu";
 import ShowCategories from "@/components/ShowCategories";
 import ExternalAd from "@/components/ExternalAd";
 import FeaturedServicesSlide from "@/components/carousels/FeaturedServicesSlide";
-import { getOlyHomepage } from "@/server/sanity/services/homepage";
-import { getCategories } from "@/server/sanity/services/categories";
-import { getFeaturedCategoriesSection } from "@/server/sanity/services/categories";
+import { getOlyHomepage } from "@/server/sanity/read-write/pages/oly-homepage/read";
+import { getCategories } from "@/server/sanity/read-write/categories/read";
+import { getFeaturedCategoriesSection } from "@/server/sanity/read-write/featuredCategoriesSection/read";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import OlyArticles from "@/components/OlyArticles";
 import FeaturedCategories from "@/components/FeaturedCategories";
+import { getHeroSectionData } from "@/server/sanity/read-write/pages/oly-homepage/hero-section/read";
+
 
 const Home = async ({
   searchParams,
@@ -22,6 +24,8 @@ const Home = async ({
 }) => {
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
+  const heroSectionData = await getHeroSectionData();
+
 
   const { categories: firstLevelCategories, title } = categories || {
     categories: null,
@@ -31,7 +35,7 @@ const Home = async ({
   // Read page from URL parameters, default to 1
   const resolvedSearchParams = await searchParams;
   const currentPage = parseInt(resolvedSearchParams.page || "1");
-// throw new Error("Test error: This is a simulated error for testing purposes.");
+  // throw new Error("Test error: This is a simulated error for testing purposes.");
   const {
     heroSection,
     moreFromOlySection,
@@ -47,7 +51,6 @@ const Home = async ({
   const { featuredCategories } = featuredCategoriesSectionData || {
     featuredCategories: null,
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -78,9 +81,7 @@ const Home = async ({
             >
               <HeroSection
                 site="oly"
-                mainTitle=" Welcome to South Africa's hub for buying and selling. Oly is a
-        modern marketplace. The future of classifieds."
-                displayOptions={heroSection?.reference?.displayOptions}
+                data={heroSectionData}
               />
             </Suspense>
           </section>
@@ -145,7 +146,6 @@ const Home = async ({
 
         {featuredListingsSection?.isEnabled === true && (
           <section className={styles.featuredListings}>
-          
             <Suspense
               fallback={
                 <div>
@@ -190,7 +190,6 @@ const Home = async ({
         )}
         {sponsoredArticlesSection?.isEnabled === true && (
           <section className={styles.sponsoredArticles}>
-           
             <Suspense
               fallback={
                 <div>
@@ -208,3 +207,4 @@ const Home = async ({
 };
 
 export default Home;
+

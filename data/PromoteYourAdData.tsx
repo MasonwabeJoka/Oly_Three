@@ -3,7 +3,7 @@ export const PromoteYourAdData = [
     {
       id: 1,
       promotionChannel: "Oly Feed",
-      title: "Promote Your Ad On Oly Feed",
+      title: "Promote Your Listing On Oly Feed",
       promotionPrice: [
         {
           duration: "1 Day",
@@ -89,7 +89,7 @@ export const PromoteYourAdData = [
     {
       id: 1,
       promotionChannel: "Facebook",
-      title: "Promote Your Ad On Facebook",
+      title: "Promote Your Listing On Facebook",
       promotionPrice: [
         {
           duration: "1 Day",
@@ -117,7 +117,7 @@ export const PromoteYourAdData = [
     {
       id: 2,
       promotionChannel: "Instagram",
-      title: "Promote Your Ad On Instagram",
+      title: "Promote Your Listing On Instagram",
       promotionPrice: [
         {
           duration: "1 Day",
@@ -145,7 +145,7 @@ export const PromoteYourAdData = [
     {
       id: 3,
       promotionChannel: "Google Ads",
-      title: "Promote Your Ad On Other Websites Using Google Ads",
+      title: "Promote Your Listing On Other Websites Using Google Ads",
       promotionPrice: [
         {
           duration: "1 Day",
@@ -173,7 +173,7 @@ export const PromoteYourAdData = [
     {
       id: 4,
       promotionChannel: "LinkedIn",
-      title: "Promote Your Ad On LinkedIn",
+      title: "Promote Your Listing On LinkedIn",
       promotionPrice: [
         {
           duration: "1 Day",
@@ -283,3 +283,4 @@ export const PromoteYourAdData = [
     },
   ],
 ];
+

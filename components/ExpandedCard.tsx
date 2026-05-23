@@ -3,7 +3,15 @@ import type { PortableTextBlock } from "sanity";
 import ExpandedCardClient from "./ExpandedCardClient";
 
 type ExpandedCardProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   imageUrls?: string[];
   aspectRatios?: number[];
   isCardHovered: boolean;
@@ -30,7 +38,7 @@ type ExpandedCardProps = {
 };
 
 const ExpandedCard: React.FC<ExpandedCardProps> = ({
-  category,
+  site,
   imageUrls,
   aspectRatios,
   isCardHovered,
@@ -58,7 +66,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({
   return (
     <article className={styles.expandedCard}>
       <ExpandedCardClient
-        category={category}
+        site={site}
         imageUrls={imageUrls}
         aspectRatios={aspectRatios}
         isCardHovered={isCardHovered}

@@ -1,7 +1,7 @@
 // hooks/useArticlesQuery.ts
 import { useQuery } from '@tanstack/react-query';
 import { createClient } from '@sanity/client';
-import { client } from '../sanity/lib/client';
+import { client } from '@/server/sanity/client';
 
 // Use the correct interface from articles.ts
 interface OlyArticle {

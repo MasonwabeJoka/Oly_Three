@@ -8,7 +8,7 @@ export const siteLogo = defineType({
   fields: [
     defineField({
       name: 'site',
-      title: 'Site Key',
+      title: 'Site',
       type: 'string',
       description: 'e.g., oly, oly-auto, oly-properties, oly-services',
       validation: (Rule) => Rule.required(),

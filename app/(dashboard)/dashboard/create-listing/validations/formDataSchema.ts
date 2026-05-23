@@ -51,7 +51,7 @@ const formDataSchema = z.object({
     suburb: z.string().min(1, { message: "Suburb is required" }),
     customLocation: z.string().optional(),
   }),
-  // Promote Your Ad section
+  // Promote Your Listing section
   promoteYourAd: z.object({
     promotionDuration: z.string().optional(),
   }),

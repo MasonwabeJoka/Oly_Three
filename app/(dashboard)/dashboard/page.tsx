@@ -12,15 +12,15 @@ const Dashboard = () => {
           <Link href="/dashboard/create-listing" className={styles.card}>
             <LinkCard
               image="/bear.jpg"
-              label="Post Your Ads"
+              label="Post Your Listings"
               cardSize="large"
             />
           </Link>
           <Link href="/dashboard/my-listings" className={styles.card}>
-            <LinkCard image="/bear.jpg" label="My Ads" cardSize="large" />
+            <LinkCard image="/bear.jpg" label="My Listings" cardSize="large" />
           </Link>
           <Link href="/dashboard/liked-ads" className={styles.card}>
-            <LinkCard image="/bear.jpg" label="Liked Ads" cardSize="large" />
+            <LinkCard image="/bear.jpg" label="Liked Listings" cardSize="large" />
           </Link>
           <Link href="/dashboard/notifications" className={styles.card}>
             <LinkCard

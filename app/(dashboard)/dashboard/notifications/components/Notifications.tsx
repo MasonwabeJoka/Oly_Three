@@ -32,7 +32,7 @@ const Notifications = () => {
                 count: 5,
               },
               {
-                title: "Ads",
+                title: "Listings",
                 count: 1,
               },
               {
@@ -80,3 +80,4 @@ const Notifications = () => {
 };
 
 export default Notifications;
+

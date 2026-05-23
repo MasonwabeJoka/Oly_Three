@@ -6,5 +6,5 @@ import { FormData } from "@/app/(dashboard)/dashboard/create-listing/store/useFo
 export async function CreateAListingAction(formData: FormData) {
   // TODO: Implement real server-side logic (e.g., save to database)
   console.log("Server action received:", formData);
-  return { success: true, message: "Ad submitted successfully" };
+  return { success: true, message: "Listing submitted successfully" };
 }

@@ -1,4 +1,4 @@
-import { getFeaturedCategories } from "@/server/sanity/lib/crud/featuredCategories/data";
+import { getFeaturedCategories } from "@/server/sanity/read-write/featuredCategories/read";
 import FeaturedCategoriesClient from "./FeaturedCategoriesClient";
 
 const FeaturedCategories = async () => {
@@ -9,3 +9,4 @@ const FeaturedCategories = async () => {
 };
 
 export default FeaturedCategories;
+

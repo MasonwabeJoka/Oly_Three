@@ -7,7 +7,7 @@ import TempArticle from "../../../components/TempArticle";
 import RecommendedArticle from "../../../components/cards/RecommendedArticle";
 import CommentsSection from "../../../components/CommentsSection";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { featuredServicesSectionQueryOptions } from "@/server/sanity/query-options/homepage";
+import { featuredServicesSectionQueryOptions } from "@/server/sanity/read-write/featuredServicesSection/queryOptions";
 import { useEffect, useRef, useState } from "react";
 import ArticleHeader from "./ArticleHeader";
 import { listingsData } from "@/data/ListingsData";
@@ -268,3 +268,4 @@ const Article = ({
 };
 
 export default Article;
+

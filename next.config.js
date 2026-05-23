@@ -24,10 +24,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // experimental: {
-  //   reactCompiler: true,
-  // turbopackFileSystemCacheForDev: true,
-  // },
+   // experimental: {
+   //   reactCompiler: true,
+   // turbopackFileSystemCacheForDev: true,
+   // },
   images: {
     remotePatterns: [
       {

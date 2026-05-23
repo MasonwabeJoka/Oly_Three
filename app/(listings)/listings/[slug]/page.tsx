@@ -1,7 +1,8 @@
-import { getListing } from "@/sanity/services/listings";
+import { getListing } from "@/server/sanity/read-write/listing/read";
 import Listing from "./components/Listing";
-import { getSimilarListings } from "@/sanity/services/listings";
-import { getListingViews, updateListingView } from "@/sanity/services/listings";
+import { getSimilarListings } from "@/server/sanity/read-write/similarListings/read";
+import { getListingViews } from "@/server/sanity/read-write/listingViews/read";
+import { updateListingView } from "@/server/sanity/read-write/listingViews/write";
 import { after } from "next/server";
 
 // export const experimental_ppr = true;
@@ -37,3 +38,4 @@ const Page = async ({ params }: ParamsProp) => {
 };
 
 export default Page;
+

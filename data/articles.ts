@@ -6,7 +6,7 @@ export const articles = [
       category: "Automobiles",
       excerpt: "Learn the best tips to sell your used car quickly and get the best value for it.",
       coverImage: "/article_images/sell-car.jpg",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      content: "Lorem ipsum d sit amet, consectetur adipiscing elit...",
       author: {
         name: "John Doe",
         avatar: "/profile_images/1.jpg",

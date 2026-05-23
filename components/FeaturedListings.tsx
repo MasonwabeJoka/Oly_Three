@@ -4,10 +4,10 @@ import Link from "next/link";
 import Button from "@/components/Buttons";
 import FeaturedListingsClient from "./FeaturedListingsClient";
 import Pagination from "./Pagination";
-import { getFeaturedListings } from "@/server/sanity/lib/crud/featuredListings/data";
+import { getFeaturedListings } from "@/server/sanity/read-write/featuredListings/read";
 
 type FeaturedListingsProps = {
-   site:
+  site:
     | "oly"
     | "oly-properties"
     | "oly-auto"
@@ -19,10 +19,12 @@ type FeaturedListingsProps = {
   currentPage: number;
 };
 
-const FeaturedListings = async ({ site, currentPage }: FeaturedListingsProps) => {
+const FeaturedListings = async ({
+  site,
+  currentPage,
+}: FeaturedListingsProps) => {
   const data = await getFeaturedListings(currentPage);
   const { listings, totalPages } = data;
-
 
   return (
     <>
@@ -40,18 +42,17 @@ const FeaturedListings = async ({ site, currentPage }: FeaturedListingsProps) =>
               isDashboard={false}
               cardSize="standard"
             /> */}
-            
-              <ListingsCollage
-                site={site}
-                listings={listings}
-                sortBy="postedOn"
-                sortOrder="desc"
-                isDeletable={false}
-                isDashboard={false}
-                cardSize="standard"
-              />
-         
-         
+
+            <ListingsCollage
+              site={site}
+              listings={listings}
+              sortBy="postedOn"
+              sortOrder="desc"
+              isDeletable={false}
+              isDashboard={false}
+              cardSize="standard"
+            />
+
             <div className={styles.pagination}>
               <Pagination totalPages={totalPages} currentPage={currentPage} />
             </div>
@@ -144,3 +145,4 @@ const FeaturedListings = async ({ site, currentPage }: FeaturedListingsProps) =>
 };
 
 export default FeaturedListings;
+

@@ -6,7 +6,7 @@ const ReviewPromoteYourAd = () => {
   const params = useParams();
   const site = params.site as string;
   return (
-    <SectionWrapper title="Promote Your Ad" path={`/dashboard/create-listing/${site}/promote-your-ad`}>
+    <SectionWrapper title="Promote Your Listing" path={`/dashboard/create-listing/${site}/promote-your-ad`}>
       <div className={styles.container}>
         
       </div>
@@ -15,3 +15,4 @@ const ReviewPromoteYourAd = () => {
 };
 
 export default ReviewPromoteYourAd;
+

@@ -6,7 +6,15 @@ import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import Icon from "./Icon";
 
 type ExpandedDetailsProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   isDeletable: boolean;
   id?: string;
   isFeed: boolean;
@@ -61,7 +69,7 @@ const PreventLinkClick = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
-  category,
+  site,
   isDeletable,
   id,
   isFeed,
@@ -84,7 +92,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
 
   const getDetailsClass = () => {
     let className = styles.details;
-    if (category === "property") className += ` ${styles.property}`;
+    if (site === "oly-properties") className += ` ${styles.property}`;
     return className;
   };
 
@@ -122,7 +130,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
             />
             <div className={styles.titleWrapper}>
               <p className={styles.title}>
-                {category === "vehicles" && <span>2018</span>}{" "}
+                {site === "oly-auto" && <span>2018</span>}{" "}
                 {title && truncateTitle(title, 44)}
               </p>
               <div className={styles.location}>
@@ -146,7 +154,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
 
           <div className={styles.cardBottom}>
             <div className={styles.propertiesContainer}>
-              {category === "property" && (
+              {site === "oly-properties" && (
                 <div className={styles.featuresWithIcons}>
                   {propertyAttributes.map(
                     ({ icon, alt, value, label, className }) => (
@@ -171,7 +179,7 @@ export const ExpandedDetails: React.FC<ExpandedDetailsProps> = ({
                   )}
                 </div>
               )}
-              {category === "vehicles" && (
+              {site === "oly-auto" && (
                 <div className={styles.vehicleSpecs}>
                   <span>Used</span> •<span>Automatic</span> •
                   <span>10000km</span> •<span>Petrol</span>

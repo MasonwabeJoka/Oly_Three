@@ -56,20 +56,20 @@ export const listing = defineType({
       description: 'Price for item advertised.',
       validation: (Rule) => Rule.required().min(0).max(999999999),
     }),
-    defineField({
-      name: 'currency',
-      title: 'Currency',
-      type: 'string',
-      initialValue: 'USD',
-      options: {
-        list: [
-          { title: 'ZAR', value: 'ZAR' },
-          { title: 'USD', value: 'USD' },
-          { title: 'EUR', value: 'EUR' },
-          { title: 'GBP', value: 'GBP' },
-        ],
-      },
-    }),
+    // defineField({
+    //   name: 'currency',
+    //   title: 'Currency',
+    //   type: 'string',
+    //   initialValue: 'USD',
+    //   options: {
+    //     list: [
+    //       { title: 'ZAR', value: 'ZAR' },
+    //       { title: 'USD', value: 'USD' },
+    //       { title: 'EUR', value: 'EUR' },
+    //       { title: 'GBP', value: 'GBP' },
+    //     ],
+    //   },
+    // }),
     defineField({
       name: 'pricingOption',
       title: 'Pricing Option',
@@ -86,12 +86,12 @@ export const listing = defineType({
       description: 'The pricing strategy for the listing (negotiable, free, auction, etc.).',
       initialValue: 'fixed_price',
     }),
-    defineField({
-      name: 'priceId',
-      title: 'Price ID',
-      type: 'string',
-      description: 'The price ID associated with this product, for Payment Processing services like Paystack.',
-    }),
+    // defineField({
+    //   name: 'priceId',
+    //   title: 'Price ID',
+    //   type: 'string',
+    //   description: 'The price ID associated with this product, for Payment Processing services like Paystack.',
+    // }),
     defineField({
       name: 'paystackId',
       title: 'Paystack ID',

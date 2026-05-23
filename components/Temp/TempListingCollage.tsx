@@ -10,7 +10,15 @@ import LoadingSpinner from "../LoadingSpinner";
 import {listingsData} from "@/data/ListingsData";
 
 export type ListingsCollageProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   listings: ListingsQueryResult;
   isDeletable: boolean;
   checkedColour?: string;
@@ -32,7 +40,7 @@ type Image = {
 };
 
 const TempListingsCollage = ({
-  category,
+  site,
 //   listings,
   isDeletable,
   checkedColour,
@@ -83,9 +91,9 @@ const TempListingsCollage = ({
       <div key={_id} className={styles.cardContainer}>
         <Link href={`/listings/${_id}`}>
           <div className={styles.card}>
-          {category === "all" && (
+          {site === "oly" && (
             <ListingCard
-              category={category}
+              site={site}
               slug={`${_id}`}
               listing={listing}
               index={index}
@@ -104,9 +112,9 @@ const TempListingsCollage = ({
               checkedHovered={checkedHovered}
             />
           )}
-          {category === "property" && (
+          {site === "oly-properties" && (
             <ListingCard
-              category={category}
+              site={site}
               slug={`${_id}`}
               listing={listing}
               index={index}
@@ -133,7 +141,7 @@ const TempListingsCollage = ({
 
   return (
     <>
-      {category === "all" && (
+      {site === "oly" && (
         <>
           <Masonry
             className={styles.listingsContainer}
@@ -151,7 +159,7 @@ const TempListingsCollage = ({
           </div>
         </>
       )}
-      {category === "property" && (
+      {site === "oly-properties" && (
         <>
           <div
             style={{

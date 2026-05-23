@@ -22,7 +22,7 @@ import ReviewAndSubmit from "../components/ReviewAndSubmit";
 // 4. Location
 // 5. Upload Media
 // 6. Review Your Listing
-// 7. Promote Your Ad
+// 7. Promote Your Listing
 // 8. Bank Account Details
 
 export const getStepDefinitions = (
@@ -116,7 +116,7 @@ export const getStepDefinitions = (
       fields: [] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
+      title: "Promote Your Listing",
       content: <PromoteYourAd onNext={handleNext} />,
       path: "promote-your-ad",
       alignContentToBottom: false,
@@ -143,7 +143,7 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Ad Description",
+      title: "Listing Description",
       content: <TitleAndDescription onNext={handleNext} />,
       path: "title-and-description",
       alignContentToBottom: true,
@@ -197,7 +197,7 @@ export const getStepDefinitions = (
       fields: [] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
+      title: "Promote Your Listing",
       content: <PromoteYourAd onNext={handleNext} />,
       path: "promote-your-ad",
       alignContentToBottom: false,
@@ -224,7 +224,7 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Ad Description",
+      title: "Listing Description",
       content: <TitleAndDescription onNext={handleNext} />,
       path: "title-and-description",
       alignContentToBottom: true,
@@ -278,7 +278,7 @@ export const getStepDefinitions = (
       fields: [] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
+      title: "Promote Your Listing",
       content: <PromoteYourAd onNext={handleNext} />,
       path: "promote-your-ad",
       alignContentToBottom: false,
@@ -305,7 +305,7 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Ad Description",
+      title: "Listing Description",
       content: <TitleAndDescription onNext={handleNext} />,
       path: "title-and-description",
       alignContentToBottom: true,
@@ -359,7 +359,7 @@ export const getStepDefinitions = (
       fields: [] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
+      title: "Promote Your Listing",
       content: <PromoteYourAd onNext={handleNext} />,
       path: "promote-your-ad",
       alignContentToBottom: false,
@@ -386,7 +386,7 @@ export const getStepDefinitions = (
       fields: ["category.main", "category.subcategory"] as FormDataFields[],
     },
     {
-      title: "Ad Description",
+      title: "Listing Description",
       content: <TitleAndDescription onNext={handleNext} />,
       path: "title-and-description",
       alignContentToBottom: true,
@@ -440,7 +440,7 @@ export const getStepDefinitions = (
       fields: [] as FormDataFields[],
     },
     {
-      title: "Promote Your Ad",
+      title: "Promote Your Listing",
       content: <PromoteYourAd onNext={handleNext} />,
       path: "promote-your-ad",
       alignContentToBottom: false,
@@ -459,3 +459,4 @@ export const getStepDefinitions = (
     },
   ],
 });
+

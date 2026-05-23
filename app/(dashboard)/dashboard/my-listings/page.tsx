@@ -5,7 +5,7 @@ import { listingsData } from "@/data/ListingsData";
 const Page = () => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>My Ads</h1>
+      <h1 className={styles.title}>My Listings</h1>
 
       <div className={styles.cardsContainer}>
         <MyAds listingsData={listingsData} />

@@ -11,7 +11,15 @@ import ListingCard from "./cards/ListingCard";
 import { ListingsQueryResult } from "@/sanity.types";
 
 export type ListingsExpandedProps = {
-  category: "all" | "property" | "vehicles" | "services" | "jobs" | "shops";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   listings: ListingsQueryResult;
   isDeletable: boolean;
   checkedColour?: string;
@@ -35,7 +43,7 @@ type Image = {
 };
 const ListingsExpanded = (props: ListingsExpandedProps) => {
   const {
-    category,
+    site,
     listings,
     isDeletable,
     isDashboard,
@@ -67,7 +75,7 @@ const ListingsExpanded = (props: ListingsExpandedProps) => {
             <Link href="/">
               <div className={styles.expandedCardContainer}>
                 <ListingCard
-                  category={category}
+                  site={site}
                   slug={slug?.current}
                   listing={listing}
                   index={index}

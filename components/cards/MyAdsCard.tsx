@@ -139,7 +139,7 @@ const MyAdsCard = (props: CardProps) => {
     <div className={styles.container}>
       <div className={styles.cardContainer}>
         <ListingCard
-          category="all"
+          site="oly"
           listing={adCardMockData as any}
           id={id}
           index={0}
@@ -257,7 +257,7 @@ const MyAdsCard = (props: CardProps) => {
                 className={styles.pill}
               >
                 <Pill
-                  child="Promote Ad"
+                  child="Promote Listing"
                   colour="#CCF6FF"
                   shadow={false}
                   boxShadow="0 2px 4px rgba(0,0,0,0.1)"
@@ -326,3 +326,4 @@ const MyAdsCard = (props: CardProps) => {
 };
 
 export default MyAdsCard;
+

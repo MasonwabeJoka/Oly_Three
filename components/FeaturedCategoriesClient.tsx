@@ -5,7 +5,7 @@ import Button from "@/components/Buttons";
 import { useModalStore } from "@/store/modalStore";
 import LinkCard from "@/components/cards/LinkCard";
 import Link from "next/link";
-import { urlFor } from "@/server/sanity/lib/image";
+import { urlFor } from "@/server/sanity/image";
 
 type FeaturedCategory = {
   id?: string;
@@ -20,7 +20,7 @@ type Props = {
 
 const FeaturedCategoriesClient = ({ data }: Props) => {
   const setShowCategoriesModal = useModalStore(
-    (state) => state.setShowCategoriesModal
+    (state) => state.setShowCategoriesModal,
   );
 
   return (

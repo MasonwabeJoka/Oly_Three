@@ -1,16 +1,13 @@
-import { SanityLive } from "@/server/sanity/lib/live";
+import { SanityLive } from "@/server/sanity/live";
 // import "../gl
 // ";
 
-
-const Layout = ({children}: {children: React.ReactNode}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-   <>
-   
-        <main>{children}</main>
-        <SanityLive/>
-   </>
-    
+    <>
+      <main>{children}</main>
+      <SanityLive />
+    </>
   );
 };
 
