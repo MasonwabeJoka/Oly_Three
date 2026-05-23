@@ -1,5 +1,5 @@
 // https://www.sanity.io/docs/studio/structure-builder-cheat-sheet
-import type { StructureResolver } from "@/server/sanity/structure-config";
+import type { StructureResolver } from "sanity/desk";
 import { Card, Text, Stack } from "@sanity/ui";
 import {
   FaTachometerAlt,
@@ -9,7 +9,6 @@ import {
   FaMapMarkerAlt,
   FaMoneyBill,
   FaFileAlt,
-  FaGlobe,
   FaHome,
   FaBlog,
   FaFlag,
@@ -262,229 +261,172 @@ export const structure: StructureResolver = (S, context) => {
         : []),
 
       // Site-Specific Content
+      S.documentTypeListItem("siteLogo").title("Logos"),
+      S.documentTypeListItem("page").title("Pages"),
+      S.documentTypeListItem("Footer").title("Footer"),
+      S.documentTypeListItem("socialMediaLink").title("Social Media Links"),
       S.listItem()
-        .title("Site Content")
-        .icon(FaGlobe)
+        .title("Oly")
         .child(
           S.list()
-            .title("Site Content")
+            .title("Oly Content")
             .items([
-              // Network-wide Site Content
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.documentTypeListItem("moreFromOlySection").title(
+                "More from Oly Section"
+              ),
+              S.documentTypeListItem("featuredServicesSection").title(
+                "Featured Services Section"
+              ),
+              S.documentTypeListItem("featuredService").title(
+                "Features Services"
+              ),
+              S.documentTypeListItem("FeaturedListings").title(
+                "Featured Listings"
+              ),
+              S.documentTypeListItem("featuredCategoriesSection").title(
+                "Featured Categories Section"
+              ),
+              S.documentTypeListItem("olyArticlesSection").title(
+                "Oly Articles Section"
+              ),
               S.listItem()
-                .title("Network-Wide Content")
+                .title("Sections & Layouts")
                 .child(
                   S.list()
-                    .title("Network-Wide Content")
+                    .title("Sections & Layouts")
                     .items([
-                      S.documentTypeListItem("siteLogo").title("Network Logos"),
-                      S.documentTypeListItem("page").title("Network Pages"),
-                      S.documentTypeListItem("Footer").title("Network Footer"),
-                      S.documentTypeListItem("socialMediaLink").title(
-                        "Network Social Media Links"
-                      ),
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
                     ])
                 ),
-
-              // OLY Content
+              S.documentTypeListItem("siteLogo").title("OLY Logo"),
+              S.documentTypeListItem("socialMediaLink").title(
+                "Social Media Links"
+              ),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Properties")
+        .child(
+          S.list()
+            .title("Oly Properties Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("propertyDetails").title(
+                "Property Details"
+              ),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
               S.listItem()
-                .title("OLY")
+                .title("Sections & Layouts")
                 .child(
                   S.list()
-                    .title("OLY Content")
+                    .title("Sections & Layouts")
                     .items([
-                      S.documentTypeListItem("page").title("Pages"),
-                      S.documentTypeListItem("olyHomepage").title("Homepage"),
-                      S.documentTypeListItem("heroSection").title(
-                        "Hero Section"
-                      ),
-                      S.documentTypeListItem("moreFromOlySection").title(
-                        "More from Oly Section"
-                      ),
-                      S.documentTypeListItem("featuredServicesSection").title(
-                        "Featured Services Section"
-                      ),
-                      S.documentTypeListItem("featuredService").title("Features Services"),
-                      S.documentTypeListItem("FeaturedListings").title(
-                        "Featured Listings"
-                      ),
-                      S.documentTypeListItem("featuredCategoriesSection").title(
-                        "Featured Categories Section"
-                      ),
-                      S.documentTypeListItem("olyArticlesSection").title(
-                        "Oly Articles Section"
-                      ),
-                      S.listItem()
-                        .title("Sections & Layouts")
-                        .child(
-                          S.list()
-                            .title("Sections & Layouts")
-                            .items([
-                              S.documentTypeListItem("Footer").title("Footer"),
-                              // Add Navbar or other section types if defined
-                            ])
-                        ),
-                      S.documentTypeListItem("siteLogo").title("OLY Logo"),
-                      S.documentTypeListItem("socialMediaLink").title(
-                        "Social Media Links"
-                      ),
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
                     ])
                 ),
-
-              // Oly Properties Content
+              S.documentTypeListItem("siteLogo").title("Oly Properties Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Auto")
+        .child(
+          S.list()
+            .title("Oly Auto Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              // S.documentTypeListItem("olyAutoHomepage").title("Homepage"),
+              S.documentTypeListItem("vehicleDetails").title("Vehicle Details"),
+              S.documentTypeListItem("makeModel").title("Makes & Models"),
+              S.documentTypeListItem("inspectionReport").title(
+                "Inspection Reports"
+              ),
+              S.documentTypeListItem("dealerProfile").title("Dealer Profiles"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
               S.listItem()
-                .title("Oly Properties")
+                .title("Sections & Layouts")
                 .child(
                   S.list()
-                    .title("Oly Properties Content")
+                    .title("Sections & Layouts")
                     .items([
-                      S.documentTypeListItem("page").title("Pages"),
-                      S.documentTypeListItem("olyHomepage").title("Homepage"),
-                      S.documentTypeListItem("propertyDetails").title(
-                        "Property Details"
-                      ),
-                      S.documentTypeListItem("heroSection").title(
-                        "Hero Section"
-                      ),
-                      S.listItem()
-                        .title("Sections & Layouts")
-                        .child(
-                          S.list()
-                            .title("Sections & Layouts")
-                            .items([
-                              S.documentTypeListItem("Footer").title("Footer"),
-                              // Add Navbar or other section types if defined
-                            ])
-                        ),
-                      S.documentTypeListItem("siteLogo").title(
-                        "Oly Properties Logo"
-                      ),
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
                     ])
                 ),
-
-              // Oly Auto Content
+              S.documentTypeListItem("siteLogo").title("Oly Auto Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Hiring")
+        .child(
+          S.list()
+            .title("Oly Hiring Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("jobDetails").title("Job Details"),
+              S.documentTypeListItem("serviceDetails").title("Service Details"),
+              S.documentTypeListItem("professionalServiceProvider").title(
+                "Professional Service Providers"
+              ),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
               S.listItem()
-                .title("Oly Auto")
+                .title("Sections & Layouts")
                 .child(
                   S.list()
-                    .title("Oly Auto Content")
+                    .title("Sections & Layouts")
                     .items([
-                      S.documentTypeListItem("page").title("Pages"),
-                      // S.documentTypeListItem("olyAutoHomepage").title("Homepage"),
-                      S.documentTypeListItem("vehicleDetails").title(
-                        "Vehicle Details"
-                      ),
-                      S.documentTypeListItem("makeModel").title(
-                        "Makes & Models"
-                      ),
-                      S.documentTypeListItem("inspectionReport").title(
-                        "Inspection Reports"
-                      ),
-                      S.documentTypeListItem("dealerProfile").title(
-                        "Dealer Profiles"
-                      ),
-                      S.documentTypeListItem("heroSection").title(
-                        "Hero Section"
-                      ),
-                      S.listItem()
-                        .title("Sections & Layouts")
-                        .child(
-                          S.list()
-                            .title("Sections & Layouts")
-                            .items([
-                              S.documentTypeListItem("Footer").title("Footer"),
-                              // Add Navbar or other section types if defined
-                            ])
-                        ),
-                      S.documentTypeListItem("siteLogo").title("Oly Auto Logo"),
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
                     ])
                 ),
-
-              // Oly Hiring Content
+              S.documentTypeListItem("siteLogo").title("Oly Hiring Logo"),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Services")
+        .child(
+          S.list()
+            .title("Oly Services Content")
+            .items([
+              S.documentTypeListItem("page").title("Pages"),
+              S.documentTypeListItem("olyHomepage").title("Homepage"),
+              S.documentTypeListItem("heroSection").title("Hero Section"),
+              S.documentTypeListItem("Features").title("Features"),
+              S.documentTypeListItem("FeaturedListings").title(
+                "Featured Listings"
+              ),
               S.listItem()
-                .title("Oly Hiring")
+                .title("Sections & Layouts")
                 .child(
                   S.list()
-                    .title("Oly Hiring Content")
+                    .title("Sections & Layouts")
                     .items([
-                      S.documentTypeListItem("page").title("Pages"),
-                      S.documentTypeListItem("olyHomepage").title("Homepage"),
-                      S.documentTypeListItem("jobDetails").title("Job Details"),
-                      S.documentTypeListItem("serviceDetails").title(
-                        "Service Details"
-                      ),
-                      S.documentTypeListItem(
-                        "professionalServiceProvider"
-                      ).title("Professional Service Providers"),
-                      S.documentTypeListItem("heroSection").title(
-                        "Hero Section"
-                      ),
-                      S.listItem()
-                        .title("Sections & Layouts")
-                        .child(
-                          S.list()
-                            .title("Sections & Layouts")
-                            .items([
-                              S.documentTypeListItem("Footer").title("Footer"),
-                              // Add Navbar or other section types if defined
-                            ])
-                        ),
-                      S.documentTypeListItem("siteLogo").title(
-                        "Oly Hiring Logo"
-                      ),
+                      S.documentTypeListItem("Footer").title("Footer"),
+                      // Add Navbar or other section types if defined
                     ])
                 ),
-
-              // OLY Services Content
-              S.listItem()
-                .title("OLY Services")
-                .child(
-                  S.list()
-                    .title("OLY Services Content")
-                    .items([
-                      S.documentTypeListItem("page").title("Pages"),
-                      S.documentTypeListItem("olyHomepage").title("Homepage"),
-                      S.documentTypeListItem("heroSection").title(
-                        "Hero Section"
-                      ),
-                      S.documentTypeListItem("Features").title("Features"),
-                      S.documentTypeListItem("FeaturedListings").title(
-                        "Featured Listings"
-                      ),
-                    
-                      S.listItem()
-                        .title("Sections & Layouts")
-                        .child(
-                          S.list()
-                            .title("Sections & Layouts")
-                            .items([
-                              S.documentTypeListItem("Footer").title("Footer"),
-                              // Add Navbar or other section types if defined
-                            ])
-                        ),
-                      S.documentTypeListItem("siteLogo").title(
-                        "OLY Services Logo"
-                      ),
-                      S.documentTypeListItem("socialMediaLink").title(
-                        "Social Media Links"
-                      ),
-                    ])
-                ),
-              // OLY Shops Content
-              S.listItem()
-                .title("OLY Shops")
-                .child(
-                  S.list()
-                    .title("OLY Shops Content")
-                    .items([
-                      S.documentTypeListItem("customer").title("Customers"),
-                      S.documentTypeListItem("order").title("Orders"),
-                      S.documentTypeListItem("shop-category").title("Categories"),
-                      S.documentTypeListItem("shop-product").title("Products"),
-                     
-                    
-                 
-                    ])
-                ),
+              S.documentTypeListItem("siteLogo").title("OLY Services Logo"),
+              S.documentTypeListItem("socialMediaLink").title(
+                "Social Media Links"
+              ),
+            ])
+        ),
+      S.listItem()
+        .title("Oly Shops")
+        .child(
+          S.list()
+            .title("OLY Shops Content")
+            .items([
+              S.documentTypeListItem("customer").title("Customers"),
+              S.documentTypeListItem("order").title("Orders"),
+              S.documentTypeListItem("shop-category").title("Categories"),
+              S.documentTypeListItem("shop-product").title("Products"),
             ])
         ),
 
