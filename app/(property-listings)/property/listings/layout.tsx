@@ -1,5 +1,5 @@
+import "@/app/globals.scss";
 import styles from "./../../../global-styles/layout.module.scss";
-import "./../../../../app/globals.css";
 import Outfit from "next/font/local";
 
 import "@uploadthing/react/styles.css";

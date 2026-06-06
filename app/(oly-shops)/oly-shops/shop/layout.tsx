@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 import { SanityLive } from "@/server/sanity/live";
 // import "../gl
 // ";

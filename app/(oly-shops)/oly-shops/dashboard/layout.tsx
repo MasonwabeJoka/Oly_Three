@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 import localFont from "next/font/local";
 import { currentUser } from "@/app/temp/tempForMessages";
 import DashboardLayoutWrapper from "@/app/(dashboard)/dashboard/create-listing/components/DashboardLayoutWrapper";

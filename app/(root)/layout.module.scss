@@ -1,7 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-@import "@/app/globals.css";
+@import "@/app/globals.scss";
 .html {
   scroll-behavior: smooth;
   height: 100%;

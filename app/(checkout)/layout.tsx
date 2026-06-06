@@ -1,7 +1,7 @@
+import "@/app/globals.scss";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import styles from "../global-styles/layout.module.scss";
-import "../globals.css";
 import Outfit from "next/font/local";
 import { Toaster } from "sonner";
 

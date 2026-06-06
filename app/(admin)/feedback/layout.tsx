@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 import styles from "./../../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 import Footer from "@/components/layouts/Footer";

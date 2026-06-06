@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 import Footer from "@/components/layouts/Footer";
 import styles from "./../../global-styles/layout.module.scss";
 

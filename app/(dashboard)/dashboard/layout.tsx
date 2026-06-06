@@ -1,4 +1,4 @@
-import "../../globals.css";
+import "@/app/globals.scss";
 import styles from "./layout.module.scss";
 import localFont from "next/font/local";
 import "@uploadthing/react/styles.css";

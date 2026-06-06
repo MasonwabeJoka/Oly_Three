@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 import styles from "./layout.module.scss";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";

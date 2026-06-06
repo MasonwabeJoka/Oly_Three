@@ -1,7 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
-// Note: globals.css should be imported in root layout, not in CSS modules
+// Note: globals.scss should be imported in root layout, not in CSS modules
 .html {
   scroll-behavior: smooth;
 }

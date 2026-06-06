@@ -1,3 +1,4 @@
+import "@/app/globals.scss";
 
 import styles from "./layout.module.scss";
 

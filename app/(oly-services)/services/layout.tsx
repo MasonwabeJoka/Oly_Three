@@ -1,8 +1,8 @@
+import "@/app/globals.scss";
 import styles from "./layout.module.scss";
 import localFont from "next/font/local";
 
 import "@uploadthing/react/styles.css";
-import "../../globals.css";
 import { Toaster } from "sonner";
 import Footer from "@/components/layouts/Footer";
 
