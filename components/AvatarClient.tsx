@@ -10,6 +10,7 @@ interface AvatarClientProps {
   avatar: any;
   imageAlt: string;
   avatarSize: keyof typeof AVATAR_SIZE;
+  avatarShape: "circle" | "square";
   isOnline: boolean;
   isVerified: boolean;
   isBusiness?: boolean;
@@ -26,6 +27,7 @@ const AvatarClient = ({
   avatar,
   imageAlt,
   avatarSize,
+  avatarShape = "circle",
   isOnline,
   isVerified,
   isBusiness,
@@ -45,7 +47,7 @@ const AvatarClient = ({
       className={AVATAR_SIZE[avatarSize]}
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.041)",
-        borderRadius: "50%",
+        borderRadius: avatarShape === "circle" ? "50%" : "20%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -61,8 +63,8 @@ const AvatarClient = ({
       {!hasError && avatar ? (
         <>
           {isLoading && (
-            <div className={`${styles.skeleton} ${AVATAR_SIZE[avatarSize]}`}>
-              <LoadingSpinnerTwo size={2}/>
+            <div className={` ${styles.skeleton} ${avatarShape === "circle" ? styles.circleSkeleton : styles.squareSkeleton} ${AVATAR_SIZE[avatarSize]}`}>
+              <LoadingSpinnerTwo size={2} />
             </div>
           )}
           <NextImage
@@ -71,7 +73,11 @@ const AvatarClient = ({
             alt={imageAlt}
             fill
             sizes="(max-width: 768px) 100vw"
-            style={{ width: "100%", objectFit: "cover", borderRadius: "50%" }}
+            style={{
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: avatarShape === "circle" ? "50%" : "20%",
+            }}
             onLoad={() => setIsLoading(false)}
             onError={() => setHasError(true)}
             loading="lazy"

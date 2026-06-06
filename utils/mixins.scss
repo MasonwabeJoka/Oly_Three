@@ -3,27 +3,28 @@
 @use "@/utils/breakpoints" as *;
 
 @mixin title {
-  // margin-top: rem(52);
-  margin-bottom: rem(32);
   color: $danger;
+  font-size: $tiny;
   font-weight: 500;
-  font-size: $small;
+  margin-top: rem(52);
+  margin-bottom: rem(16);
   text-transform: uppercase;
   text-align: center;
+
   @include only(largeDesktop) {
     font-weight: 500;
     margin-top: rem(96);
-    margin-bottom: rem(48);
+    margin-bottom: rem(32);
   }
   @include only(smallDesktop) {
     font-weight: 500;
     margin-top: rem(96);
-    margin-bottom: rem(48);
+    margin-bottom: rem(32);
   }
   @include only(tablet) {
     font-weight: 500;
     margin-top: rem(96);
-    margin-bottom: rem(48);
+    margin-bottom: rem(32);
   }
 }
 
@@ -32,9 +33,13 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: rem(48);
-  width: rem(360);
+  width: rem(480);
   text-align: center;
-  font-size: $h4;
+  font-size: rem(24);
+  // font-size: $h4;
   font-weight: bold;
   color: $grey-four;
+  align-self: center;
+  //  text-shadow: rem(-4) rem(6) rem(8) $grey-two;
+  text-shadow: $shadow-seven;
 }

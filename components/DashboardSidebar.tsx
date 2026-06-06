@@ -155,6 +155,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
           className={styles.avatar}
           avatar={sidebarUser?.metadata?.avatarUrl || providerAvatar}
           avatarSize={isMobile ? "regular" : "large"}
+          avatarShape="square"
         />
 
         {!isMobile && (

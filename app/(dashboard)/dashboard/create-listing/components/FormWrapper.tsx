@@ -107,9 +107,22 @@ export const FormWrapper = ({
     console.log("Form data:", data);
     if (currentStepIndex === steps.length - 1) {
       try {
-        const result = await createListingAction(data as any);
+        const parts = pathname.split("/").filter(Boolean);
+        const possibleSite = parts[3];
+        const site =
+          possibleSite === "oly" ||
+          possibleSite === "oly-properties" ||
+          possibleSite === "oly-auto" ||
+          possibleSite === "oly-hiring" ||
+          possibleSite === "oly-services"
+            ? possibleSite
+            : "oly";
+
+        const result = await createListingAction({ ...(data as any), site });
         if (result.success) {
-          router.push("/listings/countryside-farmhouse", { scroll: true });
+          router.push(result.slug ? `/listings/${result.slug}` : "/listings", {
+            scroll: true,
+          });
           if (typeof window !== "undefined") {
             localStorage.removeItem("currentStepIndex");
           }
@@ -209,7 +222,17 @@ export const FormWrapper = ({
         action={
           currentStepIndex === steps.length - 1
             ? async (formData: globalThis.FormData) => {
-                const result = await createListingAction(formData as any);
+                const parts = pathname.split("/").filter(Boolean);
+                const possibleSite = parts[3];
+                const site =
+                  possibleSite === "oly" ||
+                  possibleSite === "oly-properties" ||
+                  possibleSite === "oly-auto" ||
+                  possibleSite === "oly-hiring" ||
+                  possibleSite === "oly-services"
+                    ? possibleSite
+                    : "oly";
+                const result = await createListingAction({ ...(formData as any), site });
                 return result;
               }
             : undefined

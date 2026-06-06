@@ -5,6 +5,7 @@ import AvatarClient from "./AvatarClient";
 interface AvatarProps {
   className?: string;
   avatar: any;
+  avatarShape: "circle" | "square";
   imageAlt?: string;
   avatarSize: keyof typeof AVATAR_SIZE;
   isOnline?: boolean;
@@ -25,6 +26,7 @@ const AVATAR_SIZE = {
 const Avatar = ({
   className,
   avatar,
+  avatarShape = "circle",
   imageAlt = "Avatar",
   avatarSize = "regular",
   isOnline = false,
@@ -35,12 +37,13 @@ const Avatar = ({
 }: AvatarProps) => {
   return (
     <div
-      className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className || ""} ${styles.avatarsContainer}`}
+      className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className || ""} ${styles.avatarsContainer} ${avatarShape=== "circle"? styles.circle : styles.square}`}
       style={{ outline: `0.25rem solid ${outlineColour}` }}
       onClick={onClick}
     >
       <AvatarClient
         avatar={avatar}
+        avatarShape={avatarShape}
         imageAlt={imageAlt}
         avatarSize={avatarSize}
         isOnline={isOnline}

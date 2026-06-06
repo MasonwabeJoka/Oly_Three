@@ -7,9 +7,10 @@ import Link from "next/link";
 interface isAuctionProps {
   title: string;
   description: string;
+  site: string;
 }
 
-const IsAuction = ({ title, description }: isAuctionProps) => {
+const IsAuction = ({ title, description, site }: isAuctionProps) => {
   const { setIsAuction } = useIsAuctionStore();
 
   return (
@@ -18,17 +19,17 @@ const IsAuction = ({ title, description }: isAuctionProps) => {
       <p className={styles.description}>{description}</p>
       <div className={styles.buttons}>
         <Link
-          href="/dashboard/create-listing/oly/select-category"
+          href={`/dashboard/create-listing/${site}/select-category`}
           className={styles.auctionButtonContainer}
         >
           <Button
             className={styles.saleButton}
-            buttonChildren="Yes"
+            buttonChildren="Auction"
             buttonType="primary"
             buttonSize="large"
-            name="sale-listing-btn"
+            name="auction-listing-btn"
             type="button"
-            ariaLabel="Sale Listing Button"
+            ariaLabel="Auction Listing Button"
             autoFocus={false}
             disabled={false}
             onClick={() => setIsAuction(true)}
@@ -36,17 +37,17 @@ const IsAuction = ({ title, description }: isAuctionProps) => {
           />
         </Link>
         <Link
-          href="/dashboard/create-listing/oly/select-category"
+          href={`/dashboard/create-listing/${site}/select-category`}
           className={styles.saleButtonContainer}
         >
           <Button
             className={styles.auctionButton}
-            buttonChildren="No"
+            buttonChildren="Fixed Price"
             buttonType="normal"
             buttonSize="large"
-            name="auction-listing-btn"
+            name="fixed-price-listing-btn"
             type="button"
-            ariaLabel="Auction Listing Button"
+            ariaLabel="Fixed Price Listing Button"
             autoFocus={false}
             disabled={false}
             onClick={() => setIsAuction(false)}

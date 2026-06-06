@@ -3,17 +3,26 @@
 @use "@/utils/breakpoints" as *;
 .avatarsContainer {
   position: relative;
-  border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.041);
   outline: rem(4) solid $white-one;
+
+
 
   .skeleton {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: $grey-one;
-    border-radius: 50%;
+    
     outline: rem(4) solid $white-one;
+  }
+
+  .circleSkeleton {
+border-radius: 50%;
+  }
+
+  .squareSkeleton {
+border-radius: 20%;
   }
 
   .isOnline {
@@ -37,6 +46,14 @@
     }
   }
 }
+
+  .circle {
+  border-radius: 50%;
+  }
+
+  .square {
+      border-radius: 20%;
+  }
 .isVerified {
   position: absolute;
   bottom: 0;

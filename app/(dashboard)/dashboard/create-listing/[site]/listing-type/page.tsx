@@ -3,19 +3,19 @@ import IsAuction from "../../components/IsAuction";
 
 const siteCopy = {
   oly: {
-    title: "Do you want to auction your item?",
+    title: "Choose your listing type",
     description:
-      "Choose 'Yes' to auction your item or 'No' to sell at a fixed price.",
+      "Select Auction to let buyers place bids, or Fixed Price to sell your item at a set price.",
   },
   "oly-auto": {
-    title: "Do you want to auction your car?",
+    title: "Choose your vehicle listing type",
     description:
-      "Pick 'Yes' to auction your car or 'No' to set a fixed selling price.",
+      "Select Auction to let buyers bid on your vehicle, or Fixed Price to sell it at a set price.",
   },
   "oly-properties": {
-    title: "Auction your property?",
+    title: "Choose your property listing type",
     description:
-      "Choose 'Yes' to auction the property or 'No' to list at a fixed price.",
+      "Select Auction to let buyers bid on your property, or Fixed Price to list it at a set price.",
   },
 } as const;
 
@@ -27,10 +27,10 @@ export default async function ListingTypePage({
   params: { site: ValidSite };
 }) {
   const { site } = await params;
- if (!(site in siteCopy)) {
-    notFound(); 
+  if (!(site in siteCopy)) {
+    notFound();
   }
   const { title, description } = siteCopy[site];
 
-  return <IsAuction title={title} description={description} />;
+  return <IsAuction title={title} description={description} site={site} />;
 }

@@ -1,6 +1,7 @@
 @use "@/utils/variables" as *;
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
+@use "@/utils/mixins" as *;
 
 .container {
   display: flex;
@@ -11,14 +12,11 @@
   width: 100%;
 
   .title {
-    font-size: $h4;
-    font-weight: 500;
-    margin-bottom: rem(20);
+    @include title;
   }
+
   .description {
-    width: 50%;
-    margin-bottom: rem(48);
-    text-align: center;
+    @include description;
   }
 
   .buttons {

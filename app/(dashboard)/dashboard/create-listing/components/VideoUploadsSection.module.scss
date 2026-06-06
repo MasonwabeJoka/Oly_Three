@@ -6,15 +6,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  @include only(largeDesktop) {
-  }
-  @include only(smallDesktop) {
-  }
-  @include only(tablet) {
-  }
+  width: rem(1060);
+  margin-bottom: auto;
 
   .dropzone {
- position: relative;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,44 +28,36 @@
       width: 100%;
       height: auto;
       background: $white-four;
-    }
-
-      .text {
-      margin: auto;
-      font-size: $small;
-      text-transform: uppercase;
-    }
-
-    @include only(largeDesktop) {
-    }
-    @include only(smallDesktop) {
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: unset;
-      gap: rem(32);
+      gap: rem(16);
     }
-    @include only(tablet) {
+
+    .text {
+      margin: auto;
+      font-size: $tiny;
+      text-transform: uppercase;
     }
 
     .uploadedVideo {
     }
-  }
 
-  .buttonContainer {
-    position: sticky;
-    bottom: rem(200);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: rem(20);
+    .buttonContainer {
+      position: sticky;
+      bottom: rem(200);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: rem(48);
 
-    .uploadButton {
-      background: $primary-hover;
-      color: white;
-      font-size: $tiny;
+      .uploadButton {
+        background: $primary-hover;
+        color: white;
+        font-size: $tiny;
         text-transform: uppercase;
+      }
     }
   }
 }

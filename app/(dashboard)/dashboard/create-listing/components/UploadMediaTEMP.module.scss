@@ -13,41 +13,11 @@
   }
 
   .title {
-    margin-top: rem(52);
-    margin-bottom: rem(32);
-    color: $danger;
-    font-weight: 500;
-    font-size: $small;
-    text-transform: uppercase;
-    text-align: center;
-
-    @include only(largeDesktop) {
-      font-weight: 500;
-      margin-top: rem(96);
-      margin-bottom: rem(48);
-    }
-    @include only(smallDesktop) {
-      font-weight: 500;
-      margin-top: rem(96);
-      margin-bottom: rem(48);
-    }
-    @include only(tablet) {
-      font-weight: 500;
-      margin-top: rem(96);
-      margin-bottom: rem(48);
-    }
+    @include title;
   }
 
   .description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: rem(48);
-    width: rem(360);
-    text-align: center;
-    font-size: $h4;
-    font-weight: bold;
-    color: $grey-four;
+    @include description;
   }
   .mediaType {
     display: flex;

@@ -14,11 +14,11 @@ export const userStatusEnum = pgEnum("user_status", [
 ]);
 
 export const listingSiteEnum = pgEnum("listing_site", [
-  "auto",
-  "property",
-  "job",
-  "service",
-  "shop",
+  "oly",
+  "oly-properties",
+  "oly-auto",
+  "oly-hiring",
+  "oly-services",
 ]);
 
 export const listingStatusEnum = pgEnum("listing_status", [
@@ -35,6 +35,8 @@ export const mediaTypeEnum = pgEnum("media_type", [
   "video",
   "attachment",
 ]);
+
+export const listingTypeEnum = pgEnum("listing_type", ["sale", "auction"]);
 
 export const currencyEnum = pgEnum("currency", ["ZAR"]);
 
