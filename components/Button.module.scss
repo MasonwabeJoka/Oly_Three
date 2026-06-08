@@ -1,0 +1,423 @@
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $normal;
+  border: none;
+  color: #67787c;
+  border-radius: 4rem;
+  outline: none;
+  box-shadow: $shadow-one;
+  
+
+  &[data-pressed] {
+    scale: 0.99;
+  }
+}
+
+
+.largeButton {
+  width: 31.1rem;
+  height: 5.6rem;
+  
+  @include only(largeDesktop) {
+    width: 51.4rem;
+    height: 5.6rem;
+  }
+
+  @include only(smallDesktop) {
+    width: 46.2rem;
+    height: 5.6rem;
+  }
+
+  @include only(tablet) {
+    width: 46.2rem;
+    height: 5.6rem;
+  }
+
+  @include only(extraLargeDesktop) {
+    width: 51.4rem;
+    height: 5.6rem;
+  }
+}
+.mediumButton {
+  width: 20.2rem;
+  height: 5.6rem;
+
+  @include only(largeDesktop) {
+    width: 42.4rem;
+    height: 5.6rem;
+  }
+  @include only(smallDesktop) {
+    width: 38.1rem;
+    height: 5.6rem;
+  }
+  @include only(tablet) {
+    width: 38.1rem;
+    height: 5.6rem;
+  }
+  @include only(extraLargeDesktop) {
+    width: 42.4rem;
+    height: 5.6rem;
+  }
+}
+.smallButton {
+  width: 9.6rem;
+  height: 5.2rem;
+
+  @include only(largeDesktop) {
+    width: 17.6rem;
+    height: 5.2rem;
+  }
+
+  @include only(smallDesktop) {
+    width: 15.8rem;
+    height: 5.2rem;
+  }
+
+  @include only(tablet) {
+    width: 15.8rem;
+    height: 5.6rem;
+  }
+
+  @include only(extraLargeDesktop) {
+    width: 17.6rem;
+    height: 5.6rem;
+  }
+}
+.tinyButton {
+  width: 4.5rem;
+  height: 3.2rem;
+
+  @include only(largeDesktop) {
+    width: 9.7rem;
+    height: 5.6rem;
+  }
+  @include only(smallDesktop) {
+    width: 8.7rem;
+    height: 5.6rem;
+  }
+}
+.largeDashboardButton {
+  width: 26.7rem;
+  height: 5.6rem;
+
+  @include only(largeDesktop) {
+    width: 47.1rem;
+  }
+  @include only(smallDesktop) {
+    width: 42.4rem;
+  }
+  @include only(tablet) {
+    width: 42.4rem;
+  }
+}
+.mediumDashboardButton {
+  width: 24rem;
+  height: 4.8rem;
+  @include only(largeDesktop) {
+    width: 32.6rem;
+    height: 5.6rem;
+  }
+  @include only(smallDesktop) {
+    width: 29.3rem;
+    height: 5.6rem;
+  }
+  @include only(tablet) {
+    width: 29.3rem;
+    height: 5.6rem;
+  }
+}
+.smallDashboardButton {
+  @include only(largeDesktop) {
+    width: 14.9rem;
+    height: 4.8rem;
+  }
+  @include only(smallDesktop) {
+    width: 13.4rem;
+    height: 4.8rem;
+  }
+  @include only(tablet) {
+    width: 13.4rem;
+    height: 4.8rem;
+  }
+}
+.tinyDashboardButton {
+  @include only(largeDesktop) {
+    width: 6.9rem;
+    height: 4.8rem;
+  }
+
+  @include only(smallDesktop) {
+    width: 6.2rem;
+    height: 4.8rem;
+  }
+
+  @include only(tablet) {
+    width: 6.2rem;
+    height: 4.8rem;
+  }
+
+  @include only(extraLargeDesktop) {
+    width: 6.9rem;
+    height: 4.8rem;
+  }
+}
+
+.round {
+  border-radius: 100%;
+  background-color: $white-one;
+}
+
+.roundMedium {
+  width: 3.6rem;
+  height: 3.6rem;
+
+  @include only(largeDesktop) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  @include only(smallDesktop) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  @include only(tablet) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+.roundLargeDashboard {
+  width: 3.2rem;
+  height: 3.2rem;
+
+  @include only(largeDesktop) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  @include only(smallDesktop) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  @include only(tablet) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+.roundSmall {
+  width: 3.2rem;
+  height: 3.2rem;
+  @include only(largeDesktop) {
+    width: 4rem;
+    height: 4rem;
+  }
+  @include only(smallDesktop) {
+    width: 4rem;
+    height: 4rem;
+  }
+  @include only(tablet) {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+
+.filter {
+  width: 23.6875rem;
+  height: 4.8rem;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.primary {
+  background-color: $primary;
+}
+
+.primary:hover {
+  background-color: $primary-hover;
+  color: $white-one;
+}
+
+.primary:hover:focus {
+  outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $primary-hover !important;
+  outline-width: 0.2rem;
+}
+
+.primary:active {
+  background-color: $primary-hover;
+  color: $white-one;
+  outline: none;
+}
+.primary:disabled {
+  background-color: $primary-disabled;
+  color: $grey-four;
+}
+.primary:focus {
+   outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $primary;
+  outline-width: 0.2rem;
+}
+
+.normal {
+  background-color: $normal;
+}
+
+.normal:hover {
+  background-color: $normal-hover;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.normal:active {
+  background-color: $normal-hover;
+  outline: none;
+}
+.normal:disabled {
+  background-color: $normal-disabled;
+}
+.normal:focus {
+  outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $white-one;
+  outline-width: 0.2rem;
+  border-radius: 4rem;
+}
+
+
+.success {
+  background-color: $success;
+}
+
+.success:hover {
+  background-color: $success-hover;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.success:focus-visible {
+  outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $success;
+  outline-width: 0.2rem;
+  border-radius: 4rem;
+
+}
+
+.success:active {
+  background-color: $success-hover;
+  outline: none;
+}
+.success:disabled {
+  background-color: $success-disabled;
+}
+
+.warning {
+  background-color: $warning;
+}
+
+.warning:hover {
+  background-color: $warning-hover;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.warning:focus-visible {
+  outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $warning;
+  outline-width: 0.2rem;
+  border-radius: 4rem;
+}
+
+.warning:active {
+  background-color: $warning-hover;
+  outline: none;
+}
+.warning:disabled {
+  background-color: $warning-disabled;
+}
+
+.danger {
+  background-color: $danger;
+  color: $white-one;
+}
+
+.danger:hover {
+  background-color: $danger-hover;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.danger:focus-visible {
+   outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $danger;
+  outline-width: 0.2rem;
+  border-radius: 4rem;
+}
+
+.danger:active {
+  background-color: $danger-hover;
+  outline: none;
+}
+.danger:disabled {
+  background-color: $danger-disabled;
+}
+
+.info {
+  background-color: $info;
+}
+
+.info:hover {
+  background-color: $info-hover;
+  color: $white-one;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.info:focus-visible {
+   outline-offset: 0.1rem;
+  outline-style: solid;
+  outline-color: $info;
+  outline-width: 0.2rem;
+  border-radius: 4rem;
+}
+
+.info:active {
+  background-color: $info-hover;
+  outline: none;
+}
+
+.info:disabled {
+  background-color: $info-disabled;
+}
+
+.linkBtn {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.linkBtn:hover {
+  // background-color: $primary;
+}
+
+.linkBtn:focus-visible {
+  // background-color: $primary;
+}
+
+.linkBtn:active {
+  // background-color: $primary;
+  outline: none;
+}
+.linkBtn:disabled {
+  // background-color: $primary;
+}
+
+.icon {
+  background-color: unset;
+  box-shadow: none;
+  width: fit-content;
+  height: fit-content;
+}
+
