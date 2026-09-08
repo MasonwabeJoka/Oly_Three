@@ -2,7 +2,7 @@
 import styles from "./UploadButton.module.scss";
 import { useRef, useState } from "react";
 import useUploadFiles from "@/app/(dashboard)/dashboard/create-listing/store/useUploadFiles";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 interface Props {
   mediaType: "photo" | "video" | "attachment";
@@ -118,14 +118,14 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
         <Button
           className={`${styles.uploadButton} ${className}`}
-          buttonChildren={`Upload ${capitalizeFirstLetter(mediaType)}`}
-          buttonType={colour}
+          children={`Upload ${capitalizeFirstLetter(mediaType)}`}
+          buttonVariant={colour}
           buttonSize={size}
-          name="upload-btn"
-          type="button"
+
+
           ariaLabel="Upload Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={() => dropAreaRef.current?.querySelector("input")?.click()}
         />

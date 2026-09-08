@@ -9,13 +9,13 @@
   width: 100%;
 
   @include only(largeDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(smallDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(tablet) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
 
   .pageTitle {
@@ -27,20 +27,20 @@
   .titleContainer {
     display: flex;
     justify-self: center;
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
 
     .title {
       @include only(largeDesktop) {
-        width: rem(580);
-        margin-bottom: rem(16);
+        width: 58rem;
+        margin-bottom: 1.6rem;
       }
       @include only(smallDesktop) {
-        width: rem(580);
-        margin-bottom: rem(16);
+        width: 58rem;
+        margin-bottom: 1.6rem;
       }
       @include only(tablet) {
-        width: rem(580);
-        margin-bottom: rem(16);
+        width: 58rem;
+        margin-bottom: 1.6rem;
       }
     }
   }
@@ -49,39 +49,39 @@
     align-items: center;
     justify-content: center;
     // background-color: $grey-one;
-    border-radius: rem(40);
-    width: rem(640);
-    height: rem(348);
+    border-radius: 4rem;
+    width: 64rem;
+    height: 34.8rem;
     .description {
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: rem(240);
+      height: 24rem;
 
       @include only(largeDesktop) {
-        width: rem(640);
-        border-radius: rem(40);
+        width: 64rem;
+        border-radius: 4rem;
       }
       @include only(smallDesktop) {
-        width: rem(640);
-        border-radius: rem(40);
+        width: 64rem;
+        border-radius: 4rem;
       }
       @include only(tablet) {
-        width: rem(640);
-        border-radius: rem(40);
+        width: 64rem;
+        border-radius: 4rem;
       }
     }
   }
 
   .submitButtonContainer {
     text-align: center;
-    margin-top: rem(16);
+    margin-top: 1.6rem;
   }
 
   .editorSkeleton {
-    width: rem(640);
-    height: rem(240);
-    border-radius: rem(40);
+    width: 64rem;
+    height: 24rem;
+    border-radius: 4rem;
     background-color: $white-three;
   }
 }

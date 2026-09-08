@@ -13,13 +13,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-       margin-bottom: rem(20);
+       margin-bottom: 2rem;
       .errorMessage {
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
         color: $danger;
       }
       .videoTitle {
-        width: rem(540);
+        width: 54rem;
       }
     }
 
@@ -27,14 +27,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: rem(48);
-       margin-bottom: rem(20);
+      margin-bottom: 4.8rem;
+       margin-bottom: 2rem;
       .errorMessage {
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
         color: $danger;
       }
       .description {
-        width: rem(540);
+        width: 54rem;
         
       }
     }

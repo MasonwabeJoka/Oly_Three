@@ -1,7 +1,7 @@
 "use client";
 import styles from "./FeaturedServicesSlideBackend.module.scss";
 import SlideOne from "./FeaturesMoreInfo/SlideOne";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import SlideTwo from "./FeaturesMoreInfo/SlideTwo";

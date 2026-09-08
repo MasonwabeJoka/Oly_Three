@@ -14,26 +14,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: rem(732);
-  margin-top: rem(300);
-  margin-bottom: rem(96);
+    width: 73.2rem;
+  margin-top: 30rem;
+  margin-bottom: 9.6rem;
     .questionAndAnswer {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: rem(680);
-      min-height: rem(72);
+      width: 68rem;
+      min-height: 7.2rem;
       background-color: $white-one;
       box-shadow: $shadow-one;
-      border-radius: rem(40);
-      margin-bottom: rem(20);
+      border-radius: 4rem;
+      margin-bottom: 2rem;
       cursor: pointer;
 
       .questionContainer {
         display: flex;
-        padding: rem(16) rem(48);
-        // margin-bottom: rem(-8);
-        min-height: rem(70);
+        padding: 1.6rem 4.8rem;
+        // margin-bottom: -0.8rem;
+        min-height: 7rem;
         position: relative;
 
         .question {
@@ -47,7 +47,7 @@
 
         .closeButtonContainer {
           position: absolute;
-          right: rem(16);
+          right: 1.6rem;
           top: 50%;
           transform: translateY(-50%);
         }
@@ -57,9 +57,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: rem(16) rem(48);
-        margin-top: rem(-24);
-        margin-bottom: rem(16);
+        padding: 1.6rem 4.8rem;
+        margin-top: -2.4rem;
+        margin-bottom: 1.6rem;
         width: 100%;
       }
     }

@@ -7,7 +7,7 @@ import styles from "./PropertiesFilters.module.scss";
 import { PROPERTY_SEARCH_FILTERS } from "@/data/propertyFilters";
 import { PROPERTY_FILTER_UI_ORDER, PROPERTY_FILTER_UI_ORDER_COMMON } from "@/data/propertyFilters.uiOrder";
 import useBreakpointStore from "@/store/useBreakpointStore";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 
 type ListingType = "rent" | "buy";
@@ -142,9 +142,9 @@ const sections: FilterSection[] = useMemo(() => {
         columnClassName={styles.masonryColumn}
         breakpointCols={breakpointColumnsObj}
         style={{
-          maxWidth: isDashboard ? "59.625rem" : "95vw",
+          maxWidth: isDashboard ? "95.4rem" : "95vw",
           width:
-            isSmallDesktop && currentScreenSize < 1383 ? "62rem" : "1650px",
+            isSmallDesktop && currentScreenSize < 1383 ? "99.2rem" : "1650px",
         }}
       >
         {sections.map((section) => (
@@ -160,14 +160,14 @@ const sections: FilterSection[] = useMemo(() => {
       </Masonry>
       <div className={styles.applyFiltersContainer}>
         <Button
-          buttonChildren="Apply Filters"
-          buttonType="primary"
+          children="Apply Filters"
+          buttonVariant="primary"
           buttonSize="large"
-          name="apply-filters-btn"
-          type="button"
+
+
           ariaLabel="Apply Filters Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

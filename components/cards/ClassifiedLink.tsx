@@ -21,7 +21,7 @@ const ClassifiedLink = ({
             sizes="(max-width: 768px) 100vw, 50vw"
             style={{
               objectFit: "cover",
-              borderRadius: "2.5rem",
+              borderRadius: "4rem",
             }}
           />
         )}

@@ -1,6 +1,6 @@
 import styles from "./CustomCategory.module.scss";
 import Input from "./Input";
-import Button from "./Buttons";
+import Button from "./Button";
 
 const CustomCategory = () => {
   return (
@@ -18,21 +18,16 @@ const CustomCategory = () => {
         label="Submit Your Product"
         placeholder="Submit Your Product Or Service"
         id="submitProduct"
-        name="submitProduct"
         ariaLabel="Submit Your Product"
-        autoFocus={false}
         required={true}
       />
       <Button
         className={styles.submitButton}
-        buttonChildren="Submit"
-        buttonType="normal"
+        children="Submit"
+        buttonVariant="normal"
         buttonSize="large"
-        name="submit-btn"
-        type="button"
         ariaLabel="Submit Button"
-        autoFocus={false}
-        disabled={false}
+
       />
     </div>
   );

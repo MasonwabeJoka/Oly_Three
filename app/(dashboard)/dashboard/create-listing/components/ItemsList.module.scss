@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(648);
+  width: 64.8rem;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(10px);
@@ -13,32 +13,32 @@
     opacity: 1;
     transform: translateY(0);
 
-    border-radius: rem(40);
-    padding: rem(32);
-    margin-bottom: rem(20);
+    border-radius: 4rem;
+    padding: 3.2rem;
+    margin-bottom: 2rem;
   }
 
   .detail {
     display: flex;
     align-items: flex-start;
-    margin-bottom: rem(20);
-    width: rem(580);
+    margin-bottom: 2rem;
+    width: 58rem;
 
     .bulletPoint {
-        margin-right: rem(32);
+        margin-right: 3.2rem;
     }
 
     .detailText {
       font-weight: normal;
-      margin-right: rem(20);
+      margin-right: 2rem;
     }
 
     .detailButtons {
       display: flex;
-      gap: rem(16);
+      gap: 1.6rem;
       margin-left: auto;
       
-      height: rem(30);
+      height: 3rem;
 
       .deleteButtonContainer,
       .editButtonContainer {
@@ -46,8 +46,8 @@
         justify-content: center;
         align-items: center;
         background-color: #dbe3eb;
-        width: rem(28);
-        height: rem(28);
+        width: 2.8rem;
+        height: 2.8rem;
         border-radius: 50%;
         cursor: pointer;
       }
@@ -56,12 +56,12 @@
 
   .editMode {
     position: relative;
-    width: rem(514);
-    margin-bottom: rem(16);
+    width: 51.4rem;
+    margin-bottom: 1.6rem;
 
     .editDetail {
-      width: rem(514);
-      height: rem(40);
+      width: 51.4rem;
+      height: 4rem;
       text-align: start;
       color: $black-one;
     }
@@ -72,11 +72,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: rem(40);
-      height: rem(40);
+      width: 4rem;
+      height: 4rem;
       border-radius: 50%;
       transform: translateY(-50%);
-      right: rem(8);
+      right: 0.8rem;
       z-index: 10;
       background-color: $white-one;
       cursor: pointer;
@@ -85,7 +85,7 @@
         5px 5px 10px 0px rgba(169, 196, 203, 0.25);
 
       .iconContainer {
-        margin-top: rem(4);
+        margin-top: 0.4rem;
       }
     }
   }

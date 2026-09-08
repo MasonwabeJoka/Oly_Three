@@ -9,7 +9,7 @@
   gap: 1.25rem;
   width: 100%;
   flex-wrap: wrap;
-  border-radius: rem(40) rem(40) 0 0;
+  border-radius: 4rem 4rem 0 0;
 }
 
 .toolbarGroup {
@@ -59,54 +59,54 @@
 
 .xxLarge {
   @include only(largeDesktop) {
-    width: rem(1296);
-    height: rem(56);
+    width: 129.6rem;
+    height: 5.6rem;
   }
 }
 
 .xxLargeFeed {
-  width: rem(954);
-  min-height: rem(56);
+  width: 95.4rem;
+  min-height: 5.6rem;
 }
 
 .xLarge {
   @include only(largeDesktop) {
-    width: rem(1078);
-    min-height: rem(56);
+    width: 107.8rem;
+    min-height: 5.6rem;
   }
 }
 
 .xLargeFeed {
-  width: rem(793);
-  min-height: rem(56);
+  width: 79.3rem;
+  min-height: 5.6rem;
 }
 
 .large {
-  width: rem(311);
-  min-height: rem(56);
+  width: 31.1rem;
+  min-height: 5.6rem;
 
   @include only(largeDesktop) {
-    width: rem(514);
-    min-height: rem(56);
+    width: 51.4rem;
+    min-height: 5.6rem;
   }
 }
 
 .largeFeed {
-  width: rem(471);
-  min-height: rem(56);
-  // max-height: rem(240);
+  width: 47.1rem;
+  min-height: 5.6rem;
+  // max-height: 24rem;
 }
 
 .medium {
-  width: rem(202);
-  min-height: rem(56);
+  width: 20.2rem;
+  min-height: 5.6rem;
   @include only(largeDesktop) {
-    width: rem(424);
-    min-height: rem(56);
+    width: 42.4rem;
+    min-height: 5.6rem;
   }
 }
 
 .mediumFeed {
-  width: rem(310);
-  min-height: rem(48);
+  width: 31rem;
+  min-height: 4.8rem;
 }

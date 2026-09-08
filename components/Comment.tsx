@@ -80,7 +80,6 @@ const Comment = ({ isPostOpen }: { isPostOpen: boolean }) => {
             className={styles.commentInput}
             textareaClassName={styles.textarea}
             id="reply-textarea"
-            name="reply-textarea"
             maxHeight={240}
             placeholder="Reply..."
             submitButtonText="Reply"

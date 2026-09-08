@@ -2,7 +2,7 @@
 import styles from "./BackButton.module.scss";
 import { useRouter } from "next/navigation";
 import Icon from "./Icon";
-import Button from "./Buttons";
+import Button from "./Button";
 
 const BackButton = () => {
   const router = useRouter();
@@ -14,14 +14,11 @@ const BackButton = () => {
   return (
     <div className={styles.button}>
       <Button
-        buttonType="round"
+        buttonShape="round"
         buttonSize="medium"
-        name="back"
-        type="button"
         ariaLabel="Go back"
-        autoFocus={false}
         onClick={handleBack}
-        buttonChildren={
+        children={
           <Icon
             src="/icons/left-arrow.png"
             alt="Go back"

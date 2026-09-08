@@ -7,9 +7,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: rem(40);
+  border-radius: 4rem;
   .image {
-    border-radius: rem(40);
+    border-radius: 4rem;
     box-shadow: $shadow-eight;
   }
 
@@ -18,8 +18,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(72);
-    height: rem(72);
+    width: 7.2rem;
+    height: 7.2rem;
     border-radius: 50%;
 
     .likeIcon {

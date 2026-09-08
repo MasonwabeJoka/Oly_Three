@@ -2,7 +2,7 @@
 import styles from "./PromoteYourAdCard.module.scss";
 import { useState, useRef, useEffect } from "react";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import Icon from "@/components/Icon";
 import useIsDashboardStore from "@/store/isDashboardStore";
@@ -77,7 +77,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
         className={styles.container}
         ref={containerRef}
         style={{
-          width: "18.75rem",
+          width: "30rem",
         }}
       >
         <div
@@ -87,7 +87,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
         >
           <p className={styles.title}>{title}</p>
 
-          <div style={{ marginBottom: "2rem" }}>
+          <div style={{ marginBottom: "3.2rem" }}>
             <Icon
               className={styles.icon}
               src={src}
@@ -101,7 +101,7 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
             className={`${styles.setPromotionDurationContainer} ${
               isDurationSelectOpen ? styles.dropdownOpen : ""
             }`}
-            style={{ marginBottom: "1rem" }}
+            style={{ marginBottom: "1.6rem" }}
           >
             <Select
               options={options()}
@@ -112,8 +112,8 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               label="Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
-              autoFocus={false}
-              disabled={false}
+
+
               required={true}
               multiple={false}
               dashboard
@@ -130,33 +130,33 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
 
           <Button
             className={styles.moreInfoButton}
-            buttonChildren="More Info"
-            buttonType="normal"
+            children="More Info"
+            buttonVariant="normal"
             buttonSize="medium"
-            name="more-info-btn"
-            type="button"
+
+
             ariaLabel="More Info Button"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard={isDashboard}
-            ariaHidden={false}
-            style={{ marginBottom: "2rem" }}
+
+            style={{ marginBottom: "3.2rem" }}
           />
 
           <div
             className={styles.priceContainer}
             style={{
-              width: "3rem",
-              height: "3rem",
+              width: "4.8rem",
+              height: "4.8rem",
               margin: "0 auto",
-              marginBottom: "2rem",
+              marginBottom: "3.2rem",
             }}
           >
             <h4 className={styles.price}>{`R${selectedPrice}`}</h4>
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: "1.6rem",
             }}
           >
             <Checkbox
@@ -208,8 +208,8 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
               label="Duration"
               id="set-promotion_duration"
               ariaLabel="Set Promotion Duration"
-              autoFocus={false}
-              disabled={false}
+
+
               required={true}
               dashboard={isDashboard}
               error={(errors as any).promotionDuration?.message as string}
@@ -225,14 +225,11 @@ const PromoteYourAdCard = ({ id, src, alt, title, price }: CardProps) => {
 
           <Button
             className={styles.moreInfoButton}
-            buttonChildren="More Info"
-            buttonType="normal"
+            children="More Info"
+            buttonVariant="normal"
             buttonSize="medium"
-            name="more-info-btn"
-            type="button"
             ariaLabel="More Info Button"
-            autoFocus={false}
-            disabled={false}
+
             dashboard={isDashboard}
           />
         </div>

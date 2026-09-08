@@ -1,6 +1,6 @@
 import Select from "@/components/Select";
 import styles from "./MakeModel.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 interface MakeModelProps {}
 
 const MakeModel = ({}: MakeModelProps) => {
@@ -14,9 +14,9 @@ const MakeModel = ({}: MakeModelProps) => {
             selectSize="large"
             label="Condition"
             id="condition"
-            name="condition"
+
             ariaLabel="Condition"
-            autoFocus={false}
+
             required={false}
           />
         </div>
@@ -27,9 +27,9 @@ const MakeModel = ({}: MakeModelProps) => {
             selectSize="large"
             label="Year"
             id="year"
-            name="year"
+
             ariaLabel="Year"
-            autoFocus={false}
+
             required={false}
           />
         </div>
@@ -40,9 +40,9 @@ const MakeModel = ({}: MakeModelProps) => {
             selectSize="large"
             label="Make"
             id="make"
-            name="make"
+
             ariaLabel="Make"
-            autoFocus={false}
+
             required={false}
           />
         </div>
@@ -53,9 +53,9 @@ const MakeModel = ({}: MakeModelProps) => {
             selectSize="large"
             label="Model"
             id="model"
-            name="model"
+
             ariaLabel="Model"
-            autoFocus={false}
+
             required={false}
           />
         </div>
@@ -67,36 +67,36 @@ const MakeModel = ({}: MakeModelProps) => {
           selectSize="large"
           label="Variant"
           id="variant"
-          name="variant"
+
           ariaLabel="Variant"
-          autoFocus={false}
+
           required={false}
         />
       </div> */}
       <div className={`${styles.field} ${styles.moreFilters}`}>
         <Button
-          buttonChildren="More Filters"
+          children="More Filters"
           className={styles.moreFiltersBtn}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="more-filters-btn"
-          type="button"
+
+
           ariaLabel="More Filters Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       <div className={`${styles.field} ${styles.continue}`}>
         <Button
-          buttonChildren="Continue"
+          children="Continue"
           className={styles.continueBtn}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="continue-btn"
+
           type="submit"
           ariaLabel="Continue Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
 

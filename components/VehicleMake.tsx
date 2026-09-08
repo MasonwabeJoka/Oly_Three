@@ -1,5 +1,5 @@
 "use client";
-import Button from "./Buttons";
+import Button from "./Button";
 import Checkbox from "./Checkbox";
 import Input from "./Input";
 import Tabs from "./Tabs";
@@ -43,9 +43,9 @@ const VehicleMake = () => {
           label="Search"
           placeholder="Find your car brand..."
           id="locationSearch"
-          name="locationSearch"
+
           ariaLabel="Location"
-          autoFocus={false}
+
           autoComplete="off"
           required
         />
@@ -99,15 +99,15 @@ const VehicleMake = () => {
       </div>
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="Search"
+          children="Search"
           className={styles.search}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="Search Button"
+
           type="submit"
           ariaLabel="Search Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

@@ -86,7 +86,7 @@ const Locations = ({ locations }: LocationsProps) => {
           top: "0",
           left: "0",
           width: "1440px",
-          paddingTop: "6rem",
+          paddingTop: "9.6rem",
           overflowX: "hidden",
         }}
         onClick={() => setShowCategoriesModal(false)}
@@ -142,7 +142,7 @@ const Locations = ({ locations }: LocationsProps) => {
             : "",
           width: isTablet
             ? currentScreenSize < 1100 && isTablet
-              ? "47rem"
+              ? "75.2rem"
               : ""
             : "",
         }}

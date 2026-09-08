@@ -2,7 +2,7 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .container {
-  width: rem(720);
+  width: 72rem;
 
   .contentContainer {
     .content {
@@ -10,12 +10,12 @@
       display: flex;
       .contentLabel {
         font-weight: 500;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
 
       .contentItem {
         position: absolute;
-        left: rem(216);
+        left: 21.6rem;
       }
     }
   }

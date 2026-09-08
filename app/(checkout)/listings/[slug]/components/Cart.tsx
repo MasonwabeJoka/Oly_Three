@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./Cart.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 import CartItem from "../../components/CartItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -70,15 +70,15 @@ const Cart = () => {
         {/* <div className={styles.button}>
         <Button
           className={styles.buyButton}
-          buttonChildren="Proceed To Payments"
-          buttonType="primary"
+          children="Proceed To Payments"
+          buttonVariant="primary"
           buttonSize="medium"
-          name="buy-btn"
-          type="button"
+
+
           ariaLabel="Buy Button"
-          autoFocus={false}
-          disabled={false}
-          ariaHidden={false}
+
+
+
           // onClick={confirmPurchase}
         />
       </div> */}

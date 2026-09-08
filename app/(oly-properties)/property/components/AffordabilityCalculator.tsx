@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../calculators/styles/calculatorStyles.module.scss";
 import NumberInput from "@/components/NumberInput";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import ShareCalculator from "./shareCalculator";
 import { formatNumberWithCommas } from "@/utils/formatterFunctions/Formatter";
 // Todo: when I hit the arrows of the interest rate number input the number should start at the current interest rate + 1, e.g. 11 + 1
@@ -103,7 +103,7 @@ const AffordabilityCalculator = () => {
               value={grossIncome} 
               inputSize="large"
               placeholder="Enter Your Monthly Gross Income"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setGrossIncome, e.target.value)}
               // Optional: Add a formatter prop if NumberInput supports it
@@ -121,7 +121,7 @@ const AffordabilityCalculator = () => {
               value={netIncome}
               inputSize="large"
               placeholder="Enter Your Monthly Net Income"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setNetIncome, e.target.value)}
             />
@@ -138,7 +138,7 @@ const AffordabilityCalculator = () => {
               value={expenses}
               inputSize="large"
               placeholder="Enter Your Monthly Expenses"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(setExpenses, e.target.value)}
             />
@@ -155,7 +155,7 @@ const AffordabilityCalculator = () => {
               value={interestRate === 11 ? undefined : interestRate}
               inputSize="large"
               placeholder="11% Interest Rate"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInterestRate(parseFloat(e.target.value) || 0)}
             />
@@ -175,10 +175,10 @@ const AffordabilityCalculator = () => {
               selectSize="large"
               label="repaymentTerm"
               id="repaymentTerm"
-              name="repaymentTerm"
+
               ariaLabel="Repayment Term Selector"
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRepaymentTerm(parseInt(e.target.value.split(" ")[0]))}
-              autoFocus={false}
+
               required={false}
             />
           </div>
@@ -212,14 +212,14 @@ const AffordabilityCalculator = () => {
       <div className={styles.button}>
         <Button
           className={styles.calculateButton}
-          buttonChildren="Calculate"
-          buttonType="primary"
+          children="Calculate"
+          buttonVariant="primary"
           buttonSize="large"
-          name="calculate-btn"
-          type="button"
+
+
           ariaLabel="Calculate Button"
-          autoFocus={false}
-          disabled={false}
+
+
           onClick={handleCalculate}
         />
       </div>

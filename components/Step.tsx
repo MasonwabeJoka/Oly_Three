@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Buttons";
+import Button from "./Button";
 import styles from "./Step.module.scss";
 
 type StepProps<T> = {
@@ -35,28 +35,28 @@ export default function Step<T>({
         {!isLastStep && !hideNextButton && (
           <Button
             className={styles.proceedButton}
-            buttonChildren={isLastStep ? lastStepButtonText : nextButtonText}
-            buttonType="primary"
+            children={isLastStep ? lastStepButtonText : nextButtonText}
+            buttonVariant="primary"
             buttonSize="large"
-            name="proceed-btn"
-            type="button"
+
+
             ariaLabel="Proceed Button"
-            autoFocus={false}
-            disabled={false}
+
+
             onClick={onNext}
           />
         )}
         {!isFirstStep && !hideBackButton && (
           <Button
             className={styles.backButton}
-            buttonChildren={backButtonText}
-            buttonType="normal"
+            children={backButtonText}
+            buttonVariant="normal"
             buttonSize="large"
-            name="back-btn"
-            type="button"
+
+
             ariaLabel="Back Button"
-            autoFocus={false}
-            disabled={false}
+
+
             onClick={onBack}
           />
         )}

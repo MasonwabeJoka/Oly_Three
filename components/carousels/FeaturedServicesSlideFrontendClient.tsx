@@ -11,7 +11,7 @@ import useFeatureInfo from "@/store/featuresInfo";
 import useCurrentSlideIndex from "@/store/currentSlide";
 import FeaturedServices from "../FeaturedServices";
 import NavButtons from "../NavButtons";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingGraphic from "../LoadingGraphic";
 import useBreakpointStore from "@/store/useBreakpointStore";
 
 const FeaturedServicesSlideFrontendClient = ({
@@ -21,7 +21,7 @@ const FeaturedServicesSlideFrontendClient = ({
 }) => {
   const { isMobile, isTablet } = useBreakpointStore();
   const [initialSlideIndex, setInitialSlideIndex] = useState<number | null>(
-    null
+    null,
   );
   const { setIsMoreInfo } = useFeatureInfo();
   const { setCurrentSlideIndex } = useCurrentSlideIndex();
@@ -44,7 +44,7 @@ const FeaturedServicesSlideFrontendClient = ({
   };
 
   if (initialSlideIndex === null) {
-    return <LoadingSpinner />;
+    return <LoadingGraphic />;
   }
 
   return (

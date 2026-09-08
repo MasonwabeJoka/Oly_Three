@@ -23,7 +23,7 @@
 
   &::-webkit-scrollbar {
     cursor: auto !important;
-    // width: rem(16) !important;
+    // width: 1.6rem !important;
   }
 
   &::-webkit-scrollbar-track {
@@ -43,7 +43,7 @@
   position: absolute;
   left: 95%;
   top: 3%;
-  gap: rem(16);
+  gap: 1.6rem;
   cursor: pointer;
   width: 100%;
   z-index: 10;
@@ -72,7 +72,7 @@
     position: sticky;
     right: 5%;
     top: 3%;
-    gap: rem(16);
+    gap: 1.6rem;
     cursor: pointer;
     width: fit-content;
     z-index: 20;

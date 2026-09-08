@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(311);
+  width: 31.1rem;
   min-height: 100vh;
   width: 100%;
 
@@ -23,7 +23,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    padding-bottom: rem(240);
+    padding-bottom: 24rem;
 
     @include only(largeDesktop) {
     }
@@ -35,8 +35,8 @@
     .title {
       color: $danger;
       font-size: $h4;
-      margin-top: rem(64);
-      margin-bottom: rem(64);
+      margin-top: 6.4rem;
+      margin-bottom: 6.4rem;
       font-weight: 600;
     }
 
@@ -71,13 +71,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: rem(20);
-        height: rem(180);
+        margin-top: 2rem;
+        height: 18rem;
         background-color: $white-four;
        
 
         .proceedButton {
-          margin-bottom: rem(20);
+          margin-bottom: 2rem;
         }
       }
     }

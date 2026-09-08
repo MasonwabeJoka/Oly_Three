@@ -45,7 +45,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
               // <span style={{ margin: "0 1rem" }}>{` ≫ `}</span>
               // <span style={{ margin: "0 1rem" }}>{` » `}</span>
               // <span style={{ margin: "0 1rem" }}>{` ∷ `}</span>
-              <span style={{ margin: "0 1rem" }}>{` ➜ `}</span>
+              <span style={{ margin: "0 1.6rem" }}>{` ➜ `}</span>
               // <span style={{ margin: "0 1rem" }}>{` • `}</span>
             )}
           </li>

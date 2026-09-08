@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(1060);
+  width: 106rem;
   margin-bottom: auto;
 
   .dropzone {
@@ -15,15 +15,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    width: rem(420);
-    height: rem(360);
-    border-radius: rem(60);
+    width: 42rem;
+    height: 36rem;
+    border-radius: 6rem;
     background: $white-two;
     box-shadow: $shadow-one;
     &.hasImages {
-      margin-bottom: rem(148);
+      margin-bottom: 14.8rem;
       box-shadow: none;
-      max-width: rem(1060);
+      max-width: 106rem;
       width: 100%;
       height: auto;
       background: $white-four;
@@ -37,18 +37,18 @@
 
     .masonry {
       display: flex;
-      max-width: rem(1060);
+      max-width: 106rem;
       width: 100%;
     }
     .fileContainer {
       position: relative;
-      width: rem(248);
+      width: 24.8rem;
       height: fit-content;
-      margin-right: rem(16);
-      margin-bottom: rem(16);
+      margin-right: 1.6rem;
+      margin-bottom: 1.6rem;
       scroll-snap-align: start;
       transition: transform 0.3s ease-in-out;
-      border-radius: rem(20);
+      border-radius: 2rem;
       cursor: grab;
       overflow-y: auto;
       transition: transform 0.2s;
@@ -75,14 +75,14 @@
 
       .deleteButtonContainer {
         position: absolute;
-        top: rem(4);
-        right: rem(6);
+        top: 0.4rem;
+        right: 0.6rem;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: $white-one;
-        width: rem(28);
-        height: rem(28);
+        width: 2.8rem;
+        height: 2.8rem;
         border-radius: 50%;
         pointer-events: none; // Make delete button non-interactive during drag
         pointer-events: auto !important; // Allow click interactions
@@ -108,12 +108,12 @@
 
       .imageNumber {
         position: absolute;
-        top: rem(4);
-        left: rem(6);
+        top: 0.4rem;
+        left: 0.6rem;
         background-color: rgba(0, 0, 0, 0.7);
         color: $white-four;
-        width: rem(28);
-        height: rem(28);
+        width: 2.8rem;
+        height: 2.8rem;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -123,18 +123,18 @@
       }
 
       .image {
-        border-radius: rem(20);
+        border-radius: 2rem;
       }
     }
 
     .buttonContainer {
       position: sticky;
-      bottom: rem(200);
+      bottom: 20rem;
       z-index: 10;
       display: flex;
       justify-content: center;
       width: 100%;
-      margin-bottom: rem(48);
+      margin-bottom: 4.8rem;
 
       .uploadButton {
         background: $primary-hover;

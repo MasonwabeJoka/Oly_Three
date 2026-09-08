@@ -5,24 +5,24 @@
 .container {
   display: flex;
   justify-content: center;
-  // width: rem(800);
+  // width: 80rem;
   overflow: hidden;
   @include only(largeDesktop) {
-    // width: rem(1556);
-    height: rem(570);
+    // width: 155.6rem;
+    height: 57rem;
   }
   @include only(smallDesktop) {
-    // width: rem(1245);
-    height: rem(456);
+    // width: 124.5rem;
+    height: 45.6rem;
   }
 
   .gallery {
     display: flex;
-    gap: rem(20);
-    border-radius: rem(40);
+    gap: 2rem;
+    border-radius: 4rem;
     width: max-content; /* Allow gallery to size based on children without stretching */
     .image {
-      border-radius: rem(40);
+      border-radius: 4rem;
     }
 
     .firstImage {
@@ -30,19 +30,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
+      border-radius: 4rem;
       flex: 0 0 auto; /* Don't grow or shrink */
       margin-right: auto;
       @include only(largeDesktop) {
-        width: rem(768); /* Default for landscape */
+        width: 76.8rem; /* Default for landscape */
         &.portrait {
-          width: rem(372); /* Width for portrait */
+          width: 37.2rem; /* Width for portrait */
         }
       }
       @include only(smallDesktop) {
-        width: rem(615); /* Default for landscape */
+        width: 61.5rem; /* Default for landscape */
         &.portrait {
-          width: rem(298); /* Width for portrait */
+          width: 29.8rem; /* Width for portrait */
         }
       }
     }
@@ -50,41 +50,41 @@
     .remainingImages {
       position: relative;
       /* Keep fixed column width */
-      column-gap: rem(20);
+      column-gap: 2rem;
       column-fill: auto;
       overflow: hidden;
-      border-radius: rem(40);
+      border-radius: 4rem;
 
       flex: 0 0 auto; /* Don't grow or shrink; base width on content */
       height: auto; /* Default for small screens */
 
       @include only(largeDesktop) {
-        // column-width: rem(370);
-        max-width: rem(768);
-        height: rem(570); /* Fixed height for sequential filling */
+        // column-width: 37rem;
+        max-width: 76.8rem;
+        height: 57rem; /* Fixed height for sequential filling */
       }
       @include only(smallDesktop) {
-        max-width: rem(615);
-        height: rem(456); /* Fixed height for sequential filling */
+        max-width: 61.5rem;
+        height: 45.6rem; /* Fixed height for sequential filling */
       }
 
       .imageContainer {
         position: relative;
-        width: rem(372);
+        width: 37.2rem;
         break-inside: avoid;
-        margin-bottom: rem(20);
-        border-radius: rem(40);
-        height: rem(275);
+        margin-bottom: 2rem;
+        border-radius: 4rem;
+        height: 27.5rem;
         &[data-orientation="portrait"] {
-          height: rem(570);
+          height: 57rem;
         }
         background-color: $grey-one;
 
         @include only(smallDesktop) {
-          width: rem(298);
-          height: rem(275);
+          width: 29.8rem;
+          height: 27.5rem;
           &[data-orientation="portrait"] {
-            height: rem(456);
+            height: 45.6rem;
           }
         }
       }
@@ -102,8 +102,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(128);
-    height: rem(128);
+    width: 12.8rem;
+    height: 12.8rem;
     border-radius: 50%;
     cursor: pointer;
 
@@ -111,8 +111,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: rem(150);
-      height: rem(150);
+      width: 15rem;
+      height: 15rem;
       transform: translateY(50%);
       border: 0px solid black;
       border-radius: 50%;

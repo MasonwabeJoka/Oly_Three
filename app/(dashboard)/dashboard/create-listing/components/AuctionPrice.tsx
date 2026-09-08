@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
 import NumberInput from "@/components/NumberInput";
 import { useState, ChangeEvent, useEffect } from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useFAQStore from "../store/useFAQStore";
 import Modal from "@/components/Modal";
 import AuctionStartTime from "./AuctionStartTime";
@@ -76,7 +76,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                   value={watch("price.startingPrice") || 0}
                   inputSize="large"
                   placeholder="Starting Price"
-                  autoFocus={false}
+
                   required={true}
                   dashboard
                   error={(errors as any)?.price?.startingPrice?.message}
@@ -100,7 +100,7 @@ const AuctionPrice = ({ onNext }: Props) => {
                     value={watch("price.buyNowPrice") || 0}
                     inputSize="large"
                     placeholder="Buy Now Price"
-                    autoFocus={false}
+
                     required={false}
                     dashboard
                     error={(errors as any)?.price?.buyNowPrice?.message}
@@ -134,8 +134,8 @@ const AuctionPrice = ({ onNext }: Props) => {
                     label="Start Time"
                     id="startTime"
                     ariaLabel="Auction Start Time"
-                    autoFocus={false}
-                    disabled={false}
+
+
                     required={true}
                     dashboard
                     error={(errors as any)?.price?.startTime?.message}
@@ -178,8 +178,8 @@ const AuctionPrice = ({ onNext }: Props) => {
                     label="Duration"
                     id="auctionDuration"
                     ariaLabel="Auction Duration"
-                    autoFocus={false}
-                    disabled={false}
+
+
                     required={true}
                     dashboard
                     error={(errors as any)?.price?.auctionDuration?.message}
@@ -203,14 +203,14 @@ const AuctionPrice = ({ onNext }: Props) => {
                   <div className={styles.faqs}>
                     <Button
                       className={styles.faqBtn}
-                      buttonChildren="Auctions FAQs"
-                      buttonType="info"
+                      children="Auctions FAQs"
+                      buttonVariant="info"
                       buttonSize="large"
-                      name="faq-btn"
-                      type="button"
+
+
                       ariaLabel="Auctions FAQs"
-                      autoFocus={false}
-                      disabled={false}
+
+
                       dashboard
                       onClick={() => setShowFAQs(true)}
                     />

@@ -6,17 +6,17 @@
   .selectContainer {
     position: relative;
     align-items: center;
-    width: rem(300);
+    width: 30rem;
 
     .select {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
+      border-radius: 4rem;
       background-color: $white-three;
-      width: rem(300);
-      height: rem(56);
+      width: 30rem;
+      height: 5.6rem;
       box-shadow: $shadow-one;
       text-align: center;
       border: none;
@@ -34,8 +34,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: rem(16);
-      height: rem(16);
+      width: 1.6rem;
+      height: 1.6rem;
 
       .dropdownIcon {
         background-color: $black-four;
@@ -45,23 +45,23 @@
 }
 
 .options {
-  max-height: rem(400);
-  width: rem(300);
+  max-height: 40rem;
+  width: 30rem;
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: rem(1);
+  margin-top: 0.1rem;
 
   .option {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: rem(48);
-    border-radius: rem(40);
-    margin: rem(8) auto 0;
+    height: 4.8rem;
+    border-radius: 4rem;
+    margin: 0.8rem auto 0;
     background-color: $white-two;
-    width: rem(288);
+    width: 28.8rem;
 
     .optionText {
       font-size: $small;
@@ -74,8 +74,8 @@
 }
 
 .options::-webkit-scrollbar-track {
-  border-radius: rem(40);
-  margin-block: rem(30);
+  border-radius: 4rem;
+  margin-block: 3rem;
 }
 
 .hideOptions {

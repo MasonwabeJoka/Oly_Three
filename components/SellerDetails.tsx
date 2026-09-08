@@ -1,6 +1,6 @@
 "use client";
 import styles from "./SellerDetails.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 import Avatar from "@/components/Avatar";
 import Image from "@/components/Image";
 import useMessageStore from "@/features/messages/store/useMessageStore";
@@ -50,37 +50,37 @@ const SellerDetails = () => {
         <div className={styles.buttons}>
           <Button
             className={`${styles.button} ${styles.chatButton}`}
-            buttonChildren="Chat"
-            buttonType="primary"
+            children="Chat"
+            buttonVariant="primary"
             buttonSize="small"
-            name="chat_btn"
-            type="button"
+
+
             ariaLabel="Chat Button"
-            autoFocus={false}
-            disabled={false}
+
+
             onClick={() => {}} // setChats(true)
           />
           <Button
             className={`${styles.button} ${styles.followButton}`}
-            buttonChildren="Follow"
-            buttonType="normal"
+            children="Follow"
+            buttonVariant="normal"
             buttonSize="small"
-            name="follow_btn"
-            type="button"
+
+
             ariaLabel="Follow Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
           <Button
             className={`${styles.button} ${styles.storeButton}`}
-            buttonChildren="Shop"
-            buttonType="normal"
+            children="Shop"
+            buttonVariant="normal"
             buttonSize="small"
-            name="shop_btn"
-            type="button"
+
+
             ariaLabel="Shop Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </div>
 
@@ -88,7 +88,7 @@ const SellerDetails = () => {
           {socialMediaLogos.map((app) => (
             <li key={app.id} className={styles.app}>
               <Button
-                buttonChildren={
+                children={
                   <Image
                     src={app.icon}
                     alt={`${app.app} Icon`}
@@ -96,13 +96,13 @@ const SellerDetails = () => {
                     height={16}
                   />
                 }
-                buttonType="icon"
-                buttonSize=""
+                buttonVariant="icon"
+
                 name={`${app.app.toLowerCase()}_icon`}
-                type="button"
+
                 ariaLabel={`${app.app} Icon`}
-                autoFocus={false}
-                disabled={false}
+
+
               />
             </li>
           ))}

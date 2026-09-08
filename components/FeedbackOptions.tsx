@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from "./Buttons";
+import Button from "./Button";
 import styles from "./FeedbackOptions.module.scss";
 import Modal from "./Modal";
 import FeedbackForm from "./FeedbackForm";
@@ -23,15 +23,15 @@ const FeedbackOptions = () => {
       >
         <Button
           className={styles.generalButton}
-          buttonChildren="General Feedback"
-          buttonType="normal"
+          children="General Feedback"
+          buttonVariant="normal"
           buttonSize="large"
-          name="general-feedback-btn"
-          type="button"
+
+
           ariaLabel="General Feedback Button"
           onClick={() => openModal("General Feedback")}
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       <div
@@ -39,15 +39,15 @@ const FeedbackOptions = () => {
       >
         <Button
           className={styles.featureButton}
-          buttonChildren="Feature Request"
-          buttonType="normal"
+          children="Feature Request"
+          buttonVariant="normal"
           buttonSize="large"
-          name="feature-request-btn"
-          type="button"
+
+
           ariaLabel="Feature Request Button"
           onClick={() => openModal("Feature Request")}
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       <div
@@ -55,15 +55,15 @@ const FeedbackOptions = () => {
       >
         <Button
           className={styles.bugReportButton}
-          buttonChildren="Bug Report"
-          buttonType="normal"
+          children="Bug Report"
+          buttonVariant="normal"
           buttonSize="large"
-          name="bug-report-btn"
-          type="button"
+
+
           ariaLabel="Bug Report Button"
           onClick={() => openModal("Bug Report")}
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       {showFeedbackModal && (

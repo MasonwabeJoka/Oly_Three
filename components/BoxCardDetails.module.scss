@@ -6,25 +6,25 @@
   display: flex;
   align-items: center;
   position: relative;
-  font-size: rem(13);
-  letter-spacing: rem(1.1);
+  font-size: 1.3rem;
+  letter-spacing: 0.11rem;
   line-height: 1.5 !important;
   background-color: $grey-one;
   color: $black-three;
-  width: rem(310);
+  width: 31rem;
   z-index: 1;
-  border-radius: rem(0) rem(0) rem(40) rem(40);
-  padding: 0 rem(8) rem(8) rem(8);
+  border-radius: 0rem 0rem 4rem 4rem;
+  padding: 0 0.8rem 0.8rem 0.8rem;
   
   .titleAndDescription {
-    min-height: rem(96);
+    min-height: 9.6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 80%;
 
     .title {
-      padding: rem(0) rem(0) rem(4) rem(20);
+      padding: 0rem 0rem 0.4rem 2rem;
       line-height: 1.2;
       text-transform: uppercase;
     }
@@ -34,8 +34,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: rem(96);
-    padding: rem(16);
+    min-height: 9.6rem;
+    padding: 1.6rem;
     text-align: center;
     font-size: $h4 !important;
     font-weight: 600;
@@ -46,13 +46,13 @@
     justify-content: space-between;
     align-items: center !important;
     width: 100%;
-    padding: 0 rem(20);
-    margin-top: rem(16);
+    padding: 0 2rem;
+    margin-top: 1.6rem;
 
     .title {
       text-transform: uppercase;
       width: 75%;
-      font-size: rem(16);
+      font-size: 1.6rem;
     }
 
     .price {
@@ -64,11 +64,11 @@
 
   .locationContainer {
     display: flex;
-    gap: rem(8);
+    gap: 0.8rem;
     width: 100%;
-    padding: 0 rem(20);
+    padding: 0 2rem;
     font-size: $tiny;
-    margin-bottom: rem(4);
+    margin-bottom: 0.4rem;
   }
 
   .featuresWithIcons {
@@ -76,20 +76,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 rem(20);
+    padding: 0 2rem;
     margin-top: auto;
-    margin-bottom: rem(24);
+    margin-bottom: 2.4rem;
 
     .feature {
       display: flex;
-      gap: rem(8);
+      gap: 0.8rem;
 
       p {
         font-size: $tiny;
       }
 
       .featureValue {
-        margin-right: rem(3.2);
+        margin-right: 0.32rem;
       }
     }
   }
@@ -97,19 +97,19 @@
   &.vehicles,
   &.property {
     flex-direction: column;
-    height: rem(160);
-    width: rem(387);
+    height: 16rem;
+    width: 38.7rem;
   }
 
   .vehicleSpecs {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    // gap: rem(32);
+    // gap: 3.2rem;
     font-size: $tiny;
-    padding: 0 rem(28);
+    padding: 0 2.8rem;
     // text-transform: uppercase;
-    margin-top: rem(40);
+    margin-top: 4rem;
   }
 }
 
@@ -123,20 +123,20 @@
 
   .titleAndDescription {
     width: 100%;
-    margin-bottom: rem(-12);
+    margin-bottom: -1.2rem;
 
     .title {
-      padding: rem(32) rem(20) rem(4);
-      font-size: rem(16);
-      margin-bottom: rem(8);
+      padding: 3.2rem 2rem 0.4rem;
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
       line-height: 1.5;
       font-weight: 600;
       text-align: center;
     }
 
     .description {
-      padding: rem(3) rem(20) rem(12) rem(20);
-      font-size: rem(16);
+      padding: 0.3rem 2rem 1.2rem 2rem;
+      font-size: 1.6rem;
       text-transform: none;
       text-align: center;
     }
@@ -144,6 +144,6 @@
 
   .price {
     font-size: $h2;
-    padding-bottom: rem(36) !important;
+    padding-bottom: 3.6rem !important;
   }
 }

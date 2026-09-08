@@ -1,6 +1,6 @@
 "use client";
 import styles from "./FeedbackCard.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Avatar from "@/components/Avatar";
 import Image from "@/components/Image";
 import Checkbox from "@/components/Checkbox";

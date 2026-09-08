@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
-  width: rem(1080);
+  width: 108rem;
 
   .searchInputContainer {
   }
@@ -11,7 +11,7 @@
   .tableContainer {
     .tableHeader {
       .tableRow {
-        height: rem(100);
+        height: 10rem;
         .tableHead {
             font-size: $body;
         }
@@ -20,7 +20,7 @@
 
     .tableBody {
       .tableRow {
-        height: rem(80);
+        height: 8rem;
         .tableCell {
         }
       }

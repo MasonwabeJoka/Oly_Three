@@ -9,21 +9,21 @@
   justify-content: center;
   align-items: center;
   background-color: $grey-one;
-  width: rem(302);
-  height: rem(378);
-  border-radius: rem(40);
+  width: 30.2rem;
+  height: 37.8rem;
+  border-radius: 4rem;
   box-shadow: $shadow-one;
   cursor: pointer;
 
   .checkboxContainer {
     position: absolute;
-    top: rem(20);
-    left: rem(240);
+    top: 2rem;
+    left: 24rem;
   }
 
   .text {
     position: absolute;
-    bottom: rem(20);
+    bottom: 2rem;
     font-size: $h4;
     font-weight: 500;
     color: $black-four;

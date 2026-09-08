@@ -4,17 +4,17 @@
 
 .container {
     
-    // margin-top: rem(48);
+    // margin-top: 4.8rem;
     .content {
    
 
         .title {
-            margin-bottom: rem(8);
+            margin-bottom: 0.8rem;
           }
 
           .icons {
             display: flex;
-            gap: rem(24);
+            gap: 2.4rem;
 
             .iconContainer {
                 display: flex;
@@ -33,14 +33,14 @@
             }
             .x {
                 .icon {
-                    width: rem(14);
-                    height: rem(14);
-                    margin-top: rem(2);
+                    width: 1.4rem;
+                    height: 1.4rem;
+                    margin-top: 0.2rem;
                 }
             }
             .instagram {
                 .icon {
-                    margin-top: rem(2);
+                    margin-top: 0.2rem;
                 }
             }
             .linkedin {
@@ -50,7 +50,7 @@
             }
             .email {
                 .icon {
-                    margin-top: rem(3);
+                    margin-top: 0.3rem;
                 }
             }
           }

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./UserTypeSelection.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 interface UserTypeSelectionProps {
   onSelect: (type: "individual" | "business") => void;
@@ -13,27 +13,27 @@ const UserTypeSelection: React.FC<UserTypeSelectionProps> = ({ onSelect }) => {
       <div className={styles.buttons}>
         <Button
           className={styles.individualButton}
-          buttonChildren="Verify Individual Account"
-          buttonType={"primary"}
+          children="Verify Individual Account"
+          buttonVariant={"primary"}
           buttonSize="large"
-          name="individual-btn"
-          type="button"
+
+
           ariaLabel="Verify Individual Account"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={() => onSelect("individual")}
         />
         <Button
           className={styles.businessButton}
-          buttonChildren="Verify Business Account"
-          buttonType={"normal"}
+          children="Verify Business Account"
+          buttonVariant={"normal"}
           buttonSize="large"
-          name="business-btn"
-          type="button"
+
+
           ariaLabel="Verify Business Account"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={() => onSelect("business")}
         />

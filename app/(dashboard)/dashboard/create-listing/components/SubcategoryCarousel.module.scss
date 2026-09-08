@@ -4,7 +4,7 @@
 
 .subcategories {
   height: auto;
-  padding-bottom: rem(16);
+  padding-bottom: 1.6rem;
   display: none;
 
   @include only(largeDesktop) {
@@ -19,12 +19,12 @@
 
   .subcategoriesWrapper {
     .swipper {
-      padding-top: rem(8);
-      padding-left: rem(8);
+      padding-top: 0.8rem;
+      padding-left: 0.8rem;
       display: none;
       background-color: #d0d3d615;
-      border-radius: rem(40);
-      padding-right: rem(48);
+      border-radius: 4rem;
+      padding-right: 4.8rem;
       width: 120%;
       @include only(largeDesktop) {
         display: block;
@@ -43,14 +43,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        padding-bottom: rem(16);
+        padding-bottom: 1.6rem;
         .subcategoryList {
           list-style: none;
           padding: 0;
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: rem(16);
+          gap: 1.6rem;
 
           .subcategory {
             cursor: pointer;
@@ -61,28 +61,28 @@
               justify-content: center;
               align-items: center;
               text-align: center;
-              width: rem(200);
-              height: rem(56);
-              border-radius: rem(40);
+              width: 20rem;
+              height: 5.6rem;
+              border-radius: 4rem;
               background-color: $white-three;
-              padding: 0 rem(32);
-              margin: rem(2) 0;
+              padding: 0 3.2rem;
+              margin: 0.2rem 0;
               word-wrap: break-word;
               overflow-wrap: break-word;
               white-space: normal;
               font-size: $small;
               @include only(largeDesktop) {
-                width: rem(256);
-                padding: 0 rem(32);
+                width: 25.6rem;
+                padding: 0 3.2rem;
               }
               @include only(smallDesktop) {
-                width: rem(212);
-                padding: 0 rem(16);
+                width: 21.2rem;
+                padding: 0 1.6rem;
                 line-height: 1.3;
               }
               @include only(tablet) {
-                width: rem(212);
-                padding: 0 rem(16);
+                width: 21.2rem;
+                padding: 0 1.6rem;
                 line-height: 1.3;
               }
             }
@@ -99,11 +99,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: rem(48);
-        margin-bottom: rem(16);
-        width: rem(160);
+        margin-right: 4.8rem;
+        margin-bottom: 1.6rem;
+        width: 16rem;
         @include only(largeDesktop) {
-          margin-left: rem(906);
+          margin-left: 90.6rem;
         }
         @include only(smallDesktop) {
         }

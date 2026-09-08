@@ -2,13 +2,13 @@ import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
-  Controller,
   ControllerProps,
   FieldPath,
   FieldValues,
   FormProvider,
   useFormContext,
 } from "react-hook-form"
+import { SafeController } from "./safe-controller"
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
@@ -32,9 +32,14 @@ const FormField = <
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
+  if (!props.name) {
+    console.error('FormField requires a name prop')
+    return null
+  }
+  
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+      <SafeController {...props} />
     </FormFieldContext.Provider>
   )
 }
@@ -44,12 +49,11 @@ const useFormField = () => {
   const itemContext = React.useContext(FormItemContext)
   const { getFieldState, formState } = useFormContext()
 
-  const fieldState = getFieldState(fieldContext.name, formState)
-
-  if (!fieldContext) {
+  if (!fieldContext || !fieldContext.name) {
     throw new Error("useFormField should be used within <FormField>")
   }
 
+  const fieldState = getFieldState(fieldContext.name, formState)
   const { id } = itemContext
 
   return {

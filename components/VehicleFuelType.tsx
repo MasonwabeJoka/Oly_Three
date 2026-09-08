@@ -1,5 +1,5 @@
 import styles from "./VehicleFuelType.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 interface VehicleFuelTypeProps {
   buttonLabel?: string;
   buttonLabelSub?: string;
@@ -12,79 +12,79 @@ const VehicleFuelType = ({}: VehicleFuelTypeProps) => {
 
       <div className={styles.buttonsContainer}>
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Petrol"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="petrol"
+
           type="submit"
           ariaLabel="Petrol Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Diesel"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="diesel"
+
           type="submit"
           ariaLabel="Diesel Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Hybrid"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="hybrid"
+
           type="submit"
           ariaLabel="Hybrid Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Plug-in Hybrid (PHEV)"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="plug-in-hybrid"
+
           type="submit"
           ariaLabel="Plug-in Hybrid Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Electric (EV)"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="electric"
+
           type="submit"
           ariaLabel="Electric Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
      

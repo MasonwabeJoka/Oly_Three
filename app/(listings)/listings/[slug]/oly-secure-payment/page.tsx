@@ -1,6 +1,6 @@
 'use client';
 import styles from "./styles.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import {useRouter} from "next/navigation";
 
 
@@ -41,29 +41,29 @@ const OlySecurePayment = () => {
       </p>
       <Button
         className={styles.goToPaymentsBtn}
-        buttonChildren="Go To Payments"
-        buttonType="primary"
+        children="Go To Payments"
+        buttonVariant="primary"
         buttonSize="medium"
-        name="go-to-payments-btn"
-        type="button"
+
+
         ariaLabel="Go To Payments Button"
-        autoFocus={false}
-        disabled={false}
-        ariaHidden={false}
+
+
+
         onClick={() => router.push('listings/[listing]/confirm-your-purchase')}
 
       />
       <Button
         className={styles.contactSellerBtn}
-        buttonChildren="Contact Seller"
-        buttonType="normal"
+        children="Contact Seller"
+        buttonVariant="normal"
         buttonSize="medium"
-        name="contact-seller-btn"
-        type="button"
+
+
         ariaLabel="Contact Seller Button"
-        autoFocus={false}
-        disabled={false}
-        ariaHidden={false}
+
+
+
         onClick={() => router.push('listings/[listing]/buyer-chat')}
       />
     </div>

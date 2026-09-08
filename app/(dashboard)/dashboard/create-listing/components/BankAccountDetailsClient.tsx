@@ -3,7 +3,7 @@ import Input from "@/components/Input";
 import styles from "./BankAccountDetailsClient.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import { useFormContext } from "react-hook-form";
 import type { FormDataSchema } from "../validations/formDataSchema";
 import useIsSelectOpen from "../store/useIsSelectOpen";
@@ -51,7 +51,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: CreateAccountKey
+    field: CreateAccountKey,
   ) => {
     setValue(`createAccount.${field}`, e.target.value, {
       shouldValidate: true,
@@ -78,7 +78,7 @@ const BankAccountDetailsClient = ({ onNext }: Props) => {
     loadBanks();
   }, []);
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingGraphic />;
   if (isError) return <div>Error fetching banks: {errorMessage}</div>;
 
   const bankNames = banks?.map((bank: any) => bank.name);

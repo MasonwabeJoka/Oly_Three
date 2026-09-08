@@ -11,10 +11,18 @@ import NavButtonRight from "./navButtonRight";
 import NavButtonLeft from "./navButtonLeft";
 import { normalizeImageSrc } from "@/utils/imageUtils";
 import { useLikeButton } from "./../hooks/useLikeButton";
-import LoadingSpinnerTwo from "./LoadingSpinnerTwo";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface ImageSliderProps extends React.HTMLAttributes<HTMLDivElement> {
-  site: "oly" | "oly-properties" | "oly-auto" | "oly-hiring" | "oly-services"| "oly-shops" | "oly-agents" | "oly-dealerships";
+  site:
+    | "oly"
+    | "oly-properties"
+    | "oly-auto"
+    | "oly-hiring"
+    | "oly-services"
+    | "oly-shops"
+    | "oly-agents"
+    | "oly-dealerships";
   imagesUrls?: string[];
   hasLikeButton: boolean;
   aspectRatios?: number[];
@@ -85,28 +93,24 @@ const ImageSlider = ({
 
   const swiperStyles = {
     width:
-      site === "oly-properties" || site === "oly-auto"
-        ? "24.21875rem"
-        : "19.375rem",
+      site === "oly-properties" || site === "oly-auto" ? "38.75rem" : "31rem",
   };
   const swiperSlideHeight = (index: number) => {
     if (site === "oly-properties" || site === "oly-auto") {
-      return "13.623046875rem";
+      return "21.797rem";
     } else if (site === "oly-shops") {
       if (aspectRatios && aspectRatios[index] >= 1) {
-        return "15.5rem";
+        return "24.8rem";
       } else {
-        return "27.5rem";
+        return "44rem";
       }
     } else {
-      return `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`;
+      return `calc(31rem / ${aspectRatios && aspectRatios[index]})`;
     }
   };
 
   const swiperSlideWidth =
-    site === "oly-properties" || site === "oly-auto"
-      ? "24.21875rem"
-      : "19.375rem";
+    site === "oly-properties" || site === "oly-auto" ? "38.75rem" : "31rem";
 
   return (
     <div className={styles.container} style={swiperStyles}>
@@ -134,7 +138,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: site === "oly-properties" ? "21rem" : "16rem",
+            marginRight: site === "oly-properties" ? "33.6rem" : "25.6rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
@@ -160,7 +164,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: site === "oly-properties" ? "21rem" : "16rem",
+            marginLeft: site === "oly-properties" ? "33.6rem" : "25.6rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
@@ -199,9 +203,9 @@ const ImageSlider = ({
               }}
             >
               {imageLoading[index] !== false && (
-               <div className={styles.loadingSpinnerContainer}>
-                <LoadingSpinnerTwo size={3} loaderType="circle" speed={1} />
-               </div>
+                <div className={styles.loadingSpinnerContainer}>
+                  <LoadingSpinner size={3} loaderType="circle" speed={1} />
+                </div>
               )}
               <Image
                 className={styles.image}
@@ -215,7 +219,9 @@ const ImageSlider = ({
                   opacity: imageLoading[index] === false ? 1 : 0,
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                onLoadingComplete={() => setImageLoading(prev => ({ ...prev, [index]: false }))}
+                onLoadingComplete={() =>
+                  setImageLoading((prev) => ({ ...prev, [index]: false }))
+                }
               />
             </div>
           </SwiperSlide>

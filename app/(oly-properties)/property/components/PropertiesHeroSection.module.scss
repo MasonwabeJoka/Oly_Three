@@ -7,8 +7,8 @@
   align-items: center;
   width: 96vw;
   height: 95vh;
-  border-radius: rem(100) rem(150) rem(150) rem(100);
-  gap: rem(100);
+  border-radius: 10rem 15rem 15rem 10rem;
+  gap: 10rem;
 
   .star {
     position: absolute;
@@ -19,9 +19,9 @@
   }
 
   .mainTitle {
-    width: rem(640) !important;
-    margin-top: rem(64);
-    margin-bottom: rem(96);
+    width: 64rem !important;
+    margin-top: 6.4rem;
+    margin-bottom: 9.6rem;
     font-size: $h1;
     font-weight: 600;
     line-height: 1;
@@ -29,14 +29,14 @@
     color: $black-four;
 
     @include only(largeDesktop) {
-      width: rem(740);
-      margin-top: rem(96);
+      width: 74rem;
+      margin-top: 9.6rem;
       font-size: 64px;
       line-height: 1.2;
     }
   }
 
   .HeroSectionFieldsContainer {
-    margin-right: rem(8);
+    margin-right: 0.8rem;
   }
 }

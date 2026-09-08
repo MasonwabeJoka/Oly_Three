@@ -7,13 +7,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: rem(640);
-  height: rem(240);
-  border-radius: rem(50);
+  width: 64rem;
+  height: 24rem;
+  border-radius: 5rem;
   background-color: $grey-one;
 
   .inputContainer {
-    margin-bottom: rem(32);
+    margin-bottom: 3.2rem;
     .input {
     }
   }
@@ -23,7 +23,7 @@
     align-items: center;
     user-select: none;
     touch-action: none;
-    width: rem(480);
+    width: 48rem;
     height: 20px;
   }
 
@@ -31,7 +31,7 @@
     position: relative;
     flex-grow: 1;
     border-radius: 9999px;
-    height: rem(12);
+    height: 1.2rem;
     background-color: $white-four;
   }
 
@@ -44,11 +44,11 @@
 
   .sliderThumb {
     display: block;
-    width: rem(32);
-    height: rem(32);
+    width: 3.2rem;
+    height: 3.2rem;
     background-color: white;
     box-shadow: $shadow-one;
-    border-radius: rem(32);
+    border-radius: 3.2rem;
 
     cursor: pointer;
     &:focus {

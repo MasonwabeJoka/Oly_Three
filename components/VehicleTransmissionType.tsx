@@ -1,5 +1,5 @@
 import styles from "./VehicleTransmissionType.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 interface VehicleTransmissionTypeProps {
   buttonLabel?: string;
   buttonLabelSub?: string;
@@ -13,34 +13,34 @@ const VehicleTransmissionType = ({}: VehicleTransmissionTypeProps) => {
 
       <div className={styles.buttonsContainer}>
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Automatic"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="automatic"
+
           type="submit"
           ariaLabel="Automatic Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Manual"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="manual"
+
           type="submit"
           ariaLabel="Manual Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
      
       </div>

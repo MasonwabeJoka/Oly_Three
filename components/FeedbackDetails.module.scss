@@ -7,22 +7,22 @@
 
   .wrapper {
     display: flex;
-  gap: rem(40);
-    margin-top: rem(180);
+  gap: 4rem;
+    margin-top: 18rem;
     .userDetails {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: rem(342);
-      height: rem(456);
-      padding: rem(80) rem(40);
-      border-radius: rem(40);
+      width: 34.2rem;
+      height: 45.6rem;
+      padding: 8rem 4rem;
+      border-radius: 4rem;
       background-color: $grey-one;
       box-shadow: $shadow-one;
       .detail {
         display: flex;
-        gap: rem(16);
-        margin-bottom: rem(20);
+        gap: 1.6rem;
+        margin-bottom: 2rem;
       }
     }
   }

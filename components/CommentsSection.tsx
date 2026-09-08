@@ -9,7 +9,7 @@ const CommentsSection = () => {
         <TextAreaComponent
           className={styles.commentInput}
           id="my-textarea"
-          name="my-textarea"
+
           maxHeight={240}
           placeholder="Share your thoughts..."
           submitButtonText="Comment"

@@ -1,5 +1,5 @@
 import styles from "./ReportAd.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 import Input from "./Input";
 import TextArea from "@/components/TextArea";
 import { UIData } from "@/data/UIData";
@@ -20,7 +20,7 @@ const ReportAd = () => {
 
   return (
     <Form
-      name="reportForm"
+
       className={styles.container}
       action={mockServerAction}
     >
@@ -96,26 +96,26 @@ const ReportAd = () => {
         <TextArea
           className={styles.moreInfo}
           id="moreInfo"
-          name="moreInfo"
+
           placeholder="Please provide more information."
           size="large"
           label="More Info"
           required={true}
           value=""
-          style={{ minHeight: "24rem" }}
+          style={{ minHeight: "38.4rem" }}
           onChange={() => {}}
           error={""}
         />
         <div className={styles.submitReportBtn}>
           <Button
-            buttonChildren="Submit"
-            buttonType="primary"
+            children="Submit"
+            buttonVariant="primary"
             buttonSize="medium"
-            name="submit_report_btn"
+
             type="submit"
             ariaLabel="Submit Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </div>
       </div>

@@ -49,7 +49,7 @@ const Pill = ({
         textTransform: textCase,
         boxShadow: shadow ? boxShadow : "none",
         border: withBorder ? borderStyle : "none",
-        padding: "0.6rem 0.8rem",
+        padding: "0.96rem 1.28rem",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

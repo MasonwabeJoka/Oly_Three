@@ -1,6 +1,6 @@
 "use client";
 import styles from "./FeaturedServicesBackend.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useFeatureInfo from "@/store/featuresInfo";
 import Modal from "./Modal";
 

@@ -7,18 +7,18 @@
   background-color: $white-three;
   justify-content: space-between;
   align-items: center;
-  width: rem(600);
-  height: rem(76);
-  border-radius: rem(50);
+  width: 60rem;
+  height: 7.6rem;
+  border-radius: 5rem;
   box-shadow: $shadow-one;
 
 
   cursor: pointer;
 
   .iconContainer {
-    width: rem(60);
-    height: rem(60);
-    margin-left: rem(8);
+    width: 6rem;
+    height: 6rem;
+    margin-left: 0.8rem;
     border-radius: 50%;
     background-color: $grey-one;
 
@@ -44,7 +44,7 @@
     }
 
     .publishButtonText {
-      margin-left: rem(8);
+      margin-left: 0.8rem;
     }
   }
 
@@ -53,10 +53,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(24);
-    height: rem(24);
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
-    margin-right: rem(20);
+    margin-right: 2rem;
   }
 }
 

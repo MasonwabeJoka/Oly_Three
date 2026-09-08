@@ -11,31 +11,31 @@
     display: flex;
 
     width: fit-content;
-    gap: rem(16);
-    border-radius: rem(40);
+    gap: 1.6rem;
+    border-radius: 4rem;
 
     .slide {
       position: absolute;
       position: relative;
       display: flex;
       flex-direction: column;
-      width: rem(311);
-      border-radius: rem(40);
+      width: 31.1rem;
+      border-radius: 4rem;
       padding: 0;
       background-color: $white-four;
       z-index: 5;
       box-shadow: $shadow-one;
 
       .image {
-        border-radius: rem(40) rem(40) 0 0;
+        border-radius: 4rem 4rem 0 0;
       }
 
       .description {
-        width: rem(311);
-        height: rem(132);
-        border-radius: 0 0 rem(40) rem(40);
+        width: 31.1rem;
+        height: 13.2rem;
+        border-radius: 0 0 4rem 4rem;
         .slideTitle {
-          height: rem(32);
+          height: 3.2rem;
           line-height: normal;
         }
       }
@@ -46,24 +46,24 @@
     // bottom: 0;
     // left: 50%;
     // transform: translateX(-50%);
-    height: rem(30);
+    height: 3rem;
 
     .slideDots {
       display: flex;
       justify-content: space-between;
-      gap: rem(16);
+      gap: 1.6rem;
       margin: 0 auto;
       width: fit-content;
 
       .dotsContainer {
-        height: rem(24);
+        height: 2.4rem;
         cursor: pointer;
 
         .dot {
           background-color: $grey-one;
-          width: rem(88);
-          height: rem(5);
-          border-radius: rem(40);
+          width: 8.8rem;
+          height: 0.5rem;
+          border-radius: 4rem;
           border: none;
           cursor: pointer;
         }

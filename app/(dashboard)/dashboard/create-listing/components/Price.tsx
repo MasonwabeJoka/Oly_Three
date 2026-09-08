@@ -60,7 +60,7 @@ const Price = ({ onNext }: Props) => {
               label="Price Types"
               id="price-types"
               ariaLabel="Price Types Select"
-              autoFocus={false}
+
               disabled={false}
               required={true}
               dashboard
@@ -95,7 +95,7 @@ const Price = ({ onNext }: Props) => {
                   inputSize="large"
                   inputType="normal"
                   placeholder="Price"
-                  autoFocus={false}
+
                   required={true}
                   dashboard
                   error={(errors.price as any)?.amount?.message}

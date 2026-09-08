@@ -5,7 +5,7 @@ import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import TextArea from "@/components/TextArea";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { detailsFormSchema } from "@/lib/validations/formValidations";
 import Icon from "@/components/Icon";
 import SelectedDetail from "./SelectedDetail";
@@ -50,7 +50,7 @@ const EditModeForm = ({ initialValue }: any) => {
         <div className={styles.submitButton}>
           <Button
             className={styles.backButton}
-            buttonChildren={
+            children={
               <div className={styles.iconContainer}>
                 <Icon
                   className={styles.icon}
@@ -61,13 +61,13 @@ const EditModeForm = ({ initialValue }: any) => {
                 />
               </div>
             }
-            buttonType="icon"
-            buttonSize=""
-            name="submit-edit-btn"
+            buttonVariant="icon"
+
+
             type="submit"
             ariaLabel="Submit Edit"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
           />
         </div>

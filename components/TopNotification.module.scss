@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: rem(48);
+  height: 4.8rem;
   // padding: 32px;
   display: flex;
   justify-content: center;
@@ -40,7 +40,7 @@
   .homeButtonContainer {
     position: absolute;
     top: 50%;
-    left: rem(32);
+    left: 3.2rem;
     transform: translateY(-50%);
   }
 }
@@ -54,7 +54,7 @@
 .closeButton {
   position: absolute;
   top: 50%;
-  right: rem(32);
+  right: 3.2rem;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -62,7 +62,7 @@
   font-size: 20px;
 
   cursor: pointer;
-  // padding: 0 rem(16);
+  // padding: 0 1.6rem;
   &:hover {
     color: $black-one;
   }

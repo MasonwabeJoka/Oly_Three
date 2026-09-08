@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import Link from "next/link";
 import FooterClient from "./FooterClient";

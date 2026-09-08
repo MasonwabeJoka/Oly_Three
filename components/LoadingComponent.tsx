@@ -1,8 +1,11 @@
 import Image from "@/components/Image";
+import LoadingGraphic from "@/components/LoadingGraphic";
 
-import LoadingSpinner from "@/components/LoadingSpinner";
-
-export default function LoadingComponent() {
+export default function LoadingComponent({
+  spinnerAriaLabel ="Processing...",
+}: {
+  spinnerAriaLabel: string;
+}) {
   return (
     <div
       style={{
@@ -12,7 +15,7 @@ export default function LoadingComponent() {
         height: "100vh",
       }}
     >
-      <LoadingSpinner />
+      <LoadingGraphic spinnerAriaLabel={spinnerAriaLabel} />
     </div>
   );
 }

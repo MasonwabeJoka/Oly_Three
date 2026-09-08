@@ -2,7 +2,7 @@ import Select from "@/components/Select";
 import styles from "./SearchByLocation.module.scss";
 import { locations } from "@/data/LocationData";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 interface LocationProps {}
 
 const Location = ({}: LocationProps) => {
@@ -15,10 +15,10 @@ const Location = ({}: LocationProps) => {
           selectSize="large"
           selectColourType="normal"
           label="Province"
-          name="province"
+
           id="province"
           ariaLabel="Province"
-          autoFocus={false}
+
           required={false}
         />
       </div>
@@ -30,10 +30,10 @@ const Location = ({}: LocationProps) => {
           selectSize="large"
           label="City"
           id="city"
-          name="city"
+
           ariaLabel="City"
-          disabled={false}
-          autoFocus={false}
+
+
           required={false}
         />
       </div>
@@ -44,26 +44,26 @@ const Location = ({}: LocationProps) => {
           initialValue="Select your suburb"
           selectSize="large"
           label="Suburb"
-          name="suburb"
+
           id="suburb"
           ariaLabel="Suburb"
-          disabled={false}
-          autoFocus={false}
+
+
           required={false}
         />
       </div>
 
       <div className={styles.field}>
         <Button
-          buttonChildren="Search"
+          children="Search"
           className={styles.search}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="Search Button"
+
           type="submit"
           ariaLabel="Search Button"
-          autoFocus={false}
-          disabled={false}
+
+
         /> 
       </div>
     </div>

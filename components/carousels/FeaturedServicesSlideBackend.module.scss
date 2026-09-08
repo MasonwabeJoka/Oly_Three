@@ -11,15 +11,15 @@
   max-height: 120vh;
 
   background-color: $grey-one;
-  border-radius: rem(40);
+  border-radius: 4rem;
   box-shadow: $shadow-one;
 
   .SlideDataContainer {
     position: relative;
     display: flex;
     justify-content: center;
-    padding: rem(120);
-    width: rem(1200);
+    padding: 12rem;
+    width: 120rem;
     height: 80%;
     overflow-y: auto;
   }
@@ -27,8 +27,8 @@
   .buttonContainer {
     display: flex;
     justify-content: center;
-    padding-top: rem(64);
-    padding-right: rem(64);
+    padding-top: 6.4rem;
+    padding-right: 6.4rem;
     height: 20%;
     .button {
     }

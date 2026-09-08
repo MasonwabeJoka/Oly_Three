@@ -4,7 +4,7 @@ import Image from "@/components/Image";
 import { useState, forwardRef, Ref, useEffect, useRef } from "react";
 import useSidebarStore from "@/store/useSidebarStore";
 import { UseFormRegisterReturn } from "react-hook-form";
-import Button from "./Buttons";
+import Button from "./Button";
 import Checkbox from "./Checkbox";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
@@ -481,14 +481,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               ))}
               <Button
                 className={styles.selectButton}
-                buttonChildren="Select"
-                buttonType="primary"
+                children="Select"
+                buttonVariant="primary"
                 buttonSize="large"
-                name="select-btn"
-                type="button"
                 ariaLabel="Select Button"
-                autoFocus={false}
-                disabled={false}
+
                 onClick={handleSelectButtonClick}
               />
             </ul>

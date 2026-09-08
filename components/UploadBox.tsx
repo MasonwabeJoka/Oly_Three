@@ -2,7 +2,7 @@
 import styles from "./UploadBox.module.scss";
 import { useRef, useState } from "react";
 import Input from "@/components/Input";
-import Button from "./Buttons";
+import Button from "./Button";
 import useUploadFiles from "@/app/(dashboard)/dashboard/create-listing/store/useUploadFiles";
 
 interface Props {
@@ -109,14 +109,14 @@ const UploadBox = ({
 
           <Button
             className={styles.uploadButton}
-            buttonChildren={`Upload ${capitalizeFirstLetter(mediaType)}`}
-            buttonType="normal"
+            children={`Upload ${capitalizeFirstLetter(mediaType)}`}
+            buttonVariant="normal"
             buttonSize="large"
-            name="upload-btn"
-            type="button"
+
+
             ariaLabel="Upload Button"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={() => dropAreaRef.current?.querySelector("input")?.click()}
           />
@@ -129,14 +129,14 @@ const UploadBox = ({
 
               <Button
                 className={styles.uploadButton}
-                buttonChildren={`Upload ${capitalizeFirstLetter(mediaType)}`}
-                buttonType="normal"
+                children={`Upload ${capitalizeFirstLetter(mediaType)}`}
+                buttonVariant="normal"
                 buttonSize="large"
-                name="upload-btn"
-                type="button"
+
+
                 ariaLabel="Upload Button"
-                autoFocus={false}
-                disabled={false}
+
+
                 dashboard
                 onClick={() =>
                   dropAreaRef.current?.querySelector("input")?.click()
@@ -151,11 +151,11 @@ const UploadBox = ({
               placeholder="Enter Video URL"
               label="Enter Video URL"
               id="video-url"
-              name="video-url"
+
               ariaLabel="Video URL Field"
-              autoFocus={false}
+
               autoComplete="off"
-              // disabled={false}
+              //
               required={required}
               value={value}
               onChange={onChange}

@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../calculators/styles/calculatorStyles.module.scss";
 import NumberInput from "@/components/NumberInput";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import ShareCalculator from "./shareCalculator";
 
 const RepaymentCalculator = () => {
@@ -153,7 +153,7 @@ const RepaymentCalculator = () => {
               value={purchasePrice}
               inputSize="large"
               placeholder="Enter The Purchase Price"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPurchasePrice(parseFloat(e.target.value) || 0)
@@ -172,7 +172,7 @@ const RepaymentCalculator = () => {
               value={bondAmount}
               inputSize="large"
               placeholder="Purchase Price - Deposit"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBondAmount(parseFloat(e.target.value) || 0)}
             />
@@ -189,7 +189,7 @@ const RepaymentCalculator = () => {
               value={interestRate === 11 ? undefined : interestRate} 
               inputSize="large"
               placeholder="11% Interest Rate"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInterestRate(parseFloat(e.target.value) || 0)}
             />
@@ -209,24 +209,24 @@ const RepaymentCalculator = () => {
               selectSize="large"
               label="repaymentTerm"
               id="repaymentTerm"
-              name="repaymentTerm"
+
               ariaLabel="Repayment Term Selector"
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setRepaymentTerm(parseInt(e.target.value) || 0)}
-              autoFocus={false}
+
               required={false}
             />
           </div>
           <div className={styles.button}>
             <Button
               className={styles.calculateButton}
-              buttonChildren="Calculate"
-              buttonType="primary"
+              children="Calculate"
+              buttonVariant="primary"
               buttonSize="large"
-              name="calculate-btn"
-              type="button"
+
+
               ariaLabel="Calculate Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={handleCalculate}
             />
           </div>

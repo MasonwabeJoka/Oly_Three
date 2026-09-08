@@ -7,9 +7,9 @@ import Input from "./Input";
 import { toast } from "sonner";
 import Icon from "./Icon";
 import { Loader2, Loader2Icon, XCircle } from "lucide-react";
-import Button from "./Buttons";
+import Button from "./Button";
 import axios from "axios";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingGraphic from "./LoadingGraphic";
 
 interface Props {
   mediaType: "photo" | "video" | "attachment";
@@ -82,7 +82,7 @@ const UploadBox = ({
             // Do something with the error.
 
             toast.error(
-              `Error occurred while uploading. Make sure your file is less than ${mediaType === "photo" ? "16MB" : "4MB"} in size.`
+              `Error occurred while uploading. Make sure your file is less than ${mediaType === "photo" ? "16MB" : "4MB"} in size.`,
             );
           }}
           content={{
@@ -90,7 +90,7 @@ const UploadBox = ({
               if (uploadProgress) return `${progress}%`;
               if (ready) return `Upload ${mediaType}`;
 
-              return <LoadingSpinner />;
+              return <LoadingGraphic />;
             },
             allowedContent() {
               return `${mediaType === "photo" ? "Please ensure your files are images and under 16MB in size." : "Attach any additional documents here. Only PDF files are accepted."}`;
@@ -133,7 +133,7 @@ const UploadBox = ({
                 // Do something with the error.
 
                 toast.error(
-                  "Error occurred while uploading. Make sure your file is less than 2GB in size."
+                  "Error occurred while uploading. Make sure your file is less than 2GB in size.",
                 );
               }}
               content={{
@@ -141,7 +141,7 @@ const UploadBox = ({
                   if (ready) return `Upload ${mediaType}`;
                   if (uploadProgress) return `${progress}%`;
 
-                  return <LoadingSpinner />;
+                  return <LoadingGraphic />;
                 },
 
                 allowedContent() {
@@ -176,11 +176,11 @@ const UploadBox = ({
               placeholder="Enter Video URL"
               label="Enter Video URL"
               id="video-url"
-              name="video-url"
+
               ariaLabel="Video URL Field"
-              autoFocus={false}
+
               autoComplete="off"
-              disabled={false}
+
               required={required}
               value={value}
               onChange={onChange}
@@ -195,14 +195,14 @@ const UploadBox = ({
       ) : null}
       <Button
         className={styles.deleteButton}
-        buttonChildren={isDeleting ? <Loader2Icon /> : <XCircle />}
-        buttonType="icon"
-        buttonSize=""
-        name="delete-btn"
-        type="button"
+        children={isDeleting ? <Loader2Icon /> : <XCircle />}
+        buttonVariant="icon"
+
+
+
         ariaLabel="Delete Button"
-        autoFocus={false}
-        disabled={false}
+
+
         onClick={() => handleDelete(imageUrl)}
       />
     </div>

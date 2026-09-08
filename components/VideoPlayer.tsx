@@ -16,7 +16,7 @@ export default function VideoPlayer({ videoPath }: Props) {
         "--media-primary-color": "#ccf6ff",
         "--media-secondary-color": "#14d6ff",
         "--media-accent-color": "#14d6ff",
-        borderRadius: "2.5rem",
+        borderRadius: "4rem",
         maxWidth,
         width: "100%",
       } as React.CSSProperties}

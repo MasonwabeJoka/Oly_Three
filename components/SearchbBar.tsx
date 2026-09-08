@@ -71,7 +71,6 @@ const SearchBar = () => {
         ariaLabel={""}
         value={inputValue && inputValue}
         onChange={handleInputChange}
-        autoFocus={false}
         required={true}
       />
       {activeSuggestions.length > 0 && (

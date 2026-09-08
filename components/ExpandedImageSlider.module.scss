@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 .container {
   position: relative;
-  border-radius: rem(40);
+  border-radius: 4rem;
   .buttonsAndLike {
     position: absolute;
     z-index: 10;
@@ -16,12 +16,12 @@
     align-items: center;
 
     .likeIconContainer {
-      bottom: rem(88);
+      bottom: 8.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: rem(72);
-      height: rem(72);
+      width: 7.2rem;
+      height: 7.2rem;
       border-radius: 50%;
 
       .likeIcon {
@@ -36,8 +36,8 @@
       top: 50%;
       z-index: 20;
       transform: translateY(-50%);
-      width: rem(40);
-      height: rem(40);
+      width: 4rem;
+      height: 4rem;
       border-radius: 50%;
       transition: transform 0.2s;
       background-color: transparent;
@@ -48,8 +48,8 @@
         justify-content: center;
         align-items: center;
         opacity: 0;
-        width: rem(48);
-        height: rem(48);
+        width: 4.8rem;
+        height: 4.8rem;
         opacity: 1;
         pointer-events: visible;
       }
@@ -82,9 +82,9 @@
     display: flex;
     justify-content: center;
 
-    width: rem(382.8);
-    min-height: rem(215.325);
-    border-radius: rem(40);
+    width: 38.28rem;
+    min-height: 21.5325rem;
+    border-radius: 4rem;
 
     .swiperSlide {
       position: relative;

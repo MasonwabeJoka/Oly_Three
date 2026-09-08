@@ -72,9 +72,9 @@ export const BoxImageContainer: React.FC<BoxImageContainerProps> = ({
             position: "absolute",
             top: 0,
             right: 0,
-            margin: "1rem 1rem 0 0",
+            margin: "1.6rem 1.6rem 0 0",
             backgroundColor: "white",
-            borderRadius: "1rem",
+            borderRadius: "1.6rem",
           }}
         >
           <PreventLinkClick>

@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 .sortingButtonsContainer {
   position: fixed;
-  top: rem(124);
+  top: 12.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,15 +12,15 @@
 
   @include only(largeDesktop) {
     width: 100%;
-    top: rem(152);
+    top: 15.2rem;
   }
   @include only(smallDesktop) {
     width: 100%;
-    top: rem(152);
+    top: 15.2rem;
   }
   @include only(tablet) {
     width: 100%;
-    top: rem(152);
+    top: 15.2rem;
   }
 
   .sortingButtons {
@@ -33,11 +33,11 @@
     }
 
     .selectAllBtn {
-      margin-right: rem(2);
-      border-radius: rem(40) 0 0 rem(40);
+      margin-right: 0.2rem;
+      border-radius: 4rem 0 0 4rem;
     }
     .deleteBtn {
-      margin-right: rem(2);
+      margin-right: 0.2rem;
     }
   }
 }
@@ -46,7 +46,7 @@
   position: fixed;
   top: 0;
   width: 55%;
-  height: rem(178);
+  height: 17.8rem;
   background-color: $white-four;
   z-index: 5;
   pointer-events: none; /* Make the div click-through */
@@ -57,7 +57,7 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: rem(254);
-  width: rem(1080);
+  top: 25.4rem;
+  width: 108rem;
 
 }

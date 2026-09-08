@@ -2,26 +2,26 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .videoAdContainer {
-  width: rem(311);
-  height: rem(175);
+  width: 31.1rem;
+  height: 17.5rem;
   padding: 0;
-  margin: rem(100) auto;
+  margin: 10rem auto;
 
   @include only(largeDesktop) {
-    width: rem(628);
-    height: rem(353.25);
+    width: 62.8rem;
+    height: 35.325rem;
   }
   @include only(smallDesktop) {
-    width: rem(628);
-    height: rem(353.25);
+    width: 62.8rem;
+    height: 35.325rem;
   }
   @include only(tablet) {
-    width: rem(628);
-    height: rem(353.25);
+    width: 62.8rem;
+    height: 35.325rem;
   }
   @include only(extraLargeDesktop) {
-    width: rem(628);
-    height: rem(353.25);
+    width: 62.8rem;
+    height: 35.325rem;
   }
 
   .titleContainer {

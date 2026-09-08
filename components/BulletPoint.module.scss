@@ -3,9 +3,9 @@
 @use "@/utils/breakpoints" as *;
 
         .bullet {
-          margin-top: rem(1);
-          width: rem(24);
-          height: rem(24);
+          margin-top: 0.1rem;
+          width: 2.4rem;
+          height: 2.4rem;
           border-radius: 30%;
           box-shadow: $shadow-one;
           background-color: $white-one;

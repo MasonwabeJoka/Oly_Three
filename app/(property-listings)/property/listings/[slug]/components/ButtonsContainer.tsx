@@ -1,4 +1,4 @@
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./ButtonsContainer.module.scss";
 import useMessageStore from "@/features/messages/store/useMessageStore";
 type ButtonsContainerProps = {
@@ -22,15 +22,15 @@ const ButtonsContainer = ({
           <div className={`${styles.buttons} ${styles.bidContainer}`}>
             <Button
               className={styles.bidButton}
-              buttonChildren="Place bid"
-              buttonType="primary"
+              children="Place bid"
+              buttonVariant="primary"
               buttonSize="medium"
-              name="bid-button"
-              type="button"
+
+
               ariaLabel="Bid Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={placeBid}
             />
           </div>
@@ -38,15 +38,15 @@ const ButtonsContainer = ({
           <div className={`${styles.buttons} ${styles.buyContainer}`}>
             <Button
               className={styles.buyButton}
-              buttonChildren="Buy Now"
-              buttonType="normal"
+              children="Buy Now"
+              buttonVariant="normal"
               buttonSize="medium"
-              name="buy-btn"
-              type="button"
+
+
               ariaLabel="Buy Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={buyNow}
             />
           </div>
@@ -54,15 +54,15 @@ const ButtonsContainer = ({
           <div className={`${styles.buttons} ${styles.contactSellerContainer}`}>
             <Button
               className={styles.contactSellerBtn}
-              buttonChildren="Contact Seller"
-              buttonType="normal"
+              children="Contact Seller"
+              buttonVariant="normal"
               buttonSize="medium"
-              name="contact-seller-btn"
-              type="button"
+
+
               ariaLabel="Contact Seller Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={() => setChats(true)}
             />
           </div>
@@ -72,30 +72,30 @@ const ButtonsContainer = ({
           <div className={`${styles.buttons} ${styles.buyContainer}`}>
             <Button
               className={styles.buyButton}
-              buttonChildren="Buy Now"
-              buttonType="primary"
+              children="Buy Now"
+              buttonVariant="primary"
               buttonSize="medium"
-              name="buy-btn"
-              type="button"
+
+
               ariaLabel="Buy Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={buyNow}
             />
           </div>
           <div className={`${styles.buttons} ${styles.contactSellerContainer}`}>
             <Button
               className={styles.contactSellerBtn}
-              buttonChildren="Contact Seller"
-              buttonType="normal"
+              children="Contact Seller"
+              buttonVariant="normal"
               buttonSize="medium"
-              name="contact-seller-btn"
-              type="button"
+
+
               ariaLabel="Contact Seller Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={contactSeller}
             />
           </div>

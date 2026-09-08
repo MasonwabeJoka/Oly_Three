@@ -23,7 +23,7 @@ const ListingCardSkeletons = ({
     alignItems: orientation === "expanded" ? "center" : "unset",
     flexWrap: "wrap" as const,
     width: "100vw",
-    gap: "2rem",
+    gap: "3.2rem",
   };
 
   const skeletons = Array(skeletonCount)
@@ -39,7 +39,7 @@ const ListingCardSkeletons = ({
     <div
       className={styles.listingsContainer}
       style={{
-        maxWidth: isDashboard ? "59.625rem" : "95vw",
+        maxWidth: isDashboard ? "95.4rem" : "95vw",
         ...containerStyles,
       }}
     >

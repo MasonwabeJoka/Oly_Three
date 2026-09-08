@@ -21,9 +21,9 @@ const VehicleListingIntro = () => {
         label="License Plate or VIN"
         placeholder="Enter your license plate or VIN"
         id="licensePlateOrVin"
-        name="licensePlateOrVin"
+
         ariaLabel="License Plate or VIN"
-        autoFocus={false}
+
         autoComplete="off"
         required={false}
         dashboard

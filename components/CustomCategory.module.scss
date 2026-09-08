@@ -6,9 +6,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: rem(833);
-  height: rem(416);
-  border-radius: rem(40);
+  width: 83.3rem;
+  height: 41.6rem;
+  border-radius: 4rem;
   box-shadow:
     0px 23px 50px 0px rgba(0, 0, 0, 0.1),
     0px 92px 92px 0px rgba(56, 38, 38, 0.09),
@@ -17,11 +17,11 @@
     0px 573px 160px 0px rgba(0, 0, 0, 0);
 
   .submitProduct {
-    margin-bottom: rem(24);
-    width: rem(653);
+    margin-bottom: 2.4rem;
+    width: 65.3rem;
   }
 
   .submitButton {
-    width: rem(653);
+    width: 65.3rem;
   }
 }

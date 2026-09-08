@@ -1,5 +1,5 @@
 import styles from "./MyAdsCard.module.scss";
-import Button from "../Buttons";
+import Button from "../Button";
 import Image from "@/components/Image";
 import Avatar from "@/components/Avatar";
 import Pill from "@/components/Pill";
@@ -129,7 +129,7 @@ const MyAdsCard = (props: CardProps) => {
   });
 
   const detailsStyles = {
-    borderRadius: showAnalytics ? "0 2rem 0 0" : "0 2rem 2rem 0",
+    borderRadius: showAnalytics ? "0 3.2rem 0 0" : "0 3.2rem 3.2rem 0",
     boxShadow: showAnalytics
       ? "none"
       : "0px 1px 3px 0px rgba(180, 191, 203, 0.2), 0px 5px 5px 0px rgba(180, 191, 203, 0.17), 0px 11px 7px 0px rgba(180, 191, 203, 0.1), 0px 20px 8px 0px rgba(180, 191, 203, 0.03), 0px 30px 9px 0px rgba(180, 191, 203, 0)",
@@ -170,7 +170,7 @@ const MyAdsCard = (props: CardProps) => {
               <div ref={statsIconRef}>
                 <Button
                   className={`${styles.statsIconBtn} ${styles.icon}`}
-                  buttonChildren={
+                  children={
                     <Icon
                       className={styles.statsIcon}
                       src="/icons/analytics.png"
@@ -179,20 +179,20 @@ const MyAdsCard = (props: CardProps) => {
                       height={18}
                     />
                   }
-                  buttonType="roundStandardFeed"
-                  buttonSize=""
-                  name="stats-icon"
-                  type="button"
+                  buttonShape="round"
+
+
+
                   ariaLabel="Stats Icon"
-                  autoFocus={false}
-                  disabled={false}
+
+
                   onClick={() => setShowAnalytics((prev) => !prev)}
                 />
               </div>
               <Link href="/dashboard/create-listing/home">
                 <Button
                   className={`${styles.editIconBtn} ${styles.icon}`}
-                  buttonChildren={
+                  children={
                     <Icon
                       className={styles.editIcon}
                       src="/icons/pencil.svg"
@@ -201,19 +201,19 @@ const MyAdsCard = (props: CardProps) => {
                       height={18}
                     />
                   }
-                  buttonType="roundStandardFeed"
-                  buttonSize=""
-                  name="edit-icon"
-                  type="button"
+                  buttonShape="round"
+
+
+
                   ariaLabel="Edit Icon"
-                  autoFocus={false}
-                  disabled={false}
+
+
                 />
               </Link>
               <Link href="/dashboard/#">
                 <Button
                   className={`${styles.previewIconBtn} ${styles.icon}`}
-                  buttonChildren={
+                  children={
                     <Icon
                       className={styles.previewIcon}
                       src="/icons/view.png"
@@ -222,19 +222,19 @@ const MyAdsCard = (props: CardProps) => {
                       height={18}
                     />
                   }
-                  buttonType="roundStandardFeed"
-                  buttonSize=""
-                  name="preview-icon"
-                  type="button"
+                  buttonShape="round"
+
+
+
                   ariaLabel="Preview Icon"
-                  autoFocus={false}
-                  disabled={false}
+
+
                 />
               </Link>
 
               <Button
                 className={`${styles.deleteIconBtn} ${styles.icon}`}
-                buttonChildren={
+                children={
                   <Icon
                     className={styles.deleteIcon}
                     src="/icons/delete.png"
@@ -243,13 +243,13 @@ const MyAdsCard = (props: CardProps) => {
                     height={18}
                   />
                 }
-                buttonType="roundStandardFeed"
-                buttonSize=""
-                name="delete-icon"
-                type="button"
+                buttonShape="round"
+
+
+
                 ariaLabel="Delete Icon"
-                autoFocus={false}
-                disabled={false}
+
+
               />
 
               <Link

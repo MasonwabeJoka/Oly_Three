@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./FeaturedCategories.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useModalStore } from "@/store/modalStore";
 import LinkCard from "@/components/cards/LinkCard";
 import Link from "next/link";
@@ -46,14 +46,14 @@ const FeaturedCategoriesClient = ({ data }: Props) => {
       </ul>
       <Button
         className={styles.button}
-        buttonChildren="More Categories..."
+        children="More Categories..."
         buttonSize="large"
-        buttonType="normal"
-        name="More Categories Button"
-        type="button"
+        buttonVariant="normal"
+
+
         ariaLabel="More Categories Button"
-        autoFocus={false}
-        disabled={false}
+
+
         onClick={() => setShowCategoriesModal(true)}
       />
     </div>

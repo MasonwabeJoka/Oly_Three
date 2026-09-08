@@ -3,5 +3,6 @@
     "kiroAgent.configureMCP": "Disabled",
     "cSpell.words": [
         "fulfilment"
-    ]
+    ],
+    "specstory.cloudSync.enabled": "never"
 }

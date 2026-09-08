@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./Step.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useEditStore from "../store/useEditStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { StepType } from "../types/listing.types";
@@ -62,14 +62,12 @@ const Step: React.FC<StepProps> = ({
             {(!isFirstStep || effectiveEditMode) && (
               <Button
                 className={styles.proceedButton}
-                buttonChildren={proceedButtonText}
-                buttonType="primary"
+                children={proceedButtonText}
+                buttonVariant="primary"
                 buttonSize="large"
-                name="proceed-btn"
                 type={isUpdateProfileStep ? "submit" : "button"}
                 ariaLabel="Proceed Button"
-                autoFocus={false}
-                disabled={false}
+
                 dashboard
                 form={isUpdateProfileStep ? "update-profile-form" : undefined}
                 onClick={
@@ -84,14 +82,11 @@ const Step: React.FC<StepProps> = ({
             {(!isFirstStep || effectiveEditMode) && (
               <Button
                 className={styles.backButton}
-                buttonChildren={backButtonText}
-                buttonType="normal"
+                children={backButtonText}
+                buttonVariant="normal"
                 buttonSize="large"
-                name="back-btn"
-                type="button"
                 ariaLabel="Back Button"
-                autoFocus={false}
-                disabled={false}
+
                 dashboard
                 onClick={effectiveEditMode ? handleBackToReview : onBack}
               />

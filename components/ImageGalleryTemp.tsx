@@ -4,7 +4,7 @@ import Image from "@/components/Image";
 import { useMemo, useState } from "react";
 import type { GalleryImage } from "@/data/galleryImages";
 import Icon from "@/components/Icon";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { Ad } from "@/sanityTemp/Types/Ad";
 
 interface ImageGalleryProps {
@@ -300,18 +300,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                   height: "54px",
                   backgroundColor: "white",
                 }}
-                buttonChildren={
+                children={
                   images && images.length > 4
                     ? "Show All Images"
                     : "Full Screen"
                 }
-                buttonType="normal"
+                buttonVariant="normal"
                 buttonSize="medium"
-                name="allImagesBtn"
-                type="button"
+
+
                 ariaLabel="All Images Button"
-                autoFocus={false}
-                disabled={false}
+
+
                 formTarget="_blank"
                 onClick={onClick}
               />
@@ -380,18 +380,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -415,18 +415,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -450,18 +450,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -485,18 +485,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -520,18 +520,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -553,18 +553,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />
@@ -586,18 +586,18 @@ const ImageGallery = ({ images = [], onClick }: ImageGalleryProps) => {
                             height: "54px",
                             backgroundColor: "white",
                           }}
-                          buttonChildren={
+                          children={
                             images && images.length > 4
                               ? "Show All Images"
                               : "Full Screen"
                           }
-                          buttonType="normal"
+                          buttonVariant="normal"
                           buttonSize="medium"
-                          name="allImagesBtn"
-                          type="button"
+
+
                           ariaLabel="All Images Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           formTarget="_blank"
                           onClick={onClick}
                         />

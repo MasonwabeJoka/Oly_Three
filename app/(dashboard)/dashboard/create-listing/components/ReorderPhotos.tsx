@@ -5,7 +5,7 @@ import { galleryData } from "@/data/GalleryData";
 import { SwiperSlide } from "swiper/react";
 import Icon from "@/components/Icon";
 import Image from "@/components/Image";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { FormWrapper } from "./FormWrapper";
 import useUploadFiles from "../store/useUploadFiles";
 const ReorderPhotos = () => {
@@ -94,14 +94,14 @@ const ReorderPhotos = () => {
           <div>
             <Button
               className={styles.proceedButton}
-              buttonChildren="Upload Photo"
-              buttonType="normal"
+              children="Upload Photo"
+              buttonVariant="normal"
               buttonSize="large"
-              name="proceed-btn"
-              type="button"
+
+
               ariaLabel="Proceed Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
             />
           </div>

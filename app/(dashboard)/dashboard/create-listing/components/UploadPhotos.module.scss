@@ -9,13 +9,13 @@
   justify-content: center;
   width: 100%;
   @include only(largeDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(smallDesktop) {
-    // width: rem(960);
+    // width: 96rem;
   }
   @include only(tablet) {
-    width: rem(960);
+    width: 96rem;
   }
 
   .wrapper {

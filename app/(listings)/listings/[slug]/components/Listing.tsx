@@ -97,7 +97,7 @@ const Listing: React.FC<ListingProps> = ({
                   sortOrder="desc"
                 />
               </div>
-              <div style={{ height: "6rem" }}></div>
+              <div style={{ height: "9.6rem" }}></div>
             </section>
           </>
         ) : (

@@ -4,27 +4,27 @@
 
 .container {
   .analyticsItemsContainer {
-    border-radius: rem(40);
-    margin-bottom: rem(12);
+    border-radius: 4rem;
+    margin-bottom: 1.2rem;
 
     .analyticsItems {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: rem(40);
+      height: 4rem;
       width: 100%;
-      padding: 0 rem(40) rem(0) rem(80);
+      padding: 0 4rem 0rem 8rem;
     }
 
     .analyticsItems:first-child {
-      height: rem(48);
-      padding-top: rem(10) !important;
+      height: 4.8rem;
+      padding-top: 1rem !important;
     }
 
     .analyticsItems:last-child {
-      height: rem(52);
-      padding-bottom: rem(12) !important;
-      border-radius: 0 0 rem(40) rem(40);
+      height: 5.2rem;
+      padding-bottom: 1.2rem !important;
+      border-radius: 0 0 4rem 4rem;
     }
 
     .whiteOne {
@@ -37,7 +37,7 @@
     }
 
     .label {
-      font-size: rem(10);
+      font-size: 1rem;
       text-transform: uppercase;
     }
 

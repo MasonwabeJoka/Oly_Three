@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Select from "@/components/Select";
 import styles from "./HeroSectionStepOne.module.scss";
 import { suggestions } from "@/data/SuggestionsData";
@@ -35,15 +35,12 @@ export default function HeroSectionStepOne({ onClick }: Props) {
       </div>
       <Link href="/dashboard/create-listing" className={styles.link}>
         <Button
-          buttonChildren={"Create A Listing"}
+          children={"Create A Listing"}
           className={styles.createAListingBtn}
-          buttonType="danger"
+          buttonVariant="danger"
           buttonSize="large"
-          name="Create A Listing Button"
-          type="button"
           ariaLabel="Create A Listing Button"
-          autoFocus={false}
-          disabled={false}
+
         />
       </Link>
 
@@ -62,9 +59,7 @@ export default function HeroSectionStepOne({ onClick }: Props) {
           selectSize="large"
           label="Buy or Rent"
           id="buyRent"
-          name="buyRent"
           ariaLabel="Buy or Rent Selector"
-          autoFocus={false}
           required={false}
           overlayDropdown
           overlayOptionsClass={styles.buyRentOverlay}
@@ -102,30 +97,24 @@ export default function HeroSectionStepOne({ onClick }: Props) {
       </div>
       <Link href="/property/locations">
         <Button
-          buttonChildren="See All Locations"
+          children="See All Locations"
           className={styles.createAListingBtn}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="Select Location Button"
-          type="button"
           ariaLabel="Create A Listing Button"
-          autoFocus={false}
-          disabled={false}
+
         />
       </Link>
 
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="Continue"
+          children="Continue"
           className={styles.continueBtn}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="Search Button"
-          type="button"
           ariaLabel="Search Button"
-          autoFocus={false}
           onClick={onClick}
-          // disabled={pending} // Disables during submission
+          // isDisabled={pending} // Disables during submission
         />
       </div>
     </div>

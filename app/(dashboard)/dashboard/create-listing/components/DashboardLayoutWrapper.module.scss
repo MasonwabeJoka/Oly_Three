@@ -6,11 +6,11 @@
   position: relative;
   display: flex;
   justify-content: space-between !important;
-  width: rem(360);
+  width: 36rem;
   // height: 100%;
 
   @include only(largeDesktop) {
-    width: rem(1527);
+    width: 152.7rem;
   }
   @include only(smallDesktop) {
     width: 96vw !important;
@@ -21,20 +21,20 @@
 
   .keepSidebarInPlace {
     @include only(largeDesktop) {
-      width: rem(342);
+      width: 34.2rem;
     }
     @include only(smallDesktop) {
-      width: rem(342);
+      width: 34.2rem;
     }
     @include only(tablet) {
-      width: rem(342);
+      width: 34.2rem;
     }
   }
 
   .backButton {
     position: fixed;
-    top: rem(20);
-    right: rem(20);
+    top: 2rem;
+    right: 2rem;
   }
 
   .sidebarContainer {
@@ -43,7 +43,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: rem(342);
+    width: 34.2rem;
     height: 100vh;
 
     .sidebar {
@@ -68,13 +68,13 @@
     flex: 1;
    
     @include only(largeDesktop) {
-      width: rem(1098);
+      width: 109.8rem;
     }
     @include only(smallDesktop) {
-      width: rem(1098) !important;
+      width: 109.8rem !important;
     }
     @include only(tablet) {
-      width: rem(1098);
+      width: 109.8rem;
     }
   }
 }

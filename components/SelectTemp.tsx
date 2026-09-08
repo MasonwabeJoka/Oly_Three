@@ -222,9 +222,7 @@ export default Select;
     selectSize="large"
     label="Provinces"
     id="provinces"
-    name="provinces"
     ariaLabel="Provinces"
-    autoFocus={false}
     required={false}
 />; */
 }

@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: rem(12);
+    gap: 1.2rem;
     width: 100%;
     height: 100%;
 
@@ -16,22 +16,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: rem(12);
+      gap: 1.2rem;
       width: fit-content;
       background-color: $white-three;
-      padding: rem(12) !important;
-      border-radius: rem(40);
+      padding: 1.2rem !important;
+      border-radius: 4rem;
 
       .card {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: rem(12);
+        gap: 1.2rem;
         cursor: pointer;
-        width: rem(600);
-        height: rem(160);
-        padding: 0 rem(60);
-        border-radius: rem(40);
+        width: 60rem;
+        height: 16rem;
+        padding: 0 6rem;
+        border-radius: 4rem;
         background-color: $white-four;
         box-shadow: $shadow-one;
       }

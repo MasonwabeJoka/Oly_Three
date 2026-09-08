@@ -17,7 +17,7 @@
     overflow-x: hidden;
     width: 100vw !important;
     @include only(largeDesktop) {
-      // width: rem(1440);
+      // width: 144rem;
     }
 
     .nav {
@@ -39,11 +39,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: rem(96);
-      margin-top: rem(24);
+      margin-bottom: 9.6rem;
+      margin-top: 2.4rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(112);
+        margin-bottom: 11.2rem;
       }
     }
     .title {
@@ -52,72 +52,72 @@
       font-size: $h3 !important;
       font-weight: 600;
       color: $black-four;
-      margin-bottom: rem(48);
+      margin-bottom: 4.8rem;
     }
 
     .aboveFoldAd {
       width: 100%;
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
     }
 
     .featured {
       display: flex;
       justify-content: center;
       width: 100%;
-      margin-top: rem(32);
-      margin-bottom: rem(96);
+      margin-top: 3.2rem;
+      margin-bottom: 9.6rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
       }
     }
     .features {
       width: 95vw;
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
       }
     }
 
     .categories {
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
       }
     }
 
     .featuredListings {
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
       width: 100%;
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
       }
     }
 
     .blog {
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
         width: 100%;
       }
     }
 
     .belowFoldAd {
       width: 100%;
-      margin-top: rem(32);
-      margin-bottom: rem(96);
+      margin-top: 3.2rem;
+      margin-bottom: 9.6rem;
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
       }
     }
     .sponsoredArticles {
-      margin-bottom: rem(96);
+      margin-bottom: 9.6rem;
 
       @include only(largeDesktop) {
-        margin-bottom: rem(192);
+        margin-bottom: 19.2rem;
         width: 100%;
       }
     }

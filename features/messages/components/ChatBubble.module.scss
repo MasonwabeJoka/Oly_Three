@@ -3,16 +3,16 @@
 @use "@/utils/breakpoints" as *;
 .contactChatBubbleContainer {
   display: flex;
-  margin-bottom: rem(0);
+  margin-bottom: 0rem;
   align-items: flex-start;
 
   .avatarContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: rem(36);
+    margin-right: 3.6rem;
     .avatar {
-      margin-bottom: rem(8);
+      margin-bottom: 0.8rem;
     }
     .contactTime {
       font-size: $small;
@@ -26,25 +26,25 @@
 
     .bubbleWidthSetter {
       display: inline-flex;
-      max-width: rem(360);
+      max-width: 36rem;
 
       .contactChatBubble {
-        padding: rem(24) rem(32) rem(32) rem(32);
+        padding: 2.4rem 3.2rem 3.2rem 3.2rem;
         width: fit-content;
-        border-radius: 0 rem(40) rem(40) rem(40);
-        margin-bottom: rem(24);
+        border-radius: 0 4rem 4rem 4rem;
+        margin-bottom: 2.4rem;
         background-color: $white-two;
         box-shadow: $shadow-one;
 
         .contactName {
           font-weight: 600;
-         font-size: rem(11);
+         font-size: 1.1rem;
            text-transform: uppercase;
-          margin-bottom: rem(8);
+          margin-bottom: 0.8rem;
 
         }
         .message {
-          font-size: rem(15);
+          font-size: 1.5rem;
         }
       }
     }
@@ -54,14 +54,14 @@
 .userChatBubbleContainer {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: rem(0);
+  margin-bottom: 0rem;
 
   .avatarContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     .avatar {
-      margin-bottom: rem(8);
+      margin-bottom: 0.8rem;
     }
     .contactTime {
       font-size: $small;
@@ -77,21 +77,21 @@
       display: inline-flex;
       flex-direction: column;
       align-items: flex-end;
-      max-width: rem(456);
+      max-width: 45.6rem;
 
       .userTime {
         font-size: $small;
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
       }
 
       .userChatBubble {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: rem(24) rem(32) rem(32) rem(32);
-        border-radius: rem(40) 0 rem(40) rem(40);
-        margin-right: rem(32);
-        margin-bottom: rem(24);
+        padding: 2.4rem 3.2rem 3.2rem 3.2rem;
+        border-radius: 4rem 0 4rem 4rem;
+        margin-right: 3.2rem;
+        margin-bottom: 2.4rem;
         background-color: $white-five;
         box-shadow: $shadow-one;
 
@@ -100,25 +100,25 @@
           justify-content: flex-end;
           width: 100%;
           font-weight: 600;
-          font-size: rem(11);
+          font-size: 1.1rem;
           text-align: left;
           text-transform: uppercase;
-          margin-bottom: rem(8);
+          margin-bottom: 0.8rem;
 
           .tick {
-            font-size: rem(13);
+            font-size: 1.3rem;
             font-weight: bold;
           }
 
           .tickSeen {
-            font-size: rem(13);
+            font-size: 1.3rem;
             font-weight: bold;
             color: $primary-hover;
           }
         }
 
          .message {
-          font-size: rem(15);
+          font-size: 1.5rem;
         }
       }
     }

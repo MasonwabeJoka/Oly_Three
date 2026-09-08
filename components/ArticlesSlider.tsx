@@ -22,7 +22,7 @@ const ArticleSlider = () => {
   if (!isClient) {
     return (
       <div className={styles.articleSection}>
-        <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+        <div style={{ padding: "3.2rem", textAlign: "center", color: "#666" }}>
           Loading articles...
         </div>
       </div>
@@ -32,7 +32,7 @@ const ArticleSlider = () => {
   if (isLoading) {
     return (
       <div className={styles.articleSection}>
-        <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+        <div style={{ padding: "3.2rem", textAlign: "center", color: "#666" }}>
           Loading articles...
         </div>
       </div>
@@ -42,7 +42,7 @@ const ArticleSlider = () => {
   if (error) {
     return (
       <div className={styles.articleSection}>
-        <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+        <div style={{ padding: "3.2rem", textAlign: "center", color: "#666" }}>
           Error loading articles. Please try again later.
         </div>
       </div>
@@ -56,7 +56,7 @@ const ArticleSlider = () => {
   if (!articles || articles.length === 0) {
     return (
       <div className={styles.articleSection}>
-        <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>
+        <div style={{ padding: "3.2rem", textAlign: "center", color: "#666" }}>
           No articles available at the moment. Check back later!
         </div>
       </div>

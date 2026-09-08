@@ -14,7 +14,7 @@
 .title {
   color: $danger;
   font-size: $body !important;
-  margin-bottom: rem(20) !important;
+  margin-bottom: 2rem !important;
   font-weight: 500;
   @include only(tablet) {
     font-size: $h4;
@@ -25,7 +25,7 @@
   width: 50%;
   text-align: center;
   color: $danger;
-  margin-bottom: rem(20) !important;
+  margin-bottom: 2rem !important;
   .description {
   }
 }
@@ -33,11 +33,11 @@
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  gap: rem(20);
+  gap: 2rem;
 
   @include only(tablet) {
     flex-direction: row;
-    gap: rem(20);
+    gap: 2rem;
     justify-content: center;
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
@@ -246,28 +246,28 @@ export const FormWrapper = ({
           <nav className={styles.buttons}>
             <Button
               className={styles.proceedButton}
-              buttonChildren={topText}
-              buttonType={pathname.includes("upload-photos") || pathname.includes("upload-videos") ? "normal" : "primary"}
+              children={topText}
+              buttonVariant={pathname.includes("upload-photos") || pathname.includes("upload-videos") ? "normal" : "primary"}
               buttonSize="large"
-              name="proceed-btn"
-              type="button"
+
+
               ariaLabel="Proceed Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
               onClick={nextStep}
             />
             {currentStepIndex > 0 && (
               <Button
                 className={styles.backButton}
-                buttonChildren={bottomText}
-                buttonType="normal"
+                children={bottomText}
+                buttonVariant="normal"
                 buttonSize="large"
-                name="back-btn"
-                type="button"
+
+
                 ariaLabel="Back Button"
-                autoFocus={false}
-                disabled={false}
+
+
                 dashboard
                 onClick={previousStep}
               />

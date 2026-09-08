@@ -8,10 +8,10 @@
   align-items: center;
 
   @include only(largeDesktop) {
-    width: rem(1552);
+    width: 155.2rem;
   }
   @include only(smallDesktop) {
-    width: rem(1250);
+    width: 125rem;
   }
 
   .listingContainer {
@@ -47,7 +47,7 @@
           height: fit-content;
 
           .report {
-            margin-top: rem(20);
+            margin-top: 2rem;
             color: $danger;
             cursor: pointer;
           }
@@ -64,19 +64,19 @@
             flex-direction: column;
             align-items: center;
             width: auto;
-            min-height: rem(200);
-            margin-bottom: rem(96);
+            min-height: 20rem;
+            margin-bottom: 9.6rem;
 
             .title {
               color: $danger;
               font-weight: 500;
               font-size: $h4;
-              margin-bottom: rem(48);
+              margin-bottom: 4.8rem;
             }
           }
 
           .productSpecsContainer {
-            margin-top: rem(32);
+            margin-top: 3.2rem;
           }
 
           .featuresContainer {
@@ -90,11 +90,11 @@
         align-items: center;
         width: 100vw;
         .similarAdsTitle {
-          margin-left: rem(390);
+          margin-left: 39rem;
           color: $danger;
           font-weight: 500;
           font-size: $h4;
-          margin-bottom: rem(48);
+          margin-bottom: 4.8rem;
         }
       }
     }
@@ -103,18 +103,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: rem(72);
-      margin-bottom: rem(128);
+      margin-top: 7.2rem;
+      margin-bottom: 12.8rem;
 
       .imageContainer {
-        height: rem(800);
+        height: 80rem;
         position: relative;
 
-        border-radius: rem(40);
-        margin-bottom: rem(64);
+        border-radius: 4rem;
+        margin-bottom: 6.4rem;
 
         .image {
-          margin-bottom: rem(16);
+          margin-bottom: 1.6rem;
         }
       }
     }

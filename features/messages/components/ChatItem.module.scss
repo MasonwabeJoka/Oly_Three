@@ -5,16 +5,16 @@
 .chat {
   display: flex;
   align-items: center;
-  width: rem(600);
-  height: rem(88);
-  min-height: rem(88);
-  max-height: rem(88);
-  border-radius: rem(50);
-  margin-bottom: rem(20);
+  width: 60rem;
+  height: 8.8rem;
+  min-height: 8.8rem;
+  max-height: 8.8rem;
+  border-radius: 5rem;
+  margin-bottom: 2rem;
   background-color: $white-two;
   box-shadow: $shadow-one;
   cursor: pointer;
-  padding: rem(0) rem(8);
+  padding: 0rem 0.8rem;
 
   &:focus {
     outline: 2px solid $white-two;
@@ -29,8 +29,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(88);
-    height: rem(88);
+    width: 8.8rem;
+    height: 8.8rem;
     .avatar {
     }
   }
@@ -38,12 +38,12 @@
   .textContainer {
     .name {
       font-weight: 600;
-      font-size: rem(11);
-      margin-bottom: rem(8);
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
       text-transform: uppercase;
     }
     .message {
-      font-size: rem(15);
+      font-size: 1.5rem;
       span {
         // // font-weight: 600;
         // font-size: $tiny;
@@ -56,34 +56,34 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: rem(8);
+    gap: 0.8rem;
     margin-left: auto;
-    margin-right: rem(14);
-    max-width: rem(88);
+    margin-right: 1.4rem;
+    max-width: 8.8rem;
     width: 100%;
-    height: rem(88);
+    height: 8.8rem;
     .time {
-      margin-right: rem(8);
-      font-size: rem(10);
+      margin-right: 0.8rem;
+      font-size: 1rem;
       text-transform: uppercase;
     }
     .unread {
-      width: rem(14);
-      height: rem(14);
+      width: 1.4rem;
+      height: 1.4rem;
       background: $primary-hover;
       border-radius: 50%;
     }
     .tick {
-      font-size: rem(13);
+      font-size: 1.3rem;
       font-weight: bold;
     }
     .tickLabel {
-      font-size: rem(10);
+      font-size: 1rem;
       text-transform: uppercase;
       font-weight: 600;
     }
     .tickSeen {
-      font-size: rem(13);
+      font-size: 1.3rem;
       color: $primary-hover;
       font-weight: bold;
     }

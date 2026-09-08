@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./TopNotification.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 import HomeButton from "./HomeButton";
 
 interface TopNotificationProps {
@@ -41,14 +41,14 @@ const TopNotification: React.FC<TopNotificationProps> = ({
 
       <Button
         className={styles.closeButton}
-        buttonChildren="✕"
-        buttonType="icon"
+        children="✕"
+        buttonVariant="icon"
         buttonSize="small"
-        name="close-btn"
-        type="button"
+
+
         ariaLabel="Close Button"
-        autoFocus={false}
-        disabled={false}
+
+
         onClick={handleClose}
       />
     </div>

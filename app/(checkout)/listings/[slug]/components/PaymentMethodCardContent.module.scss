@@ -5,17 +5,17 @@
 .container {
   width: 100%;
   .content {
-    margin: 0 rem(32);
+    margin: 0 3.2rem;
     display: flex;
     flex-direction: column;
-    gap: rem(6);
+    gap: 0.6rem;
     .paymentTypeContainer {
       display: flex;
       justify-content: space-between;
-      margin-bottom: rem(8);
+      margin-bottom: 0.8rem;
       .text {
         .title {
-          font-size: rem(20);
+          font-size: 2rem;
           font-weight: 500;
         }
 
@@ -23,20 +23,20 @@
           font-size: $body;
           font-weight: 400;
           font-size: $tiny;
-          margin-top: rem(-2);
+          margin-top: -0.2rem;
         }
       }
 
       .icons {
         display: flex;
-        gap: rem(4);
+        gap: 0.4rem;
         .iconContainer {
           display: flex;
           justify-content: center;
           align-items: center;
-          border-radius: rem(2);
-          width: rem(35);
-          height: rem(35);
+          border-radius: 0.2rem;
+          width: 3.5rem;
+          height: 3.5rem;
           border-radius: 50%;
 
           background-color: $white-two;
@@ -45,8 +45,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: rem(24);
-            height: rem(20);
+            width: 2.4rem;
+            height: 2rem;
           }
         }
       }

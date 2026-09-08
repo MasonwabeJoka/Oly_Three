@@ -3,7 +3,7 @@ import styles from "./Table.module.scss";
 import { Button as ShadcnButton } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import Button from "../Buttons";
+import Button from "../Button";
 import {
   Table as ShadcnTable,
   TableBody,
@@ -94,9 +94,7 @@ export function Table<TData, TValue>({
             inputSize="xLarge"
             label="Search"
             id="search"
-            name="search"
             ariaLabel="Search"
-            autoFocus={false}
             autoComplete="off"
             required={false}
             dashboard
@@ -160,27 +158,21 @@ export function Table<TData, TValue>({
         <div className={styles.paginationContainer}>
           <Button
             className={styles.previousButton}
-            buttonChildren="prev"
-            buttonType="round"
+            children="prev"
+            buttonShape="round"
             buttonSize="medium"
-            name="prev-btn"
-            type="button"
             ariaLabel="Previous Button"
-            autoFocus={false}
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            isDisabled={!table.getCanPreviousPage()}
           />
           <Button
             className={styles.nextButton}
-            buttonChildren="next"
-            buttonType="round"
+            children="next"
+            buttonShape="round"
             buttonSize="medium"
-            name="next-btn"
-            type="button"
             ariaLabel="Next Button"
-            autoFocus={false}
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            isDisabled={!table.getCanNextPage()}
           />
         </div>
         <div className="text-muted-foreground flex-1 text-sm">

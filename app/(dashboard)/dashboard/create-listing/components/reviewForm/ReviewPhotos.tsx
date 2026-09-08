@@ -9,7 +9,7 @@ import "swiper/css/scrollbar";
 import NavButtons from "@/components/NavButtons";
 import Image from "@/components/Image";
 import { imagesData } from "@/data/galleryImages";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useEditStore from "../../store/useEditStore";
 import useFormStore from "../../store/useFormStore";
 import useUploadMediaStore from "../../store/useUploadMediaStore";
@@ -41,7 +41,7 @@ const ReviewPhotos = () => {
                     alt="image"
                     width={248}
                     height={186.4}
-                    style={{ borderRadius: "2.5rem" }}
+                    style={{ borderRadius: "4rem" }}
                   />
                 )}
               </SwiperSlide>
@@ -52,14 +52,14 @@ const ReviewPhotos = () => {
             <NavButtons className={styles.navButtons} />
             <Button
               className={styles.editButton}
-              buttonChildren="Edit"
-              buttonType="normal"
+              children="Edit"
+              buttonVariant="normal"
               buttonSize="small"
-              name="edit-btn"
-              type="button"
+
+
               ariaLabel="Edit Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
               onClick={onClick}
             />

@@ -1,4 +1,4 @@
-import Button from "./Buttons";
+import Button from "./Button";
 import BulletPoint from "./BulletPoint";
 import Checkbox from "./Checkbox";
 import styles from "./VehicleFeatures.module.scss";
@@ -34,14 +34,14 @@ const VehicleFeatures = ({}: VehicleFeaturesProps) => {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.button}
-          buttonChildren="Search"
-          buttonType="primary"
+          children="Search"
+          buttonVariant="primary"
           buttonSize="large"
-          name="Search Button"
+
           type="submit"
           ariaLabel="Search Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

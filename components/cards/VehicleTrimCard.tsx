@@ -40,7 +40,7 @@ const VehicleTrimCard = ({ image, trimName, engine, transmission, fuelType, driv
               src={image}
               alt={trimName}
               fill
-              style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+              style={{ objectFit: "cover", borderRadius: "4rem" }}
             />
           )}
         </div>

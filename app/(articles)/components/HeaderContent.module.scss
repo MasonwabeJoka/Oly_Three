@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: rem(1300);
+    max-width: 130rem;
     @include only(largeDesktop) {
       width: 100%;
       flex-direction: row;
@@ -21,14 +21,14 @@
     }
     @include only(smallDesktop) {
       width: 80%;
-      margin-right: rem(80) !important;
+      margin-right: 8rem !important;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
     }
     @include only(tablet) {
       width: 75%;
-      margin-right: rem(80) !important;
+      margin-right: 8rem !important;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -37,27 +37,27 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: rem(24);
-      max-width: rem(560);
+      gap: 2.4rem;
+      max-width: 56rem;
       @include only(largeDesktop) {
-        max-width: rem(560);
+        max-width: 56rem;
       }
       @include only(smallDesktop) {
-        max-width: rem(450);
+        max-width: 45rem;
       }
       @include only(tablet) {
         align-items: center;
-        max-width: rem(360);
+        max-width: 36rem;
       }
       .title {
-        font-size: rem(50) !important;
+        font-size: 5rem !important;
         font-weight: bold;
         text-transform: uppercase;
         // text-align: center;
 
         letter-spacing: 8%;
         color: $black-four;
-        margin-bottom: rem(16);
+        margin-bottom: 1.6rem;
         line-height: 1.2;
 
         @include only(largeDesktop) {
@@ -72,7 +72,7 @@
         font-size: $body;
         line-height: 1.6;
         color: $black-four;
-        margin-bottom: rem(16);
+        margin-bottom: 1.6rem;
 
         @include only(tablet) {
           text-align: center;
@@ -83,7 +83,7 @@
           font-size: $tiny;
           text-transform: uppercase;
           align-items: center;
-          gap: rem(12);
+          gap: 1.2rem;
       
           cursor: pointer;
 
@@ -104,21 +104,21 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: rem(480);
-      max-width: rem(640);
-      border-radius: rem(48);
+      height: 48rem;
+      max-width: 64rem;
+      border-radius: 4.8rem;
 
       @include only(largeDesktop) {
-        max-width: rem(660);
-        height: rem(480);
+        max-width: 66rem;
+        height: 48rem;
       }
       @include only(smallDesktop) {
-        max-width: rem(600);
-        height: rem(480);
+        max-width: 60rem;
+        height: 48rem;
       }
       @include only(tablet) {
-        max-width: rem(450);
-        height: rem(640);
+        max-width: 45rem;
+        height: 64rem;
       }
     }
   }

@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./AuctionStartTimeClient.module.scss";
 import { useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
@@ -95,10 +95,10 @@ const AuctionStartTimeClient = () => {
             selectSize="large"
             label="Auction Start Time"
             id="startTime"
-            name="startTime"
+
             ariaLabel="Auction Start Time"
-            autoFocus={false}
-            disabled={false}
+
+
             required={true}
             dashboard
             onDropdownOpenChange={onAuctionStartTimeOpen}
@@ -127,10 +127,10 @@ const AuctionStartTimeClient = () => {
               selectSize="large"
               label="Auction Duration"
               id="auctionDuration"
-              name="auctionDuration"
+
               ariaLabel="Auction Duration"
-              autoFocus={false}
-              disabled={false}
+
+
               required={true}
               dashboard
               onDropdownOpenChange={onAuctionDurationOpen}
@@ -141,14 +141,14 @@ const AuctionStartTimeClient = () => {
           <div className={styles.auctionStartButtonContainer}>
             <Button
               className={styles.auctionStartButton}
-              buttonChildren="Accept"
-              buttonType="primary"
+              children="Accept"
+              buttonVariant="primary"
               buttonSize="large"
-              name="auction-start-btn"
-              type="button"
+
+
               ariaLabel="Auction Start Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
             />
           </div>

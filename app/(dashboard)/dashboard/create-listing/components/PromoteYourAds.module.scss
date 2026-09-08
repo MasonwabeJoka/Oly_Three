@@ -5,7 +5,7 @@
 .container {
   display: flex;
   justify-content: center;
-  gap: rem(64);
+  gap: 6.4rem;
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -20,12 +20,12 @@
 
     .cards {
       .cardContainer {
-        margin-bottom: rem(48);
+        margin-bottom: 4.8rem;
       }
     }
   }
 
   .paymentSummaryContainer{
-      width: rem(342);
+      width: 34.2rem;
   }
 }

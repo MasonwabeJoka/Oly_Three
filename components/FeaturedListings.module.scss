@@ -13,13 +13,13 @@
     font-size: $h3 !important;
     font-weight: 600;
     color: $black-four;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
 
     @include only(largeDesktop) {
     }
 
     @include only(smallDesktop) {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 
@@ -27,14 +27,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: rem(56);
+    margin-bottom: 5.6rem;
     width: 100%;
    
     .controlContainer {
-      margin-bottom: rem(56);
+      margin-bottom: 5.6rem;
 
       .control {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
     }
   }
@@ -42,7 +42,7 @@
   .buttonsAndSearch {
     .buttons {
       .button {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
     }
 
@@ -53,22 +53,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
         .errorMessage {
-          margin-bottom: rem(8);
+          margin-bottom: 0.8rem;
           color: $danger;
         }
         .searchTerm {
-          // margin-bottom: rem(0)
+          // margin-bottom: 0rem
         }
       }
       .locationContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
         .errorMessage {
-          margin-bottom: rem(8);
+          margin-bottom: 0.8rem;
           color: $danger;
         }
         .location {

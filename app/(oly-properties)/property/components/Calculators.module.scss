@@ -8,20 +8,20 @@
   align-items: center;
 
   width: 100%;
-  padding: rem(64) rem(16);
+  padding: 6.4rem 1.6rem;
   background-color: $white-four;
-  border-radius: rem(40);
-  margin: rem(40) 0;
+  border-radius: 4rem;
+  margin: 4rem 0;
 
   @include only(largeDesktop) {
-    padding: rem(80) rem(40);
+    padding: 8rem 4rem;
   }
 
   .calculators {
     display: flex;
-    gap: rem(32);
+    gap: 3.2rem;
     width: 100%;
-    max-width: rem(1200);
+    max-width: 120rem;
 
     @include only(largeDesktop) {
     }
@@ -31,11 +31,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: rem(32);
-      width: rem(336);
-      height: rem(420);
+      padding: 3.2rem;
+      width: 33.6rem;
+      height: 42rem;
       background-color: $white-one;
-      border-radius: rem(40);
+      border-radius: 4rem;
       box-shadow: $shadow-six;
       cursor: pointer;
       background-color: $warning-hover;
@@ -50,12 +50,12 @@
 
       .calculatorTitle {
         font-size: $h2 !important;
-        font-size: rem(40) !important;
+        font-size: 4rem !important;
         font-weight: 600;
         color: $white-four;
         line-height: 1.3;
         line-height: 1.2;
-        margin-bottom: rem(32);
+        margin-bottom: 3.2rem;
         text-align: center;
       }
 

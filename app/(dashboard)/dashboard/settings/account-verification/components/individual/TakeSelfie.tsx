@@ -3,7 +3,7 @@ import styles from "./TakeSelfie.module.scss";
 import Webcam from "react-webcam";
 import { useRef } from "react";
 import Image from "next/image";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useFormContext } from "react-hook-form";
 
 interface TakeSelfieProps {
@@ -50,14 +50,14 @@ const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
           />
           <Button
             className={styles.button}
-            buttonChildren="Capture Selfie"
-            buttonType="normal"
+            children="Capture Selfie"
+            buttonVariant="normal"
             buttonSize="large"
-            name="capture-btn"
-            type="button"
+
+
             ariaLabel="Capture Selfie"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={capture}
           />
@@ -73,27 +73,27 @@ const TakeSelfie: React.FC<TakeSelfieProps> = ({ onNext }) => {
           />
           <Button
             className={styles.button}
-            buttonChildren="Submit Selfie"
-            buttonType="primary"
+            children="Submit Selfie"
+            buttonVariant="primary"
             buttonSize="large"
-            name="submit-btn"
-            type="button"
+
+
             ariaLabel="Submit Selfie"
-            autoFocus={false}
-            disabled={!!errors.selfie}
+
+            isDisabled={!!errors.selfie}
             dashboard
             onClick={handleSubmit}
           />
           <Button
             className={styles.button}
-            buttonChildren="Retake"
-            buttonType="normal"
+            children="Retake"
+            buttonVariant="normal"
             buttonSize="large"
-            name="retake-btn"
-            type="button"
+
+
             ariaLabel="Retake Selfie"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={() => setValue("selfie", "", { shouldValidate: true })}
           />

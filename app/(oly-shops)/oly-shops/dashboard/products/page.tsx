@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from "next/link";
 import Table from "@/components/table/Table";
 import { topProducts, TopProduct } from "../data/products";
@@ -16,14 +16,14 @@ const ShopDashboardProducts = ({}: ShopDashboardProductsProps) => {
         <Link href="/oly-shops/dashboard/products/add-product">
           <Button
             className={styles.button}
-            buttonChildren="Add Product"
-            buttonType="primary"
+            children="Add Product"
+            buttonVariant="primary"
             buttonSize="small"
-            name="add-product-btn"
-            type="button"
+
+
             ariaLabel="Add Product"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </Link>
       </div>

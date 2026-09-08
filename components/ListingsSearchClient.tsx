@@ -6,7 +6,7 @@ import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { suggestions } from "@/data/SuggestionsData";
 import styles from "./ListingsSearchClient.module.scss";
 
@@ -93,15 +93,15 @@ const ListingsSearchClient = () => {
         )}
       />
       <Button
-        buttonChildren="Search"
+        children="Search"
         className={styles.search}
-        buttonType="normal"
+        buttonVariant="normal"
         buttonSize="large"
-        name="Search Button"
+
         type="submit"
         ariaLabel="Search Button"
-        autoFocus={false}
-        disabled={isSubmitting}
+
+        isDisabled={isSubmitting}
       />
     </form>
   );

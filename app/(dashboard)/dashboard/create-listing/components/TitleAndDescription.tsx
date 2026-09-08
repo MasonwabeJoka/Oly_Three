@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import type { FormDataSchema } from "../validations/formDataSchema";
-import LoadingSpinnerTwo from "@/components/LoadingSpinnerTwo";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 // Todo: Autofocus on title input
 // Dynamically import RichTextEditor with a loading skeleton
@@ -13,7 +13,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/richTextEditor/RichTextEditor"),
   {
     ssr: false,
-    loading: () => <LoadingSpinnerTwo size={3} />,
+    loading: () => <LoadingSpinner size={3} />,
   },
 );
 
@@ -74,52 +74,51 @@ const TitleAndDescription = ({ onNext }: Props) => {
 
   return (
     <div className={styles.container}>
-    
-        <h2 className={styles.pageTitle}>Title & Description</h2>
-        <p className={styles.pageDescription}>Add a title and description to clearly explain your ad.</p>
-        <div className={styles.titleContainer}>
-          <Input
-            className={styles.title}
-            inputType="text"
-            inputSize="large"
-            placeholder="Write a title for your ad."
-            label="Title"
-            id="titleAndDescription.title"
-            ariaLabel="Listing title input field"
-            aria-describedby={
-              errors.titleAndDescription?.title?.message
-                ? "title-error"
-                : undefined
-            }
-            autoComplete="off"
-            iconPosition="right"
-            iconWidth={32}
-            iconHeight={32}
-            disabled={false}
-            required={true}
-            value={title}
-            error={errors.titleAndDescription?.title?.message}
-            {...restTitleRegister}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              titleOnChange(e);
-              handleTitleChange(e);
-            }}
-            dashboard
-          />
-        </div>
-        <div className={styles.descriptionContainer}>
-          <RichTextEditor
-            name="titleAndDescription.description"
-            setValue={handleDescriptionChange}
-            content={description}
-            error={errors.titleAndDescription?.description?.message}
-            label="Description"
-          />
-        </div>
-      
+      <h2 className={styles.pageTitle}>Title & Description</h2>
+      <p className={styles.pageDescription}>
+        Add a title and description to clearly explain your ad.
+      </p>
+      <div className={styles.titleContainer}>
+        <Input
+          className={styles.title}
+          inputType="text"
+          inputSize="large"
+          placeholder="Write a title for your ad."
+          label="Title"
+          id="titleAndDescription.title"
+          ariaLabel="Listing title input field"
+          aria-describedby={
+            errors.titleAndDescription?.title?.message
+              ? "title-error"
+              : undefined
+          }
+          autoComplete="off"
+          iconPosition="right"
+          iconWidth={32}
+          iconHeight={32}
+          disabled={false}
+          required={true}
+          value={title}
+          error={errors.titleAndDescription?.title?.message}
+          {...restTitleRegister}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            titleOnChange(e);
+            handleTitleChange(e);
+          }}
+          dashboard
+        />
+      </div>
+      <div className={styles.descriptionContainer}>
+        <RichTextEditor
+
+          setValue={handleDescriptionChange}
+          content={description}
+          error={errors.titleAndDescription?.description?.message}
+          label="Description"
+        />
+      </div>
     </div>
   );
 };
 
 export default TitleAndDescription;
-

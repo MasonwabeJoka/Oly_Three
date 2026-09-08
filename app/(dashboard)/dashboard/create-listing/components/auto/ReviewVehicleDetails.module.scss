@@ -11,25 +11,25 @@
     font-size: $h4;
     font-weight: 500;
     color: $danger;
-    margin-top: rem(64);
-    margin-bottom: rem(32);
+    margin-top: 6.4rem;
+    margin-bottom: 3.2rem;
   }
 
   .card {
     display: flex;
     flex-direction: column;
-    width: rem(920);
-    min-height: rem(180);
-    border-radius: rem(40);
+    width: 92rem;
+    min-height: 18rem;
+    border-radius: 4rem;
     background-color: $white-three;
-    padding: rem(64) rem(64);
-    margin-bottom: rem(32);
+    padding: 6.4rem 6.4rem;
+    margin-bottom: 3.2rem;
     .cardHeader {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: rem(32);
-      padding: 0 rem(32);
+      margin-bottom: 3.2rem;
+      padding: 0 3.2rem;
 
       .cardTitle {
         font-size: $h4;
@@ -41,8 +41,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: rem(48);
-        height: rem(48);
+        width: 4.8rem;
+        height: 4.8rem;
         border-radius: 50%;
        
         box-shadow: $shadow-three;
@@ -58,18 +58,18 @@
       display: flex;
       flex-direction: column;
     
-      padding: 0 rem(32);
-      margin-bottom: rem(32);
+      padding: 0 3.2rem;
+      margin-bottom: 3.2rem;
 
       .cardItem {
         font-weight: 300;
-        margin-bottom: rem(20)
+        margin-bottom: 2rem
     }
     .itemList {
         display: flex;
         flex-direction: column;
-        margin-bottom: rem(20);
-        margin-left: rem(20);
+        margin-bottom: 2rem;
+        margin-left: 2rem;
         .subItem {
             font-weight: 300;
         }

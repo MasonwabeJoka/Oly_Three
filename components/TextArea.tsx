@@ -3,7 +3,7 @@
 import styles from "./TextArea.module.scss";
 import React, { forwardRef, useState, useEffect, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import Button from "./Buttons";
+import Button from "./Button";
 import Emojis from "./Emojis";
 
 interface Props extends React.HTMLAttributes<HTMLTextAreaElement> {
@@ -237,15 +237,12 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
               <div className={styles.submitButtonContainer}>
                 <Button
                   className={styles.submitButton}
-                  buttonChildren={submitButtonText}
-                  buttonType="normal"
+                  children={submitButtonText}
+                  buttonVariant="normal"
                   buttonSize="tiny"
-                  name="submit-btn"
-                  type="button"
                   onClick={handleSubmit}
                   ariaLabel="Send message"
-                  autoFocus={false}
-                  disabled={false}
+
                 />
               </div>
             </div>

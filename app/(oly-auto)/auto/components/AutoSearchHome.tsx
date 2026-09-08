@@ -2,7 +2,7 @@
 
 import { useFormStatus } from "react-dom"; 
 import styles from "./AutoSearchHome.module.scss";
-import Button from "../../../../components/Buttons";
+import Button from "../../../../components/Button";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validations/formValidations";
@@ -41,15 +41,15 @@ const AutoSearchHome = () => {
         >
           {/* {errors && <p className={styles.errorMessage}>{errors?.message}</p>} */}
           <Button
-            buttonChildren="Sell Your Car"
+            children="Sell Your Car"
             className={styles.createAListingBtn}
-            buttonType="danger"
+            buttonVariant="danger"
             buttonSize="large"
-            name="sell-your-car-btn"
-            type="button"
+
+
             ariaLabel="Sell Your Car Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </Link>
 
@@ -64,6 +64,7 @@ const AutoSearchHome = () => {
             control={control}
             render={({ field }) => (
               <Select
+                {...field}
                 options={[
                   "Cars",
                   "Motorcycles",
@@ -75,9 +76,9 @@ const AutoSearchHome = () => {
                 selectSize="large"
                 label="Type"
                 id="propertyType"
-                name="propertyType"
+
                 ariaLabel="Property Type Selector"
-                autoFocus={false}
+
                 required={false}
                 overlayDropdown
                 overlayOptionsClass={styles.vehicleTypeOverlay}
@@ -99,7 +100,7 @@ const AutoSearchHome = () => {
             value={0}
             inputSize="large"
             placeholder="What’s your budget"
-            autoFocus={false}
+
             required={true}
             onChange={(e : React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
@@ -116,7 +117,7 @@ const AutoSearchHome = () => {
             value={0}
             inputSize="large"
             placeholder="Target monthly payment"
-            autoFocus={false}
+
             required={true}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
@@ -133,7 +134,7 @@ const AutoSearchHome = () => {
             value={0}
             inputSize="large"
             placeholder="Your planned deposit amount"
-            autoFocus={false}
+
             required={true}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
           />
@@ -142,15 +143,15 @@ const AutoSearchHome = () => {
 
         <div className={styles.searchButton}>
           <Button
-            buttonChildren="Continue"
+            children="Continue"
             className={styles.search}
-            buttonType="normal"
+            buttonVariant="normal"
             buttonSize="large"
-            name="Continue Button"
+
             type="submit"
             ariaLabel="Continue Button"
-            autoFocus={false}
-            disabled={pending} 
+
+            isDisabled={pending} 
           />
         </div>
       </div>

@@ -7,33 +7,33 @@
   align-items: center;
   width: 50vw;
   height: 93vh;
-  border-radius: rem(150) rem(150) rem(150) rem(150);
+  border-radius: 15rem 15rem 15rem 15rem;
   background-color: $primary;
   background-color: #c9e5e8;
   background-color: $danger;
   background-color: $warning;
 background-color: red;
   .logo {
-    margin-top: rem(104);
-    margin-bottom: rem(48);
+    margin-top: 10.4rem;
+    margin-bottom: 4.8rem;
   }
   .buttonsAndSearch {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: rem(48);
+    margin-top: 4.8rem;
 
     .buttons {
       display: flex;
       flex-direction: column;
-      margin-bottom: rem(64);
+      margin-bottom: 6.4rem;
 
       .link {
       }
 
       .createYourShopBtn {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
         background-color: $danger-hover;
         color: $white-one;
       }
@@ -53,7 +53,7 @@ background-color: red;
     }
 
     .searchFields {
-      margin-bottom: rem(30);
+      margin-bottom: 3rem;
       .dropdownOpen {
         position: relative;
         z-index: 20;
@@ -69,7 +69,7 @@ background-color: red;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
 
         .searchTermInput {
         }
@@ -80,13 +80,13 @@ background-color: red;
         align-items: center;
 
         .searchLocationInput {
-          // margin-bottom: rem(10);
+          // margin-bottom: 1rem;
         }
       }
 
       .errorMessage {
         color: $danger;
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
       }
     }
     .searchButton {

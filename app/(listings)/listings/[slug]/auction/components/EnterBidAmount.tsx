@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./EnterBidAmount.module.scss";
 import NumberInput from "@/components/NumberInput";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import BidHistory from "./BidHistory";
 import Form from "next/form";
 
@@ -67,7 +67,7 @@ const EnterBidAmount = ({
             inputSize="large"
             label="Your Bid (R)"
             placeholder="Enter Your Bid"
-            autoFocus={false}
+
             required={true}
             dashboard
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBid(e.target.value)}
@@ -81,26 +81,26 @@ const EnterBidAmount = ({
         <div className={styles.buttonsContainer}>
           <Button
             className={styles.submitButton}
-            buttonChildren="Submit Bid"
-            buttonType="primary"
+            children="Submit Bid"
+            buttonVariant="primary"
             buttonSize="large"
-            name="submit-btn"
+
             type="submit"
             ariaLabel="Submit Bid"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
           />
           <Button
             className={styles.buyNowButton}
-            buttonChildren="Buy Now"
-            buttonType="normal"
+            children="Buy Now"
+            buttonVariant="normal"
             buttonSize="large"
-            name="buy-now-btn"
-            type="button"
+
+
             ariaLabel="Buy Now"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
           />
         </div>

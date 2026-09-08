@@ -71,13 +71,13 @@ const CategorySelectorClient = ({
   const subcategoriesStyles: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    width: "18rem",
+    width: "28.8rem",
     height: "fit-content",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    paddingBottom: "1rem",
-    paddingLeft: "1rem",
+    paddingBottom: "1.6rem",
+    paddingLeft: "1.6rem",
   };
 
   return (
@@ -148,8 +148,8 @@ const CategorySelectorClient = ({
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
-                          height: "1.5rem",
-                          marginBottom: "0.75rem",
+                          height: "2.4rem",
+                          marginBottom: "1.2rem",
                           color,
                           transform,
                           transition,

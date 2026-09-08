@@ -1,5 +1,5 @@
 import styles from "./UploadMediaTEMP.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useUploadMediaStore from "../store/useUploadMediaStore";
 
 interface UploadMediaProps {
@@ -21,14 +21,11 @@ const UploadMedia = ({ onNext }: UploadMediaProps) => {
         <div className={styles.buttonContainer}>
           <Button
             className={styles.images}
-            buttonChildren="Upload Images"
-            buttonType="primary"
+            children="Upload Images"
+            buttonVariant="primary"
             buttonSize="large"
-            name="upload-images-btn"
-            type="button"
             ariaLabel="Upload Images Button"
-            autoFocus={false}
-            disabled={false}
+
             dashboard
             onClick={() => setUploadPhotos([])}
           />
@@ -36,14 +33,11 @@ const UploadMedia = ({ onNext }: UploadMediaProps) => {
         <div className={styles.buttonContainer}>
           <Button
             className={styles.videos}
-            buttonChildren="Upload Videos"
-            buttonType="normal"
+            children="Upload Videos"
+            buttonVariant="normal"
             buttonSize="large"
-            name="upload-videos-btn"
-            type="button"
             ariaLabel="Upload Videos Button"
-            autoFocus={false}
-            disabled={false}
+
             dashboard
             onClick={() => setUploadVideos([])}
           />
@@ -51,14 +45,11 @@ const UploadMedia = ({ onNext }: UploadMediaProps) => {
         <div className={styles.buttonContainer}>
           <Button
             className={styles.attachment}
-            buttonChildren="Upload Attachments"
-            buttonType="normal"
+            children="Upload Attachments"
+            buttonVariant="normal"
             buttonSize="large"
-            name="upload-attachment-btn"
-            type="button"
             ariaLabel="Upload Attachment Button"
-            autoFocus={false}
-            disabled={false}
+
             dashboard
             onClick={() => setUploadAttachments([])}
           />

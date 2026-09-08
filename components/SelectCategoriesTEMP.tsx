@@ -1,7 +1,7 @@
 import styles from "./SelectCategories.module.scss";
 import LinkCard from "@/components/cards/LinkCard";
 import { categories } from "@/data/CategoriesData";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useTitleStore from "@/store/titleStore";
 import { useModalStore } from "@/store/modalStore";
 
@@ -29,14 +29,11 @@ const SelectCategories = () => {
 
       <Button
         className={styles.button}
-        buttonChildren={"More Categories..."}
+        children={"More Categories..."}
         buttonSize="large"
-        buttonType="normal"
-        name="More Categories Button"
-        type="button"
+        buttonVariant="normal"
         ariaLabel="More Categories Button"
-        autoFocus={false}
-        disabled={false}
+
         onClick={() => setShowModal(true)}
       />
     </div>

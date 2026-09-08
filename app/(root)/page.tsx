@@ -11,11 +11,10 @@ import { getOlyHomepage } from "@/server/sanity/read-write/pages/oly-homepage/re
 import { getCategories } from "@/server/sanity/read-write/categories/read";
 import { getFeaturedCategoriesSection } from "@/server/sanity/read-write/featuredCategoriesSection/read";
 import { Suspense } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import OlyArticles from "@/components/OlyArticles";
 import FeaturedCategories from "@/components/FeaturedCategories";
 import { getHeroSectionData } from "@/server/sanity/read-write/pages/oly-homepage/hero-section/read";
-
 
 const Home = async ({
   searchParams,
@@ -25,7 +24,6 @@ const Home = async ({
   const olyHomepage = await getOlyHomepage();
   const categories = await getCategories();
   const heroSectionData = await getHeroSectionData();
-
 
   const { categories: firstLevelCategories, title } = categories || {
     categories: null,
@@ -62,7 +60,7 @@ const Home = async ({
           <Suspense
             fallback={
               <div>
-                <LoadingSpinner />
+                <LoadingGraphic />
               </div>
             }
           >
@@ -75,14 +73,11 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
-              <HeroSection
-                site="oly"
-                data={heroSectionData}
-              />
+              <HeroSection site="oly" data={heroSectionData} />
             </Suspense>
           </section>
         )}
@@ -91,7 +86,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -104,7 +99,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -121,7 +116,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -135,7 +130,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -149,7 +144,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -163,7 +158,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -177,7 +172,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -193,7 +188,7 @@ const Home = async ({
             <Suspense
               fallback={
                 <div>
-                  <LoadingSpinner />
+                  <LoadingGraphic />
                 </div>
               }
             >
@@ -207,4 +202,3 @@ const Home = async ({
 };
 
 export default Home;
-

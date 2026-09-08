@@ -134,8 +134,8 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
   }));
 
   const logoStyles = {
-    marginTop: isMobile ? "1rem" : "1.5rem",
-    marginBottom: isMobile ? "2rem" : "0rem",
+    marginTop: isMobile ? "1.6rem" : "2.4rem",
+    marginBottom: isMobile ? "3.2rem" : "0rem",
   };
   const providerAvatar = isGeneratedInitialsAvatar(
     sidebarUser?.profilePictureUrl

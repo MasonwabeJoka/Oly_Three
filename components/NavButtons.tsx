@@ -1,6 +1,6 @@
 "use client";
 import styles from "./NavButtons.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Image from "@/components/Image";
 import { useSwiper } from "swiper/react";
 type Props = {
@@ -24,7 +24,7 @@ const NavButtons = ({
       <div className={styles.prev}>
         <Button
           className={`${className} ${styles.button}`}
-          buttonChildren={
+          children={
             <Image
               src="/icons/left-arrow.png"
               alt="left"
@@ -33,20 +33,20 @@ const NavButtons = ({
               className={styles.left}
             />
           }
-          buttonType="round"
+          buttonShape="round"
           buttonSize={size}
-          type="button"
-          name="nav-prev-btn"
+
+
           ariaLabel="Nav Previous Button"
           autoFocus={autoFocus}
-          disabled={disabled}
+          isDisabled={disabled}
           onClick={onClick ?? (() => swiper?.slidePrev())}
         />
       </div>
       <div className={styles.next}>
         <Button
           className={`${className} ${styles.button}`}
-          buttonChildren={
+          children={
             <Image
               src="/icons/right-arrow.png"
               alt="right"
@@ -55,13 +55,13 @@ const NavButtons = ({
               className={styles.right}
             />
           }
-          buttonType="round"
+          buttonShape="round"
           buttonSize={size}
-          type="button"
-          name="nav-next-btn"
+
+
           ariaLabel="Nav Next Button"
           autoFocus={autoFocus}
-          disabled={disabled}
+          isDisabled={disabled}
           onClick={onClick ?? (() => swiper?.slideNext())}
         />
       </div>

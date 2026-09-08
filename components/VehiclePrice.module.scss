@@ -11,34 +11,34 @@
     font-size: $h4;
     font-weight: 500;
 
-    margin-bottom: rem(16);
+    margin-bottom: 1.6rem;
   }
 
   .sub {
     font-size: $small;
-    margin-bottom: rem(56);
+    margin-bottom: 5.6rem;
   }
   .buttonsContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: rem(12);
-    border-radius: rem(72);
-    padding: rem(12);
+    gap: 1.2rem;
+    border-radius: 7.2rem;
+    padding: 1.2rem;
     // box-shadow: $shadow-two;
 
     .button {
-      height: rem(112);
-      border-radius: rem(60);
+      height: 11.2rem;
+      border-radius: 6rem;
     }
 
     .buttonChildren {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: rem(8);
-      padding-left: 0 rem(96);
+      gap: 0.8rem;
+      padding-left: 0 9.6rem;
 
       .buttonLabel {
         font-size: $h4;
@@ -60,6 +60,6 @@
     font-weight: 300;
     width: 70%;
     color: $grey-four;
-    margin-top: rem(16);
+    margin-top: 1.6rem;
   }
 }

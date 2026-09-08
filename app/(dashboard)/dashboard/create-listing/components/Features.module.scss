@@ -8,16 +8,16 @@
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
-  width: rem(311);
+  width: 31.1rem;
 
   @include only(largeDesktop) {
-    width: rem(1098);
+    width: 109.8rem;
   }
   @include only(smallDesktop) {
-    width: rem(960);
+    width: 96rem;
   }
   @include only(tablet) {
-    width: rem(960);
+    width: 96rem;
   }
 
   .form {
@@ -33,56 +33,56 @@
       align-items: center;
       .errorMessage {
         color: $danger;
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
       }
       .conditionsContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
 
       .selecteDetailContainer {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
 
       .chosenDetailContainer {
-        padding: rem(16) rem(32);
+        padding: 1.6rem 3.2rem;
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         background-color: $white-one;
-        border-radius: rem(40) rem(40) rem(44) rem(44);
-        width: rem(548);
-        min-height: rem(232);
-        margin-bottom: rem(48);
+        border-radius: 4rem 4rem 4.4rem 4.4rem;
+        width: 54.8rem;
+        min-height: 23.2rem;
+        margin-bottom: 4.8rem;
 
         .chosenDetailTitle {
           color: $black-four;
-          margin-top: rem(24);
-          margin-bottom: rem(8);
+          margin-top: 2.4rem;
+          margin-bottom: 0.8rem;
           text-align: center;
         }
 
         .chosenDetailDescription {
           color: $grey-four;
           text-align: center;
-          margin-bottom: rem(48);
+          margin-bottom: 4.8rem;
         }
 
         .chosenDetail {
-          margin-bottom: rem(20);
+          margin-bottom: 2rem;
 
           .chosenDetailInput {
             background-color: $white-two;
-            width: rem(471);
+            width: 47.1rem;
           }
         }
       }
 
       .customDetailContainer {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
     }
   }
@@ -91,23 +91,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: rem(648);
-    margin-bottom: rem(48);
+    width: 64.8rem;
+    margin-bottom: 4.8rem;
     .detail {
       display: flex;
       align-items: center;
-      margin-bottom: rem(16);
-      width: rem(480);
+      margin-bottom: 1.6rem;
+      width: 48rem;
 
       .detailButtons {
         display: flex;
-        margin-right: rem(16);
+        margin-right: 1.6rem;
         .detailButton {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: rem(40);
-          height: rem(40);
+          width: 4rem;
+          height: 4rem;
           border: none;
           background-color: $white-one;
         }
@@ -120,7 +120,7 @@
         }
 
         .deleteButtonContainer {
-          margin-left: rem(16);
+          margin-left: 1.6rem;
         }
       }
 
@@ -131,12 +131,12 @@
 
     .editMode {
       position: relative;
-      width: rem(514);
-      margin-bottom: rem(16);
+      width: 51.4rem;
+      margin-bottom: 1.6rem;
 
       .editDetail {
-        width: rem(514);
-        height: rem(40);
+        width: 51.4rem;
+        height: 4rem;
         text-align: start;
         color: $black-one;
       }
@@ -147,11 +147,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: rem(40);
-        height: rem(40);
+        width: 4rem;
+        height: 4rem;
         border-radius: 50%;
         transform: translateY(-50%);
-        right: rem(8);
+        right: 0.8rem;
         z-index: 10;
         background-color: $white-one;
         cursor: pointer;
@@ -160,7 +160,7 @@
           5px 5px 10px 0px rgba(169, 196, 203, 0.25);
 
         .iconContainer {
-          margin-top: rem(4);
+          margin-top: 0.4rem;
         }
       }
     }
@@ -172,10 +172,10 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    margin-bottom: rem(124);
+    margin-bottom: 12.4rem;
 
     .proceedButton {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 }

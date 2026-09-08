@@ -8,7 +8,7 @@
   align-items: center;
 
   .buyRentContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
 
   .dropdownOpen {
@@ -23,9 +23,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
     .breadcrumbs {
-      margin-bottom: rem(8);
+      margin-bottom: 0.8rem;
     }
 
     .searchLocation {
@@ -39,7 +39,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
 }
 

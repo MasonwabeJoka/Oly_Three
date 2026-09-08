@@ -5,7 +5,7 @@ import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./PropertyListingsSearchForm.module.scss";
 import { useState } from "react";
@@ -61,9 +61,7 @@ export default function PropertyListingsSearchForm({
           selectSize="large"
           label="Buy or Rent"
           id="buyRent"
-          name="buyRent"
           ariaLabel="Buy or Rent Selector"
-          autoFocus={false}
           required={false}
           overlayDropdown
           overlayOptionsClass={styles.buyRentOverlay}
@@ -108,14 +106,11 @@ export default function PropertyListingsSearchForm({
       </div>
       <div className={styles.moreFiltersButtonContainer}>
         <Button
-          buttonChildren="More Filters"
+          children="More Filters"
           className={styles.moreFiltersButton}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="More Filters Button"
-          type="button"
           ariaLabel="More Filters Button"
-          autoFocus={false}
           onClick={() => setShowFilters(true)}
         />
       </div>
@@ -128,14 +123,12 @@ export default function PropertyListingsSearchForm({
       />
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="Search"
+          children="Search"
           className={styles.search}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="search"
-          autoFocus={false}
           type="submit"
-          disabled={isSubmitting}
+          isDisabled={isSubmitting}
         />
       </div>
     </div>

@@ -3,7 +3,7 @@
 @use "@/utils/breakpoints" as *;
 .tabs {
   display: flex;
-  border-radius: rem(40);
+  border-radius: 4rem;
   width: 100%;
-  column-gap: rem(8);
+  column-gap: 0.8rem;
 }

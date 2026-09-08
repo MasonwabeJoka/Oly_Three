@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { formatPrice } from "@/utils/formatterFunctions/Formatter";
 import { Textarea } from "@/components/ui/textarea";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { AddProductAction } from "../_actions/products";
 import SubmitButton from "./SubmitButton";
 
@@ -24,7 +24,7 @@ const AddProductForm = ({}: AddProductFormProps) => {
         <Input
           type="number"
           id="priceInCents"
-          name="priceInCents"
+
           value={priceInCents || ""}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPriceInCents(Number(e.target.value) || 0)

@@ -18,13 +18,13 @@
       font-size: $h4;
       color: $danger;
       font-weight: 500;
-      margin-top: rem(24);
-      margin-bottom: rem(32);
+      margin-top: 2.4rem;
+      margin-bottom: 3.2rem;
     }
 
     p {
       text-align: center;
-      margin-bottom: rem(16);
+      margin-bottom: 1.6rem;
     }
     .link {
       cursor: pointer;
@@ -33,7 +33,7 @@
 
     .termsAndConditions {
       // font-size: $small;
-      margin-top: rem(-12);
+      margin-top: -1.2rem;
     }
   }
   .buttons {
@@ -43,9 +43,9 @@
     display: flex;
     flex-direction: column;
     margin-top: auto;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
     .proceedButton {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 }

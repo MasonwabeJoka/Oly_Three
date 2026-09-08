@@ -1,7 +1,7 @@
 "use client";
 
 import { useModalStore } from "@/store/modalStore";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Image from "@/components/Image";
 import styles from "./MenuButton.module.scss";
 
@@ -17,7 +17,7 @@ const MenuButton = () => {
       <div className={styles.profileIconContainer}>
         <Button
           className={styles.profile}
-          buttonChildren={
+          children={
             <div
               style={{
                 height: "28px",
@@ -34,13 +34,13 @@ const MenuButton = () => {
               />
             </div>
           }
-          buttonType="icon"
-          buttonSize=""
-          name="profile-icon"
-          type="button"
+          buttonVariant="icon"
+
+
+
           ariaLabel="Profile Icon"
-          autoFocus={false}
-          disabled={false}
+
+
           onClick={openModal}
         />
       </div>

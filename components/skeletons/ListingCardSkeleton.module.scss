@@ -3,13 +3,13 @@
 @use "@/utils/breakpoints" as *;
 .boxAdContainer {
   background-color: rgba(0, 0, 0, 0.041);
-  border-radius: rem(40);
+  border-radius: 4rem;
  
 }
 
 .expandedAdContainer {
   background-color: rgba(0, 0, 0, 0.041);
-  border-radius: rem(40);
+  border-radius: 4rem;
 }
 
 .largeBox {
@@ -17,8 +17,8 @@
 }
 
 .standardBox {
-  width: rem(310);
-  min-height: rem(413);
+  width: 31rem;
+  min-height: 41.3rem;
 }
 
 .smallBox {
@@ -33,8 +33,8 @@
 }
 .standardDashboardBox {
   @include only(largeDesktop) {
-    width: rem(310);
-    min-height: rem(413);
+    width: 31rem;
+    min-height: 41.3rem;
   }
 }
 .smallDashboardBox {
@@ -44,8 +44,8 @@
 }
 
 .standardExpanded {
-  width: rem(310);
-  min-height: rem(413);
+  width: 31rem;
+  min-height: 41.3rem;
 }
 
 .smallExpanded {
@@ -56,14 +56,14 @@
 
 .largeDashboardExpanded {
   @include only(largeDesktop) {
-    width: rem(918);
-    min-height: rem(248);
+    width: 91.8rem;
+    min-height: 24.8rem;
   }
 }
 .standardDashboardExpanded {
   @include only(largeDesktop) {
-    width: rem(918);
-    min-height: rem(248);
+    width: 91.8rem;
+    min-height: 24.8rem;
   }
 }
 .smallDashboardExpanded {

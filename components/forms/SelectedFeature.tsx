@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import styles from "./SelectedFeature.module.scss";
 import Form from "next/form";
@@ -94,7 +94,7 @@ const SelectedFeature = ({
               }`}
               id="detail"
               aria-label="Chosen Detail"
-              autoFocus={false}
+
               iconSrcRight=""
               iconPosition="right"
               iconWidth={32}
@@ -112,14 +112,14 @@ const SelectedFeature = ({
           <div className={styles.submitButtonContainer}>
             <Button
               className={styles.proceedButton}
-              buttonChildren="Submit Detail"
-              buttonType="normal"
+              children="Submit Detail"
+              buttonVariant="normal"
               type="submit"
               buttonSize="large"
-              name="proceed-btn"
+
               aria-label="Proceed Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
             />
           </div>

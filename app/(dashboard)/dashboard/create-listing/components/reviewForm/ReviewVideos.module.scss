@@ -7,17 +7,17 @@
   z-index: -1;
   .videoContainer {
     height: auto;
-    width: rem(310);
+    width: 31rem;
     scroll-snap-align: start;
     transition: transform 0.3s ease-in-out;
-    margin-bottom: rem(24);
+    margin-bottom: 2.4rem;
   }
 
   .buttonsContainer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: rem(240);
+    gap: 24rem;
     margin-right: 14.6%;
 
      .navButtons {

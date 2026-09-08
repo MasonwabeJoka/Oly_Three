@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import styles from './Step.module.scss';
-import Button from '@/components/Buttons';
+import Button from '@/components/Button';
 import useIsSelectOpen from '../store/useIsSelectOpen';
 
 interface StepType {
@@ -29,28 +29,28 @@ const Step: React.FC<StepProps> = ({ step, onNext, onBack, isLastStep }) => {
             {!isLastStep && (
               <Button
                 className={styles.proceedButton}
-                buttonChildren="Proceed"
-                buttonType="primary"
+                children="Proceed"
+                buttonVariant="primary"
                 buttonSize="large"
-                name="proceed-btn"
-                type="button"
+
+
                 ariaLabel="Proceed Button"
-                autoFocus={false}
-                disabled={false}
+
+
                 dashboard
                 onClick={onNext}
               />
             )}
             <Button
               className={styles.backButton}
-              buttonChildren="Back"
-              buttonType="normal"
+              children="Back"
+              buttonVariant="normal"
               buttonSize="large"
-              name="back-btn"
-              type="button"
+
+
               ariaLabel="Back Button"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
               onClick={onBack}
             />

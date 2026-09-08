@@ -8,7 +8,7 @@
   width: 100%;
   max-width: 60ch;
   margin: 0 auto;
-  padding: rem(32);
+  padding: 3.2rem;
 
 
 
@@ -23,8 +23,8 @@
       width: 100%;
       height: auto;
  
-      margin-top: rem(12);
-      margin-bottom: rem(32);
+      margin-top: 1.2rem;
+      margin-bottom: 3.2rem;
      
     }
 
@@ -38,16 +38,16 @@
       font-size: $h4 !important;
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
     p {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
     ul {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
     ol {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 }

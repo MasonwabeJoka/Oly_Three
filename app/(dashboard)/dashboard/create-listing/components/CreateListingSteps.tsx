@@ -5,12 +5,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import styles from "./CreateListingSteps.module.scss";
 import Step from "./Step";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import SiteSelection from "./SiteSelection";
 import { formDataSchema } from "../validations/formDataSchema";
 import { useIsAuctionStore } from "../store/useIsAuction";
 import FormProgressBar from "./FormProgressBar";
-import { FormData, CreateListingStepsProps, StepType, SiteType } from "../types/listing.types";
+import {
+  FormData,
+  CreateListingStepsProps,
+  StepType,
+  SiteType,
+} from "../types/listing.types";
 import { getStepDefinitions } from "../config/stepDefinitions";
 import { useAuth } from "@workos-inc/authkit-nextjs/components";
 
@@ -44,7 +49,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
     if (isValid && step! < steps[site].length - 1) {
       const nextStep = step! + 1;
       router.push(
-        `/dashboard/create-listing/${site}/${steps[site][nextStep].path}`
+        `/dashboard/create-listing/${site}/${steps[site][nextStep].path}`,
       );
     } else if (isValid && step! === steps[site].length - 1) {
       router.push(`/dashboard/create-listing/${site}/published`);
@@ -53,7 +58,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
 
   const steps = useMemo(
     () => getStepDefinitions(isAuction, handleNext, user),
-    [isAuction, user, handleNext]
+    [isAuction, user, handleNext],
   );
 
   const stepPaths: Record<SiteType, string[]> = {
@@ -66,7 +71,13 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
 
   useEffect(() => {
     if (currentSite && currentStep && isClient) {
-      const validTypes: SiteType[] = ["oly", "oly-properties", "oly-auto", "oly-hiring", "oly-services"];
+      const validTypes: SiteType[] = [
+        "oly",
+        "oly-properties",
+        "oly-auto",
+        "oly-hiring",
+        "oly-services",
+      ];
       if (!validTypes.includes(currentSite)) {
         router.push("/dashboard/create-listing/oly/select-category");
         return;
@@ -83,7 +94,9 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
 
   const handleSiteSelection = (selectedSite: SiteType) => {
     methods.reset();
-    router.push(`/dashboard/create-listing/${selectedSite}/${steps[selectedSite][0].path}`);
+    router.push(
+      `/dashboard/create-listing/${selectedSite}/${steps[selectedSite][0].path}`,
+    );
   };
 
   const handleBack = () => {
@@ -92,12 +105,12 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
     if (step! === steps[site].length - 1) {
       const prevStep = step! - 2;
       router.push(
-        `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
+        `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`,
       );
     } else if (step! > 1) {
       const prevStep = step! - 1;
       router.push(
-        `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`
+        `/dashboard/create-listing/${site}/${steps[site][prevStep].path}`,
       );
     } else if (step! === 1) {
       router.push(`/dashboard/create-listing/${site}/select-new-category`);
@@ -137,7 +150,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
         )}
         {!isClient ? (
           <div>
-            <LoadingSpinner />
+            <LoadingGraphic />
           </div>
         ) : !site ? (
           <SiteSelection onSelect={handleSiteSelection} />
@@ -157,7 +170,7 @@ const CreateListingSteps: React.FC<CreateListingStepsProps> = ({
           </>
         ) : (
           <div>
-            <LoadingSpinner />
+            <LoadingGraphic />
           </div>
         )}
       </div>

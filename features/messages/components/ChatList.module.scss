@@ -7,17 +7,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: rem(40);
-  width: rem(736);
+  border-radius: 4rem;
+  width: 73.6rem;
 
   .headerDiv {
     position: sticky;
     top: 0;
-    margin-left: rem(4);
+    margin-left: 0.4rem;
     z-index: 3;
     width: 102%;
 
-    height: rem(24);
+    height: 2.4rem;
     display: block;
     background-color: $white-four;
   }
@@ -26,22 +26,22 @@
     display: flex;
     justify-content: center;
     position: sticky;
-    top: rem(24);
-    height: rem(80);
-    width: rem(624);
+    top: 2.4rem;
+    height: 8rem;
+    width: 62.4rem;
     z-index: 2;
     background-color: $white-four;
-    border-radius: 0 0 rem(40) rem(40);
+    border-radius: 0 0 4rem 4rem;
     // background: yellow;
     .search {
-      width: rem(600) !important;
-      height: rem(72) !important;
-      border-radius: rem(40);
+      width: 60rem !important;
+      height: 7.2rem !important;
+      border-radius: 4rem;
       box-shadow: $shadow-one;
     }
   }
 
   .chats {
-    margin-top: rem(24);
+    margin-top: 2.4rem;
   }
 }

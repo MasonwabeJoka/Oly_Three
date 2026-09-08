@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Icon from "./Icon";
-import Button from "./Buttons";
+import Button from "./Button";
 import Emojis from "./Emojis";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -420,14 +420,11 @@ const TextInputBar = forwardRef<HTMLTextAreaElement, Props>(
                 <div className={styles.submitButtonContainer}>
                   <Button
                     className={styles.submitButton}
-                    buttonChildren={submitButtonText}
-                    buttonType="normal"
+                    children={submitButtonText}
+                    buttonVariant="normal"
                     buttonSize="tiny"
-                    name="submit-btn"
-                    type="button"
                     ariaLabel="Send message"
-                    autoFocus={false}
-                    disabled={false}
+
                     onClick={handleSubmit}
                   />
                 </div>

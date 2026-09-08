@@ -3,13 +3,13 @@
 @use "@/utils/breakpoints" as *;
 
 .header {
-  margin-bottom: rem(32);
-  padding: rem(24) 0;
+  margin-bottom: 3.2rem;
+  padding: 2.4rem 0;
   border-bottom: 1px solid $grey-one;
 }
 
 .title {
-  font-size: rem(32);
+  font-size: 3.2rem;
   font-weight: 600;
   color: $black-one;
   margin: 0;

@@ -1,7 +1,7 @@
 'use client';
 import Image from "@/components/Image";
 import styles from "./FeaturedServicesFrontend.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useFeatureInfo from "@/store/featuresInfo";
 import useBreakpointStore from "@/store/useBreakpointStore";
 import BulletPoint from "@/components/BulletPoint";
@@ -110,12 +110,12 @@ export const TextLeft = ({
           </ul>
 
           <Button
-            type="button"
-            name="ctaButton"
-            buttonType="primary"
+
+
+            buttonVariant="primary"
             buttonSize="small"
-            buttonChildren={cta}
-            autoFocus={false}
+            children={cta}
+
             className={styles.ctaButton}
             onClick={() => setIsMoreInfo(true)}
           />
@@ -126,7 +126,7 @@ export const TextLeft = ({
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
       </div>
@@ -152,7 +152,7 @@ export const TextRight = ({
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
         <div className={styles.textContent}>
@@ -177,12 +177,12 @@ export const TextRight = ({
           </div>
 
           <Button
-            type="button"
-            name="ctaButton"
-            buttonType="primary"
+
+
+            buttonVariant="primary"
             buttonSize="small"
-            buttonChildren={cta}
-            autoFocus={false}
+            children={cta}
+
             className={styles.ctaButton}
             onClick={() => setIsMoreInfo(true)}
           />
@@ -220,12 +220,12 @@ export const TextLeftTablet = ({
           </ul>
 
           <Button
-            type="button"
-            name="ctaButton"
-            buttonType="primary"
+
+
+            buttonVariant="primary"
             buttonSize="small"
-            buttonChildren={cta}
-            autoFocus={false}
+            children={cta}
+
             className={styles.ctaButton}
             onClick={() => setIsMoreInfo(true)}
           />
@@ -236,7 +236,7 @@ export const TextLeftTablet = ({
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
       </div>
@@ -261,7 +261,7 @@ export const TextRightTablet = ({
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "3rem" }}
+            style={{ objectFit: "cover", borderRadius: "4.8rem" }}
           />
         </div>
         <div className={styles.textContent}>
@@ -269,12 +269,12 @@ export const TextRightTablet = ({
           <p className={styles.description}>{description}</p>
 
           <Button
-            type="button"
-            name="ctaButton"
-            buttonType="primary"
+
+
+            buttonVariant="primary"
             buttonSize="small"
-            buttonChildren={cta}
-            autoFocus={false}
+            children={cta}
+
             className={styles.ctaButton}
             onClick={() => setIsMoreInfo(true)}
           />

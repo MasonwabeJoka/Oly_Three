@@ -3,7 +3,7 @@ import styles from './EnterBusinessDetails.module.scss';
 import Input from '@/components/Input';
 import BusinessAddressForm from './BusinessAddressForm';
 import { useFormContext } from 'react-hook-form';
-import Button from '@/components/Buttons';
+import Button from '@/components/Button';
 
 interface EnterBusinessDetailsProps {
   onNext: () => void;
@@ -73,14 +73,14 @@ const EnterBusinessDetails: React.FC<EnterBusinessDetailsProps> = ({ onNext }) =
         <BusinessAddressForm />
         <Button
           className={styles.button}
-          buttonChildren="Submit"
-          buttonType="primary"
+          children="Submit"
+          buttonVariant="primary"
           buttonSize="large"
-          name="submit-btn"
-          type="button"
+
+
           ariaLabel="Submit Business Details"
-          autoFocus={false}
-          disabled={!!errors.businessName || !!errors.regNumber || !!errors.taxNumber || !!errors.street || !!errors.suburb || !!errors.city || !!errors.province || !!errors.postalCode}
+
+          isDisabled={!!errors.businessName || !!errors.regNumber || !!errors.taxNumber || !!errors.street || !!errors.suburb || !!errors.city || !!errors.province || !!errors.postalCode}
           dashboard
           onClick={handleSubmit}
         />

@@ -3,7 +3,7 @@ import styles from "./ProductSpecification.module.scss";
 import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
@@ -122,8 +122,8 @@ const ProductSpecification = ({
               marginBottom: placeholder
                 ? 0
                 : specification === "Product Specifications"
-                ? "0.5rem"
-                : "1.25rem",
+                ? "0.8rem"
+                : "2rem",
             }}
           >
             {description}
@@ -131,7 +131,7 @@ const ProductSpecification = ({
           {placeholder && (
             <p
               className={styles.productSpecificationExample}
-              style={{ marginBottom: "1.25rem" }}
+              style={{ marginBottom: "2rem" }}
             >
               eg. {"  "}
               <strong>{boldTextExample}</strong>:{" "}
@@ -178,14 +178,14 @@ const ProductSpecification = ({
         <div className={styles.submitButtonContainer}>
           <Button
             className={styles.submitButton}
-            buttonChildren="Submit Specification"
-            buttonType="normal"
-            type="button"
+            children="Submit Specification"
+            buttonVariant="normal"
+
             buttonSize="large"
-            name="submit-specification-btn"
+
             aria-label="Submit Specification Button"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={clickHandler}
           />

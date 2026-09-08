@@ -18,7 +18,6 @@ const SetVehiclePrice = ({}: SetVehiclePriceProps) => {
         value={0}
         inputSize="large"
         placeholder="Set Your Price"
-        autoFocus={false}
         required={true}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           console.log(e.target.value)

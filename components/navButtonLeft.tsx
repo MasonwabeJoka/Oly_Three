@@ -1,5 +1,5 @@
 import Image from "@/components/Image";
-import Button from "./Buttons";
+import Button from "./Button";
 import styles from "./NavButtonLeft.module.scss";
 import { useSwiper } from "swiper/react";
 
@@ -24,7 +24,7 @@ const NavButtonLeft = ({
     <div className={styles.leftArrowContainer}>
       <Button
         className={`${className} ${styles.leftArrow}`}
-        buttonChildren={
+        children={
           <Image
             src="/icons/left-arrow.png"
             alt="left"
@@ -33,13 +33,13 @@ const NavButtonLeft = ({
             className={styles.left}
           />
         }
-        buttonType="round"
-        buttonSize={size || ""}
-        name="left-arrow-btn"
-        type="button"
+        buttonShape="round"
+        buttonSize={size}
+
+
         ariaLabel="Left Arrow Button"
         autoFocus={autoFocus}
-        disabled={disabled}
+        isDisabled={disabled}
         onClick={onClick ?? (() => swiper?.slidePrev())}
       />
     </div>

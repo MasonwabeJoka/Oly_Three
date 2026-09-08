@@ -3,7 +3,7 @@ import ExitButton from "./ExitButton";
 import styles from "./Modal.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingGraphic from "./LoadingGraphic";
 import { ReactNode } from "react";
 // Todo: Consider adding logo that takes you to home screen to modal
 type Props = {
@@ -81,7 +81,7 @@ const Modal = ({
           </div>
           <div className={styles.modalContent}>
             {" "}
-            {isNavigating ? <LoadingSpinner /> : modalContent}
+            {isNavigating ? <LoadingGraphic /> : modalContent}
           </div>
         </div>
       )}

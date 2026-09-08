@@ -5,10 +5,10 @@
 .container {
   .calculator {
     display: flex;
-    gap: rem(112);
+    gap: 11.2rem;
     .inputSection {
       .control {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
     }
 
@@ -16,8 +16,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: rem(514);
-      height: rem(384);
+      width: 51.4rem;
+      height: 38.4rem;
 
       .title {
         font-size: $body !important;
@@ -27,13 +27,13 @@
       .resultValue {
         font-size: $h3;
         font-weight: 600;
-        margin-bottom: rem(48);
+        margin-bottom: 4.8rem;
       }
 
       .note {
         font-size: $tiny;
         color: $black-four;
-        // margin-bottom: rem(16);
+        // margin-bottom: 1.6rem;
       }
     }
   }

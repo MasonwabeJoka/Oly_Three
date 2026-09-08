@@ -8,24 +8,24 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: rem(1080);
+    width: 108rem;
 
     .title {
         color: $danger;
         font-size: $h4;
         font-weight: 500;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
     }
 
     .subtitle {
         width: 40%;
         text-align: center;
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
     }
     .description {
         width: 40%;
          font-weight: 300;
         text-align: center;
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
     }
 }

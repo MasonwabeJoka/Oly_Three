@@ -51,7 +51,6 @@ const VideoDetailsFields = ({
           inputSize="large"
           placeholder="Give your video a title"
           autoComplete="off"
-          autoFocus={false}
           id="title"
           ariaLabel="Title Field"
           required={true}
@@ -78,8 +77,8 @@ const VideoDetailsFields = ({
           required={true}
           onSubmit={() => {}}
           style={{
-            padding: "2rem 4rem 2rem 4rem",
-            height: "15rem",
+            padding: "3.2rem 6.4rem 3.2rem 6.4rem",
+            height: "24rem",
             textAlign: "left",
           }}
           {...register("message")}

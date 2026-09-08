@@ -1,7 +1,7 @@
 "use client";
 import styles from "./IsAuction.module.scss";
 import { useIsAuctionStore } from "../store/useIsAuction";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from "next/link";
 
 interface isAuctionProps {
@@ -24,14 +24,11 @@ const IsAuction = ({ title, description, site }: isAuctionProps) => {
         >
           <Button
             className={styles.saleButton}
-            buttonChildren="Auction"
-            buttonType="primary"
+            children="Auction"
+            buttonVariant="primary"
             buttonSize="large"
-            name="auction-listing-btn"
-            type="button"
             ariaLabel="Auction Listing Button"
-            autoFocus={false}
-            disabled={false}
+
             onClick={() => setIsAuction(true)}
             dashboard
           />
@@ -42,14 +39,11 @@ const IsAuction = ({ title, description, site }: isAuctionProps) => {
         >
           <Button
             className={styles.auctionButton}
-            buttonChildren="Fixed Price"
-            buttonType="normal"
+            children="Fixed Price"
+            buttonVariant="normal"
             buttonSize="large"
-            name="fixed-price-listing-btn"
-            type="button"
             ariaLabel="Fixed Price Listing Button"
-            autoFocus={false}
-            disabled={false}
+
             onClick={() => setIsAuction(false)}
             dashboard
           />

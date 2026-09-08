@@ -9,13 +9,13 @@
   align-items: center;
 width: 100%;
   @include only(largeDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(smallDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(tablet) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
 
   .title {
@@ -23,30 +23,30 @@ width: 100%;
   }
 
   .uploadedPhotos {
-    padding: 0 rem(100);
+    padding: 0 10rem;
     width: 114%;
   }
 
   .mediaSection {
     display: flex;
     flex-direction: column;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
   }
 
   .buttons {
-    margin-top: rem(48);
+    margin-top: 4.8rem;
   }
 
   .photosButtonContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
   .videosButtonContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
   .videoUrlsContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
   .attachmentsButtonContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
 }

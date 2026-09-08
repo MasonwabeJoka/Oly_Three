@@ -95,9 +95,9 @@ const MobileCarouselOne = ({
                   className={`${styles.dot} ${
                     currentSlideNameIndex === index ? styles.active : ""
                   }`}
-                  type="button"
+
                   aria-label={`${slide.slideName} button`}
-                  autoFocus={false}
+
                   disabled={false}
                 ></button>
               </li>

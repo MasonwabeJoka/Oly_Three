@@ -103,7 +103,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: "20.5rem",
+            marginRight: "32.8rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
@@ -127,7 +127,7 @@ const ExpandedImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "20.5rem",
+            marginLeft: "32.8rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
@@ -160,9 +160,9 @@ const ExpandedImageSlider = ({
               <div
                 style={{
                   position: "relative",
-                  height: "16rem",
-                  width: `calc(16rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : 1.77})`,
-                  borderRadius: "2.5rem",
+                  height: "25.6rem",
+                  width: `calc(25.6rem * ${aspectRatios && aspectRatios[index] ? aspectRatios[index] : 1.77})`,
+                  borderRadius: "4rem",
                 }}
               >
                 <Image
@@ -172,7 +172,7 @@ const ExpandedImageSlider = ({
                   alt="Ad Image"
                   style={{
                     objectFit: "cover",
-                    borderRadius: "2.5rem",
+                    borderRadius: "4rem",
                     zIndex: "50",
                   }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -8,7 +8,7 @@
   align-items: center;
   width: 50vw;
   height: 93vh;
-  border-radius: rem(150) rem(150) rem(150) rem(150);
+  border-radius: 15rem 15rem 15rem 15rem;
   background-color: #c9dce8;
 
   @include only(largeDesktop) {
@@ -43,7 +43,7 @@
       @include only(largeDesktop) {
       }
       @include only(smallDesktop) {
-        margin-right: rem(144);
+        margin-right: 14.4rem;
       }
    
 
@@ -59,30 +59,30 @@
       @include only(smallDesktop) {
       }
       @include only(tablet) {
-        margin-top: rem(230);
+        margin-top: 23rem;
       }
 
 
        .logo {
-      // margin-top: rem(146);
-      margin-bottom: rem(32);
+      // margin-top: 14.6rem;
+      margin-bottom: 3.2rem;
 
       @include only(largeDesktop) {
-        width: rem(120);
+        width: 12rem;
         height: "auto";
       }
       @include only(smallDesktop) {
-        width: rem(120);
+        width: 12rem;
         height: "auto";
       }
       @include only(tablet) {
         position: relative;
-        top: rem(-330);
-        width: rem(100);
+        top: -33rem;
+        width: 10rem;
         height: "auto";
       }
       @include only(extraLargeDesktop) {
-        width: rem(120);
+        width: 12rem;
         height: "auto";
       }
     }

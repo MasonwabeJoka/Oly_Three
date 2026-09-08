@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./CategoryChangeWarning.module.scss";
 import { useRouter } from "next/navigation";
 
@@ -27,24 +27,24 @@ const CategoryChangeWarning = ({ site, onConfirm, onCancel }: CategoryChangeWarn
 
       <div className={styles.buttonContainer}>
         <Button
-          buttonChildren="Yes"
-          buttonType="danger"
+          children="Yes"
+          buttonVariant="danger"
           buttonSize="large"
-          name="yes"
-          type="button"
+
+
           ariaLabel="Yes"
-          autoFocus={false}
+
           onClick={onConfirm}
           dashboard
         />
         <Button
-          buttonChildren="Cancel"
-          buttonType="normal"
+          children="Cancel"
+          buttonVariant="normal"
           buttonSize="large"
-          name="cancel"
-          type="button"
+
+
           ariaLabel="Cancel"
-          autoFocus={false}
+
           onClick={onCancel}
           dashboard
         />

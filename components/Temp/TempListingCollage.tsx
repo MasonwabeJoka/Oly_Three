@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import styles from "./../ListingsCollage.module.scss";
 import { ListingsQueryResult } from "@/sanity.types";
-import LoadingSpinner from "../LoadingSpinner";
-import {listingsData} from "@/data/ListingsData";
+import LoadingGraphic from "../LoadingGraphic";
+import { listingsData } from "@/data/ListingsData";
 
 export type ListingsCollageProps = {
   site:
@@ -41,7 +41,7 @@ type Image = {
 
 const TempListingsCollage = ({
   site,
-//   listings,
+  //   listings,
   isDeletable,
   checkedColour,
   hoverColour,
@@ -49,7 +49,6 @@ const TempListingsCollage = ({
   isDashboard,
   cardSize,
 }: ListingsCollageProps) => {
-
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { ref, inView } = useInView({
@@ -58,7 +57,6 @@ const TempListingsCollage = ({
   useEffect(() => {
     setIsClient(true);
   }, []);
-
 
   if (!isClient) {
     return null;
@@ -73,66 +71,63 @@ const TempListingsCollage = ({
     650: 1,
   };
 
-
   const cards = listingsData.slice(0, 30)?.map((listing, index) => {
-    const { _id,  imageUrls, title, text, price, user } = listing;
-  
-   
-    const aspectRatios = imageUrls.map((url) => {
-  const match = url.match(/\/(\d+)\/(\d+)/);
-  if (!match) return null; // handle unexpected URLs
-  const width = Number(match[1]);
-  const height = Number(match[2]);
-  return width / height;
-});
+    const { _id, imageUrls, title, text, price, user } = listing;
 
+    const aspectRatios = imageUrls.map((url) => {
+      const match = url.match(/\/(\d+)\/(\d+)/);
+      if (!match) return null; // handle unexpected URLs
+      const width = Number(match[1]);
+      const height = Number(match[2]);
+      return width / height;
+    });
 
     return (
       <div key={_id} className={styles.cardContainer}>
         <Link href={`/listings/${_id}`}>
           <div className={styles.card}>
-          {site === "oly" && (
-            <ListingCard
-              site={site}
-              slug={`${_id}`}
-              listing={listing}
-              index={index}
-              id={_id}
-              cardType="box"
-              imageUrls={imageUrls}
-              aspectRatios={aspectRatios as number[]}
-              title={title}
-              price={price}
-              cardSize={cardSize}
-              description={text}
-              isDeletable={isDeletable}
-              isDashboard={isDashboard}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
-            />
-          )}
-          {site === "oly-properties" && (
-            <ListingCard
-              site={site}
-              slug={`${_id}`}
-              listing={listing}
-              index={index}
-              id={_id}
-              cardType="box"
-              imageUrls={imageUrls}
-              aspectRatios={aspectRatios as number[]}
-              title={title}
-              price={price}
-              cardSize={cardSize}
-              description={text}
-              isDeletable={isDeletable}
-              isDashboard={isDashboard}
-              checkedColour={checkedColour}
-              hoverColour={hoverColour}
-              checkedHovered={checkedHovered}
-            />
-          )}
+            {site === "oly" && (
+              <ListingCard
+                site={site}
+                slug={`${_id}`}
+                listing={listing}
+                index={index}
+                id={_id}
+                cardType="box"
+                imageUrls={imageUrls}
+                aspectRatios={aspectRatios as number[]}
+                title={title}
+                price={price}
+                cardSize={cardSize}
+                description={text}
+                isDeletable={isDeletable}
+                isDashboard={isDashboard}
+                checkedColour={checkedColour}
+                hoverColour={hoverColour}
+                checkedHovered={checkedHovered}
+              />
+            )}
+            {site === "oly-properties" && (
+              <ListingCard
+                site={site}
+                slug={`${_id}`}
+                listing={listing}
+                index={index}
+                id={_id}
+                cardType="box"
+                imageUrls={imageUrls}
+                aspectRatios={aspectRatios as number[]}
+                title={title}
+                price={price}
+                cardSize={cardSize}
+                description={text}
+                isDeletable={isDeletable}
+                isDashboard={isDashboard}
+                checkedColour={checkedColour}
+                hoverColour={hoverColour}
+                checkedHovered={checkedHovered}
+              />
+            )}
           </div>
         </Link>
       </div>
@@ -154,8 +149,8 @@ const TempListingsCollage = ({
             {cards || []}
           </Masonry>
           <div ref={ref} className={styles.loading}>
-            {loading ? <LoadingSpinner /> : null}
-            {/* {loading && hasMore ? <LoadingSpinner /> : null} */}
+            {loading ? <LoadingGraphic /> : null}
+            {/* {loading && hasMore ? <LoadingGraphic /> : null} */}
           </div>
         </>
       )}
@@ -171,7 +166,7 @@ const TempListingsCollage = ({
             {cards || []}
           </div>
           <div ref={ref} className={styles.loading}>
-            {loading ? <LoadingSpinner /> : null}
+            {loading ? <LoadingGraphic /> : null}
           </div>
         </>
       )}

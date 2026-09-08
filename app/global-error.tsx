@@ -41,8 +41,8 @@ export default function GlobalError({
         >
           <h2
             style={{
-              fontSize: "1.75rem",
-              marginBottom: "3rem",
+              fontSize: "2.8rem",
+              marginBottom: "4.8rem",
               color: "#dc3545",
             }}
           >
@@ -52,8 +52,8 @@ export default function GlobalError({
             style={{
               display: "flex",
               justifyContent: "center",
-              fontSize: "1rem",
-              marginBottom: "3rem",
+              fontSize: "1.6rem",
+              marginBottom: "4.8rem",
               color: "#dc3545",
               width: "40%",
               textAlign: "center",
@@ -64,8 +64,8 @@ export default function GlobalError({
           {process.env.NODE_ENV === "development" && error.digest && (
             <p
               style={{
-                fontSize: "0.875rem",
-                marginBottom: "1.5rem",
+                fontSize: "1.4rem",
+                marginBottom: "2.4rem",
                 color: "#999",
                 fontFamily: "monospace",
               }}
@@ -73,14 +73,14 @@ export default function GlobalError({
               Error ID: {error.digest}
             </p>
           )}
-          <div style={{ marginBottom: "1.25rem" }}>
+          <div style={{ marginBottom: "2rem" }}>
             <button
               onClick={reset}
               autoFocus
               aria-label="Retry the action"
               style={{
                 padding: "12px 32px",
-                fontSize: "1rem",
+                fontSize: "1.6rem",
                 backgroundColor: "#007bff",
                 color: "white",
                 border: "none",
@@ -92,13 +92,13 @@ export default function GlobalError({
               Try Again
             </button>
           </div>
-          <div style={{ marginBottom: "1.25rem" }}>
+          <div style={{ marginBottom: "2rem" }}>
             <button
               onClick={handleGoBack}
               aria-label="Return to previous page"
               style={{
                 padding: "12px 32px",
-                fontSize: "1rem",
+                fontSize: "1.6rem",
                 backgroundColor: "#6c757d",
                 color: "white",
                 border: "none",

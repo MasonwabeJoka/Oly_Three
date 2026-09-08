@@ -3,7 +3,7 @@ import styles from "./VehicleCondition.module.scss";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 const VehicleCondition = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const VehicleCondition = () => {
 
       <Select
         id="exterior"
-        name="exterior"
+
         label="Exterior"
         options={[
           { label: "Excellent", value: "excellent" },
@@ -47,7 +47,7 @@ const VehicleCondition = () => {
         initialValue="Exterior Condition"
         selectSize="large"
         ariaLabel="Exterior Condition"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
@@ -55,7 +55,7 @@ const VehicleCondition = () => {
 
       <Select
         id="interior"
-        name="interior"
+
         label="Interior"
         options={[
           { label: "Excellent", value: "excellent" },
@@ -66,7 +66,7 @@ const VehicleCondition = () => {
         initialValue="Interior Condition"
         selectSize="large"
         ariaLabel="Interior Condition"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
@@ -74,7 +74,7 @@ const VehicleCondition = () => {
 
       <Select
         id="tyres"
-        name="tyres"
+
         label="Tyres"
         options={[
           { label: "New", value: "new" },
@@ -84,7 +84,7 @@ const VehicleCondition = () => {
         initialValue="Tyres Condition"
         selectSize="large"
         ariaLabel="Tyres Condition"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
@@ -92,7 +92,7 @@ const VehicleCondition = () => {
 
       <Select
         id="modifications"
-        name="modifications"
+
         label="Modified"
         options={[
           { label: "Yes", value: "yes" },
@@ -101,7 +101,7 @@ const VehicleCondition = () => {
         initialValue="Any Modifications"
         selectSize="large"
         ariaLabel="Modifications"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
@@ -109,7 +109,7 @@ const VehicleCondition = () => {
 
       <Select
         id="accidents"
-        name="accidents"
+
         label="Accidents"
         options={[
           { label: "Yes", value: "yes" },
@@ -118,7 +118,7 @@ const VehicleCondition = () => {
         initialValue="Any Accidents"
         selectSize="large"
         ariaLabel="Accidents"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
@@ -126,7 +126,7 @@ const VehicleCondition = () => {
 
       <Select
         id="serviceHistory"
-        name="serviceHistory"
+
         label="Service History"
         options={[
           { label: "Yes", value: "yes" },
@@ -137,21 +137,21 @@ const VehicleCondition = () => {
         initialValue="Service History"
         selectSize="large"
         ariaLabel="Service History"
-        autoFocus={false}
+
         required={false}
         onChange={handleChange}
         value={null}
       />
 
       <Button
-        type="button"
+
         onClick={handleNext}
-        buttonChildren="Next"
+        children="Next"
         buttonSize="large"
-        buttonType="primary"
-        autoFocus={false}
-        disabled={false}
-        name="next"
+        buttonVariant="primary"
+
+
+
         ariaLabel="Next"
       />
     </div>

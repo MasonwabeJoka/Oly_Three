@@ -13,7 +13,7 @@ import { z } from "zod";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
 import Avatar from "@/components/Avatar";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 import { profileSchema } from "@/server/db/schemas/users/validations";
 
@@ -401,14 +401,14 @@ const ProfileSettingsForm = ({
           <Link href="/dashboard/settings/password-settings">
             <Button
               className={`${styles.changePasswordButton} ${styles.control}`}
-              buttonChildren="Change Your Password"
-              buttonType="normal"
+              children="Change Your Password"
+              buttonVariant="normal"
               buttonSize="large"
-              name="change-password"
-              type="button"
+
+
               ariaLabel="Change Your Password"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
             />
           </Link>
@@ -419,7 +419,7 @@ const ProfileSettingsForm = ({
               initialValue="Social Media Links"
               selectSize="large"
               label="Socials"
-              name="social-media"
+
               id="social-media"
               ariaLabel="Social Media Links"
               onChange={(
@@ -547,32 +547,32 @@ const ProfileSettingsForm = ({
         <div className={styles.buttonsContainer}>
           <Button
             className={styles.updateProfileSettings}
-            buttonChildren={
+            children={
               isSubmitting
                 ? "Updating..."
                 : "Update Profile"
             }
-            buttonType="primary"
+            buttonVariant="primary"
             buttonSize="large"
-            name="update-profile"
+
             type="submit"
             ariaLabel="Update Profile Button"
-            autoFocus={false}
-            disabled={isSubmitting}
+
+            isDisabled={isSubmitting}
             dashboard
           />
 
           <Link href="/dashboard/settings">
             <Button
               className={styles.backButton}
-              buttonChildren="Back"
-              buttonType="normal"
+              children="Back"
+              buttonVariant="normal"
               buttonSize="large"
-              name="back-btn"
-              type="button"
+
+
               ariaLabel="Back"
-              autoFocus={false}
-              disabled={false}
+
+
               dashboard
             />
           </Link>

@@ -6,24 +6,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: rem(48);
+  margin-top: 4.8rem;
 
   .title {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
     text-align: center;
     width: 70%;
   }
 
   .thumbnails {
     display: flex;
-    gap: rem(8);
+    gap: 0.8rem;
 
     .thumbnail {
       position: relative;
       overflow: hidden;
-      width: rem(208);
-      height: rem(117);
-      border-radius: rem(40);
+      width: 20.8rem;
+      height: 11.7rem;
+      border-radius: 4rem;
       background-color: $grey-one;
       cursor: pointer;
       border: 3px solid transparent;
@@ -35,10 +35,10 @@
 
       .editBtn {
         position: absolute;
-        top: rem(8);
-        right: rem(8);
-        width: rem(32);
-        height: rem(32);
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 3.2rem;
+        height: 3.2rem;
         border-radius: 50%;
         background-color: rgba(255, 255, 255, 0.85);
         border: none;

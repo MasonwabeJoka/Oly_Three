@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { CreditCard } from "lucide-react";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import SmallInputWrapper from "@/components/SmallInputWrapper";
 import Link from "next/link";
 
@@ -202,14 +202,14 @@ const CardForm = () => {
   <Link href={`/listings/some-slug/payment-success`}>
   <Button
           className={styles.payButton}
-          buttonChildren={submitting ? "Processing..." : "Pay"}
-          buttonType="primary"
+          children={submitting ? "Processing..." : "Pay"}
+          buttonVariant="primary"
           buttonSize="large"
-          name="pay-btn"
+
           type="submit"
           ariaLabel="Pay Button"
-          autoFocus={false}
-          disabled={submitting}
+
+          isDisabled={submitting}
           dashboard
         /></Link>
         

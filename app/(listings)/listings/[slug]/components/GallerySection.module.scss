@@ -9,13 +9,13 @@
   .galleryContainer {
     width: auto;
     .breadcrumbsContainer {
-      margin: rem(0) rem(0) rem(16) rem(32);
+      margin: 0rem 0rem 1.6rem 3.2rem;
     }
 
     .gallery {
       display: flex;
       justify-content: center;
-      margin-bottom: rem(12);
+      margin-bottom: 1.2rem;
     }
   }
 }

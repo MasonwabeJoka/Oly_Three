@@ -46,10 +46,10 @@ export default function DashboardLayoutWrapper({
       marginLeft = isVisible ? "auto" : "0";
       break;
     case isSmallDesktop:
-      marginLeft = isVisible ? "1rem" : "0";
+      marginLeft = isVisible ? "1.6rem" : "0";
       break;
     case isTablet:
-      marginLeft = isVisible ? "1rem" : "0";
+      marginLeft = isVisible ? "1.6rem" : "0";
       break;
     default:
       marginLeft = "0";

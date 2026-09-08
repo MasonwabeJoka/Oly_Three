@@ -1,7 +1,7 @@
 "use client";
 import styles from "./ImageGallery.module.scss";
 import Image from "@/components/Image";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useState } from "react";
 import Icon from "./Icon";
 import Modal from "./Modal";
@@ -179,14 +179,14 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             <div className={styles.buttonContainer}>
               <Button
                 className={styles.showAllImagesButton}
-                buttonChildren="Full Screen"
-                buttonType="normal"
+                children="Full Screen"
+                buttonVariant="normal"
                 buttonSize="small"
-                name="show-all-images-btn"
-                type="button"
+
+
                 ariaLabel="Show All Images Button"
-                autoFocus={false}
-                disabled={false}
+
+
                 onClick={() => setShowImages(true)}
               />
             </div>

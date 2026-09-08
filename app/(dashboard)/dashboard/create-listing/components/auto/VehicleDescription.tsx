@@ -36,7 +36,6 @@ const VehicleDescription = () => {
       </label>
 
       <button
-        type="button"
         onClick={handleNext}
         disabled={!description || !price}
       >

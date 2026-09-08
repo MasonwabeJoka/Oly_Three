@@ -189,7 +189,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: "16rem",
+            marginRight: "25.6rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsLeftNavHovered(true)}
@@ -215,7 +215,7 @@ const ImageSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: "16rem",
+            marginLeft: "25.6rem",
           }}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
           onMouseEnter={() => setIsRightNavHovered(true)}
@@ -246,9 +246,9 @@ const ImageSlider = ({
           <SwiperSlide key={index} className={styles.swiperSlide}>
             <div
               style={{
-                height: `calc(19.375rem / ${aspectRatios && aspectRatios[index]})`,
-                width: "19.375rem",
-                borderRadius: "1.5rem",
+                height: `calc(31rem / ${aspectRatios && aspectRatios[index]})`,
+                width: "31rem",
+                borderRadius: "2.4rem",
               }}
             >
               <Image

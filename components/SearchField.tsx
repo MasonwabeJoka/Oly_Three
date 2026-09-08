@@ -31,7 +31,7 @@ const SearchField = ({
     <Form
       className={styles.searchForm}
       autoComplete={autoComplete}
-      name=""
+
 
       action={mockServerAction}
     >
@@ -41,7 +41,7 @@ const SearchField = ({
           autoFocus
           type="search"
           id="user"
-          name="username"
+
           placeholder={placeholder}
           required={require}
         />

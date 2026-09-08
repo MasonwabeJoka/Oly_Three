@@ -10,15 +10,15 @@
   justify-content: center;
 
   @include only(largeDesktop) {
-    width: rem(1098);
+    width: 109.8rem;
   }
 
   @include only(largeDesktop) {
-    width: rem(960);
+    width: 96rem;
   }
 
   @include only(largeDesktop) {
-    width: rem(960);
+    width: 96rem;
   }
 
   .title {
@@ -33,23 +33,23 @@
     flex-direction: column;
     align-items: center;
     width: 108%;
-    padding: rem(48) rem(64);
-    border-radius: rem(40);
-    margin-bottom: rem(64);
+    padding: 4.8rem 6.4rem;
+    border-radius: 4rem;
+    margin-bottom: 6.4rem;
     background: $white-six;
     .descriptionContainer {
-      margin-bottom: rem(64);
+      margin-bottom: 6.4rem;
 
       .description {
         text-align: center;
-        padding: 0 rem(120);
-        margin-bottom: rem(16);
+        padding: 0 12rem;
+        margin-bottom: 1.6rem;
       }
     }
 
     .reviewSection {
       .section {
-        margin-bottom: rem(64);
+        margin-bottom: 6.4rem;
       }
     }
   }
@@ -59,16 +59,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    bottom: rem(180);
-    padding-top: rem(32);
-    padding-bottom: rem(20);
+    bottom: 18rem;
+    padding-top: 3.2rem;
+    padding-bottom: 2rem;
     z-index: 50;
     text-align: center;
     background: $white-four;
-    width: rem(1080);
+    width: 108rem;
 
     p {
-      width: rem(640);
+      width: 64rem;
     }
     .link {
       text-decoration: underline;

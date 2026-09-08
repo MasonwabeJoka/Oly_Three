@@ -6,15 +6,15 @@
   position: relative;
   display: flex;
   background-color: $white-three;
-  width: rem(918);
-  height: rem(378);
-  border-radius: rem(40);
+  width: 91.8rem;
+  height: 37.8rem;
+  border-radius: 4rem;
   cursor: pointer;
 
   .checkboxContainer {
     position: absolute;
-    top: rem(20);
-    right: rem(20);
+    top: 2rem;
+    right: 2rem;
   }
 
   .content {
@@ -28,7 +28,7 @@
     position: relative;
     width: 60%;
     height: 100%;
-    border-radius: rem(40);
+    border-radius: 4rem;
     box-shadow: $shadow-one;
   }
 
@@ -37,10 +37,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: rem(20);
+    gap: 2rem;
     width: 40%;
     height: 100%;
-    border-radius: rem(40);
+    border-radius: 4rem;
 
     .trimName {
       font-size: $h4;
@@ -51,9 +51,9 @@
       width: 80%;
       .detail {
         display: flex;
-        gap: rem(16);
+        gap: 1.6rem;
         font-size: $small;
-        margin-bottom: rem(16);
+        margin-bottom: 1.6rem;
       }
     }
   }

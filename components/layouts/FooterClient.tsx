@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Modal from "../Modal";
 import FeedbackOptions from "../FeedbackOptions";
 import styles from "./Footer.module.scss";
@@ -16,15 +16,15 @@ const FooterClient = () => {
     <>
       <Button
         className={styles.feedbackButton}
-        buttonChildren="Please give us your feedback"
-        buttonType="primary"
+        children="Please give us your feedback"
+        buttonVariant="primary"
         buttonSize="large"
-        name="feedback-btn"
-        type="button"
+
+
         ariaLabel="Open Feedback Form"
         onClick={openModal}
-        autoFocus={false}
-        disabled={false}
+
+
       />
       <Modal
         showModal={showFeedbackModal}

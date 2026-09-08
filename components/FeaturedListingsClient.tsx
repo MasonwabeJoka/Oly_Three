@@ -65,9 +65,9 @@ const FeaturedListingsClient = ({ site }: any) => {
             selectSize="large"
             label="Categories"
             id="categories"
-            name="categories"
+
             ariaLabel="categories"
-            autoFocus={false}
+
             required={true}
           />
         </div>
@@ -93,9 +93,9 @@ const FeaturedListingsClient = ({ site }: any) => {
               selectSize="large"
               label="Property Type"
               id="propertyType"
-              name="propertyType"
+
               ariaLabel="Property Type Selector"
-              autoFocus={false}
+
               required={false}
             />
           </div>
@@ -114,9 +114,9 @@ const FeaturedListingsClient = ({ site }: any) => {
               label="Location"
               placeholder="Search by city, province, town..."
               id="locationSearch"
-              name="locationSearch"
+
               ariaLabel="Location"
-              autoFocus={false}
+
               autoComplete="off"
               required
             />
@@ -145,9 +145,9 @@ const FeaturedListingsClient = ({ site }: any) => {
               selectSize="large"
               label="Property Type"
               id="propertyType"
-              name="propertyType"
+
               ariaLabel="Property Type Selector"
-              autoFocus={false}
+
               required={false}
             />
           </div>
@@ -166,9 +166,9 @@ const FeaturedListingsClient = ({ site }: any) => {
               label="Location"
               placeholder="Search by city, province, town..."
               id="locationSearch"
-              name="locationSearch"
+
               ariaLabel="Location"
-              autoFocus={false}
+
               autoComplete="off"
               required
             />

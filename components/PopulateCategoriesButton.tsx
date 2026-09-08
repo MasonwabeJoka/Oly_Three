@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import Button from "./Buttons"
+import Button from "./Button"
 
 function PopulateCategoriesButton() {
   const [loading, setLoading] = useState(false)
@@ -33,20 +33,17 @@ function PopulateCategoriesButton() {
     <div>
       {/* <button 
         onClick={handlePopulate} 
-        disabled={loading}
+        isDisabled={loading}
         style={{ padding: "10px 20px", fontSize: "16px" }}
       >
         {loading ? "Populating..." : "Populate Categories"}
       </button> */}
       <Button
-        buttonChildren={loading ? "Populating..." : "Populate Categories"}
-        buttonType="primary"
+        children={loading ? "Populating..." : "Populate Categories"}
+        buttonVariant="primary"
         buttonSize="large"
-        name="populate-categories-btn"
-        type="button"
         ariaLabel="Populate Categories"
-        autoFocus={false}
-        disabled={loading}
+        isDisabled={loading}
         onClick={handlePopulate}
       />
       {message && <p>{message}</p>}

@@ -1,7 +1,7 @@
 import Image from "@/components/Image";
 import styles from "./FinancialAssistance.module.scss";
 import BulletPoint from "@/components/BulletPoint";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import BankLogos from "./BankLogos";
 interface FinancialAssistanceProps {}
 
@@ -46,30 +46,30 @@ const FinancialAssistance = ({}: FinancialAssistanceProps) => {
       </p>
       <div className={`${styles.button} ${styles.getFinanceBtnContainer}`}>
         <Button
-          buttonChildren="Get Finance Help"
+          children="Get Finance Help"
           className={styles.getFinanceBtn}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="get-finance-btn"
-          type="button"
+
+
           ariaLabel="Get Finance Help Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       <div
         className={`${styles.button} ${styles.continueWithoutFinanceBtnContainer}`}
       >
         <Button
-          buttonChildren="Continue Without Finance"
+          children="Continue Without Finance"
           className={styles.continueWithoutFinanceBtn}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="continue-without-finance-btn"
-          type="button"
+
+
           ariaLabel="Continue Without Finance Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

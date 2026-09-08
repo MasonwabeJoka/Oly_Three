@@ -8,7 +8,7 @@
 
   .errorMessage {
     color: $danger !important;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
     text-align: center;
   }
 
@@ -16,12 +16,12 @@
     font-size: $h4;
     font-weight: 500;
     color: $danger;
-    margin-top: rem(80);
-    margin-bottom: rem(52);
+    margin-top: 8rem;
+    margin-bottom: 5.2rem;
   }
 
   .avatarContainer {
-    margin-bottom: rem(24);
+    margin-bottom: 2.4rem;
     cursor: url("/icons/pencil.png"), auto;
   }
 
@@ -30,8 +30,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: rem(48);
-    margin-bottom: rem(48);
+    gap: 4.8rem;
+    margin-bottom: 4.8rem;
 
     .controls {
       display: flex;
@@ -40,19 +40,19 @@
       align-items: center;
 
       .control {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
 
       .phoneNumber {
-        // margin-bottom: rem(48);
+        // margin-bottom: 4.8rem;
       }
 
       .changePasswordButton {
         color: #67787c;
-        // margin-bottom: rem(48);
+        // margin-bottom: 4.8rem;
       }
       .selectContainer {
-        margin-bottom: rem(20);
+        margin-bottom: 2rem;
       }
     }
 
@@ -60,8 +60,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: rem(20);
-      // margin-top: rem(48);
+      gap: 2rem;
+      // margin-top: 4.8rem;
       .otherSocialMedia {
       }
       .selectedSocialMediaContainer {
@@ -70,15 +70,15 @@
         align-items: center;
 
         .link {
-          // margin-bottom: rem(48);
+          // margin-bottom: 4.8rem;
         }
       }
       .otherSocialMediaContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: rem(20);
-        margin-bottom: rem(48);
+        gap: 2rem;
+        margin-bottom: 4.8rem;
       }
     }
   }
@@ -87,10 +87,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: rem(240);
+    margin-bottom: 24rem;
 
     .updateProfileSettings {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
 
     .backButton {

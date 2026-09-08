@@ -13,23 +13,23 @@
 
   .message {
     font-size: $h4;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
     color: $danger;
   }
   .description {
     display: flex;
     justify-content: center;
     font-size: $body;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
     color: $danger;
     width: 40%;
   }
   .digest {
     font-size: $small;
-    margin-bottom: rem(24);
+    margin-bottom: 2.4rem;
     color: $grey-two;
   }
   .buttonContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
 }

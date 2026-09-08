@@ -6,7 +6,7 @@ interface IconProps {
   alt: string;
   width?: number;
   height?: number;
-  fill?: boolean;               // ← new
+  fill?: boolean;              
   boxShadow?: string;
   onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
   isButton?: boolean;

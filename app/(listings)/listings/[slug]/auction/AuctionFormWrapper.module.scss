@@ -5,22 +5,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(311);
+  width: 31.1rem;
   height: 100vh;
   overflow-y: auto; /* Enable vertical scrolling */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
 
   @include only(largeDesktop) {
-    width: rem(1098);
-    margin-left: rem(-48);
+    width: 109.8rem;
+    margin-left: -4.8rem;
   }
 
   .titleContainer {
     display: flex;
     justify-content: center;
-    margin-top: rem(128);
-    margin-bottom: rem(64);
+    margin-top: 12.8rem;
+    margin-bottom: 6.4rem;
     width: 100%;
     .title {
       color: $danger;
@@ -33,7 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: rem(64);
+    margin-bottom: 6.4rem;
   }
 
   .buttons {
@@ -43,9 +43,9 @@
     flex-direction: column;
     margin-top: auto;
 
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
     .proceedButton {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 

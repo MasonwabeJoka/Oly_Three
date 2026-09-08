@@ -2,7 +2,7 @@
 
 import styles from './DropdownMenu.module.scss'
 import * as React from "react"
-import Button from "./Buttons"
+import Button from "./Button"
 import {
   DropdownMenu as ShadcnDropdownMenu,
   DropdownMenuContent,
@@ -43,14 +43,14 @@ export function DropdownMenu({
     //   {triggerText}
     // </ShadcnButton>
     <Button
-        buttonChildren={triggerText}
-        buttonType="normal"
+        children={triggerText}
+        buttonVariant="normal"
         buttonSize={buttonSize}
-        name="my-dropdown-menu-btn"
-        type="button"
+
+
         ariaLabel="My Dropdown Menu Button"
-        autoFocus={false}
-        disabled={false}
+
+
       />
   )
 

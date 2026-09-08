@@ -6,7 +6,7 @@ import useSidebarStore from "@/store/useSidebarStore";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import styles from "./ListingsCollage.module.scss";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingGraphic from "./LoadingGraphic";
 import { ListingsQueryResult } from "@/sanity.types";
 import ListingCardSkeletons from "./skeletons/ListingCardSkeletons";
 import useBreakpointStore from "@/store/useBreakpointStore";
@@ -148,9 +148,11 @@ const ListingsCollage = ({
             breakpointCols={breakpointColumnsObj}
             columnClassName={styles.listingsContainerColumns}
             style={{
-              maxWidth: isDashboard ? "59.625rem" : "95vw",
+              maxWidth: isDashboard ? "95.4rem" : "95vw",
               width:
-                isSmallDesktop && currentScreenSize < 1383 ? "62rem" : "1650px",
+                isSmallDesktop && currentScreenSize < 1383
+                  ? "99.2rem"
+                  : "1650px",
             }}
           >
             {cards || []}

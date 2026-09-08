@@ -52,7 +52,6 @@ export default function ModificationsSection() {
         <label>
           <input
             type="radio"
-            name="hasMods"
             value="yes"
             checked={hasMods === "yes"}
             onChange={() => setHasMods("yes")}
@@ -63,7 +62,6 @@ export default function ModificationsSection() {
         <label>
           <input
             type="radio"
-            name="hasMods"
             value="no"
             checked={hasMods === "no"}
             onChange={() => setHasMods("no")}
@@ -108,7 +106,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="installer"
                 value="professional"
                 checked={installer === "professional"}
                 onChange={() => setInstaller("professional")}
@@ -119,7 +116,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="installer"
                 value="diy"
                 checked={installer === "diy"}
                 onChange={() => setInstaller("diy")}
@@ -130,7 +126,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="installer"
                 value="unknown"
                 checked={installer === "unknown"}
                 onChange={() => setInstaller("unknown")}
@@ -146,7 +141,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="certified"
                 value="yes-docs"
                 checked={certified === "yes-docs"}
                 onChange={() => setCertified("yes-docs")}
@@ -157,7 +151,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="certified"
                 value="yes-nodocs"
                 checked={certified === "yes-nodocs"}
                 onChange={() => setCertified("yes-nodocs")}
@@ -168,7 +161,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="certified"
                 value="no"
                 checked={certified === "no"}
                 onChange={() => setCertified("no")}
@@ -179,7 +171,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="certified"
                 value="na"
                 checked={certified === "na"}
                 onChange={() => setCertified("na")}
@@ -195,7 +186,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="reversible"
                 value="yes"
                 checked={reversible === "yes"}
                 onChange={() => setReversible("yes")}
@@ -206,7 +196,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="reversible"
                 value="no"
                 checked={reversible === "no"}
                 onChange={() => setReversible("no")}
@@ -217,7 +206,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="reversible"
                 value="partial"
                 checked={reversible === "partial"}
                 onChange={() => setReversible("partial")}
@@ -233,7 +221,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="performanceChange"
                 value="improved"
                 checked={performanceChange === "improved"}
                 onChange={() => setPerformanceChange("improved")}
@@ -244,7 +231,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="performanceChange"
                 value="no-change"
                 checked={performanceChange === "no-change"}
                 onChange={() => setPerformanceChange("no-change")}
@@ -255,7 +241,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="performanceChange"
                 value="unsure"
                 checked={performanceChange === "unsure"}
                 onChange={() => setPerformanceChange("unsure")}
@@ -271,7 +256,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="warranty"
                 value="yes"
                 checked={warranty === "yes"}
                 onChange={() => setWarranty("yes")}
@@ -282,7 +266,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="warranty"
                 value="no"
                 checked={warranty === "no"}
                 onChange={() => setWarranty("no")}
@@ -293,7 +276,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="warranty"
                 value="unsure"
                 checked={warranty === "unsure"}
                 onChange={() => setWarranty("unsure")}
@@ -309,7 +291,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="legalIssues"
                 value="yes"
                 checked={legalIssues === "yes"}
                 onChange={() => setLegalIssues("yes")}
@@ -320,7 +301,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="legalIssues"
                 value="no"
                 checked={legalIssues === "no"}
                 onChange={() => setLegalIssues("no")}
@@ -331,7 +311,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="legalIssues"
                 value="unsure"
                 checked={legalIssues === "unsure"}
                 onChange={() => setLegalIssues("unsure")}
@@ -365,7 +344,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="repairRelated"
                 value="yes"
                 checked={repairRelated === "yes"}
                 onChange={() => setRepairRelated("yes")}
@@ -376,7 +354,6 @@ export default function ModificationsSection() {
             <label>
               <input
                 type="radio"
-                name="repairRelated"
                 value="no"
                 checked={repairRelated === "no"}
                 onChange={() => setRepairRelated("no")}

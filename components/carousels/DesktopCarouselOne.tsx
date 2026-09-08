@@ -1,7 +1,7 @@
 "use client";
 import styles from "./DesktopCarouselOne.module.scss";
 import { useState, useEffect, useRef, useCallback } from "react";
-import Button from "../Buttons";
+import Button from "../Button";
 import Image from "@/components/Image";
 
 interface CarouselProps {
@@ -117,10 +117,10 @@ const DesktopCarouselOne = ({
                           className={`${styles.dot} ${
                             currentSlideNameIndex === index ? styles.active : ""
                           }`}
-                          type="button"
+
                           aria-label={`${slide.slideName} button`}
-                          autoFocus={false}
-                          disabled={false}
+
+
                         ></button>
                       </li>
                     );
@@ -150,7 +150,7 @@ const DesktopCarouselOne = ({
           <div className={styles.buttons}>
             <Button
               className={`${styles.button} ${styles.prev}`}
-              buttonChildren={
+              children={
                 <Image
                   src="/left-chevron.png"
                   alt="left"
@@ -158,18 +158,18 @@ const DesktopCarouselOne = ({
                   height={24}
                 />
               }
-              buttonType="roundStandardFeed"
-              buttonSize=""
-              name="nav-prev-btn"
-              type="button"
+              buttonShape="round"
+
+
+
               ariaLabel="Nav Previous Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={() => prevNext(-1)}
             />
             <Button
               className={`${styles.button} ${styles.next}`}
-              buttonChildren={
+              children={
                 <Image
                   src="/right-chevron.png"
                   alt="right"
@@ -177,13 +177,13 @@ const DesktopCarouselOne = ({
                   height={24}
                 />
               }
-              buttonType="roundStandardFeed"
-              buttonSize=""
-              name="nav-next-btn"
-              type="button"
+              buttonShape="round"
+
+
+
               ariaLabel="Nav Next Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={() => prevNext(1)}
             />
           </div>

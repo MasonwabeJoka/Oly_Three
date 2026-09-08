@@ -4,7 +4,7 @@
 
 .container {
   position: fixed;
-  top: rem(4);
+  top: 0.4rem;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center;
@@ -13,7 +13,7 @@
   width: 95vw;
    pointer-events: none;
   @include only(largeDesktop) {
-    top: rem(8);
+    top: 0.8rem;
   }
 
   .logo {

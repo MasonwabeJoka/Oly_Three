@@ -92,7 +92,7 @@ const TableCheckbox = ({
             : isHovered
               ? hoverColour
               : "#edf2f7",
-          borderRadius: "0.5rem",
+          borderRadius: "0.8rem",
           cursor: "pointer",
         }}
         onMouseEnter={() => setIsHovered(true)}

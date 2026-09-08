@@ -8,27 +8,27 @@
   .errorMessage {
     color: $danger;
     text-align: center;
-    margin-bottom: rem(16);
+    margin-bottom: 1.6rem;
   }
 
   .wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
-    border-radius: rem(40);
+    border-radius: 4rem;
     background-color: $white-one;
     box-shadow: $shadow-two;
     overflow: hidden;
 
     .textareaWrapper {
       position: relative;
-      border-radius: rem(40);
+      border-radius: 4rem;
       overflow: hidden;
       overflow: visible !important;
       box-shadow: $shadow-two;
       .label {
         position: absolute;
-        top: rem(20);
+        top: 2rem;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
@@ -39,9 +39,9 @@
       }
       .textarea {
         width: 100%;
-        padding: 0 rem(48);
-        margin-top: rem(48);
-        margin-bottom: rem(48);
+        padding: 0 4.8rem;
+        margin-top: 4.8rem;
+        margin-bottom: 4.8rem;
         font-size: $body;
         line-height: 1.5;
         color: $black-one;
@@ -54,32 +54,30 @@
         background-color: transparent;
         scroll-behavior: smooth;
         overflow: hidden;
-        border-radius: rem(40);
+        border-radius: 4rem;
         // Hide scrollbar by default
         &::-webkit-scrollbar {
           display: none; // Prevent scrollbar from showing before atMaxHeight
         }
         &.atMaxHeight {
           overflow-y: auto !important;
-          padding-right: rem(
-            36
-          ); // ← make room for scrollbar (prevents text jump)
+          padding-right: 3.6rem; // ← make room for scrollbar (prevents text jump)
 
           // Your existing beautiful custom scrollbar — unchanged
           &::-webkit-scrollbar {
-            width: rem(12);
+            width: 1.2rem;
           }
 
           &::-webkit-scrollbar-track {
             background: transparent;
-            margin-block: rem(80);
+            margin-block: 8rem;
           }
 
           &::-webkit-scrollbar-thumb {
             background-color: $warning-hover !important;
-            min-height: rem(56);
-            border-radius: rem(4);
-            border: rem(2) solid transparent;
+            min-height: 5.6rem;
+            border-radius: 0.4rem;
+            border: 0.2rem solid transparent;
             background-clip: content-box;
           }
 
@@ -94,80 +92,80 @@
       }
 
       .largeTextarea {
-        width: rem(311);
-        height: rem(56);
+        width: 31.1rem;
+        height: 5.6rem;
 
         @include only(largeDesktop) {
-          width: rem(514);
-          height: rem(56);
+          width: 51.4rem;
+          height: 5.6rem;
         }
 
         @include only(smallDesktop) {
-          width: rem(462);
-          height: rem(56);
+          width: 46.2rem;
+          height: 5.6rem;
         }
 
         @include only(tablet) {
-          width: rem(462);
-          height: rem(56);
+          width: 46.2rem;
+          height: 5.6rem;
         }
 
         @include only(extraLargeDesktop) {
-          width: rem(514);
-          height: rem(56);
+          width: 51.4rem;
+          height: 5.6rem;
         }
       }
       .mediumTextarea {
-        width: rem(202);
-        height: rem(56);
+        width: 20.2rem;
+        height: 5.6rem;
 
         @include only(largeDesktop) {
-          width: rem(424) !important;
-          height: rem(56) !important;
+          width: 42.4rem !important;
+          height: 5.6rem !important;
         }
         @include only(smallDesktop) {
-          width: rem(381);
-          height: rem(56);
+          width: 38.1rem;
+          height: 5.6rem;
         }
         @include only(tablet) {
-          width: rem(381);
-          height: rem(56);
+          width: 38.1rem;
+          height: 5.6rem;
         }
         @include only(extraLargeDesktop) {
-          width: rem(424);
-          height: rem(56);
+          width: 42.4rem;
+          height: 5.6rem;
         }
       }
 
       .largeDashboardTextarea {
-        width: rem(267);
-        height: rem(56);
+        width: 26.7rem;
+        height: 5.6rem;
 
         @include only(largeDesktop) {
-          width: rem(471);
+          width: 47.1rem;
         }
         @include only(smallDesktop) {
-          width: rem(424);
+          width: 42.4rem;
         }
         @include only(tablet) {
-          width: rem(424);
+          width: 42.4rem;
         }
       }
 
       .mediumDashboardTextarea {
-        width: rem(240);
-        height: rem(48);
+        width: 24rem;
+        height: 4.8rem;
         @include only(largeDesktop) {
-          width: rem(326);
-          height: rem(56);
+          width: 32.6rem;
+          height: 5.6rem;
         }
         @include only(smallDesktop) {
-          width: rem(293);
-          height: rem(56);
+          width: 29.3rem;
+          height: 5.6rem;
         }
         @include only(tablet) {
-          width: rem(293);
-          height: rem(56);
+          width: 29.3rem;
+          height: 5.6rem;
         }
       }
     }
@@ -182,8 +180,8 @@
       top: 0;
       left: 0;
       width: 100%;
-      min-height: rem(120);
-      padding: rem(14) rem(48);
+      min-height: 12rem;
+      padding: 1.4rem 4.8rem;
       white-space: pre-wrap;
       word-wrap: break-word;
       overflow: hidden;
@@ -201,9 +199,9 @@
     align-items: center;
     width: 100%;
     .submitButton {
-      height: rem(40);
-      margin-right: rem(16);
-      margin-bottom: rem(8);
+      height: 4rem;
+      margin-right: 1.6rem;
+      margin-bottom: 0.8rem;
       background-color: $primary;
       box-shadow: $shadow-one !important;
       // filter: drop-shadow(0px 1px 3px rgba(180, 191, 203, 0.2))
@@ -222,17 +220,17 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: rem(8);
+    gap: 0.8rem;
     font-size: $small;
     span {
       text-transform: uppercase;
-      padding-top: rem(8);
+      padding-top: 0.8rem;
     }
     .charCountLabel {
       font-size: $tiny;
     }
     .charCount {
-      margin-right: rem(32);
+      margin-right: 3.2rem;
     }
   }
 }
@@ -248,48 +246,48 @@
 // Size variants
 .xxLarge {
   @include only(largeDesktop) {
-    width: rem(1296);
+    width: 129.6rem;
   }
 }
 
 .xLarge {
   @include only(largeDesktop) {
-    width: rem(954);
-    height: rem(56);
+    width: 95.4rem;
+    height: 5.6rem;
   }
 }
 
 .xLargeFeed {
-  width: rem(793);
-  height: rem(56);
+  width: 79.3rem;
+  height: 5.6rem;
 }
 
 .large {
-  width: rem(311);
+  width: 31.1rem;
 
   @include only(largeDesktop) {
-    width: rem(514);
+    width: 51.4rem;
   }
 }
 .largeFeed {
-  width: rem(471);
+  width: 47.1rem;
 }
 
 .medium {
-  width: rem(202);
+  width: 20.2rem;
 
   @include only(largeDesktop) {
-    width: rem(424);
+    width: 42.4rem;
   }
 }
 
 .mediumFeed {
-  width: rem(310);
+  width: 31rem;
 }
 
 .xxLargeDashboard {
   @include only(largeDesktop) {
-    width: rem(1002);
+    width: 100.2rem;
   }
 }
 
@@ -300,14 +298,14 @@
 
 .largeDashboard {
   @include only(largeDesktop) {
-    width: rem(471);
+    width: 47.1rem;
   }
 }
 
 .mediumDashboard {
-  width: rem(240);
+  width: 24rem;
 
   @include only(largeDesktop) {
-    width: rem(326);
+    width: 32.6rem;
   }
 }

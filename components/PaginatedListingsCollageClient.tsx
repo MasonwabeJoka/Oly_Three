@@ -160,7 +160,7 @@ const PaginatedListingsCollageClient = ({
           breakpointCols={breakpointColumnsObj}
           columnClassName={styles.listingsContainerColumns}
           style={{
-            maxWidth: isDashboard || isFeed ? "59.625rem" : "95vw",
+            maxWidth: isDashboard || isFeed ? "95.4rem" : "95vw",
           }}
         >
           {cards}

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import styles from "./UrlMultiStepForm.module.scss";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingGraphic from "./LoadingGraphic";
 import Step from "./Step";
 
 import { useUrlMultiStepForm } from "@/hooks/useUrlMultiStepNavigation";
@@ -57,7 +57,7 @@ export default function UrlMultiStepForm<T extends Record<string, any>>({
   if (!isClient) {
     return (
       <div className={styles.container}>
-        <LoadingSpinner />
+        <LoadingGraphic />
       </div>
     );
   }

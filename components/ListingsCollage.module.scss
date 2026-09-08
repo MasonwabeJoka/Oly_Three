@@ -8,8 +8,8 @@
 .listingsContainer {
   display: flex;
   justify-content: center;
-  width: rem(1650);
-  gap: rem(32) !important;
+  width: 165rem;
+  gap: 3.2rem !important;
 
 
 }
@@ -17,16 +17,16 @@
 .cardContainer {
   display: flex;
   justify-content: center;
-  width: rem(310) !important;
+  width: 31rem !important;
   pointer-events: auto;
   .card {
     width: fit-content;
-    margin-bottom: rem(44) !important;
+    margin-bottom: 4.4rem !important;
   }
 }
 
 .skeletons {
- margin-bottom: rem(44);
+ margin-bottom: 4.4rem;
 }
 
 

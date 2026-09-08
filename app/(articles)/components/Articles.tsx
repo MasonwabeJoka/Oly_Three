@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import HomeButton from "@/components/HomeButton";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Pill from "@/components/Pill";
 import Select from "@/components/Select";
 import { formatRelativeTime } from "@/utils/formatterFunctions/Formatter";
@@ -89,9 +89,9 @@ const Articles = ({
               selectSize="large"
               label="Sort Articles"
               id="sortArticles"
-              name="sortArticles"
+
               ariaLabel="Sort Articles"
-              autoFocus={false}
+
               required={false}
             />
           </section>
@@ -117,14 +117,14 @@ const Articles = ({
         {nextPage && (
           <Link href={`/articles/${category}?nextpage=${nextPage}`}>
             <Button
-              buttonChildren="Load More"
-              buttonType="primary"
+              children="Load More"
+              buttonVariant="primary"
               buttonSize="medium"
-              name="load-more"
-              type="button"
+
+
               ariaLabel="Load More Articles"
-              autoFocus={false}
-              disabled={false}
+
+
             />
           </Link>
         )}

@@ -5,10 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: rem(32);
+  gap: 3.2rem;
 
   .error {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
 }

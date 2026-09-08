@@ -1,6 +1,6 @@
 'use client'
 import styles from "./TransactionFeeModal.module.scss";
-import Button from "../Buttons";
+import Button from "../Button";
 
 interface TransactionFeeProps {
   setShowTransactionFeeModal: (value: boolean) => void;
@@ -18,14 +18,14 @@ const TransactionFee: React.FC<TransactionFeeProps> = ({
       </p>
       <Button
         className={styles.okayButton}
-        buttonChildren="Okay"
-        buttonType="primary"
+        children="Okay"
+        buttonVariant="primary"
         buttonSize="large"
-        name="okay-btn"
-        type="button"
+
+
         ariaLabel="Okay Button"
-        autoFocus={false}
-        disabled={false}
+
+
         dashboard
         onClick={() => setShowTransactionFeeModal(false)}
       />

@@ -7,19 +7,19 @@
   bottom: 0;
   // left: 0;
   // right: 0;
-  height: rem(16);
+  height: 1.6rem;
   background-color: $white-two;
   z-index: 100;
 
 
   @include only(largeDesktop) {
-    width: rem(1098);
+    width: 109.8rem;
   }
   @include only(smallDesktop) {
-    width: rem(960);
+    width: 96rem;
   }
   @include only(tablet) {
-    width: rem(960);
+    width: 96rem;
   }
 }
 

@@ -1,5 +1,5 @@
 import styles from "./VehicleDriveTrainType.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 interface VehicleDriveTrainTypeProps {
   buttonLabel?: string;
   buttonLabelSub?: string;
@@ -12,68 +12,68 @@ const VehicleDriveTrainType = ({}: VehicleDriveTrainTypeProps) => {
 
       <div className={styles.buttonsContainer}>
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="FWD (Front-Wheel Drive)"
               buttonLabelSub="Great fuel economy and stable on city roads"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="fwd"
+
           type="submit"
           ariaLabel="Front-Wheel Drive Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="RWD (Rear-Wheel Drive)"
               buttonLabelSub="Sportier feel with balanced handling"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="rwd"
+
           type="submit"
           ariaLabel="Rear-Wheel Drive Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="AWD (All-Wheel Drive)"
               buttonLabelSub="Stable and predictable on slippery surfaces"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="awd"
+
           type="submit"
           ariaLabel="All-Wheel Drive Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="4×4"
               buttonLabelSub="Ideal for heavy-duty and challenging conditions"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="4x4"
+
           type="submit"
           ariaLabel="4x4 Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       {/* <p className={styles.disclaimer}>

@@ -5,7 +5,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { z } from "zod";
 import Image from "@/components/Image";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
 import { featuresData } from "@/data/FeaturesData";
@@ -87,8 +87,8 @@ const FeaturesClient = (props: FeaturesProps) => {
                 label="Choose a detail"
                 id="choose-detail"
                 ariaLabel="Choose Detail Select"
-                autoFocus={false}
-                disabled={false}
+
+
                 required={false}
                 error={errors.selectDetail?.message as string}
                 {...register("selectFeature")}
@@ -127,7 +127,7 @@ const FeaturesClient = (props: FeaturesProps) => {
                       <div className={styles.editButtonContainer}>
                         <Button
                           className={`${styles.editButton} ${styles.detailButton}`}
-                          buttonChildren={
+                          children={
                             <Image
                               src="/icons/pencil.png"
                               alt="edit-icon"
@@ -135,20 +135,20 @@ const FeaturesClient = (props: FeaturesProps) => {
                               height={18}
                             />
                           }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="edit-btn"
-                          type="button"
+                          buttonShape="round"
+
+
+
                           ariaLabel="Edit Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                           onClick={() => editDetail(String(detail.id))}
                         />
                       </div>
                       <div className={styles.deleteButtonContainer}>
                         <Button
                           className={`${styles.deleteButton} ${styles.detailButton}`}
-                          buttonChildren={
+                          children={
                             <Image
                               src="/icons/trash.png"
                               alt="delete-icon"
@@ -156,13 +156,13 @@ const FeaturesClient = (props: FeaturesProps) => {
                               height={18}
                             />
                           }
-                          buttonType="roundStandardFeed"
-                          buttonSize=""
-                          name="delete-btn"
-                          type="button"
+                          buttonShape="round"
+
+
+
                           ariaLabel="Delete Button"
-                          autoFocus={false}
-                          disabled={false}
+
+
                         />
                       </div>
                     </div>

@@ -84,7 +84,7 @@ export const TextLeft = ({ image, title, description }: Props) => {
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
       </div>
@@ -102,7 +102,7 @@ export const TextRight = ({ image, title, description }: Props) => {
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
         <div className={styles.textContent}>
@@ -145,7 +145,7 @@ export const TextLeftTablet = ({ image, title, description }: Props) => {
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+            style={{ objectFit: "cover", borderRadius: "4rem" }}
           />
         </div>
       </div>
@@ -162,7 +162,7 @@ export const TextRightTablet = ({ image, title, description }: Props) => {
             alt="Illustration"
             fill
             className={styles.image}
-            style={{ objectFit: "cover", borderRadius: "3rem" }}
+            style={{ objectFit: "cover", borderRadius: "4.8rem" }}
           />
         </div>
         <div className={styles.textContent}>

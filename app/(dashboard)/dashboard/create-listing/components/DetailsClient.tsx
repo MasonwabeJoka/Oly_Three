@@ -3,7 +3,7 @@ import styles from "./DetailsClient.module.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import SelectedDetail from "./SelectedDetail";
 import ProductSpecification from "./ProductSpecification";
 import { FormWrapper } from "./FormWrapper";
@@ -300,14 +300,14 @@ const DetailsClient = ({
               <div className={styles.addSpecificationsContainer}>
                 <Button
                   className={styles.addSpecifications}
-                  buttonChildren="Add Product Specifications"
-                  buttonType="normal"
+                  children="Add Product Specifications"
+                  buttonVariant="normal"
                   buttonSize="large"
-                  name="addSpecification"
-                  type="button"
+
+
                   ariaLabel="Add Product Specification Button"
-                  autoFocus={false}
-                  disabled={false}
+
+
                   dashboard
                   onClick={() => {
                     setIsAnimating(true);

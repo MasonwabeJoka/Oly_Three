@@ -4,7 +4,7 @@ import Image from "@/components/Image";
 import NextImage from "next/image";
 import styles from "./Avatar.module.scss";
 import Loading from "@/app/(oly-auto)/auto/loading";
-import LoadingSpinnerTwo from "./LoadingSpinnerTwo";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface AvatarClientProps {
   avatar: any;
@@ -51,8 +51,8 @@ const AvatarClient = ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontSize: "0.8rem",
-        lineHeight: "0.8rem",
+        fontSize: "1.28rem",
+        lineHeight: "1.28rem",
         textAlign: "center",
       }}
     ></div>
@@ -63,8 +63,10 @@ const AvatarClient = ({
       {!hasError && avatar ? (
         <>
           {isLoading && (
-            <div className={` ${styles.skeleton} ${avatarShape === "circle" ? styles.circleSkeleton : styles.squareSkeleton} ${AVATAR_SIZE[avatarSize]}`}>
-              <LoadingSpinnerTwo size={2} />
+            <div
+              className={` ${styles.skeleton} ${avatarShape === "circle" ? styles.circleSkeleton : styles.squareSkeleton} ${AVATAR_SIZE[avatarSize]}`}
+            >
+              <LoadingSpinner size={2} />
             </div>
           )}
           <NextImage

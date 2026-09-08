@@ -250,7 +250,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           />
           <div className={styles.arrows}>
             <button
-              type="button"
               className={`${styles.upArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("up")}
               onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
@@ -262,7 +261,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               <Image src="/icons/arrow-up.png" alt="" width={24} height={24} />
             </button>
             <button
-              type="button"
               className={`${styles.downArrow} ${styles.arrow}`}
               onClick={() => handleArrowClick("down")}
               onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>

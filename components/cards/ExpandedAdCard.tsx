@@ -1,5 +1,5 @@
 import styles from "./ExpandedAdCard.module.scss";
-import Button from "../Buttons";
+import Button from "../Button";
 import Image from "@/components/Image";
 import Avatar from "../Avatar";
 
@@ -48,14 +48,14 @@ const ExpandedAdCard = ({
           <div className={styles.likeIconBG}>
             <Button
               className={styles.likeIcon}
-              buttonChildren="heart"
-              buttonType="icon"
-              buttonSize=""
-              name="Like Icon"
+              children="heart"
+              buttonVariant="icon"
+
+
               type="submit"
               ariaLabel="Like Icon"
-              autoFocus={false}
-              disabled={false}
+
+
             />
           </div>
         </div>

@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(1552);
+  width: 155.2rem;
 
   .listingContainer {
     display: flex;
@@ -43,7 +43,7 @@
           height: fit-content;
 
           .report {
-            margin-top: rem(20);
+            margin-top: 2rem;
             color: $danger;
             cursor: pointer;
           }
@@ -55,8 +55,8 @@
           justify-content: center;
           align-items: center;
           width: 100%;
-          padding: 0 rem(96);
-          margin-bottom: rem(48);
+          padding: 0 9.6rem;
+          margin-bottom: 4.8rem;
 
           .exitButtonContainer {
             position: absolute;
@@ -71,7 +71,7 @@
         color: $danger;
         font-weight: 500;
         font-size: $h4;
-        margin-bottom: rem(48);
+        margin-bottom: 4.8rem;
       }
 
       .detailsContainer {
@@ -79,9 +79,9 @@
         flex-direction: column;
         align-items: center;
         width: auto;
-        min-height: rem(200);
-        margin-left: rem(364);
-        margin-bottom: rem(96);
+        min-height: 20rem;
+        margin-left: 36.4rem;
+        margin-bottom: 9.6rem;
       }
 
       .similarAdsContainer {
@@ -91,7 +91,7 @@
         width: 100vw;
 
         .similarAdsTitle {
-          margin-left: rem(360);
+          margin-left: 36rem;
         }
       }
     }
@@ -100,18 +100,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: rem(72);
-      margin-bottom: rem(128);
+      margin-top: 7.2rem;
+      margin-bottom: 12.8rem;
 
       .imageContainer {
-        height: rem(800);
+        height: 80rem;
         position: relative;
 
-        border-radius: rem(40);
-        margin-bottom: rem(64);
+        border-radius: 4rem;
+        margin-bottom: 6.4rem;
 
         .image {
-          margin-bottom: rem(16);
+          margin-bottom: 1.6rem;
         }
       }
     }

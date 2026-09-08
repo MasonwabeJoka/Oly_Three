@@ -23,13 +23,13 @@
     font-size: $h3 !important;
     font-weight: 600;
     color: $black-four;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
 
     @include only(largeDesktop) {
     }
 
     @include only(smallDesktop) {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 
@@ -40,7 +40,7 @@
     .classifieds {
     display: flex;
     flex-wrap: wrap;
-    gap: rem(32);
+    gap: 3.2rem;
     width: fit-content;
     
     @include only(largeDesktop) {
@@ -48,12 +48,12 @@
     }
     
     @include only(smallDesktop) {
-   width: rem(972);
+   width: 97.2rem;
 
   }
     
     @include only(tablet) {
-   width: rem(972);
+   width: 97.2rem;
   }
 }
 }

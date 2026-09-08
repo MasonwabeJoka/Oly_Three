@@ -1,4 +1,5 @@
 import "@/app/globals.scss";
+import "@/lib/react-hook-form-patch";
 import styles from "../global-styles/layout.module.scss";
 import Outfit from "next/font/local";
 

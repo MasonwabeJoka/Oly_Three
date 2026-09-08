@@ -6,28 +6,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: rem(12);
+  gap: 1.2rem;
   font-size: $extra-tiny;
-  letter-spacing: rem(0.3);
+  letter-spacing: 0.03rem;
 
   width: fit-content;
   height: fit-content;
-  border-radius: rem(40);
-  border: rem(1) solid $grey-one;
+  border-radius: 4rem;
+  border: 0.1rem solid $grey-one;
 
   .child {
-    padding: 0 rem(8);
+    padding: 0 0.8rem;
   }
 
   .cancelButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(22);
-    height: rem(22);
+    width: 2.2rem;
+    height: 2.2rem;
     border-radius: 50%;
     background-color: $grey-one;
-    margin-right: rem(-10); // NEGATIVE: pulls dot flush to right edge
+    margin-right: -1rem; // NEGATIVE: pulls dot flush to right edge
   }
 
   .cancelButton:hover {

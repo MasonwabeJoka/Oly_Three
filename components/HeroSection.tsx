@@ -47,8 +47,8 @@ const HeroSection = ({ site, mainTitle, data }: HeroSectionProps) => {
                 isLargeDesktop &&
                 currentScreenSize < 1590 &&
                 currentScreenSize === variables.minLargeDesktop
-                  ? "2.625rem"
-                  : "3rem",
+                  ? "4.2rem"
+                  : "4.8rem",
             }}
           >
             {site === "oly" && (data?.olyMainTitle ?? "")}

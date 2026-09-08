@@ -5,7 +5,7 @@ import { searchFormSchema } from "@/lib/validations/formValidations";
 import { z } from "zod";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./ListingsSearchForm.module.scss";
 import { useState } from "react";
@@ -76,9 +76,7 @@ export default function ListingsSearchForm({
                 selectSize="large"
                 label=""
                 id="categories"
-                name="categories"
                 ariaLabel="Categories"
-                autoFocus={false}
                 required={false}
                 error={errors.categories?.message}
                 overlayDropdown
@@ -182,14 +180,12 @@ export default function ListingsSearchForm({
 
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="Search"
+          children="Search"
           className={styles.search}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="search"
-          autoFocus={false}
           type="submit"
-          disabled={isSubmitting}
+          isDisabled={isSubmitting}
         />
       </div>
     </div>

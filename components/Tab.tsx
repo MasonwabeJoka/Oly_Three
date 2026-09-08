@@ -30,7 +30,7 @@ const Tab: React.FC<TabProps> = ({
       style={{
         ...style,
         color,
-        marginBottom: isMobile ? "1rem" : undefined,
+        marginBottom: isMobile ? "1.6rem" : undefined,
       }}
       onClick={onClick}
     >

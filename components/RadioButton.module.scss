@@ -22,7 +22,7 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
-  gap: rem(14);
+  gap: 1.4rem;
 }
 
 .radioInput {
@@ -48,7 +48,7 @@
       background-color: $primary-hover;
       width: 24px;
       height: 24px;
-      border-radius: rem(8);
+      border-radius: 0.8rem;
       box-shadow: none;
     }
 
@@ -73,12 +73,12 @@
     // Outer circle
     &::before {
       content: "";
-      width: rem(24);
-      height: rem(24);
+      width: 2.4rem;
+      height: 2.4rem;
       background-color: $white-one;
-      border: rem(4) solid $white-one;
-      outline: rem(0.5) solid #9defff;
-      border-radius: rem(8);
+      border: 0.4rem solid $white-one;
+      outline: 0.05rem solid #9defff;
+      border-radius: 0.8rem;
       display: flex;
       justify-content: center;
       align-items: center;

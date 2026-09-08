@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import useCurrentSlideIndex from "@/store/currentSlide";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import useBreakpointStore from "@/store/useBreakpointStore";
 import HeaderContent from "./HeaderContent";
 import NavButtons from "@/components/NavButtons";
@@ -38,7 +38,7 @@ const ArticlesHeader = ({ data }: { data: any }) => {
   };
 
   if (initialSlideIndex === null) {
-    return <LoadingSpinner />;
+    return <LoadingGraphic />;
   }
 
   return (

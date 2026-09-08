@@ -10,19 +10,19 @@
 
     .topBoxOne {
       position: absolute;
-      top: rem(-100);
+      top: -10rem;
       width: 100%;
-      height: rem(100);
+      height: 10rem;
       z-index: 1;
       background-color: $white-four;
     }
     .topBoxTwo {
       position: absolute;
-      top: rem(-40);
-      right: rem(16);
+      top: -4rem;
+      right: 1.6rem;
       width: 99%;
-      height: rem(100);
-      border-radius: rem(120);
+      height: 10rem;
+      border-radius: 12rem;
       box-shadow: $shadow-three;
       background-color: $white-four;
     }
@@ -34,36 +34,42 @@
     justify-content: center;
     align-items: center;
     background-color: $white-one;
-    padding-top: rem(144);
-    padding-bottom: rem(144);
+    padding-top: 14.4rem;
+    padding-bottom: 14.4rem;
+
     .adContainer {
       display: flex;
       flex-direction: column;
-      margin-bottom: rem(48);
+      margin-bottom: 4.8rem;
       cursor: pointer;
 
+      span {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+      }
       .imageContainer {
         box-shadow: $shadow-three;
       }
     }
   }
   .bottomContainer {
-    height: rem(100);
+    height: 10rem;
     .bottomBoxOne {
       position: relative;
-      top: rem(-50);
-      left: rem(2);
+      top: -5rem;
+      left: 0.2rem;
       width: 99%;
-      height: rem(100);
-      border-radius: rem(120);
+      height: 10rem;
+      border-radius: 12rem;
       box-shadow: $shadow-three;
       background-color: $white-four;
     }
     .bottomBoxTwo {
       position: relative;
-      top: rem(-100);
+      top: -10rem;
       width: 100%;
-      height: rem(100);
+      height: 10rem;
       z-index: 1;
       background-color: $white-four;
     }

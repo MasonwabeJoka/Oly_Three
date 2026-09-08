@@ -3,14 +3,14 @@
 @use "@/utils/breakpoints" as *;
 .container {
   position: relative;
-  width: rem(640);
+  width: 64rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .errorMessage {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
 
   .editorContainer {
@@ -18,25 +18,25 @@
 
     .label {
       position: absolute;
-      top: rem(80);
+      top: 8rem;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: $extra-tiny;
       text-transform: uppercase;
       color: $grey-four;
-      margin-bottom: rem(18) !important;
+      margin-bottom: 1.8rem !important;
       z-index: 10;
     }
 
     .required {
       position: absolute;
-      top: rem(96);
-      left: rem(32);
+      top: 9.6rem;
+      left: 3.2rem;
 
       font-size: $extra-tiny;
       text-transform: uppercase;
       color: $grey-four;
-      margin-bottom: rem(18) !important;
+      margin-bottom: 1.8rem !important;
       z-index: 10;
     }
 
@@ -48,15 +48,15 @@
 
     :global(.fr-element) {
       p {
-        margin-top: rem(8);
+        margin-top: 0.8rem;
       }
     }
   }
 }
 
 .skeleton {
-  width: rem(640);
-  height: rem(240);
+  width: 64rem;
+  height: 24rem;
   background-color: $grey-three;
-  border-radius: rem(8);
+  border-radius: 0.8rem;
 }

@@ -8,13 +8,13 @@
   align-items: center;
   width: 100%;
   @include only(largeDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(smallDesktop) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
   @include only(tablet) {
-    // width: rem(1098);
+    // width: 109.8rem;
   }
 
   .title {

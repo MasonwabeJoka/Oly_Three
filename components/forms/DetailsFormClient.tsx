@@ -7,7 +7,7 @@ import { z } from "zod";
 import Image from "@/components/Image";
 import { useRouter } from "next/navigation";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { ConditionsData } from "@/data/ConditionsData";
 import { DetailsData } from "@/data/DetailsData";
 import { featuresData } from "@/data/FeaturesData";
@@ -99,8 +99,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
               label="Choose a condition"
               id="conditions"
               ariaLabel="Conditions"
-              autoFocus={false}
-              disabled={false}
+
               required={true}
               multiple={false}
               {...register("condition")}
@@ -123,8 +122,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
               label="Choose a detail"
               id="choose-detail"
               ariaLabel="Choose Detail Select"
-              autoFocus={false}
-              disabled={false}
+
               required={true}
               multiple={false}
               {...register("selectDetail")}
@@ -161,7 +159,7 @@ const DetailsFormClient = (props: DetailsFormProps) => {
                     <div className={styles.editButtonContainer}>
                       <Button
                         className={`${styles.editButton} ${styles.detailButton}`}
-                        buttonChildren={
+                        children={
                           <Image
                             src="/icons/pencil.png"
                             alt="edit-icon"
@@ -169,20 +167,16 @@ const DetailsFormClient = (props: DetailsFormProps) => {
                             height={18}
                           />
                         }
-                        buttonType="roundStandardFeed"
-                        buttonSize=""
-                        name="edit-btn"
-                        type="button"
+                        buttonShape="round"
                         ariaLabel="Edit Button"
-                        autoFocus={false}
-                        disabled={false}
+
                         onClick={() => editDetail(detail.id as any)}
                       />
                     </div>
                     <div className={styles.deleteButtonContainer}>
                       <Button
                         className={`${styles.deleteButton} ${styles.detailButton}`}
-                        buttonChildren={
+                        children={
                           <Image
                             src="/icons/trash.png"
                             alt="delete-icon"
@@ -190,13 +184,9 @@ const DetailsFormClient = (props: DetailsFormProps) => {
                             height={24}
                           />
                         }
-                        buttonType="roundStandardFeed"
-                        buttonSize=""
-                        name="delete-btn"
-                        type="button"
+                        buttonShape="round"
                         ariaLabel="Delete Button"
-                        autoFocus={false}
-                        disabled={false}
+
                       />
                     </div>
                   </div>
@@ -215,14 +205,12 @@ const DetailsFormClient = (props: DetailsFormProps) => {
         <div className={styles.submitDetailContainer}>
           <Button
             className={styles.submitDetailButton}
-            buttonChildren="Submit Detail"
-            buttonType="primary"
+            children="Submit Detail"
+            buttonVariant="primary"
             buttonSize="large"
-            name="submit-detail-btn"
             type="submit"
             ariaLabel="Submit Detail Button"
-            autoFocus={false}
-            disabled={isSubmitting}
+            isDisabled={isSubmitting}
           />
         </div>
       </Form>

@@ -1,4 +1,4 @@
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 
 export default function Loading() {
   return (
@@ -10,7 +10,7 @@ export default function Loading() {
         height: "100vh",
       }}
     >
-      <LoadingSpinner />
+      <LoadingGraphic />
     </div>
   );
 }

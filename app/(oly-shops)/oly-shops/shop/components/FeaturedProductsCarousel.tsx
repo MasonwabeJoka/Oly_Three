@@ -82,7 +82,7 @@ console.log({ products });
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={`dot-${index}`}
-              type="button"
+
               onClick={() => scrollTo(index)}
               className={cn(
                 "h-2 w-2 rounded-full transition-all duration-300",

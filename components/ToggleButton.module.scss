@@ -10,9 +10,9 @@
 
   .toggleContainer {
     position: relative;
-    width: rem(60);
-    height: rem(30);
-    border-radius: rem(50);
+    width: 6rem;
+    height: 3rem;
+    border-radius: 5rem;
     background-color: $grey-one;
     transition: background 0.2s;
   }
@@ -24,17 +24,17 @@
   .toggleContainer::after {
     content: "";
     position: absolute;
-    top: rem(3);
-    left: rem(3);
-    width: rem(24);
-    height: rem(24);
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     background-color: $white-one;
     transition: transform 0.2s;
   }
 
   .checkbox:checked ~ .toggleContainer::after {
-    transform: translateX(rem(30));
+    transform: translateX(3rem);
     // background-color: red;
   }
 }

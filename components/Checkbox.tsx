@@ -154,7 +154,7 @@ const Checkbox = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "0.875rem",
+          gap: "1.4rem",
           cursor: disabled ? "not-allowed" : "pointer",
           outline: isFocused ? "1px solid #14d6ff" : "none",
           borderRadius: "8px",
@@ -163,7 +163,7 @@ const Checkbox = ({
         {label && labelSide === "left" && (
           <span
             style={{
-              fontSize: "0.875rem",
+              fontSize: "1.4rem",
               marginLeft: "8px",
               color: disabled ? "#999" : "inherit",
             }}
@@ -199,7 +199,7 @@ const Checkbox = ({
         {label && labelSide === "right" && (
           <span
             style={{
-              fontSize: "0.875rem",
+              fontSize: "1.4rem",
               marginLeft: "8px",
               color: disabled ? "#999" : "inherit",
             }}

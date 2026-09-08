@@ -6,12 +6,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(600);
-  margin-top: rem(100);
-  gap: rem(20);
+  width: 60rem;
+  margin-top: 10rem;
+  gap: 2rem;
   .error {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
   .description {
     text-align: center;

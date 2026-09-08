@@ -1,5 +1,5 @@
 import styles from "./VehiclePrice.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 interface VehiclePriceProps {
   buttonLabel?: string;
   buttonLabelSub?: string;
@@ -17,68 +17,68 @@ const VehiclePrice = ({}: VehiclePriceProps) => {
 
       <div className={styles.buttonsContainer}>
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="Cash Price"
               buttonLabelSub="Shows cash prices"
             />
           }
           className={styles.button}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="cash-price"
+
           type="submit"
           ariaLabel="Cash Price Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="2-Year Monthly Price"
               buttonLabelSub="Shows monthly prices for a 2-year term"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="2-year-monthly-price"
+
           type="submit"
           ariaLabel="2-Year Monthly Price Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="4-Year Monthly Price"
               buttonLabelSub="Shows monthly prices for a 4-year term"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="4-year-monthly-price"
+
           type="submit"
           ariaLabel="4-Year Monthly Price Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={
+          children={
             <ButtonChildren
               buttonLabel="6-Year Monthly Price"
               buttonLabelSub="Shows monthly prices for a 6-year term"
             />
           }
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="6-year-monthly-price"
+
           type="submit"
           ariaLabel="6-Year Monthly Price Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
       <p className={styles.disclaimer}>

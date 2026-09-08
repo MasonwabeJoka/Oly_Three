@@ -11,7 +11,7 @@ import { z } from "zod";
 import Image from "@/components/Image";
 import Form from "next/form";
 import { useModalStore } from "@/store/modalStore";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 // Server action (ideally in a separate server file)
 async function searchAction(formData: FormData): Promise<void> {
@@ -86,28 +86,28 @@ const ShopsHeroSectionFields = () => {
         <div className={styles.buttons}>
           <Link href="/dashboard/create-listing" className={styles.link}>
             <Button
-              buttonChildren={"Create Your Shop"}
+              children={"Create Your Shop"}
               className={styles.createYourShopBtn}
-              buttonType="primary"
+              buttonVariant="primary"
               buttonSize="large"
-              name="Create Your Shop"
-              type="button"
+
+
               ariaLabel="Create Your Shop Button"
-              autoFocus={false}
-              disabled={false}
+
+
             />
           </Link>
 
           <Button
-            buttonChildren={"See All Categories"}
+            children={"See All Categories"}
             className={styles.categoriesBtn}
-            buttonType="normal"
+            buttonVariant="normal"
             buttonSize="large"
-            name="Categories Button"
-            type="button"
+
+
             ariaLabel="Categories Button"
-            autoFocus={false}
-            disabled={false}
+
+
             onClick={() => setShowCategoriesModal(true)}
           />
         </div>
@@ -173,7 +173,6 @@ const ShopsHeroSectionFields = () => {
               placeholder="Search by city, province, town..."
               id="locationSearch"
               ariaLabel="Location"
-              autoFocus={false}
               autoComplete="off"
               required
               {...register("locationSearch")}
@@ -192,15 +191,13 @@ const ShopsHeroSectionFields = () => {
 
         <div className={styles.searchButton}>
           <Button
-            buttonChildren={"Search"}
+            children={"Search"}
             className={styles.search}
-            buttonType="normal"
+            buttonVariant="normal"
             buttonSize="large"
-            name="Search Button"
             type="submit"
             ariaLabel="Search Button"
-            autoFocus={false}
-            disabled={isSubmitting}
+            isDisabled={isSubmitting}
           />
         </div>
       </Form>

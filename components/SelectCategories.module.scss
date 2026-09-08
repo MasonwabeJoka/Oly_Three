@@ -7,27 +7,27 @@
   align-items: center;
 
   .titleContainer {
-    margin-bottom: rem(56);
+    margin-bottom: 5.6rem;
     .title {
       font-weight: 600;
     }
   }
 
   .categoriesContainer {
-    width: rem(312);
+    width: 31.2rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: rem(136);
-    gap: rem(16);
+    margin-bottom: 13.6rem;
+    gap: 1.6rem;
 
     @include only(largeDesktop) {
-      width: rem(954);
-      gap: rem(24);
+      width: 95.4rem;
+      gap: 2.4rem;
     }
     @include larger-than(tablet) {
-      width: rem(1248);
-      gap: rem(32);
+      width: 124.8rem;
+      gap: 3.2rem;
     }
   }
 

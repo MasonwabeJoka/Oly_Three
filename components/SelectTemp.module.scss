@@ -8,7 +8,7 @@
 
   .errorMessage {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
   .selectContainer {
     position: relative;
@@ -17,9 +17,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
+      border-radius: 4rem;
       background-color: $white-three;
-      height: rem(56);
+      height: 5.6rem;
       box-shadow: $shadow-one;
       text-align: center;
       border: none;
@@ -33,8 +33,8 @@
     }
 
     .input {
-      height: rem(56);
-      border-radius: rem(40);
+      height: 5.6rem;
+      border-radius: 4rem;
       box-shadow: $shadow-two;
     }
 
@@ -45,9 +45,9 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: rem(80);
+      width: 8rem;
       height: 100%;
-      border-radius: rem(40);
+      border-radius: 4rem;
       pointer-events: none;
 
       .dropdownIcon {
@@ -61,20 +61,20 @@
 }
 
 .options {
-  max-height: rem(400);
+  max-height: 40rem;
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: rem(4);
+  margin-top: 0.4rem;
 
   .option {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: rem(40);
+    border-radius: 4rem;
     height: 94%;
-    margin: rem(4) auto 0;
+    margin: 0.4rem auto 0;
 
     background-color: $white-two;
   }
@@ -85,8 +85,8 @@
 }
 
 .options::-webkit-scrollbar-track {
-  border-radius: rem(40);
-  margin-block: rem(30);
+  border-radius: 4rem;
+  margin-block: 3rem;
 }
 
 .hideOptions {
@@ -101,95 +101,95 @@
 
 .xxLarge {
   @include only(largeDesktop) {
-    width: rem(1296);
-    height: rem(56);
+    width: 129.6rem;
+    height: 5.6rem;
   }
 }
 
 .xxLarge .option {
-  @include option-width(rem(1296));
+  @include option-width(129.6rem);
 }
 
 .xLargeFeed {
-  width: rem(954);
-  height: rem(56);
+  width: 95.4rem;
+  height: 5.6rem;
 }
 
 .xLargeFeed .option {
-  @include option-width(rem(954));
+  @include option-width(95.4rem);
 }
 
 .xLarge {
   @include only(largeDesktop) {
-    width: rem(954);
-    height: rem(56);
+    width: 95.4rem;
+    height: 5.6rem;
   }
 }
 
 .xLarge .option {
-  @include option-width(rem(954));
+  @include option-width(95.4rem);
 }
 
 .xLargeFeed {
-  width: rem(793);
-  height: rem(56);
+  width: 79.3rem;
+  height: 5.6rem;
 }
 
 .xLargeFeed .option {
-  @include option-width(rem(793));
+  @include option-width(79.3rem);
 }
 
 .large {
-  width: rem(311);
-  height: rem(56);
+  width: 31.1rem;
+  height: 5.6rem;
   @include only(largeDesktop) {
-    width: rem(514);
-    height: rem(56);
+    width: 51.4rem;
+    height: 5.6rem;
   }
 }
 
 .large .option {
-  @include option-width(rem(514));
+  @include option-width(51.4rem);
 }
 
 .largeFeed {
-  width: rem(471);
+  width: 47.1rem;
 }
 
 .largeFeed .option {
-  @include option-width(rem(471));
+  @include option-width(47.1rem);
 }
 
 .medium {
-  width: rem(202);
-  height: rem(56);
+  width: 20.2rem;
+  height: 5.6rem;
   @include only(largeDesktop) {
-    width: rem(424);
+    width: 42.4rem;
   }
 }
 
 .medium .option {
-  @include option-width(rem(424));
+  @include option-width(42.4rem);
 }
 
 .mediumFeed {
-  width: rem(310);
-  height: rem(48);
+  width: 31rem;
+  height: 4.8rem;
 }
 
 .mediumFeed .option {
-  @include option-width(rem(310));
+  @include option-width(31rem);
 }
 
 .xxLargeDashboard {
   @include only(largeDesktop) {
-    width: rem(1002);
-    height: rem(56);
+    width: 100.2rem;
+    height: 5.6rem;
   }
 }
 
 .xxLargeDashboard .option {
-  @include option-width(rem(1002));
+  @include option-width(100.2rem);
 }
 
 .xLargeDashboard {
@@ -198,31 +198,31 @@
 }
 
 // .xLargeDashboard .option {
-//   @include option-width(rem(1002));
+//   @include option-width(100.2rem);
 // }
 
 .largeDashboard {
   @include only(largeDesktop) {
-    width: rem(471);
-    height: rem(56);
+    width: 47.1rem;
+    height: 5.6rem;
   }
 }
 
 .largeDashboard .option {
-  @include option-width(rem(471));
+  @include option-width(47.1rem);
 }
 
 .mediumDashboard {
-  width: rem(240);
-  height: rem(48);
+  width: 24rem;
+  height: 4.8rem;
   @include only(largeDesktop) {
-    width: rem(326);
-    height: rem(48);
+    width: 32.6rem;
+    height: 4.8rem;
   }
 }
 
 .mediumDashboard .option {
-  @include option-width(rem(326));
+  @include option-width(32.6rem);
 }
 
 .primary {
@@ -254,10 +254,10 @@
 }
 
 .normal:focus {
-  outline-offset: rem(4);
+  outline-offset: 0.4rem;
   outline-style: solid;
   outline-color: $white-one;
-  outline-width: rem(4);
+  outline-width: 0.4rem;
 }
 
 .outline {

@@ -1,5 +1,5 @@
 import styles from "./VehicleSortBy.module.scss";
-import Button from "./Buttons";
+import Button from "./Button";
 interface VehicleSortByProps {
   buttonLabel?: string;
   buttonLabelSub?: string;
@@ -12,71 +12,71 @@ const VehicleSortBy = ({}: VehicleSortByProps) => {
 
       <div className={styles.buttonsContainer}>
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Default" />}
+          children={<ButtonChildren buttonLabel="Default" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="default"
+
           type="submit"
           ariaLabel="Default Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Price: Low to High" />}
+          children={<ButtonChildren buttonLabel="Price: Low to High" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="price-low-to-high"
+
           type="submit"
           ariaLabel="Price: Low to High Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Price: High to Low" />}
+          children={<ButtonChildren buttonLabel="Price: High to Low" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="price-high-to-low"
+
           type="submit"
           ariaLabel="Price: High to Low Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Mileage: Low to High" />}
+          children={<ButtonChildren buttonLabel="Mileage: Low to High" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="mileage-low-to-high"
+
           type="submit"
           ariaLabel="Mileage: Low to High Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Year: Newest First" />}
+          children={<ButtonChildren buttonLabel="Year: Newest First" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="year-newest-first"
+
           type="submit"
           ariaLabel="Year: Newest First Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
 
         <Button
-          buttonChildren={<ButtonChildren buttonLabel="Recently Added" />}
+          children={<ButtonChildren buttonLabel="Recently Added" />}
           className={styles.button}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="recently-added"
+
           type="submit"
           ariaLabel="Recently Added Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

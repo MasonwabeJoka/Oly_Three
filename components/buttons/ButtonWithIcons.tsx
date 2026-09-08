@@ -132,10 +132,10 @@ export default ButtonWithIcons;
   buttonChildren="Facebook"
   buttonType={icon}
   buttonSize={small}
-  name="facebook_icon"
-  type="button"
+
+
   ariaLabel="Facebook Icon"
-  autoFocus={false}
+
   disabled={false}
 />; */
 }

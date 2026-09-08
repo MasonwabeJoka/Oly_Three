@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./SelectNewCategory.module.scss";
 import ExitButton from "@/components/ExitButton";
 import Link from "next/link";
@@ -36,24 +36,18 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
         <div className={styles.buttonContainer}>
           <Link href={continueUrl} className={styles.continueButtonContainer}>
             <Button
-              buttonChildren="Complete Current Listing"
-              buttonType="primary"
+              children="Complete Current Listing"
+              buttonVariant="primary"
               buttonSize="large"
-              name="continue-current-category"
-              type="button"
               ariaLabel="Continue with current category"
-              autoFocus={false}
               dashboard
             />
           </Link>
           <Button
-            buttonChildren="Start New Listing"
-            buttonType="normal"
+            children="Start New Listing"
+            buttonVariant="normal"
             buttonSize="large"
-            name="select-new-category"
-            type="button"
             ariaLabel="Select new category"
-            autoFocus={false}
             onClick={() =>
               router.push(
                 `/dashboard/create-listing/${site}/confirm-new-listing`,
@@ -63,13 +57,10 @@ const SelectNewCategory = ({ onNext, goTo }: SelectNewCategoryProps) => {
           />
           <Link href='/' className={styles.cancelContainer}>
             <Button
-              buttonChildren="Cancel"
-              buttonType="normal"
+              children="Cancel"
+              buttonVariant="normal"
               buttonSize="large"
-              name="cancel"
-              type="button"
               ariaLabel="Cancel"
-              autoFocus={false}
               dashboard
             />
           </Link>

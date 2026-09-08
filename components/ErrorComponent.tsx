@@ -3,7 +3,7 @@
 import { useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./ErrorComponent.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 export default function ErrorComponent({
   error,
@@ -45,29 +45,29 @@ const handleGoBack = useCallback(() => {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.tryAgainButton}
-          buttonChildren="Reload Page"
-          buttonType="primary"
+          children="Reload Page"
+          buttonVariant="primary"
           buttonSize="large"
-          name="try-again-btn"
-          type="button"
+
+
           ariaLabel="Retry the action"
           onClick={reset}
           autoFocus
-          disabled={false}
+
         />
       </div>
       <div className={styles.buttonContainer}>
         <Button
           className={styles.goBackButton}
-          buttonChildren="Go Back"
-          buttonType="normal"
+          children="Go Back"
+          buttonVariant="normal"
           buttonSize="large"
-          name="go-back-btn"
-          type="button"
+
+
           ariaLabel="Return to previous page"
           onClick={handleGoBack}
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </div>
     </div>

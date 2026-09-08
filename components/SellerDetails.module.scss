@@ -6,22 +6,22 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: rem(365);
-  height: rem(688);
-  border-radius: rem(40);
+  width: 36.5rem;
+  height: 68.8rem;
+  border-radius: 4rem;
   background-color: $grey-one !important;
   color: $black-four;
   box-shadow: $shadow-one;
-  padding: rem(240);
+  padding: 24rem;
 
   @include only(largeDesktop) {
-    width: rem(365);
-    height: rem(688);
+    width: 36.5rem;
+    height: 68.8rem;
   }
 
   @include only(smallDesktop) {
-    width: rem(340);
-    height: rem(688);
+    width: 34rem;
+    height: 68.8rem;
   }
 
   .profileSection {
@@ -29,8 +29,8 @@
     flex-direction: column;
     align-items: center;
     .avatar {
-      margin-top: rem(96);
-      margin-bottom: rem(12);
+      margin-top: 9.6rem;
+      margin-bottom: 1.2rem;
     }
 
     .details {
@@ -56,9 +56,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: rem(-72);
+    margin-top: -7.2rem;
     .button {
-      margin-bottom: rem(12);
+      margin-bottom: 1.2rem;
     }
     .chatButton {
     }
@@ -70,7 +70,7 @@
   .socialMediaContainer {
     display: flex;
     justify-content: space-around;
-    margin-bottom: rem(32);
+    margin-bottom: 3.2rem;
 
     width: 80%;
     // background-color: red;

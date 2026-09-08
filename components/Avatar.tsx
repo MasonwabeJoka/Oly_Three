@@ -38,7 +38,7 @@ const Avatar = ({
   return (
     <div
       className={`${avatarSize ? AVATAR_SIZE[avatarSize] : ""} ${className || ""} ${styles.avatarsContainer} ${avatarShape=== "circle"? styles.circle : styles.square}`}
-      style={{ outline: `0.25rem solid ${outlineColour}` }}
+      style={{ outline: `0.4rem solid ${outlineColour}` }}
       onClick={onClick}
     >
       <AvatarClient

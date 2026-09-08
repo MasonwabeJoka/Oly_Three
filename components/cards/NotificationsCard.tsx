@@ -1,6 +1,6 @@
 "use client";
 import styles from "./NotificationsCard.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Avatar from "@/components/Avatar";
 import Image from "@/components/Image";
 import Checkbox from "@/components/Checkbox";
@@ -108,14 +108,14 @@ const NotificationsCard = ({
                     className={`${styles.button} ${
                       buttons[0] === button && styles.firstButton
                     }`}
-                    buttonChildren={button}
-                    buttonType="normal"
+                    children={button}
+                    buttonVariant="normal"
                     buttonSize="medium"
-                    name="take-action"
-                    type="button"
+
+
                     ariaLabel="Take Action Button"
-                    autoFocus={false}
-                    disabled={false}
+
+
                     dashboard
                   />
                 </Link>

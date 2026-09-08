@@ -2,8 +2,8 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .postMetrics {
-  width: rem(180);
-  height: rem(24);
+  width: 18rem;
+  height: 2.4rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -12,25 +12,25 @@
 
   .likes {
     display: flex;
-    margin-left: rem(16);
+    margin-left: 1.6rem;
     .icon {
-      margin-right: rem(4);
-      margin-top: rem(-1);
+      margin-right: 0.4rem;
+      margin-top: -0.1rem;
     }
   }
   .views {
     display: flex;
     .icon {
-      margin-right: rem(4);
-      margin-top: rem(-1);
+      margin-right: 0.4rem;
+      margin-top: -0.1rem;
     }
   }
 
   .postAge {
     font-size: $tiny;
     .duration {
-      margin-left: rem(8);
-      margin-right: rem(8);
+      margin-left: 0.8rem;
+      margin-right: 0.8rem;
     }
   }
 }

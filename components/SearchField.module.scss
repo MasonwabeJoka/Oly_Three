@@ -2,12 +2,12 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .extraLargeDesktop {
-  width: rem(500);
-  height: rem(50);
+  width: 50rem;
+  height: 5rem;
 }
 
 .dropdown {
-  width: rem(500);
+  width: 50rem;
 }
 .standard {
 }
@@ -31,7 +31,7 @@
 }
 
 .searchOpen {
-  width: rem(500);
+  width: 50rem;
   height: re;
   background-color: white;
 }

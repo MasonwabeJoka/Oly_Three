@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./BidSuccess.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 interface BidSuccessProps {
   bidAmount: number;
@@ -17,14 +17,14 @@ const BidSuccess = ({ bidAmount }: BidSuccessProps) => {
       <div className={styles.buttonsContainer}>
         <Button
           className={styles.viewBidsButton}
-          buttonChildren="View Bids"
-          buttonType="primary"
+          children="View Bids"
+          buttonVariant="primary"
           buttonSize="large"
-          name="view-bids-btn"
-          type="button"
+
+
           ariaLabel="View Bids"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
         />
       </div>

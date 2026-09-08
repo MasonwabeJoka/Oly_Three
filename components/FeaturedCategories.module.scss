@@ -12,36 +12,36 @@
     font-size: $h3 !important;
     font-weight: 600;
     color: $black-four;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
 
     @include only(largeDesktop) {
     }
 
     @include only(smallDesktop) {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 
   .categoriesContainer {
-    width: rem(312);
+    width: 31.2rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: rem(136);
-    gap: rem(16);
+    margin-bottom: 13.6rem;
+    gap: 1.6rem;
 
     @include only(largeDesktop) {
-      width: rem(1248);
-      gap: rem(32);
+      width: 124.8rem;
+      gap: 3.2rem;
     }
 
     @include only(smallDesktop) {
-      width: rem(1248);
-      gap: rem(32);
+      width: 124.8rem;
+      gap: 3.2rem;
     }
     @include only(tablet) {
-      width: rem(1000);
-      gap: rem(32);
+      width: 100rem;
+      gap: 3.2rem;
     }
   }
 

@@ -6,7 +6,7 @@ import Reaction from "../Reaction";
 import TextInputBar from "../TextInputBar";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { formatRelativeTime } from "@/utils/formatterFunctions/Formatter";
-import Button from "../Buttons";
+import Button from "../Button";
 
 interface FeedbackDetailsCardProps {
   id: string;
@@ -73,13 +73,10 @@ const FeedbackDetailsCard = ({
         <div className={styles.buttonContainer}>
           <Button
             className={styles.chatButton}
-            buttonChildren="Chat"
-            buttonType="normal"
+            children="Chat"
+            buttonVariant="normal"
             buttonSize="medium"
-            name="chat-btn"
-            type="button"
             ariaLabel="Chat Button"
-            autoFocus={false}
             onClick={handleReply}
           />
         </div>
@@ -93,7 +90,6 @@ const FeedbackDetailsCard = ({
             containerClassName={styles.commentInput}
             className={styles.textarea}
             id="reply-textarea"
-            name="reply-textarea"
             maxHeight={240}
             placeholder="Reply..."
             submitButtonText="Reply"

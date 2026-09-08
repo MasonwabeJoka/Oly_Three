@@ -131,7 +131,7 @@ const ResultsToolbar = ({
       <TabOptions
         options={options}
         onSelect={handleOptionSelect}
-        width={expanded ? "57.24rem" : optionsWidth}
+        width={expanded ? "91.584rem" : optionsWidth}
       />
     );
   };

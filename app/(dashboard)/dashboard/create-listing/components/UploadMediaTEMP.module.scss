@@ -9,7 +9,7 @@
   align-items: center;
 
   @include only(largeDesktop) {
-    width: rem(1098);
+    width: 109.8rem;
   }
 
   .title {
@@ -25,9 +25,9 @@
   }
 
   .buttons {
-    margin-top: rem(48);
+    margin-top: 4.8rem;
   }
   .buttonContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
 }

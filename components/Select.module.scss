@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  // border-radius: rem(40);
+  // border-radius: 4rem;
 }
 
 .overlayDropdown {
@@ -20,16 +20,16 @@
   flex-direction: column;
   align-items: center;
   width: fit-content;
-  border-radius: rem(40);
+  border-radius: 4rem;
   box-shadow: $shadow-one;
   isolation: isolate;
 
   .label {
     position: absolute;
     display: flex;
-    gap: rem(4);
+    gap: 0.4rem;
     top: 50%;
-    left: rem(24);
+    left: 2.4rem;
     transform: translateY(-50%);
     z-index: 1;
     color: $grey-four;
@@ -37,7 +37,7 @@
     font-size: $extra-tiny;
     .requiredStar {
       display: block;
-      margin-top: rem(1);
+      margin-top: 0.1rem;
     }
   }
 
@@ -50,7 +50,7 @@
   // }
   .errorMessage {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
   .selectContainer {
     position: relative;
@@ -59,9 +59,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
+      border-radius: 4rem;
       background-color: $white-three;
-      height: rem(56);
+      height: 5.6rem;
       text-align: center;
       border: none;
       outline: none;
@@ -73,107 +73,107 @@
     }
 
     .largeSelect {
-      width: rem(311);
-      height: rem(56);
+      width: 31.1rem;
+      height: 5.6rem;
 
       @include only(largeDesktop) {
-        width: rem(514);
-        height: rem(56);
+        width: 51.4rem;
+        height: 5.6rem;
       }
 
       @include only(smallDesktop) {
-        width: rem(462);
-        height: rem(56);
+        width: 46.2rem;
+        height: 5.6rem;
       }
 
       @include only(tablet) {
-        width: rem(462);
-        height: rem(56);
+        width: 46.2rem;
+        height: 5.6rem;
       }
 
       @include only(extraLargeDesktop) {
-        width: rem(514);
-        height: rem(56);
+        width: 51.4rem;
+        height: 5.6rem;
       }
     }
     .mediumSelect {
-      width: rem(202);
-      height: rem(56);
+      width: 20.2rem;
+      height: 5.6rem;
 
       @include only(largeDesktop) {
-        width: rem(424) !important;
-        height: rem(56) !important;
+        width: 42.4rem !important;
+        height: 5.6rem !important;
       }
       @include only(smallDesktop) {
-        width: rem(381);
-        height: rem(56);
+        width: 38.1rem;
+        height: 5.6rem;
       }
       @include only(tablet) {
-        width: rem(381);
-        height: rem(56);
+        width: 38.1rem;
+        height: 5.6rem;
       }
       @include only(extraLargeDesktop) {
-        width: rem(424);
-        height: rem(56);
+        width: 42.4rem;
+        height: 5.6rem;
       }
     }
 
     .largeDashboardSelect {
-      width: rem(267);
-      height: rem(56);
+      width: 26.7rem;
+      height: 5.6rem;
 
       @include only(largeDesktop) {
-        width: rem(471);
+        width: 47.1rem;
       }
       @include only(smallDesktop) {
-        width: rem(424);
+        width: 42.4rem;
       }
       @include only(tablet) {
-        width: rem(424);
+        width: 42.4rem;
       }
     }
 
     .mediumDashboardSelect {
-      width: rem(240);
-      height: rem(48);
+      width: 24rem;
+      height: 4.8rem;
 
       @include only(largeDesktop) {
-        width: rem(326) !important;
-        height: rem(56) !important;
+        width: 32.6rem !important;
+        height: 5.6rem !important;
       }
       @include only(smallDesktop) {
-        width: rem(293) !important;
-        height: rem(56) !important;
+        width: 29.3rem !important;
+        height: 5.6rem !important;
       }
       @include only(tablet) {
-        width: rem(293) !important;
-        height: rem(56) !important;
+        width: 29.3rem !important;
+        height: 5.6rem !important;
       }
     }
     .dashboardSelect {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
+      border-radius: 4rem;
       background-color: $white-three;
-      height: rem(56);
+      height: 5.6rem;
       // box-shadow: $shadow-one;
       text-align: center;
       border: none;
       outline: none;
       appearance: none;
       margin: 0 !important;
-      width: rem(267);
-      height: rem(56);
+      width: 26.7rem;
+      height: 5.6rem;
 
       @include only(largeDesktop) {
-        width: rem(471);
+        width: 47.1rem;
       }
       @include only(smallDesktop) {
-        width: rem(424);
+        width: 42.4rem;
       }
       @include only(tablet) {
-        width: rem(424);
+        width: 42.4rem;
       }
 
       &:hover {
@@ -181,8 +181,8 @@
       }
     }
     .input {
-      height: rem(56);
-      border-radius: rem(40);
+      height: 5.6rem;
+      border-radius: 4rem;
       // box-shadow: $shadow-two;
     }
 
@@ -193,9 +193,9 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: rem(80);
+      width: 8rem;
       height: 100%;
-      border-radius: rem(40);
+      border-radius: 4rem;
       pointer-events: none;
 
       .dropdownIcon {
@@ -209,9 +209,9 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: rem(80);
+      width: 8rem;
       height: 100%;
-      border-radius: rem(40);
+      border-radius: 4rem;
       .clearIcon {
       }
     }
@@ -223,15 +223,15 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: rem(80);
+      width: 8rem;
       height: 100%;
-      border-radius: rem(40);
+      border-radius: 4rem;
       pointer-events: none;
 
       .selectCount {
         border-radius: 50%;
-        width: rem(24);
-        height: rem(24);
+        width: 2.4rem;
+        height: 2.4rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -249,23 +249,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: rem(346);
+  max-height: 34.6rem;
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1000;
-  padding: 0 rem(8) rem(2) rem(8) !important;
-  margin-top: rem(8) !important;
+  padding: 0 0.8rem 0.2rem 0.8rem !important;
+  margin-top: 0.8rem !important;
   scrollbar-width: thin;
   background-color: $white-four;
-  border-radius: rem(0) rem(0) rem(40) rem(40);
+  border-radius: 0rem 0rem 4rem 4rem;
 
   &::-webkit-scrollbar {
-    width: rem(4) !important;
+    width: 0.4rem !important;
   }
 
   &::-webkit-scrollbar-track {
-    margin-block: rem(80) !important;
+    margin-block: 8rem !important;
   }
   @supports (scrollbar-width: thin) {
     & {
@@ -275,17 +275,17 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: $primary-hover;
-    border-radius: rem(4);
+    border-radius: 0.4rem;
   }
 
   .optionWrapper {
-    margin-bottom: rem(8) !important;
+    margin-bottom: 0.8rem !important;
     .option {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
-      height: rem(56);
+      border-radius: 4rem;
+      height: 5.6rem;
       margin: 0 auto;
       background-color: $white-two;
       color: $black-five;
@@ -294,12 +294,12 @@
       box-shadow: $shadow-one;
       .checkboxContainer {
         position: absolute;
-        left: rem(48);
+        left: 4.8rem;
       }
 
       .radioContainer {
         position: absolute;
-        left: rem(48);
+        left: 4.8rem;
 
         .radioInput {
           display: flex;
@@ -321,7 +321,7 @@
               background-color: $primary-hover;
               width: 24px;
               height: 24px;
-              border-radius: rem(8);
+              border-radius: 0.8rem;
               box-shadow: none;
             }
           }
@@ -333,12 +333,12 @@
 
             &::before {
               content: "";
-              width: rem(24);
-              height: rem(24);
+              width: 2.4rem;
+              height: 2.4rem;
               background-color: $white-one;
-              border: rem(4) solid $white-one;
-              outline: rem(0.5) solid #9defff;
-              border-radius: rem(8);
+              border: 0.4rem solid $white-one;
+              outline: 0.05rem solid #9defff;
+              border-radius: 0.8rem;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -367,25 +367,25 @@
     }
   }
   .mediumOptionWrapper {
-    margin-bottom: rem(8) !important;
+    margin-bottom: 0.8rem !important;
     .option {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
-      height: rem(56);
+      border-radius: 4rem;
+      height: 5.6rem;
       margin: 0 auto;
       background-color: $white-two;
       box-shadow: $shadow-one;
 
       .checkboxContainer {
         position: absolute;
-        left: rem(48);
+        left: 4.8rem;
       }
 
       .radioContainer {
         position: absolute;
-        left: rem(48);
+        left: 4.8rem;
 
         .radioInput {
           display: flex;
@@ -407,7 +407,7 @@
               background-color: $primary-hover;
               width: 24px;
               height: 24px;
-              border-radius: rem(8);
+              border-radius: 0.8rem;
               box-shadow: none;
             }
           }
@@ -419,12 +419,12 @@
 
             &::before {
               content: "";
-              width: rem(24);
-              height: rem(24);
+              width: 2.4rem;
+              height: 2.4rem;
               background-color: $white-one;
-              border: rem(4) solid $white-one;
-              outline: rem(0.5) solid #9defff;
-              border-radius: rem(8);
+              border: 0.4rem solid $white-one;
+              outline: 0.05rem solid #9defff;
+              border-radius: 0.8rem;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -458,16 +458,16 @@
   }
 
   .option:focus {
-    outline-offset: rem(1);
+    outline-offset: 0.1rem;
     outline-style: solid;
     outline-color: $white-one;
-    outline-width: rem(2);
+    outline-width: 0.2rem;
   }
 }
 
 .overlayOptions {
   position: absolute;
-  top: calc(100% + rem(8));
+  top: calc(100% + 0.8rem);
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0 !important;
@@ -475,8 +475,8 @@
 }
 
 .options::-webkit-scrollbar-track {
-  border-radius: rem(40);
-  margin-block: rem(30);
+  border-radius: 4rem;
+  margin-block: 3rem;
 }
 
 .hideOptions {
@@ -486,10 +486,10 @@
 .searchInputContainer {
   // background-color: burlywood !important;
   .searchInput {
-    width: rem(493.44);
-    height: rem(52.64);
-    margin-top: rem(6) !important;
-    margin-bottom: rem(4) !important;
+    width: 49.344rem;
+    height: 5.264rem;
+    margin-top: 0.6rem !important;
+    margin-bottom: 0.4rem !important;
     outline: none !important;
   }
 }
@@ -500,72 +500,72 @@
 }
 
 .largeSelect .option {
-  @include option-width(rem(311));
+  @include option-width(31.1rem);
 
   @include only(largeDesktop) {
-    @include option-width(rem(514));
+    @include option-width(51.4rem);
   }
 
   @include only(smallDesktop) {
-    @include option-width(rem(462));
+    @include option-width(46.2rem);
   }
 
   @include only(tablet) {
-    @include option-width(rem(514));
+    @include option-width(51.4rem);
   }
 
   @include only(extraLargeDesktop) {
-    @include option-width(rem(514));
+    @include option-width(51.4rem);
   }
 }
 
 .largeDashboardSelect .option {
-  @include option-width(rem(267));
+  @include option-width(26.7rem);
   @include only(largeDesktop) {
-    @include option-width(rem(471));
+    @include option-width(47.1rem);
   }
 
   @include only(smallDesktop) {
-    @include option-width(rem(424));
+    @include option-width(42.4rem);
   }
 
   @include only(tablet) {
-    @include option-width(rem(424));
+    @include option-width(42.4rem);
   }
 }
 .mediumSelect .option {
-  @include option-width(rem(311));
+  @include option-width(31.1rem);
 
   @include only(largeDesktop) {
-    @include option-width(rem(381));
+    @include option-width(38.1rem);
   }
 
   @include only(smallDesktop) {
-    @include option-width(rem(381));
+    @include option-width(38.1rem);
   }
 
   @include only(tablet) {
-    @include option-width(rem(381));
+    @include option-width(38.1rem);
   }
 
   @include only(extraLargeDesktop) {
-    @include option-width(rem(424));
+    @include option-width(42.4rem);
   }
 }
 
 .mediumDashboardSelect .option {
-  @include option-width(rem(240));
+  @include option-width(24rem);
 
   @include only(largeDesktop) {
-    @include option-width(rem(326));
+    @include option-width(32.6rem);
   }
 
   @include only(smallDesktop) {
-    @include option-width(rem(293));
+    @include option-width(29.3rem);
   }
 
   @include only(tablet) {
-    @include option-width(rem(293));
+    @include option-width(29.3rem);
   }
 }
 
@@ -598,11 +598,11 @@
 }
 
 .normal:focus {
-  outline-offset: rem(1);
+  outline-offset: 0.1rem;
   outline-style: solid;
   outline-color: $white-one;
-  outline-width: rem(2);
-  border-radius: rem(40);
+  outline-width: 0.2rem;
+  border-radius: 4rem;
 }
 
 .outline {

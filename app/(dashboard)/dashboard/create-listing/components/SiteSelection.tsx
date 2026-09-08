@@ -76,13 +76,13 @@ const SiteSelection = ({ onSelect }: SiteSelectionProps) => {
   let marginRight = "";
   switch (true) {
     case isLargeDesktop:
-      marginRight = currentScreenSize < 1570 ? "20rem" : "12.5rem";
+      marginRight = currentScreenSize < 1570 ? "32rem" : "20rem";
       break;
     case isSmallDesktop:
-      marginRight = currentScreenSize < 1340 ? "27rem" : "18.75rem";
+      marginRight = currentScreenSize < 1340 ? "43.2rem" : "30rem";
       break;
     default:
-      marginRight = "12.5rem";
+      marginRight = "20rem";
       break;
   }
 

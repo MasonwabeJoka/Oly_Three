@@ -1,5 +1,1 @@
-@use "sass:math";
-
-@function rem($pixels) {
-    @return calc($pixels / 16) * 1rem;
-}
+// Deprecated helper removed after migrating to literal rem values.

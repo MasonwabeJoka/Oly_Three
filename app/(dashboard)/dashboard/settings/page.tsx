@@ -1,6 +1,6 @@
 import LinkCard from "@/components/cards/LinkCard";
 import styles from "./styles.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from "next/link";
 
 const Settings = () => {
@@ -47,14 +47,14 @@ const Settings = () => {
 
       <Button
         className={styles.deleteButton}
-        buttonChildren="Delete Account"
-        buttonType="link"
-        buttonSize=""
-        name="delete-btn"
-        type="button"
+        children="Delete Account"
+        buttonVariant="link"
+
+
+
         ariaLabel="Delete Button"
-        autoFocus={false}
-        disabled={false}
+
+
       />
     </div>
   );

@@ -2,7 +2,7 @@ import Input from "@/components/Input";
 import styles from "./EnterRepMobile.module.scss";
 import axios from "axios";
 import { useState } from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 interface EnterRepMobileProps {
   onNext: () => void | Promise<void>;
@@ -53,7 +53,7 @@ const EnterRepMobile: React.FC<EnterRepMobileProps> = ({ onNext }) => {
             label="Representative's Phone Number"
             id="rep-phone-number"
             ariaLabel="Representative's Phone Number Field"
-            autoFocus={false}
+
             autoComplete="off"
             required={true}
             dashboard
@@ -68,7 +68,7 @@ const EnterRepMobile: React.FC<EnterRepMobileProps> = ({ onNext }) => {
               placeholder="Verification Code"
               label="Verification Code"
               id="rep-verification-code"
-              name="rep-verification-code"
+
               ariaLabel="Verification Code Field"
               autoFocus={true}
               autoComplete="off"
@@ -82,28 +82,28 @@ const EnterRepMobile: React.FC<EnterRepMobileProps> = ({ onNext }) => {
         {!codeSent ? (
           <Button
             className={styles.button}
-            buttonChildren="Send Code"
-            buttonType="primary"
+            children="Send Code"
+            buttonVariant="primary"
             buttonSize="large"
-            name="send-code-btn"
-            type="button"
+
+
             ariaLabel="Send Code"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={handleSendCode}
           />
         ) : (
           <Button
             className={styles.button}
-            buttonChildren="Verify Code"
-            buttonType="primary"
+            children="Verify Code"
+            buttonVariant="primary"
             buttonSize="large"
-            name="verify-code-btn"
-            type="button"
+
+
             ariaLabel="Verify Code"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={handleVerifyCode}
           />

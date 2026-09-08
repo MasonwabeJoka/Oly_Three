@@ -1,6 +1,6 @@
 "use client";
 import styles from "./OlyArticles.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from "next/link";
 import ArticlesSlider from "@/components/ArticlesSlider";
 
@@ -13,27 +13,27 @@ const OlyArticles = () => {
         <Link href="/articles/sports/?page=1">
           <Button
             className={styles.moreArticlesBtn}
-            buttonType="normal"
-            buttonChildren="More articles..."
+            buttonVariant="normal"
+            children="More articles..."
             buttonSize="large"
-            type="button"
-            name="More Articles Button"
+
+
             ariaLabel="More Articles Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </Link>
         <Link href="#">
           <Button
             className={styles.forumBtn}
-            buttonType="normal"
-            buttonChildren="Forum"
+            buttonVariant="normal"
+            children="Forum"
             buttonSize="large"
-            type="button"
-            name="Forum Button"
+
+
             ariaLabel="Forum Button"
-            autoFocus={false}
-            disabled={false}
+
+
           />
         </Link>
       </div>

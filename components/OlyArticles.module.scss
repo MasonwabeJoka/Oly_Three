@@ -14,23 +14,23 @@
     font-size: $h3 !important;
     font-weight: 600;
     color: $black-four;
-    margin-bottom: rem(48);
+    margin-bottom: 4.8rem;
 
     @include only(largeDesktop) {
     }
 
     @include only(smallDesktop) {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 
   .buttons {
     display: flex;
     flex-direction: column;
-    margin-top: rem(56);
+    margin-top: 5.6rem;
 
     .moreArticlesBtn {
-      margin-bottom: rem(20);
+      margin-bottom: 2rem;
     }
   }
 }

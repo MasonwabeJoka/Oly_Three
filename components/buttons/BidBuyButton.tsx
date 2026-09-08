@@ -1,6 +1,6 @@
 import styles from "./BidBuyButton.module.scss";
 import { UIData } from "@/data/UIData";
-import Button from "../Buttons";
+import Button from "../Button";
 
 interface bidBuyButtonProps {
   className: string;
@@ -29,14 +29,14 @@ const BidBuyButton = ({
       <div className={styles.amount}>R{amount}</div>
       <Button
         className={`${className} ${styles.button}`}
-        buttonChildren={buttonChildren}
+        children={buttonChildren}
         buttonSize={small}
-        buttonType={bidBuy}
+        buttonVariant="normal"
         name={name}
         type="submit"
         ariaLabel={ariaLabel}
         autoFocus={autoFocus}
-        disabled={disabled}
+        isDisabled={disabled}
         formTarget="_blank"
         {...otherProps}
       />

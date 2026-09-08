@@ -13,7 +13,7 @@ const Home = () => {
       <form action={addTaskAction} className={styles.form}>
         <input
           type="text"
-          name="title"
+
           placeholder="Enter a new task"
           required
         />

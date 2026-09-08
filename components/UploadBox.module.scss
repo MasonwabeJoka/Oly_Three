@@ -11,7 +11,7 @@
     border: none;
     outline: none;
 
-    border-radius: rem(40);
+    border-radius: 4rem;
     box-shadow:
       0px -3px 3px 0px rgba(0, 94, 117, 0.1) inset,
       0px 5px 5px 0px rgba(0, 94, 117, 0.09) inset,
@@ -23,7 +23,7 @@
       display: none;
     }
     .uploadVideoContainer {
-      margin-bottom: rem(24);
+      margin-bottom: 2.4rem;
 
       .uploadVideo {
         display: none;
@@ -31,7 +31,7 @@
     }
 
     .or {
-      margin-bottom: rem(24);
+      margin-bottom: 2.4rem;
     }
 
     .videoURL {
@@ -42,7 +42,7 @@
       justify-content: center;
       align-items: center;
       font-size: $body;
-      border-radius: rem(40);
+      border-radius: 4rem;
       cursor: pointer;
       background-color: $primary;
       box-shadow:
@@ -55,21 +55,21 @@
     }
   }
   .boxLarge {
-    width: rem(664);
-    height: rem(440);
+    width: 66.4rem;
+    height: 44rem;
   }
 
   .boxMedium {
-    width: rem(514);
-    height: rem(360);
+    width: 51.4rem;
+    height: 36rem;
   }
 
   .labelLarge {
-    width: rem(471);
-    height: rem(56);
+    width: 47.1rem;
+    height: 5.6rem;
   }
   .labelMedium {
-    width: rem(336.4285);
-    height: rem(56);
+    width: 33.64285rem;
+    height: 5.6rem;
   }
 }

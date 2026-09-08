@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./Published.module.scss";
 import { useEffect } from "react";
 const Published = () => {
@@ -21,14 +21,14 @@ const Published = () => {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.viewButton}
-          buttonChildren="View Your Listing"
-          buttonType="primary"
+          children="View Your Listing"
+          buttonVariant="primary"
           buttonSize="large"
-          name="view-btn"
-          type="button"
+
+
           ariaLabel="View Your Listing"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
         />
       </div>

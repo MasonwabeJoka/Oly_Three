@@ -9,7 +9,7 @@
   min-height: 100vh;
 
   .chatList {
-    // margin-top: rem(52);
+    // margin-top: 5.2rem;
   }
 
   .mainSection {
@@ -17,15 +17,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: rem(800);
-    margin-left: rem(32);
+    width: 80rem;
+    margin-left: 3.2rem;
     z-index: 10;
 
     .exitButtonContainer {
       position: fixed;
       left: 95%;
       top: 3%;
-      gap: rem(16);
+      gap: 1.6rem;
       cursor: pointer;
       width: 100%;
       z-index: 500;
@@ -37,8 +37,8 @@
     }
 
     .mainSectionWrapper {
-      margin-top: rem(96);
-      margin-bottom: rem(360);
+      margin-top: 9.6rem;
+      margin-bottom: 36rem;
       width: 100%;
     }
   }
@@ -46,6 +46,6 @@
   .bottomSection {
     position: fixed;
     bottom: 0;
-    margin-bottom: rem(56);
+    margin-bottom: 5.6rem;
   }
 }

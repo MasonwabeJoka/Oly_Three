@@ -4,10 +4,10 @@
 .container {
   display: flex;
   align-items: center;
-  width: rem(920);
-  height: rem(180);
-  padding: rem(32);
-  border-radius: rem(40);
+  width: 92rem;
+  height: 18rem;
+  padding: 3.2rem;
+  border-radius: 4rem;
   background-color: $white-three;
   box-shadow: $shadow-one;
   cursor: pointer;
@@ -16,22 +16,22 @@
   @include only(smallDesktop) {
     display: flex;
     flex-direction: column;
-    width: rem(360);
-    height: rem(480);
+    width: 36rem;
+    height: 48rem;
   }
   @include only(tablet) {
   }
   .video {
-    width: rem(320);
+    width: 32rem;
     height: inherit;
-    // border-radius: rem(40);
+    // border-radius: 4rem;
     background-color: $grey-one;
     @include only(largeDesktop) {
     }
 
     @include only(smallDesktop) {
       width: 100%;
-      height: rem(202);
+      height: 20.2rem;
     }
     @include only(tablet) {
     }
@@ -43,7 +43,7 @@
     justify-content: center;
     width: 40%;
     height: inherit;
-    margin-left: rem(32);
+    margin-left: 3.2rem;
     @include only(largeDesktop) {
     }
 
@@ -52,7 +52,7 @@
       height: fit-content;
       margin-left: 0;
       justify-content: unset;
-      padding: rem(20) rem(20) rem(0);
+      padding: 2rem 2rem 0rem;
     }
     @include only(tablet) {
     }
@@ -62,13 +62,13 @@
       align-items: flex-start;
       .title {
         font-size: $small;
-        margin-bottom: rem(8);
+        margin-bottom: 0.8rem;
         text-transform: uppercase;
 
         @include only(smallDesktop) {
-          margin-bottom: rem(0);
+          margin-bottom: 0rem;
           width: 80% !important;
-           margin-bottom: rem(16);
+           margin-bottom: 1.6rem;
         }
         @include only(tablet) {
         }
@@ -76,7 +76,7 @@
 
       .publishButtonContainer {
  
-    margin-left: rem(0);
+    margin-left: 0rem;
 
     .publishButton {
     }
@@ -94,13 +94,13 @@
   .publishButtonContainer {
     display: flex;
     align-items: center;
-    margin-left: rem(48);
+    margin-left: 4.8rem;
 
     .publishButton {
     }
 
     .publishButtonText {
-      margin-left: rem(8);
+      margin-left: 0.8rem;
       font-weight: 300;
     }
   }

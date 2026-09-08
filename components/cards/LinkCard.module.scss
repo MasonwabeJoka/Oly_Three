@@ -6,20 +6,20 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-radius: rem(40);
+  border-radius: 4rem;
   cursor: pointer;
   box-shadow: $shadow-one;
   background-color: $grey-one;
   .imageContainer {
-    height: rem(128);
-    border-radius: rem(40) rem(40) 0 0;
+    height: 12.8rem;
+    border-radius: 4rem 4rem 0 0;
     position: absolute;
 
     @include only(largeDesktop) {
-      height: rem(216);
+      height: 21.6rem;
     }
     @include only(smallDesktop) {
-      height: rem(216);
+      height: 21.6rem;
     }
   }
 
@@ -30,24 +30,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0 0 rem(40) rem(40);
+    border-radius: 0 0 4rem 4rem;
     margin-top: auto;
     .label {
       color: $white-one;
       letter-spacing: 1.15px !important;
       text-align: center;
-      font-size: rem(28);
+      font-size: 2.8rem;
       font-weight: 500;
       line-height: 1;
-      padding: rem(2) rem(24) rem(24) rem(12);
+      padding: 0.2rem 2.4rem 2.4rem 1.2rem;
       // background-color: rgba(0, 0, 0, 0.164);
-      border-radius: rem(40);
+      border-radius: 4rem;
     
   }
 }
 .largeLabelContainer {
  .label {
-    -webkit-text-stroke: rem(0.4) $primary !important;
+    -webkit-text-stroke: 0.04rem $primary !important;
     text-shadow: 2px 2px 4px #03181d71 !important;
     font-weight: 800;
 
@@ -57,28 +57,28 @@
 .standardLabelContainer {
      .label {
        color: $white-one !important;
-      -webkit-text-stroke: rem(0.1) #0a5f70ce !important;
+      -webkit-text-stroke: 0.01rem #0a5f70ce !important;
       text-shadow: 2px 2px 4px #03181d71 !important;
-      font-size: rem(24) !important;
+      font-size: 2.4rem !important;
       font-weight: 800 !important;
     }
 }
 
 .large {
   position: relative;
-  width: rem(290);
-  height: rem(321);
+  width: 29rem;
+  height: 32.1rem;
 }
 
 .standard {
   position: relative;
-  width: rem(228) !important;
-  height: rem(236);
+  width: 22.8rem !important;
+  height: 23.6rem;
 }
 
 .largeLabelContainer {
-  height: rem(84);
-  // border-radius: 0 0 rem(40) rem(40);
+  height: 8.4rem;
+  // border-radius: 0 0 4rem 4rem;
   // display: flex;
   // justify-content: center;
   // align-items: center;
@@ -89,22 +89,22 @@
 }
 
 .standardLabelContainer {
-  height: rem(56);
+  height: 5.6rem;
   // font-size: $h4;
-  // padding: rem(8) !important;
-  // width: rem(228);
+  // padding: 0.8rem !important;
+  // width: 22.8rem;
 
   @include only(largeDesktop) {
-    height: rem(72);
+    height: 7.2rem;
   }
   @include only(smallDesktop) {
-    height: rem(72);
+    height: 7.2rem;
   }
 }
 
 .cardContainer:hover {
   transform: scale(1.04);
-  // border-radius: rem(40);
+  // border-radius: 4rem;
 }
 .cardContainer:hover .labelContainer {
   // background-color: $white-three;

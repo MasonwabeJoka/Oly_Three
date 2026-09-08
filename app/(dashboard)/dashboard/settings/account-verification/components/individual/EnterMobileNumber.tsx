@@ -3,7 +3,7 @@ import styles from "./EnterMobileNumber.module.scss";
 import Input from "@/components/Input";
 import axios from "axios";
 import { useState } from "react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useFormContext } from "react-hook-form";
 
 interface EnterMobileNumberProps {
@@ -81,9 +81,9 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
           label="Phone Number"
           id="phone-number"
           ariaLabel="Phone Number Field"
-          autoFocus={false}
+
           autoComplete="off"
-          disabled={codeSent}
+          isDisabled={codeSent}
           required
           dashboard
           {...register("phoneNumber")}
@@ -116,28 +116,28 @@ const EnterMobileNumber: React.FC<EnterMobileNumberProps> = ({ onNext }) => {
           {!codeSent ? (
             <Button
               className={styles.button}
-              buttonChildren="Send Code"
-              buttonType="primary"
+              children="Send Code"
+              buttonVariant="primary"
               buttonSize="large"
-              name="send-code-btn"
-              type="button"
+
+
               ariaLabel="Send Code"
-              autoFocus={false}
-              disabled={!!errors.phoneNumber}
+
+              isDisabled={!!errors.phoneNumber}
               dashboard
               onClick={handleSendCode}
             />
           ) : (
             <Button
               className={styles.button}
-              buttonChildren="Verify Code"
-              buttonType="primary"
+              children="Verify Code"
+              buttonVariant="primary"
               buttonSize="large"
-              name="verify-code-btn"
-              type="button"
+
+
               ariaLabel="Verify Code"
-              autoFocus={false}
-              disabled={!!errors.verificationCode}
+
+              isDisabled={!!errors.verificationCode}
               dashboard
               onClick={handleVerifyCode}
             />

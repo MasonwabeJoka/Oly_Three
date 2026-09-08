@@ -56,7 +56,7 @@ const RangeSlider = ({
           inputType="normal"
           placeholder={placeholder}
           label={inputLabel}
-          autoFocus={false}
+
           required={true}
           onChange={handleInputChange}
         />

@@ -1,7 +1,7 @@
 import styles from "./PromoteYourAds.module.scss";
 import { PromoteYourAdData } from "@/data/PromoteYourAdData";
 import PromoteYourAdCard from "@/components/cards/PromoteYourAdCard";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from "next/link";
 import PromotionPaymentSummary from "@/app/(dashboard)/dashboard/create-listing/components/PromotionPaymentSummary";
 import { useShowSidebarStore } from "../store/useShowSidebarStore";
@@ -18,13 +18,13 @@ const PromoteYourAd = ({ onNext }: Props) => {
   let marginLeft = "";
   switch (true) {
     case isLargeDesktop:
-      marginLeft = isVisible ? "0" : "17rem";
+      marginLeft = isVisible ? "0" : "27.2rem";
       break;
     case isSmallDesktop:
-      marginLeft = isVisible ? "0" : "17rem";
+      marginLeft = isVisible ? "0" : "27.2rem";
       break;
     case isTablet:
-      marginLeft = isVisible ? "0" : "17rem";
+      marginLeft = isVisible ? "0" : "27.2rem";
       break;
     default:
       marginLeft = "0";

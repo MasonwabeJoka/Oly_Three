@@ -1,4 +1,4 @@
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./BidConfirmation.module.scss";
 
 interface BidConfirmationProps {
@@ -21,27 +21,27 @@ const BidConfirmation = ({
       <div className={styles.buttonsContainer}>
         <Button
           className={styles.confirmButton}
-          buttonChildren="Yes"
-          buttonType="primary"
+          children="Yes"
+          buttonVariant="primary"
           buttonSize="large"
-          name="confirm-btn"
+
           type="submit"
           ariaLabel="Yes"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={onConfirm}
         />
         <Button
           className={styles.cancelButton}
-          buttonChildren="Cancel"
-          buttonType="normal"
+          children="Cancel"
+          buttonVariant="normal"
           buttonSize="large"
-          name="cancel-btn"
+
           type="submit"
           ariaLabel="Cancel"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={onCancel}
         />

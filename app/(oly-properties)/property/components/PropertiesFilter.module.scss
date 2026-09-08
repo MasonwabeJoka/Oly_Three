@@ -7,10 +7,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: rem(320);
-  min-height: rem(240);
+  width: 32rem;
+  min-height: 24rem;
   height: auto;
-  border-radius: rem(40);
+  border-radius: 4rem;
   background-color: $white-three;
 
   &.hasSelection {
@@ -22,10 +22,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: rem(16);
+    gap: 1.6rem;
     width: 100%;
     height: 100%;
-    padding: rem(20) !important;
+    padding: 2rem !important;
     background-color: transparent;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -35,12 +35,12 @@
       flex-direction: column;
       justify-content: center;
       font-size: $small !important;
-      border-radius: rem(40);
-      width: rem(280);
+      border-radius: 4rem;
+      width: 28rem;
       background-color: $white-three;
       box-shadow: $shadow-three;
       flex-shrink: 0;
-      height: rem(32);
+      height: 3.2rem;
       cursor: pointer;
       transition: background-color 0.2s ease;
 
@@ -53,7 +53,7 @@
       }
 
       span {
-        margin-left: rem(20);
+        margin-left: 2rem;
       }
     }
 

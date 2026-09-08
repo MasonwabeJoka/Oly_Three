@@ -59,7 +59,7 @@ const TabsClient: React.FC<TabsProps> = ({
     <ul
       className={styles.tabs}
       style={{
-        width: dashboard ? "16.6875rem" : "19.1475rem",
+        width: dashboard ? "26.7rem" : "30.636rem",
       }}
     >
       {tabs.map((tab, index) => {

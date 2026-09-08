@@ -2,7 +2,7 @@ import { Ad } from "@/sanityTemp/Types/Ad";
 import styles from "./CartItem.module.scss";
 import Image from "@/components/Image";
 import { ImageIcon, X } from "lucide-react";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useCart } from "../payment/store/useCart";
 import * as Formatter from "@/utils/formatterFunctions/Formatter";
 
@@ -38,18 +38,18 @@ const CartItem = ({ ad }: { ad: Ad }) => {
           <div className={styles.removeButtonContainer}>
             <Button
               className={styles.removeButton}
-              buttonChildren={
+              children={
                 <>
                   <X className="w-3 h-3" /> Remove
                 </>
               }
-              buttonType="icon"
+              buttonVariant="icon"
               buttonSize="medium"
-              name="remove-btn"
-              type="button"
+
+
               ariaLabel="Remove Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={() => removeItem(ad._id)}
             />
           </div>

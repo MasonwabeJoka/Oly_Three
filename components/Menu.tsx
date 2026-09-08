@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import MaxWidthWrapper from "@/components/utilComponents/MaxWidthWrapper";
 import useSidebarStore from "@/store/useSidebarStore";
 import { useState } from "react";
-import Button from "./Buttons";
+import Button from "./Button";
 import { useModalStore } from "@/store/modalStore";
 
 const Menu = () => {
@@ -20,29 +20,29 @@ const Menu = () => {
   // Authentication removed - no longer using Clerk
 
   const containerStyles = {
-    width: isMobile ? "100vw" : isSidebarOpen ? "85vw" : "51.51rem",
+    width: isMobile ? "100vw" : isSidebarOpen ? "85vw" : "82.416rem",
     // width: isMobile ? "100vw" : isSidebarOpen ? "49.375rem" : "60.60rem",
-    height: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "80vh",
+    height: isMobile ? "100vh" : isSidebarOpen ? "53.8rem" : "80vh",
     // minHeight: isMobile ? "100vh" : isSidebarOpen ? "33.625rem" : "45.875rem",
     boxShadow: isMobile ? "none" : "none",
     // boxShadow: isMobile ? "none" : shadow,
   };
 
   const menuStyles = {
-    columnGap: isMobile ? "1rem" : isSidebarOpen ? "3rem" : "3rem",
+    columnGap: isMobile ? "1.6rem" : isSidebarOpen ? "4.8rem" : "4.8rem",
     // padding: isMobile ? "" : "3rem 3rem 12rem 3rem",
   };
   const menuItemStyles = {
-    width: isMobile ? "6rem" : isSidebarOpen ? "12rem" : "12rem",
-    height: isMobile ? "6rem" : isSidebarOpen ? "12rem" : "12rem",
-    marginBottom: isMobile ? "1rem" : isSidebarOpen ? "1rem" : "1rem",
+    width: isMobile ? "9.6rem" : isSidebarOpen ? "19.2rem" : "19.2rem",
+    height: isMobile ? "9.6rem" : isSidebarOpen ? "19.2rem" : "19.2rem",
+    marginBottom: isMobile ? "1.6rem" : isSidebarOpen ? "1.6rem" : "1.6rem",
   };
   const iconContainerSize = {
-    width: isMobile ? "3rem" : isSidebarOpen ? "4rem" : "5.5rem",
-    height: isMobile ? "3rem" : isSidebarOpen ? "4rem" : "5.5rem",
+    width: isMobile ? "4.8rem" : isSidebarOpen ? "6.4rem" : "8.8rem",
+    height: isMobile ? "4.8rem" : isSidebarOpen ? "6.4rem" : "8.8rem",
   };
   const textSize = {
-    fontSize: isMobile ? "0.875rem" : isSidebarOpen ? "1rem" : "1rem",
+    fontSize: isMobile ? "1.4rem" : isSidebarOpen ? "1.6rem" : "1.6rem",
   };
 
   // TODO: When Menu is open and the user is logged out, dynamically change the logout button to exit button, with an X icon.
@@ -95,15 +95,15 @@ const Menu = () => {
           <div className={styles.goBackButtonContainer}>
             <Button
               className={styles.goBackButton}
-              buttonChildren="Go Back"
-              buttonType="normal"
+              children="Go Back"
+              buttonVariant="normal"
               buttonSize="medium"
-              name="go-back-btn"
-              type="button"
+
+
               ariaLabel="Go Back Button"
-              autoFocus={false}
-              disabled={false}
-              ariaHidden={false}
+
+
+
               onClick={() => setShowMenuModal(false)}
             />
           </div>

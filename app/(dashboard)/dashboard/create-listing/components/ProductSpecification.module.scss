@@ -3,13 +3,13 @@
 @use "@/utils/breakpoints" as *;
 
 .container {
-  padding: rem(50);
+  padding: 5rem;
   overflow: auto;
 }
 
 .productSpecificationContainer {
   position: relative;
-  padding: rem(16) rem(32);
+  padding: 1.6rem 3.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,27 +17,27 @@
   opacity: 0;
   transform: translateY(-10px);
   background-color: $white-two;
-  border-radius: rem(40) rem(40) rem(44) rem(44);
-  width: rem(544);
-  min-height: rem(232);
-  margin-bottom: rem(48);
+  border-radius: 4rem 4rem 4.4rem 4.4rem;
+  width: 54.4rem;
+  min-height: 23.2rem;
+  margin-bottom: 4.8rem;
     &.open {
     opacity: 1;
     transform: translateY(0);
-  margin-bottom: rem(32);
+  margin-bottom: 3.2rem;
 
   }
 
   .deleteButtonContainer {
     position: absolute;
-    top: rem(16);
-    right: rem(20);
+    top: 1.6rem;
+    right: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: $white-three;
-    width: rem(28);
-    height: rem(28);
+    width: 2.8rem;
+    height: 2.8rem;
     border-radius: 50%;
     cursor: pointer;
 
@@ -50,34 +50,34 @@
 
     .productSpecificationTitle {
       color: $black-four;
-      margin-top: rem(24);
-      margin-bottom: rem(8);
-      padding: 0 rem(16);
+      margin-top: 2.4rem;
+      margin-bottom: 0.8rem;
+      padding: 0 1.6rem;
       text-align: center;
     }
 
     .productSpecificationDescription {
       color: $grey-four;
       text-align: center;
-      padding: 0 rem(16);
+      padding: 0 1.6rem;
     }
 
     .productSpecificationExample {
       color: $grey-four;
-      padding: 0 rem(16);
+      padding: 0 1.6rem;
     }
   }
 
   .productSpecificationInputContainer {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
 
     .productSpecificationInput {
       background-color: $white-two;
-      width: rem(471);
+      width: 47.1rem;
     }
   }
 }
 
 .submitButtonContainer {
-  margin-bottom: rem(40) !important;
+  margin-bottom: 4rem !important;
 }

@@ -1,7 +1,7 @@
 import Icon from "@/components/Icon";
 import styles from "./PostMetrics.module.scss";
 import { Suspense, useState } from "react";
-import LoadingSpinnerTwo from "@/components/LoadingSpinnerTwo";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type Props = {
   totalViews: number;
@@ -30,7 +30,7 @@ const PostMetrics = ({ totalViews }: Props) => {
           </div>
           <p>10</p>
         </div>
-        <Suspense fallback={<LoadingSpinnerTwo size={2} />}>
+        <Suspense fallback={<LoadingSpinner size={2} />}>
           <div className={styles.views}>
             <div className={styles.icon}>
               <Icon
@@ -46,7 +46,7 @@ const PostMetrics = ({ totalViews }: Props) => {
         </Suspense>
         <div className={styles.postAge}>
           <p>
-           <span className={styles.duration}>2 weeks</span> 
+            <span className={styles.duration}>2 weeks</span>
           </p>
         </div>
       </div>

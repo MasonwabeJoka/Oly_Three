@@ -2,7 +2,7 @@
 import styles from "./FeedbackForm.module.scss";
 import { useState } from "react";
 import Input from "./Input";
-import Button from "./Buttons";
+import Button from "./Button";
 import TextArea from "./TextArea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -111,7 +111,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           inputSize="large"
           placeholder="Please enter your name"
           autoComplete="off"
-          autoFocus={false}
           id="name"
           ariaLabel="Name Field"
           required={true}
@@ -136,7 +135,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           inputSize="large"
           placeholder="Please enter your email"
           autoComplete="off"
-          autoFocus={false}
           id="email"
           ariaLabel="Email Field"
           required={true}
@@ -160,7 +158,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           inputSize="large"
           placeholder="Please enter a title for your feedback"
           autoComplete="off"
-          autoFocus={false}
           id="title"
           ariaLabel="Title Field"
           required={true}
@@ -183,7 +180,6 @@ const FeedbackForm = ({ title }: { title: string }) => {
           placeholder="Please enter your feedback here..."
           label={label}
           id="message"
-          name="message"
           size="large"
           required={true}
           onSubmit={() => {}}
@@ -216,14 +212,12 @@ const FeedbackForm = ({ title }: { title: string }) => {
       <div className={`${styles.submitButtonContainer} ${styles.control}`}>
         <Button
           className={styles.submitButton}
-          buttonChildren="Submit"
-          buttonType="primary"
+          children="Submit"
+          buttonVariant="primary"
           buttonSize="large"
-          name="submit-btn"
           type="submit"
           ariaLabel="Submit Button"
-          autoFocus={false}
-          disabled={isSubmitting}
+          isDisabled={isSubmitting}
         />
       </div>
     </Form>

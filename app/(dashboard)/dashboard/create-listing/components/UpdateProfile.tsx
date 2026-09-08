@@ -1,7 +1,7 @@
 "use client";
 
 import type { User } from "@workos-inc/node";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import ProfileSettingsForm from "../../settings/components/ProfileSettingsForm";
 
 type UpdateProfileProps = {
@@ -11,7 +11,7 @@ type UpdateProfileProps = {
 
 const UpdateProfile = ({ initialUser, onNext }: UpdateProfileProps) => {
   if (!initialUser) {
-    return <LoadingSpinner />;
+    return <LoadingGraphic />;
   }
 
   return (
@@ -20,8 +20,7 @@ const UpdateProfile = ({ initialUser, onNext }: UpdateProfileProps) => {
         firstName: initialUser.firstName ?? "",
         lastName: initialUser.lastName ?? "",
         email: initialUser.email ?? "",
-        avatarUrl:
-          initialUser.profilePictureUrl ?? null,
+        avatarUrl: initialUser.profilePictureUrl ?? null,
         phoneNumber: null,
         socialMediaName: null,
         socialMediaUrl: null,

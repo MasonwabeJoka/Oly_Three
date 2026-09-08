@@ -222,6 +222,7 @@ signInWithRedirect(auth, new GoogleAuthProvider());
 };
 
 return (
+
 <div className="page">
 <div className="logo">👋 💬 🤖 </div>
 <div className="text">Welcome to ChatRCE</div>
@@ -250,6 +251,7 @@ user: User;
 
 export default function Page(props: ChatProps) {
 return (
+
 <div style={{ height: "100vh" }}>
 <button
 style={{ position: "absolute", top: "0px", left: "0px" }}
@@ -267,10 +269,11 @@ style={{ height: "100%" }}
 }
 Next, add a loading page (pages/Loading.tsx) with the following code:
 
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 
 export default function Loading() {
 return (
+
 <div className="page">
 <div className="logo">☝️</div>
 <div className="text">Loading your info...</div>

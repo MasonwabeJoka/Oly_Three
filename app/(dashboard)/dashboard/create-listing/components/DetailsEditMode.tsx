@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextArea from "@/components/TextArea";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import styles from "./EditMode.module.scss";
 
@@ -42,7 +42,7 @@ const DetailsEditMode = ({
       <TextArea
         className={styles.editDetail}
         id="edit-detail"
-        name="editDetail"
+
         size="large"
         label="Edit Detail"
         required={true}
@@ -55,7 +55,7 @@ const DetailsEditMode = ({
       <div className={`${styles.cancelButton} ${styles.editButton}`}>
         <Button
           className={styles.cancel}
-          buttonChildren={
+          children={
             <div className={styles.iconContainer}>
               <Icon
                 className={styles.icon}
@@ -66,13 +66,13 @@ const DetailsEditMode = ({
               />
             </div>
           }
-          buttonType="icon"
-          buttonSize=""
-          name="cancel-edit-btn"
-          type="button"
+          buttonVariant="icon"
+
+
+
           ariaLabel="Cancel Edit"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={cancelEdit}
         />
@@ -80,7 +80,7 @@ const DetailsEditMode = ({
       <div className={`${styles.submitButton} ${styles.editButton}`}>
         <Button
           className={styles.submit}
-          buttonChildren={
+          children={
             <div className={styles.iconContainer}>
               <Icon
                 className={styles.icon}
@@ -91,13 +91,13 @@ const DetailsEditMode = ({
               />
             </div>
           }
-          buttonType="icon"
-          buttonSize=""
-          name="submit-edit-btn"
-          type="button"
+          buttonVariant="icon"
+
+
+
           ariaLabel="Submit Edit"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={handleSubmitEdit}
         />

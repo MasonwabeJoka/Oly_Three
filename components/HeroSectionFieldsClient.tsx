@@ -2,7 +2,7 @@
 import styles from "./HeroSectionFieldsClient.module.scss";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import Button from "./Buttons";
+import Button from "./Button";
 import Input from "@/components/Input";
 import { suggestions } from "@/data/SuggestionsData";
 import { useForm, Controller } from "react-hook-form";
@@ -49,28 +49,28 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
     >
       <Link href="/dashboard/create-listing" className={styles.link}>
         <Button
-          buttonChildren="Create A Listing"
+          children="Create A Listing"
           className={styles.createAListingBtn}
-          buttonType="danger"
+          buttonVariant="danger"
           buttonSize="large"
-          name="Create A Listing Button"
-          type="button"
+
+
           ariaLabel="Create A Listing Button"
-          autoFocus={false}
-          disabled={false}
+
+
         />
       </Link>
       <div className={styles.categoriesBtnContainer}>
         <Button
-          buttonChildren="See All Categories"
+          children="See All Categories"
           className={styles.categoriesBtn}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="Categories Button"
-          type="button"
+
+
           ariaLabel="Categories Button"
-          autoFocus={false}
-          disabled={false}
+
+
           onClick={() => setShowCategoriesModal(true)}
         />
       </div>
@@ -154,15 +154,13 @@ const HeroSectionFieldsClient = ({ searchTerm, locationSearch }: Props) => {
         </div>
         <div className={styles.searchButton}>
           <Button
-            buttonChildren="Search"
+            children="Search"
             className={styles.search}
-            buttonType="normal"
+            buttonVariant="normal"
             buttonSize="large"
-            name="Search Button"
             type="submit"
             ariaLabel="Search Button"
-            autoFocus={false}
-            disabled={pending}
+            isDisabled={pending}
           />
         </div>
       

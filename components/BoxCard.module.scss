@@ -6,12 +6,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-radius: rem(40);
-  min-width: rem(310);
+  border-radius: 4rem;
+  min-width: 31rem;
   background: $grey-one;
   cursor: pointer;
   box-shadow: $shadow-six;
-  // min-height: rem(248);
+  // min-height: 24.8rem;
   height: fit-content;
-  margin-top: rem(-8);
+  margin-top: -0.8rem;
 }

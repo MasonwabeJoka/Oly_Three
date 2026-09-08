@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./SectionWrapper.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import useEditStore from "../../store/useEditStore";
 import useFormStore from "../../store/useFormStore";
 import { useRouter } from "next/navigation";
@@ -32,14 +32,11 @@ export const SectionWrapper = ({
         <div className={styles.children}>{children}</div>
         <Button
           className={styles.editButton}
-          buttonChildren="Edit"
-          buttonType="normal"
+          children="Edit"
+          buttonVariant="normal"
           buttonSize="small"
-          name="edit-btn"
-          type="button"
           ariaLabel="Edit Button"
-          autoFocus={false}
-          disabled={false}
+
           dashboard
           onClick={onClick}
         />

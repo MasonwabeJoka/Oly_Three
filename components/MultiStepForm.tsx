@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import styles from "./MultiStepForm.module.scss";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingGraphic from "./LoadingGraphic";
 import Step from "./Step";
 import FormProgressBar from "@/app/(dashboard)/dashboard/create-listing/components/FormProgressBar";
 
@@ -80,7 +80,7 @@ export default function MultiStepForm<T extends Record<string, any>>({
   if (!isClient) {
     return (
       <div className={styles.container}>
-        <LoadingSpinner />
+        <LoadingGraphic />
       </div>
     );
   }

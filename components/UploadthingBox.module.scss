@@ -11,7 +11,7 @@
     color: #67787c;
     // https://kovart.github.io/dashed-border-generator/
     // background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%23C9CECF' stroke-width='6' stroke-dasharray='32%2c32' stroke-dashoffset='19' stroke-linecap='square'/%3e%3c/svg%3e");
-    border-radius: rem(40);
+    border-radius: 4rem;
     border: none;
     box-shadow:
       0px -3px 3px 0px rgba(0, 94, 117, 0.1) inset,
@@ -21,7 +21,7 @@
       1px 33px 9px 0px rgba(0, 94, 117, 0) inset;
 
     .uploadVideoContainer {
-      margin-bottom: rem(24);
+      margin-bottom: 2.4rem;
 
       .uploadVideo {
         display: none;
@@ -29,7 +29,7 @@
     }
 
     .or {
-      margin-bottom: rem(24);
+      margin-bottom: 2.4rem;
     }
 
     .videoURL {
@@ -40,7 +40,7 @@
       justify-content: center;
       align-items: center;
       font-size: $body;
-      border-radius: rem(40);
+      border-radius: 4rem;
       cursor: pointer;
       background-color: $primary;
       box-shadow:
@@ -54,13 +54,13 @@
   }
 
   .button {
-    width: rem(471);
-    height: rem(56);
-    border-radius: rem(40);
+    width: 47.1rem;
+    height: 5.6rem;
+    border-radius: 4rem;
     background-color: $primary;
     color: $black-four;
     box-shadow: $shadow-one;
-    margin-top: rem(32);
+    margin-top: 3.2rem;
   }
 
   .buttonLoading {
@@ -83,26 +83,26 @@
 
   .allowed {
     font-size: $body;
-    margin-bottom: rem(32);
-    width: rem(300);
+    margin-bottom: 3.2rem;
+    width: 30rem;
   }
 
   .boxLarge {
-    width: rem(664);
-    height: rem(440);
+    width: 66.4rem;
+    height: 44rem;
   }
 
   .boxMedium {
-    width: rem(514);
-    height: rem(360);
+    width: 51.4rem;
+    height: 36rem;
   }
 
   .labelLarge {
-    width: rem(471);
-    height: rem(56);
+    width: 47.1rem;
+    height: 5.6rem;
   }
   .labelMedium {
-    width: rem(336.4285);
-    height: rem(56);
+    width: 33.64285rem;
+    height: 5.6rem;
   }
 }

@@ -1,5 +1,5 @@
 import styles from "./Popup.module.scss";
-import  Button  from "@/components/Buttons";
+import  Button  from "@/components/Button";
 import { UIData } from "@/data/UIData";
 
 const Popup = () => {
@@ -9,14 +9,11 @@ const Popup = () => {
       <p>You have entered an invalid email or password</p>
       <Button
         className={styles.okButton}
-        buttonChildren="OK"
-        buttonType={normal}
+        children="OK"
+        buttonVariant={normal}
         buttonSize={medium}
-        name="ok"
-        type="button"
         ariaLabel="OK button"
-        autoFocus={false}
-        disabled={false}
+
       />
     </div>
   );

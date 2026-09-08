@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./ConfirmYourPurchase.module.scss";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import ListingModalContentWrapper from "@/app/(listings)/listings/[slug]/components/ListingModalContentWrapper";
 
 
@@ -36,28 +36,28 @@ const ConfirmYourPurchase = () => {
       <nav className={styles.buttons}>
         <Button
           className={styles.proceedButton}
-          buttonChildren="Continue To Payment"
-          buttonType={"primary"}
+          children="Continue To Payment"
+          buttonVariant={"primary"}
           buttonSize="large"
-          name="proceed-btn"
-          type="button"
+
+
           ariaLabel="Proceed Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           // onClick={nextStep}
         />
 
         <Button
           className={styles.bottomButton}
-          buttonChildren="Cancel"
-          buttonType="normal"
+          children="Cancel"
+          buttonVariant="normal"
           buttonSize="large"
-          name="bottom-btn"
-          type="button"
+
+
           ariaLabel="Bottom Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           // onClick={
           //   bottomButtonText === "Contact Seller" ? goToChat : () => back()

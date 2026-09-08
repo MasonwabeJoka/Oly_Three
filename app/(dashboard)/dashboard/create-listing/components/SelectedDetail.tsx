@@ -3,7 +3,7 @@ import styles from "./SelectedDetail.module.scss";
 import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { multiStepFormSchema } from "@/lib/validations/formValidations";
 import { FormDataSchema } from "../validations/formDataSchema";
 import Icon from "@/components/Icon";
@@ -117,8 +117,8 @@ const SelectedDetail = ({
               marginBottom: placeholder
                 ? 0
                 : detail === "Add Your Own Details"
-                ? "0.5rem"
-                : "1.25rem",
+                ? "0.8rem"
+                : "2rem",
             }}
           >
             {description}
@@ -126,7 +126,7 @@ const SelectedDetail = ({
           {detail === "Add Your Own Details" && (
             <p
               className={styles.selectedDetailExample}
-              style={{ marginBottom: "1.25rem" }}
+              style={{ marginBottom: "2rem" }}
             >
               eg. {"  "}
               <strong>Warranty Information</strong>:{" "}
@@ -136,7 +136,7 @@ const SelectedDetail = ({
           {placeholder && (
             <p
               className={styles.selectedDetailExample}
-              style={{ marginBottom: "1.25rem" }}
+              style={{ marginBottom: "2rem" }}
             >
               eg. {"  "}
               <strong>{boldTextExample}</strong>:{" "}
@@ -180,14 +180,14 @@ const SelectedDetail = ({
         <div className={styles.submitButtonContainer}>
           <Button
             className={styles.submitButton}
-            buttonChildren="Submit Detail"
-            buttonType="normal"
-            type="button"
+            children="Submit Detail"
+            buttonVariant="normal"
+
             buttonSize="large"
-            name="submit-detail-btn"
+
             aria-label="Submit Detail Button"
-            autoFocus={false}
-            disabled={false}
+
+
             dashboard
             onClick={clickHandler}
           />

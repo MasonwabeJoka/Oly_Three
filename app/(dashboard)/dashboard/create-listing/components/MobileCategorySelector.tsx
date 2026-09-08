@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./SelectACategory.module.scss";
 import MobileSubcategories from "@/components/MobileSubcategories";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useFormContext } from "react-hook-form";
 
 const MobileCategorySelector = ({
@@ -51,15 +51,15 @@ const handleSubcategoryClick = async (subcategory: string) => {
       <div className={styles.goBackButtonContainer}>
         <Button
           className={styles.goBackButton}
-          buttonChildren="Go Back"
-          buttonType="normal"
+          children="Go Back"
+          buttonVariant="normal"
           buttonSize="large"
-          name="go-back-btn"
-          type="button"
+
+
           ariaLabel="Go Back Button"
-          autoFocus={false}
-          disabled={false}
-          ariaHidden={false}
+
+
+
         />
       </div>
     </>

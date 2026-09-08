@@ -5,7 +5,7 @@ import styles from "./Pagination.module.scss";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import NavButtonLeft from "./navButtonLeft";
 import NavButtonRight from "./navButtonRight";
-import Button from "./Buttons";
+import Button from "./Button";
 
 interface PaginationProps {
   totalPages?: number; 
@@ -111,15 +111,15 @@ const Pagination: React.FC<PaginationProps> = ({
           className={`${styles.pageButton} ${
             page === currentPage ? styles.active : ""
           } ${page === ellipsis ? styles.ellipsis : ""}`}
-          buttonChildren={page}
-          buttonType="round"
+          children={page}
+          buttonShape="round"
           buttonSize="medium"
-          name="pageButton"
-          type="button"
+
+
           ariaLabel={`Page ${page}`}
-          disabled={page === ellipsis}
+          isDisabled={page === ellipsis}
           onClick={() => typeof page === "number" && handlePageChange(page)}
-          autoFocus={false}
+
         />
       </div>
     ));

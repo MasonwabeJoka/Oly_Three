@@ -1,4 +1,4 @@
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 
 interface Props {
   containerClassName?: string;
@@ -7,14 +7,12 @@ interface Props {
 const PublishButton = ({ containerClassName }: Props) => (
   <div className={containerClassName}>
     <Button
-      buttonChildren="Publish"
-      buttonType="primary"
+      children="Publish"
+      buttonVariant="primary"
       buttonSize="large"
-      name="publish-btn"
       type="submit"
       ariaLabel="Publish Button"
-      autoFocus={false}
-      disabled={false}
+
       dashboard
     />
   </div>

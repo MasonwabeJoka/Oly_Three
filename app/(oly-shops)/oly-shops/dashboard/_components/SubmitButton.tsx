@@ -1,6 +1,6 @@
 import { useFormStatus } from 'react-dom';
 import styles from './SubmitButton.module.scss'
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import Link from 'next/link';
 
 interface SubmitButtonProps {
@@ -14,12 +14,12 @@ const SubmitButton = ({}: SubmitButtonProps) => {
     
     <Button
         buttonSize="medium"
-        buttonType="normal"
-        buttonChildren={pending ? 'Submitting...': 'Add Product'}
-        name="add-product-btn"
+        buttonVariant="normal"
+        children={pending ? 'Submitting...': 'Add Product'}
+
         aria-label="Add Product Button"
-        autoFocus={false}
-        disabled={pending}
+
+        isDisabled={pending}
         type="submit"
       />
   );

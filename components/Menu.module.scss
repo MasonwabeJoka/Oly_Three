@@ -4,8 +4,8 @@
 
 .profile {
   position: absolute;
-  top: rem(32);
-  left: rem(52);
+  top: 3.2rem;
+  left: 5.2rem;
 }
 .container {
   position: relative;
@@ -13,20 +13,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: rem(40);
+  border-radius: 4rem;
   background-color: $white-four;
   pointer-events: auto;
 
   @include only(largeDesktop) {
-    width: rem(888);
+    width: 88.8rem;
     height: 80vh;
   }
   @include only(smallDesktop) {
-     width: rem(888);
+     width: 88.8rem;
     height: 80vh;
   }
   @include only(tablet) {
-     width: rem(888);
+     width: 88.8rem;
     height: 80vh;
   }
 
@@ -47,9 +47,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: rem(52);
-        height: rem(52);
-        margin-bottom: rem(16);
+        width: 5.2rem;
+        height: 5.2rem;
+        margin-bottom: 1.6rem;
         border-radius: 50%;
         background-color: $white-four;
         box-shadow: $shadow-seven;
@@ -78,7 +78,7 @@
     }
   }
   .goBackButtonContainer {
-    margin-top: rem(64);
+    margin-top: 6.4rem;
     .goBackButton {
       background-color: $white-three;
     }

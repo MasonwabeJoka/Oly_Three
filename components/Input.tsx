@@ -579,7 +579,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <span key={item} className={styles.tag}>
                 {item}
                 <button
-                  type="button"
+
                   onClick={() => handleMultiSelectChange(item, false)}
                   aria-label={`Remove ${item}`}
                   tabIndex={0}

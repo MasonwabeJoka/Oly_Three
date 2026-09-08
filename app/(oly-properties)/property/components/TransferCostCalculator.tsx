@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "../calculators/styles/calculatorStyles.module.scss";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import ShareCalculator from "./shareCalculator";
 import NumberInput from "@/components/NumberInput";
 
@@ -146,7 +146,7 @@ const TransferCostCalculator = () => {
               value={purchasePrice}
               inputSize="large"
               placeholder="Enter The Purchase Price"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setPurchasePrice(parseFloat(e.target.value) || 0)
@@ -166,7 +166,7 @@ const TransferCostCalculator = () => {
               value={bondAmount}
               inputSize="large"
               placeholder="Enter The Deposit Amount"
-              autoFocus={false}
+
               required={true}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setBondAmount(parseFloat(e.target.value) || 0)
@@ -177,14 +177,14 @@ const TransferCostCalculator = () => {
           <div className={styles.button}>
             <Button
               className={styles.calculateButton}
-              buttonChildren="Calculate"
-              buttonType="primary"
+              children="Calculate"
+              buttonVariant="primary"
               buttonSize="large"
-              name="calculate-btn"
-              type="button"
+
+
               ariaLabel="Calculate Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={handleCalculate}
             />
           </div>
@@ -282,7 +282,7 @@ const TransferCostCalculator = () => {
                   : "0.00"}
               </p>
             </div>
-            <p className={styles.note} style={{ marginTop: "  3rem" }}>
+            <p className={styles.note} style={{ marginTop: "4.8rem" }}>
               Disclaimer: This is an estimate based on 2025 South African market
               trends. Bond and transfer costs are calculated using current rates
               but may vary. Speak to a bank for exact figures.

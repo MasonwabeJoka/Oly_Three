@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import CreateListingSteps from "../../components/CreateListingSteps";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import useFormStore from "../../store/useFormStore";
 import { SiteType } from "../../types/listing.types";
 
@@ -12,7 +12,7 @@ export default function CreateAListingStepPage() {
   const resetKey = useFormStore((state) => state.resetKey);
 
   if (!site || !step) {
-    return <LoadingSpinner />;
+    return <LoadingGraphic />;
   }
 
   return (

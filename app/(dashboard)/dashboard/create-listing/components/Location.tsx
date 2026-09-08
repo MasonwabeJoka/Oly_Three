@@ -40,7 +40,7 @@ const Location = ({ onNext }: Props) => {
             label="Province"
             id="province"
             ariaLabel="Province"
-            autoFocus={false}
+
             required={true}
             isMultiSelect={false}
             dashboard
@@ -59,7 +59,7 @@ const Location = ({ onNext }: Props) => {
               id="city"
               ariaLabel="City"
               disabled={false}
-              autoFocus={false}
+
               required={true}
               dashboard
               error={errors.location?.city?.message}
@@ -78,7 +78,7 @@ const Location = ({ onNext }: Props) => {
               id="suburb"
               ariaLabel="Suburb"
               disabled={false}
-              autoFocus={false}
+
               required={true}
               dashboard
               error={errors.location?.suburb?.message}
@@ -97,7 +97,7 @@ const Location = ({ onNext }: Props) => {
               label="More"
               id="customLocation"
               ariaLabel="Custom Location Field"
-              autoFocus={false}
+
               autoComplete="on"
               disabled={false}
               required={false}

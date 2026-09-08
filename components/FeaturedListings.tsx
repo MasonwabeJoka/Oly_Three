@@ -1,7 +1,7 @@
 import styles from "./FeaturedListings.module.scss";
 import ListingsCollage from "@/components/ListingsCollage";
 import Link from "next/link";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import FeaturedListingsClient from "./FeaturedListingsClient";
 import Pagination from "./Pagination";
 import { getFeaturedListings } from "@/server/sanity/read-write/featuredListings/read";
@@ -61,14 +61,14 @@ const FeaturedListings = async ({
             <Link href="/listings" className={styles.buttons}>
               <Button
                 className={styles.button}
-                buttonChildren="View all listings"
-                buttonType="primary"
+                children="View all listings"
+                buttonVariant="primary"
                 buttonSize="large"
-                name="View All Listings Button"
-                type="button"
+
+
                 ariaLabel="View All Listings Button"
-                autoFocus={false}
-                disabled={false}
+
+
               />
             </Link>
           </div>
@@ -92,14 +92,14 @@ const FeaturedListings = async ({
             <Link href="/listings" className={styles.buttons}>
               <Button
                 className={styles.button}
-                buttonChildren="View All Properties"
-                buttonType="primary"
+                children="View All Properties"
+                buttonVariant="primary"
                 buttonSize="large"
-                name="View All Listings Button"
-                type="button"
+
+
                 ariaLabel="View All Listings Button"
-                autoFocus={false}
-                disabled={false}
+
+
               />
             </Link>
           </div>
@@ -127,14 +127,14 @@ const FeaturedListings = async ({
             <Link href="/listings" className={styles.buttons}>
               <Button
                 className={styles.button}
-                buttonChildren="View All Properties"
-                buttonType="primary"
+                children="View All Properties"
+                buttonVariant="primary"
                 buttonSize="large"
-                name="View All Listings Button"
-                type="button"
+
+
                 ariaLabel="View All Listings Button"
-                autoFocus={false}
-                disabled={false}
+
+
               />
             </Link>
           </div>

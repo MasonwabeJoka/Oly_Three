@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Select from "@/components/Select";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./HeroSectionStepTwo.module.scss";
 import Modal from "@/components/Modal";
 import PropertiesFilters from "./PropertiesFilters";
@@ -59,9 +59,8 @@ export default function AdvancedFilters({ onClick }: Props) {
           selectSize="large"
           label="Property Type"
           id="propertyType"
-          name="propertyType"
+
           ariaLabel="Property Type Selector"
-          autoFocus={false}
           required={false}
           overlayDropdown
           overlayOptionsClass={styles.propertyTypeOverlay}
@@ -107,9 +106,7 @@ export default function AdvancedFilters({ onClick }: Props) {
           selectSize="large"
           label="Max Price"
           id="maxPrice"
-          name="maxPrice"
           ariaLabel="Maximum Price Selector"
-          autoFocus={false}
           required={false}
           overlayDropdown
           overlayOptionsClass={styles.maxPriceOverlay}
@@ -156,9 +153,7 @@ export default function AdvancedFilters({ onClick }: Props) {
           selectSize="large"
           label="Min Price"
           id="minPrice"
-          name="minPrice"
           ariaLabel="Minimum Price Selector"
-          autoFocus={false}
           required={false}
           overlayDropdown
           overlayOptionsClass={styles.minPriceOverlay}
@@ -168,28 +163,23 @@ export default function AdvancedFilters({ onClick }: Props) {
 
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="More Filters"
+          children="More Filters"
           className={styles.moreFiltersButton}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="More Filters Button"
-          type="button"
           ariaLabel="More Filters Button"
-          autoFocus={false}
           onClick={() => setShowFilters(true)}
         />
       </div>
       <div className={styles.searchButton}>
         <Button
-          buttonChildren="Search"
+          children="Search"
           className={styles.search}
-          buttonType="primary"
+          buttonVariant="primary"
           buttonSize="large"
-          name="Search Button"
           type="submit"
           ariaLabel="Search Button"
-          autoFocus={false}
-          // disabled={pending} // Disables during submission
+          // isDisabled={pending} // Disables during submission
         />
       </div>
       <Modal
@@ -200,16 +190,13 @@ export default function AdvancedFilters({ onClick }: Props) {
       />
       <div className={styles.backButtonContainer}>
         <Button
-          buttonChildren="Back"
+          children="Back"
           className={styles.backButton}
-          buttonType="normal"
+          buttonVariant="normal"
           buttonSize="large"
-          name="Back Button"
-          type="button"
           ariaLabel="Back Button"
-          autoFocus={false}
           onClick={onClick}
-          // disabled={pending} // Disables during submission
+          // isDisabled={pending} // Disables during submission
         />
       </div>
     </div>

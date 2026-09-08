@@ -6,13 +6,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: rem(1440);
+  width: 144rem;
   .header {
     position: relative;
     width: 95%;
-    height: rem(640);
-    border-radius: rem(40);
-    margin-top: rem(32);
+    height: 64rem;
+    border-radius: 4rem;
+    margin-top: 3.2rem;
     box-shadow: $shadow-one;
 
     .topSection {
@@ -22,15 +22,15 @@
       align-items: center;
       width: 100%;
       z-index: 50;
-      margin-top: rem(32);
+      margin-top: 3.2rem;
 
       .homeButton {
-        margin-left: rem(56);
+        margin-left: 5.6rem;
         width: fit-content;
       }
 
       .socialMedia {
-        margin-right: rem(56);
+        margin-right: 5.6rem;
       }
 
       .readArticleButton {
@@ -39,8 +39,8 @@
         align-items: center;
         white-space: nowrap;
         color: $black-four;
-        height: rem(48);
-        padding: 0 rem(64);
+        height: 4.8rem;
+        padding: 0 6.4rem;
         box-shadow: none;
 
         &:hover {
@@ -65,28 +65,28 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      padding-left: rem(56);
-      padding-top: rem(56);
+      padding-left: 5.6rem;
+      padding-top: 5.6rem;
       color: $white-one;
       background: linear-gradient(
         to top,
         rgba($black-one, 1),
         rgba($black-one, 0)
       );
-      border-bottom-left-radius: rem(32);
-      border-bottom-right-radius: rem(32);
+      border-bottom-left-radius: 3.2rem;
+      border-bottom-right-radius: 3.2rem;
 
       .categoryPill {
-        margin-left: rem(24);
+        margin-left: 2.4rem;
         color: $black-four;
         box-shadow: none !important;
       }
 
       .articleDetails {
         display: flex;
-        margin-bottom: rem(56);
-        padding: rem(24);
-        border-radius: rem(40);
+        margin-bottom: 5.6rem;
+        padding: 2.4rem;
+        border-radius: 4rem;
         .leftSection {
           width: 50%;
           .articleTitle {
@@ -97,14 +97,14 @@
           }
 
           .articleExcerpt {
-            margin-bottom: rem(12);
+            margin-bottom: 1.2rem;
             color: $primary;
-            letter-spacing: rem(1);
+            letter-spacing: 0.1rem;
           }
 
           .articleMetadata {
             display: flex;
-            gap: rem(56);
+            gap: 5.6rem;
             font-size: $small;
             font-weight: 300;
             color: $primary;
@@ -113,11 +113,11 @@
 
         .rightSection {
           margin-left: auto;
-          margin-right: rem(56);
+          margin-right: 5.6rem;
           .articleAuthor {
             display: flex;
             align-items: center;
-            gap: rem(12);
+            gap: 1.2rem;
             cursor: pointer;
           }
         }
@@ -136,43 +136,43 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: rem(280);
-      padding: rem(12);
+      width: 28rem;
+      padding: 1.2rem;
 
       .categories {
         display: flex;
         justify-content: left;
         flex-wrap: wrap;
-        gap: rem(16);
-        width: rem(300);
-        padding-top: rem(20);
+        gap: 1.6rem;
+        width: 30rem;
+        padding-top: 2rem;
       }
 
       .stickyCategories {
         position: sticky;
-        top: rem(0);
+        top: 0rem;
         z-index: 20;
         background-color: $white-four;
-        padding-top: rem(20);
-        padding-bottom: rem(8);
+        padding-top: 2rem;
+        padding-bottom: 0.8rem;
       }
 
       .articleRecommendations {
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        margin-top: rem(56);
+        margin-top: 5.6rem;
         .title {
           font-size: $h3 !important;
           font-weight: 600;
           margin: 0 auto;
-          margin-bottom: rem(20);
+          margin-bottom: 2rem;
         }
 
         .articles {
           display: flex;
           flex-direction: column;
-          gap: rem(32);
+          gap: 3.2rem;
         }
       }
     }
@@ -183,12 +183,12 @@
     justify-content: center;
     align-items: center;
     width: 95%;
-    margin-bottom: rem(32);
+    margin-bottom: 3.2rem;
   }
       .articlesContainer {
         display: flex;
         justify-content: center;
-        gap: rem(32);
+        gap: 3.2rem;
         flex-wrap: wrap;
         width: 100%;
         .article {
@@ -205,15 +205,15 @@
 .swiperGlobalStyles {
   :global(.swiper-pagination) {
     position: absolute;
-    bottom: rem(48) !important;
-    left: rem(74) !important;
+    bottom: 4.8rem !important;
+    left: 7.4rem !important;
     text-align: left;
     width: auto !important;
   }
 
   :global(.swiper-pagination-bullet) {
-    width: rem(12);
-    height: rem(12);
+    width: 1.2rem;
+    height: 1.2rem;
     background-color: $white-one !important;
     opacity: 0.5;
     transition: all 0.3s ease;
@@ -243,7 +243,7 @@
 
   :global(.swiper-horizontal > .swiper-pagination-bullets),
   :global(.swiper-pagination-bullets.swiper-pagination-horizontal) {
-    gap: rem(8);
+    gap: 0.8rem;
   }
 
   :global(.swiper-pagination-progressbar) {

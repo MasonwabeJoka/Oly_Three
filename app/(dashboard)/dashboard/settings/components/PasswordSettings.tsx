@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./PasswordSettings.module.scss";
 import Input from "@/components/Input";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import { useForm, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordSchema } from "@/lib/validations/formValidations";
@@ -65,9 +65,9 @@ const PasswordSettings = () => {
           label="Enter old password"
           id="old-password"
           ariaLabel="Old Password Field"
-          autoFocus={false}
+
           autoComplete="off"
-          disabled={false}
+
           required={true}
           dashboard
           {...register("oldPassword")}
@@ -86,9 +86,9 @@ const PasswordSettings = () => {
           label="Enter new password"
           id="new-password"
           ariaLabel="New Password Field"
-          autoFocus={false}
+
           autoComplete="off"
-          disabled={false}
+
           required={true}
           dashboard
           {...register("newPassword")}
@@ -108,9 +108,9 @@ const PasswordSettings = () => {
           label="Re-enter new password"
           id="reenter-password"
           ariaLabel="Re-enter New Password Field"
-          autoFocus={false}
+
           autoComplete="off"
-          disabled={false}
+
           required={true}
           dashboard
           {...register("reenterPassword")}
@@ -121,14 +121,14 @@ const PasswordSettings = () => {
       >
         <Button
           className={styles.changePasswordButton}
-          buttonChildren="Change password"
-          buttonType="primary"
+          children="Change password"
+          buttonVariant="primary"
           buttonSize="large"
-          name="change-password-btn"
+
           type="submit"
           ariaLabel="Change Password Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
         />
       </div>
@@ -136,14 +136,14 @@ const PasswordSettings = () => {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.backButton}
-          buttonChildren="Back"
-          buttonType="normal"
+          children="Back"
+          buttonVariant="normal"
           buttonSize="large"
-          name="back-btn"
-          type="button"
+
+
           ariaLabel="Back Button"
-          autoFocus={false}
-          disabled={false}
+
+
           onClick={handleBackClick}
           dashboard
         />

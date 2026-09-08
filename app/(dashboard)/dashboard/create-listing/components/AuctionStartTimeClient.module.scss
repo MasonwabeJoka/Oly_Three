@@ -10,21 +10,21 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border-radius: rem(40);
-      width: rem(696);
-      height: rem(500);
-      margin-top: rem(52);
+      border-radius: 4rem;
+      width: 69.6rem;
+      height: 50rem;
+      margin-top: 5.2rem;
       background-color: $white-two;
       box-shadow: $shadow-one;
   
   
       .root {
   
-        // margin-top: rem(48);
+        // margin-top: 4.8rem;
       }
   
       .table {
-        width: rem(600);
+        width: 60rem;
     
       }
   
@@ -35,7 +35,7 @@
       .monthContainer {
         display: flex;
         justify-content: center;
-        margin-bottom: rem(32);
+        margin-bottom: 3.2rem;
         font-size: $h4;
         font-weight: 700;
         text-transform: uppercase;
@@ -51,32 +51,32 @@
       }
   
       .row {
-        height: rem(54);
+        height: 5.4rem;
       }
   
       .cell {
         // background-color: cadetblue;
-        width: rem(84) !important;
-        height: rem(48) !important;
+        width: 8.4rem !important;
+        height: 4.8rem !important;
       }
   
       .nav {
         position: absolute;
-        bottom: rem(-80);
+        bottom: -8rem;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         justify-content: flex-end;
-        gap: rem(16);
-        width: rem(560);
+        gap: 1.6rem;
+        width: 56rem;
       }
   
       .navButton {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: rem(48);
-        height: rem(48);
+        width: 4.8rem;
+        height: 4.8rem;
         border-radius: 50%;
         cursor: pointer;
         background-color: $white-one;
@@ -87,15 +87,15 @@
       }
   
       .day {
-        width: rem(40);
-        height: rem(40);
+        width: 4rem;
+        height: 4rem;
         border-radius: 50%;
       }
   
       .daySelected {
         background-color: $primary-hover;
-        width: rem(40);
-        height: rem(40);
+        width: 4rem;
+        height: 4rem;
         color: white;
       }
     }
@@ -104,8 +104,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: rem(116);
-      gap: rem(20);
+      margin-top: 11.6rem;
+      gap: 2rem;
     }
   
     .setStartTimeContainer {

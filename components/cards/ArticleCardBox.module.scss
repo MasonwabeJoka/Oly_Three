@@ -4,21 +4,21 @@
 .articleCard {
   flex-direction: column;
   position: relative;
-  width: rem(310);
-  height: rem(512);
-  border-radius: rem(40);
+  width: 31rem;
+  height: 51.2rem;
+  border-radius: 4rem;
   break-inside: avoid;
   cursor: pointer;
   box-shadow: $shadow-six;
 
   .imageContainer {
     width: 100%;
-    height: rem(233);
-    border-radius: rem(40) rem(40) 0 0;
+    height: 23.3rem;
+    border-radius: 4rem 4rem 0 0;
     background-color: #bdecfc;
 
     .image {
-      border-radius: rem(40) rem(40) 0 0;
+      border-radius: 4rem 4rem 0 0;
     }
   }
 
@@ -26,16 +26,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 0 0 rem(40) rem(40);
-    height: rem(283);
+    border-radius: 0 0 4rem 4rem;
+    height: 28.3rem;
     background-color: $grey-one;
 
     .titleContainer {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: rem(220);
-      padding: rem(32);
+      height: 22rem;
+      padding: 3.2rem;
       .title {
         color: $black-four;
         font-size: $body;
@@ -51,16 +51,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 rem(24);
-      margin-bottom: rem(16);
+      padding: 0 2.4rem;
+      margin-bottom: 1.6rem;
 
       .profilePic {
-        margin-bottom: rem(16);
+        margin-bottom: 1.6rem;
       }
 
       .authorName {
         color: $black-four;
-        margin-left: rem(10);
+        margin-left: 1rem;
         font-weight: 500;
         letter-spacing: 1.2px !important;
       }

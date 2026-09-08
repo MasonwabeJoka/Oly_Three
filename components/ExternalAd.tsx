@@ -18,7 +18,7 @@ const ExternalAd = ({ adType, path }: Props) => {
         <div className={styles.adContainer}>
           {adType === "image" && (
             <>
-              Ad
+              <span className={styles.label}>Ad</span>
               <div className={styles.imageContainer}>
                 <Image
                   src={path}
@@ -31,7 +31,7 @@ const ExternalAd = ({ adType, path }: Props) => {
           )}
           {adType === "video" && (
             <>
-              Ad
+              <span className={styles.label}>Ad</span>
               <VideoAd path={path} />
             </>
           )}

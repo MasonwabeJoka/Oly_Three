@@ -1,4 +1,4 @@
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./ReviewListing.module.scss";
 
 interface Props {
@@ -23,14 +23,11 @@ const ReviewListing = ({ onNext, onPublish }: Props) => {
               Already happy with everything? Skip the review and go live now.
             </p>
             <Button
-              buttonChildren="Publish Immediately"
-              buttonType="normal"
+              children="Publish Immediately"
+              buttonVariant="normal"
               buttonSize="large"
-              name="publish-immediately-btn"
-              type="button"
               ariaLabel="Publish Immediately"
-              autoFocus={false}
-              disabled={false}
+
               dashboard
               onClick={onPublish}
             />

@@ -2,9 +2,9 @@
 @use "@/utils/functions" as *;
 @use "@/utils/breakpoints" as *;
 .container {
-  margin-top: rem(48);
+  margin-top: 4.8rem;
   .searchBar {
-    width: rem(500);
-    height: rem(56);
+    width: 50rem;
+    height: 5.6rem;
   }
 }

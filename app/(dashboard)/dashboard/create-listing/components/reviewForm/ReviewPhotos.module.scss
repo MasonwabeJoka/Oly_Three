@@ -9,10 +9,10 @@
    
     .photoContainer {
       height: auto;
-      width: rem(310);
+      width: 31rem;
       scroll-snap-align: start;
       transition: transform 0.3s ease-in-out;
-      margin-bottom: rem(24);
+      margin-bottom: 2.4rem;
     }
 
     .buttonsContainer {
@@ -20,7 +20,7 @@
       justify-content: flex-end;
       align-items: center;
       margin-right: 14.6%;
-      gap: rem(240);
+      gap: 24rem;
 
       .navButtons {
         background-color: $white-three;

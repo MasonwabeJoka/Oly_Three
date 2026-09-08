@@ -1,0 +1,33 @@
+@use "@/utils/variables" as *;
+@use "@/utils/breakpoints" as *;
+@use "@/utils/mixins" as *;
+
+@include inputStyles;
+
+.group {
+  position: relative;
+   
+
+  .fieldButton {
+    position: absolute;
+    display: flex;
+    gap: 0.4rem;
+    top: 50%;
+    right: 2.4rem;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: $grey-four;
+    text-shadow: $shadow-four;
+   
+  }
+}
+
+.dateInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .dateSegment {
+    font-size: $small;
+  }
+}

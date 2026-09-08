@@ -3,8 +3,8 @@
 @use "@/utils/breakpoints" as *;
 .editMode {
   position: relative;
-  width: rem(514);
-  margin-bottom: rem(16);
+  width: 51.4rem;
+  margin-bottom: 1.6rem;
 
   .editDetail {
 
@@ -18,8 +18,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(40);
-    height: rem(40);
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     transform: translateY(-30%);
     z-index: 10;
@@ -31,17 +31,17 @@
   }
 
   .cancelButton {
-    left: rem(8);
+    left: 0.8rem;
     background-color: $white-one;
     .iconContainer {
     }
   }
 
   .submitButton {
-    right: rem(8);
+    right: 0.8rem;
     background-color: $primary;
     .iconContainer {
-      margin-top: rem(4);
+      margin-top: 0.4rem;
     }
   }
 }

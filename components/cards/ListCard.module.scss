@@ -5,12 +5,12 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: rem(12);
+        gap: 1.2rem;
         cursor: pointer;
-        width: rem(600);
-        height: rem(160);
-        padding: 0 rem(60);
-        border-radius: rem(40);
+        width: 60rem;
+        height: 16rem;
+        padding: 0 6rem;
+        border-radius: 4rem;
         background-color: $white-four;
         box-shadow: $shadow-one;
       }

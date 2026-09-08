@@ -8,7 +8,7 @@
   align-items: center;
  
   .field {
-    margin-bottom: rem(20);
+    margin-bottom: 2rem;
   }
   .link {
     display: block; 
@@ -23,11 +23,11 @@
   }
 
   .createAListingBtn:focus {
-    outline-offset: rem(1);
+    outline-offset: 0.1rem;
     outline-style: solid;
     outline-color: $danger-hover;
-    outline-width: rem(2);
-    border-radius: rem(40);
+    outline-width: 0.2rem;
+    border-radius: 4rem;
   }
 
   .vehicleType {
@@ -47,7 +47,7 @@
 
   .errorMessage {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
 }
 
@@ -59,7 +59,7 @@
 }
 
 .searchFields {
-  margin-top: rem(4) !important;
+  margin-top: 0.4rem !important;
 
   .searchLocation {
     display: flex;
@@ -67,13 +67,13 @@
     align-items: center;
 
     .searchLocationInput {
-      // margin-bottom: rem(10);
+      // margin-bottom: 1rem;
     }
   }
 
   .errorMessage {
     color: $danger;
-    margin-bottom: rem(8);
+    margin-bottom: 0.8rem;
   }
 }
 .searchButton {

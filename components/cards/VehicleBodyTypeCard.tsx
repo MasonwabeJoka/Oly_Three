@@ -1,4 +1,4 @@
-import Button from "../Buttons";
+import Button from "../Button";
 import Checkbox from "../Checkbox";
 import Image from "../Image";
 import styles from "./VehicleBodyTypeCard.module.scss";
@@ -38,7 +38,7 @@ const VehicleBodyTypeCard = ({
               src={image}
               alt={name}
               fill
-              style={{ objectFit: "cover", borderRadius: "2.5rem" }}
+              style={{ objectFit: "cover", borderRadius: "4rem" }}
             />
           )}
         </div>
@@ -47,51 +47,51 @@ const VehicleBodyTypeCard = ({
           <div className={styles.buttonContainer}>
             <Button
               className={`${styles.button} ${styles.all}`}
-              buttonChildren={
+              children={
                 <p className={styles.buttonChildren}>
                   {`All ${name}s`} <span className={styles.count}>9,000+</span>
                 </p>
               }
-              buttonType="normal"
+              buttonVariant="normal"
               buttonSize="small"
-              name="view-btn"
-              type="button"
+
+
               ariaLabel="View Button"
-              autoFocus={false}
-              disabled={false}
+
+
             />
             <Button
               className={styles.button}
-              buttonChildren={
+              children={
                 <p className={styles.buttonChildren}>
                   {province}
                   <span className={styles.count}>852</span>
                   {/* <span className={styles.count}>4,582</span> */}
                 </p>
               }
-              buttonType="normal"
+              buttonVariant="normal"
               buttonSize="small"
-              name="view-btn"
-              type="button"
+
+
               ariaLabel="View Button"
-              autoFocus={false}
-              disabled={false}
+
+
             />
             <Button
               className={styles.button}
-              buttonChildren={
+              children={
                 <p className={styles.buttonChildren}>
                   {city}
                   <span className={styles.count}>52</span>
                 </p>
               }
-              buttonType="normal"
+              buttonVariant="normal"
               buttonSize="small"
-              name="view-btn"
-              type="button"
+
+
               ariaLabel="View Button"
-              autoFocus={false}
-              disabled={false}
+
+
             />
           </div>
         </div>

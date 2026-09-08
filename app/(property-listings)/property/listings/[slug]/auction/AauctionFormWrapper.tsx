@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import styles from "./PaymentFormWrapper.module.scss";
 import { useRouter } from "next/navigation";
 import FormProgressBar from "@/app/(dashboard)/dashboard/create-listing/components/FormProgressBar";
@@ -73,14 +73,14 @@ export const PaymentFormWrapper = ({ title, children }: FormWrapperProps) => {
       <nav className={styles.buttons}>
         <Button
           className={styles.proceedButton}
-          buttonChildren={topButtonText}
-          buttonType={"primary"}
+          children={topButtonText}
+          buttonVariant={"primary"}
           buttonSize="large"
-          name="proceed-btn"
-          type="button"
+
+
           ariaLabel="Proceed Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={nextStep}
         />
@@ -88,14 +88,14 @@ export const PaymentFormWrapper = ({ title, children }: FormWrapperProps) => {
         {/* {!isLastStep &&  */}
         <Button
           className={styles.bottomButton}
-          buttonChildren={bottomButtonText}
-          buttonType="normal"
+          children={bottomButtonText}
+          buttonVariant="normal"
           buttonSize="large"
-          name="bottom-btn"
-          type="button"
+
+
           ariaLabel="Bottom Button"
-          autoFocus={false}
-          disabled={false}
+
+
           dashboard
           onClick={
             bottomButtonText === "Contact Seller" ? goToChat : () => back()

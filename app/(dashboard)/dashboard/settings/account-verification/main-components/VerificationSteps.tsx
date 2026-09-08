@@ -19,7 +19,7 @@ import UploadRepId from "../components/business/UploadRepId";
 import RepSelfie from "../components/business/RepSelfie";
 import EnterRepMobile from "../components/business/EnterRepMobile";
 import BusinessVerificationComplete from "../components/business/BusinessVerificationComplete";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingGraphic from "@/components/LoadingGraphic";
 import FormProgressBar from "../../../create-listing/components/FormProgressBar";
 
 interface StepType {
@@ -59,7 +59,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
 }) => {
   const router = useRouter();
   const [userType, setUserType] = useState<"individual" | "business" | null>(
-    initialType || null
+    initialType || null,
   );
   const [step, setStep] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
@@ -163,11 +163,11 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
       }
       const stepIndex =
         stepPaths[initialType as "individual" | "business"].indexOf(
-          initialStep
+          initialStep,
         );
       if (stepIndex === -1) {
         router.push(
-          `/dashboard/settings/account-verification/${initialType}/account`
+          `/dashboard/settings/account-verification/${initialType}/account`,
         );
       } else {
         setUserType(initialType as "individual" | "business");
@@ -181,7 +181,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
     setStep(0);
     methods.reset();
     router.push(
-      `/dashboard/settings/account-verification/${type}/${steps[type][0].path}`
+      `/dashboard/settings/account-verification/${type}/${steps[type][0].path}`,
     );
   };
 
@@ -193,7 +193,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
       const nextStep = step + 1;
       setStep(nextStep);
       router.push(
-        `/dashboard/settings/account-verification/${userType}/${steps[userType][nextStep].path}`
+        `/dashboard/settings/account-verification/${userType}/${steps[userType][nextStep].path}`,
       );
     } else if (isValid && step === steps[userType].length - 1) {
       // Submit form data to backend
@@ -201,7 +201,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
         const formData = methods.getValues();
         await axios.post(
           "https://api.example.com/submit-verification",
-          formData
+          formData,
         );
         router.push("/dashboard");
       } catch (error) {
@@ -218,7 +218,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
       const prevStep = step - 1;
       setStep(prevStep);
       router.push(
-        `/dashboard/settings/account-verification/${userType}/${steps[userType][prevStep].path}`
+        `/dashboard/settings/account-verification/${userType}/${steps[userType][prevStep].path}`,
       );
     } else {
       setUserType(null);
@@ -237,7 +237,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
         )}
         {!isClient ? (
           <div>
-            <LoadingSpinner />
+            <LoadingGraphic />
           </div>
         ) : !userType ? (
           <UserTypeSelection onSelect={handleUserType} />
@@ -259,7 +259,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
           </>
         ) : (
           <div>
-            <LoadingSpinner />
+            <LoadingGraphic />
           </div>
         )}
       </div>

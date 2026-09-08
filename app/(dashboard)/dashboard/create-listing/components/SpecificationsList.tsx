@@ -1,7 +1,7 @@
 "use client";
 import styles from "./DetailsList.module.scss";
 import Image from "@/components/Image";
-import Button from "@/components/Buttons";
+import Button from "@/components/Button";
 import SpecificationsEditMode from "./SpecificationsEditMode";
 import type { SpecificationItem } from "./ProductSpecification";
 
@@ -41,7 +41,7 @@ const SpecificationsList = ({
           <div className={styles.detailButtons}>
             <Button
               className={`${styles.editButton} ${styles.detailButton}`}
-              buttonChildren={
+              children={
                 <Image
                   src="/icons/pencil.png"
                   alt="edit-icon"
@@ -51,17 +51,17 @@ const SpecificationsList = ({
               }
               buttonSize="medium"
               dashboard
-              buttonType="roundStandardFeed"
-              name="edit-btn"
-              type="button"
+              buttonShape="round"
+
+
               ariaLabel="Edit Button"
-              autoFocus={false}
-              disabled={false}
+
+
               onClick={() => editSpecification(index)}
             />
             <Button
               className={`${styles.deleteButton} ${styles.detailButton}`}
-              buttonChildren={
+              children={
                 <Image
                   src="/icons/trash.png"
                   alt="delete-icon"
@@ -71,13 +71,13 @@ const SpecificationsList = ({
               }
               buttonSize="medium"
               dashboard
-              buttonType="roundStandardFeed"
-              name="delete-btn"
-              type="button"
+              buttonShape="round"
+
+
               ariaLabel="Delete Button"
               onClick={() => handleDeleteSpecification(index)}
-              autoFocus={false}
-              disabled={false}
+
+
             />
           </div>
           <p className={styles.detailText}>

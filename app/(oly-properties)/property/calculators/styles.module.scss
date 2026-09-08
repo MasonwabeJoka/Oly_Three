@@ -5,26 +5,26 @@
   height: 100vh;
   .homeButton {
     position: fixed;
-    top: rem(4);
-    left: rem(38);
+    top: 0.4rem;
+    left: 3.8rem;
     z-index: 100;
     transition: transform 0.5s ease-in-out;
 
     @include only(largeDesktop) {
-      top: rem(8);
+      top: 0.8rem;
     }
   }
   .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: rem(132);
+    margin-top: 13.2rem;
 
     .title {
       font-size: $h4 !important;
       font-weight: 600;
       color: $danger-hover;
-      margin-bottom: rem(64);
+      margin-bottom: 6.4rem;
     }
   }
 }
